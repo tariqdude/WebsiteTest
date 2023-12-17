@@ -6,6 +6,7 @@
     <title>Your GitHub Pages</title>
     <link rel="stylesheet" href="https://unpkg.com/@material/top-app-bar/dist/mdc.top-app-bar.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/@material/layout-grid/dist/mdc.layout-grid.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@material/card/dist/mdc.card.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" />
     <style>
         body {
@@ -13,6 +14,7 @@
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
+            color: #333;
         }
 
         .mdc-top-app-bar {
@@ -36,16 +38,32 @@
             text-align: left;
         }
 
-        .mdc-typography--headline5 {
+        .mdc-typography--headline5,
+        .mdc-typography--headline6 {
             margin-bottom: 1em;
         }
 
-        .mdc-typography--body1 {
-            margin-bottom: 1.5em;
+        .mdc-card {
+            margin-bottom: 1em;
         }
 
         .mdc-button {
             --mdc-theme-primary: #007bff;
+        }
+
+        form {
+            margin-top: 2em;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
         }
     </style>
 </head>
@@ -71,12 +89,31 @@
 
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                 <h2 class="mdc-typography--headline5">Projects</h2>
-                <p class="mdc-typography--body1">Highlight some of your key GitHub projects and provide a brief description for each.</p>
+                <div class="mdc-card">
+                    <h3 class="mdc-typography--headline6">Project 1</h3>
+                    <p class="mdc-typography--body1">Description of Project 1.</p>
+                </div>
+                <div class="mdc-card">
+                    <h3 class="mdc-typography--headline6">Project 2</h3>
+                    <p class="mdc-typography--body1">Description of Project 2.</p>
+                </div>
+                <!-- Add more projects as needed -->
             </div>
 
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                 <h2 class="mdc-typography--headline5">Contact</h2>
-                <p class="mdc-typography--body1">Feel free to reach out to me at your.email@example.com</p>
+                <form id="contactForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button class="mdc-button mdc-button--raised" type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>
@@ -85,5 +122,14 @@
     <script>
         const topAppBar = new mdc.topAppBar.MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
     </script>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            // Add your form submission logic here (e.g., send data to a server)
+            alert('Form submitted!');
+        });
+    </script>
+
 </body>
 </html>
