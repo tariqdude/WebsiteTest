@@ -4,39 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your GitHub Pages</title>
+    <link rel="stylesheet" href="https://unpkg.com/@material/top-app-bar/dist/mdc.top-app-bar.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@material/layout-grid/dist/mdc.layout-grid.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" />
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
-            text-align: center;
         }
 
-        header {
+        .mdc-top-app-bar {
             background-color: #343a40;
+        }
+
+        .mdc-top-app-bar__title {
             color: white;
-            padding: 1em 0;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #495057;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 14px 20px;
-            display: inline-block;
-        }
-
-        nav a:hover {
-            background-color: #6c757d;
-        }
-
-        section {
+        .mdc-layout-grid {
             max-width: 800px;
             margin: 2em auto;
             padding: 2em;
@@ -44,35 +31,59 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
         }
+
+        .mdc-layout-grid__inner {
+            text-align: left;
+        }
+
+        .mdc-typography--headline5 {
+            margin-bottom: 1em;
+        }
+
+        .mdc-typography--body1 {
+            margin-bottom: 1.5em;
+        }
+
+        .mdc-button {
+            --mdc-theme-primary: #007bff;
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Your Name</h1>
-        <p>GitHub Pages Intro</p>
+    <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <span class="mdc-top-app-bar__title">Your Name</span>
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+                <button class="mdc-icon-button material-icons" aria-label="Menu">menu</button>
+            </section>
+        </div>
     </header>
 
-    <nav>
-        <a href="#about">About Me</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                <h2 class="mdc-typography--headline5">About Me</h2>
+                <p class="mdc-typography--body1">Write a brief introduction about yourself here.</p>
+            </div>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Write a brief introduction about yourself here.</p>
-    </section>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                <h2 class="mdc-typography--headline5">Projects</h2>
+                <p class="mdc-typography--body1">Highlight some of your key GitHub projects and provide a brief description for each.</p>
+            </div>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <p>Highlight some of your key GitHub projects and provide a brief description for each.</p>
-    </section>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                <h2 class="mdc-typography--headline5">Contact</h2>
+                <p class="mdc-typography--body1">Feel free to reach out to me at your.email@example.com</p>
+            </div>
+        </div>
+    </div>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Feel free to reach out to me at your.email@example.com</p>
-    </section>
-
+    <script src="https://unpkg.com/@material/top-app-bar/dist/mdc.top-app-bar.min.js"></script>
+    <script>
+        const topAppBar = new mdc.topAppBar.MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
+    </script>
 </body>
 </html>
