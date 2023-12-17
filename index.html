@@ -3,133 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your GitHub Pages</title>
-    <link rel="stylesheet" href="https://unpkg.com/@material/top-app-bar/dist/mdc.top-app-bar.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@material/layout-grid/dist/mdc.layout-grid.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@material/card/dist/mdc.card.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" />
+    <title>Your Advanced Website</title>
     <style>
+        /* Basic Reset and Styles */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            box-sizing: border-box;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1em;
+        }
+
+        nav a {
+            margin: 0 1em;
             color: #333;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        .mdc-top-app-bar {
-            background-color: #343a40;
-        }
-
-        .mdc-top-app-bar__title {
-            color: white;
-        }
-
-        .mdc-layout-grid {
-            max-width: 800px;
-            margin: 2em auto;
+        /* Main Content Styles */
+        main {
             padding: 2em;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2em;
+            background-color: #eee;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1em 2em;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
             border-radius: 5px;
         }
 
-        .mdc-layout-grid__inner {
-            text-align: left;
-        }
-
-        .mdc-typography--headline5,
-        .mdc-typography--headline6 {
-            margin-bottom: 1em;
-        }
-
-        .mdc-card {
-            margin-bottom: 1em;
-        }
-
-        .mdc-button {
-            --mdc-theme-primary: #007bff;
-        }
-
-        form {
+        .features {
             margin-top: 2em;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
-        form label {
-            display: block;
-            margin-bottom: 0.5em;
+        .feature-item {
+            flex: 0 1 calc(33.333% - 1em);
+            margin-bottom: 2em;
+            padding: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
 
-        form input, form textarea {
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
             width: 100%;
-            padding: 0.5em;
-            margin-bottom: 1em;
         }
     </style>
 </head>
 <body>
 
-    <header class="mdc-top-app-bar">
-        <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                <span class="mdc-top-app-bar__title">Your Name</span>
-            </section>
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                <button class="mdc-icon-button material-icons" aria-label="Menu">menu</button>
-            </section>
-        </div>
+    <!-- Header Section -->
+    <header>
+        <h1>Your Advanced Website</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
     </header>
 
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                <h2 class="mdc-typography--headline5">About Me</h2>
-                <p class="mdc-typography--body1">Write a brief introduction about yourself here.</p>
+    <!-- Main Content Section -->
+    <main>
+        <section class="hero">
+            <h1>Welcome to Your Website</h1>
+            <p>Discover the best content and services.</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </section>
+
+        <section class="features">
+            <h2>Features</h2>
+            <div class="feature-item">
+                <h3>Feature 1</h3>
+                <p>Description of feature 1.</p>
             </div>
-
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                <h2 class="mdc-typography--headline5">Projects</h2>
-                <div class="mdc-card">
-                    <h3 class="mdc-typography--headline6">Project 1</h3>
-                    <p class="mdc-typography--body1">Description of Project 1.</p>
-                </div>
-                <div class="mdc-card">
-                    <h3 class="mdc-typography--headline6">Project 2</h3>
-                    <p class="mdc-typography--body1">Description of Project 2.</p>
-                </div>
-                <!-- Add more projects as needed -->
+            <div class="feature-item">
+                <h3>Feature 2</h3>
+                <p>Description of feature 2.</p>
             </div>
-
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                <h2 class="mdc-typography--headline5">Contact</h2>
-                <form id="contactForm">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="4" required></textarea>
-
-                    <button class="mdc-button mdc-button--raised" type="submit">Submit</button>
-                </form>
+            <div class="feature-item">
+                <h3>Feature 3</h3>
+                <p>Description of feature 3.</p>
             </div>
-        </div>
-    </div>
+            <!-- Add more feature items as needed -->
+        </section>
+    </main>
 
-    <script src="https://unpkg.com/@material/top-app-bar/dist/mdc.top-app-bar.min.js"></script>
-    <script>
-        const topAppBar = new mdc.topAppBar.MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
-    </script>
-
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            // Add your form submission logic here (e.g., send data to a server)
-            alert('Form submitted!');
-        });
-    </script>
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
+
