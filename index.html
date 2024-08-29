@@ -12,6 +12,7 @@
             padding: 0;
             box-sizing: border-box;
             line-height: 1.6;
+            background-color: #f4f4f4;
         }
 
         h1, h2, h3 {
@@ -20,10 +21,11 @@
 
         /* Header Styles */
         header {
-            background-color: #007BFF;
+            background-color: #004080;
             color: #fff;
             padding: 1em 0;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         nav {
@@ -34,9 +36,14 @@
 
         nav a {
             margin: 0 1em;
-            color: #007BFF;
+            color: #fff;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
         }
 
         /* Main Content Styles */
@@ -46,17 +53,27 @@
 
         .hero {
             text-align: center;
-            padding: 4em 0;
-            background-color: #f8f9fa;
+            padding: 5em 0;
+            background: linear-gradient(135deg, #007BFF, #00aaff);
+            color: #fff;
+            border-radius: 10px;
+            margin-bottom: 2em;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1em 2em;
-            background-color: #007BFF;
-            color: #fff;
+            background-color: #ffcc00;
+            color: #004080;
             text-decoration: none;
             border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #e0a800;
+            color: #fff;
         }
 
         .features {
@@ -69,9 +86,16 @@
         .feature-item {
             flex: 0 1 calc(33.333% - 1em);
             margin-bottom: 2em;
-            padding: 1em;
+            padding: 1.5em;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .feature-item:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .testimonial {
@@ -82,19 +106,57 @@
         .testimonial img {
             border-radius: 50%;
             margin-bottom: 1em;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
         }
 
-        /* Contact Section Styles */
         .contact {
-            background-color: #007BFF;
+            background-color: #004080;
             color: #fff;
             padding: 4em 0;
             text-align: center;
         }
 
         .contact-form {
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
+            background: #fff;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form label {
+            display: block;
+            margin: 0.5em 0 0.2em;
+            font-weight: bold;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .contact-form button {
+            display: inline-block;
+            padding: 0.8em 2em;
+            background-color: #ffcc00;
+            color: #004080;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #e0a800;
         }
 
         /* Footer Styles */
@@ -103,8 +165,7 @@
             color: #fff;
             text-align: center;
             padding: 1em;
-            position: fixed;
-            bottom: 0;
+            position: relative;
             width: 100%;
         }
     </style>
@@ -166,7 +227,7 @@
                     <label for="message">Your Message</label>
                     <textarea id="message" name="message" rows="4" required></textarea>
 
-                    <button type="submit" class="cta-button">Send Message</button>
+                    <button type="submit">Send Message</button>
                 </form>
             </div>
         </section>
@@ -174,7 +235,7 @@
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2023 Your Business. All rights reserved.</p>
+        <p>&copy; 2024 Your Business. All rights reserved.</p>
     </footer>
 
 </body>
