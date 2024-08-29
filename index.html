@@ -7,6 +7,8 @@
     <meta name="keywords" content="Business, Innovation, Solutions, Technology, Services">
     <meta name="author" content="Your Business Name">
     <title>Your Professional Business Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
     <style>
         /* Basic Reset and Styles */
         body {
@@ -18,6 +20,13 @@
             background-color: #f4f4f4;
             color: #333;
             scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
         }
 
         /* Header Styles */
@@ -58,6 +67,11 @@
             background: rgba(255, 255, 255, 0.2);
             color: #ff9900;
             transform: translateY(-3px);
+        }
+
+        .dark-mode nav a:hover, .dark-mode nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ff9900;
         }
 
         /* Main Content Styles */
@@ -240,46 +254,42 @@
             width: 100%;
             padding: 0.8em;
             margin-bottom: 1em;
-            border: 2px solid #ddd;
+            border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1em;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: border-color 0.3s;
         }
 
         .contact-form input:focus,
         .contact-form textarea:focus {
-            border-color: #007BFF;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            border-color: #ff9900;
             outline: none;
         }
 
         .contact-form button {
-            display: inline-block;
-            padding: 1em 2em;
+            width: 100%;
+            padding: 0.8em;
             background: #ff9900;
             color: #fff;
             border: none;
             border-radius: 5px;
-            font-size: 1.1em;
+            font-size: 1.2em;
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
 
         .contact-form button:hover {
             background: #e68a00;
             transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         /* Footer Styles */
         footer {
-            background-color: #333;
+            background: #333;
             color: #fff;
+            padding: 1.5em;
             text-align: center;
-            padding: 1em;
             position: relative;
-            bottom: 0;
-            width: 100%;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
         }
 
@@ -303,10 +313,6 @@
                 font-size: 2.5em;
             }
 
-            .features {
-                grid-template-columns: 1fr;
-            }
-
             .contact-form {
                 padding: 1em;
             }
@@ -328,9 +334,55 @@
             outline: 3px solid #ff9900;
             outline-offset: 2px;
         }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            background: #ff9900;
+            color: #fff;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s, color 0.3s;
+            z-index: 1001;
+        }
+
+        .dark-mode-toggle:hover {
+            background: #e68a00;
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #ff9900;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            z-index: 1000;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader" id="loader"></div>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="dark-mode-toggle">🌙</button>
+
     <!-- Header Section -->
     <header>
         <h1>Your Business Name</h1>
@@ -398,6 +450,23 @@
     </footer>
 
     <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            darkModeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        });
+
         // Header shrink on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
@@ -421,6 +490,8 @@
         // Form Validation and Submission with AJAX
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
             
             const formData = new FormData(this);
             
@@ -430,6 +501,7 @@
             })
             .then(response => response.json())
             .then(data => {
+                loader.style.display = 'none';
                 if (data.success) {
                     alert('Message sent successfully!');
                     this.reset();
@@ -438,10 +510,24 @@
                 }
             })
             .catch(error => {
+                loader.style.display = 'none';
                 console.error('Error:', error);
                 alert('An error occurred. Please try again.');
             });
         });
+
+        // Service Worker Registration (for PWA capabilities)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful:', registration);
+                    })
+                    .catch(error => {
+                        console.error('ServiceWorker registration failed:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
