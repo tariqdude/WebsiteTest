@@ -31,6 +31,9 @@
             --line-height-base: 1.6;
             --font-family-base: 'Arial', sans-serif;
             --font-family-heading: 'Roboto', sans-serif;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         /* Reset and Base Styles */
@@ -96,12 +99,13 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color var(--transition-speed);
+            box-shadow: var(--shadow-sm);
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         header.sticky {
             background-color: rgba(0, 123, 255, 0.9);
+            box-shadow: var(--shadow-md);
         }
 
         .logo {
@@ -141,6 +145,8 @@
             color: #fff;
             position: relative;
             overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
         }
 
         .hero h2 {
@@ -159,12 +165,13 @@
             color: #fff;
             border-radius: var(--border-radius);
             font-size: 1.2em;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         .cta-button:hover {
             background-color: var(--primary-color);
             transform: scale(1.05);
+            box-shadow: var(--shadow-md);
         }
 
         /* Features Section */
@@ -178,13 +185,13 @@
         .feature-item {
             background: #fff;
             border-radius: var(--border-radius);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-sm);
             padding: 1.5em;
             transition: box-shadow var(--transition-speed);
         }
 
         .feature-item:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-md);
         }
 
         .feature-item h3 {
@@ -211,11 +218,12 @@
             padding: 2em;
             background: #fff;
             border-radius: var(--border-radius);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-sm);
         }
 
         .testimonial-carousel footer {
             font-style: italic;
+            margin-top: 1em;
         }
 
         /* Newsletter Section */
@@ -234,6 +242,12 @@
             border: none;
             margin-right: 0.5em;
             width: 60%;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-speed);
+        }
+
+        .newsletter input[type="email"]:focus {
+            box-shadow: var(--shadow-md);
         }
 
         .newsletter button {
@@ -243,11 +257,12 @@
             color: #fff;
             font-size: 1.2em;
             cursor: pointer;
-            transition: background-color var(--transition-speed);
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         .newsletter button:hover {
             background-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
         }
 
         /* FAQ Section */
@@ -258,15 +273,16 @@
         .faq-item {
             background: #fff;
             border-radius: var(--border-radius);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-sm);
             padding: 1.5em;
             margin-bottom: 1em;
             cursor: pointer;
-            transition: background-color var(--transition-speed);
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         .faq-item.open {
             background-color: #f1f1f1;
+            box-shadow: var(--shadow-md);
         }
 
         .faq-answer {
@@ -284,6 +300,8 @@
             color: #fff;
             padding: 4em 2em;
             text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
         }
 
         .contact-form {
@@ -298,6 +316,13 @@
             border-radius: var(--border-radius);
             border: 1px solid #ddd;
             margin-bottom: 1em;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-speed);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            box-shadow: var(--shadow-md);
         }
 
         .contact-form button {
@@ -307,11 +332,12 @@
             color: #fff;
             font-size: 1.2em;
             cursor: pointer;
-            transition: background-color var(--transition-speed);
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         .contact-form button:hover {
             background-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
         }
 
         /* Footer Section */
@@ -322,6 +348,7 @@
             text-align: center;
             position: relative;
             margin-top: 4em;
+            box-shadow: var(--shadow-sm);
         }
 
         .footer-social a {
@@ -347,11 +374,12 @@
             cursor: pointer;
             display: none;
             z-index: 1000;
-            transition: background-color var(--transition-speed);
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         .back-to-top:hover {
             background-color: var(--accent-color);
+            box-shadow: var(--shadow-md);
         }
 
         @media (max-width: 768px) {
@@ -509,11 +537,17 @@
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 arrows: true,
-                dots: true
+                dots: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
             });
 
             // Initialize AOS
-            AOS.init();
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+            });
 
             // FAQ Toggle
             $('.faq-item').click(function() {
@@ -532,6 +566,15 @@
             $('.back-to-top').click(function() {
                 $('html, body').animate({scrollTop: 0}, 600);
                 return false;
+            });
+
+            // Sticky Header on Scroll
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('header').addClass('sticky');
+                } else {
+                    $('header').removeClass('sticky');
+                }
             });
         });
     </script>
