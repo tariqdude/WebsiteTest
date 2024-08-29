@@ -16,11 +16,13 @@
             --background-color: #f5f6f7; /* Light gray background */
             --text-color: #333; /* Dark gray text */
             --card-background: #fff; /* White background for cards */
-            --border-radius: 10px; /* Rounded corners */
-            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+            --border-radius: 12px; /* Rounded corners */
+            --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Box shadow */
             --transition-speed: 0.3s; /* Smooth transitions */
             --font-base: 'Roboto', sans-serif; /* Base font */
             --font-heading: 'Montserrat', sans-serif; /* Heading font */
+            --padding: 1em;
+            --margin: 1em;
         }
 
         body {
@@ -36,7 +38,7 @@
         header {
             background: var(--primary-color);
             color: #fff;
-            padding: 1em 0;
+            padding: var(--padding) 0;
             text-align: center;
             box-shadow: var(--box-shadow);
             position: fixed;
@@ -54,8 +56,8 @@
         nav {
             display: flex;
             justify-content: center;
-            margin-top: 1em;
-            gap: 1em;
+            margin-top: var(--padding);
+            gap: 1.5em;
         }
 
         nav a {
@@ -64,10 +66,23 @@
             font-weight: bold;
             transition: color var(--transition-speed);
             font-family: var(--font-heading);
+            position: relative;
         }
 
-        nav a:hover {
-            color: var(--accent-color);
+        nav a::after {
+            content: '';
+            display: block;
+            height: 3px;
+            background: var(--accent-color);
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            transition: width var(--transition-speed);
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         main {
@@ -117,26 +132,33 @@
             margin-top: 4em;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1em;
+            gap: var(--margin);
         }
 
         .feature-item {
             background: var(--card-background);
             border-radius: var(--border-radius);
-            padding: 1.5em;
+            padding: var(--padding);
             box-shadow: var(--box-shadow);
-            transition: box-shadow var(--transition-speed);
+            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
             font-family: var(--font-base);
+            text-align: center;
+        }
+
+        .feature-item img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
         }
 
         .feature-item:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
         }
 
         .testimonial {
             margin: 4em 0;
             text-align: center;
-            padding: 2em;
+            padding: var(--padding);
             background-color: var(--card-background);
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
@@ -150,6 +172,7 @@
             border-left: 4px solid var(--primary-color);
             position: relative;
             font-family: var(--font-base);
+            font-style: italic;
         }
 
         .testimonial blockquote::before {
@@ -174,14 +197,44 @@
             box-shadow: var(--box-shadow);
             text-align: center;
             margin-top: 4em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 0;
+        }
+
+        .newsletter h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            font-family: var(--font-heading);
+            z-index: 1;
+            position: relative;
+        }
+
+        .newsletter p {
+            font-size: 1.2em;
+            margin-bottom: 1.5em;
+            z-index: 1;
+            position: relative;
         }
 
         .newsletter form {
             display: flex;
             flex-direction: column;
-            gap: 1em;
+            gap: var(--margin);
             max-width: 500px;
             margin: 0 auto;
+            z-index: 1;
+            position: relative;
         }
 
         .newsletter input {
@@ -195,12 +248,17 @@
         .faq-item {
             border: 1px solid #ddd;
             border-radius: var(--border-radius);
-            margin: 1em 0;
-            padding: 1em;
+            margin: var(--margin) 0;
+            padding: var(--padding);
             background: var(--card-background);
             cursor: pointer;
-            transition: background-color var(--transition-speed);
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
             font-family: var(--font-base);
+        }
+
+        .faq-item:hover {
+            background-color: #f9f9f9;
+            transform: scale(1.02);
         }
 
         .faq-item.open {
@@ -219,6 +277,10 @@
         .contact-form {
             max-width: 600px;
             margin: 2em auto;
+            background: var(--card-background);
+            padding: var(--padding);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
         }
 
         .contact-form label {
@@ -232,36 +294,47 @@
         .contact-form textarea {
             width: 100%;
             padding: 0.75em;
+            margin-bottom: 1em;
             border: 1px solid #ddd;
             border-radius: var(--border-radius);
-            margin-bottom: 1em;
             font-size: 1em;
             font-family: var(--font-base);
         }
 
-        .map {
+        .contact-form button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 0.75em;
             border-radius: var(--border-radius);
-            overflow: hidden;
-            margin-top: 2em;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            font-family: var(--font-heading);
+        }
+
+        .contact-form button:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.05);
         }
 
         footer {
-            background-color: var(--primary-color);
+            background: var(--secondary-color);
             color: #fff;
+            padding: 1em;
             text-align: center;
-            padding: 2em 1em;
-            position: relative;
             font-family: var(--font-base);
+            box-shadow: var(--box-shadow);
         }
 
         .social-icons {
-            margin: 1em 0;
+            margin-top: 0.5em;
         }
 
         .social-icons a {
-            margin: 0 0.5em;
             color: #fff;
             font-size: 1.5em;
+            margin: 0 0.5em;
             transition: color var(--transition-speed);
         }
 
@@ -269,17 +342,48 @@
             color: var(--accent-color);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero {
-                padding: 4em 1em;
+            header {
+                padding: 1em 0;
             }
 
-            .newsletter {
-                padding: 2em;
+            nav {
+                flex-direction: column;
+                gap: 0.5em;
             }
 
             .features {
                 grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 4em 1em;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .cta-button {
+                padding: 0.5em 1.5em;
+                font-size: 1em;
+            }
+
+            .newsletter h2 {
+                font-size: 1.5em;
+            }
+
+            .newsletter p {
+                font-size: 1em;
             }
 
             .contact-form {
@@ -291,10 +395,9 @@
 <body>
     <!-- Header -->
     <header>
-        <h1>Art Gallery</h1>
         <nav>
             <a href="#home">Home</a>
-            <a href="#art">Art Pieces</a>
+            <a href="#art">Art</a>
             <a href="#testimonials">Testimonials</a>
             <a href="#newsletter">Newsletter</a>
             <a href="#faq">FAQ</a>
@@ -392,7 +495,6 @@
                     <button type="submit" class="cta-button">Send Message</button>
                 </form>
             </div>
-            <div id="map" class="map" data-aos="fade-up"></div>
         </section>
     </main>
 
@@ -438,15 +540,6 @@
             $('.faq-item').click(function() {
                 $(this).toggleClass('open');
             });
-
-            // Initialize Leaflet Map
-            var map = L.map('map').setView([51.505, -0.09], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-            L.marker([51.5, -0.09]).addTo(map)
-                .bindPopup('Our Location')
-                .openPopup();
         });
     </script>
 </body>
