@@ -16,6 +16,8 @@
     <!-- Slick Carousel for image sliders -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <!-- Swiper.js for additional sliders -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <!-- Custom CSS -->
     <style>
         body {
@@ -23,19 +25,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
             color: #333;
         }
 
         header {
-            background: #343a40;
+            background: #1c1e21;
             color: #fff;
             padding: 1em 2em;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         nav {
@@ -59,31 +61,33 @@
         .hero {
             text-align: center;
             padding: 6em 2em;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #e83e8c, #ff8c00);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             margin-bottom: 2em;
+            color: #fff;
         }
 
         .hero h2 {
-            font-size: 2.8em;
+            font-size: 3em;
             margin: 0 0 0.5em;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1em 2.5em;
-            background-color: #e83e8c;
-            color: #fff;
+            background-color: #fff;
+            color: #e83e8c;
             text-decoration: none;
             border-radius: 5px;
             font-size: 1.3em;
             transition: background 0.3s, transform 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .cta-button:hover {
-            background-color: #d63384;
+            background-color: #e83e8c;
+            color: #fff;
             transform: scale(1.05);
         }
 
@@ -96,8 +100,8 @@
 
         .art-piece {
             background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
         }
@@ -113,19 +117,20 @@
         }
 
         .art-piece-title {
-            font-size: 1.6em;
+            font-size: 1.8em;
             margin: 0;
+            color: #333;
         }
 
         .art-piece-price {
             color: #e83e8c;
-            font-size: 1.3em;
+            font-size: 1.4em;
             margin: 0.5em 0;
         }
 
         .art-piece-button {
             display: inline-block;
-            padding: 0.6em 1.5em;
+            padding: 0.7em 1.5em;
             background-color: #e83e8c;
             color: #fff;
             text-decoration: none;
@@ -143,7 +148,7 @@
             color: #333;
             padding: 3em 2em;
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             margin-top: 2em;
             text-align: center;
         }
@@ -185,7 +190,7 @@
         }
 
         footer {
-            background: #343a40;
+            background: #1c1e21;
             color: #fff;
             text-align: center;
             padding: 1em;
@@ -212,6 +217,36 @@
 
         .slick-prev, .slick-next {
             font-size: 2em;
+            color: #e83e8c;
+        }
+
+        /* Swiper Carousel Custom Styles */
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        .swiper-pagination-bullet {
+            background: #e83e8c;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #d63384;
+        }
+
+        .swiper-button-next, .swiper-button-prev {
             color: #e83e8c;
         }
     </style>
@@ -243,17 +278,17 @@
                     <div><img src="path/to/art2.jpg" alt="Art Piece 2"></div>
                 </div>
                 <div class="art-piece-info">
-                    <h3 class="art-piece-title">Art Piece 1</h3>
-                    <p class="art-piece-price">$500</p>
-                    <a href="#" class="art-piece-button">Buy Now</a>
+                    <h3 class="art-piece-title">Stunning Artwork 1</h3>
+                    <p class="art-piece-price">$1,200</p>
+                    <a href="#contact" class="art-piece-button">Buy Now</a>
                 </div>
             </div>
-            <!-- Repeat for more art pieces -->
+            <!-- Additional art pieces here -->
         </section>
 
         <section id="contact" class="contact">
             <h2>Contact Us</h2>
-            <p>Have questions or need assistance? Reach out to us!</p>
+            <p>If you have any questions or need more information, feel free to reach out.</p>
             <div class="contact-form">
                 <form action="#" method="post">
                     <label for="name">Your Name</label>
@@ -279,6 +314,7 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         $(document).ready(function() {
             // Initialize Slick Carousel
@@ -289,6 +325,20 @@
                 autoplaySpeed: 3000,
                 fade: true,
                 speed: 500
+            });
+
+            // Initialize Swiper Carousel (if needed for other carousels)
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
             });
         });
     </script>
