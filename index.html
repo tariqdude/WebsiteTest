@@ -3,355 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore exclusive art pieces from talented artists around the world.">
-    <meta name="author" content="Art Gallery">
+    <meta name="description" content="Discover and purchase exquisite art pieces from renowned artists around the world.">
+    <meta name="keywords" content="art, gallery, exhibitions, modern art, artwork">
     <meta property="og:title" content="Art Gallery">
-    <meta property="og:description" content="Discover stunning artworks and exclusive collections from talented artists.">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Art+Gallery">
-    <meta property="og:url" content="https://your-art-gallery.com">
+    <meta property="og:description" content="Discover and purchase exquisite art pieces from renowned artists around the world.">
+    <meta property="og:image" content="path-to-your-image.jpg">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:type" content="website">
     <title>Art Gallery</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick/slick-theme.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* CSS Variables for easy theming */
         :root {
-            --primary-color: #2C3E50;
-            --secondary-color: #3498DB;
-            --background-color: #ECF0F1;
-            --text-color: #2C3E50;
-            --font-family: 'Roboto', sans-serif;
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+            --border-color: #bdc3c7;
+            --highlight-color: #e74c3c;
+            --error-color: #c0392b;
         }
 
         body {
-            font-family: var(--font-family);
-            color: var(--text-color);
-            background-color: var(--background-color);
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-color);
+            margin: 0;
+            padding: 0.5em 0;
         }
 
         header {
             background-color: var(--primary-color);
-            color: #FFF;
-            padding: 1rem;
-        }
-
-        header nav {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        header nav a {
-            color: #FFF;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s ease;
-        }
-
-        header nav a:hover {
-            color: var(--secondary-color);
-        }
-
-        .cta-button {
-            background-color: var(--secondary-color);
-            color: #FFF;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            display: inline-block;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: background-color 0.3s ease;
         }
 
-        .cta-button:hover {
-            background-color: #2980B9;
+        header.scrolled {
+            background-color: var(--secondary-color);
         }
 
-        .section {
-            padding: 2rem;
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1em;
+        }
+
+        nav a {
+            margin: 0 1em;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--highlight-color);
+            transform: scale(1.1);
+        }
+
+        main {
+            padding: 6em 2em 2em;
+        }
+
+        .hero {
             text-align: center;
+            padding: 4em 0;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: #fff;
+            position: relative;
+            overflow: hidden;
         }
 
-        .category-list, .art-pieces {
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        .category-item img, .art-piece img {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
         }
 
-        .art-piece-info {
-            background-color: #FFF;
-            padding: 1rem;
-            border-radius: 0.5rem;
+        .hero h2 {
+            position: relative;
+            z-index: 2;
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1em 2em;
+            background-color: var(--highlight-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .features {
+            margin-top: 4em;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1em;
+        }
+
+        .feature-item {
+            padding: 1em;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        .feature-item:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .art-piece {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .faq-item {
+        .art-piece img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .art-piece-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 0.5em;
+            text-align: center;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .art-piece:hover .art-piece-info {
+            opacity: 1;
+        }
+
+        .testimonials-carousel {
+            margin-top: 4em;
+        }
+
+        .testimonial blockquote {
+            margin: 0;
+            padding: 1em;
+            background: #fff;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            font-style: italic;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .testimonial blockquote::after {
+            content: '\201C';
+            font-size: 3em;
+            color: var(--highlight-color);
+            position: absolute;
+            top: -0.5em;
+            left: 1em;
+        }
+
+        .testimonial footer {
+            margin-top: 0.5em;
+            text-align: right;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .newsletter {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 2em;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 4em;
+        }
+
+        .newsletter form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter input[type="email"] {
+            padding: 0.75em;
+            border-radius: 5px;
+            border: none;
+            width: calc(100% - 110px);
+        }
+
+        .newsletter button {
+            padding: 0.75em 1.5em;
+            border: none;
+            border-radius: 5px;
+            background: var(--highlight-color);
+            color: #fff;
             cursor: pointer;
-            margin: 1rem 0;
-            border-bottom: 1px solid #CCC;
-            padding: 1rem 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter button:hover {
+            background: var(--primary-color);
+        }
+
+        .faq-item {
+            margin: 1em 0;
+            padding: 1em;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: #fff;
+            cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         .faq-item.open {
-            background-color: #F9F9F9;
+            background-color: var(--highlight-color);
+            color: #fff;
         }
 
-        .faq-item h3 {
-            margin: 0;
+        .faq-answer {
+            display: none;
+            margin-top: 0.5em;
         }
 
-        .contact-form input, .contact-form textarea, .newsletter form input {
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-form input, .contact-form textarea {
             width: 100%;
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            border: 1px solid #CCC;
-            border-radius: 0.25rem;
+            padding: 0.75em;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1em;
+            font-size: 1em;
         }
 
-        .contact-form button, .newsletter form button {
-            background-color: var(--secondary-color);
-            color: #FFF;
+        .contact-form button {
+            padding: 0.75em 1.5em;
             border: none;
-            padding: 1rem;
-            border-radius: 0.25rem;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: #fff;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .contact-form button:hover, .newsletter form button:hover {
-            background-color: #2980B9;
+        .contact-form button:hover {
+            background-color: var(--secondary-color);
         }
 
         footer {
             background-color: var(--primary-color);
-            color: #FFF;
-            padding: 1rem;
+            color: #fff;
             text-align: center;
+            padding: 1em 0;
+            position: relative;
+        }
+
+        .social-icons {
+            margin: 1em 0;
         }
 
         .social-icons a {
-            color: #FFF;
-            margin: 0 0.5rem;
-            display: inline-block;
+            margin: 0 0.5em;
+            color: #fff;
+            font-size: 1.5em;
             transition: color 0.3s ease;
         }
 
         .social-icons a:hover {
-            color: var(--secondary-color);
+            color: var(--highlight-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2em 1em;
+            }
+
+            .newsletter {
+                padding: 1em;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
+        <h1>Art Gallery</h1>
         <nav>
             <a href="#home">Home</a>
-            <a href="#categories">Categories</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#featured">Featured</a>
+            <a href="#art">Art Pieces</a>
             <a href="#testimonials">Testimonials</a>
             <a href="#newsletter">Newsletter</a>
             <a href="#faq">FAQ</a>
-            <a href="#map">Location</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main id="home">
         <!-- Hero Section -->
-        <section id="home" class="hero">
-            <h2>Discover Stunning Artworks</h2>
-            <p>Explore our exclusive collection of art pieces from talented artists around the world.</p>
-            <a href="#gallery" class="cta-button">Browse Gallery</a>
+        <section class="hero">
+            <h2>Welcome to Our Art Gallery</h2>
+            <p>Discover and purchase exquisite art pieces from renowned artists around the world.</p>
+            <a href="#art" class="cta-button">Explore Art</a>
         </section>
 
-        <!-- Categories Section -->
-        <section id="categories" class="section categories">
-            <h2>Categories</h2>
-            <div class="category-list">
-                <div class="category-item">
-                    <img src="https://via.placeholder.com/300x200?text=Category+1" alt="Category 1">
-                    <h3>Abstract</h3>
-                </div>
-                <div class="category-item">
-                    <img src="https://via.placeholder.com/300x200?text=Category+2" alt="Category 2">
-                    <h3>Landscape</h3>
-                </div>
-                <div class="category-item">
-                    <img src="https://via.placeholder.com/300x200?text=Category+3" alt="Category 3">
-                    <h3>Portrait</h3>
+        <!-- Art Pieces Section -->
+        <section id="art" class="features">
+            <div class="art-piece">
+                <img src="https://via.placeholder.com/400x300" alt="Art Piece 1">
+                <div class="art-piece-info">
+                    <h3>Art Piece 1</h3>
+                    <p>Artist Name</p>
+                    <a href="#" class="cta-button">View Details</a>
                 </div>
             </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section id="gallery" class="section gallery">
-            <h2>Gallery</h2>
-            <div class="art-pieces">
-                <div class="art-piece" data-aos="fade-up">
-                    <img src="https://via.placeholder.com/300x300?text=Art+Piece+1" alt="Art Piece 1">
-                    <div class="art-piece-info">
-                        <h3>Art Piece 1</h3>
-                        <p>Description of Art Piece 1</p>
-                        <a href="#" class="art-piece-button">View Details</a>
-                    </div>
-                </div>
-                <div class="art-piece" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://via.placeholder.com/300x300?text=Art+Piece+2" alt="Art Piece 2">
-                    <div class="art-piece-info">
-                        <h3>Art Piece 2</h3>
-                        <p>Description of Art Piece 2</p>
-                        <a href="#" class="art-piece-button">View Details</a>
-                    </div>
-                </div>
-                <div class="art-piece" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://via.placeholder.com/300x300?text=Art+Piece+3" alt="Art Piece 3">
-                    <div class="art-piece-info">
-                        <h3>Art Piece 3</h3>
-                        <p>Description of Art Piece 3</p>
-                        <a href="#" class="art-piece-button">View Details</a>
-                    </div>
+            <div class="art-piece">
+                <img src="https://via.placeholder.com/400x300" alt="Art Piece 2">
+                <div class="art-piece-info">
+                    <h3>Art Piece 2</h3>
+                    <p>Artist Name</p>
+                    <a href="#" class="cta-button">View Details</a>
                 </div>
             </div>
-        </section>
-
-        <!-- Featured Art Section -->
-        <section id="featured" class="section featured">
-            <h2>Featured Art</h2>
-            <div class="art-pieces">
-                <div class="art-piece" data-aos="fade-up">
-                    <img src="https://via.placeholder.com/600x400?text=Featured+Art+1" alt="Featured Art 1">
-                    <div class="art-piece-info">
-                        <h3>Featured Art 1</h3>
-                        <p>Description of Featured Art 1</p>
-                    </div>
-                </div>
-                <div class="art-piece" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://via.placeholder.com/600x400?text=Featured+Art+2" alt="Featured Art 2">
-                    <div class="art-piece-info">
-                        <h3>Featured Art 2</h3>
-                        <p>Description of Featured Art 2</p>
-                    </div>
-                </div>
-            </div>
+            <!-- Add more art pieces here -->
         </section>
 
         <!-- Testimonials Section -->
-        <section id="testimonials" class="section testimonials">
-            <h2>What Our Visitors Say</h2>
-            <div class="testimonials-carousel">
-                <div class="testimonial">
-                    <blockquote>
-                        <p>"A truly breathtaking collection of art. I could spend hours here!"</p>
-                        <footer>— Jane Doe</footer>
-                    </blockquote>
-                </div>
-                <div class="testimonial">
-                    <blockquote>
-                        <p>"The gallery's selection is top-notch. Highly recommend visiting."</p>
-                        <footer>— John Smith</footer>
-                    </blockquote>
-                </div>
+        <section id="testimonials" class="testimonials-carousel">
+            <div class="testimonial">
+                <blockquote>
+                    "An amazing experience! The art collection is stunning and the service was exceptional."
+                </blockquote>
+                <footer>- Satisfied Customer</footer>
             </div>
+            <div class="testimonial">
+                <blockquote>
+                    "I found the perfect piece for my home. Highly recommend this gallery!"
+                </blockquote>
+                <footer>- Happy Buyer</footer>
+            </div>
+            <!-- Add more testimonials here -->
         </section>
 
         <!-- Newsletter Section -->
-        <section id="newsletter" class="section newsletter">
-            <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
-            <form action="subscribe.php" method="post">
-                <input type="email" name="email" placeholder="Your Email Address" required>
+        <section id="newsletter" class="newsletter">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get updates on new art pieces and upcoming exhibitions directly in your inbox.</p>
+            <form action="#" method="post">
+                <input type="email" name="email" placeholder="Your email address" required>
                 <button type="submit">Subscribe</button>
             </form>
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="section faq">
-            <h2>Frequently Asked Questions</h2>
+        <section id="faq">
             <div class="faq-item">
-                <h3>What is the return policy?</h3>
-                <p class="faq-answer">You can return any item within 30 days of purchase for a full refund.</p>
+                <h3>What is your return policy?</h3>
+                <div class="faq-answer">
+                    <p>We offer a 30-day return policy on all purchases. Please contact us for more details.</p>
+                </div>
             </div>
             <div class="faq-item">
                 <h3>Do you offer international shipping?</h3>
-                <p class="faq-answer">Yes, we offer international shipping. Shipping costs vary by destination.</p>
+                <div class="faq-answer">
+                    <p>Yes, we ship internationally. Shipping costs will be calculated at checkout.</p>
+                </div>
             </div>
+            <!-- Add more FAQs here -->
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="section contact">
+        <section id="contact">
             <h2>Contact Us</h2>
-            <form class="contact-form" action="contact.php" method="post">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email Address" required>
-                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
+            <p>For inquiries, please fill out the form below or visit us at our location.</p>
+            <div class="contact-form">
+                <form action="#" method="post">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
 
-        <!-- Map Section -->
-        <section id="map" class="section map">
-            <h2>Find Us</h2>
-            <div id="map" style="height: 400px;"></div>
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+            <div id="map" class="map" style="height: 400px;"></div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Art Gallery. All rights reserved.</p>
+        <p>&copy; 2023 Art Gallery. All rights reserved.</p>
         <div class="social-icons">
-            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12.1v-1.6c0-.6-.5-1.1-1.1-1.1h-1.5v-2c0-2.8-2.3-5.1-5.1-5.1-1.3 0-2.5.5-3.4 1.4-.9-.9-2.1-1.4-3.4-1.4-2.8 0-5.1 2.3-5.1 5.1v2h-1.5c-.6 0-1.1.5-1.1 1.1v1.6c0 .6.5 1.1 1.1 1.1h1.5v6.7c0 .6.5 1.1 1.1 1.1h1.6c.6 0 1.1-.5 1.1-1.1v-6.7h2.1v6.7c0 .6.5 1.1 1.1 1.1h1.6c.6 0 1.1-.5 1.1-1.1v-6.7h2.1v6.7c0 .6.5 1.1 1.1 1.1h1.6c.6 0 1.1-.5 1.1-1.1v-6.7h1.5c.6 0 1.1-.5 1.1-1.1z"/></svg></a>
-            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c-2.549 0-2.861.01-3.865.056a5.733 5.733 0 0 0-1.53.38 3.212 3.212 0 0 0-1.18.85 3.212 3.212 0 0 0-.85 1.18c-.369.866-.582 1.81-.646 2.872a53.175 53.175 0 0 0-.056 3.863c0 2.549.01 2.861.056 3.865a5.73 5.73 0 0 0 .38 1.53 3.212 3.212 0 0 0 .85 1.18 3.212 3.212 0 0 0 1.18.85c.866.369 1.81.582 2.872.646a53.175 53.175 0 0 0 3.863.056c2.549 0 2.861-.01 3.865-.056a5.733 5.733 0 0 0 1.53-.38 3.212 3.212 0 0 0 1.18-.85 3.212 3.212 0 0 0 .85-1.18c.369-.866.582-1.81.646-2.872a53.175 53.175 0 0 0 .056-3.863c0-2.549-.01-2.861-.056-3.865a5.73 5.73 0 0 0-.38-1.53 3.212 3.212 0 0 0-.85-1.18 3.212 3.212 0 0 0-1.18-.85c-.866-.369-1.81-.582-2.872-.646a53.175 53.175 0 0 0-3.863-.056zM12 5.842a6.158 6.158 0 0 0-6.158 6.158A6.158 6.158 0 0 0 12 18.158a6.158 6.158 0 0 0 6.158-6.158A6.158 6.158 0 0 0 12 5.842zM12 15.935a3.042 3.042 0 0 1-3.042-3.042A3.042 3.042 0 0 1 12 9.85a3.042 3.042 0 0 1 3.042 3.042A3.042 3.042 0 0 1 12 15.935zM18.837 7.163a1.372 1.372 0 0 1-1.37-1.37 1.371 1.371 0 0 1 1.37-1.371 1.371 1.371 0 0 1 1.37 1.371 1.372 1.372 0 0 1-1.37 1.37z"/></svg></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // Initialize AOS (Animate On Scroll)
-        AOS.init({
-            duration: 1200,
-            easing: 'ease-in-out',
-            once: true
-        });
-
-        // Initialize Slick Slider for Art Pieces
-        $(document).ready(function(){
-            $('.art-pieces').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
+        $(document).ready(function() {
+            // Initialize Slick Slider
+            $('.testimonials-carousel').slick({
                 dots: true,
-                infinite: true,
-                autoplay: true,
-                autoplaySpeed: 2000,
                 arrows: false,
-                responsive: [
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
+                autoplay: true,
+                autoplaySpeed: 3000,
+                slidesToShow: 1
             });
 
             // FAQ Toggle Functionality
@@ -359,16 +490,29 @@
                 $(this).toggleClass('open');
                 $(this).find('.faq-answer').slideToggle();
             });
-        });
 
-        // Initialize Leaflet Map
-        var map = L.map('map').setView([40.7128, -74.0060], 13); // Default to New York City
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        L.marker([40.7128, -74.0060]).addTo(map)
-            .bindPopup('Our Location')
-            .openPopup();
+            // Initialize AOS
+            AOS.init();
+
+            // Initialize Leaflet Map
+            var map = L.map('map').setView([40.7128, -74.0060], 13); // Default to New York City
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            L.marker([40.7128, -74.0060]).addTo(map)
+                .bindPopup('Our Location')
+                .openPopup();
+
+            // Sticky Header on Scroll
+            $(window).on('scroll', function() {
+                if ($(this).scrollTop() > 50) {
+                    $('header').addClass('scrolled');
+                } else {
+                    $('header').removeClass('scrolled');
+                }
+            });
+        });
     </script>
 </body>
 </html>
+
