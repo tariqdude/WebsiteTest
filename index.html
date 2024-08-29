@@ -43,6 +43,8 @@
             --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
             --container-padding: 2em;
             --highlight-color: #FFEB3B;
+            --animation-speed: 0.3s;
+            --carousel-height: 600px;
         }
 
         /* Reset and Base Styles */
@@ -248,6 +250,7 @@
         .testimonial-carousel {
             width: 80%;
             margin: 0 auto;
+            height: var(--carousel-height);
         }
 
         .testimonial-carousel blockquote {
@@ -256,6 +259,10 @@
             background: #fff;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .testimonial-carousel footer {
@@ -366,7 +373,7 @@
         .contact-form button {
             padding: 1em 2em;
             background-color: var(--accent-color);
-            border-radius: var(--border-radius);
+            border-radius: var (--border-radius);
             color: #fff;
             font-size: 1.2em;
             cursor: pointer;
@@ -616,6 +623,8 @@
                 dots: true,
                 autoplay: true,
                 autoplaySpeed: 4000,
+                fade: true,
+                cssEase: 'linear',
             });
 
             // Initialize AOS
