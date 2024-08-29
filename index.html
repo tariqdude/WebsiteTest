@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/css/glightbox.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@6.3.1/dist/tippy.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -288,7 +290,7 @@
 
         .newsletter input[type="email"] {
             padding: 0.5em;
-            border-radius: var(--border-radius);
+            border-radius: var (--border-radius);
             border: none;
             margin-right: 0.5em;
             width: 60%;
@@ -441,6 +443,25 @@
             object-fit: cover;
         }
 
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2em;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            color: #fff;
+            font-size: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+        }
+
         /* Footer Section */
         footer {
             background: #333;
@@ -562,36 +583,45 @@
         </nav>
     </header>
 
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <span>Scroll Down</span>
+        <i class="bx bx-chevron-down animate__animated animate__bounce"></i>
+    </div>
+
     <!-- Main Content Section -->
-    <main>
+    <main id="fullpage">
         <!-- Hero Section -->
-        <section id="home" class="hero" data-tilt>
+        <section id="home" class="hero section" data-tilt>
             <h2>Discover Unique Art Pieces</h2>
             <p>Explore our curated collection and custom commissions.</p>
             <a href="#contact" class="cta-button">Get in Touch</a>
         </section>
 
         <!-- Features Section -->
-        <section id="about" class="features">
+        <section id="about" class="features section">
             <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Custom Commissions</h3>
                 <p>Work with our artists to create personalized art pieces.</p>
+                <span class="tooltip" data-tippy-content="We offer custom art commissions to match your style and preferences."></span>
             </div>
             <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Art Collections</h3>
                 <p>Explore our diverse range of curated art collections.</p>
+                <span class="tooltip" data-tippy-content="Discover art collections curated by experts."></span>
             </div>
             <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Art Services</h3>
                 <p>Benefit from our art consultancy and curation services.</p>
+                <span class="tooltip" data-tippy-content="Our services include art consultation, framing, and more."></span>
             </div>
         </section>
 
         <!-- Testimonial Carousel Section -->
-        <section class="testimonial">
+        <section class="testimonial section">
             <h2>What Our Clients Say</h2>
             <div class="testimonial-carousel" data-aos="fade-up">
                 <div>
@@ -611,7 +641,7 @@
         </section>
 
         <!-- Image Gallery Section -->
-        <section id="gallery" class="gallery-section">
+        <section id="gallery" class="gallery-section section">
             <h2>Gallery</h2>
             <div class="gallery" data-aos="fade-up">
                 <a href="https://via.placeholder.com/800x600" class="gallery-item glightbox">
@@ -631,7 +661,7 @@
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="faq" data-aos="fade-up">
+        <section id="faq" class="faq section" data-aos="fade-up">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item">
                 <h3>How can I order a custom commission?</h3>
@@ -649,7 +679,7 @@
         </section>
 
         <!-- Newsletter Signup Section -->
-        <section class="newsletter" data-aos="fade-up">
+        <section class="newsletter section" data-aos="fade-up">
             <h2>Subscribe to Our Newsletter</h2>
             <p>Get the latest updates and exclusive offers delivered to your inbox.</p>
             <form action="#" method="post">
@@ -659,7 +689,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="contact" data-aos="fade-up">
+        <section id="contact" class="contact section" data-aos="fade-up">
             <h2>Contact Us</h2>
             <p>We'd love to hear from you! Get in touch with us to learn more about our offerings.</p>
             <div class="contact-form">
@@ -679,7 +709,7 @@
         </section>
 
         <!-- Code Snippet Section -->
-        <section id="code" class="code-section" data-aos="fade-up">
+        <section id="code" class="code-section section" data-aos="fade-up">
             <h2>Sample Code Snippets</h2>
             <pre><code class="language-javascript">console.log('Hello, world!');</code></pre>
         </section>
@@ -712,6 +742,8 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/js/glightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.js"></script>
     <script>
         $(document).ready(function() {
             // Initialize Slick Carousel
@@ -747,6 +779,24 @@
                 touchNavigation: true,
                 loop: true,
                 zoomable: true,
+            });
+
+            // Initialize Tippy.js for tooltips
+            tippy('.tooltip', {
+                theme: 'light',
+                animation: 'scale',
+                arrow: true,
+            });
+
+            // Initialize fullPage.js for smooth scrolling
+            new fullpage('#fullpage', {
+                autoScrolling: true,
+                scrollHorizontally: true,
+                navigation: true,
+                navigationPosition: 'right',
+                showActiveTooltip: true,
+                slidesNavigation: true,
+                slidesNavPosition: 'bottom',
             });
 
             // FAQ Toggle
