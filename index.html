@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore and discover stunning artworks from talented artists around the world. Art Gallery offers a curated collection of high-quality art pieces and custom commissions.">
-    <meta name="keywords" content="art, gallery, artwork, buy art, art collection, custom commissions">
-    <meta name="author" content="Art Gallery">
-    <title>Art Gallery | Discover Stunning Artworks</title>
-    <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
+    <meta name="description" content="Art Gallery - Discover stunning artworks, custom commissions, and art services.">
+    <meta name="keywords" content="Art Gallery, Custom Art, Art Commissions, Art Services">
+    <meta property="og:title" content="Art Gallery">
+    <meta property="og:description" content="Explore a curated collection of unique art pieces and custom commissions.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <title>Art Gallery</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
     <style>
         :root {
             --primary-color: #007BFF;
-            --accent-color: #0056b3;
-            --background-color: #f4f4f4;
+            --accent-color: #FFC107;
+            --background-color: #f8f9fa;
             --text-color: #333;
-            --font-heading: 'Roboto', sans-serif;
-            --font-base: 'Segoe UI', sans-serif;
             --border-radius: 8px;
             --transition-speed: 0.3s;
         }
 
         body {
-            font-family: var(--font-base);
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
-            background: var(--background-color);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
             color: var(--text-color);
         }
 
@@ -39,70 +42,55 @@
             background: var(--primary-color);
             color: #fff;
             padding: 1em;
+            text-align: center;
             position: fixed;
             width: 100%;
             top: 0;
-            left: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
-            font-size: 1.8em;
+            font-size: 2em;
             font-weight: bold;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            margin-top: 0.5em;
         }
 
         nav a {
-            margin: 0 1em;
             color: #fff;
             text-decoration: none;
+            margin: 0 1em;
             font-weight: bold;
-            transition: color var(--transition-speed), border-bottom var(--transition-speed);
+            transition: color var(--transition-speed);
         }
 
         nav a:hover {
             color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
         }
 
         main {
-            padding: 6em 2em 2em;
+            padding: 5em 2em 2em;
         }
 
         .hero {
             text-align: center;
+            padding: 5em 0;
             background: url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
             color: #fff;
-            padding: 6em 2em;
-            border-radius: var(--border-radius);
             position: relative;
             overflow: hidden;
         }
 
         .hero h2 {
-            font-size: 2.5em;
-            margin: 0;
-            font-family: var(--font-heading);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 3em;
+            margin-bottom: 0.5em;
         }
 
         .hero p {
             font-size: 1.2em;
-            margin: 0.5em 0 2em;
         }
 
         .cta-button {
-            display: inline-block;
             padding: 1em 2em;
-            background-color: var(--primary-color);
+            background: var(--accent-color);
             color: #fff;
             text-decoration: none;
             border-radius: var(--border-radius);
@@ -111,176 +99,111 @@
         }
 
         .cta-button:hover {
-            background-color: var(--accent-color);
+            background: var(--primary-color);
             transform: scale(1.05);
         }
 
         .features {
-            margin: 4em 0;
             display: grid;
-            gap: 2em;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2em;
+            margin-top: 4em;
         }
 
         .feature-item {
-            background: #fff;
+            border: 1px solid #ddd;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 1.5em;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: box-shadow var(--transition-speed);
         }
 
         .feature-item img {
             width: 100%;
             height: auto;
-            border-radius: var(--border-radius);
-            margin-bottom: 1em;
+            display: block;
         }
 
         .feature-item h3 {
-            font-size: 1.5em;
             margin: 0.5em 0;
-            font-family: var(--font-heading);
-        }
-
-        .feature-item p {
-            font-size: 1em;
         }
 
         .testimonial {
-            text-align: center;
             margin: 4em 0;
+            text-align: center;
         }
 
-        .testimonial h2 {
-            font-size: 2.5em;
-            margin-bottom: 1em;
-            font-family: var(--font-heading);
+        .testimonial-carousel {
+            width: 80%;
+            margin: 0 auto;
         }
 
         .testimonial-carousel blockquote {
             font-size: 1.2em;
-            border-left: 4px solid var(--primary-color);
-            padding-left: 1em;
-            margin: 1em 0;
-            position: relative;
+            padding: 2em;
+            background: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .testimonial-carousel blockquote footer {
+        .testimonial-carousel footer {
             font-style: italic;
-            margin-top: 0.5em;
         }
 
         .newsletter {
             background: var(--primary-color);
             color: #fff;
-            padding: 2em 1em;
+            padding: 2em;
             text-align: center;
             border-radius: var(--border-radius);
-            margin: 2em 0;
-        }
-
-        .newsletter h2 {
-            font-size: 2.5em;
-            margin-bottom: 0.5em;
-            font-family: var(--font-heading);
-        }
-
-        .newsletter p {
-            font-size: 1.2em;
-            margin-bottom: 1em;
-        }
-
-        .newsletter form {
-            display: flex;
-            justify-content: center;
-            gap: 0.5em;
         }
 
         .newsletter input[type="email"] {
-            padding: 1em;
-            border: none;
+            width: 60%;
+            padding: 0.5em;
             border-radius: var(--border-radius);
-            font-size: 1em;
-            width: 300px;
-            max-width: 80%;
-        }
-
-        .newsletter button {
-            padding: 1em 2em;
             border: none;
-            border-radius: var(--border-radius);
-            font-size: 1.2em;
-            color: #fff;
-            background: var(--accent-color);
-            cursor: pointer;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-        }
-
-        .newsletter button:hover {
-            background-color: var(--primary-color);
-            transform: scale(1.05);
+            margin-right: 0.5em;
         }
 
         .faq {
             margin: 4em 0;
         }
 
-        .faq h2 {
-            font-size: 2.5em;
-            margin-bottom: 1em;
-            font-family: var(--font-heading);
-        }
-
         .faq-item {
-            margin-bottom: 1em;
-            padding: 1em;
             background: #fff;
+            border: 1px solid #ddd;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1em;
+            margin-bottom: 1em;
             cursor: pointer;
-            transition: box-shadow var(--transition-speed);
+            transition: background-color var(--transition-speed);
         }
 
-        .faq-item:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .faq-item h3 {
-            font-size: 1.5em;
-            margin: 0;
-            font-family: var(--font-heading);
+        .faq-item.open {
+            background-color: #f1f1f1;
         }
 
         .faq-answer {
             display: none;
-            margin-top: 1em;
-            font-size: 1.1em;
+            padding-top: 1em;
         }
 
         .faq-item.open .faq-answer {
             display: block;
         }
 
+        .contact {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 4em 2em;
+            text-align: center;
+        }
+
         .contact-form {
-            padding: 3em 2em;
             max-width: 600px;
             margin: 0 auto;
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-form h2 {
-            font-size: 2.5em;
-            margin-bottom: 1em;
-            font-family: var(--font-heading);
-        }
-
-        .contact-form label {
-            font-size: 1.1em;
-            margin-bottom: 0.5em;
-            display: block;
         }
 
         .contact-form input,
@@ -297,67 +220,53 @@
             padding: 1em 2em;
             border: none;
             border-radius: var(--border-radius);
-            background: var(--primary-color);
+            background: var(--accent-color);
             color: #fff;
             font-size: 1.2em;
             cursor: pointer;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            transition: background-color var(--transition-speed);
         }
 
         .contact-form button:hover {
-            background-color: var(--accent-color);
-            transform: scale(1.05);
+            background: var(--primary-color);
         }
 
         footer {
             background: #333;
             color: #fff;
-            padding: 2em 1em;
             text-align: center;
+            padding: 1em;
             position: relative;
-            margin-top: 4em;
         }
 
-        footer .social-icons a {
+        .footer-social a {
             color: #fff;
             margin: 0 0.5em;
             font-size: 1.5em;
             transition: color var(--transition-speed);
         }
 
-        footer .social-icons a:hover {
-            color: var(--primary-color);
-        }
-
-        .footer-logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 1em;
-        }
-
-        .footer-logo img {
-            width: 40px;
-            height: auto;
-        }
-
-        .footer-menu {
-            margin: 1em 0;
-            display: flex;
-            justify-content: center;
-            gap: 1em;
-        }
-
-        .footer-menu a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color var(--transition-speed), border-bottom var(--transition-speed);
-        }
-
-        .footer-menu a:hover {
+        .footer-social a:hover {
             color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 1em;
+            right: 1em;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 0.5em 1em;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color var(--transition-speed);
+            display: none;
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-color);
         }
 
         @media (max-width: 768px) {
@@ -365,117 +274,121 @@
                 font-size: 2em;
             }
 
-            .hero p {
+            .cta-button {
                 font-size: 1em;
             }
 
             .newsletter input[type="email"] {
-                width: 250px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
+                width: 80%;
             }
         }
     </style>
 </head>
 <body>
+
     <!-- Header Section -->
     <header>
         <div class="logo">Art Gallery</div>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Artworks</a>
-            <a href="#">Contact</a>
-            <a href="#">FAQ</a>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <!-- Main Content Section -->
     <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <h2>Discover Stunning Artworks</h2>
-            <p>Explore a curated collection of unique art pieces and custom commissions.</p>
-            <a href="#" class="cta-button">Explore Now</a>
+        <section id="home" class="hero">
+            <h2>Discover Unique Art Pieces</h2>
+            <p>Explore our curated collection and custom commissions.</p>
+            <a href="#contact" class="cta-button">Get in Touch</a>
         </section>
 
         <!-- Features Section -->
-        <section class="features">
-            <div class="feature-item" data-aos="fade-up">
-                <img src="https://via.placeholder.com/300x200" alt="Featured Art 1">
-                <h3>Featured Art</h3>
-                <p>Discover our featured artworks from talented artists around the world.</p>
-            </div>
-            <div class="feature-item" data-aos="fade-up">
-                <img src="https://via.placeholder.com/300x200" alt="Custom Commissions">
+        <section id="about" class="features">
+            <div class="feature-item">
+                <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Custom Commissions</h3>
-                <p>Get custom artwork created specifically for you by our professional artists.</p>
+                <p>Work with our artists to create personalized art pieces.</p>
             </div>
-            <div class="feature-item" data-aos="fade-up">
-                <img src="https://via.placeholder.com/300x200" alt="Art Services">
+            <div class="feature-item">
+                <img src="https://via.placeholder.com/600x400" alt="Feature Image">
+                <h3>Art Collections</h3>
+                <p>Explore our diverse range of curated art collections.</p>
+            </div>
+            <div class="feature-item">
+                <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Art Services</h3>
-                <p>Explore our range of art-related services designed to meet your needs.</p>
+                <p>Benefit from our art consultancy and curation services.</p>
             </div>
         </section>
 
-        <!-- Testimonials Section -->
+        <!-- Testimonial Carousel Section -->
         <section class="testimonial">
             <h2>What Our Clients Say</h2>
             <div class="testimonial-carousel">
-                <blockquote>
-                    <p>"Art Gallery provided us with exceptional artwork that transformed our space. Highly recommended!"</p>
-                    <footer>- Satisfied Client</footer>
-                </blockquote>
-                <blockquote>
-                    <p>"The custom commission service was outstanding. The artwork exceeded our expectations."</p>
-                    <footer>- Happy Customer</footer>
-                </blockquote>
+                <div>
+                    <blockquote>
+                        "The art piece exceeded our expectations! The service was outstanding."
+                        <footer>- Satisfied Client</footer>
+                    </blockquote>
+                </div>
+                <div>
+                    <blockquote>
+                        "Incredible talent and professionalism. Highly recommended!"
+                        <footer>- Happy Customer</footer>
+                    </blockquote>
+                </div>
                 <!-- Add more testimonials as needed -->
             </div>
         </section>
 
-        <!-- Newsletter Section -->
-        <section class="newsletter">
-            <h2>Stay Updated</h2>
-            <p>Sign up for our newsletter to receive updates on new artworks, special offers, and more.</p>
-            <form action="#" method="post">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </section>
-
         <!-- FAQ Section -->
-        <section class="faq">
+        <section id="faq" class="faq">
             <h2>Frequently Asked Questions</h2>
-            <div class="faq-item" data-aos="fade-up">
-                <h3>What types of artworks do you offer?</h3>
+            <div class="faq-item">
+                <h3>How can I order a custom commission?</h3>
                 <div class="faq-answer">
-                    <p>We offer a wide range of artworks including paintings, sculptures, and digital art. Explore our collection to find something that suits your taste.</p>
+                    <p>To order a custom commission, please fill out the contact form with your requirements, and our team will get in touch with you.</p>
                 </div>
             </div>
-            <div class="faq-item" data-aos="fade-up">
-                <h3>How can I commission a custom artwork?</h3>
+            <div class="faq-item">
+                <h3>What is your return policy?</h3>
                 <div class="faq-answer">
-                    <p>To commission a custom artwork, please contact us through the 'Contact' page or fill out our commission request form. Our team will get in touch with you to discuss your requirements.</p>
+                    <p>We offer a 30-day return policy on all purchases. Please contact us for more details.</p>
                 </div>
             </div>
             <!-- Add more FAQ items as needed -->
         </section>
 
+        <!-- Newsletter Signup Section -->
+        <section class="newsletter">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest updates and exclusive offers delivered to your inbox.</p>
+            <form action="#" method="post">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="cta-button">Subscribe</button>
+            </form>
+        </section>
+
         <!-- Contact Section -->
-        <section class="contact">
+        <section id="contact" class="contact">
             <h2>Contact Us</h2>
-            <p>If you have any questions or need assistance, please reach out to us.</p>
+            <p>We'd love to hear from you! Get in touch with us to learn more about our offerings.</p>
             <div class="contact-form">
                 <form action="#" method="post">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required>
+
                     <label for="email">Your Email</label>
                     <input type="email" id="email" name="email" required>
+
                     <label for="message">Your Message</label>
                     <textarea id="message" name="message" rows="4" required></textarea>
+
                     <button type="submit" class="cta-button">Send Message</button>
                 </form>
             </div>
@@ -484,43 +397,56 @@
 
     <!-- Footer Section -->
     <footer>
-        <div class="footer-logo">
-            <img src="https://via.placeholder.com/40" alt="Art Gallery Logo">
-            <span>Art Gallery</span>
-        </div>
-        <div class="footer-menu">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-        </div>
-        <div class="social-icons">
+        <p>&copy; 2023 Art Gallery. All rights reserved.</p>
+        <div class="footer-social">
             <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
             <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <p>&copy; 2024 Art Gallery. All rights reserved.</p>
     </footer>
+
+    <!-- Back-to-Top Button -->
+    <div class="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.js"></script>
     <script>
         $(document).ready(function(){
+            // Initialize Slick Carousel
             $('.testimonial-carousel').slick({
-                dots: true,
                 infinite: true,
-                speed: 500,
                 slidesToShow: 1,
-                slidesToScroll: 1
+                slidesToScroll: 1,
+                arrows: true,
+                dots: true
             });
 
+            // Initialize AOS
             AOS.init();
 
-            $('.faq-item').click(function(){
+            // FAQ Toggle
+            $('.faq-item').click(function() {
                 $(this).toggleClass('open');
+            });
+
+            // Back-to-Top Button
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 200) {
+                    $('.back-to-top').fadeIn();
+                } else {
+                    $('.back-to-top').fadeOut();
+                }
+            });
+
+            $('.back-to-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 600);
+                return false;
             });
         });
     </script>
