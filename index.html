@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Art Gallery - Discover stunning artworks, custom commissions, and art services.">
     <meta name="keywords" content="Art Gallery, Custom Art, Art Commissions, Art Services">
@@ -12,7 +11,6 @@
     <meta property="og:url" content="https://yourwebsite.com">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Art Gallery">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';">
     <title>Art Gallery | Discover Stunning Artworks</title>
     <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -29,10 +27,6 @@
             --border-radius: 8px;
             --transition-speed: 0.3s;
             --max-width: 1200px;
-            --font-size-base: 16px;
-            --line-height-base: 1.6;
-            --font-family-base: 'Arial', sans-serif;
-            --font-family-heading: 'Roboto', sans-serif;
         }
 
         /* Reset and Base Styles */
@@ -42,24 +36,17 @@
             box-sizing: border-box;
         }
 
-        html {
-            font-size: var(--font-size-base);
-            line-height: var(--line-height-base);
-        }
-
         body {
-            font-family: var(--font-family-base);
+            font-family: 'Arial', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
+            line-height: 1.6;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         img {
             max-width: 100%;
             height: auto;
-            display: block;
         }
 
         a {
@@ -68,24 +55,9 @@
         }
 
         h1, h2, h3 {
-            font-family: var(--font-family-heading);
+            color: var(--text-color);
             margin-bottom: 0.5em;
             font-weight: 600;
-            color: var(--text-color);
-        }
-
-        p {
-            margin-bottom: 1em;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* Accessibility Improvements */
-        :focus {
-            outline: 3px solid var(--primary-color);
-            outline-offset: 3px;
         }
 
         /* Header Styles */
@@ -99,11 +71,6 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color var(--transition-speed);
-        }
-
-        header.sticky {
-            background-color: rgba(0, 123, 255, 0.9);
         }
 
         .logo {
@@ -350,7 +317,6 @@
             background-color: var(--accent-color);
         }
 
-        /* Media Queries */
         @media (max-width: 768px) {
             .hero h2 {
                 font-size: 2em;
@@ -529,15 +495,6 @@
             $('.back-to-top').click(function() {
                 $('html, body').animate({scrollTop: 0}, 600);
                 return false;
-            });
-
-            // Sticky Header on Scroll
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 50) {
-                    $('header').addClass('sticky');
-                } else {
-                    $('header').removeClass('sticky');
-                }
             });
         });
     </script>
