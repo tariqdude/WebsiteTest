@@ -25,6 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
     <style>
         :root {
             --primary-color: #007BFF;
@@ -373,11 +374,11 @@
         .contact-form button {
             padding: 1em 2em;
             background-color: var(--accent-color);
-            border-radius: var (--border-radius);
+            border-radius: var(--border-radius);
             color: #fff;
             font-size: 1.2em;
             cursor: pointer;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+            transition: background-color var(--transition-speed), box-shadow var (--transition-speed);
         }
 
         .contact-form button:hover {
@@ -440,6 +441,20 @@
             background-color: var(--primary-color);
             border-radius: 20px;
             border: 3px solid var(--background-color);
+        }
+
+        /* Code Block Styling */
+        pre {
+            background: #2d2d2d;
+            padding: 1em;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            box-shadow: var(--shadow-sm);
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #f8f8f2;
         }
 
         /* Media Queries for Responsive Design */
@@ -587,6 +602,12 @@
                 </form>
             </div>
         </section>
+
+        <!-- Code Snippet Section -->
+        <section id="code" class="code-section" data-aos="fade-up">
+            <h2>Sample Code Snippets</h2>
+            <pre><code class="language-javascript">console.log('Hello, world!');</code></pre>
+        </section>
     </main>
 
     <!-- Footer Section -->
@@ -612,6 +633,8 @@
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/dist/boxicons.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/components/prism-javascript.min.js"></script>
     <script>
         $(document).ready(function() {
             // Initialize Slick Carousel
@@ -704,6 +727,9 @@
                     }, 800);
                 }
             });
+
+            // Initialize PrismJS for Code Highlighting
+            Prism.highlightAll();
         });
     </script>
 </body>
