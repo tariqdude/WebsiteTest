@@ -771,4 +771,151 @@
     <script src="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/js/glightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.pkgd.min
+    <script src="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize Slick Carousel
+            $('.testimonial-carousel').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                dots: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                fade: true,
+                cssEase: 'linear',
+            });
+
+            // Initialize Flickity Carousel
+            $('.carousel').flickity({
+                cellAlign: 'left',
+                contain: true,
+                wrapAround: true,
+                autoPlay: 3000,
+                imagesLoaded: true,
+                pauseAutoPlayOnHover: true,
+                prevNextButtons: true,
+                pageDots: false,
+            });
+
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+            });
+
+            // Initialize Vanilla Tilt
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.5,
+            });
+
+            // Initialize GLightbox
+            const lightbox = GLightbox({
+                touchNavigation: true,
+                loop: true,
+                zoomable: true,
+            });
+
+            // Initialize Tippy.js for tooltips
+            tippy('.tooltip', {
+                theme: 'light',
+                animation: 'scale',
+                arrow: true,
+            });
+
+            // Initialize fullPage.js for smooth scrolling
+            new fullpage('#fullpage', {
+                autoScrolling: true,
+                scrollHorizontally: true,
+                navigation: true,
+                navigationPosition: 'right',
+                showActiveTooltip: true,
+                slidesNavigation: true,
+                slidesNavPosition: 'bottom',
+            });
+
+            // FAQ Toggle
+            $('.faq-item').click(function() {
+                $(this).toggleClass('open');
+            });
+
+            // Back-to-Top Button
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 200) {
+                    $('.back-to-top').fadeIn();
+                } else {
+                    $('.back-to-top').fadeOut();
+                }
+            });
+
+            $('.back-to-top').click(function() {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
+            // Sticky Header on Scroll
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 50) {
+                    $('header').addClass('sticky');
+                } else {
+                    $('header').removeClass('sticky');
+                }
+            });
+
+            // Lazy Load Images
+            $("img").each(function() {
+                $(this).attr("loading", "lazy");
+            });
+
+            // Form Validation
+            $("form").on("submit", function(e) {
+                let isValid = true;
+                $(this).find("input, textarea").each(function() {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                        $(this).addClass("input-error");
+                    } else {
+                        $(this).removeClass("input-error");
+                    }
+                });
+                if (!isValid) {
+                    e.preventDefault();
+                    toastr.error("Please fill in all required fields.");
+                }
+            });
+
+            // Smooth Scroll for Anchor Links
+            $('nav a, .back-to-top').on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800);
+                }
+            });
+
+            // Initialize PrismJS for Code Highlighting
+            Prism.highlightAll();
+
+            // Initialize Toastr Notifications
+            toastr.options = {
+                "positionClass": "toast-top-right",
+                "closeButton": true,
+                "progressBar": true
+            };
+
+            // Trigger a sample toast notification on page load
+            toastr.success("Welcome to the Art Gallery!");
+        });
+    </script>
+</body>
+
+</html>
