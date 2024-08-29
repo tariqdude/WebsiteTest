@@ -63,10 +63,10 @@
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s;
-        }
-
-        header.scrolled {
-            background: linear-gradient(135deg, #0056b3, #003f6c);
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         nav {
@@ -93,10 +93,16 @@
             position: absolute;
             bottom: -5px;
             left: 0;
+            transition: width 0.3s;
         }
 
         nav a:hover {
             color: #ff9900;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
         }
 
         /* Main Content Styles */
@@ -151,6 +157,7 @@
             background: #f8f9fa;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1s ease-in-out;
         }
 
         .feature-item:hover {
@@ -220,6 +227,7 @@
             position: relative;
             margin: 2em 0;
             backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-in-out;
         }
 
         .contact-form {
@@ -246,16 +254,15 @@
 
         .contact-form input:focus,
         .contact-form textarea:focus {
-            border-color: #ff9900;
+            border-color: #007BFF;
             outline: none;
         }
 
         .contact-form button {
-            width: 100%;
-            padding: 0.8em;
-            background: #ff9900;
-            color: #fff;
+            padding: 1em 2em;
             border: none;
+            background-color: #007BFF;
+            color: #fff;
             border-radius: 10px;
             font-size: 1.2em;
             cursor: pointer;
@@ -263,7 +270,7 @@
         }
 
         .contact-form button:hover {
-            background: #e68a00;
+            background-color: #0056b3;
             transform: scale(1.05);
         }
 
@@ -340,9 +347,9 @@
         <h1>Your Business Name</h1>
         <nav>
             <a href="#" class="active">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
@@ -351,10 +358,10 @@
         <section class="hero animate__animated animate__fadeIn">
             <h2>Welcome to Your Business</h2>
             <p>Empowering businesses with innovative solutions.</p>
-            <a href="#" class="cta-button">Get Started</a>
+            <a href="#services" class="cta-button">Get Started</a>
         </section>
 
-        <section class="features">
+        <section id="services" class="features">
             <div class="feature-item animate__animated animate__fadeIn">
                 <h3>Our Services</h3>
                 <p>Discover our range of services designed to meet your business needs.</p>
@@ -370,7 +377,7 @@
         </section>
 
         <section class="testimonial-carousel">
-            <button class="prev">❮</button>
+            <button class="prev" aria-label="Previous Testimonial">❮</button>
             <div class="testimonial-item active">
                 <img src="user-avatar.jpg" alt="Client Avatar">
                 <p>"Your business transformed ours! We're grateful for your expertise."</p>
@@ -381,11 +388,11 @@
                 <p>"Exceptional service and results. Highly recommended!"</p>
                 <cite>- Satisfied Customer</cite>
             </div>
-            <button class="next">❯</button>
+            <button class="next" aria-label="Next Testimonial">❯</button>
         </section>
 
         <!-- Contact Section -->
-        <section class="contact animate__animated animate__fadeIn">
+        <section id="contact" class="contact animate__animated animate__fadeIn">
             <h2>Contact Us</h2>
             <p>Get in touch with us to explore how we can elevate your business.</p>
             <div class="contact-form">
@@ -467,6 +474,17 @@
                 alert('Please fill in all required fields.');
             }
         });
+
+        // PWA Setup
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+                    console.log('ServiceWorker registered with scope:', registration.scope);
+                }).catch((error) => {
+                    console.log('ServiceWorker registration failed:', error);
+                });
+            });
+        }
     </script>
 </body>
 </html>
