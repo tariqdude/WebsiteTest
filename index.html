@@ -8,18 +8,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
+        /* Root Variables */
         :root {
-            --primary-color: #007BFF;
-            --secondary-color: #0056b3;
-            --background-color: #f4f4f4;
-            --text-color: #333;
-            --highlight-color: #FFD700;
-            --border-radius: 8px;
-            --transition-speed: 0.3s;
+            --primary-color: #3498db; /* Modern blue */
+            --secondary-color: #2c3e50; /* Darker blue */
+            --accent-color: #e74c3c; /* Vibrant red for accents */
+            --background-color: #f5f6f7; /* Light gray background */
+            --text-color: #333; /* Dark gray text */
+            --card-background: #fff; /* White background for cards */
+            --border-radius: 10px; /* Rounded corners */
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+            --transition-speed: 0.3s; /* Smooth transitions */
+            --font-base: 'Roboto', sans-serif; /* Base font */
+            --font-heading: 'Montserrat', sans-serif; /* Heading font */
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: var(--font-base);
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -29,11 +34,11 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color);
             color: #fff;
             padding: 1em 0;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             position: fixed;
             width: 100%;
             top: 0;
@@ -58,10 +63,11 @@
             text-decoration: none;
             font-weight: bold;
             transition: color var(--transition-speed);
+            font-family: var(--font-heading);
         }
 
         nav a:hover {
-            color: var(--highlight-color);
+            color: var(--accent-color);
         }
 
         main {
@@ -74,13 +80,15 @@
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
             color: #fff;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--box-shadow);
             position: relative;
+            margin-bottom: 4em;
         }
 
         .hero h2 {
-            font-size: 2.5em;
+            font-size: 3em;
             margin-bottom: 0.5em;
+            font-family: var(--font-heading);
         }
 
         .hero p {
@@ -91,32 +99,34 @@
         .cta-button {
             display: inline-block;
             padding: 0.75em 2em;
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
             color: #fff;
             text-decoration: none;
             border-radius: var(--border-radius);
             font-size: 1.1em;
             transition: background-color var(--transition-speed), transform var(--transition-speed);
+            font-family: var(--font-heading);
         }
 
         .cta-button:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--primary-color);
             transform: scale(1.05);
         }
 
         .features {
             margin-top: 4em;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1em;
         }
 
         .feature-item {
-            background: #fff;
+            background: var(--card-background);
             border-radius: var(--border-radius);
             padding: 1.5em;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             transition: box-shadow var(--transition-speed);
+            font-family: var(--font-base);
         }
 
         .feature-item:hover {
@@ -127,9 +137,9 @@
             margin: 4em 0;
             text-align: center;
             padding: 2em;
-            background-color: #fff;
+            background-color: var(--card-background);
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             position: relative;
         }
 
@@ -139,6 +149,7 @@
             padding: 0 1em;
             border-left: 4px solid var(--primary-color);
             position: relative;
+            font-family: var(--font-base);
         }
 
         .testimonial blockquote::before {
@@ -157,10 +168,10 @@
         }
 
         .newsletter {
-            background-color: #fff;
+            background-color: var(--card-background);
             padding: 3em 2em;
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             text-align: center;
             margin-top: 4em;
         }
@@ -186,9 +197,10 @@
             border-radius: var(--border-radius);
             margin: 1em 0;
             padding: 1em;
-            background: #fff;
+            background: var(--card-background);
             cursor: pointer;
             transition: background-color var(--transition-speed);
+            font-family: var(--font-base);
         }
 
         .faq-item.open {
@@ -213,6 +225,7 @@
             display: block;
             margin-bottom: 0.5em;
             font-weight: bold;
+            font-family: var(--font-heading);
         }
 
         .contact-form input,
@@ -223,6 +236,7 @@
             border-radius: var(--border-radius);
             margin-bottom: 1em;
             font-size: 1em;
+            font-family: var(--font-base);
         }
 
         .map {
@@ -237,6 +251,7 @@
             text-align: center;
             padding: 2em 1em;
             position: relative;
+            font-family: var(--font-base);
         }
 
         .social-icons {
@@ -251,7 +266,7 @@
         }
 
         .social-icons a:hover {
-            color: var(--highlight-color);
+            color: var(--accent-color);
         }
 
         @media (max-width: 768px) {
@@ -288,23 +303,23 @@
     </header>
 
     <!-- Main Content -->
-    <main id="home">
+    <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <h2>Welcome to Our Art Gallery</h2>
-            <p>Discover and purchase exquisite art pieces from renowned artists around the world.</p>
-            <a href="#art" class="cta-button">Explore Art</a>
+        <section id="home" class="hero">
+            <h2>Discover Stunning Art</h2>
+            <p>Explore our collection of beautiful art pieces curated just for you.</p>
+            <a href="#art" class="cta-button">Browse Art</a>
         </section>
 
-        <!-- Art Pieces Section -->
+        <!-- Features Section -->
         <section id="art" class="features">
-            <div class="art-piece">
+            <div class="feature-item" data-aos="fade-up">
                 <img src="https://via.placeholder.com/300" alt="Art Piece 1">
                 <h3>Art Piece Title</h3>
                 <p>Description of the art piece.</p>
                 <a href="#" class="cta-button">View Details</a>
             </div>
-            <div class="art-piece">
+            <div class="feature-item" data-aos="fade-up">
                 <img src="https://via.placeholder.com/300" alt="Art Piece 2">
                 <h3>Art Piece Title</h3>
                 <p>Description of the art piece.</p>
