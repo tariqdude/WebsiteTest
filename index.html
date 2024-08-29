@@ -4,43 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art Gallery</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <style>
+        /* Basic Reset and Styles */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background: #f9f9f9;
-            color: #333;
             line-height: 1.6;
+            background: #f4f4f4;
+            color: #333;
         }
 
         header {
-            background: linear-gradient(90deg, rgba(0,123,255,1) 0%, rgba(0,85,255,1) 100%);
+            background: linear-gradient(to right, #007BFF, #00BFFF);
             color: #fff;
-            padding: 1.5em;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
+            padding: 1em 2em;
+            position: sticky;
             top: 0;
-            left: 0;
             z-index: 1000;
-            border-bottom: 2px solid #0056b3;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5em;
-            letter-spacing: 1px;
+            font-size: 2em;
+            text-align: center;
         }
 
         nav {
+            display: flex;
+            justify-content: center;
             margin-top: 0.5em;
         }
 
@@ -49,109 +42,92 @@
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: #d4d4d4;
+            color: #ffdd00;
         }
 
         .hero {
-            background: url('https://via.placeholder.com/1600x600?text=Hero+Image') center/cover no-repeat;
-            color: #fff;
             text-align: center;
-            padding: 6em 1em;
-            margin-top: 4em;
-            position: relative;
-            border-bottom: 4px solid #0056b3;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: -1;
+            padding: 6em 2em;
+            background: url('https://via.placeholder.com/1200x600?text=Hero+Image') no-repeat center center/cover;
+            color: #fff;
         }
 
         .hero h2 {
-            font-size: 2.5em;
+            font-size: 3em;
             margin: 0;
         }
 
         .hero p {
-            font-size: 1.2em;
-            margin: 1em 0;
+            font-size: 1.25em;
+            margin: 0.5em 0;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1em 2em;
-            background: #007BFF;
-            color: #fff;
+            background: #ffdd00;
+            color: #333;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 5px;
             font-weight: bold;
-            transition: background 0.3s, transform 0.3s;
+            transition: background 0.3s ease;
         }
 
         .cta-button:hover {
-            background: #0056b3;
-            transform: scale(1.05);
+            background: #ffbb00;
         }
 
         .section {
-            padding: 2em 1em;
-            max-width: 1200px;
-            margin: auto;
+            padding: 4em 2em;
+            background: #fff;
+            margin: 0 auto;
         }
 
         .section h2 {
-            font-size: 2em;
-            color: #333;
-            text-align: center;
+            font-size: 2.5em;
             margin-bottom: 1em;
+            text-align: center;
         }
 
-        .categories, .gallery, .featured, .testimonials, .newsletter, .faq, .map, .contact {
-            border-top: 1px solid #ddd;
+        .section p {
+            font-size: 1.1em;
+            text-align: center;
+            margin: 0;
         }
 
-        .categories .category-list, .gallery .art-pieces, .featured .art-pieces {
+        .category-list, .art-pieces {
             display: flex;
             flex-wrap: wrap;
-            gap: 2em;
             justify-content: center;
+            gap: 1em;
         }
 
         .category-item, .art-piece {
-            background: #fff;
-            border-radius: 10px;
+            flex: 1 1 calc(33.333% - 1em);
+            margin-bottom: 1em;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            position: relative;
-            flex: 1 1 calc(33.333% - 2em);
-            max-width: 300px;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .category-item img, .art-piece img {
             width: 100%;
+            height: auto;
             display: block;
-            transition: opacity 0.3s;
         }
 
-        .category-item h3, .art-piece-info h3 {
-            margin: 0.5em;
-            font-size: 1.2em;
-            color: #333;
+        .category-item h3, .art-piece h3 {
+            margin: 0.5em 0;
+            text-align: center;
         }
 
         .art-piece-info {
             padding: 1em;
+            background: #fff;
             text-align: center;
         }
 
@@ -163,136 +139,108 @@
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            transition: background 0.3s, transform 0.3s;
+            transition: background 0.3s ease;
         }
 
         .art-piece-button:hover {
             background: #0056b3;
-            transform: scale(1.05);
         }
 
-        .testimonials blockquote {
-            background: #fff;
-            border-left: 4px solid #007BFF;
-            padding: 1em;
-            margin: 0 auto 1em;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 800px;
+        .testimonial {
+            background: #f8f9fa;
+            padding: 2em;
             text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .testimonials blockquote p {
-            font-style: italic;
+        .testimonial blockquote {
+            font-size: 1.25em;
+            margin: 0;
+            padding: 0;
+            position: relative;
         }
 
-        .testimonials blockquote cite {
+        .testimonial blockquote::before {
+            content: "\201C";
+            font-size: 3em;
+            color: #007BFF;
+            position: absolute;
+            top: -0.5em;
+            left: 0;
+        }
+
+        .testimonial cite {
             display: block;
-            margin-top: 0.5em;
-            font-weight: bold;
-            color: #555;
+            margin-top: 1em;
+            font-style: italic;
+            color: #666;
         }
 
-        .newsletter form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1em;
-        }
-
-        .newsletter input[type="email"] {
-            padding: 0.75em;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            width: 100%;
-            max-width: 400px;
-            font-size: 1em;
-        }
-
-        .newsletter button {
-            padding: 0.75em;
+        .newsletter, .contact {
             background: #007BFF;
             color: #fff;
+            padding: 4em 2em;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .newsletter input, .contact-form input, .contact-form textarea {
+            padding: 0.75em;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+            margin-bottom: 1em;
+        }
+
+        .newsletter button, .contact-form button {
+            padding: 0.75em 2em;
+            background: #ffdd00;
+            color: #333;
             border: none;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
+            transition: background 0.3s ease;
         }
 
-        .newsletter button:hover {
-            background: #0056b3;
-            transform: scale(1.05);
+        .newsletter button:hover, .contact-form button:hover {
+            background: #ffbb00;
         }
 
         .faq-item {
-            margin-bottom: 1em;
-            cursor: pointer;
+            margin: 1em 0;
             padding: 1em;
-            background: #fff;
+            background: #f4f4f4;
             border-radius: 5px;
-            border: 1px solid #ddd;
-            transition: background 0.3s;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
 
         .faq-item:hover {
-            background: #f1f1f1;
+            background: #e4e4e4;
         }
 
         .faq-item h3 {
             margin: 0;
-            font-size: 1.2em;
         }
 
         .faq-item p {
-            margin: 0.5em 0 0;
             display: none;
-            color: #555;
+            margin: 0.5em 0 0;
         }
 
         .faq-item.open p {
             display: block;
         }
 
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-            max-width: 500px;
-            margin: auto;
-        }
-
-        .contact-form input, .contact-form textarea {
-            padding: 0.75em;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-        .contact-form button {
-            padding: 0.75em;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .contact-form button:hover {
-            background: #0056b3;
-            transform: scale(1.05);
-        }
-
         footer {
             background: #333;
             color: #fff;
             text-align: center;
-            padding: 1em;
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            padding: 1em 2em;
             position: relative;
-            z-index: 1000;
         }
 
         footer p {
@@ -316,6 +264,14 @@
 
             .hero p {
                 font-size: 1em;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 0.5em 0;
             }
         }
     </style>
@@ -366,109 +322,113 @@
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="section gallery">
-            <h2>Art Gallery</h2>
-            <div class="slick-slider">
-                <div><img src="https://via.placeholder.com/800x600?text=Art+Piece+1" alt="Art Piece 1"></div>
-                <div><img src="https://via.placeholder.com/800x600?text=Art+Piece+2" alt="Art Piece 2"></div>
-                <div><img src="https://via.placeholder.com/800x600?text=Art+Piece+3" alt="Art Piece 3"></div>
-            </div>
-        </section>
-
-        <!-- Featured Section -->
-        <section id="featured" class="section featured">
-            <h2>Featured Art</h2>
+        <section id="gallery" class="section">
+            <h2>Gallery</h2>
             <div class="art-pieces">
                 <div class="art-piece" data-aos="fade-up">
-                    <img src="https://via.placeholder.com/400x300?text=Art+Piece+1" alt="Art Piece 1">
+                    <img src="https://via.placeholder.com/300x300?text=Art+Piece+1" alt="Art Piece 1">
                     <div class="art-piece-info">
-                        <h3>Art Piece Title 1</h3>
-                        <p>Description of the art piece, its style, and the artist.</p>
-                        <a href="#" class="art-piece-button">Learn More</a>
+                        <h3>Art Piece 1</h3>
+                        <p>Description of Art Piece 1</p>
+                        <a href="#" class="art-piece-button">View Details</a>
                     </div>
                 </div>
                 <div class="art-piece" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://via.placeholder.com/400x300?text=Art+Piece+2" alt="Art Piece 2">
+                    <img src="https://via.placeholder.com/300x300?text=Art+Piece+2" alt="Art Piece 2">
                     <div class="art-piece-info">
-                        <h3>Art Piece Title 2</h3>
-                        <p>Description of the art piece, its style, and the artist.</p>
-                        <a href="#" class="art-piece-button">Learn More</a>
+                        <h3>Art Piece 2</h3>
+                        <p>Description of Art Piece 2</p>
+                        <a href="#" class="art-piece-button">View Details</a>
                     </div>
                 </div>
                 <div class="art-piece" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://via.placeholder.com/400x300?text=Art+Piece+3" alt="Art Piece 3">
+                    <img src="https://via.placeholder.com/300x300?text=Art+Piece+3" alt="Art Piece 3">
                     <div class="art-piece-info">
-                        <h3>Art Piece Title 3</h3>
-                        <p>Description of the art piece, its style, and the artist.</p>
-                        <a href="#" class="art-piece-button">Learn More</a>
+                        <h3>Art Piece 3</h3>
+                        <p>Description of Art Piece 3</p>
+                        <a href="#" class="art-piece-button">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Art Section -->
+        <section id="featured" class="section">
+            <h2>Featured Art</h2>
+            <div class="art-pieces">
+                <div class="art-piece" data-aos="fade-up">
+                    <img src="https://via.placeholder.com/600x400?text=Featured+Art+1" alt="Featured Art 1">
+                    <div class="art-piece-info">
+                        <h3>Featured Art 1</h3>
+                        <p>Description of Featured Art 1</p>
+                    </div>
+                </div>
+                <div class="art-piece" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://via.placeholder.com/600x400?text=Featured+Art+2" alt="Featured Art 2">
+                    <div class="art-piece-info">
+                        <h3>Featured Art 2</h3>
+                        <p>Description of Featured Art 2</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Testimonials Section -->
-        <section id="testimonials" class="section testimonials">
+        <section id="testimonials" class="section testimonial">
             <h2>What Our Clients Say</h2>
-            <blockquote data-aos="fade-up">
-                <p>"A fantastic experience! The art pieces are stunning and the service is exceptional."</p>
-                <cite>- Art Lover</cite>
-            </blockquote>
-            <blockquote data-aos="fade-up" data-aos-delay="100">
-                <p>"I found the perfect piece for my home. The quality and craftsmanship are unmatched."</p>
+            <blockquote>
+                <p>"The art collection is outstanding and the service was exceptional!"</p>
                 <cite>- Satisfied Customer</cite>
+            </blockquote>
+            <blockquote>
+                <p>"A fantastic experience from start to finish. Highly recommended."</p>
+                <cite>- Happy Buyer</cite>
             </blockquote>
         </section>
 
         <!-- Newsletter Section -->
         <section id="newsletter" class="section newsletter">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Stay updated with our latest art pieces, exhibitions, and news.</p>
-            <form action="#" method="post" data-aos="fade-up">
-                <input type="email" placeholder="Enter your email" required>
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+            <form action="#" method="post">
+                <input type="email" id="newsletter-email" name="newsletter-email" placeholder="Your Email" required>
                 <button type="submit">Subscribe</button>
             </form>
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="section faq">
+        <section id="faq" class="section">
             <h2>Frequently Asked Questions</h2>
-            <div class="faq-item" data-aos="fade-up">
-                <h3>What types of art do you sell?</h3>
-                <p>We offer a diverse range of art including abstract, landscape, portrait, and more.</p>
+            <div class="faq-item">
+                <h3>How do I purchase art?</h3>
+                <p>Simply select the art piece you like and follow the checkout process.</p>
             </div>
-            <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="faq-item">
                 <h3>Do you offer international shipping?</h3>
-                <p>Yes, we ship our art pieces worldwide. Shipping costs and times may vary based on location.</p>
+                <p>Yes, we ship worldwide. Please check our shipping policies for more details.</p>
             </div>
-            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
-                <h3>Can I return an art piece?</h3>
-                <p>We accept returns within 30 days of purchase. Please contact us for more details.</p>
+            <div class="faq-item">
+                <h3>Can I return an artwork?</h3>
+                <p>Returns are accepted within 14 days of receipt. Please contact us for more information.</p>
             </div>
         </section>
 
         <!-- Map Section -->
-        <section id="map" class="section map">
+        <section id="map" class="section">
             <h2>Our Location</h2>
-            <div id="leaflet-map" style="height: 400px; width: 100%;"></div>
+            <div id="map" style="height: 400px; width: 100%;"></div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="section contact">
             <h2>Contact Us</h2>
-            <div class="contact-form">
-                <form action="#" method="post">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" rows="4" required></textarea>
-
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
+            <p>If you have any questions or need assistance, feel free to reach out.</p>
+            <form class="contact-form" action="#" method="post">
+                <input type="text" id="contact-name" name="contact-name" placeholder="Your Name" required>
+                <input type="email" id="contact-email" name="contact-email" placeholder="Your Email" required>
+                <textarea id="contact-message" name="contact-message" rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
         </section>
     </main>
 
@@ -477,30 +437,29 @@
         <p>&copy; 2024 Art Gallery. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <!-- Custom JavaScript -->
     <script>
         $(document).ready(function() {
-            // Initialize Slick Slider
-            $('.slick-slider').slick({
-                dots: true,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-            });
-
             // Initialize AOS
             AOS.init();
 
-            // Initialize Leaflet Map
-            const map = L.map('leaflet-map').setView([51.505, -0.09], 13);
+            // Initialize Slick Slider
+            $('.art-pieces').slick({
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                dots: true,
+                infinite: true,
+                arrows: true
+            });
 
+            // Initialize Leaflet Map
+            var map = L.map('map').setView([51.5, -0.09], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
