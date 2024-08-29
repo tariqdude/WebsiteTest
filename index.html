@@ -7,37 +7,35 @@
     <meta name="keywords" content="art, purchase art, art gallery, buy art">
     <meta name="author" content="Your Art Gallery">
     <title>Art Gallery</title>
+    <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Animate.css for animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Slick Carousel for image sliders -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <!-- Custom CSS -->
     <style>
-        /* Basic Reset and Styles */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            line-height: 1.6;
             background-color: #f0f0f0;
             color: #333;
         }
 
-        h1, h2, h3 {
-            margin: 0;
-            color: #333;
-        }
-
-        /* Header Styles */
         header {
             background: #282c34;
             color: #fff;
             padding: 1em 2em;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: -webkit-sticky; /* Safari */
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         nav {
@@ -56,11 +54,6 @@
 
         nav a:hover {
             color: #ff6347;
-        }
-
-        /* Main Content Styles */
-        main {
-            padding: 2em;
         }
 
         .hero {
@@ -145,7 +138,6 @@
             background-color: #e5533d;
         }
 
-        /* Contact Section Styles */
         .contact {
             background: #fff;
             color: #333;
@@ -192,7 +184,6 @@
             background-color: #e5533d;
         }
 
-        /* Footer Styles */
         footer {
             background: #282c34;
             color: #fff;
@@ -203,7 +194,6 @@
             width: 100%;
         }
 
-        /* Responsive Styles */
         @media (max-width: 768px) {
             .cta-button {
                 padding: 0.8em 1.5em;
@@ -214,6 +204,16 @@
                 padding: 0.5em;
             }
         }
+
+        /* Slick Carousel Custom Styles */
+        .slick-slide img {
+            width: 100%;
+        }
+
+        .slick-prev, .slick-next {
+            font-size: 2em;
+            color: #ff6347;
+        }
     </style>
 </head>
 <body>
@@ -221,41 +221,37 @@
     <header>
         <h1>Art Gallery</h1>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">Gallery</a>
-            <a href="#">Contact</a>
+            <a href="#home">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <!-- Main Content Section -->
     <main>
-        <section class="hero">
-            <h2>Welcome to Our Art Gallery</h2>
-            <p>Explore and purchase unique art pieces that speak to your soul.</p>
-            <a href="#" class="cta-button">Explore Art</a>
+        <section id="home" class="hero">
+            <h2 class="animate__animated animate__fadeIn">Welcome to Our Art Gallery</h2>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">Explore and purchase unique art pieces that speak to your soul.</p>
+            <a href="#gallery" class="cta-button animate__animated animate__fadeIn animate__delay-2s">Explore Art</a>
         </section>
 
-        <section class="gallery">
+        <section id="gallery" class="gallery">
+            <!-- Slick Carousel for Featured Art -->
             <div class="art-piece">
-                <img src="path/to/art1.jpg" alt="Art Piece 1">
+                <div class="slider">
+                    <img src="path/to/art1.jpg" alt="Art Piece 1">
+                    <img src="path/to/art2.jpg" alt="Art Piece 2">
+                </div>
                 <div class="art-piece-info">
                     <h3 class="art-piece-title">Art Piece 1</h3>
                     <p class="art-piece-price">$500</p>
                     <a href="#" class="art-piece-button">Buy Now</a>
                 </div>
             </div>
-            <div class="art-piece">
-                <img src="path/to/art2.jpg" alt="Art Piece 2">
-                <div class="art-piece-info">
-                    <h3 class="art-piece-title">Art Piece 2</h3>
-                    <p class="art-piece-price">$750</p>
-                    <a href="#" class="art-piece-button">Buy Now</a>
-                </div>
-            </div>
-            <!-- Add more art pieces as needed -->
+            <!-- Repeat for more art pieces -->
         </section>
 
-        <section class="contact">
+        <section id="contact" class="contact">
             <h2>Contact Us</h2>
             <p>Have questions or need assistance? Reach out to us!</p>
             <div class="contact-form">
@@ -280,5 +276,21 @@
         <p>&copy; 2024 Art Gallery. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize Slick Carousel
+            $('.slider').slick({
+                dots: true,
+                arrows: true,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                fade: true,
+                speed: 500
+            });
+        });
+    </script>
 </body>
 </html>
