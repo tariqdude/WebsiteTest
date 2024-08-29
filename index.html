@@ -166,7 +166,7 @@
         .hero {
             text-align: center;
             padding: 4em 0;
-            background: url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.9), rgba(0, 123, 255, 0.7)), url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
             color: #fff;
             position: relative;
             overflow: hidden;
@@ -177,10 +177,34 @@
         .hero h2 {
             font-size: 2.5em;
             margin-bottom: 0.5em;
+            animation: fadeInDown var(--animation-speed) ease-in-out;
         }
 
         .hero p {
             font-size: 1em;
+            animation: fadeInUp var(--animation-speed) ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .cta-button {
@@ -191,12 +215,24 @@
             border-radius: var(--border-radius);
             font-size: 1.2em;
             transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+            animation: bounceIn var(--animation-speed) ease-in-out;
         }
 
         .cta-button:hover {
             background-color: var(--primary-color);
             transform: scale(1.05);
             box-shadow: var(--shadow-md);
+        }
+
+        @keyframes bounceIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         /* Features Section */
@@ -214,6 +250,7 @@
             padding: 1em;
             transition: box-shadow var(--transition-speed);
             position: relative;
+            overflow: hidden;
         }
 
         .feature-item:hover {
@@ -265,12 +302,16 @@
             width: 90%;
             margin: 0 auto;
             height: 400px;
+            padding: 1em;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            background-color: #fff;
         }
 
         .testimonial-carousel blockquote {
             font-size: 1em;
             padding: 1.5em;
-            background: #fff;
+            background: none;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
             height: 100%;
@@ -524,7 +565,7 @@
 
         .back-to-top:hover {
             background-color: var(--accent-color);
-            box-shadow: var(--shadow-md);
+            box-shadow: var (--shadow-md);
         }
 
         /* Scrollbar Styling */
