@@ -10,17 +10,17 @@
     <style>
         /* Root Variables */
         :root {
-            --primary-color: #3498db; /* Modern blue */
-            --secondary-color: #2c3e50; /* Darker blue */
-            --accent-color: #e74c3c; /* Vibrant red for accents */
-            --background-color: #f5f6f7; /* Light gray background */
-            --text-color: #333; /* Dark gray text */
-            --card-background: #fff; /* White background for cards */
-            --border-radius: 12px; /* Rounded corners */
-            --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Box shadow */
+            --primary-color: #007BFF; /* Modern blue */
+            --secondary-color: #343A40; /* Darker gray */
+            --accent-color: #FFC107; /* Gold accent */
+            --background-color: #F8F9FA; /* Light gray background */
+            --text-color: #212529; /* Darker text */
+            --card-background: #FFFFFF; /* Card background */
+            --border-radius: 8px; /* Rounded corners */
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
             --transition-speed: 0.3s; /* Smooth transitions */
             --font-base: 'Roboto', sans-serif; /* Base font */
-            --font-heading: 'Montserrat', sans-serif; /* Heading font */
+            --font-heading: 'Poppins', sans-serif; /* Heading font */
             --padding: 1em;
             --margin: 1em;
         }
@@ -38,7 +38,7 @@
         header {
             background: var(--primary-color);
             color: #fff;
-            padding: var(--padding) 0;
+            padding: 1em 2em;
             text-align: center;
             box-shadow: var(--box-shadow);
             position: fixed;
@@ -47,16 +47,20 @@
             left: 0;
             z-index: 1000;
             transition: background-color var(--transition-speed);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        header.scrolled {
-            background-color: var(--secondary-color);
+        header .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            font-family: var(--font-heading);
         }
 
         nav {
             display: flex;
-            justify-content: center;
-            margin-top: var(--padding);
             gap: 1.5em;
         }
 
@@ -64,9 +68,9 @@
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            transition: color var(--transition-speed);
-            font-family: var(--font-heading);
+            transition: color var(--transition-speed), border-bottom var(--transition-speed);
             position: relative;
+            font-family: var(--font-heading);
         }
 
         nav a::after {
@@ -86,13 +90,13 @@
         }
 
         main {
-            padding: 6em 2em 2em; /* Adjusted padding for fixed header */
+            padding: 5em 2em 2em; /* Adjusted padding for fixed header */
         }
 
         .hero {
             text-align: center;
             padding: 6em 2em;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
             color: #fff;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
@@ -165,7 +169,16 @@
             position: relative;
         }
 
-        .testimonial blockquote {
+        .testimonial-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-carousel .slick-slide {
+            padding: 1em;
+        }
+
+        .testimonial-carousel blockquote {
             font-size: 1.2em;
             margin: 0;
             padding: 0 1em;
@@ -175,7 +188,7 @@
             font-style: italic;
         }
 
-        .testimonial blockquote::before {
+        .testimonial-carousel blockquote::before {
             content: "“";
             font-size: 4em;
             color: var(--primary-color);
@@ -184,7 +197,7 @@
             left: -0.5em;
         }
 
-        .testimonial footer {
+        .testimonial-carousel footer {
             margin-top: 1em;
             font-style: italic;
             color: var(--secondary-color);
@@ -217,88 +230,118 @@
             margin-bottom: 0.5em;
             font-family: var(--font-heading);
             z-index: 1;
-            position: relative;
         }
 
         .newsletter p {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-bottom: 1.5em;
             z-index: 1;
-            position: relative;
         }
 
         .newsletter form {
+            z-index: 1;
             display: flex;
             flex-direction: column;
-            gap: var(--margin);
-            max-width: 500px;
-            margin: 0 auto;
-            z-index: 1;
-            position: relative;
+            align-items: center;
         }
 
-        .newsletter input {
+        .newsletter input[type="email"] {
             padding: 0.75em;
-            border: 1px solid #ddd;
             border-radius: var(--border-radius);
-            font-size: 1em;
+            border: 1px solid #ddd;
+            margin-bottom: 1em;
             width: 100%;
-        }
-
-        .faq-item {
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            margin: var(--margin) 0;
-            padding: var(--padding);
-            background: var(--card-background);
-            cursor: pointer;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            max-width: 400px;
+            font-size: 1em;
             font-family: var(--font-base);
         }
 
-        .faq-item:hover {
-            background-color: #f9f9f9;
-            transform: scale(1.02);
+        .newsletter button {
+            padding: 0.75em 2em;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            font-family: var(--font-heading);
         }
 
-        .faq-item.open {
-            background-color: #f9f9f9;
+        .newsletter button:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .faq {
+            margin: 4em 0;
+        }
+
+        .faq h2 {
+            text-align: center;
+            font-family: var(--font-heading);
+            margin-bottom: 1.5em;
+        }
+
+        .faq-item {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--padding);
+            margin-bottom: 1em;
+            cursor: pointer;
+            position: relative;
+            font-family: var(--font-base);
+            overflow: hidden;
+            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .faq-item h3 {
+            font-size: 1.2em;
+            margin: 0;
+            font-family: var(--font-heading);
         }
 
         .faq-answer {
-            display: none;
-            padding-top: 0.5em;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            font-size: 1em;
+            margin-top: 0.5em;
         }
 
         .faq-item.open .faq-answer {
-            display: block;
+            max-height: 200px; /* Adjust based on content */
         }
 
         .contact-form {
-            max-width: 600px;
-            margin: 2em auto;
             background: var(--card-background);
-            padding: var(--padding);
+            padding: 2em;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
+            margin-top: 4em;
         }
 
         .contact-form label {
             display: block;
             margin-bottom: 0.5em;
             font-weight: bold;
-            font-family: var(--font-heading);
+            font-family: var(--font-base);
         }
 
-        .contact-form input,
-        .contact-form textarea {
+        .contact-form input, .contact-form textarea {
             width: 100%;
             padding: 0.75em;
-            margin-bottom: 1em;
             border: 1px solid #ddd;
             border-radius: var(--border-radius);
-            font-size: 1em;
             font-family: var(--font-base);
+            margin-bottom: 1em;
+            font-size: 1em;
         }
 
         .contact-form button {
@@ -325,27 +368,32 @@
             text-align: center;
             font-family: var(--font-base);
             box-shadow: var(--box-shadow);
+            position: relative;
+            margin-top: 2em;
         }
 
         .social-icons {
-            margin-top: 0.5em;
+            margin-top: 1em;
         }
 
         .social-icons a {
             color: #fff;
             font-size: 1.5em;
             margin: 0 0.5em;
-            transition: color var(--transition-speed);
+            transition: color var(--transition-speed), transform var(--transition-speed);
         }
 
         .social-icons a:hover {
             color: var(--accent-color);
+            transform: scale(1.1);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             header {
-                padding: 1em 0;
+                padding: 1em;
+                flex-direction: column;
+                text-align: center;
             }
 
             nav {
@@ -353,14 +401,22 @@
                 gap: 0.5em;
             }
 
-            .features {
-                grid-template-columns: 1fr;
-            }
-
             .hero {
                 padding: 4em 1em;
                 background-size: cover;
                 background-position: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-carousel {
+                width: 100%;
+            }
+
+            .newsletter {
+                padding: 2em 1em;
             }
         }
 
@@ -395,6 +451,7 @@
 <body>
     <!-- Header -->
     <header>
+        <div class="logo">Art Gallery</div>
         <nav>
             <a href="#home">Home</a>
             <a href="#art">Art</a>
@@ -505,38 +562,28 @@
             <a href="#" class="fab fa-facebook-f"></a>
             <a href="#" class="fab fa-twitter"></a>
             <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin-in"></a>
+            <a href="#" class="fab fa-youtube"></a>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         $(document).ready(function(){
-            // Initialize Slick Slider
             $('.testimonial-carousel').slick({
+                autoplay: true,
+                arrows: false,
                 dots: true,
-                infinite: true,
-                speed: 500,
                 fade: true,
-                cssEase: 'linear'
+                speed: 500
             });
 
-            // Initialize AOS
-            AOS.init();
-
-            // Header scroll effect
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 50) {
-                    $('header').addClass('scrolled');
-                } else {
-                    $('header').removeClass('scrolled');
-                }
+            AOS.init({
+                duration: 1200,
             });
 
-            // FAQ Toggle
             $('.faq-item').click(function() {
                 $(this).toggleClass('open');
             });
