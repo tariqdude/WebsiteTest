@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/css/glightbox.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@6.3.1/dist/tippy.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -290,7 +291,7 @@
 
         .newsletter input[type="email"] {
             padding: 0.5em;
-            border-radius: var (--border-radius);
+            border-radius: var(--border-radius);
             border: none;
             margin-right: 0.5em;
             width: 60%;
@@ -443,23 +444,37 @@
             object-fit: cover;
         }
 
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 2em;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            color: #fff;
-            font-size: 1.5em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.3s ease-in-out;
+        /* Carousel Section */
+        .carousel-section {
+            margin: 4em 0;
         }
 
-        .scroll-indicator.hidden {
-            opacity: 0;
+        .carousel {
+            background-color: #fff;
+            padding: 2em;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .carousel-item {
+            width: 100%;
+            margin-right: 10px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
         }
 
         /* Footer Section */
@@ -578,16 +593,11 @@
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
             <a href="#faq">FAQ</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
-
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">
-        <span>Scroll Down</span>
-        <i class="bx bx-chevron-down animate__animated animate__bounce"></i>
-    </div>
 
     <!-- Main Content Section -->
     <main id="fullpage">
@@ -657,6 +667,23 @@
                     <img src="https://via.placeholder.com/400x300" alt="Gallery Image">
                 </a>
                 <!-- Add more gallery items as needed -->
+            </div>
+        </section>
+
+        <!-- Carousel Section -->
+        <section id="carousel" class="carousel-section section">
+            <h2>Featured Art Pieces</h2>
+            <div class="carousel flickity-enabled" data-aos="fade-up">
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/600x400" alt="Carousel Image">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/600x400" alt="Carousel Image">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/600x400" alt="Carousel Image">
+                </div>
+                <!-- Add more carousel items as needed -->
             </div>
         </section>
 
@@ -744,138 +771,4 @@
     <script src="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/js/glightbox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Initialize Slick Carousel
-            $('.testimonial-carousel').slick({
-                infinite: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                dots: true,
-                autoplay: true,
-                autoplaySpeed: 4000,
-                fade: true,
-                cssEase: 'linear',
-            });
-
-            // Initialize AOS
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-            });
-
-            // Initialize Vanilla Tilt
-            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-                max: 15,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.5,
-            });
-
-            // Initialize GLightbox
-            const lightbox = GLightbox({
-                touchNavigation: true,
-                loop: true,
-                zoomable: true,
-            });
-
-            // Initialize Tippy.js for tooltips
-            tippy('.tooltip', {
-                theme: 'light',
-                animation: 'scale',
-                arrow: true,
-            });
-
-            // Initialize fullPage.js for smooth scrolling
-            new fullpage('#fullpage', {
-                autoScrolling: true,
-                scrollHorizontally: true,
-                navigation: true,
-                navigationPosition: 'right',
-                showActiveTooltip: true,
-                slidesNavigation: true,
-                slidesNavPosition: 'bottom',
-            });
-
-            // FAQ Toggle
-            $('.faq-item').click(function() {
-                $(this).toggleClass('open');
-            });
-
-            // Back-to-Top Button
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 200) {
-                    $('.back-to-top').fadeIn();
-                } else {
-                    $('.back-to-top').fadeOut();
-                }
-            });
-
-            $('.back-to-top').click(function() {
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 600);
-                return false;
-            });
-
-            // Sticky Header on Scroll
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 50) {
-                    $('header').addClass('sticky');
-                } else {
-                    $('header').removeClass('sticky');
-                }
-            });
-
-            // Lazy Load Images
-            $("img").each(function() {
-                $(this).attr("loading", "lazy");
-            });
-
-            // Form Validation
-            $("form").on("submit", function(e) {
-                let isValid = true;
-                $(this).find("input, textarea").each(function() {
-                    if ($(this).val() === "") {
-                        isValid = false;
-                        $(this).addClass("input-error");
-                    } else {
-                        $(this).removeClass("input-error");
-                    }
-                });
-                if (!isValid) {
-                    e.preventDefault();
-                    toastr.error("Please fill in all required fields.");
-                }
-            });
-
-            // Smooth Scroll for Anchor Links
-            $('nav a, .back-to-top').on('click', function(event) {
-                if (this.hash !== "") {
-                    event.preventDefault();
-                    var hash = this.hash;
-                    $('html, body').animate({
-                        scrollTop: $(hash).offset().top
-                    }, 800);
-                }
-            });
-
-            // Initialize PrismJS for Code Highlighting
-            Prism.highlightAll();
-
-            // Initialize Toastr Notifications
-            toastr.options = {
-                "positionClass": "toast-top-right",
-                "closeButton": true,
-                "progressBar": true
-            };
-
-            // Trigger a sample toast notification on page load
-            toastr.success("Welcome to the Art Gallery!");
-        });
-    </script>
-</body>
-
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.pkgd.min
