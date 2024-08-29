@@ -49,11 +49,14 @@
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s, transform 0.3s;
+            transition: color 0.3s, transform 0.3s, background-color 0.3s;
+            padding: 0.5em 1em;
+            border-radius: 5px;
         }
 
-        nav a:hover {
+        nav a:hover, nav a.active {
             color: #ff9900;
+            background-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-3px);
         }
 
@@ -93,11 +96,12 @@
             font-size: 3em;
             margin-bottom: 0.5em;
             font-weight: bold;
-            transition: transform 0.3s;
+            transition: transform 0.3s, color 0.3s;
         }
 
         .hero h2:hover {
             transform: translateY(-10px);
+            color: #ff9900;
         }
 
         .hero p {
@@ -115,16 +119,18 @@
             text-decoration: none;
             border-radius: 10px;
             font-weight: bold;
-            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
             font-size: 1.2em;
             position: relative;
             z-index: 2;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .cta-button:hover {
             background-color: #e68a00;
             color: #fff;
             transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .features {
@@ -140,13 +146,14 @@
             border-radius: 15px;
             background-color: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
             text-align: center;
         }
 
         .feature-item:hover {
             transform: translateY(-10px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background-color: #f9f9f9;
         }
 
         .feature-item h3 {
@@ -183,11 +190,18 @@
             height: 160px;
             object-fit: cover;
             border: 4px solid #007BFF;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .testimonial img:hover {
+            transform: scale(1.05);
+            border-color: #ff9900;
         }
 
         .testimonial p {
             font-size: 1.3em;
             margin-bottom: 0.5em;
+            color: #666;
         }
 
         .contact {
@@ -260,6 +274,21 @@
             border-top: 4px solid #ff9900;
             margin-top: 2em;
         }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            nav a {
+                margin: 0 0.5em;
+            }
+
+            .hero h2 {
+                font-size: 2.5em;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -268,7 +297,7 @@
     <header>
         <h1>Your Business Name</h1>
         <nav>
-            <a href="#">Home</a>
+            <a href="#" class="active">Home</a>
             <a href="#">About</a>
             <a href="#">Services</a>
             <a href="#">Contact</a>
