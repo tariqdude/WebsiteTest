@@ -3,32 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover and purchase exquisite art pieces from renowned artists around the world.">
-    <meta name="keywords" content="art, gallery, exhibitions, modern art, artwork">
-    <meta property="og:title" content="Art Gallery">
-    <meta property="og:description" content="Discover and purchase exquisite art pieces from renowned artists around the world.">
-    <meta property="og:image" content="path-to-your-image.jpg">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta property="og:type" content="website">
     <title>Art Gallery</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --background-color: #ecf0f1;
-            --text-color: #2c3e50;
-            --border-color: #bdc3c7;
-            --highlight-color: #e74c3c;
-            --error-color: #c0392b;
+            --primary-color: #007BFF;
+            --secondary-color: #0056b3;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --highlight-color: #FFD700;
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -37,23 +28,18 @@
             color: var(--text-color);
         }
 
-        h1, h2, h3 {
-            color: var(--text-color);
-            margin: 0;
-            padding: 0.5em 0;
-        }
-
         header {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: #fff;
             padding: 1em 0;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: background-color 0.3s ease;
+            transition: background-color var(--transition-speed);
         }
 
         header.scrolled {
@@ -64,66 +50,57 @@
             display: flex;
             justify-content: center;
             margin-top: 1em;
+            gap: 1em;
         }
 
         nav a {
-            margin: 0 1em;
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s ease, transform 0.3s ease;
+            transition: color var(--transition-speed);
         }
 
         nav a:hover {
             color: var(--highlight-color);
-            transform: scale(1.1);
         }
 
         main {
-            padding: 6em 2em 2em;
+            padding: 6em 2em 2em; /* Adjusted padding for fixed header */
         }
 
         .hero {
             text-align: center;
-            padding: 4em 0;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            padding: 6em 2em;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
             color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 1;
         }
 
         .hero h2 {
-            position: relative;
-            z-index: 2;
             font-size: 2.5em;
-            margin: 0;
+            margin-bottom: 0.5em;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 1.5em;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1em 2em;
-            background-color: var(--highlight-color);
+            padding: 0.75em 2em;
+            background-color: var(--primary-color);
             color: #fff;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            position: relative;
-            z-index: 2;
+            border-radius: var(--border-radius);
+            font-size: 1.1em;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
         }
 
         .cta-button:hover {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             transform: scale(1.05);
         }
 
@@ -135,186 +112,130 @@
         }
 
         .feature-item {
-            padding: 1em;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.1);
-            z-index: 1;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .feature-item:hover::before {
-            opacity: 1;
+            background: #fff;
+            border-radius: var(--border-radius);
+            padding: 1.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow var(--transition-speed);
         }
 
         .feature-item:hover {
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .art-piece {
-            position: relative;
-            overflow: hidden;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .art-piece img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .art-piece-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.6);
-            color: #fff;
-            padding: 0.5em;
+        .testimonial {
+            margin: 4em 0;
             text-align: center;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .art-piece:hover .art-piece-info {
-            opacity: 1;
-        }
-
-        .testimonials-carousel {
-            margin-top: 4em;
+            padding: 2em;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .testimonial blockquote {
+            font-size: 1.2em;
             margin: 0;
-            padding: 1em;
-            background: #fff;
-            border-left: 5px solid var(--primary-color);
-            border-radius: 5px;
-            font-style: italic;
-            color: var(--text-color);
+            padding: 0 1em;
+            border-left: 4px solid var(--primary-color);
             position: relative;
         }
 
-        .testimonial blockquote::after {
-            content: '\201C';
-            font-size: 3em;
-            color: var(--highlight-color);
+        .testimonial blockquote::before {
+            content: "“";
+            font-size: 4em;
+            color: var(--primary-color);
             position: absolute;
             top: -0.5em;
-            left: 1em;
+            left: -0.5em;
         }
 
         .testimonial footer {
-            margin-top: 0.5em;
-            text-align: right;
-            font-weight: bold;
+            margin-top: 1em;
+            font-style: italic;
             color: var(--secondary-color);
         }
 
         .newsletter {
-            background: var(--primary-color);
-            color: #fff;
-            padding: 2em;
+            background-color: #fff;
+            padding: 3em 2em;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            border-radius: 10px;
             margin-top: 4em;
         }
 
         .newsletter form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
             max-width: 500px;
             margin: 0 auto;
         }
 
-        .newsletter input[type="email"] {
+        .newsletter input {
             padding: 0.75em;
-            border-radius: 5px;
-            border: none;
-            width: calc(100% - 110px);
-        }
-
-        .newsletter button {
-            padding: 0.75em 1.5em;
-            border: none;
-            border-radius: 5px;
-            background: var(--highlight-color);
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .newsletter button:hover {
-            background: var(--primary-color);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1em;
+            width: 100%;
         }
 
         .faq-item {
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
             margin: 1em 0;
             padding: 1em;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
             background: #fff;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color var(--transition-speed);
         }
 
         .faq-item.open {
-            background-color: var(--highlight-color);
-            color: #fff;
+            background-color: #f9f9f9;
         }
 
         .faq-answer {
             display: none;
-            margin-top: 0.5em;
+            padding-top: 0.5em;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
         }
 
         .contact-form {
-            max-width: 500px;
-            margin: 0 auto;
+            max-width: 600px;
+            margin: 2em auto;
         }
 
-        .contact-form input, .contact-form textarea {
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
             width: 100%;
             padding: 0.75em;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
             margin-bottom: 1em;
             font-size: 1em;
         }
 
-        .contact-form button {
-            padding: 0.75em 1.5em;
-            border: none;
-            border-radius: 5px;
-            background-color: var(--primary-color);
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .contact-form button:hover {
-            background-color: var(--secondary-color);
+        .map {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-top: 2em;
         }
 
         footer {
             background-color: var(--primary-color);
             color: #fff;
             text-align: center;
-            padding: 1em 0;
+            padding: 2em 1em;
             position: relative;
         }
 
@@ -326,7 +247,7 @@
             margin: 0 0.5em;
             color: #fff;
             font-size: 1.5em;
-            transition: color 0.3s ease;
+            transition: color var(--transition-speed);
         }
 
         .social-icons a:hover {
@@ -335,15 +256,19 @@
 
         @media (max-width: 768px) {
             .hero {
-                padding: 2em 1em;
+                padding: 4em 1em;
             }
 
             .newsletter {
-                padding: 1em;
+                padding: 2em;
             }
 
             .features {
                 grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 1em;
             }
         }
     </style>
@@ -374,72 +299,70 @@
         <!-- Art Pieces Section -->
         <section id="art" class="features">
             <div class="art-piece">
-                <img src="https://via.placeholder.com/400x300" alt="Art Piece 1">
-                <div class="art-piece-info">
-                    <h3>Art Piece 1</h3>
-                    <p>Artist Name</p>
-                    <a href="#" class="cta-button">View Details</a>
-                </div>
+                <img src="https://via.placeholder.com/300" alt="Art Piece 1">
+                <h3>Art Piece Title</h3>
+                <p>Description of the art piece.</p>
+                <a href="#" class="cta-button">View Details</a>
             </div>
             <div class="art-piece">
-                <img src="https://via.placeholder.com/400x300" alt="Art Piece 2">
-                <div class="art-piece-info">
-                    <h3>Art Piece 2</h3>
-                    <p>Artist Name</p>
-                    <a href="#" class="cta-button">View Details</a>
-                </div>
+                <img src="https://via.placeholder.com/300" alt="Art Piece 2">
+                <h3>Art Piece Title</h3>
+                <p>Description of the art piece.</p>
+                <a href="#" class="cta-button">View Details</a>
             </div>
-            <!-- Add more art pieces here -->
+            <!-- Add more art pieces as needed -->
         </section>
 
         <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials-carousel">
-            <div class="testimonial">
-                <blockquote>
-                    "An amazing experience! The art collection is stunning and the service was exceptional."
-                </blockquote>
-                <footer>- Satisfied Customer</footer>
+        <section id="testimonials" class="testimonial">
+            <div class="testimonial-carousel">
+                <div>
+                    <blockquote>
+                        "The art pieces here are simply stunning! Great quality and service."
+                        <footer>- Art Lover</footer>
+                    </blockquote>
+                </div>
+                <div>
+                    <blockquote>
+                        "A fantastic experience from start to finish. Highly recommended!"
+                        <footer>- Satisfied Customer</footer>
+                    </blockquote>
+                </div>
+                <!-- Add more testimonials as needed -->
             </div>
-            <div class="testimonial">
-                <blockquote>
-                    "I found the perfect piece for my home. Highly recommend this gallery!"
-                </blockquote>
-                <footer>- Happy Buyer</footer>
-            </div>
-            <!-- Add more testimonials here -->
         </section>
 
         <!-- Newsletter Section -->
         <section id="newsletter" class="newsletter">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get updates on new art pieces and upcoming exhibitions directly in your inbox.</p>
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest updates and exclusive offers.</p>
             <form action="#" method="post">
-                <input type="email" name="email" placeholder="Your email address" required>
-                <button type="submit">Subscribe</button>
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="cta-button">Subscribe</button>
             </form>
         </section>
 
         <!-- FAQ Section -->
         <section id="faq">
-            <div class="faq-item">
-                <h3>What is your return policy?</h3>
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item" data-aos="fade-up">
+                <h3>What is the return policy?</h3>
                 <div class="faq-answer">
-                    <p>We offer a 30-day return policy on all purchases. Please contact us for more details.</p>
+                    <p>You can return art pieces within 30 days of purchase. Please see our return policy for more details.</p>
                 </div>
             </div>
-            <div class="faq-item">
-                <h3>Do you offer international shipping?</h3>
+            <div class="faq-item" data-aos="fade-up">
+                <h3>How do I track my order?</h3>
                 <div class="faq-answer">
-                    <p>Yes, we ship internationally. Shipping costs will be calculated at checkout.</p>
+                    <p>You will receive a tracking number via email once your order has shipped. You can use this number to track your order on our website.</p>
                 </div>
             </div>
-            <!-- Add more FAQs here -->
+            <!-- Add more FAQs as needed -->
         </section>
 
         <!-- Contact Section -->
         <section id="contact">
             <h2>Contact Us</h2>
-            <p>For inquiries, please fill out the form below or visit us at our location.</p>
             <div class="contact-form">
                 <form action="#" method="post">
                     <label for="name">Your Name</label>
@@ -451,68 +374,65 @@
                     <label for="message">Your Message</label>
                     <textarea id="message" name="message" rows="4" required></textarea>
 
-                    <button type="submit">Send Message</button>
+                    <button type="submit" class="cta-button">Send Message</button>
                 </form>
             </div>
-            <div id="map" class="map" style="height: 400px;"></div>
+            <div id="map" class="map" data-aos="fade-up"></div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 Art Gallery. All rights reserved.</p>
+        <p>&copy; 2024 Art Gallery. All rights reserved.</p>
         <div class="social-icons">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin-in"></a>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function(){
             // Initialize Slick Slider
-            $('.testimonials-carousel').slick({
+            $('.testimonial-carousel').slick({
                 dots: true,
-                arrows: false,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                slidesToShow: 1
-            });
-
-            // FAQ Toggle Functionality
-            $('.faq-item').on('click', function() {
-                $(this).toggleClass('open');
-                $(this).find('.faq-answer').slideToggle();
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear'
             });
 
             // Initialize AOS
             AOS.init();
 
-            // Initialize Leaflet Map
-            var map = L.map('map').setView([40.7128, -74.0060], 13); // Default to New York City
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-            L.marker([40.7128, -74.0060]).addTo(map)
-                .bindPopup('Our Location')
-                .openPopup();
-
-            // Sticky Header on Scroll
-            $(window).on('scroll', function() {
+            // Header scroll effect
+            $(window).scroll(function() {
                 if ($(this).scrollTop() > 50) {
                     $('header').addClass('scrolled');
                 } else {
                     $('header').removeClass('scrolled');
                 }
             });
+
+            // FAQ Toggle
+            $('.faq-item').click(function() {
+                $(this).toggleClass('open');
+            });
+
+            // Initialize Leaflet Map
+            var map = L.map('map').setView([51.505, -0.09], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            L.marker([51.5, -0.09]).addTo(map)
+                .bindPopup('Our Location')
+                .openPopup();
         });
     </script>
 </body>
 </html>
-
