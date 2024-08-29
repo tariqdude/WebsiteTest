@@ -21,11 +21,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
     <style>
         :root {
             --primary-color: #007BFF;
@@ -46,6 +47,8 @@
             --highlight-color: #FFEB3B;
             --animation-speed: 0.3s;
             --carousel-height: 600px;
+            --toast-background-color: #333;
+            --toast-text-color: #fff;
         }
 
         /* Reset and Base Styles */
@@ -386,6 +389,28 @@
             box-shadow: var(--shadow-md);
         }
 
+        /* Code Snippet Section */
+        .code-section {
+            background-color: #f0f0f0;
+            padding: 2em;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            margin: 4em 0;
+        }
+
+        .code-section pre {
+            background: #2d2d2d;
+            padding: 1em;
+            border-radius: var(--border-radius);
+            overflow-x: auto;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .code-section code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #f8f8f2;
+        }
+
         /* Footer Section */
         footer {
             background: #333;
@@ -443,18 +468,18 @@
             border: 3px solid var(--background-color);
         }
 
-        /* Code Block Styling */
-        pre {
-            background: #2d2d2d;
-            padding: 1em;
-            border-radius: var(--border-radius);
-            overflow-x: auto;
-            box-shadow: var(--shadow-sm);
+        /* Toast Notification Styling */
+        #toast-container {
+            top: 1em;
+            right: 1em;
+            z-index: 10000;
         }
 
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            color: #f8f8f2;
+        .toast {
+            background-color: var(--toast-background-color) !important;
+            color: var(--toast-text-color) !important;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--border-radius);
         }
 
         /* Media Queries for Responsive Design */
@@ -635,6 +660,7 @@
     <script src="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/dist/boxicons.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
             // Initialize Slick Carousel
@@ -713,7 +739,7 @@
                 });
                 if (!isValid) {
                     e.preventDefault();
-                    alert("Please fill in all required fields.");
+                    toastr.error("Please fill in all required fields.");
                 }
             });
 
@@ -730,6 +756,16 @@
 
             // Initialize PrismJS for Code Highlighting
             Prism.highlightAll();
+
+            // Initialize Toastr Notifications
+            toastr.options = {
+                "positionClass": "toast-top-right",
+                "closeButton": true,
+                "progressBar": true
+            };
+
+            // Trigger a sample toast notification on page load
+            toastr.success("Welcome to the Art Gallery!");
         });
     </script>
 </body>
