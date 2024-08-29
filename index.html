@@ -9,11 +9,15 @@
     <meta property="og:description" content="Explore a curated collection of unique art pieces and custom commissions.">
     <meta property="og:image" content="https://via.placeholder.com/1200x630">
     <meta property="og:url" content="https://yourwebsite.com">
-    <title>Art Gallery</title>
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Art Gallery">
+    <title>Art Gallery | Discover Stunning Artworks</title>
+    <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
             --primary-color: #007BFF;
@@ -22,22 +26,41 @@
             --text-color: #333;
             --border-radius: 8px;
             --transition-speed: 0.3s;
+            --max-width: 1200px;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
         h1, h2, h3 {
             color: var(--text-color);
+            margin-bottom: 0.5em;
+            font-weight: 600;
         }
 
+        /* Header Styles */
         header {
             background: var(--primary-color);
             color: #fff;
@@ -47,6 +70,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -54,10 +78,15 @@
             font-weight: bold;
         }
 
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 0.5em;
+        }
+
         nav a {
-            color: #fff;
-            text-decoration: none;
             margin: 0 1em;
+            color: #fff;
             font-weight: bold;
             transition: color var(--transition-speed);
         }
@@ -66,10 +95,14 @@
             color: var(--accent-color);
         }
 
+        /* Main Styles */
         main {
-            padding: 5em 2em 2em;
+            padding: 6em 2em 2em;
+            max-width: var(--max-width);
+            margin: 0 auto;
         }
 
+        /* Hero Section */
         .hero {
             text-align: center;
             padding: 5em 0;
@@ -89,20 +122,21 @@
         }
 
         .cta-button {
+            display: inline-block;
             padding: 1em 2em;
-            background: var(--accent-color);
+            background-color: var(--accent-color);
             color: #fff;
-            text-decoration: none;
             border-radius: var(--border-radius);
             font-size: 1.2em;
             transition: background-color var(--transition-speed), transform var(--transition-speed);
         }
 
         .cta-button:hover {
-            background: var(--primary-color);
+            background-color: var(--primary-color);
             transform: scale(1.05);
         }
 
+        /* Features Section */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -111,27 +145,25 @@
         }
 
         .feature-item {
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            overflow: hidden;
             background: #fff;
+            border-radius: var(--border-radius);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5em;
             transition: box-shadow var(--transition-speed);
         }
 
-        .feature-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
         .feature-item h3 {
-            margin: 0.5em 0;
+            margin-bottom: 0.5em;
         }
 
+        .feature-item p {
+            margin-bottom: 1em;
+        }
+
+        /* Testimonial Section */
         .testimonial {
-            margin: 4em 0;
             text-align: center;
+            margin: 4em 0;
         }
 
         .testimonial-carousel {
@@ -151,31 +183,48 @@
             font-style: italic;
         }
 
+        /* Newsletter Section */
         .newsletter {
             background: var(--primary-color);
             color: #fff;
             padding: 2em;
             text-align: center;
             border-radius: var(--border-radius);
+            margin: 4em 0;
         }
 
         .newsletter input[type="email"] {
-            width: 60%;
             padding: 0.5em;
             border-radius: var(--border-radius);
             border: none;
             margin-right: 0.5em;
+            width: 60%;
         }
 
+        .newsletter button {
+            padding: 1em 2em;
+            background-color: var(--accent-color);
+            border-radius: var(--border-radius);
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+
+        .newsletter button:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* FAQ Section */
         .faq {
             margin: 4em 0;
         }
 
         .faq-item {
             background: #fff;
-            border: 1px solid #ddd;
             border-radius: var(--border-radius);
-            padding: 1em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5em;
             margin-bottom: 1em;
             cursor: pointer;
             transition: background-color var(--transition-speed);
@@ -194,6 +243,7 @@
             display: block;
         }
 
+        /* Contact Section */
         .contact {
             background: var(--primary-color);
             color: #fff;
@@ -210,17 +260,15 @@
         .contact-form textarea {
             width: 100%;
             padding: 1em;
-            border: 1px solid #ddd;
             border-radius: var(--border-radius);
+            border: 1px solid #ddd;
             margin-bottom: 1em;
-            font-size: 1em;
         }
 
         .contact-form button {
             padding: 1em 2em;
-            border: none;
+            background-color: var(--accent-color);
             border-radius: var(--border-radius);
-            background: var(--accent-color);
             color: #fff;
             font-size: 1.2em;
             cursor: pointer;
@@ -228,14 +276,15 @@
         }
 
         .contact-form button:hover {
-            background: var(--primary-color);
+            background-color: var(--primary-color);
         }
 
+        /* Footer Section */
         footer {
             background: #333;
             color: #fff;
-            text-align: center;
             padding: 1em;
+            text-align: center;
             position: relative;
         }
 
@@ -250,6 +299,7 @@
             color: var(--accent-color);
         }
 
+        /* Back-to-Top Button */
         .back-to-top {
             position: fixed;
             bottom: 1em;
@@ -258,15 +308,13 @@
             color: #fff;
             padding: 0.5em 1em;
             border-radius: var(--border-radius);
-            text-align: center;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: background-color var(--transition-speed);
             display: none;
+            z-index: 1000;
         }
 
         .back-to-top:hover {
-            background: var(--accent-color);
+            background-color: var(--accent-color);
         }
 
         @media (max-width: 768px) {
@@ -397,7 +445,7 @@
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2023 Art Gallery. All rights reserved.</p>
+        <p>&copy; 2024 Art Gallery. All rights reserved.</p>
         <div class="footer-social">
             <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -452,3 +500,4 @@
     </script>
 </body>
 </html>
+
