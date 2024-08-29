@@ -23,12 +23,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f0f0f0;
+            background-color: #f8f9fa;
             color: #333;
         }
 
         header {
-            background: #282c34;
+            background: #343a40;
             color: #fff;
             padding: 1em 2em;
             text-align: center;
@@ -53,12 +53,12 @@
         }
 
         nav a:hover {
-            color: #ff6347;
+            color: #e83e8c;
         }
 
         .hero {
             text-align: center;
-            padding: 5em 2em;
+            padding: 6em 2em;
             background: #fff;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -66,31 +66,31 @@
         }
 
         .hero h2 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             margin: 0 0 0.5em;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1em 2em;
-            background-color: #ff6347;
+            padding: 1em 2.5em;
+            background-color: #e83e8c;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 1.2em;
+            font-size: 1.3em;
             transition: background 0.3s, transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .cta-button:hover {
-            background-color: #e5533d;
+            background-color: #d63384;
             transform: scale(1.05);
         }
 
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1em;
+            gap: 1.5em;
             margin-top: 2em;
         }
 
@@ -113,20 +113,20 @@
         }
 
         .art-piece-title {
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin: 0;
         }
 
         .art-piece-price {
-            color: #ff6347;
-            font-size: 1.2em;
+            color: #e83e8c;
+            font-size: 1.3em;
             margin: 0.5em 0;
         }
 
         .art-piece-button {
             display: inline-block;
-            padding: 0.5em 1em;
-            background-color: #ff6347;
+            padding: 0.6em 1.5em;
+            background-color: #e83e8c;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
@@ -135,7 +135,7 @@
         }
 
         .art-piece-button:hover {
-            background-color: #e5533d;
+            background-color: #d63384;
         }
 
         .contact {
@@ -149,7 +149,7 @@
         }
 
         .contact-form {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -170,7 +170,7 @@
         }
 
         .contact-form button {
-            background-color: #ff6347;
+            background-color: #e83e8c;
             color: #fff;
             padding: 0.8em 2em;
             border: none;
@@ -181,11 +181,11 @@
         }
 
         .contact-form button:hover {
-            background-color: #e5533d;
+            background-color: #d63384;
         }
 
         footer {
-            background: #282c34;
+            background: #343a40;
             color: #fff;
             text-align: center;
             padding: 1em;
@@ -196,8 +196,8 @@
 
         @media (max-width: 768px) {
             .cta-button {
-                padding: 0.8em 1.5em;
-                font-size: 1em;
+                padding: 0.8em 1.8em;
+                font-size: 1.1em;
             }
 
             .art-piece-info {
@@ -212,7 +212,7 @@
 
         .slick-prev, .slick-next {
             font-size: 2em;
-            color: #ff6347;
+            color: #e83e8c;
         }
     </style>
 </head>
@@ -229,18 +229,18 @@
 
     <!-- Main Content Section -->
     <main>
-        <section id="home" class="hero">
-            <h2 class="animate__animated animate__fadeIn">Welcome to Our Art Gallery</h2>
-            <p class="animate__animated animate__fadeIn animate__delay-1s">Explore and purchase unique art pieces that speak to your soul.</p>
-            <a href="#gallery" class="cta-button animate__animated animate__fadeIn animate__delay-2s">Explore Art</a>
+        <section id="home" class="hero animate__animated animate__fadeIn">
+            <h2>Welcome to Our Art Gallery</h2>
+            <p>Discover and purchase unique art pieces that resonate with your soul.</p>
+            <a href="#gallery" class="cta-button">Explore Art</a>
         </section>
 
         <section id="gallery" class="gallery">
-            <!-- Slick Carousel for Featured Art -->
+            <!-- Art Piece Example with Slick Carousel -->
             <div class="art-piece">
                 <div class="slider">
-                    <img src="path/to/art1.jpg" alt="Art Piece 1">
-                    <img src="path/to/art2.jpg" alt="Art Piece 2">
+                    <div><img src="path/to/art1.jpg" alt="Art Piece 1"></div>
+                    <div><img src="path/to/art2.jpg" alt="Art Piece 2"></div>
                 </div>
                 <div class="art-piece-info">
                     <h3 class="art-piece-title">Art Piece 1</h3>
