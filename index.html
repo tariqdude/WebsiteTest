@@ -4,308 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Art Gallery</title>
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        /* Global Styles */
+        /* Basic Reset and Styles */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             line-height: 1.6;
-            background: #f4f4f4;
-            color: #333;
         }
 
         h1, h2, h3 {
-            color: #222;
+            color: #333;
         }
 
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
             color: #fff;
-            padding: 1em 2em;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2em;
+            padding: 1em 0;
+            text-align: center;
         }
 
         nav {
             display: flex;
             justify-content: center;
-            gap: 2em;
-            margin-top: 0.5em;
+            flex-wrap: wrap;
+            margin-top: 1em;
         }
 
         nav a {
+            margin: 0 1em;
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1em;
-            transition: color 0.3s ease, transform 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: #333;
-            transform: translateY(-3px);
+            color: #feb47b;
         }
 
         /* Main Content Styles */
         main {
-            padding-top: 6em; /* Adjust padding to account for fixed header */
+            padding: 2em;
         }
 
         .hero {
             text-align: center;
-            padding: 6em 2em;
-            background: url('hero-bg.jpg') no-repeat center center/cover;
+            padding: 4em 0;
+            background: url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
             color: #fff;
-            position: relative;
-            border-bottom: 2px solid #fff;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
-
-        .hero h2 {
-            font-size: 2.5em;
-            margin-bottom: 0.5em;
-        }
-
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 1em;
         }
 
         .cta-button {
             display: inline-block;
             padding: 1em 2em;
-            background-color: #ff7e5f;
+            background-color: #feb47b;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .cta-button:hover {
-            background-color: #feb47b;
-            transform: translateY(-3px);
+            background-color: #ff7e5f;
         }
 
         .categories, .gallery, .featured, .testimonials, .newsletter, .faq, .map, .contact {
-            padding: 4em 2em;
+            margin: 4em 0;
         }
 
-        /* Category Styles */
-        .categories {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+        .categories h2, .gallery h2, .featured h2, .testimonials h2, .newsletter h2, .faq h2, .map h2, .contact h2 {
+            text-align: center;
+            margin-bottom: 1em;
         }
 
-        .category-list {
+        .category-list, .gallery, .slider {
             display: flex;
             flex-wrap: wrap;
             gap: 1em;
         }
 
-        .category-item {
+        .category-item, .art-piece {
             flex: 1 1 calc(25% - 2em);
             background: #f9f9f9;
             border-radius: 10px;
-            padding: 1.5em;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .category-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Gallery Styles */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5em;
-        }
-
-        .art-piece {
-            background: #fff;
-            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .art-piece img {
+        .category-item img, .art-piece img {
             width: 100%;
             height: auto;
         }
 
         .art-piece-info {
-            padding: 1.5em;
+            padding: 1em;
             text-align: center;
-        }
-
-        .art-piece-title {
-            font-size: 1.2em;
-            margin: 0.5em 0;
-        }
-
-        .art-piece-price {
-            font-size: 1.1em;
-            color: #ff7e5f;
-            margin-bottom: 1em;
         }
 
         .art-piece-button {
             display: inline-block;
-            padding: 0.5em 1.5em;
+            padding: 0.5em 1em;
             background-color: #ff7e5f;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
         }
 
         .art-piece-button:hover {
             background-color: #feb47b;
-            transform: translateY(-3px);
-        }
-
-        /* Featured Styles */
-        .featured {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 2em;
-        }
-
-        .slider {
-            position: relative;
         }
 
         .slider img {
             width: 100%;
+            height: auto;
             border-radius: 10px;
-        }
-
-        .slick-prev, .slick-next {
-            font-size: 2em;
-            color: #ff7e5f;
-            z-index: 1;
-        }
-
-        .slick-prev:hover, .slick-next:hover {
-            color: #feb47b;
-        }
-
-        /* Testimonial Styles */
-        .testimonials {
-            background: #f9f9f9;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 2em;
         }
 
         .testimonials blockquote {
-            font-size: 1.2em;
-            font-style: italic;
-            margin: 0;
-            padding: 1em;
-            border-left: 5px solid #ff7e5f;
-        }
-
-        .testimonials footer {
-            font-weight: bold;
-            margin-top: 1em;
-            color: #555;
-        }
-
-        /* Newsletter Styles */
-        .newsletter {
-            background: #ff7e5f;
-            color: #fff;
-            border-radius: 10px;
-            padding: 2em;
             text-align: center;
-        }
-
-        .newsletter h2 {
-            font-size: 1.8em;
-            margin-bottom: 0.5em;
+            border-left: 5px solid #ff7e5f;
+            padding-left: 1em;
+            font-style: italic;
         }
 
         .newsletter input[type="email"] {
             padding: 0.75em;
             border-radius: 5px;
-            border: none;
+            border: 1px solid #ddd;
             margin-right: 0.5em;
-            width: calc(100% - 120px);
-        }
-
-        .newsletter button {
-            padding: 0.75em 1.5em;
-            background-color: #feb47b;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .newsletter button:hover {
-            background-color: #ff7e5f;
-            transform: translateY(-3px);
-        }
-
-        /* FAQ Styles */
-        .faq {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 2em;
         }
 
         .faq-item {
-            margin-bottom: 1.5em;
-        }
-
-        .faq-item h3 {
-            font-size: 1.3em;
-            margin-bottom: 0.5em;
+            border-bottom: 1px solid #ddd;
+            padding: 1em 0;
             cursor: pointer;
-            position: relative;
         }
 
         .faq-item h3::after {
             content: '+';
-            position: absolute;
-            right: 0;
-            top: 0;
+            float: right;
             font-size: 1.5em;
             color: #ff7e5f;
             transition: transform 0.3s ease;
@@ -325,16 +171,14 @@
             display: block;
         }
 
-        /* Map Styles */
         #leaflet-map {
             height: 300px;
             border-radius: 10px;
             overflow: hidden;
         }
 
-        /* Contact Styles */
         .contact {
-            background: #fff;
+            background: #f9f9f9;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 2em;
@@ -354,7 +198,7 @@
 
         .contact-form button {
             padding: 0.75em;
-            background-color: #ff7e5f;
+            background-color: #feb47b;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -364,7 +208,7 @@
         }
 
         .contact-form button:hover {
-            background-color: #feb47b;
+            background-color: #ff7e5f;
             transform: translateY(-3px);
         }
 
@@ -427,11 +271,6 @@
             }
         }
     </style>
-    <!-- Slick Carousel CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
 
@@ -485,33 +324,50 @@
         <!-- Gallery Section -->
         <section id="gallery" class="gallery">
             <h2>Gallery</h2>
-            <div class="art-piece">
-                <img src="art1.jpg" alt="Art 1">
-                <div class="art-piece-info">
-                    <h3 class="art-piece-title">Sunset Over the Sea</h3>
-                    <p class="art-piece-price">$1200</p>
-                    <a href="#" class="art-piece-button">Buy Now</a>
-                </div>
+            <div class="slider">
+                <div><img src="https://via.placeholder.com/800x600?text=Art+Piece+1" alt="Art Piece 1"></div>
+                <div><img src="https://via.placeholder.com/800x600?text=Art+Piece+2" alt="Art Piece 2"></div>
+                <div><img src="https://via.placeholder.com/800x600?text=Art+Piece+3" alt="Art Piece 3"></div>
+                <div><img src="https://via.placeholder.com/800x600?text=Art+Piece+4" alt="Art Piece 4"></div>
             </div>
-            <div class="art-piece">
-                <img src="art2.jpg" alt="Art 2">
-                <div class="art-piece-info">
-                    <h3 class="art-piece-title">Mountain Landscape</h3>
-                    <p class="art-piece-price">$1500</p>
-                    <a href="#" class="art-piece-button">Buy Now</a>
-                </div>
-            </div>
-            <!-- Add more art pieces as needed -->
         </section>
 
-        <!-- Featured Artworks Section -->
+        <!-- Featured Section -->
         <section id="featured" class="featured">
             <h2>Featured Artworks</h2>
-            <div class="slider">
-                <div><img src="featured1.jpg" alt="Featured 1"></div>
-                <div><img src="featured2.jpg" alt="Featured 2"></div>
-                <div><img src="featured3.jpg" alt="Featured 3"></div>
-                <!-- Add more slides as needed -->
+            <div class="gallery">
+                <div class="art-piece">
+                    <img src="https://via.placeholder.com/400x300?text=Featured+Art+1" alt="Featured Art 1">
+                    <div class="art-piece-info">
+                        <h3>Featured Artwork 1</h3>
+                        <p>Artist: Jane Doe</p>
+                        <a href="#" class="art-piece-button">View Details</a>
+                    </div>
+                </div>
+                <div class="art-piece">
+                    <img src="https://via.placeholder.com/400x300?text=Featured+Art+2" alt="Featured Art 2">
+                    <div class="art-piece-info">
+                        <h3>Featured Artwork 2</h3>
+                        <p>Artist: John Smith</p>
+                        <a href="#" class="art-piece-button">View Details</a>
+                    </div>
+                </div>
+                <div class="art-piece">
+                    <img src="https://via.placeholder.com/400x300?text=Featured+Art+3" alt="Featured Art 3">
+                    <div class="art-piece-info">
+                        <h3>Featured Artwork 3</h3>
+                        <p>Artist: Emily Davis</p>
+                        <a href="#" class="art-piece-button">View Details</a>
+                    </div>
+                </div>
+                <div class="art-piece">
+                    <img src="https://via.placeholder.com/400x300?text=Featured+Art+4" alt="Featured Art 4">
+                    <div class="art-piece-info">
+                        <h3>Featured Artwork 4</h3>
+                        <p>Artist: Michael Brown</p>
+                        <a href="#" class="art-piece-button">View Details</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -519,37 +375,43 @@
         <section id="testimonials" class="testimonials">
             <h2>What Our Clients Say</h2>
             <blockquote>
-                <p>"The art pieces are stunning and the service is top-notch. Highly recommended!"</p>
-                <footer>- Jane Doe, Art Collector</footer>
+                <p>"This gallery has the most amazing selection of art. The quality and service are top-notch!"</p>
+                <cite>- Happy Customer</cite>
             </blockquote>
-            <!-- Add more testimonials as needed -->
+            <blockquote>
+                <p>"I found the perfect piece for my home. The buying experience was seamless and enjoyable."</p>
+                <cite>- Satisfied Buyer</cite>
+            </blockquote>
         </section>
 
-        <!-- Newsletter Signup Section -->
+        <!-- Newsletter Section -->
         <section id="newsletter" class="newsletter">
             <h2>Stay Updated</h2>
-            <p>Sign up for our newsletter to receive the latest news and exclusive offers.</p>
-            <form action="#" method="post">
+            <p>Sign up for our newsletter to receive the latest updates and exclusive offers.</p>
+            <form action="#">
                 <input type="email" placeholder="Your Email" required>
-                <button type="submit">Subscribe</button>
+                <button type="submit" class="cta-button">Subscribe</button>
             </form>
         </section>
 
-        <!-- FAQs Section -->
+        <!-- FAQ Section -->
         <section id="faq" class="faq">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item">
-                <h3>How can I purchase an artwork?</h3>
-                <p>You can purchase artwork directly through our gallery or contact us for custom orders.</p>
+                <h3>How do I purchase art?</h3>
+                <p>You can purchase art directly through our website or contact us for assistance.</p>
             </div>
             <div class="faq-item">
-                <h3>What payment methods do you accept?</h3>
-                <p>We accept various payment methods including credit/debit cards and PayPal.</p>
+                <h3>Do you offer custom framing?</h3>
+                <p>Yes, we offer custom framing options for most of our artworks.</p>
             </div>
-            <!-- Add more FAQs as needed -->
+            <div class="faq-item">
+                <h3>What is your return policy?</h3>
+                <p>We offer a 30-day return policy on most of our artworks. Please check our return policy for details.</p>
+            </div>
         </section>
 
-        <!-- Interactive Map Section -->
+        <!-- Map Section -->
         <section id="map" class="map">
             <h2>Our Location</h2>
             <div id="leaflet-map"></div>
@@ -558,29 +420,24 @@
         <!-- Contact Section -->
         <section id="contact" class="contact">
             <h2>Contact Us</h2>
-            <p>If you have any questions or need further information, feel free to reach out to us.</p>
-            <div class="contact-form">
-                <form action="#" method="post">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" rows="4" required></textarea>
-
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
+            <p>Get in touch with us to explore how we can assist you with your art needs.</p>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
         </section>
     </main>
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 Art Gallery. All rights reserved.</p>
+        <p>&copy; 2023 Art Gallery. All rights reserved.</p>
     </footer>
 
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Slick Carousel JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <!-- Leaflet JS -->
