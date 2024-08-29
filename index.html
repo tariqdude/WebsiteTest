@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.css">
     <style>
         :root {
             --primary-color: #007BFF;
@@ -68,7 +70,9 @@
             color: inherit;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-family: var(--font-family-heading);
             margin-bottom: 0.5em;
             font-weight: 600;
@@ -202,6 +206,15 @@
             margin-bottom: 1em;
         }
 
+        .feature-item img {
+            border-radius: var(--border-radius);
+            transition: transform var(--transition-speed);
+        }
+
+        .feature-item img:hover {
+            transform: scale(1.05);
+        }
+
         /* Testimonial Section */
         .testimonial {
             text-align: center;
@@ -332,7 +345,7 @@
             color: #fff;
             font-size: 1.2em;
             cursor: pointer;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+            transition: background-color var(--transition-speed), box-shadow var (--transition-speed);
         }
 
         .contact-form button:hover {
@@ -397,6 +410,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Header Section -->
@@ -414,7 +428,7 @@
     <!-- Main Content Section -->
     <main>
         <!-- Hero Section -->
-        <section id="home" class="hero">
+        <section id="home" class="hero" data-tilt>
             <h2>Discover Unique Art Pieces</h2>
             <p>Explore our curated collection and custom commissions.</p>
             <a href="#contact" class="cta-button">Get in Touch</a>
@@ -422,17 +436,17 @@
 
         <!-- Features Section -->
         <section id="about" class="features">
-            <div class="feature-item">
+            <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Custom Commissions</h3>
                 <p>Work with our artists to create personalized art pieces.</p>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Art Collections</h3>
                 <p>Explore our diverse range of curated art collections.</p>
             </div>
-            <div class="feature-item">
+            <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Art Services</h3>
                 <p>Benefit from our art consultancy and curation services.</p>
@@ -442,7 +456,7 @@
         <!-- Testimonial Carousel Section -->
         <section class="testimonial">
             <h2>What Our Clients Say</h2>
-            <div class="testimonial-carousel">
+            <div class="testimonial-carousel" data-aos="fade-up">
                 <div>
                     <blockquote>
                         "The art piece exceeded our expectations! The service was outstanding."
@@ -460,7 +474,7 @@
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="faq">
+        <section id="faq" class="faq" data-aos="fade-up">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item">
                 <h3>How can I order a custom commission?</h3>
@@ -478,7 +492,7 @@
         </section>
 
         <!-- Newsletter Signup Section -->
-        <section class="newsletter">
+        <section class="newsletter" data-aos="fade-up">
             <h2>Subscribe to Our Newsletter</h2>
             <p>Get the latest updates and exclusive offers delivered to your inbox.</p>
             <form action="#" method="post">
@@ -488,7 +502,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="contact">
+        <section id="contact" class="contact" data-aos="fade-up">
             <h2>Contact Us</h2>
             <p>We'd love to hear from you! Get in touch with us to learn more about our offerings.</p>
             <div class="contact-form">
@@ -529,8 +543,9 @@
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             // Initialize Slick Carousel
             $('.testimonial-carousel').slick({
                 infinite: true,
@@ -549,6 +564,14 @@
                 once: true,
             });
 
+            // Initialize Vanilla Tilt
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.5,
+            });
+
             // FAQ Toggle
             $('.faq-item').click(function() {
                 $(this).toggleClass('open');
@@ -564,7 +587,9 @@
             });
 
             $('.back-to-top').click(function() {
-                $('html, body').animate({scrollTop: 0}, 600);
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 600);
                 return false;
             });
 
@@ -579,4 +604,5 @@
         });
     </script>
 </body>
+
 </html>
