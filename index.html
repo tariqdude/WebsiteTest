@@ -292,6 +292,14 @@
             transform: scale(1.05);
         }
 
+        /* Parallax Effect for Images */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
         /* Testimonial Section */
         .testimonial {
             text-align: center;
@@ -434,7 +442,7 @@
             color: #fff;
             font-size: 1em;
             cursor: pointer;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+            transition: background-color var (--transition-speed), box-shadow var(--transition-speed);
         }
 
         .contact-form button:hover {
@@ -565,7 +573,7 @@
 
         .back-to-top:hover {
             background-color: var(--accent-color);
-            box-shadow: var (--shadow-md);
+            box-shadow: var(--shadow-md);
         }
 
         /* Scrollbar Styling */
@@ -595,6 +603,27 @@
             color: var(--toast-text-color) !important;
             box-shadow: var(--shadow-sm);
             border-radius: var(--border-radius);
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            border: 6px solid rgba(0, 123, 255, 0.2);
+            border-top-color: #007BFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Media Queries for Responsive Design */
@@ -662,6 +691,9 @@
 
 <body>
 
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner"></div>
+
     <!-- Header Section -->
     <header>
         <div class="logo">Art Gallery</div>
@@ -678,7 +710,7 @@
     <!-- Main Content Section -->
     <main id="fullpage">
         <!-- Hero Section -->
-        <section id="home" class="hero section" data-tilt>
+        <section id="home" class="hero section parallax" style="background-image: url('https://via.placeholder.com/1600x600');">
             <h2>Discover Unique Art Pieces</h2>
             <p>Explore our curated collection and custom commissions.</p>
             <a href="#contact" class="cta-button">Get in Touch</a>
@@ -851,6 +883,9 @@
     <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Remove loading spinner after page loads
+            $('#loading-spinner').fadeOut();
+
             // Initialize Slick Carousel
             $('.testimonial-carousel').slick({
                 infinite: true,
