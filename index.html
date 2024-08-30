@@ -32,8 +32,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.3.0/dist/photoswipe.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.3.0/dist/default-skin/default-skin.css">
     <style>
         :root {
             --primary-color: #007BFF;
@@ -56,9 +54,6 @@
             --carousel-height: 600px;
             --toast-background-color: #333;
             --toast-text-color: #fff;
-            --dark-mode-background: #121212;
-            --dark-mode-text: #e0e0e0;
-            --dark-mode-accent: #bb86fc;
         }
 
         /* Reset and Base Styles */
@@ -81,7 +76,6 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
 
         img {
@@ -102,7 +96,6 @@
             margin-bottom: 0.5em;
             font-weight: 600;
             color: var(--text-color);
-            transition: color var(--transition-speed);
         }
 
         p {
@@ -117,34 +110,6 @@
         :focus {
             outline: 3px solid var(--primary-color);
             outline-offset: 3px;
-        }
-
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: var(--dark-mode-background);
-            color: var(--dark-mode-text);
-        }
-
-        body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
-            color: var(--dark-mode-text);
-        }
-
-        body.dark-mode a {
-            color: var(--dark-mode-accent);
-        }
-
-        body.dark-mode .btn-dark-mode {
-            background-color: var(--dark-mode-accent);
-            color: var(--dark-mode-background);
-        }
-
-        body.dark-mode header {
-            background-color: #1f1f1f;
-            color: var(--dark-mode-text);
-        }
-
-        body.dark-mode .hero {
-            background: linear-gradient(to right, rgba(31, 31, 31, 0.9), rgba(31, 31, 31, 0.7)), url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
         }
 
         /* Header Styles */
@@ -450,7 +415,7 @@
         .contact-form textarea {
             width: 100%;
             padding: 1em;
-            border-radius: var(--border-radius);
+            border-radius: var (--border-radius);
             border: 1px solid #ddd;
             margin-bottom: 1em;
             box-shadow: var(--shadow-sm);
@@ -600,7 +565,7 @@
 
         .back-to-top:hover {
             background-color: var(--accent-color);
-            box-shadow: var(--shadow-md);
+            box-shadow: var (--shadow-md);
         }
 
         /* Scrollbar Styling */
@@ -630,23 +595,6 @@
             color: var(--toast-text-color) !important;
             box-shadow: var(--shadow-sm);
             border-radius: var(--border-radius);
-        }
-
-        /* Dark Mode Toggle Button */
-        .btn-dark-mode {
-            background-color: var(--dark-mode-accent);
-            color: #fff;
-            border: none;
-            border-radius: var(--border-radius);
-            padding: 0.5em 1em;
-            cursor: pointer;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .btn-dark-mode:hover {
-            background-color: var(--dark-mode-text);
-            color: var(--dark-mode-accent);
-            box-shadow: var(--shadow-md);
         }
 
         /* Media Queries for Responsive Design */
@@ -717,7 +665,6 @@
     <!-- Header Section -->
     <header>
         <div class="logo">Art Gallery</div>
-        <button class="btn-dark-mode" id="darkModeToggle">Toggle Dark Mode</button>
         <nav>
             <a href="#home">Home</a>
             <a href="#about">About</a>
@@ -902,8 +849,6 @@
     <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.3.0/dist/photoswipe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.3.0/dist/photoswipe-ui-default.min.js"></script>
     <script>
         $(document).ready(function() {
             // Initialize Slick Carousel
@@ -1056,72 +1001,8 @@
 
             // Trigger a sample toast notification on page load
             toastr.success("Welcome to the Art Gallery!");
-
-            // Initialize PhotoSwipe for advanced image viewing
-            const pswpElement = document.querySelectorAll('.pswp')[0];
-            const items = [
-                {
-                    src: 'https://via.placeholder.com/1200x900',
-                    w: 1200,
-                    h: 900
-                },
-                {
-                    src: 'https://via.placeholder.com/1200x900',
-                    w: 1200,
-                    h: 900
-                }
-            ];
-            const options = {
-                index: 0 // start at first slide
-            };
-            const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-            gallery.init();
-
-            // Dark Mode Toggle
-            $('#darkModeToggle').on('click', function() {
-                $('body').toggleClass('dark-mode');
-                const isDarkMode = $('body').hasClass('dark-mode');
-                toastr.info(isDarkMode ? 'Dark mode activated' : 'Dark mode deactivated');
-            });
         });
     </script>
-
-    <!-- PhotoSwipe template for full-screen gallery -->
-    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="pswp__bg"></div>
-        <div class="pswp__scroll-wrap">
-            <div class="pswp__container">
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-            </div>
-            <div class="pswp__ui pswp__ui--hidden">
-                <div class="pswp__top-bar">
-                    <div class="pswp__counter"></div>
-                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                    <button class="pswp__button pswp__button--share" title="Share"></button>
-                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                    <div class="pswp__preloader">
-                        <div class="pswp__preloader__icn">
-                            <div class="pswp__preloader__cut">
-                                <div class="pswp__preloader__donut"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                    <div class="pswp__share-tooltip"></div>
-                </div>
-                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-                </button>
-                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-                </button>
-                <div class="pswp__caption">
-                    <div class="pswp__caption__center"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
+
 </html>
