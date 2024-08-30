@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Art Gallery - Discover stunning artworks, custom commissions, and art services.">
-    <meta name="keywords" content="Art Gallery, Custom Art, Art Commissions, Art Services">
+    <meta name="keywords" content="Art Gallery, Custom Art, Art Commissions, Art Services, Photography, High-Resolution Images">
     <meta property="og:title" content="Art Gallery">
-    <meta property="og:description" content="Explore a curated collection of unique art pieces and custom commissions.">
+    <meta property="og:description" content="Explore a curated collection of unique art pieces, custom commissions, and high-quality photography services.">
     <meta property="og:image" content="https://via.placeholder.com/1200x630">
     <meta property="og:url" content="https://yourwebsite.com">
     <meta name="robots" content="index, follow">
@@ -16,7 +16,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="msapplication-TileColor" content="#007BFF">
-    <title>Art Gallery | Discover Stunning Artworks</title>
+    <title>Art Gallery | Discover Stunning Artworks & Photography</title>
     <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollreveal/4.0.9/scrollreveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.3.9/dist/css/lightgallery.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -59,6 +60,12 @@
             --carousel-height: 600px;
             --toast-background-color: #333;
             --toast-text-color: #fff;
+            --dark-theme-bg: #121212;
+            --dark-theme-text: #e0e0e0;
+            --audio-player-color: #1abc9c;
+            --photo-gallery-bg: #000;
+            --photo-gallery-border: #fff;
+            --photo-gallery-hover: rgba(255, 255, 255, 0.8);
         }
 
         /* Reset and Base Styles */
@@ -338,204 +345,104 @@
             margin-top: 1em;
         }
 
-        /* Newsletter Section */
-        .newsletter {
-            background: var(--primary-color);
-            color: #fff;
-            padding: 2em;
+        /* Photography Gallery Section */
+        .photo-gallery {
+            background-color: var(--photo-gallery-bg);
+            padding: 3em 0;
             text-align: center;
             border-radius: var(--border-radius);
             margin: 3em 0;
             box-shadow: var(--shadow-lg);
         }
 
-        .newsletter input[type="email"] {
-            padding: 0.5em;
-            border-radius: var(--border-radius);
-            border: none;
-            margin-right: 0.5em;
-            width: 70%;
-            max-width: 280px;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow var(--transition-speed);
+        .photo-gallery h2 {
+            color: var(--accent-color);
+            margin-bottom: 2em;
         }
 
-        .newsletter input[type="email"]:focus {
-            box-shadow: var(--shadow-md);
-        }
-
-        .newsletter button {
-            padding: 0.75em 1.5em;
-            background-color: var(--accent-color);
-            border-radius: var(--border-radius);
-            color: #fff;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .newsletter button:hover {
-            background-color: var(--primary-color);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* FAQ Section */
-        .faq {
-            margin: 3em 0;
-        }
-
-        .faq-item {
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            padding: 1em;
-            margin-bottom: 1em;
-            cursor: pointer;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .faq-item.open {
-            background-color: #f1f1f1;
-            box-shadow: var(--shadow-md);
-        }
-
-        .faq-answer {
-            display: none;
-            padding-top: 1em;
-        }
-
-        .faq-item.open .faq-answer {
-            display: block;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--primary-color);
-            color: #fff;
-            padding: 3em 1em;
-            text-align: center;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .contact-form {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0 1em;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 1em;
-            border-radius: var(--border-radius);
-            border: 1px solid #ddd;
-            margin-bottom: 1em;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow var(--transition-speed);
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            box-shadow: var(--shadow-md);
-        }
-
-        .contact-form button {
-            padding: 0.75em 1.5em;
-            background-color: var(--accent-color);
-            border-radius: var(--border-radius);
-            color: #fff;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .contact-form button:hover {
-            background-color: var(--primary-color);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Code Snippet Section */
-        .code-section {
-            background-color: #f0f0f0;
-            padding: 1.5em;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            margin: 3em 0;
-        }
-
-        .code-section pre {
-            background: #2d2d2d;
-            padding: 1em;
-            border-radius: var(--border-radius);
-            overflow-x: auto;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .code-section code {
-            font-family: 'Courier New', Courier, monospace;
-            color: #f8f8f2;
-        }
-
-        /* Image Gallery Section */
-        .gallery-section {
-            margin: 3em 0;
-        }
-
-        .gallery {
+        .photo-gallery .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1em;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5em;
+            max-width: var(--max-width);
+            margin: 0 auto;
         }
 
-        .gallery-item {
-            overflow: hidden;
+        .photo-gallery .gallery-item {
+            border: 2px solid var(--photo-gallery-border);
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            position: relative;
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
         }
 
-        .gallery-item:hover {
+        .photo-gallery .gallery-item:hover {
             transform: scale(1.05);
             box-shadow: var(--shadow-md);
         }
 
-        .gallery-item img {
+        .photo-gallery .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: opacity var(--transition-speed);
         }
 
-        /* Carousel Section */
-        .carousel-section {
+        .photo-gallery .gallery-item:hover img {
+            opacity: 0.8;
+        }
+
+        .photo-gallery .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--photo-gallery-hover);
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .photo-gallery .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Audio Player Section */
+        .audio-player {
+            background-color: var(--audio-player-color);
+            color: #fff;
+            padding: 1em;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
             margin: 3em 0;
         }
 
-        .carousel {
+        .audio-player audio {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .audio-player button {
             background-color: #fff;
-            padding: 1.5em;
+            color: var(--audio-player-color);
+            border: none;
+            padding: 0.5em 1em;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+            margin-top: 1em;
         }
 
-        .carousel-item {
-            width: 100%;
-            margin-right: 10px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            overflow: hidden;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        .carousel-item:hover {
-            transform: scale(1.05);
+        .audio-player button:hover {
+            background-color: var(--audio-player-color);
+            color: #fff;
             box-shadow: var(--shadow-md);
         }
 
@@ -578,7 +485,7 @@
 
         .back-to-top:hover {
             background-color: var(--accent-color);
-            box-shadow: var (--shadow-md);
+            box-shadow: var(--shadow-md);
         }
 
         /* Scrollbar Styling */
@@ -652,8 +559,8 @@
 
         /* Dark Mode Styles */
         body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: var(--dark-theme-bg);
+            color: var(--dark-theme-text);
         }
 
         header.dark-mode {
@@ -666,12 +573,17 @@
 
         .feature-item.dark-mode {
             background-color: #1f1f1f;
-            color: #e0e0e0;
+            color: var(--dark-theme-text);
         }
 
         .testimonial-carousel.dark-mode {
             background-color: #1f1f1f;
-            color: #e0e0e0;
+            color: var(--dark-theme-text);
+        }
+
+        .photo-gallery.dark-mode {
+            background-color: #1f1f1f;
+            color: var(--dark-theme-text);
         }
 
         footer.dark-mode {
@@ -756,6 +668,7 @@
             <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#gallery">Gallery</a>
+            <a href="#photography">Photography</a>
             <a href="#faq">FAQ</a>
             <a href="#contact">Contact</a>
         </nav>
@@ -812,21 +725,25 @@
             </div>
         </section>
 
-        <!-- Image Gallery Section -->
-        <section id="gallery" class="gallery-section section">
-            <h2>Gallery</h2>
+        <!-- Photography Gallery Section -->
+        <section id="photography" class="photo-gallery section">
+            <h2>Photography</h2>
             <div class="gallery" data-aos="fade-up">
-                <a href="https://via.placeholder.com/800x600" class="gallery-item glightbox">
-                    <img src="https://via.placeholder.com/400x300" alt="Gallery Image">
+                <a href="https://via.placeholder.com/1200x800" class="gallery-item glightbox" data-gallery="photography">
+                    <img src="https://via.placeholder.com/600x400" alt="Photography Image">
+                    <div class="overlay">View Photo</div>
                 </a>
-                <a href="https://via.placeholder.com/800x600" class="gallery-item glightbox">
-                    <img src="https://via.placeholder.com/400x300" alt="Gallery Image">
+                <a href="https://via.placeholder.com/1200x800" class="gallery-item glightbox" data-gallery="photography">
+                    <img src="https://via.placeholder.com/600x400" alt="Photography Image">
+                    <div class="overlay">View Photo</div>
                 </a>
-                <a href="https://via.placeholder.com/800x600" class="gallery-item glightbox">
-                    <img src="https://via.placeholder.com/400x300" alt="Gallery Image">
+                <a href="https://via.placeholder.com/1200x800" class="gallery-item glightbox" data-gallery="photography">
+                    <img src="https://via.placeholder.com/600x400" alt="Photography Image">
+                    <div class="overlay">View Photo</div>
                 </a>
-                <a href="https://via.placeholder.com/800x600" class="gallery-item glightbox">
-                    <img src="https://via.placeholder.com/400x300" alt="Gallery Image">
+                <a href="https://via.placeholder.com/1200x800" class="gallery-item glightbox" data-gallery="photography">
+                    <img src="https://via.placeholder.com/600x400" alt="Photography Image">
+                    <div class="overlay">View Photo</div>
                 </a>
                 <!-- Add more gallery items as needed -->
             </div>
@@ -875,6 +792,16 @@
                 <input type="email" placeholder="Enter your email" required>
                 <button type="submit" class="cta-button">Subscribe</button>
             </form>
+        </section>
+
+        <!-- Audio Player Section -->
+        <section class="audio-player section" data-aos="fade-up">
+            <h2>Enjoy Our Featured Audio Track</h2>
+            <audio controls>
+                <source src="your-audio-file.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <button>Download Track</button>
         </section>
 
         <!-- Contact Section -->
@@ -935,6 +862,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.3.9/dist/js/lightgallery.min.js"></script>
     <script>
         $(document).ready(function() {
             // Remove loading spinner after page loads
@@ -942,7 +870,7 @@
 
             // Dark Mode Toggle
             $('#dark-mode-toggle').click(function() {
-                $('body, header, .hero, .feature-item, .testimonial-carousel, footer').toggleClass('dark-mode');
+                $('body, header, .hero, .feature-item, .testimonial-carousel, .photo-gallery, footer').toggleClass('dark-mode');
             });
 
             // Initialize Slick Carousel
@@ -1018,6 +946,18 @@
                 easing: 'ease-in-out',
                 origin: 'bottom',
                 reset: true,
+            });
+
+            // Initialize LightGallery for Photography Section
+            lightGallery(document.querySelector('.photo-gallery .gallery'), {
+                selector: '.gallery-item',
+                thumbnail: true,
+                animateThumb: true,
+                showThumbByDefault: true,
+                zoom: true,
+                download: false,
+                fullScreen: true,
+                share: false,
             });
 
             // FAQ Toggle
