@@ -15,8 +15,10 @@
     <meta name="theme-color" content="#007BFF">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-TileColor" content="#007BFF">
     <title>Art Gallery | Discover Stunning Artworks</title>
     <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -365,7 +367,7 @@
         .newsletter button {
             padding: 0.75em 1.5em;
             background-color: var(--accent-color);
-            border-radius: var (--border-radius);
+            border-radius: var(--border-radius);
             color: #fff;
             font-size: 1em;
             cursor: pointer;
@@ -426,7 +428,7 @@
         .contact-form textarea {
             width: 100%;
             padding: 1em;
-            border-radius: var (--border-radius);
+            border-radius: var(--border-radius);
             border: 1px solid #ddd;
             margin-bottom: 1em;
             box-shadow: var(--shadow-sm);
@@ -445,7 +447,7 @@
             color: #fff;
             font-size: 1em;
             cursor: pointer;
-            transition: background-color var (--transition-speed), box-shadow var(--transition-speed);
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         .contact-form button:hover {
@@ -576,7 +578,7 @@
 
         .back-to-top:hover {
             background-color: var(--accent-color);
-            box-shadow: var(--shadow-md);
+            box-shadow: var (--shadow-md);
         }
 
         /* Scrollbar Styling */
@@ -603,7 +605,7 @@
 
         .toast {
             background-color: var(--toast-background-color) !important;
-            color: var (--toast-text-color) !important;
+            color: var(--toast-text-color) !important;
             box-shadow: var(--shadow-sm);
             border-radius: var(--border-radius);
         }
@@ -698,6 +700,40 @@
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
         }
+
+        /* Offline Support - Placeholder for PWA */
+        .offline-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #ff9800;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            z-index: 10000;
+        }
+
+        .offline-warning.show {
+            display: block;
+        }
+
+        /* Improved Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .high-contrast-mode {
+            background-color: #000;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -708,6 +744,9 @@
 
     <!-- Dark Mode Toggle -->
     <div class="dark-mode-toggle" id="dark-mode-toggle">Dark Mode</div>
+
+    <!-- Offline Warning -->
+    <div class="offline-warning" id="offline-warning">You are currently offline. Some features may not be available.</div>
 
     <!-- Header Section -->
     <header>
@@ -1076,6 +1115,26 @@
             })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
             ga('create', 'UA-XXXXX-Y', 'auto');
             ga('send', 'pageview');
+
+            // Service Worker Registration for PWA
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(function(error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+            }
+
+            // Handle Offline Mode
+            window.addEventListener('offline', function() {
+                $('#offline-warning').addClass('show');
+            });
+
+            window.addEventListener('online', function() {
+                $('#offline-warning').removeClass('show');
+            });
+
         });
     </script>
 </body>
