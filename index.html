@@ -12,6 +12,9 @@
     <meta property="og:url" content="https://yourwebsite.com">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Art Gallery">
+    <meta name="theme-color" content="#007BFF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Art Gallery | Discover Stunning Artworks</title>
     <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -362,7 +365,7 @@
         .newsletter button {
             padding: 0.75em 1.5em;
             background-color: var(--accent-color);
-            border-radius: var(--border-radius);
+            border-radius: var (--border-radius);
             color: #fff;
             font-size: 1em;
             cursor: pointer;
@@ -600,7 +603,7 @@
 
         .toast {
             background-color: var(--toast-background-color) !important;
-            color: var(--toast-text-color) !important;
+            color: var (--toast-text-color) !important;
             box-shadow: var(--shadow-sm);
             border-radius: var(--border-radius);
         }
@@ -626,64 +629,73 @@
             }
         }
 
-        /* Media Queries for Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                padding: 0.75em;
-            }
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 0.5em 1em;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            z-index: 10000;
+            box-shadow: var(--shadow-md);
+            transition: background-color var(--transition-speed);
+        }
 
-            .hero h2 {
-                font-size: 2em;
+        .dark-mode-toggle:hover {
+            background: var(--primary-color);
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        header.dark-mode {
+            background-color: #1f1f1f;
+        }
+
+        .hero.dark-mode {
+            background: linear-gradient(to right, rgba(31, 31, 31, 0.9), rgba(31, 31, 31, 0.7)), url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
+        }
+
+        .feature-item.dark-mode {
+            background-color: #1f1f1f;
+            color: #e0e0e0;
+        }
+
+        .testimonial-carousel.dark-mode {
+            background-color: #1f1f1f;
+            color: #e0e0e0;
+        }
+
+        footer.dark-mode {
+            background-color: #1f1f1f;
+        }
+
+        /* Additional Media Queries for Larger Screens */
+        @media (min-width: 1200px) {
+            body {
+                font-size: 18px;
             }
 
             .cta-button {
-                font-size: 1em;
-                padding: 0.75em 1em;
-            }
-
-            .newsletter input[type="email"] {
-                width: 80%;
-            }
-
-            .features, .testimonial-carousel, .gallery {
-                width: 95%;
-                margin: auto;
-            }
-
-            nav a {
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 0.5em;
-            }
-
-            .logo {
-                font-size: 1.5em;
-            }
-
-            nav a {
-                font-size: 0.8em;
-                margin: 0.3em;
+                padding: 1.2em 1.8em;
             }
 
             .hero h2 {
-                font-size: 1.5em;
+                font-size: 3em;
             }
 
-            .hero p {
-                font-size: 0.9em;
+            .testimonial-carousel {
+                width: 80%;
             }
 
-            .cta-button, .contact-form button {
-                padding: 0.5em 1em;
-                font-size: 0.9em;
-            }
-
-            .features, .gallery {
-                grid-template-columns: 1fr;
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
         }
     </style>
@@ -693,6 +705,9 @@
 
     <!-- Loading Spinner -->
     <div class="loading-spinner" id="loading-spinner"></div>
+
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="dark-mode-toggle">Dark Mode</div>
 
     <!-- Header Section -->
     <header>
@@ -886,6 +901,11 @@
             // Remove loading spinner after page loads
             $('#loading-spinner').fadeOut();
 
+            // Dark Mode Toggle
+            $('#dark-mode-toggle').click(function() {
+                $('body, header, .hero, .feature-item, .testimonial-carousel, footer').toggleClass('dark-mode');
+            });
+
             // Initialize Slick Carousel
             $('.testimonial-carousel').slick({
                 infinite: true,
@@ -1036,6 +1056,26 @@
 
             // Trigger a sample toast notification on page load
             toastr.success("Welcome to the Art Gallery!");
+
+            // SEO Enhancement: Add Canonical URL
+            $('head').append('<link rel="canonical" href="https://yourwebsite.com">');
+
+            // Security Enhancement: Content Security Policy
+            $('head').append('<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\' https://code.jquery.com https://cdn.jsdelivr.net; style-src \'self\' https://fonts.googleapis.com https://cdn.jsdelivr.net; object-src \'none\'; frame-ancestors \'none\';">');
+
+            // Security Enhancement: X-Frame-Options
+            $('head').append('<meta http-equiv="X-Frame-Options" content="DENY">');
+
+            // Performance Enhancement: Add Preload for Fonts
+            $('head').append('<link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" as="style">');
+
+            // Analytics Integration: Google Analytics Example
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-XXXXX-Y', 'auto');
+            ga('send', 'pageview');
         });
     </script>
 </body>
