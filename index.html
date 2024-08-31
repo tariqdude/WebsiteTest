@@ -12,63 +12,45 @@
     <meta property="og:url" content="https://yourwebsite.com">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Art Gallery">
-    <meta name="theme-color" content="#4A90E2">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="msapplication-TileColor" content="#4A90E2">
+    <meta name="theme-color" content="#1E1E1E">
     <title>Art Gallery | Discover Stunning Artworks & Photography</title>
     <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
-    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/css/glightbox.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@6.3.1/dist/tippy.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/scrollreveal/4.0.9/scrollreveal.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery.js@1.3.9/dist/css/lightgallery.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4A90E2;
-            --accent-color: #FFC107;
-            --background-color: #f4f6f8;
+            --primary-color: #1E88E5;
+            --accent-color: #FFCA28;
+            --background-color: #F5F5F5;
             --text-color: #333;
-            --border-radius: 10px;
+            --border-radius: 8px;
             --transition-speed: 0.3s;
             --max-width: 1200px;
             --font-size-base: 16px;
-            --line-height-base: 1.6;
-            --font-family-base: 'Poppins', sans-serif;
-            --font-family-heading: 'Merriweather', serif;
-            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.15);
-            --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.2);
+            --line-height-base: 1.7;
+            --font-family-base: 'Inter', sans-serif;
+            --font-family-heading: 'Playfair Display', serif;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
             --container-padding: 2em;
             --highlight-color: #FFEB3B;
             --animation-speed: 0.3s;
-            --carousel-height: 600px;
-            --toast-background-color: #333;
-            --toast-text-color: #fff;
-            --dark-theme-bg: #1A1A1A;
-            --dark-theme-text: #e0e0e0;
-            --audio-player-color: #34d399;
-            --photo-gallery-bg: #000;
-            --photo-gallery-border: #fff;
-            --photo-gallery-hover: rgba(255, 255, 255, 0.8);
         }
 
-        /* Reset and Base Styles */
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -135,17 +117,17 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
         header.sticky {
-            background-color: rgba(74, 144, 226, 0.95);
-            box-shadow: var(--shadow-md);
+            background-color: rgba(30, 136, 229, 0.95);
+            box-shadow: var(--shadow-lg);
         }
 
         .logo {
-            font-size: 2.5em;
+            font-size: clamp(2em, 2.5vw, 2.5em);
             font-weight: bold;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -153,16 +135,17 @@
 
         nav {
             display: flex;
-            justify-content: space-around;
-            margin-top: 0.5em;
+            justify-content: center;
             flex-wrap: wrap;
+            gap: 1em;
+            margin-top: 0.5em;
         }
 
         nav a {
-            margin: 0.5em 1em;
+            margin: 0.5em;
             color: #fff;
-            font-weight: bold;
-            font-size: 1em;
+            font-weight: 500;
+            font-size: clamp(0.9em, 1.2vw, 1em);
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -182,8 +165,8 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 5em 0;
-            background: linear-gradient(to right, rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.7)), url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
+            padding: 5em 1em;
+            background: linear-gradient(to right, rgba(30, 136, 229, 0.9), rgba(30, 136, 229, 0.7)), url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
             color: #fff;
             position: relative;
             overflow: hidden;
@@ -192,13 +175,13 @@
         }
 
         .hero h2 {
-            font-size: 3em;
+            font-size: clamp(2.5em, 5vw, 3.5em);
             margin-bottom: 0.5em;
             animation: fadeInDown var(--animation-speed) ease-in-out;
         }
 
         .hero p {
-            font-size: 1.2em;
+            font-size: clamp(1em, 2.5vw, 1.2em);
             animation: fadeInUp var(--animation-speed) ease-in-out;
             max-width: 700px;
             margin: 0 auto;
@@ -229,11 +212,11 @@
 
         .cta-button {
             display: inline-block;
-            padding: 1.2em 2em;
+            padding: clamp(1em, 1.2vw, 1.2em) clamp(2em, 2.5vw, 2em);
             background-color: var(--accent-color);
             color: #fff;
             border-radius: var(--border-radius);
-            font-size: 1.2em;
+            font-size: clamp(1em, 1.2vw, 1.2em);
             transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
             animation: bounceIn var(--animation-speed) ease-in-out;
         }
@@ -280,7 +263,7 @@
 
         .feature-item h3 {
             margin-bottom: 0.5em;
-            font-size: 1.4em;
+            font-size: clamp(1.2em, 1.4vw, 1.4em);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--primary-color);
@@ -288,7 +271,7 @@
 
         .feature-item p {
             margin-bottom: 1em;
-            font-size: 1em;
+            font-size: clamp(1em, 1.2vw, 1em);
             line-height: 1.6;
             color: var(--text-color);
         }
@@ -300,14 +283,6 @@
         .feature-item:hover img {
             transform: scale(1.05);
             opacity: 0.9;
-        }
-
-        /* Parallax Effect for Images */
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
         }
 
         /* Testimonial Section */
@@ -348,7 +323,7 @@
 
         /* Photography Gallery Section */
         .photo-gallery {
-            background-color: var(--photo-gallery-bg);
+            background-color: #212121;
             padding: 4em 0;
             text-align: center;
             border-radius: var(--border-radius);
@@ -359,7 +334,7 @@
         .photo-gallery h2 {
             color: var(--accent-color);
             margin-bottom: 2em;
-            font-size: 2.5em;
+            font-size: clamp(2em, 2.5vw, 2.5em);
             letter-spacing: 0.5px;
         }
 
@@ -372,7 +347,7 @@
         }
 
         .photo-gallery .gallery-item {
-            border: 2px solid var(--photo-gallery-border);
+            border: 2px solid var(--accent-color);
             border-radius: var(--border-radius);
             overflow: hidden;
             position: relative;
@@ -401,13 +376,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--photo-gallery-hover);
+            background-color: rgba(255, 255, 255, 0.6);
             opacity: 0;
             transition: opacity var(--transition-speed);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-color);
+            color: #333;
             font-size: 1.2em;
             font-weight: bold;
             text-transform: uppercase;
@@ -420,7 +395,7 @@
 
         /* Audio Player Section */
         .audio-player {
-            background-color: var(--audio-player-color);
+            background-color: var(--primary-color);
             color: #fff;
             padding: 2em;
             border-radius: var(--border-radius);
@@ -436,7 +411,7 @@
 
         .audio-player button {
             background-color: #fff;
-            color: var(--audio-player-color);
+            color: var(--primary-color);
             border: none;
             padding: 0.75em 1.5em;
             border-radius: var(--border-radius);
@@ -449,14 +424,14 @@
         }
 
         .audio-player button:hover {
-            background-color: var(--audio-player-color);
+            background-color: var(--primary-color);
             color: #fff;
             box-shadow: var(--shadow-md);
         }
 
         /* Footer Section */
         footer {
-            background: #1A1A1A;
+            background: #1E1E1E;
             color: #fff;
             padding: 2em 1em;
             text-align: center;
@@ -488,7 +463,7 @@
             cursor: pointer;
             display: none;
             z-index: 1000;
-            transition: background-color var(--transition-speed), box-shadow var (--transition-speed);
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
             font-size: 1.2em;
             font-weight: bold;
             text-transform: uppercase;
@@ -512,43 +487,6 @@
             background-color: var(--primary-color);
             border-radius: 20px;
             border: 2px solid var(--background-color);
-        }
-
-        /* Toast Notification Styling */
-        #toast-container {
-            top: 1em;
-            right: 1em;
-            z-index: 10000;
-        }
-
-        .toast {
-            background-color: var(--toast-background-color) !important;
-            color: var(--toast-text-color) !important;
-            box-shadow: var(--shadow-sm);
-            border-radius: var(--border-radius);
-            padding: 1em;
-            font-size: 1em;
-        }
-
-        /* Loading Spinner */
-        .loading-spinner {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10000;
-            width: 50px;
-            height: 50px;
-            border: 6px solid rgba(74, 144, 226, 0.2);
-            border-top-color: #4A90E2;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
         }
 
         /* Dark Mode Toggle */
@@ -575,35 +513,35 @@
 
         /* Dark Mode Styles */
         body.dark-mode {
-            background-color: var(--dark-theme-bg);
-            color: var(--dark-theme-text);
+            background-color: #121212;
+            color: #e0e0e0;
         }
 
         header.dark-mode {
-            background-color: #1f1f1f;
+            background-color: #1e1e1e;
         }
 
         .hero.dark-mode {
-            background: linear-gradient(to right, rgba(31, 31, 31, 0.9), rgba(31, 31, 31, 0.7)), url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
+            background: linear-gradient(to right, rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.7)), url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
         }
 
         .feature-item.dark-mode {
-            background-color: #1f1f1f;
-            color: var(--dark-theme-text);
+            background-color: #1e1e1e;
+            color: #e0e0e0;
         }
 
         .testimonial-carousel.dark-mode {
-            background-color: #1f1f1f;
-            color: var(--dark-theme-text);
+            background-color: #1e1e1e;
+            color: #e0e0e0;
         }
 
         .photo-gallery.dark-mode {
-            background-color: #1f1f1f;
-            color: var(--dark-theme-text);
+            background-color: #1e1e1e;
+            color: #e0e0e0;
         }
 
         footer.dark-mode {
-            background-color: #1f1f1f;
+            background-color: #1e1e1e;
         }
 
         /* Additional Media Queries for Larger Screens */
@@ -673,9 +611,6 @@
 
 <body>
 
-    <!-- Loading Spinner -->
-    <div class="loading-spinner" id="loading-spinner"></div>
-
     <!-- Dark Mode Toggle -->
     <div class="dark-mode-toggle" id="dark-mode-toggle">Dark Mode</div>
 
@@ -711,19 +646,16 @@
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Custom Commissions</h3>
                 <p>Work with our artists to create personalized art pieces.</p>
-                <span class="tooltip" data-tippy-content="We offer custom art commissions to match your style and preferences."></span>
             </div>
             <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Art Collections</h3>
                 <p>Explore our diverse range of curated art collections.</p>
-                <span class="tooltip" data-tippy-content="Discover art collections curated by experts."></span>
             </div>
             <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
                 <h3>Art Services</h3>
                 <p>Benefit from our art consultancy and curation services.</p>
-                <span class="tooltip" data-tippy-content="Our services include art consultation, framing, and more."></span>
             </div>
         </section>
 
@@ -743,7 +675,6 @@
                         <footer>- Happy Customer</footer>
                     </blockquote>
                 </div>
-                <!-- Add more testimonials as needed -->
             </div>
         </section>
 
@@ -767,7 +698,6 @@
                     <img src="https://via.placeholder.com/600x400" alt="Photography Image">
                     <div class="overlay">View Photo</div>
                 </a>
-                <!-- Add more gallery items as needed -->
             </div>
         </section>
 
@@ -784,7 +714,6 @@
                 <div class="carousel-item">
                     <img src="https://via.placeholder.com/600x400" alt="Carousel Image">
                 </div>
-                <!-- Add more carousel items as needed -->
             </div>
         </section>
 
@@ -803,7 +732,6 @@
                     <p>We offer a 30-day return policy on all purchases. Please contact us for more details.</p>
                 </div>
             </div>
-            <!-- Add more FAQ items as needed -->
         </section>
 
         <!-- Newsletter Signup Section -->
@@ -887,9 +815,6 @@
     <script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.3.9/dist/js/lightgallery.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Remove loading spinner after page loads
-            $('#loading-spinner').fadeOut();
-
             // Dark Mode Toggle
             $('#dark-mode-toggle').click(function() {
                 $('body, header, .hero, .feature-item, .testimonial-carousel, .photo-gallery, footer').toggleClass('dark-mode');
@@ -1068,15 +993,7 @@
             $('head').append('<meta http-equiv="X-Frame-Options" content="DENY">');
 
             // Performance Enhancement: Add Preload for Fonts
-            $('head').append('<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" as="style">');
-
-            // Analytics Integration: Google Analytics Example
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-XXXXX-Y', 'auto');
-            ga('send', 'pageview');
+            $('head').append('<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" as="style">');
 
             // Service Worker Registration for PWA
             if ('serviceWorker' in navigator) {
