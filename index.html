@@ -29,6 +29,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #1E88E5;
@@ -50,71 +51,8 @@
             --animation-speed: 0.3s;
         }
 
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: var(--font-size-base);
-            line-height: var(--line-height-base);
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-family-base);
-            background-color: var(--background-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            transition: transform var(--transition-speed), opacity var(--transition-speed);
-        }
-
-        img:hover {
-            transform: scale(1.05);
-            opacity: 0.9;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color var(--transition-speed);
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-family-heading);
-            margin-bottom: 0.5em;
-            font-weight: 700;
-            color: var(--text-color);
-        }
-
-        p {
-            margin-bottom: 1em;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* Accessibility Improvements */
-        :focus {
-            outline: 3px solid var(--primary-color);
-            outline-offset: 3px;
-        }
-
-        /* Header Styles */
-        header {
+        /* BEM Methodology for CSS */
+        .header {
             background: var(--primary-color);
             color: #fff;
             padding: 1em;
@@ -127,19 +65,19 @@
             transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
         }
 
-        header.sticky {
+        .header--sticky {
             background-color: rgba(30, 136, 229, 0.95);
             box-shadow: var(--shadow-lg);
         }
 
-        .logo {
+        .header__logo {
             font-size: clamp(2em, 2.5vw, 2.5em);
             font-weight: bold;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        nav {
+        .nav {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
@@ -147,7 +85,7 @@
             margin-top: 0.5em;
         }
 
-        nav a {
+        .nav__link {
             margin: 0.5em;
             color: #fff;
             font-weight: 500;
@@ -157,7 +95,7 @@
             letter-spacing: 0.5px;
         }
 
-        nav a:hover {
+        .nav__link:hover {
             color: var(--accent-color);
         }
 
@@ -166,7 +104,7 @@
             display: inline-block;
         }
 
-        .dropdown-content {
+        .dropdown__content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
@@ -176,11 +114,11 @@
             border-radius: var(--border-radius);
         }
 
-        .dropdown:hover .dropdown-content {
+        .dropdown:hover .dropdown__content {
             display: block;
         }
 
-        .dropdown-content a {
+        .dropdown__content-link {
             color: var(--text-color);
             padding: 12px 16px;
             text-decoration: none;
@@ -188,19 +126,11 @@
             text-align: left;
         }
 
-        .dropdown-content a:hover {
+        .dropdown__content-link:hover {
             background-color: var(--accent-color);
             color: #fff;
         }
 
-        /* Main Styles */
-        main {
-            padding: 6em var(--container-padding) 2em;
-            max-width: var(--max-width);
-            margin: 0 auto;
-        }
-
-        /* Hero Section */
         .hero {
             text-align: center;
             padding: 5em 1em;
@@ -210,20 +140,185 @@
             overflow: hidden;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-lg);
+            background-attachment: fixed;
         }
 
-        .hero h2 {
+        .hero__title {
             font-size: clamp(2.5em, 5vw, 3.5em);
             margin-bottom: 0.5em;
             animation: fadeInDown var(--animation-speed) ease-in-out;
         }
 
-        .hero p {
+        .hero__description {
             font-size: clamp(1em, 2.5vw, 1.2em);
             animation: fadeInUp var(--animation-speed) ease-in-out;
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: clamp(1em, 1.2vw, 1.2em) clamp(2em, 2.5vw, 2em);
+            background-color: var(--accent-color);
+            color: #fff;
+            border-radius: var(--border-radius);
+            font-size: clamp(1em, 1.2vw, 1.2em);
+            transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+            animation: bounceIn var(--animation-speed) ease-in-out;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5em;
+            margin-top: 4em;
+        }
+
+        .feature-item {
+            background: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 1.5em;
+            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+
+        .feature-item__title {
+            margin-bottom: 0.5em;
+            font-size: clamp(1.2em, 1.4vw, 1.4em);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary-color);
+        }
+
+        .feature-item__description {
+            margin-bottom: 1em;
+            font-size: clamp(1em, 1.2vw, 1em);
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .services {
+            margin: 4em 0;
+        }
+
+        .services__item {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 1.5em;
+            margin-bottom: 2em;
+            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .services__item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 1.5em;
+            border-radius: var(--border-radius);
+        }
+
+        .services__item h4 {
+            font-size: 1.5em;
+            color: var(--primary-color);
+        }
+
+        .services__item:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+
+        .testimonial {
+            text-align: center;
+            margin: 4em 0;
+        }
+
+        .testimonial__carousel {
+            width: 90%;
+            margin: 0 auto;
+            height: 400px;
+            padding: 2em;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            background-color: #fff;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .testimonial__carousel blockquote {
+            font-size: 1.2em;
+            padding: 2em;
+            background: none;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+        }
+
+        .testimonial__carousel footer {
+            font-style: italic;
+            margin-top: 1em;
+            color: var(--primary-color);
+        }
+
+        .footer {
+            background: #1E1E1E;
+            color: #fff;
+            padding: 2em 1em;
+            text-align: center;
+            position: relative;
+            margin-top: 4em;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .footer__social a {
+            color: #fff;
+            margin: 0 0.5em;
+            font-size: 1.5em;
+            transition: color var(--transition-speed);
+        }
+
+        .footer__social a:hover {
+            color: var(--accent-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 1em;
+            right: 1em;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 0.75em 1.5em;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--accent-color);
+            box-shadow: var(--shadow-md);
         }
 
         @keyframes fadeInDown {
@@ -248,23 +343,6 @@
             }
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: clamp(1em, 1.2vw, 1.2em) clamp(2em, 2.5vw, 2em);
-            background-color: var(--accent-color);
-            color: #fff;
-            border-radius: var(--border-radius);
-            font-size: clamp(1em, 1.2vw, 1.2em);
-            transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
-            animation: bounceIn var(--animation-speed) ease-in-out;
-        }
-
-        .cta-button:hover {
-            background-color: var(--primary-color);
-            transform: scale(1.05);
-            box-shadow: var(--shadow-md);
-        }
-
         @keyframes bounceIn {
             from {
                 opacity: 0;
@@ -276,432 +354,17 @@
             }
         }
 
-        /* Features Section */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5em;
-            margin-top: 4em;
-        }
-
-        .feature-item {
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 1.5em;
-            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-item:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-5px);
-        }
-
-        .feature-item h3 {
-            margin-bottom: 0.5em;
-            font-size: clamp(1.2em, 1.4vw, 1.4em);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--primary-color);
-        }
-
-        .feature-item p {
-            margin-bottom: 1em;
-            font-size: clamp(1em, 1.2vw, 1em);
-            line-height: 1.6;
-            color: var(--text-color);
-        }
-
-        /* Services Section */
-        .services {
-            margin: 4em 0;
-        }
-
-        .services .service-item {
-            display: flex;
-            align-items: center;
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 1.5em;
-            margin-bottom: 2em;
-            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
-        }
-
-        .services .service-item img {
-            width: 100px;
-            height: 100px;
-            margin-right: 1.5em;
-            border-radius: var(--border-radius);
-        }
-
-        .services .service-item h4 {
-            font-size: 1.5em;
-            color: var(--primary-color);
-        }
-
-        .services .service-item:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-5px);
-        }
-
-        /* Events Section */
-        .events {
-            margin: 4em 0;
-        }
-
-        .events .event-item {
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 1.5em;
-            margin-bottom: 2em;
-            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
-            position: relative;
-        }
-
-        .events .event-item h4 {
-            font-size: 1.5em;
-            color: var(--primary-color);
-            margin-bottom: 0.5em;
-        }
-
-        .events .event-item p {
-            font-size: 1em;
-            color: var(--text-color);
-        }
-
-        .events .event-item:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-5px);
-        }
-
-        /* Blog Section */
-        .blog {
-            margin: 4em 0;
-        }
-
-        .blog .blog-item {
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 1.5em;
-            margin-bottom: 2em;
-            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
-            position: relative;
-        }
-
-        .blog .blog-item h4 {
-            font-size: 1.5em;
-            color: var(--primary-color);
-            margin-bottom: 0.5em;
-        }
-
-        .blog .blog-item p {
-            font-size: 1em;
-            color: var(--text-color);
-        }
-
-        .blog .blog-item:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-5px);
-        }
-
-        /* Team Section */
-        .team {
-            margin: 4em 0;
-        }
-
-        .team .team-member {
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 1.5em;
-            text-align: center;
-            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .team .team-member img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 1em;
-            border-radius: 50%;
-        }
-
-        .team .team-member h4 {
-            font-size: 1.5em;
-            color: var(--primary-color);
-        }
-
-        .team .team-member p {
-            font-size: 1em;
-            color: var(--text-color);
-        }
-
-        .team .team-member:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-5px);
-        }
-
-        /* Testimonial Section */
-        .testimonial {
-            text-align: center;
-            margin: 4em 0;
-        }
-
-        .testimonial-carousel {
-            width: 90%;
-            margin: 0 auto;
-            height: 400px;
-            padding: 2em;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            background-color: #fff;
-            transition: transform var(--transition-speed), box-shadow var (--transition-speed);
-        }
-
-        .testimonial-carousel blockquote {
-            font-size: 1.2em;
-            padding: 2em;
-            background: none;
-            border-radius: var (--border-radius);
-            box-shadow: var(--shadow-sm);
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-color);
-        }
-
-        .testimonial-carousel footer {
-            font-style: italic;
-            margin-top: 1em;
-            color: var(--primary-color);
-        }
-
-        /* Photography Gallery Section */
-        .photo-gallery {
-            background-color: #212121;
-            padding: 4em 0;
-            text-align: center;
-            border-radius: var(--border-radius);
-            margin: 4em 0;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .photo-gallery h2 {
-            color: var(--accent-color);
-            margin-bottom: 2em;
-            font-size: clamp(2em, 2.5vw, 2.5em);
-            letter-spacing: 0.5px;
-        }
-
-        .photo-gallery .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5em;
-            max-width: var(--max-width);
-            margin: 0 auto;
-        }
-
-        .photo-gallery .gallery-item {
-            border: 2px solid var(--accent-color);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            position: relative;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .photo-gallery .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-md);
-        }
-
-        .photo-gallery .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-gallery .gallery-item .overlay {
+        .sr-only {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.6);
-            opacity: 0;
-            transition: opacity var(--transition-speed);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
 
-        .photo-gallery .gallery-item:hover .overlay {
-            opacity: 1;
-        }
-
-        /* Audio Player Section */
-        .audio-player {
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 2em;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            text-align: center;
-            margin: 4em 0;
-        }
-
-        .audio-player audio {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .audio-player button {
-            background-color: #fff;
-            color: var(--primary-color);
-            border: none;
-            padding: 0.75em 1.5em;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-            margin-top: 1.5em;
-            font-size: 1em;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .audio-player button:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Footer Section */
-        footer {
-            background: #1E1E1E;
-            color: #fff;
-            padding: 2em 1em;
-            text-align: center;
-            position: relative;
-            margin-top: 4em;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .footer-social a {
-            color: #fff;
-            margin: 0 0.5em;
-            font-size: 1.5em;
-            transition: color var(--transition-speed);
-        }
-
-        .footer-social a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Back-to-Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 1em;
-            right: 1em;
-            background: var(--primary-color);
-            color: #fff;
-            padding: 0.75em 1.5em;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            display: none;
-            z-index: 1000;
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-            font-size: 1.2em;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .back-to-top:hover {
-            background-color: var(--accent-color);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--background-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--primary-color);
-            border-radius: 20px;
-            border: 2px solid var(--background-color);
-        }
-
-        /* Dark Mode Toggle */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 1em;
-            right: 1em;
-            background: var(--accent-color);
-            color: #fff;
-            padding: 0.75em 1.5em;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            z-index: 10000;
-            box-shadow: var(--shadow-md);
-            transition: background-color var(--transition-speed);
-            font-size: 1em;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .dark-mode-toggle:hover {
-            background: var(--primary-color);
-        }
-
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-
-        header.dark-mode {
-            background-color: #1e1e1e;
-        }
-
-        .hero.dark-mode {
-            background: linear-gradient(to right, rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.7)), url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
-        }
-
-        .feature-item.dark-mode {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-        }
-
-        .testimonial-carousel.dark-mode {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-        }
-
-        .photo-gallery.dark-mode {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-        }
-
-        footer.dark-mode {
-            background-color: #1e1e1e;
-        }
-
-        /* Additional Media Queries for Larger Screens */
         @media (min-width: 1200px) {
             body {
                 font-size: 18px;
@@ -711,24 +374,23 @@
                 padding: 1.5em 2.5em;
             }
 
-            .hero h2 {
+            .hero__title {
                 font-size: 3.5em;
             }
 
-            .testimonial-carousel {
+            .testimonial__carousel {
                 width: 80%;
             }
 
-            .gallery {
+            .features {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
 
-            .photo-gallery h2 {
-                font-size: 3em;
+            .footer__social {
+                margin-top: 2em;
             }
         }
 
-        /* Offline Support - Placeholder for PWA */
         .offline-warning {
             display: none;
             position: fixed;
@@ -747,18 +409,6 @@
             display: block;
         }
 
-        /* Improved Accessibility */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
         .high-contrast-mode {
             background-color: #000;
             color: #fff;
@@ -775,44 +425,44 @@
     <div class="offline-warning" id="offline-warning">You are currently offline. Some features may not be available.</div>
 
     <!-- Header Section -->
-    <header>
-        <div class="logo">Art Gallery</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
+    <header class="header">
+        <div class="header__logo">Art Gallery</div>
+        <nav class="nav">
+            <a href="#home" class="nav__link">Home</a>
+            <a href="#about" class="nav__link">About</a>
             <div class="dropdown">
-                <a href="#">Services</a>
-                <div class="dropdown-content">
-                    <a href="#services">Art Consultation</a>
-                    <a href="#services">Custom Framing</a>
-                    <a href="#services">Restoration & Repair</a>
+                <a href="#" class="nav__link">Services</a>
+                <div class="dropdown__content">
+                    <a href="#services" class="dropdown__content-link">Art Consultation</a>
+                    <a href="#services" class="dropdown__content-link">Custom Framing</a>
+                    <a href="#services" class="dropdown__content-link">Restoration & Repair</a>
                 </div>
             </div>
             <div class="dropdown">
-                <a href="#">Events</a>
-                <div class="dropdown-content">
-                    <a href="#events">Upcoming Events</a>
-                    <a href="#events">Past Events</a>
+                <a href="#" class="nav__link">Events</a>
+                <div class="dropdown__content">
+                    <a href="#events" class="dropdown__content-link">Upcoming Events</a>
+                    <a href="#events" class="dropdown__content-link">Past Events</a>
                 </div>
             </div>
-            <a href="#gallery">Gallery</a>
-            <a href="#photography">Photography</a>
+            <a href="#gallery" class="nav__link">Gallery</a>
+            <a href="#photography" class="nav__link">Photography</a>
             <div class="dropdown">
-                <a href="#">Blog</a>
-                <div class="dropdown-content">
-                    <a href="#blog">Latest Posts</a>
-                    <a href="#blog">Categories</a>
+                <a href="#" class="nav__link">Blog</a>
+                <div class="dropdown__content">
+                    <a href="#blog" class="dropdown__content-link">Latest Posts</a>
+                    <a href="#blog" class="dropdown__content-link">Categories</a>
                 </div>
             </div>
             <div class="dropdown">
-                <a href="#">Our Team</a>
-                <div class="dropdown-content">
-                    <a href="#team">Meet the Team</a>
-                    <a href="#team">Join Us</a>
+                <a href="#" class="nav__link">Our Team</a>
+                <div class="dropdown__content">
+                    <a href="#team" class="dropdown__content-link">Meet the Team</a>
+                    <a href="#team" class="dropdown__content-link">Join Us</a>
                 </div>
             </div>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
+            <a href="#faq" class="nav__link">FAQ</a>
+            <a href="#contact" class="nav__link">Contact</a>
         </nav>
     </header>
 
@@ -820,8 +470,8 @@
     <main id="fullpage">
         <!-- Hero Section -->
         <section id="home" class="hero section parallax" style="background-image: url('https://via.placeholder.com/1600x600');">
-            <h2>Discover Unique Art Pieces</h2>
-            <p>Explore our curated collection and custom commissions.</p>
+            <h2 class="hero__title">Discover Unique Art Pieces</h2>
+            <p class="hero__description">Explore our curated collection and custom commissions.</p>
             <a href="#contact" class="cta-button">Get in Touch</a>
         </section>
 
@@ -829,39 +479,39 @@
         <section id="about" class="features section">
             <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
-                <h3>Custom Commissions</h3>
-                <p>Work with our artists to create personalized art pieces.</p>
+                <h3 class="feature-item__title">Custom Commissions</h3>
+                <p class="feature-item__description">Work with our artists to create personalized art pieces.</p>
             </div>
             <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
-                <h3>Art Collections</h3>
-                <p>Explore our diverse range of curated art collections.</p>
+                <h3 class="feature-item__title">Art Collections</h3>
+                <p class="feature-item__description">Explore our diverse range of curated art collections.</p>
             </div>
             <div class="feature-item" data-aos="fade-up" data-tilt>
                 <img src="https://via.placeholder.com/600x400" alt="Feature Image">
-                <h3>Art Services</h3>
-                <p>Benefit from our art consultancy and curation services.</p>
+                <h3 class="feature-item__title">Art Services</h3>
+                <p class="feature-item__description">Benefit from our art consultancy and curation services.</p>
             </div>
         </section>
 
         <!-- Services Section -->
         <section id="services" class="services section">
             <h2>Our Services</h2>
-            <div class="service-item">
+            <div class="services__item">
                 <img src="https://via.placeholder.com/100" alt="Service Image">
                 <div>
                     <h4>Art Consultation</h4>
                     <p>Get expert advice on art selection, placement, and purchasing for your home or office.</p>
                 </div>
             </div>
-            <div class="service-item">
+            <div class="services__item">
                 <img src="https://via.placeholder.com/100" alt="Service Image">
                 <div>
                     <h4>Custom Framing</h4>
                     <p>We offer custom framing services to preserve and showcase your artwork beautifully.</p>
                 </div>
             </div>
-            <div class="service-item">
+            <div class="services__item">
                 <img src="https://via.placeholder.com/100" alt="Service Image">
                 <div>
                     <h4>Restoration & Repair</h4>
@@ -870,56 +520,10 @@
             </div>
         </section>
 
-        <!-- Events Section -->
-        <section id="events" class="events section">
-            <h2>Upcoming Events</h2>
-            <div class="event-item">
-                <h4>Gallery Opening: Modern Art Exhibition</h4>
-                <p>Join us for the grand opening of our Modern Art Exhibition. Experience contemporary art like never before.</p>
-            </div>
-            <div class="event-item">
-                <h4>Artist Talk: Creative Process in Modern Art</h4>
-                <p>Meet our featured artists and learn about their creative process in this engaging talk.</p>
-            </div>
-        </section>
-
-        <!-- Blog Section -->
-        <section id="blog" class="blog section">
-            <h2>Latest Blog Posts</h2>
-            <div class="blog-item">
-                <h4>The Impact of Art on Mental Health</h4>
-                <p>Explore how art influences mental well-being and the role it plays in therapy.</p>
-            </div>
-            <div class="blog-item">
-                <h4>Art Trends to Watch in 2024</h4>
-                <p>Stay ahead of the curve with our insights into the emerging trends in the art world.</p>
-            </div>
-        </section>
-
-        <!-- Our Team Section -->
-        <section id="team" class="team section">
-            <h2>Meet the Team</h2>
-            <div class="team-member">
-                <img src="https://via.placeholder.com/100" alt="Team Member Image">
-                <h4>Jane Doe</h4>
-                <p>Gallery Director</p>
-            </div>
-            <div class="team-member">
-                <img src="https://via.placeholder.com/100" alt="Team Member Image">
-                <h4>John Smith</h4>
-                <p>Lead Curator</p>
-            </div>
-            <div class="team-member">
-                <img src="https://via.placeholder.com/100" alt="Team Member Image">
-                <h4>Emily White</h4>
-                <p>Art Consultant</p>
-            </div>
-        </section>
-
         <!-- Testimonial Carousel Section -->
         <section class="testimonial section">
             <h2>What Our Clients Say</h2>
-            <div class="testimonial-carousel" data-aos="fade-up">
+            <div class="testimonial__carousel" data-aos="fade-up">
                 <div>
                     <blockquote>
                         "The art piece exceeded our expectations! The service was outstanding."
@@ -975,26 +579,6 @@
             </div>
         </section>
 
-        <!-- Newsletter Signup Section -->
-        <section class="newsletter section" data-aos="fade-up">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest updates and exclusive offers delivered to your inbox.</p>
-            <form action="#" method="post">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit" class="cta-button">Subscribe</button>
-            </form>
-        </section>
-
-        <!-- Audio Player Section -->
-        <section class="audio-player section" data-aos="fade-up">
-            <h2>Enjoy Our Featured Audio Track</h2>
-            <audio controls>
-                <source src="your-audio-file.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-            <button>Download Track</button>
-        </section>
-
         <!-- Contact Section -->
         <section id="contact" class="contact section" data-aos="fade-up">
             <h2>Contact Us</h2>
@@ -1017,9 +601,9 @@
     </main>
 
     <!-- Footer Section -->
-    <footer>
+    <footer class="footer">
         <p>&copy; 2024 Art Gallery. All rights reserved.</p>
-        <div class="footer-social">
+        <div class="footer__social">
             <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
             <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1052,11 +636,11 @@
         $(document).ready(function() {
             // Dark Mode Toggle
             $('#dark-mode-toggle').click(function() {
-                $('body, header, .hero, .feature-item, .testimonial-carousel, .photo-gallery, footer').toggleClass('dark-mode');
+                $('body, .header, .hero, .feature-item, .testimonial__carousel, .photo-gallery, .footer').toggleClass('dark-mode');
             });
 
             // Initialize Slick Carousel
-            $('.testimonial-carousel').slick({
+            $('.testimonial__carousel').slick({
                 infinite: true,
                 slidesToShow: 1,
                 slidesToScroll: 1,
@@ -1166,9 +750,9 @@
             // Sticky Header on Scroll
             $(window).scroll(function() {
                 if ($(this).scrollTop() > 50) {
-                    $('header').addClass('sticky');
+                    $('.header').addClass('header--sticky');
                 } else {
-                    $('header').removeClass('sticky');
+                    $('.header').removeClass('header--sticky');
                 }
             });
 
