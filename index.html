@@ -4,19 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Art Gallery - Discover unique art pieces, custom commissions, and immersive art experiences.">
+    <meta name="description" content="Creative Art Gallery - Discover unique art pieces, custom commissions, and immersive art experiences.">
     <meta name="keywords" content="Art Gallery, Custom Art, Art Commissions, Art Experiences, Interactive Art">
     <title>Creative Art Gallery | Immersive Art Experiences</title>
     <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- AOS for Animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Custom Dark Mode Stylesheet -->
+    <link rel="stylesheet" href="styles/dark-mode.css">
 
     <!-- Custom CSS -->
     <style>
@@ -28,6 +31,8 @@
             --border-radius: 10px;
             --transition-speed: 0.4s;
             --max-width: 1200px;
+            --dark-bg-color: #2C2C2C;
+            --dark-text-color: #E0E0E0;
         }
 
         * {
@@ -41,6 +46,7 @@
             color: var(--text-color);
             background-color: var(--background-color);
             overflow-x: hidden;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
 
         img {
@@ -53,11 +59,13 @@
             font-family: 'Poppins', sans-serif;
             color: var(--text-color);
             margin-bottom: 0.5em;
+            transition: color var(--transition-speed);
         }
 
         a {
             text-decoration: none;
             color: inherit;
+            transition: color var(--transition-speed);
         }
 
         /* Header Section */
@@ -70,6 +78,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color var(--transition-speed);
         }
 
         .header__logo {
@@ -108,6 +117,25 @@
             width: 100%;
         }
 
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 0.5em 1em;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            z-index: 1100;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -120,6 +148,7 @@
             color: #fff;
             position: relative;
             padding: 2em;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
 
         .hero::before {
@@ -177,6 +206,7 @@
             color: var(--primary-color);
             position: relative;
             display: inline-block;
+            transition: color var(--transition-speed);
         }
 
         section h2::after {
@@ -293,6 +323,7 @@
             font-style: italic;
             margin-top: 1em;
             color: var(--text-color);
+            transition: color var(--transition-speed);
         }
 
         /* Gallery Section */
@@ -493,10 +524,68 @@
                 transform: translateY(0);
             }
         }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: var(--dark-bg-color);
+            color: var(--dark-text-color);
+        }
+
+        .dark-mode header,
+        .dark-mode .services,
+        .dark-mode .contact,
+        .dark-mode footer {
+            background-color: var(--dark-bg-color);
+            color: var(--dark-text-color);
+        }
+
+        .dark-mode nav a {
+            color: var(--dark-text-color);
+        }
+
+        .dark-mode .dark-mode-toggle {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .dark-mode .feature-item,
+        .dark-mode .faq-item,
+        .dark-mode .testimonial__carousel .slick-slide {
+            background-color: #444;
+            color: var(--dark-text-color);
+        }
+
+        .dark-mode .gallery-item .overlay {
+            background-color: rgba(255, 64, 129, 0.7);
+        }
+
+        .dark-mode .contact-form input,
+        .dark-mode .contact-form textarea {
+            background-color: #333;
+            color: var(--dark-text-color);
+            border: 1px solid #555;
+        }
+
+        .dark-mode .contact-form input:focus,
+        .dark-mode .contact-form textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        .dark-mode .contact-form button {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .dark-mode .footer__social a {
+            color: var(--dark-text-color);
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">Dark Mode</div>
 
     <!-- Header -->
     <header>
@@ -710,6 +799,13 @@
             $('.faq-item').click(function() {
                 $(this).toggleClass('open');
                 $(this).find('.faq-answer').slideToggle();
+            });
+
+            // Dark Mode Toggle
+            const darkModeToggle = document.querySelector('.dark-mode-toggle');
+            darkModeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
             });
         });
     </script>
