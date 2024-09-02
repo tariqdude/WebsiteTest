@@ -19,9 +19,6 @@
     <!-- AOS for Animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json">
-
     <!-- Custom CSS -->
     <style>
         :root {
@@ -479,6 +476,35 @@
             color: var(--accent-color);
         }
 
+        /* Enhanced Tooltip Styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position the tooltip above the text */
+            left: 50%;
+            margin-left: -70px;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
         /* Footer Section */
         footer {
             padding: 2em 0;
@@ -870,4 +896,3 @@
 </body>
 
 </html>
-
