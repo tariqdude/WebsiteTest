@@ -16,617 +16,11 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
     <!-- AOS for Animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            --primary-color: #3F51B5;
-            --accent-color: #FF4081;
-            --background-color: #F5F5F5;
-            --text-color: #333;
-            --border-radius: 10px;
-            --transition-speed: 0.4s;
-            --max-width: 1200px;
-            --dark-bg-color: #2C2C2C;
-            --dark-text-color: #E0E0E0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            overflow-x: hidden;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: var(--border-radius);
-            transition: transform var(--transition-speed);
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-color);
-            margin-bottom: 0.5em;
-            transition: color var(--transition-speed);
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color var(--transition-speed);
-        }
-
-        /* Header Section */
-        header {
-            background-color: var(--primary-color);
-            padding: 1.5em 0;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: background-color var(--transition-speed);
-        }
-
-        .header__logo {
-            font-size: 2em;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        nav {
-            margin-top: 1em;
-        }
-
-        nav a {
-            margin: 0 1.5em;
-            color: #fff;
-            font-weight: 600;
-            text-transform: uppercase;
-            padding-bottom: 5px;
-            position: relative;
-        }
-
-        nav a:after {
-            content: '';
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            transition: width var(--transition-speed);
-        }
-
-        nav a:hover:after {
-            width: 100%;
-        }
-
-        /* Dark Mode Toggle */
-        .dark-mode-toggle {
-            position: fixed;
-            top: 1em;
-            right: 1em;
-            background: var(--accent-color);
-            color: #fff;
-            padding: 0.5em 1em;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            z-index: 1100;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-        }
-
-        .dark-mode-toggle:hover {
-            background-color: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            position: relative;
-            padding: 2em;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(63, 81, 181, 0.5);
-            z-index: 0;
-        }
-
-        .hero h1 {
-            font-size: 4em;
-            z-index: 1;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: fadeIn 1.2s ease-in-out forwards;
-        }
-
-        .hero p {
-            font-size: 1.5em;
-            margin-top: 1em;
-            z-index: 1;
-            animation: fadeInUp 1.5s ease-in-out forwards;
-        }
-
-        .hero .cta-button {
-            margin-top: 2em;
-            padding: 1em 3em;
-            background-color: var(--accent-color);
-            color: #fff;
-            border-radius: var(--border-radius);
-            font-size: 1.2em;
-            font-weight: 600;
-            z-index: 1;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 1.8s ease-in-out forwards;
-        }
-
-        .hero .cta-button:hover {
-            background-color: #fff;
-            color: var(--accent-color);
-            transform: scale(1.1);
-        }
-
-        /* Section Styling */
-        section {
-            padding: 4em 2em;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity var(--transition-speed), transform var(--transition-speed);
-        }
-
-        section h2 {
-            font-size: 2.5em;
-            margin-bottom: 1.5em;
-            text-align: center;
-            color: var(--primary-color);
-            position: relative;
-            display: inline-block;
-            transition: color var(--transition-speed);
-            animation: fadeInUp 1s ease-in-out forwards;
-        }
-
-        section h2::after {
-            content: '';
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-color);
-            display: block;
-            margin: 1em auto;
-        }
-
-        /* Features Section */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2em;
-            text-align: center;
-            animation: fadeInUp 1.5s ease-in-out forwards;
-        }
-
-        .feature-item {
-            background-color: #fff;
-            border-radius: var(--border-radius);
-            padding: 2em;
-            box-shadow: var(--shadow-md);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-item img {
-            margin-bottom: 1.5em;
-            border-radius: 50%;
-            transition: transform var(--transition-speed);
-        }
-
-        .feature-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .feature-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Services Section */
-        .services {
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 4em 2em;
-            border-radius: var(--border-radius);
-            animation: fadeInUp 1.8s ease-in-out forwards;
-        }
-
-        .services__list {
-            display: flex;
-            flex-direction: column;
-            gap: 2em;
-        }
-
-        .service-item {
-            display: flex;
-            align-items: center;
-            gap: 1.5em;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 2em;
-            border-radius: var(--border-radius);
-            transition: background-color var(--transition-speed);
-        }
-
-        .service-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .service-item h4 {
-            font-size: 1.8em;
-            margin-bottom: 0.5em;
-        }
-
-        .service-item p {
-            font-size: 1.2em;
-            margin: 0;
-        }
-
-        .service-item:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Testimonial Section */
-        .testimonial {
-            padding: 4em 2em;
-            background: linear-gradient(135deg, #ffffff 25%, #f0f0f0 100%);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            animation: fadeInUp 2s ease-in-out forwards;
-        }
-
-        .testimonial__carousel {
-            max-width: 80%;
-            margin: 0 auto;
-        }
-
-        .testimonial__carousel .slick-slide {
-            padding: 2em;
-            color: #333;
-            border-radius: var(--border-radius);
-            background-color: #fff;
-            box-shadow: var(--shadow-sm);
-        }
-
-        blockquote {
-            font-size: 1.5em;
-            font-style: italic;
-            line-height: 1.6;
-        }
-
-        footer {
-            text-align: right;
-            font-style: italic;
-            margin-top: 1em;
-            color: var(--text-color);
-            transition: color var(--transition-speed);
-        }
-
-        /* Gallery Section */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5em;
-            margin-top: 2em;
-            animation: fadeInUp 2.2s ease-in-out forwards;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--border-radius);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .gallery-item img {
-            transition: transform var(--transition-speed);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(63, 81, 181, 0.7);
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8em;
-            opacity: 0;
-            transition: opacity var(--transition-speed);
-        }
-
-        .gallery-item:hover .overlay {
-            opacity: 1;
-        }
-
-        /* FAQ Section */
-        .faq {
-            background-color: #fff;
-            padding: 4em 2em;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            animation: fadeInUp 2.5s ease-in-out forwards;
-        }
-
-        .faq-item {
-            background-color: #f5f5f5;
-            border-radius: var(--border-radius);
-            padding: 1.5em;
-            margin-bottom: 1em;
-            cursor: pointer;
-            transition: background-color var(--transition-speed);
-        }
-
-        .faq-item:hover {
-            background-color: #e0e0e0;
-        }
-
-        .faq-answer {
-            display: none;
-            padding-top: 1em;
-        }
-
-        .faq-item.open .faq-answer {
-            display: block;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 4em 2em;
-            background-color: var(--primary-color);
-            color: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            text-align: center;
-            animation: fadeInUp 2.8s ease-in-out forwards;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-form label {
-            display: block;
-            margin-bottom: 0.5em;
-            font-weight: 600;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 1em;
-            border-radius: var(--border-radius);
-            border: 1px solid #ddd;
-            margin-bottom: 1em;
-            transition: border-color var(--transition-speed);
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: var(--accent-color);
-            outline: none;
-        }
-
-        .contact-form button {
-            padding: 1em 2em;
-            background-color: var(--accent-color);
-            border-radius: var(--border-radius);
-            color: #fff;
-            font-size: 1.2em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color var(--transition-speed);
-            box-shadow: var(--shadow-md);
-        }
-
-        .contact-form button:hover {
-            background-color: #fff;
-            color: var(--accent-color);
-        }
-
-        /* Enhanced Tooltip Styles */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 140px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 5px;
-            border-radius: 6px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%; /* Position the tooltip above the text */
-            left: 50%;
-            margin-left: -70px;
-            opacity: 0;
-            transition: opacity var(--transition-speed);
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* Footer Section */
-        footer {
-            padding: 2em 0;
-            background: #333;
-            color: #fff;
-            text-align: center;
-            animation: fadeInUp 3s ease-in-out forwards;
-        }
-
-        .footer__social {
-            margin-top: 1em;
-            display: flex;
-            justify-content: center;
-        }
-
-        .footer__social a {
-            color: #fff;
-            margin: 0 0.5em;
-            font-size: 1.5em;
-            transition: color var(--transition-speed);
-        }
-
-        .footer__social a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Back-to-Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 1em;
-            right: 1em;
-            background: var(--primary-color);
-            color: #fff;
-            padding: 0.5em 1em;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            display: none;
-            z-index: 1000;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-        }
-
-        .back-to-top:hover {
-            background-color: var(--accent-color);
-            transform: scale(1.1);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Dark Mode */
-        .dark-mode {
-            background-color: var(--dark-bg-color);
-            color: var(--dark-text-color);
-        }
-
-        .dark-mode header,
-        .dark-mode .services,
-        .dark-mode .contact,
-        .dark-mode footer {
-            background-color: var(--dark-bg-color);
-            color: var(--dark-text-color);
-        }
-
-        .dark-mode nav a {
-            color: var(--dark-text-color);
-        }
-
-        .dark-mode .dark-mode-toggle {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .dark-mode .feature-item,
-        .dark-mode .faq-item,
-        .dark-mode .testimonial__carousel .slick-slide {
-            background-color: #444;
-            color: var(--dark-text-color);
-        }
-
-        .dark-mode .gallery-item .overlay {
-            background-color: rgba(255, 64, 129, 0.7);
-        }
-
-        .dark-mode .contact-form input,
-        .dark-mode .contact-form textarea {
-            background-color: #333;
-            color: var(--dark-text-color);
-            border: 1px solid #555;
-        }
-
-        .dark-mode .contact-form input:focus,
-        .dark-mode .contact-form textarea:focus {
-            border-color: var(--accent-color);
-        }
-
-        .dark-mode .contact-form button {
-            background-color: var(--accent-color);
-            color: #fff;
-        }
-
-        .dark-mode .footer__social a {
-            color: var(--dark-text-color);
-        }
-    </style>
 </head>
 
 <body>
@@ -658,17 +52,17 @@
     <section id="about" class="features container">
         <h2>Our Features</h2>
         <div class="feature-item">
-            <img src="https://via.placeholder.com/300" alt="Custom Commissions">
+            <img src="images/commissions.jpg" alt="Custom Commissions">
             <h3>Custom Commissions</h3>
             <p>Create personalized art pieces with our talented artists.</p>
         </div>
         <div class="feature-item">
-            <img src="https://via.placeholder.com/300" alt="Art Collections">
+            <img src="images/collections.jpg" alt="Art Collections">
             <h3>Art Collections</h3>
             <p>Dive into our diverse range of curated art collections.</p>
         </div>
         <div class="feature-item">
-            <img src="https://via.placeholder.com/300" alt="Art Services">
+            <img src="images/services.jpg" alt="Art Services">
             <h3>Art Services</h3>
             <p>Experience our comprehensive art consultancy and curation services.</p>
         </div>
@@ -679,21 +73,21 @@
         <h2>Our Services</h2>
         <div class="services__list container">
             <div class="service-item">
-                <img src="https://via.placeholder.com/80" alt="Consultation">
+                <img src="images/consultation.jpg" alt="Consultation">
                 <div>
                     <h4>Art Consultation</h4>
                     <p>Receive expert advice on selecting and placing art in your space.</p>
                 </div>
             </div>
             <div class="service-item">
-                <img src="https://via.placeholder.com/80" alt="Framing">
+                <img src="images/framing.jpg" alt="Framing">
                 <div>
                     <h4>Custom Framing</h4>
                     <p>Preserve and showcase your artwork with our custom framing services.</p>
                 </div>
             </div>
             <div class="service-item">
-                <img src="https://via.placeholder.com/80" alt="Restoration">
+                <img src="images/restoration.jpg" alt="Restoration">
                 <div>
                     <h4>Restoration & Repair</h4>
                     <p>Restore and repair damaged artwork to its original glory.</p>
@@ -725,19 +119,19 @@
     <section id="gallery" class="gallery container">
         <h2>Photography</h2>
         <div class="gallery-item">
-            <img src="https://via.placeholder.com/600x400" alt="Gallery Image">
+            <img src="images/gallery1.jpg" alt="Gallery Image">
             <div class="overlay">View Photo</div>
         </div>
         <div class="gallery-item">
-            <img src="https://via.placeholder.com/600x400" alt="Gallery Image">
+            <img src="images/gallery2.jpg" alt="Gallery Image">
             <div class="overlay">View Photo</div>
         </div>
         <div class="gallery-item">
-            <img src="https://via.placeholder.com/600x400" alt="Gallery Image">
+            <img src="images/gallery3.jpg" alt="Gallery Image">
             <div class="overlay">View Photo</div>
         </div>
         <div class="gallery-item">
-            <img src="https://via.placeholder.com/600x400" alt="Gallery Image">
+            <img src="images/gallery4.jpg" alt="Gallery Image">
             <div class="overlay">View Photo</div>
         </div>
     </section>
@@ -764,7 +158,7 @@
         <h2>Contact Us</h2>
         <p>We'd love to hear from you! Get in touch with us to learn more about our offerings.</p>
         <div class="contact-form">
-            <form id="contact-form" action="#" method="post">
+            <form id="contact-form" action="send.php" method="post">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" required>
 
@@ -800,99 +194,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Initialize AOS
-            AOS.init({
-                duration: 1000,
-                easing: 'ease-in-out',
-                once: true,
-            });
-
-            // Initialize Slick Carousel
-            $('.testimonial__carousel').slick({
-                infinite: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                dots: true,
-                autoplay: true,
-                autoplaySpeed: 4000,
-            });
-
-            // Initialize Lightbox
-            lightbox.option({
-                'resizeDuration': 200,
-                'wrapAround': true
-            });
-
-            // Back-to-Top Button
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 200) {
-                    $('.back-to-top').fadeIn();
-                } else {
-                    $('.back-to-top').fadeOut();
-                }
-            });
-
-            $('.back-to-top').click(function() {
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 600);
-                return false;
-            });
-
-            // FAQ Toggle
-            $('.faq-item').click(function() {
-                $(this).toggleClass('open');
-                $(this).find('.faq-answer').slideToggle();
-            });
-
-            // Dark Mode Toggle
-            const darkModeToggle = document.querySelector('.dark-mode-toggle');
-            darkModeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
-            });
-        });
-
-        // Lazy Load Images
-        document.addEventListener("DOMContentLoaded", function() {
-            const lazyImages = document.querySelectorAll("img");
-            const options = {
-                rootMargin: "0px",
-                threshold: 0.1
-            };
-
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.remove("lazy");
-                        observer.unobserve(img);
-                    }
-                });
-            }, options);
-
-            lazyImages.forEach(image => {
-                imageObserver.observe(image);
-            });
-        });
-
-        // PWA Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker registered with scope:', registration.scope);
-                    })
-                    .catch(error => {
-                        console.error('Service Worker registration failed:', error);
-                    });
-            });
-        }
-    </script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
