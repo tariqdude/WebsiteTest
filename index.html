@@ -19,33 +19,32 @@
     <meta name="twitter:site" content="@yourhandle">
     <title>Art Gallery | Discover Stunning Artworks & Photography</title>
     <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
-    
-    <!-- Custom Fonts with Fallbacks -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Fonts and Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    
     <style>
+        /* Root Variables */
         :root {
-            --primary-color: #007BFF;
-            --accent-color: #FFC107;
-            --background-color: #f8f9fa;
+            --primary-color: #4A90E2;
+            --accent-color: #F5A623;
+            --background-color: #FAFAFA;
             --text-color: #333;
-            --border-radius: 8px;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Inter', sans-serif;
+            --border-radius: 6px;
             --transition-speed: 0.3s;
             --max-width: 1200px;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-            --animation-speed: 0.5s;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Reset and Base Styles */
+        /* Reset */
         * {
             margin: 0;
             padding: 0;
@@ -53,9 +52,9 @@
         }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
-            background-color: var(--background-color);
+            font-family: var(--body-font);
             color: var(--text-color);
+            background-color: var(--background-color);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -63,6 +62,7 @@
         img {
             max-width: 100%;
             height: auto;
+            border-radius: var(--border-radius);
         }
 
         a {
@@ -71,241 +71,252 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: var(--heading-font);
             color: var(--text-color);
             margin-bottom: 0.5em;
-            font-weight: 600;
+            font-weight: 700;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1em;
         }
 
         /* Header Styles */
         header {
             background: var(--primary-color);
             color: #fff;
-            padding: 1em;
-            text-align: center;
+            padding: 1em 0;
+            box-shadow: var(--shadow-md);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow-md);
+            transition: background-color var(--transition-speed);
         }
 
         .header__logo {
-            font-size: 2em;
-            font-weight: bold;
+            font-size: 1.8em;
+            font-weight: 600;
+            text-align: center;
         }
 
         nav {
-            display: flex;
-            justify-content: center;
             margin-top: 0.5em;
+            text-align: center;
         }
 
         nav a {
             margin: 0 1em;
             color: #fff;
-            font-weight: bold;
-            transition: color var(--transition-speed);
+            font-weight: 600;
+            padding-bottom: 0.5em;
+            border-bottom: 2px solid transparent;
+            transition: color var(--transition-speed), border-color var(--transition-speed);
         }
 
         nav a:hover {
             color: var(--accent-color);
-        }
-
-        /* Main Styles */
-        main {
-            padding: 6em 2em 2em;
-            max-width: var(--max-width);
-            margin: 0 auto;
+            border-color: var(--accent-color);
         }
 
         /* Hero Section */
         .hero {
-            text-align: center;
-            padding: 5em 0;
             background: url('https://via.placeholder.com/1600x600') no-repeat center center/cover;
             color: #fff;
-            position: relative;
-            overflow: hidden;
+            padding: 10em 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
-        .hero__title {
+        .hero h1 {
             font-size: 3em;
             margin-bottom: 0.5em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .hero__description {
+        .hero p {
             font-size: 1.2em;
+            margin-bottom: 1.5em;
         }
 
-        .cta-button {
-            display: inline-block;
+        .hero .cta-button {
             padding: 1em 2em;
             background-color: var(--accent-color);
             color: #fff;
             border-radius: var(--border-radius);
             font-size: 1.2em;
-            transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
-            animation: bounceIn var(--animation-speed) ease-in-out;
-            margin-top: 1.5em;
+            font-weight: 600;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            box-shadow: var(--shadow-md);
         }
 
-        .cta-button:hover {
+        .hero .cta-button:hover {
             background-color: var(--primary-color);
             transform: scale(1.05);
-            box-shadow: var(--shadow-md);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4em 0;
+        }
+
+        section h2 {
+            font-size: 2.2em;
+            margin-bottom: 1em;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            color: var(--primary-color);
+        }
+
+        section h2:after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            display: block;
+            margin: 0.5em auto 0;
         }
 
         /* Features Section */
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2em;
-            padding: 2em 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
         }
 
         .feature-item {
+            flex: 1;
+            min-width: 280px;
+            margin: 1em;
+            padding: 2em;
             background: #fff;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 1.5em;
+            box-shadow: var(--shadow-sm);
             transition: box-shadow var(--transition-speed), transform var(--transition-speed);
-            position: relative;
-            overflow: hidden;
             text-align: center;
         }
 
-        .feature-item img {
-            width: 100%;
-            border-radius: var(--border-radius);
-            margin-bottom: 1em;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
         .feature-item:hover {
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
             transform: translateY(-5px);
         }
 
-        .feature-item__title {
-            margin-bottom: 0.5em;
-            font-size: 1.4em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--primary-color);
-        }
-
-        .feature-item__description {
-            font-size: 1em;
-            line-height: 1.6;
-            color: var(--text-color);
+        .feature-item img {
+            margin-bottom: 1em;
         }
 
         /* Services Section */
         .services {
-            padding: 4em 0;
-            background-color: #f7f7f7;
+            background-color: #fff;
             border-radius: var(--border-radius);
-            margin-top: 3em;
+            box-shadow: var(--shadow-sm);
         }
 
-        .services__item {
+        .services__list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .service-item {
+            flex: 1;
+            min-width: 250px;
+            margin: 1em;
+            padding: 1.5em;
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
             display: flex;
             align-items: center;
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 1.5em;
-            margin-bottom: 2em;
-            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
         }
 
-        .services__item img {
-            width: 100px;
-            height: 100px;
-            margin-right: 1.5em;
-            border-radius: var(--border-radius);
+        .service-item img {
+            width: 60px;
+            margin-right: 1em;
         }
 
-        .services__item h4 {
-            font-size: 1.5em;
+        .service-item h4 {
+            font-size: 1.4em;
             color: var(--primary-color);
         }
 
-        .services__item:hover {
-            box-shadow: var(--shadow-lg);
+        .service-item:hover {
+            box-shadow: var(--shadow-md);
             transform: translateY(-5px);
         }
 
         /* Testimonial Section */
         .testimonial {
-            padding: 4em 0;
-            background: linear-gradient(135deg, #ffffff 25%, #f0f0f0 100%);
-            margin-top: 3em;
+            background: #f9f9f9;
             border-radius: var(--border-radius);
+            padding: 4em 2em;
+            box-shadow: var(--shadow-sm);
         }
 
         .testimonial__carousel {
-            width: 80%;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2em;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            background: #fff;
-            transition: box-shadow var(--transition-speed);
         }
 
-        .testimonial__carousel:hover {
-            box-shadow: var(--shadow-md);
+        .testimonial__carousel .slick-slide {
+            text-align: center;
+            padding: 1em;
+            color: #333;
         }
 
         blockquote {
             font-size: 1.2em;
-            padding: 1em;
-            position: relative;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 1em;
         }
 
         blockquote:before {
-            content: "“";
+            content: '“';
             font-size: 4em;
-            position: absolute;
-            left: -0.5em;
-            top: -0.5em;
-            color: var(--primary-color);
+            color: var(--accent-color);
+            position: relative;
+            top: 10px;
+            left: -10px;
         }
 
-        blockquote footer {
+        footer {
             text-align: right;
+            color: var(--text-color);
             font-style: italic;
             margin-top: 1em;
-            color: var(--text-color);
         }
 
-        /* Photography Gallery Section */
-        .photo-gallery {
-            padding: 4em 0;
-            background: #fff;
-            border-radius: var(--border-radius);
-            margin-top: 3em;
-        }
-
+        /* Gallery Section */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2em;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1em;
+            margin-top: 2em;
         }
 
         .gallery-item {
             position: relative;
             overflow: hidden;
             border-radius: var(--border-radius);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-speed), transform var(--transition-speed);
+        }
+
+        .gallery-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
         }
 
         .gallery-item img {
-            display: block;
-            width: 100%;
-            height: auto;
             transition: transform var(--transition-speed);
         }
 
@@ -313,7 +324,7 @@
             transform: scale(1.05);
         }
 
-        .overlay {
+        .gallery-item .overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -335,18 +346,16 @@
 
         /* FAQ Section */
         .faq {
-            margin: 4em 0;
-            padding: 4em 0;
-            background: #f9f9f9;
+            background-color: #fff;
             border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
         }
 
         .faq-item {
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
             padding: 1.5em;
             margin-bottom: 1em;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
             cursor: pointer;
             transition: background-color var(--transition-speed);
         }
@@ -366,16 +375,22 @@
 
         /* Contact Section */
         .contact {
-            background: var(--primary-color);
-            color: #fff;
             padding: 4em 2em;
-            text-align: center;
+            background-color: var(--primary-color);
+            color: #fff;
             border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
         }
 
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: 600;
         }
 
         .contact-form input,
@@ -390,7 +405,8 @@
 
         .contact-form input:focus,
         .contact-form textarea:focus {
-            border-color: var(--primary-color);
+            border-color: var(--accent-color);
+            outline: none;
         }
 
         .contact-form button {
@@ -399,8 +415,10 @@
             border-radius: var(--border-radius);
             color: #fff;
             font-size: 1.2em;
+            font-weight: 600;
             cursor: pointer;
             transition: background-color var(--transition-speed);
+            box-shadow: var(--shadow-md);
         }
 
         .contact-form button:hover {
@@ -409,13 +427,10 @@
 
         /* Footer Section */
         footer {
+            padding: 2em 0;
             background: #333;
             color: #fff;
-            padding: 2em;
             text-align: center;
-            border-radius: var(--border-radius);
-            margin-top: 3em;
-            position: relative;
         }
 
         .footer__social {
@@ -447,388 +462,193 @@
             cursor: pointer;
             display: none;
             z-index: 1000;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
         }
 
         .back-to-top:hover {
             background-color: var(--accent-color);
-        }
-
-        /* Offline Warning */
-        .offline-warning {
-            display: none;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #ff9800;
-            color: #fff;
-            text-align: center;
-            padding: 1em;
-            z-index: 10000;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        .offline-warning.show {
-            display: block;
-        }
-
-        /* Accessibility Enhancements */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: #000;
-            color: #fff;
-            padding: 8px;
-            z-index: 100;
-            transition: top 0.3s;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Dark Mode Enhancements */
-        .dark-mode {
-            background-color: #1E1E1E;
-            color: #E0E0E0;
-        }
-
-        .dark-mode .header,
-        .dark-mode footer,
-        .dark-mode .contact,
-        .dark-mode .testimonial,
-        .dark-mode .services,
-        .dark-mode .faq {
-            background-color: #2B2B2B;
-        }
-
-        .dark-mode .header__logo,
-        .dark-mode .footer__social a,
-        .dark-mode .testimonial__carousel,
-        .dark-mode .contact-form input,
-        .dark-mode .contact-form textarea,
-        .dark-mode .faq-item,
-        .dark-mode .cta-button {
-            color: #E0E0E0;
-        }
-
-        .dark-mode .contact-form button,
-        .dark-mode .back-to-top,
-        .dark-mode .cta-button {
-            background-color: #FFC107;
-            color: #1E1E1E;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounceIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @media (min-width: 1200px) {
-            body {
-                font-size: 18px;
-            }
-
-            .cta-button {
-                padding: 1.5em 2.5em;
-            }
-
-            .hero__title {
-                font-size: 3.5em;
-            }
-
-            .testimonial__carousel {
-                width: 80%;
-            }
-
-            .features {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-
-            .footer__social {
-                margin-top: 2em;
-            }
+            transform: scale(1.1);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Skip to Content Link for Accessibility -->
-    <a href="#content" class="skip-link">Skip to Content</a>
-
-    <!-- Dark Mode Toggle -->
-    <div class="dark-mode-toggle" id="dark-mode-toggle">Dark Mode</div>
-
-    <!-- Offline Warning -->
-    <div class="offline-warning" id="offline-warning">You are currently offline. Some features may not be available.</div>
-
-    <!-- Header Section -->
-    <header class="header">
-        <div class="header__logo">Art Gallery</div>
-        <nav class="nav">
-            <a href="#home" class="nav__link">Home</a>
-            <a href="#about" class="nav__link">About</a>
-            <a href="#services" class="nav__link">Services</a>
-            <a href="#gallery" class="nav__link">Gallery</a>
-            <a href="#photography" class="nav__link">Photography</a>
-            <a href="#faq" class="nav__link">FAQ</a>
-            <a href="#contact" class="nav__link">Contact</a>
-        </nav>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header__logo">Art Gallery</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <!-- Main Content Section -->
-    <main id="fullpage">
-        <!-- Hero Section -->
-        <section id="home" class="hero section parallax" style="background-image: url('https://via.placeholder.com/1600x600');">
-            <h2 class="hero__title">Discover Unique Art Pieces</h2>
-            <p class="hero__description">Explore our curated collection and custom commissions.</p>
-            <a href="#contact" class="cta-button">Get in Touch</a>
-        </section>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Discover Unique Art Pieces</h1>
+        <p>Explore our curated collection and custom commissions.</p>
+        <a href="#contact" class="cta-button">Get in Touch</a>
+    </section>
 
-        <!-- Features Section -->
-        <section id="about" class="features section">
-            <div class="feature-item" data-aos="fade-up" data-tilt>
-                <img src="https://via.placeholder.com/600x400" alt="Feature Image">
-                <h3 class="feature-item__title">Custom Commissions</h3>
-                <p class="feature-item__description">Work with our artists to create personalized art pieces.</p>
-            </div>
-            <div class="feature-item" data-aos="fade-up" data-tilt>
-                <img src="https://via.placeholder.com/600x400" alt="Feature Image">
-                <h3 class="feature-item__title">Art Collections</h3>
-                <p class="feature-item__description">Explore our diverse range of curated art collections.</p>
-            </div>
-            <div class="feature-item" data-aos="fade-up" data-tilt>
-                <img src="https://via.placeholder.com/600x400" alt="Feature Image">
-                <h3 class="feature-item__title">Art Services</h3>
-                <p class="feature-item__description">Benefit from our art consultancy and curation services.</p>
-            </div>
-        </section>
+    <!-- Features Section -->
+    <section id="about" class="features container">
+        <h2>Our Features</h2>
+        <div class="feature-item">
+            <img src="https://via.placeholder.com/600x400" alt="Custom Commissions">
+            <h3>Custom Commissions</h3>
+            <p>Work with our artists to create personalized art pieces.</p>
+        </div>
+        <div class="feature-item">
+            <img src="https://via.placeholder.com/600x400" alt="Art Collections">
+            <h3>Art Collections</h3>
+            <p>Explore our diverse range of curated art collections.</p>
+        </div>
+        <div class="feature-item">
+            <img src="https://via.placeholder.com/600x400" alt="Art Services">
+            <h3>Art Services</h3>
+            <p>Benefit from our art consultancy and curation services.</p>
+        </div>
+    </section>
 
-        <!-- Services Section -->
-        <section id="services" class="services section">
-            <h2>Our Services</h2>
-            <div class="services__item">
-                <img src="https://via.placeholder.com/100" alt="Service Image">
+    <!-- Services Section -->
+    <section id="services" class="services container">
+        <h2>Our Services</h2>
+        <div class="services__list">
+            <div class="service-item">
+                <img src="https://via.placeholder.com/60" alt="Consultation">
                 <div>
                     <h4>Art Consultation</h4>
                     <p>Get expert advice on art selection, placement, and purchasing for your home or office.</p>
                 </div>
             </div>
-            <div class="services__item">
-                <img src="https://via.placeholder.com/100" alt="Service Image">
+            <div class="service-item">
+                <img src="https://via.placeholder.com/60" alt="Framing">
                 <div>
                     <h4>Custom Framing</h4>
                     <p>We offer custom framing services to preserve and showcase your artwork beautifully.</p>
                 </div>
             </div>
-            <div class="services__item">
-                <img src="https://via.placeholder.com/100" alt="Service Image">
+            <div class="service-item">
+                <img src="https://via.placeholder.com/60" alt="Restoration">
                 <div>
                     <h4>Restoration & Repair</h4>
                     <p>Our experts can restore and repair damaged or aged artwork to its original beauty.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Testimonial Carousel Section -->
-        <section class="testimonial section">
-            <h2>What Our Clients Say</h2>
-            <div class="testimonial__carousel" data-aos="fade-up">
-                <div>
-                    <blockquote>
-                        "The art piece exceeded our expectations! The service was outstanding."
-                        <footer>- Satisfied Client</footer>
-                    </blockquote>
-                </div>
-                <div>
-                    <blockquote>
-                        "Incredible talent and professionalism. Highly recommended!"
-                        <footer>- Happy Customer</footer>
-                    </blockquote>
-                </div>
+    <!-- Testimonial Section -->
+    <section class="testimonial">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial__carousel">
+            <div>
+                <blockquote>
+                    "The art piece exceeded our expectations! The service was outstanding."
+                    <footer>- Satisfied Client</footer>
+                </blockquote>
             </div>
-        </section>
+            <div>
+                <blockquote>
+                    "Incredible talent and professionalism. Highly recommended!"
+                    <footer>- Happy Customer</footer>
+                </blockquote>
+            </div>
+        </div>
+    </section>
 
-        <!-- Photography Gallery Section -->
-        <section id="photography" class="photo-gallery section">
-            <h2>Photography</h2>
-            <div class="gallery" data-aos="fade-up">
-                <a href="https://via.placeholder.com/1200x800" class="gallery-item glightbox" data-gallery="photography">
-                    <img src="https://via.placeholder.com/600x400" alt="Photography Image">
-                    <div class="overlay">View Photo</div>
-                </a>
-                <a href="https://via.placeholder.com/1200x800" class="gallery-item glightbox" data-gallery="photography">
-                    <img src="https://via.placeholder.com/600x400" alt="Photography Image">
-                    <div class="overlay">View Photo</div>
-                </a>
-                <a href="https://via.placeholder.com/1200x800" class="gallery-item glightbox" data-gallery="photography">
-                    <img src="https://via.placeholder.com/600x400" alt="Photography Image">
-                    <div class="overlay">View Photo</div>
-                </a>
-                <a href="https://via.placeholder.com/1200x800" class="gallery-item glightbox" data-gallery="photography">
-                    <img src="https://via.placeholder.com/600x400" alt="Photography Image">
-                    <div class="overlay">View Photo</div>
-                </a>
-            </div>
-        </section>
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery container">
+        <h2>Photography</h2>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/600x400" alt="Gallery Image">
+            <div class="overlay">View Photo</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/600x400" alt="Gallery Image">
+            <div class="overlay">View Photo</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/600x400" alt="Gallery Image">
+            <div class="overlay">View Photo</div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/600x400" alt="Gallery Image">
+            <div class="overlay">View Photo</div>
+        </div>
+    </section>
 
-        <!-- FAQ Section -->
-        <section id="faq" class="faq section" data-aos="fade-up">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <h3>How can I order a custom commission?</h3>
-                <div class="faq-answer">
-                    <p>To order a custom commission, please fill out the contact form with your requirements, and our team will get in touch with you.</p>
-                </div>
+    <!-- FAQ Section -->
+    <section id="faq" class="faq container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>How can I order a custom commission?</h3>
+            <div class="faq-answer">
+                <p>To order a custom commission, please fill out the contact form with your requirements, and our team will get in touch with you.</p>
             </div>
-            <div class="faq-item">
-                <h3>What is your return policy?</h3>
-                <div class="faq-answer">
-                    <p>We offer a 30-day return policy on all purchases. Please contact us for more details.</p>
-                </div>
+        </div>
+        <div class="faq-item">
+            <h3>What is your return policy?</h3>
+            <div class="faq-answer">
+                <p>We offer a 30-day return policy on all purchases. Please contact us for more details.</p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Newsletter Signup Section -->
-        <section class="newsletter section">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest updates and exclusive offers delivered to your inbox.</p>
-            <form action="#" method="post">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit" class="cta-button">Subscribe</button>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Get in touch with us to learn more about our offerings.</p>
+        <div class="contact-form">
+            <form id="contact-form" action="#" method="post">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit" class="cta-button">Send Message</button>
             </form>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact section" data-aos="fade-up">
-            <h2>Contact Us</h2>
-            <p>We'd love to hear from you! Get in touch with us to learn more about our offerings.</p>
-            <div class="contact-form">
-                <form id="contact-form" action="#" method="post">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" rows="4" required></textarea>
-
-                    <div class="g-recaptcha" data-sitekey="your-recaptcha-site-key"></div>
-
-                    <button type="submit" class="cta-button">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer Section -->
-    <footer class="footer">
+    <footer>
         <p>&copy; 2024 Art Gallery. All rights reserved.</p>
         <div class="footer__social">
-            <a href="#" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-facebook"></use></svg></a>
-            <a href="#" aria-label="Twitter"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter"></use></svg></a>
-            <a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-instagram"></use></svg></a>
-            <a href="#" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-linkedin"></use></svg></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
     </footer>
 
     <!-- Back-to-Top Button -->
-    <div class="back-to-top" aria-label="Back to Top">
-        <svg class="icon"><use xlink:href="#icon-chevron-up"></use></svg>
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
     </div>
-
-    <!-- Inline SVG Icons -->
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="icon-facebook" viewBox="0 0 24 24">
-            <path d="M9 8H7v4H4v2h3v8h2v-8h2.66l.34-2H9V8.95c0-.65.42-.95 1.01-.95H12V6.04c-.47-.04-1.25-.04-1.75-.04-1.87 0-3.25 1.21-3.25 3.44V12H4v2h2v8h2v-8h2.66l.34-2H9V8z"></path>
-        </symbol>
-        <symbol id="icon-twitter" viewBox="0 0 24 24">
-            <path d="M22.46 6c-.77.35-1.5.58-2.26.7a4.55 4.55 0 0 0 2-2.26 8.82 8.82 0 0 1-2.88 1.08 4.5 4.5 0 0 0-7.68 3.08A12.88 12.88 0 0 1 3.21 5.7a4.52 4.52 0 0 0 1.4 6 4.53 4.53 0 0 1-2.03-.57c0 2.1 1.5 3.87 3.56 4.28a4.58 4.58 0 0 1-2.03.08A4.53 4.53 0 0 0 8.28 16a9.07 9.07 0 0 1-5.64 1.95c-.36 0-.72-.02-1.08-.07A12.8 12.8 0 0 0 7.89 18c8.35 0 12.92-6.92 12.92-12.92 0-.2 0-.4-.02-.6A9.14 9.14 0 0 0 22.46 6z"></path>
-        </symbol>
-        <symbol id="icon-instagram" viewBox="0 0 24 24">
-            <path d="M12 2.16c3.2 0 3.584 0 4.85.07 1.18.07 1.91.28 2.36.6.51.35.88.82 1.22 1.33.35.45.54.91.6 1.79.04.6.04 1.18.04 4.83 0 3.72 0 4.22-.07 4.88-.07.88-.25 1.34-.6 1.79-.35.52-.7 1.04-1.22 1.34-.45.32-1.18.53-2.35.6-1.26.07-1.66.07-4.88.07-3.3 0-3.65 0-4.87-.07-1.18-.07-1.9-.28-2.36-.6-.51-.34-.88-.82-1.22-1.33-.35-.45-.54-.92-.6-1.79-.07-.62-.07-1.14-.07-4.88 0-3.72 0-4.22.07-4.88.07-.88.25-1.34.6-1.79.35-.52.7-1.03 1.22-1.34.45-.32 1.18-.53 2.35-.6 1.26-.07 1.66-.07 4.87-.07zM12 0C8.7 0 8.27 0 7.03.07c-1.28.07-2.17.29-2.9.65-.84.39-1.51.95-2.2 1.64-.69.69-1.24 1.37-1.64 2.2-.36.74-.57 1.64-.65 2.9-.07 1.24-.07 1.67-.07 4.97s0 3.73.07 4.98c.08 1.25.29 2.15.65 2.9.4.83.95 1.51 1.64 2.2.69.69 1.37 1.24 2.2 1.64.73.36 1.64.57 2.9.65 1.23.07 1.66.07 4.97.07s3.73 0 4.97-.07c1.26-.08 2.17-.29 2.9-.65.84-.39 1.51-.95 2.2-1.64.69-.69 1.24-1.37 1.64-2.2.36-.73.57-1.64.65-2.9.07-1.24.07-1.67.07-4.97s0-3.73-.07-4.98c-.08-1.25-.29-2.15-.65-2.9-.4-.83-.95-1.51-1.64-2.2-.69-.69-1.37-1.24-2.2-1.64-.73-.36-1.64-.57-2.9-.65C15.73 0 15.3 0 12 0zm0 5.84c-3.39 0-6.16 2.76-6.16 6.16 0 3.39 2.76 6.16 6.16 6.16 3.39 0 6.16-2.76 6.16-6.16 0-3.39-2.76-6.16-6.16-6.16zM12 16c-2.21 0-4-1.79-4-4 0-2.21 1.79-4 4-4 2.21 0 4 1.79 4 4 0 2.21-1.79 4-4 4zm6.5-10.29c-.65 0-1.18.53-1.18 1.18s.53 1.18 1.18 1.18 1.18-.53 1.18-1.18-.53-1.18-1.18-1.18z"></path>
-        </symbol>
-        <symbol id="icon-linkedin" viewBox="0 0 24 24">
-            <path d="M5.6 2C4.2 2 3 3.2 3 4.6s1.2 2.6 2.6 2.6 2.6-1.2 2.6-2.6S7 2 5.6 2zM4 8h3.2v12H4V8zm16.4 1.6c-1.3 0-2.3.6-2.8 1.4V8h-3.2c0 1 0 12 0 12h3.2v-6.4c0-.3 0-.6.1-.8.2-.5.6-1.1 1.3-1.1.9 0 1.2.8 1.2 1.8V20h3.2v-6.4c0-2.5-1.3-3.6-3-3.6z"></path>
-        </symbol>
-        <symbol id="icon-chevron-up" viewBox="0 0 24 24">
-            <path d="M12 8.5l-6 6 1.5 1.5L12 11.5l4.5 4.5L18 14.5l-6-6z"></path>
-        </symbol>
-    </svg>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/glightbox@3.1.0/dist/js/glightbox.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullpage.js@3.1.2/dist/fullpage.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.1/dist/tippy-bundle.umd.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Dark Mode Toggle
-            const darkModeToggle = document.getElementById('dark-mode-toggle');
-            const currentMode = localStorage.getItem('dark-mode');
-
-            if (currentMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                darkModeToggle.textContent = 'Light Mode';
-            }
-
-            darkModeToggle.addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                if (document.body.classList.contains('dark-mode')) {
-                    localStorage.setItem('dark-mode', 'enabled');
-                    darkModeToggle.textContent = 'Light Mode';
-                } else {
-                    localStorage.setItem('dark-mode', 'disabled');
-                    darkModeToggle.textContent = 'Dark Mode';
-                }
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
             });
 
             // Initialize Slick Carousel
@@ -838,49 +658,12 @@
                 slidesToScroll: 1,
                 arrows: true,
                 dots: true,
-                autoplay: true,
-                autoplaySpeed: 4000,
-                fade: true,
-                cssEase: 'linear',
             });
 
-            // Initialize Flickity Carousel
-            $('.carousel').flickity({
-                cellAlign: 'left',
-                contain: true,
-                wrapAround: true,
-                autoPlay: 3000,
-                imagesLoaded: true,
-                pauseAutoPlayOnHover: true,
-                prevNextButtons: true,
-                pageDots: false,
-            });
-
-            // Initialize AOS
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-            });
-
-            // Initialize Vanilla Tilt
-            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-                max: 15,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.5,
-            });
-
-            // Initialize GLightbox
-            const lightbox = GLightbox({
-                touchNavigation: true,
-                loop: true,
-                zoomable: true,
-            });
-
-            // FAQ Toggle
-            $('.faq-item').click(function() {
-                $(this).toggleClass('open');
+            // Initialize Lightbox
+            lightbox.option({
+                'resizeDuration': 200,
+                'wrapAround': true
             });
 
             // Back-to-Top Button
@@ -899,98 +682,12 @@
                 return false;
             });
 
-            // Sticky Header on Scroll
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 50) {
-                    $('.header').addClass('header--sticky');
-                } else {
-                    $('.header').removeClass('header--sticky');
-                }
+            // FAQ Toggle
+            $('.faq-item').click(function() {
+                $(this).toggleClass('open');
+                $(this).find('.faq-answer').slideToggle();
             });
-
-            // Lazy Load Images
-            $("img").each(function() {
-                $(this).attr("loading", "lazy");
-            });
-
-            // Form Validation with Real-Time Feedback
-            $("#contact-form").on("submit", function(e) {
-                let isValid = true;
-                $(this).find("input, textarea").each(function() {
-                    if ($(this).val() === "") {
-                        isValid = false;
-                        $(this).addClass("input-error");
-                    } else {
-                        $(this).removeClass("input-error");
-                    }
-                });
-                if (!isValid) {
-                    e.preventDefault();
-                    toastr.error("Please fill in all required fields.");
-                }
-            }).find("input, textarea").on("input", function() {
-                if ($(this).val() !== "") {
-                    $(this).removeClass("input-error");
-                }
-            });
-
-            // Smooth Scroll for Anchor Links
-            $('nav a, .back-to-top').on('click', function(event) {
-                if (this.hash !== "") {
-                    event.preventDefault();
-                    var hash = this.hash;
-                    $('html, body').animate({
-                        scrollTop: $(hash).offset().top
-                    }, 800);
-                }
-            });
-
-            // Initialize PrismJS for Code Highlighting
-            Prism.highlightAll();
-
-            // Initialize Toastr Notifications
-            toastr.options = {
-                "positionClass": "toast-top-right",
-                "closeButton": true,
-                "progressBar": true
-            };
-
-            // Trigger a sample toast notification on page load
-            toastr.success("Welcome to the Art Gallery!");
-
-            // SEO Enhancement: Add Canonical URL
-            $('head').append('<link rel="canonical" href="https://yourwebsite.com">');
-
-            // Security Enhancement: Content Security Policy
-            $('head').append('<meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\' https://code.jquery.com https://cdn.jsdelivr.net; style-src \'self\' https://fonts.googleapis.com https://cdn.jsdelivr.net; object-src \'none\'; frame-ancestors \'none\';">');
-
-            // Security Enhancement: X-Frame-Options
-            $('head').append('<meta http-equiv="X-Frame-Options" content="DENY">');
-
-            // Performance Enhancement: Add Preload for Fonts
-            $('head').append('<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" as="style">');
-
-            // Service Worker Registration for PWA
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js')
-                .then(function(registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                }).catch(function(error) {
-                    console.log('Service Worker registration failed:', error);
-                });
-            }
-
-            // Handle Offline Mode
-            window.addEventListener('offline', function() {
-                $('#offline-warning').addClass('show');
-            });
-
-            window.addEventListener('online', function() {
-                $('#offline-warning').removeClass('show');
-            });
-
         });
     </script>
 </body>
-
 </html>
