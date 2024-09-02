@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Creative Art Gallery - Discover unique art pieces, custom commissions, and immersive art experiences.">
     <meta name="keywords" content="Art Gallery, Custom Art, Art Commissions, Art Experiences, Interactive Art">
+    <meta name="theme-color" content="#3F51B5">
     <title>Creative Art Gallery | Immersive Art Experiences</title>
     <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
 
@@ -18,8 +19,8 @@
     <!-- AOS for Animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
-    <!-- Custom Dark Mode Stylesheet -->
-    <link rel="stylesheet" href="styles/dark-mode.css">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Custom CSS -->
     <style>
@@ -53,6 +54,7 @@
             max-width: 100%;
             height: auto;
             border-radius: var(--border-radius);
+            transition: transform var(--transition-speed);
         }
 
         h1, h2, h3, h4 {
@@ -167,12 +169,14 @@
             z-index: 1;
             text-transform: uppercase;
             letter-spacing: 3px;
+            animation: fadeIn 1.2s ease-in-out forwards;
         }
 
         .hero p {
             font-size: 1.5em;
             margin-top: 1em;
             z-index: 1;
+            animation: fadeInUp 1.5s ease-in-out forwards;
         }
 
         .hero .cta-button {
@@ -186,6 +190,7 @@
             z-index: 1;
             transition: background-color var(--transition-speed), transform var(--transition-speed);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1.8s ease-in-out forwards;
         }
 
         .hero .cta-button:hover {
@@ -197,6 +202,9 @@
         /* Section Styling */
         section {
             padding: 4em 2em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
         }
 
         section h2 {
@@ -207,6 +215,7 @@
             position: relative;
             display: inline-block;
             transition: color var(--transition-speed);
+            animation: fadeInUp 1s ease-in-out forwards;
         }
 
         section h2::after {
@@ -224,6 +233,7 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2em;
             text-align: center;
+            animation: fadeInUp 1.5s ease-in-out forwards;
         }
 
         .feature-item {
@@ -239,6 +249,11 @@
         .feature-item img {
             margin-bottom: 1.5em;
             border-radius: 50%;
+            transition: transform var(--transition-speed);
+        }
+
+        .feature-item:hover img {
+            transform: scale(1.1);
         }
 
         .feature-item:hover {
@@ -252,6 +267,7 @@
             color: #fff;
             padding: 4em 2em;
             border-radius: var(--border-radius);
+            animation: fadeInUp 1.8s ease-in-out forwards;
         }
 
         .services__list {
@@ -297,6 +313,7 @@
             background: linear-gradient(135deg, #ffffff 25%, #f0f0f0 100%);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
+            animation: fadeInUp 2s ease-in-out forwards;
         }
 
         .testimonial__carousel {
@@ -332,6 +349,7 @@
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5em;
             margin-top: 2em;
+            animation: fadeInUp 2.2s ease-in-out forwards;
         }
 
         .gallery-item {
@@ -381,6 +399,7 @@
             padding: 4em 2em;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
+            animation: fadeInUp 2.5s ease-in-out forwards;
         }
 
         .faq-item {
@@ -413,6 +432,7 @@
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-md);
             text-align: center;
+            animation: fadeInUp 2.8s ease-in-out forwards;
         }
 
         .contact-form {
@@ -465,6 +485,7 @@
             background: #333;
             color: #fff;
             text-align: center;
+            animation: fadeInUp 3s ease-in-out forwards;
         }
 
         .footer__social {
@@ -808,7 +829,45 @@
                 darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
             });
         });
+
+        // Lazy Load Images
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll("img");
+            const options = {
+                rootMargin: "0px",
+                threshold: 0.1
+            };
+
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove("lazy");
+                        observer.unobserve(img);
+                    }
+                });
+            }, options);
+
+            lazyImages.forEach(image => {
+                imageObserver.observe(image);
+            });
+        });
+
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
     </script>
 </body>
 
 </html>
+
