@@ -13,33 +13,8 @@
     <!-- Favicon and Touch Icons -->
     <link rel="icon" href="favicon.ico">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.0/css/all.css" integrity="sha384-3v0caN3G0z+yt4I65ZP0wxB2UC1Isl+3uylbYtTqg2v1AcY5qzD9w2Ikz8HIeZJO" crossorigin="anonymous">
-
-    <!-- Open Graph Meta Tags for Social Media Sharing -->
-    <meta property="og:title" content="Your Awesome Blog">
-    <meta property="og:description" content="An engaging and insightful blog about [Your Niche].">
-    <meta property="og:image" content="path/to/your-og-image.jpg">
-    <meta property="og:url" content="https://yourblog.com">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "Your Awesome Blog",
-      "description": "An engaging and insightful blog about [Your Niche].",
-      "url": "https://yourblog.com",
-      "author": {
-        "@type": "Person",
-        "name": "Your Name"
-      }
-    }
-    </script>
+    <!-- Web Manifest for PWA -->
+    <link rel="manifest" href="manifest.json">
 
     <!-- CSS Styles -->
     <style>
@@ -55,19 +30,29 @@
         --font-family-heading: 'Playfair Display', serif;
     }
 
-    /* Reset */
+    /* Automatic Dark Mode */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-color: #181818;
+            --text-color: #e0e0e0;
+            --secondary-color: #e0e0e0;
+            --border-color: #444;
+        }
+    }
+
+    /* Reset and Base Styles */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    /* Base Styles */
     body {
         font-family: var(--font-family-base);
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--background-color);
+        overflow-x: hidden;
     }
 
     a {
@@ -93,11 +78,16 @@
 
     /* Navigation */
     .navbar {
-        background-color: #fff;
+        background-color: var(--background-color);
         position: sticky;
         top: 0;
         z-index: 1000;
         border-bottom: 1px solid var(--border-color);
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar.scrolled {
+        background-color: var(--primary-color);
     }
 
     .navbar .container {
@@ -112,6 +102,11 @@
         font-size: 2em;
         font-weight: 700;
         color: var(--secondary-color);
+        transition: color 0.3s ease;
+    }
+
+    .navbar.scrolled .brand a {
+        color: #fff;
     }
 
     .navbar-menu {
@@ -135,12 +130,21 @@
         color: var(--primary-color);
     }
 
+    .navbar.scrolled .navbar-menu a {
+        color: #fff;
+    }
+
     .navbar-toggle {
         display: none;
         background: none;
         border: none;
         font-size: 1.5em;
         cursor: pointer;
+        color: var(--secondary-color);
+    }
+
+    .navbar.scrolled .navbar-toggle {
+        color: #fff;
     }
 
     /* Dropdown Menu */
@@ -148,7 +152,7 @@
         position: absolute;
         top: 100%;
         left: 0;
-        background-color: #fff;
+        background-color: var(--background-color);
         border: 1px solid var(--border-color);
         padding: 1em 0;
         display: none;
@@ -171,48 +175,40 @@
         color: var(--secondary-color);
     }
 
-    /* Featured Posts Carousel */
-    .carousel {
+    /* Hero Section */
+    .hero {
         position: relative;
-        overflow: hidden;
-    }
-
-    .carousel-track {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-item {
-        min-width: 100%;
-        box-sizing: border-box;
-    }
-
-    .carousel-item img {
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
-    }
-
-    .carousel-controls {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .carousel-controls button {
-        background: rgba(0,0,0,0.5);
-        border: none;
+        background-image: url('path/to/your-hero-image.jpg');
+        background-size: cover;
+        background-position: center;
         color: #fff;
-        font-size: 2em;
-        padding: 0.5em;
-        cursor: pointer;
-        transition: background 0.3s ease;
+        padding: 8em 0;
+        text-align: center;
     }
 
-    .carousel-controls button:hover {
-        background: rgba(0,0,0,0.7);
+    .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero h1 {
+        font-size: 4em;
+        font-family: var(--font-family-heading);
+        margin-bottom: 0.5em;
+    }
+
+    .hero p {
+        font-size: 1.5em;
     }
 
     /* Main Content */
@@ -229,16 +225,18 @@
     }
 
     .post {
-        background-color: #fff;
+        background-color: var(--background-color);
         margin-bottom: 2em;
         padding: 2em;
         border-radius: 8px;
         border: 1px solid var(--border-color);
-        transition: box-shadow 0.3s ease;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        overflow: hidden;
     }
 
     .post:hover {
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transform: translateY(-5px);
     }
 
     .post h2 {
@@ -268,7 +266,15 @@
     }
 
     .post .read-more:hover {
-        background-color: darken(var(--primary-color), 10%);
+        background-color: #e55b50;
+    }
+
+    /* Responsive Images */
+    .post img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1em;
     }
 
     /* Social Sharing Buttons */
@@ -308,7 +314,7 @@
     }
 
     .widget {
-        background-color: #fff;
+        background-color: var(--background-color);
         padding: 2em;
         margin-bottom: 2em;
         border-radius: 8px;
@@ -363,10 +369,11 @@
 
     /* Contact Form */
     .contact-form {
-        background-color: #fff;
+        background-color: var(--background-color);
         padding: 2em;
         border-radius: 8px;
         border: 1px solid var(--border-color);
+        margin-top: 2em;
     }
 
     .contact-form h3 {
@@ -382,6 +389,8 @@
         margin-bottom: 1em;
         border: 1px solid var(--border-color);
         border-radius: 8px;
+        background-color: var(--background-color);
+        color: var(--text-color);
     }
 
     .contact-form button {
@@ -397,7 +406,7 @@
     }
 
     .contact-form button:hover {
-        background-color: darken(var(--primary-color), 10%);
+        background-color: #e55b50;
     }
 
     /* Footer */
@@ -456,7 +465,7 @@
     }
 
     .back-to-top:hover {
-        background-color: darken(var(--primary-color), 10%);
+        background-color: #e55b50;
     }
 
     /* Accessibility */
@@ -544,33 +553,18 @@
                     </ul>
                 </li>
                 <li><a href="#">Archive</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Featured Posts Carousel -->
-    <section class="carousel" aria-label="Featured Posts">
-        <div class="carousel-track" id="carousel-track">
-            <div class="carousel-item">
-                <img src="path/to/featured-image1.jpg" alt="Featured Post 1">
-                <div class="carousel-caption">
-                    <h2><a href="#">Featured Post Title 1</a></h2>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="path/to/featured-image2.jpg" alt="Featured Post 2">
-                <div class="carousel-caption">
-                    <h2><a href="#">Featured Post Title 2</a></h2>
-                </div>
-            </div>
-            <!-- Add more carousel items as needed -->
+    <!-- Hero Section -->
+    <header class="hero" role="banner">
+        <div class="hero-content">
+            <h1>Your Blog Title</h1>
+            <p>Your blog's tagline goes here.</p>
         </div>
-        <div class="carousel-controls">
-            <button id="carousel-prev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
-            <button id="carousel-next" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </section>
+    </header>
 
     <!-- Main Content -->
     <main class="container" role="main">
@@ -665,6 +659,9 @@
     </button>
 
     <!-- JavaScript -->
+    <script type="module">
+        // Import any necessary modules (if using)
+    </script>
     <script>
         // Mobile Navigation Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -674,28 +671,13 @@
             navbarMenu.classList.toggle('active');
         });
 
-        // Carousel Functionality
-        const carouselTrack = document.getElementById('carousel-track');
-        const carouselItems = carouselTrack.children;
-        const prevButton = document.getElementById('carousel-prev');
-        const nextButton = document.getElementById('carousel-next');
-        let currentIndex = 0;
-
-        function updateCarousel() {
-            carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        prevButton.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
-
-        nextButton.addEventListener('click', () => {
-            if (currentIndex < carouselItems.length - 1) {
-                currentIndex++;
-                updateCarousel();
+        // Navbar Scroll Effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
         });
 
@@ -716,8 +698,44 @@
                 behavior: 'smooth'
             });
         });
+
+        // Service Worker Registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+
+        // Lazy Loading Images
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Fallback for browsers without IntersectionObserver support
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy");
+                });
+            }
+        });
     </script>
 
 </body>
 </html>
-
