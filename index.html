@@ -15,10 +15,10 @@
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome for Icons -->
-    <script src="https://kit.fontawesome.com/yourfontawesomekit.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/5gE+SCZt9eSEJqR4yyoBbkCeRa5KoGQoMCV3eP7fXlqwEcr" crossorigin="anonymous">
 
     <!-- Open Graph Meta Tags for Social Media Sharing -->
     <meta property="og:title" content="Your Awesome Blog">
@@ -44,16 +44,23 @@
 
     <!-- CSS Styles -->
     <style>
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     /* Base Styles */
     body {
-        margin: 0;
         font-family: 'Roboto', sans-serif;
         line-height: 1.6;
         color: #333;
+        background-color: #f9f9f9;
     }
 
     a {
-        color: #0066cc;
+        color: #3498db;
         text-decoration: none;
     }
 
@@ -71,20 +78,22 @@
     /* Navigation */
     .navbar {
         background-color: #fff;
-        border-bottom: 1px solid #ddd;
         position: sticky;
         top: 0;
         z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .navbar .container {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 1em 0;
     }
 
     .navbar .brand a {
-        font-size: 1.5em;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8em;
         font-weight: bold;
         color: #333;
     }
@@ -95,13 +104,17 @@
     }
 
     .navbar-menu li {
-        margin-left: 1em;
+        margin-left: 1.5em;
     }
 
     .navbar-menu a {
-        padding: 1em 0;
-        display: block;
+        font-weight: 500;
         color: #333;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-menu a:hover {
+        color: #3498db;
     }
 
     .navbar-toggle {
@@ -109,27 +122,35 @@
         background: none;
         border: none;
         font-size: 1.5em;
+        cursor: pointer;
     }
 
     /* Hero Section */
     .hero {
-        background-image: url('path/to/your-hero-image.jpg');
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('path/to/your-hero-image.jpg');
         background-size: cover;
         background-position: center;
         color: #fff;
-        padding: 4em 0;
+        padding: 6em 0;
         text-align: center;
     }
 
     .hero h1 {
-        font-size: 3em;
+        font-size: 3.5em;
         margin-bottom: 0.5em;
+        font-family: 'Montserrat', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .hero p {
+        font-size: 1.2em;
     }
 
     /* Main Content */
     main {
         display: flex;
-        margin-top: 2em;
+        margin-top: 3em;
         flex-wrap: wrap;
     }
 
@@ -140,33 +161,54 @@
     }
 
     .post {
+        background-color: #fff;
         margin-bottom: 2em;
+        padding: 2em;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .post:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
     .post h2 {
         font-size: 2em;
         margin-bottom: 0.5em;
+        font-family: 'Montserrat', sans-serif;
     }
 
     .post .meta {
-        color: #666;
+        color: #888;
         font-size: 0.9em;
+        margin-bottom: 1.5em;
+    }
+
+    .post p {
+        line-height: 1.7;
     }
 
     .pagination {
         display: flex;
         justify-content: space-between;
+        margin-top: 2em;
     }
 
     .pagination a {
-        padding: 0.5em 1em;
-        background-color: #f4f4f4;
+        padding: 0.8em 1.2em;
+        background-color: #fff;
         color: #333;
-        border-radius: 5px;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        font-weight: 500;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .pagination a:hover {
-        background-color: #e4e4e4;
+        background-color: #3498db;
+        color: #fff;
     }
 
     /* Sidebar */
@@ -176,12 +218,17 @@
     }
 
     .widget {
+        background-color: #fff;
+        padding: 2em;
         margin-bottom: 2em;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .widget h3 {
-        font-size: 1.5em;
+        font-size: 1.8em;
         margin-bottom: 1em;
+        font-family: 'Montserrat', sans-serif;
     }
 
     .widget ul {
@@ -190,35 +237,56 @@
     }
 
     .widget ul li {
-        margin-bottom: 0.5em;
+        margin-bottom: 0.8em;
+    }
+
+    .widget ul a {
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    .widget ul a:hover {
+        color: #3498db;
     }
 
     .widget form input[type="email"] {
         width: 100%;
-        padding: 0.5em;
+        padding: 0.8em;
         margin-bottom: 1em;
         border: 1px solid #ccc;
-        border-radius: 3px;
+        border-radius: 50px;
     }
 
     .widget form button {
-        padding: 0.5em 1em;
-        background-color: #0066cc;
+        width: 100%;
+        padding: 0.8em;
+        background-color: #3498db;
         color: #fff;
         border: none;
         cursor: pointer;
-        border-radius: 3px;
+        border-radius: 50px;
+        font-size: 1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
     }
 
     .widget form button:hover {
-        background-color: #005bb5;
+        background-color: #2980b9;
     }
 
     /* Footer */
     .site-footer {
-        background-color: #333;
+        background-color: #2c3e50;
         color: #fff;
-        padding: 2em 0;
+        padding: 3em 0;
+        margin-top: 3em;
+    }
+
+    .site-footer .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .site-footer p {
@@ -228,17 +296,84 @@
     .site-footer .social-media {
         list-style: none;
         display: flex;
-        justify-content: center;
-        margin-top: 1em;
     }
 
     .site-footer .social-media li {
-        margin: 0 0.5em;
+        margin-left: 1em;
     }
 
     .site-footer .social-media a {
         color: #fff;
         font-size: 1.5em;
+        transition: color 0.3s ease;
+    }
+
+    .site-footer .social-media a:hover {
+        color: #3498db;
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+        position: fixed;
+        bottom: 1.5em;
+        right: 1.5em;
+        background-color: #fff;
+        border: none;
+        border-radius: 50%;
+        padding: 0.8em;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+    }
+
+    .dark-mode-toggle:hover {
+        background-color: #f0f0f0;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+        background-color: #181818;
+        color: #e0e0e0;
+    }
+
+    body.dark-mode .navbar,
+    body.dark-mode .post,
+    body.dark-mode .widget,
+    body.dark-mode .site-footer,
+    body.dark-mode .pagination a {
+        background-color: #2c2c2c;
+        color: #e0e0e0;
+        border-color: #444;
+    }
+
+    body.dark-mode .navbar .brand a,
+    body.dark-mode .navbar-menu a,
+    body.dark-mode .post h2 a,
+    body.dark-mode .widget ul a,
+    body.dark-mode .site-footer .social-media a {
+        color: #e0e0e0;
+    }
+
+    body.dark-mode .navbar-menu a:hover,
+    body.dark-mode .post h2 a:hover,
+    body.dark-mode .widget ul a:hover,
+    body.dark-mode .pagination a:hover,
+    body.dark-mode .site-footer .social-media a:hover {
+        color: #3498db;
+    }
+
+    body.dark-mode .hero {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('path/to/your-hero-image.jpg');
+    }
+
+    body.dark-mode .widget form input[type="email"],
+    body.dark-mode .widget form button {
+        background-color: #333;
+        color: #e0e0e0;
+    }
+
+    body.dark-mode .widget form button:hover {
+        background-color: #444;
     }
 
     /* Accessibility */
@@ -254,18 +389,34 @@
     }
 
     /* Responsive Design */
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
+        .navbar .container {
+            flex-wrap: wrap;
+        }
+
         .navbar-menu {
             flex-direction: column;
             display: none;
+            width: 100%;
         }
 
         .navbar-menu.active {
             display: flex;
         }
 
+        .navbar-menu li {
+            margin-left: 0;
+            margin-bottom: 1em;
+        }
+
         .navbar-toggle {
             display: block;
+        }
+
+        .navbar .brand {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1em;
         }
 
         main {
@@ -274,6 +425,24 @@
 
         .content {
             margin-right: 0;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero h1 {
+            font-size: 2.5em;
+        }
+
+        .hero p {
+            font-size: 1em;
+        }
+
+        .post h2 {
+            font-size: 1.5em;
+        }
+
+        .widget h3 {
+            font-size: 1.5em;
         }
     }
     </style>
@@ -323,6 +492,9 @@
                     <p>Filed under: <a href="#">Category</a></p>
                 </footer>
             </article>
+            <!-- Additional Posts -->
+            <!-- Duplicate the article block for more posts -->
+
             <!-- Pagination -->
             <nav class="pagination" aria-label="Page navigation">
                 <a href="#" class="prev">← Older Posts</a>
@@ -367,6 +539,11 @@
         </div>
     </footer>
 
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <!-- JavaScript -->
     <script>
         // Mobile Navigation Toggle
@@ -376,6 +553,25 @@
         mobileMenuBtn.addEventListener('click', () => {
             navbarMenu.classList.toggle('active');
         });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            // Save preference to localStorage
+            if(body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Load Dark Mode Preference
+        if(localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+        }
     </script>
 
 </body>
