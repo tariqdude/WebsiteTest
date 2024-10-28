@@ -1,107 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic Page Needs -->
     <meta charset="UTF-8">
     <title>Your Awesome Blog</title>
+    <meta name="description" content="A brief description of your blog for SEO purposes.">
+    <meta name="author" content="Your Name">
+
+    <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Basic CSS Styling -->
+    <!-- Favicon and Touch Icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/yourfontawesomekit.js" crossorigin="anonymous"></script>
+
+    <!-- Open Graph Meta Tags for Social Media Sharing -->
+    <meta property="og:title" content="Your Awesome Blog">
+    <meta property="og:description" content="A brief description of your blog for social media.">
+    <meta property="og:image" content="path/to/your-image.jpg">
+    <meta property="og:url" content="https://yourblog.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Your Awesome Blog",
+      "description": "A brief description of your blog.",
+      "url": "https://yourblog.com",
+      "author": {
+        "@type": "Person",
+        "name": "Your Name"
+      }
+    }
+    </script>
+
+    <!-- CSS Styles -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+    /* Base Styles */
+    body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Container */
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Navigation */
+    .navbar {
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .navbar .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar .brand a {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .navbar-menu {
+        list-style: none;
+        display: flex;
+    }
+
+    .navbar-menu li {
+        margin-left: 1em;
+    }
+
+    .navbar-menu a {
+        padding: 1em 0;
+        display: block;
+        color: #333;
+    }
+
+    .navbar-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5em;
+    }
+
+    /* Hero Section */
+    .hero {
+        background-image: url('path/to/your-hero-image.jpg');
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        padding: 4em 0;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 3em;
+        margin-bottom: 0.5em;
+    }
+
+    /* Main Content */
+    main {
+        display: flex;
+        margin-top: 2em;
+        flex-wrap: wrap;
+    }
+
+    .content {
+        flex: 3;
+        margin-right: 2em;
+        min-width: 300px;
+    }
+
+    .post {
+        margin-bottom: 2em;
+    }
+
+    .post h2 {
+        font-size: 2em;
+        margin-bottom: 0.5em;
+    }
+
+    .post .meta {
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .pagination a {
+        padding: 0.5em 1em;
+        background-color: #f4f4f4;
+        color: #333;
+        border-radius: 5px;
+    }
+
+    .pagination a:hover {
+        background-color: #e4e4e4;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    .widget {
+        margin-bottom: 2em;
+    }
+
+    .widget h3 {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+    }
+
+    .widget ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .widget ul li {
+        margin-bottom: 0.5em;
+    }
+
+    .widget form input[type="email"] {
+        width: 100%;
+        padding: 0.5em;
+        margin-bottom: 1em;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .widget form button {
+        padding: 0.5em 1em;
+        background-color: #0066cc;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .widget form button:hover {
+        background-color: #005bb5;
+    }
+
+    /* Footer */
+    .site-footer {
+        background-color: #333;
+        color: #fff;
+        padding: 2em 0;
+    }
+
+    .site-footer p {
+        margin: 0;
+    }
+
+    .site-footer .social-media {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        margin-top: 1em;
+    }
+
+    .site-footer .social-media li {
+        margin: 0 0.5em;
+    }
+
+    .site-footer .social-media a {
+        color: #fff;
+        font-size: 1.5em;
+    }
+
+    /* Accessibility */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .navbar-menu {
+            flex-direction: column;
+            display: none;
         }
-        header, footer {
-            background-color: #333;
-            color: #fff;
-            padding: 1em 0;
-            text-align: center;
-        }
-        nav {
-            background-color: #444;
-        }
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        nav li {
-            display: inline-block;
-        }
-        nav a {
-            display: block;
-            color: #fff;
-            padding: 1em;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #555;
-        }
-        main {
+
+        .navbar-menu.active {
             display: flex;
-            flex-wrap: wrap;
-            padding: 1em;
         }
-        article {
-            flex: 3;
-            padding: 1em;
+
+        .navbar-toggle {
+            display: block;
         }
-        aside {
-            flex: 1;
-            padding: 1em;
-            background-color: #f4f4f4;
+
+        main {
+            flex-direction: column;
         }
-        h1, h2, h3 {
-            margin-top: 0;
+
+        .content {
+            margin-right: 0;
         }
-        /* Responsive Layout for Smaller Screens */
-        @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-            }
-            nav li {
-                display: block;
-                text-align: center;
-            }
-        }
+    }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Your Blog Title</h1>
-        <p>Your blog's tagline goes here</p>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Archive</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="brand">
+                <a href="index.html">Your Blog</a>
+            </div>
+            <button class="navbar-toggle" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="navbar-menu" id="navbar-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Archive</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main>
-        <article>
-            <h2>Blog Post Title</h2>
-            <p>Published on <time datetime="2023-10-01">October 1, 2023</time></p>
-            <p>Your blog post content goes here. This is an example paragraph to show the content area.</p>
-            <!-- Add more content as needed -->
-        </article>
+    <!-- Hero Section -->
+    <header class="hero" role="banner">
+        <div class="container">
+            <h1>Your Blog Title</h1>
+            <p>Your blog's tagline goes here.</p>
+        </div>
+    </header>
 
-        <aside>
-            <h3>About Me</h3>
-            <p>A short bio or description about yourself.</p>
-            <!-- Add widgets or additional info -->
+    <!-- Main Content -->
+    <main class="container" role="main">
+        <div class="content">
+            <!-- Blog Post -->
+            <article class="post">
+                <header>
+                    <h2><a href="#">Blog Post Title</a></h2>
+                    <p class="meta">Published on <time datetime="2023-10-01">October 1, 2023</time> by <a href="#">Author Name</a></p>
+                </header>
+                <section>
+                    <p>Your blog post content goes here. This is an example paragraph to show the content area.</p>
+                    <!-- Add more content as needed -->
+                </section>
+                <footer>
+                    <p>Filed under: <a href="#">Category</a></p>
+                </footer>
+            </article>
+            <!-- Pagination -->
+            <nav class="pagination" aria-label="Page navigation">
+                <a href="#" class="prev">← Older Posts</a>
+                <a href="#" class="next">Newer Posts →</a>
+            </nav>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" role="complementary">
+            <section class="widget">
+                <h3>About Me</h3>
+                <p>A short bio or description about yourself.</p>
+            </section>
+            <section class="widget">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">Design</a></li>
+                    <li><a href="#">Photography</a></li>
+                </ul>
+            </section>
+            <section class="widget">
+                <h3>Subscribe</h3>
+                <form action="#" method="post">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="Your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </section>
         </aside>
     </main>
 
-    <footer>
-        <p>&copy; 2023 Your Name. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2023 Your Name. All rights reserved.</p>
+            <ul class="social-media">
+                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Twitter</span></a></li>
+                <li><a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i><span class="sr-only">Facebook</span></a></li>
+                <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i><span class="sr-only">Instagram</span></a></li>
+            </ul>
+        </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navbarMenu = document.getElementById('navbar-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navbarMenu.classList.toggle('active');
+        });
+    </script>
 
 </body>
 </html>
