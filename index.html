@@ -1,200 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Creative Art Gallery - Discover unique art pieces, custom commissions, and immersive art experiences.">
-    <meta name="keywords" content="Art Gallery, Custom Art, Art Commissions, Art Experiences, Interactive Art">
-    <meta name="theme-color" content="#3F51B5">
-    <title>Creative Art Gallery | Immersive Art Experiences</title>
-    <link rel="icon" href="https://via.placeholder.com/32" type="image/png">
+    <title>Your Awesome Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- AOS for Animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- Basic CSS Styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        nav li {
+            display: inline-block;
+        }
+        nav a {
+            display: block;
+            color: #fff;
+            padding: 1em;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1em;
+        }
+        article {
+            flex: 3;
+            padding: 1em;
+        }
+        aside {
+            flex: 1;
+            padding: 1em;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+        /* Responsive Layout for Smaller Screens */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+            nav li {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- Dark Mode Toggle -->
-    <div class="dark-mode-toggle">Dark Mode</div>
-
-    <!-- Header -->
     <header>
-        <div class="header__logo">Creative Gallery</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
-        </nav>
+        <h1>Your Blog Title</h1>
+        <p>Your blog's tagline goes here</p>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <h1>Immersive Art Experiences</h1>
-        <p>Explore our curated collection and custom commissions.</p>
-        <a href="#contact" class="cta-button">Get in Touch</a>
-    </section>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Archive</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
 
-    <!-- Features Section -->
-    <section id="about" class="features container">
-        <h2>Our Features</h2>
-        <div class="feature-item">
-            <img src="images/commissions.jpg" alt="Custom Commissions">
-            <h3>Custom Commissions</h3>
-            <p>Create personalized art pieces with our talented artists.</p>
-        </div>
-        <div class="feature-item">
-            <img src="images/collections.jpg" alt="Art Collections">
-            <h3>Art Collections</h3>
-            <p>Dive into our diverse range of curated art collections.</p>
-        </div>
-        <div class="feature-item">
-            <img src="images/services.jpg" alt="Art Services">
-            <h3>Art Services</h3>
-            <p>Experience our comprehensive art consultancy and curation services.</p>
-        </div>
-    </section>
+    <main>
+        <article>
+            <h2>Blog Post Title</h2>
+            <p>Published on <time datetime="2023-10-01">October 1, 2023</time></p>
+            <p>Your blog post content goes here. This is an example paragraph to show the content area.</p>
+            <!-- Add more content as needed -->
+        </article>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <h2>Our Services</h2>
-        <div class="services__list container">
-            <div class="service-item">
-                <img src="images/consultation.jpg" alt="Consultation">
-                <div>
-                    <h4>Art Consultation</h4>
-                    <p>Receive expert advice on selecting and placing art in your space.</p>
-                </div>
-            </div>
-            <div class="service-item">
-                <img src="images/framing.jpg" alt="Framing">
-                <div>
-                    <h4>Custom Framing</h4>
-                    <p>Preserve and showcase your artwork with our custom framing services.</p>
-                </div>
-            </div>
-            <div class="service-item">
-                <img src="images/restoration.jpg" alt="Restoration">
-                <div>
-                    <h4>Restoration & Repair</h4>
-                    <p>Restore and repair damaged artwork to its original glory.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <aside>
+            <h3>About Me</h3>
+            <p>A short bio or description about yourself.</p>
+            <!-- Add widgets or additional info -->
+        </aside>
+    </main>
 
-    <!-- Testimonial Section -->
-    <section class="testimonial">
-        <h2>What Our Clients Say</h2>
-        <div class="testimonial__carousel">
-            <div>
-                <blockquote>
-                    "The art piece exceeded our expectations! The service was outstanding."
-                    <footer>- Satisfied Client</footer>
-                </blockquote>
-            </div>
-            <div>
-                <blockquote>
-                    "Incredible talent and professionalism. Highly recommended!"
-                    <footer>- Happy Customer</footer>
-                </blockquote>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery container">
-        <h2>Photography</h2>
-        <div class="gallery-item">
-            <img src="images/gallery1.jpg" alt="Gallery Image">
-            <div class="overlay">View Photo</div>
-        </div>
-        <div class="gallery-item">
-            <img src="images/gallery2.jpg" alt="Gallery Image">
-            <div class="overlay">View Photo</div>
-        </div>
-        <div class="gallery-item">
-            <img src="images/gallery3.jpg" alt="Gallery Image">
-            <div class="overlay">View Photo</div>
-        </div>
-        <div class="gallery-item">
-            <img src="images/gallery4.jpg" alt="Gallery Image">
-            <div class="overlay">View Photo</div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="faq container">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <h3>How can I order a custom commission?</h3>
-            <div class="faq-answer">
-                <p>To order a custom commission, please fill out the contact form with your requirements, and our team will get in touch with you.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <h3>What is your return policy?</h3>
-            <div class="faq-answer">
-                <p>We offer a 30-day return policy on all purchases. Please contact us for more details.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <p>We'd love to hear from you! Get in touch with us to learn more about our offerings.</p>
-        <div class="contact-form">
-            <form id="contact-form" action="send.php" method="post">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Your Message</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-
-                <button type="submit" class="cta-button">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
     <footer>
-        <p>&copy; 2024 Creative Gallery. All rights reserved.</p>
-        <div class="footer__social">
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        </div>
+        <p>&copy; 2023 Your Name. All rights reserved.</p>
     </footer>
 
-    <!-- Back-to-Top Button -->
-    <div class="back-to-top">
-        <i class="fas fa-chevron-up"></i>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/1.8.1/slick.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
-    <script src="js/main.js"></script>
 </body>
-
 </html>
