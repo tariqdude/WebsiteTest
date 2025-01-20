@@ -3,25 +3,25 @@
 <head>
     <!-- Basic Page Needs -->
     <meta charset="UTF-8">
-    <title>Your Construction Company</title>
-    <meta name="description" content="Professional construction services offering residential and commercial building solutions.">
+    <title>Your Construction Company | Building Excellence</title>
+    <meta name="description" content="Your Construction Company offers top-tier residential and commercial construction services with a commitment to quality and excellence.">
     <meta name="author" content="Your Name">
     
     <!-- SEO Enhancements -->
-    <meta name="keywords" content="Construction, Building, Residential, Commercial, Renovation, Contractors">
+    <meta name="keywords" content="Construction, Building, Residential, Commercial, Renovation, Contractors, Architecture, Design & Build">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph for Social Media -->
-    <meta property="og:title" content="Your Construction Company">
-    <meta property="og:description" content="Professional construction services offering residential and commercial building solutions.">
+    <meta property="og:title" content="Your Construction Company | Building Excellence">
+    <meta property="og:description" content="Your Construction Company offers top-tier residential and commercial construction services with a commitment to quality and excellence.">
     <meta property="og:image" content="https://via.placeholder.com/1200x630">
     <meta property="og:url" content="https://yourconstructioncompany.com">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Your Construction Company">
-    <meta name="twitter:description" content="Professional construction services offering residential and commercial building solutions.">
+    <meta name="twitter:title" content="Your Construction Company | Building Excellence">
+    <meta name="twitter:description" content="Your Construction Company offers top-tier residential and commercial construction services with a commitment to quality and excellence.">
     <meta name="twitter:image" content="https://via.placeholder.com/1200x630">
     
     <!-- Mobile Specific Metas -->
@@ -29,12 +29,16 @@
     
     <!-- Favicon and Touch Icons -->
     <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
     <!-- External Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pOHIW69kJgk4u..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Swiper.js CSS for Advanced Carousel -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     
     <!-- Internal CSS Styles -->
     <style>
@@ -54,6 +58,7 @@
         --header-height: 80px;
         --footer-bg-color: #2E8B57;
         --modal-bg-color: rgba(0, 0, 0, 0.8);
+        --overlay-color: rgba(0, 0, 0, 0.5);
     }
     
     /* Dark Mode Variables */
@@ -66,6 +71,7 @@
             --muted-text-color: #999999;
             --footer-bg-color: #000000;
             --modal-bg-color: rgba(255, 255, 255, 0.1);
+            --overlay-color: rgba(255, 255, 255, 0.2);
         }
     }
     
@@ -237,6 +243,12 @@
         border-radius: 20px;
         transition: border-color var(--transition-speed) ease;
         outline: none;
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+    
+    .navbar .search-container input[type="text"]::placeholder {
+        color: var(--muted-text-color);
     }
     
     .navbar .search-container input[type="text"]:focus {
@@ -374,6 +386,7 @@
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         text-align: center;
         transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        cursor: pointer;
     }
     
     .service-item:hover, .service-item:focus-within {
@@ -412,99 +425,31 @@
         color: var(--secondary-color);
     }
     
-    .carousel {
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
+    .swiper-container {
+        width: 100%;
+        padding-bottom: 50px;
     }
     
-    .carousel-track {
-        display: flex;
-        transition: transform var(--transition-speed) ease;
-    }
-    
-    .carousel-item {
-        min-width: 100%;
+    .swiper-slide {
         position: relative;
     }
     
-    .carousel-item img {
+    .swiper-slide img {
         width: 100%;
         height: 400px;
         object-fit: cover;
-        display: block;
         border-radius: 10px;
     }
     
-    .carousel-caption {
+    .swiper-slide .swiper-caption {
         position: absolute;
         bottom: 20px;
         left: 20px;
         background: rgba(0, 0, 0, 0.6);
         padding: 1em 1.5em;
         border-radius: 5px;
-    }
-    
-    .carousel-caption h3 {
-        font-size: 1.5em;
-        margin-bottom: 0.5em;
         color: #ffffff;
-    }
-    
-    .carousel-caption p {
-        font-size: 1em;
-        color: #dddddd;
-    }
-    
-    .carousel-control {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.5);
-        border: none;
-        color: #ffffff;
-        padding: 0.5em;
-        cursor: pointer;
-        border-radius: 50%;
-        transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
-    }
-    
-    .carousel-control:hover, .carousel-control:focus {
-        background: rgba(0, 0, 0, 0.8);
-        transform: translateY(-50%) scale(1.1);
-    }
-    
-    .carousel-control.prev {
-        left: 10px;
-    }
-    
-    .carousel-control.next {
-        right: 10px;
-    }
-    
-    /* Carousel Indicators */
-    .carousel-indicators {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-    }
-    
-    .carousel-indicators button {
-        background-color: rgba(255, 255, 255, 0.5);
-        border: none;
-        width: 10px;
-        height: 10px;
-        margin: 0 5px;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
-    }
-    
-    .carousel-indicators button.active, .carousel-indicators button:hover, .carousel-indicators button:focus {
-        background-color: rgba(255, 255, 255, 0.9);
-        transform: scale(1.2);
+        max-width: 80%;
     }
     
     /* Testimonials Section */
@@ -515,6 +460,11 @@
         border-radius: 10px;
         border: 1px solid var(--border-color);
         box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        transition: box-shadow var(--transition-speed) ease;
+    }
+    
+    .testimonials:hover, .testimonials:focus-within {
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     }
     
     .testimonials h2 {
@@ -543,6 +493,25 @@
         font-style: italic;
         color: var(--muted-text-color);
         margin-bottom: 0.5em;
+        position: relative;
+        padding: 0 1em;
+    }
+    
+    .testimonial-item p::before, .testimonial-item p::after {
+        content: '"';
+        font-size: 2em;
+        color: var(--accent-color);
+        position: absolute;
+    }
+    
+    .testimonial-item p::before {
+        left: -10px;
+        top: -10px;
+    }
+    
+    .testimonial-item p::after {
+        right: -10px;
+        bottom: -10px;
     }
     
     .testimonial-item h4 {
@@ -609,6 +578,13 @@
         border-radius: 5px;
         outline: none;
         transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+    
+    .contact-form-container input::placeholder,
+    .contact-form-container textarea::placeholder {
+        color: var(--muted-text-color);
     }
     
     .contact-form-container input:focus,
@@ -798,10 +774,14 @@
         width: 100%;
         height: 100%;
         overflow: auto;
-        background-color: var(--modal-bg-color);
+        background-color: var(--overlay-color);
         justify-content: center;
         align-items: center;
         animation: fadeIn 0.5s forwards;
+    }
+    
+    .newsletter-modal.show {
+        display: flex;
     }
     
     .newsletter-content {
@@ -829,6 +809,12 @@
         border-radius: 5px;
         outline: none;
         transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+    
+    .newsletter-content form input[type="email"]::placeholder {
+        color: var(--muted-text-color);
     }
     
     .newsletter-content form input[type="email"]:focus {
@@ -872,7 +858,46 @@
         from {transform: translateY(-50px); opacity: 0;}
         to {transform: translateY(0); opacity: 1;}
     }
+    
+    /* Testimonials Animation */
+    .testimonial-item {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s forwards;
+    }
+    
+    .testimonial-item:nth-child(1) { animation-delay: 0.3s; }
+    .testimonial-item:nth-child(2) { animation-delay: 0.6s; }
+    .testimonial-item:nth-child(3) { animation-delay: 0.9s; }
+    
+    /* Swiper.js Customization */
+    .swiper-button-prev, .swiper-button-next {
+        color: var(--primary-color);
+    }
+    
+    .swiper-pagination-bullet-active {
+        background-color: var(--accent-color);
+    }
+    
+    /* Responsive Images */
+    .contact img.profile-photo {
+        border: 3px solid var(--primary-color);
+        transition: transform var(--transition-speed) ease;
+    }
+    
+    .contact img.profile-photo:hover, .contact img.profile-photo:focus {
+        transform: scale(1.05);
+    }
+    
+    /* Animation Enhancements */
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
     </style>
+    
+    <!-- Swiper.js for Advanced Carousel -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     
     <!-- Schema.org for SEO -->
     <script type="application/ld+json">
@@ -891,7 +916,8 @@
       "sameAs": [
         "https://www.facebook.com/yourconstructioncompany",
         "https://www.twitter.com/yourconstructioncompany",
-        "https://www.instagram.com/yourconstructioncompany"
+        "https://www.instagram.com/yourconstructioncompany",
+        "https://www.linkedin.com/company/yourconstructioncompany"
       ]
     }
     </script>
@@ -919,7 +945,7 @@
     <nav class="navbar" role="navigation" aria-label="Main Navigation">
         <div class="container">
             <div class="brand">
-                <a href="index.html">YourCompany</a>
+                <a href="#hero">YourCompany</a>
             </div>
             <button class="navbar-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="navbar-menu">
                 <i class="fas fa-bars"></i>
@@ -950,7 +976,7 @@
     <!-- Hero Section -->
     <header class="hero" id="hero" role="banner">
         <div class="hero-content">
-            <h1>Building Your Dreams</h1>
+            <h1>Building Your Dreams with Precision</h1>
             <p>Professional construction services for residential and commercial projects.</p>
             <button class="cta-button" id="subscribe-button">Get a Free Quote</button>
         </div>
@@ -989,39 +1015,37 @@
             <!-- Projects/Portfolio Section -->
             <section class="projects" id="projects">
                 <h2>Our Projects</h2>
-                <div class="carousel">
-                    <div class="carousel-track">
-                        <div class="carousel-item current-slide">
+                <!-- Swiper -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
                             <img src="https://via.placeholder.com/800x400" alt="Project 1" class="lazy" data-src="https://via.placeholder.com/800x400">
-                            <div class="carousel-caption">
+                            <div class="swiper-caption">
                                 <h3>Modern Apartment Building</h3>
                                 <p>Completed in 2023, this project showcases our expertise in residential construction.</p>
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="swiper-slide">
                             <img src="https://via.placeholder.com/800x400" alt="Project 2" class="lazy" data-src="https://via.placeholder.com/800x400">
-                            <div class="carousel-caption">
+                            <div class="swiper-caption">
                                 <h3>Corporate Office Complex</h3>
                                 <p>Delivered a state-of-the-art commercial space for a leading corporation.</p>
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="swiper-slide">
                             <img src="https://via.placeholder.com/800x400" alt="Project 3" class="lazy" data-src="https://via.placeholder.com/800x400">
-                            <div class="carousel-caption">
+                            <div class="swiper-caption">
                                 <h3>Luxury Villa Renovation</h3>
                                 <p>Transformed a historic villa into a modern luxury residence.</p>
                             </div>
                         </div>
+                        <!-- Add more swiper-slides as needed -->
                     </div>
-                    <!-- Carousel Controls -->
-                    <button class="carousel-control prev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-control next" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
-                    <!-- Carousel Indicators -->
-                    <div class="carousel-indicators">
-                        <button class="indicator active" aria-label="Slide 1"></button>
-                        <button class="indicator" aria-label="Slide 2"></button>
-                        <button class="indicator" aria-label="Slide 3"></button>
-                    </div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
                 </div>
             </section>
 
@@ -1174,6 +1198,25 @@
             }
         });
 
+        // Initialize Swiper.js for Projects Carousel
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'slide',
+            speed: 800,
+        });
+
         // Service Worker Registration for PWA (Optional)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -1187,7 +1230,7 @@
             });
         }
 
-        // Lazy Loading Images
+        // Lazy Loading Images using IntersectionObserver
         const lazyImages = document.querySelectorAll("img.lazy");
         const config = {
             rootMargin: '50px 0px',
@@ -1223,111 +1266,26 @@
         const captionText = document.getElementById('caption');
         const closeLightbox = document.getElementById('close-lightbox');
 
-        document.querySelectorAll('.lightbox').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                lightboxModal.style.display = 'flex';
-                lightboxImg.src = anchor.href;
-                captionText.innerHTML = anchor.getAttribute('aria-label');
+        document.querySelectorAll('.swiper-slide img, .service-item img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                captionText.textContent = img.alt;
+                lightboxModal.classList.add('show');
                 lightboxModal.setAttribute('aria-hidden', 'false');
             });
         });
 
         closeLightbox.addEventListener('click', () => {
-            lightboxModal.style.display = 'none';
+            lightboxModal.classList.remove('show');
             lightboxModal.setAttribute('aria-hidden', 'true');
         });
 
         window.addEventListener('click', (e) => {
             if (e.target == lightboxModal) {
-                lightboxModal.style.display = 'none';
+                lightboxModal.classList.remove('show');
                 lightboxModal.setAttribute('aria-hidden', 'true');
             }
         });
-
-        // Featured Projects Carousel
-        const carouselTrack = document.querySelector('.carousel-track');
-        const carouselItems = Array.from(carouselTrack.children);
-        const prevButton = document.querySelector('.carousel-control.prev');
-        const nextButton = document.querySelector('.carousel-control.next');
-        const indicatorsContainer = document.querySelector('.carousel-indicators');
-        const indicators = Array.from(indicatorsContainer.children);
-        let carouselWidth = carouselTrack.getBoundingClientRect().width;
-
-        // Arrange the slides next to one another
-        carouselItems.forEach((slide, index) => {
-            slide.style.left = carouselWidth * index + 'px';
-        });
-
-        // Update carouselWidth on window resize
-        window.addEventListener('resize', () => {
-            carouselWidth = carouselTrack.getBoundingClientRect().width;
-            carouselItems.forEach((slide, index) => {
-                slide.style.left = carouselWidth * index + 'px';
-            });
-            moveToSlide(carouselTrack, currentSlide, currentSlide);
-        });
-
-        let currentSlide = carouselTrack.querySelector('.current-slide');
-
-        const moveToSlide = (track, current, target) => {
-            track.style.transform = 'translateX(-' + target.style.left + ')';
-            current.classList.remove('current-slide');
-            target.classList.add('current-slide');
-
-            // Update indicators
-            const currentIndex = carouselItems.indexOf(target);
-            indicators.forEach(indicator => indicator.classList.remove('active'));
-            if(indicators[currentIndex]){
-                indicators[currentIndex].classList.add('active');
-            }
-        };
-
-        prevButton.addEventListener('click', () => {
-            const current = carouselTrack.querySelector('.current-slide');
-            const prev = current.previousElementSibling || carouselItems[carouselItems.length - 1];
-            moveToSlide(carouselTrack, current, prev);
-        });
-
-        nextButton.addEventListener('click', () => {
-            const current = carouselTrack.querySelector('.current-slide');
-            const next = current.nextElementSibling || carouselItems[0];
-            moveToSlide(carouselTrack, current, next);
-        });
-
-        // Indicator Clicks
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                const targetSlide = carouselItems[index];
-                moveToSlide(carouselTrack, carouselTrack.querySelector('.current-slide'), targetSlide);
-            });
-        });
-
-        // Auto-slide functionality
-        let autoSlideInterval = setInterval(() => {
-            const current = carouselTrack.querySelector('.current-slide');
-            const next = current.nextElementSibling || carouselItems[0];
-            moveToSlide(carouselTrack, current, next);
-        }, 5000); // Change slide every 5 seconds
-
-        // Pause auto-slide on hover
-        document.querySelector('.carousel').addEventListener('mouseenter', () => {
-            clearInterval(autoSlideInterval);
-        });
-
-        document.querySelector('.carousel').addEventListener('mouseleave', () => {
-            autoSlideInterval = setInterval(() => {
-                const current = carouselTrack.querySelector('.current-slide');
-                const next = current.nextElementSibling || carouselItems[0];
-                moveToSlide(carouselTrack, current, next);
-            }, 5000);
-        });
-
-        // Initialize the first slide
-        if (carouselItems.length > 0) {
-            carouselItems[0].classList.add('current-slide');
-            indicators[0].classList.add('active');
-        }
 
         // Newsletter Modal Functionality
         const subscribeBtn = document.getElementById('subscribe-button');
@@ -1335,18 +1293,18 @@
         const closeNewsletter = document.getElementById('close-newsletter');
 
         subscribeBtn.addEventListener('click', () => {
-            newsletterModal.style.display = 'flex';
+            newsletterModal.classList.add('show');
             newsletterModal.setAttribute('aria-hidden', 'false');
         });
 
         closeNewsletter.addEventListener('click', () => {
-            newsletterModal.style.display = 'none';
+            newsletterModal.classList.remove('show');
             newsletterModal.setAttribute('aria-hidden', 'true');
         });
 
         window.addEventListener('click', (e) => {
             if (e.target == newsletterModal) {
-                newsletterModal.style.display = 'none';
+                newsletterModal.classList.remove('show');
                 newsletterModal.setAttribute('aria-hidden', 'true');
             }
         });
@@ -1356,9 +1314,10 @@
         newsletterForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('newsletter-email').value;
+            // Integrate with backend or email marketing service here
             alert(`Thank you for subscribing with email: ${email}`);
             newsletterForm.reset();
-            newsletterModal.style.display = 'none';
+            newsletterModal.classList.remove('show');
             newsletterModal.setAttribute('aria-hidden', 'true');
         });
 
@@ -1369,6 +1328,7 @@
             const name = document.getElementById('contact-name').value;
             const email = document.getElementById('contact-email').value;
             const message = document.getElementById('contact-message').value;
+            // Integrate with backend or email service here
             alert(`Thank you, ${name}! Your message has been received.`);
             contactForm.reset();
         });
@@ -1380,6 +1340,7 @@
                 e.preventDefault();
                 const query = searchInput.value.trim();
                 if(query){
+                    // Integrate with search functionality here
                     alert(`You searched for: ${query}`);
                     searchInput.value = '';
                 }
@@ -1387,6 +1348,6 @@
         });
     });
     </script>
-
+    
 </body>
 </html>
