@@ -34,28 +34,28 @@
     <link rel="manifest" href="manifest.json">
 
     <!-- External Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pOHIW69kJgk4u... (use actual integrity hash)" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pOHIW69kJgk4u..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Internal CSS Styles -->
     <style>
     /* CSS Variables for Theme Customization */
     :root {
-        --primary-color: #ff6f61;
-        --secondary-color: #2c3e50;
-        --accent-color: #3498db;
-        --background-color: #f0f4f8;
+        --primary-color: #6C63FF;
+        --secondary-color: #1A1A2E;
+        --accent-color: #C792EA;
+        --background-color: #F7F7FF;
         --text-color: #333;
         --muted-text-color: #777;
-        --border-color: #ddd;
-        --font-family-base: 'Roboto', sans-serif;
+        --border-color: #E0E0E0;
+        --font-family-base: 'Montserrat', sans-serif;
         --font-family-heading: 'Playfair Display', serif;
         --transition-speed: 0.3s;
         --max-width: 1200px;
         --header-height: 80px;
-        --footer-bg-color: #2c3e50;
+        --footer-bg-color: #1A1A2E;
         --lightbox-bg: rgba(0, 0, 0, 0.8);
     }
 
@@ -63,11 +63,11 @@
     @media (prefers-color-scheme: dark) {
         :root {
             --background-color: #121212;
-            --text-color: #e0e0e0;
-            --secondary-color: #e0e0e0;
+            --text-color: #E0E0E0;
+            --secondary-color: #E0E0E0;
             --border-color: #444;
             --muted-text-color: #999;
-            --footer-bg-color: #1a1a1a;
+            --footer-bg-color: #000000;
             --lightbox-bg: rgba(255, 255, 255, 0.1);
         }
     }
@@ -97,7 +97,7 @@
 
     a:hover,
     a:focus {
-        color: #e55b50;
+        color: var(--accent-color);
         text-decoration: underline;
     }
 
@@ -127,7 +127,7 @@
     }
 
     .navbar.scrolled {
-        background-color: rgba(255, 111, 97, 0.95);
+        background-color: rgba(108, 99, 255, 0.95);
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
@@ -169,7 +169,7 @@
 
     .navbar-menu a:hover,
     .navbar-menu a:focus {
-        color: #e55b50;
+        color: var(--accent-color);
     }
 
     .navbar.scrolled .navbar-menu a {
@@ -254,7 +254,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,0.5);
+        background: rgba(0,0,0,0.4);
         z-index: 0;
     }
 
@@ -285,21 +285,21 @@
     .hero .cta-button {
         margin-top: 2em;
         padding: 0.75em 2em;
-        background-color: var(--accent-color);
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
         color: #fff;
         border: none;
         border-radius: 50px;
         font-size: 1em;
         font-weight: 600;
         cursor: pointer;
-        transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
         text-transform: uppercase;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     .hero .cta-button:hover,
     .hero .cta-button:focus {
-        background-color: #2980b9;
+        background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
         transform: translateY(-2px);
     }
 
@@ -363,6 +363,7 @@
         width: 100%;
         height: 400px;
         object-fit: cover;
+        display: block;
     }
 
     .carousel-caption {
@@ -710,27 +711,27 @@
     .contact-form input:focus,
     .contact-form textarea:focus {
         border-color: var(--primary-color);
-        box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+        box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
         outline: none;
     }
 
     .contact-form button {
         width: 100%;
         padding: 0.8em;
-        background-color: var(--primary-color);
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
         color: #fff;
         border: none;
         cursor: pointer;
         border-radius: 5px;
         font-size: 1em;
         font-weight: 600;
-        transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     .contact-form button:hover,
     .contact-form button:focus {
-        background-color: #e55b50;
+        background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
         transform: translateY(-2px);
     }
 
@@ -953,6 +954,7 @@
         color: #fff;
         font-size: 1.5em;
     }
+
     </style>
 
     <!-- Schema.org for SEO -->
@@ -1027,7 +1029,7 @@
                 <h2>Featured Posts</h2>
                 <div class="carousel">
                     <div class="carousel-track">
-                        <div class="carousel-item">
+                        <div class="carousel-item current-slide">
                             <img src="https://via.placeholder.com/800x400" alt="Featured Post 1" class="lazy" data-src="https://via.placeholder.com/800x400">
                             <div class="carousel-caption">
                                 <h3><a href="#">Featured Post Title 1</a></h3>
@@ -1318,8 +1320,6 @@
             slide.style.left = carouselWidth * index + 'px';
         });
 
-        let currentSlide = 0;
-
         const moveToSlide = (track, current, target) => {
             track.style.transform = 'translateX(-' + target.style.left + ')';
             current.classList.remove('current-slide');
@@ -1339,11 +1339,24 @@
         });
 
         // Auto-slide functionality
-        setInterval(() => {
+        let autoSlideInterval = setInterval(() => {
             const current = carouselTrack.querySelector('.current-slide') || carouselItems[0];
             const next = current.nextElementSibling || carouselItems[0];
             moveToSlide(carouselTrack, current, next);
         }, 5000); // Change slide every 5 seconds
+
+        // Pause auto-slide on hover
+        document.querySelector('.carousel').addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        document.querySelector('.carousel').addEventListener('mouseleave', () => {
+            autoSlideInterval = setInterval(() => {
+                const current = carouselTrack.querySelector('.current-slide') || carouselItems[0];
+                const next = current.nextElementSibling || carouselItems[0];
+                moveToSlide(carouselTrack, current, next);
+            }, 5000);
+        });
 
         // Initialize the first slide
         if (carouselItems.length > 0) {
