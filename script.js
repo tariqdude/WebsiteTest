@@ -31,6 +31,23 @@ if (typedHero) {
     });
 }
 
+// Theme selector
+function applyTheme(theme) {
+    document.body.classList.remove('theme-blue', 'theme-green', 'theme-orange');
+    document.body.classList.add(`theme-${theme}`);
+}
+const themeSelector = document.getElementById('themeSelector');
+if (themeSelector) {
+    const savedTheme = localStorage.getItem('color-theme') || 'blue';
+    applyTheme(savedTheme);
+    themeSelector.value = savedTheme;
+    themeSelector.addEventListener('change', () => {
+        const theme = themeSelector.value;
+        applyTheme(theme);
+        localStorage.setItem('color-theme', theme);
+    });
+}
+
 const counterElements = document.querySelectorAll('.stat-number');
 counterElements.forEach(element => {
     const targetCount = parseInt(element.dataset.count);

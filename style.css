@@ -16,6 +16,20 @@ html {
     --text-light-color: #e0e0e0;
 }
 
+/* Theme color sets */
+.theme-blue {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+}
+.theme-green {
+    --primary-color: #28a745;
+    --secondary-color: #218838;
+}
+.theme-orange {
+    --primary-color: #fd7e14;
+    --secondary-color: #e8590c;
+}
+
 body {
     font-family: 'Nunito Sans', sans-serif;
     line-height: 1.8;
@@ -786,6 +800,12 @@ body.dark-mode #scrollProgress {
 }
 #darkModeToggle {
     margin-left: auto;
+}
+#themeSelector {
+    margin-left: 15px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--secondary-color);
 }
 #backToTop {
     position: fixed;
