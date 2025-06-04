@@ -46,3 +46,13 @@ Edit these portions to customize animations or disable features as needed.
 - Ensure you have an internet connection so the CDN links for fonts and third-party libraries load correctly.
 - When editing JavaScript, check the browser console for any errors.
 - Use semantic HTML and keep accessibility in mind when extending the markup.
+
+## Deployment
+
+When deploying the site to a new domain you should update the SEO files:
+
+1. Open `index.html` and change the `href` of the `<link rel="canonical">` tag to match the production URL.
+2. Edit `robots.txt` so the `Sitemap` line points to the correct domain.
+3. Update the URLs in `sitemap.xml` with your deployed domain.
+
+These steps ensure search engines index the correct locations after each deployment.
