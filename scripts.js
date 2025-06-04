@@ -51,3 +51,40 @@ if(scrollBtn){
   });
 }
 
+// Contact form submission via Fetch
+document.addEventListener('DOMContentLoaded', () => {
+  const contactForm = document.querySelector('.contact form');
+  if (!contactForm) return;
+  const statusEl = contactForm.querySelector('.form-status');
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if(statusEl){
+      statusEl.textContent = 'Sending...';
+      statusEl.classList.remove('error', 'success');
+    }
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        if(statusEl){
+          statusEl.textContent = 'Thanks for your message!';
+          statusEl.classList.add('success');
+        }
+        contactForm.reset();
+      } else {
+        const data = await response.json();
+        const msg = data.errors ? data.errors.map(err => err.message).join(', ') : 'Submission failed';
+        throw new Error(msg);
+      }
+    } catch(err) {
+      if(statusEl){
+        statusEl.textContent = 'Error: ' + err.message;
+        statusEl.classList.add('error');
+      }
+    }
+  });
+});
+

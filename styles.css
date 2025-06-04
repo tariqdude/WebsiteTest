@@ -89,6 +89,9 @@ a:hover {text-decoration: underline;}
 .contact input, .contact textarea {width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px;}
 .contact button {background:var(--color-accent); color:white; border:none; padding:0.75rem; border-radius:4px; cursor:pointer; transition:background var(--transition-fast);} 
 .contact button:hover {background:#128066;}
+.form-status{text-align:center;margin-top:0.5rem;font-weight:bold;}
+.form-status.success{color:var(--color-accent);}
+.form-status.error{color:#e74c3c;}
 .footer {text-align:center; padding:2rem 1rem; background:#222; color:#fff;}
 .footer a {color:#fff; margin:0 0.5rem;}
 .mode-toggle {position:fixed; bottom:1rem; right:1rem; background:var(--color-accent); border:none; color:#fff; padding:0.5rem; border-radius:50%; font-size:1.2rem; cursor:pointer;}
