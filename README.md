@@ -38,7 +38,11 @@ You can also switch between predefined color schemes by appending a
 `variant` query parameter to the URL, e.g. `index.html?variant=green` or
 `?variant=red`. The chosen variant is stored in `localStorage` so it
 persists on subsequent visits. Available variants correspond to the
-`data-variant` rules in `style.css`.
+`data-variant` rules in `style.css` and include:
+
+- `green` – emerald accents
+- `red` – crimson accents
+- `purple` – violet accents
 
 ## Adjusting Scripts
 
