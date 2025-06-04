@@ -7,11 +7,20 @@
 html {
     scroll-behavior: smooth;
 }
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --bg-light: #fefefe;
+    --bg-dark: #1e1e1e;
+    --text-color: #333;
+    --text-light-color: #e0e0e0;
+}
+
 body {
     font-family: 'Nunito Sans', sans-serif;
     line-height: 1.8;
-    color: #333;
-    background-color: #fefefe;
+    color: var(--text-color);
+    background-color: var(--bg-light);
     overflow-x: hidden;
 }
 
@@ -21,7 +30,7 @@ body {
     left: 0;
     height: 4px;
     width: 0;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     z-index: 1100;
     transition: width 0.25s ease;
 }
@@ -61,13 +70,13 @@ img {
     transform: translateX(-50%);
     width: 100px;
     height: 6px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     border-radius: 6px;
 }
 .btn {
     display: inline-block;
     padding: 16px 40px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border-radius: 8px;
     font-weight: 600;
@@ -83,7 +92,7 @@ img {
     box-shadow: 0 9px 22px rgba(0, 123, 255, 0.45);
 }
 .btn-secondary {
-    background-color: #6c757d;
+    background-color: var(--secondary-color);
     box-shadow: 0 6px 18px rgba(108, 117, 125, 0.35);
 }
 .btn-secondary:hover {
@@ -110,7 +119,7 @@ img {
 .logo {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #007bff;
+    color: var(--primary-color);
     transition: transform 0.3s ease;
 }
 .logo:hover {
@@ -127,7 +136,7 @@ img {
     border: none;
     font-size: 1.8rem;
     cursor: pointer;
-    color: #007bff;
+    color: var(--primary-color);
 }
 .nav-links li a {
     color: #555;
@@ -142,11 +151,11 @@ img {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     transition: width 0.4s ease;
 }
 .nav-links li a:hover, .nav-links li a:focus {
-    color: #007bff;
+    color: var(--primary-color);
 }
 .nav-links li a:hover::after, .nav-links li a:focus::after {
     width: 100%;
@@ -154,7 +163,7 @@ img {
 .nav-links li a.active,
 .nav-links li a.active:hover,
 .nav-links li a.active:focus {
-    color: #007bff;
+    color: var(--primary-color);
 }
 .nav-links li a.active::after {
     width: 100%;
@@ -253,7 +262,7 @@ img {
 .stat-number {
     font-size: 3.5rem;
     font-weight: 800;
-    color: #007bff;
+    color: var(--primary-color);
     transition: transform 0.3s ease;
 }
 .stat-number:hover {
@@ -289,7 +298,7 @@ img {
 }
 .service-icon {
     font-size: 4.5rem;
-    color: #007bff;
+    color: var(--primary-color);
     margin-bottom: 40px;
     opacity: 0.9;
     transition: transform 0.4s ease;
@@ -371,7 +380,7 @@ img {
     line-height: 1.8;
 }
 .swiper-pagination-bullet-active {
-    background-color: #007bff;
+    background-color: var(--primary-color);
 }
 
 /* Testimonials Section */
@@ -501,7 +510,7 @@ img {
     font-weight: 400;
 }
 .contact-details-list li i {
-    color: #007bff;
+    color: var(--primary-color);
     font-size: 1.5rem;
 }
 .contact-form {
@@ -516,6 +525,12 @@ img {
     color: #2a2a2a;
     text-align: center;
     font-weight: 700;
+}
+.form-status {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 .form-group {
     margin-bottom: 40px;
@@ -540,7 +555,7 @@ img {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
 }
 .form-group textarea {
@@ -746,8 +761,8 @@ img {
 
 /* Dark Mode Styles */
 body.dark-mode {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
+    background-color: var(--bg-dark);
+    color: var(--text-light-color);
 }
 body.dark-mode .header {
     background-color: #222;
@@ -761,7 +776,7 @@ body.dark-mode .projects,
 body.dark-mode .testimonials,
 body.dark-mode .about,
 body.dark-mode .contact {
-    background-color: #1e1e1e;
+    background-color: var(--bg-dark);
 }
 body.dark-mode a {
     color: #4da3ff;
@@ -776,7 +791,7 @@ body.dark-mode #scrollProgress {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 50%;
@@ -801,6 +816,16 @@ body.dark-mode #scrollProgress {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Custom animation delays for finer control */
+.animate__delay-0-2s { animation-delay: 0.2s !important; }
+.animate__delay-0-4s { animation-delay: 0.4s !important; }
+.animate__delay-0-5s { animation-delay: 0.5s !important; }
+.animate__delay-0-6s { animation-delay: 0.6s !important; }
+.animate__delay-1-2s { animation-delay: 1.2s !important; }
+.animate__delay-1-4s { animation-delay: 1.4s !important; }
+.animate__delay-1-6s { animation-delay: 1.6s !important; }
+.animate__delay-1-8s { animation-delay: 1.8s !important; }
 
 /* Sticky Header on Scroll */
 .header.scrolled {

@@ -11,6 +11,7 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&cs=tinysrgb&fit=crop&w=1200&h=630&q=80">
     <meta property="og:url" content="https://apexbuild.example.com">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063823.png">
+    <meta name="theme-color" content="#007bff">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +24,7 @@
     <div id="scrollProgress"></div>
 
     <header class="header">
-        <nav class="navbar container">
+        <nav class="navbar container" role="navigation" aria-label="Main navigation">
             <a href="#" class="logo">ApexBuild</a>
             <button id="mobileMenuToggle" class="hamburger" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
             <ul id="navMenu" class="nav-links">
@@ -235,6 +236,7 @@
             </div>
             <div class="contact-form animate__animated animate__fadeInRight">
                 <h3>Send a Quick Inquiry</h3>
+                <div id="formStatus" class="form-status" aria-live="polite"></div>
                 <form action="#" method="POST">
                     <div class="form-group">
                         <label for="name">Your Name</label>
