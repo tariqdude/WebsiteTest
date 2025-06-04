@@ -1,3 +1,5 @@
+// @ts-check
+
 const swiper = new Swiper('.swiper-container', {
     slidesPerView: 'auto',
     spaceBetween: 30,
@@ -45,6 +47,17 @@ if (typedHero && !prefersReducedMotion) {
         backDelay: 2000,
         loop: true
     });
+}
+
+// Edge-style personalization from query params
+const params = new URLSearchParams(window.location.search);
+const variant = params.get('variant');
+if (variant) {
+    localStorage.setItem('apex-variant', variant);
+}
+const savedVariant = localStorage.getItem('apex-variant');
+if (savedVariant && typedHero) {
+    typedHero.dataset.variant = savedVariant;
 }
 
 const counterElements = document.querySelectorAll('.stat-number');
@@ -196,11 +209,11 @@ const cookieBanner = document.getElementById('cookieConsent');
 const acceptCookies = document.getElementById('acceptCookies');
 if (cookieBanner && acceptCookies) {
     if (!localStorage.getItem('cookies-accepted')) {
-        cookieBanner.classList.add('show');
+        cookieBanner.showModal();
     }
     acceptCookies.addEventListener('click', () => {
         localStorage.setItem('cookies-accepted', 'true');
-        cookieBanner.classList.remove('show');
+        cookieBanner.close();
     });
 }
 
@@ -208,4 +221,28 @@ if (cookieBanner && acceptCookies) {
 const yearEl = document.getElementById('currentYear');
 if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
+}
+
+// Pointer ring effect
+const pointerRing = document.getElementById('pointerRing');
+if (pointerRing) {
+    window.addEventListener('pointermove', e => {
+        pointerRing.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+}
+
+// Service worker for offline caching
+if ('serviceWorker' in navigator) {
+    const swCode = `
+    const cacheName = 'apex-cache-v1';
+    const assets = ['index.html', 'style.css', 'script.js'];
+    self.addEventListener('install', e => {
+        e.waitUntil(caches.open(cacheName).then(c => c.addAll(assets)));
+    });
+    self.addEventListener('fetch', e => {
+        e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
+    });`;
+    const blob = new Blob([swCode], { type: 'application/javascript' });
+    const url = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(url);
 }
