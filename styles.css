@@ -94,6 +94,19 @@ nav {
   transition: transform var(--transition);
 }
 .card:hover { transform: translateY(-4px); }
+main > section {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity var(--transition), transform var(--transition);
+}
+main > section.visible {
+  opacity: 1;
+  transform: none;
+}
+.hero {
+  opacity: 1;
+  transform: none;
+}
 footer { text-align: center; padding: 2rem 0; }
 button { background: var(--accent); color: #fff; border: none; padding: 0.5rem 1rem; }
 #theme-toggle { background: none; color: var(--fg); font-size: 1.25rem; }
