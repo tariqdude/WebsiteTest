@@ -9,6 +9,13 @@ npm install -g http-server # optional for local preview
 http-server -c-1 .
 ```
 
+Run the build to generate minified assets:
+
+```bash
+npm ci
+npm run build
+```
+
 Visit `http://localhost:8080` and open devtools Lighthouse to verify scores.
 
 ## PWA Install
