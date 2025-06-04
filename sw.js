@@ -15,7 +15,10 @@ const assets = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(cacheName).then(cache => cache.addAll(assets))
+    caches
+      .open(cacheName)
+      .then(cache => cache.addAll(assets))
+      .then(() => self.skipWaiting())
   );
 });
 
