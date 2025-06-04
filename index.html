@@ -10,6 +10,8 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&cs=tinysrgb&fit=crop&w=1200&h=630&q=80">
     <meta property="og:url" content="https://apexbuild.example.com">
+    <link rel="canonical" href="https://apexbuild.example.com/">
+    <meta name="robots" content="index, follow">
     <link rel="icon" href="icon.svg">
     <meta name="theme-color" content="#007bff">
     <link rel="manifest" href="manifest.json">
@@ -17,22 +19,31 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;h=800&amp;ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyfHxjb25zdHJ1Y3Rpb24lMjBzaXRlfGVufDB8fHx8fA%3D%3D&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1600" as="image" fetchpriority="high">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" integrity="sha384-WDy11dc+3v52BOTt9WHuWenX6bjqGVBwYrU4XtgPIrneMtg1bXhpmWEZECSNrasO" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha384-j8k79CRseh745AwpSHjW97GmPlQe7+0/P1jKKUY7ciLKTMqTbXjdBjaAIc3cVYyg" crossorigin="anonymous"/>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dialog-polyfill.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": "LocalBusiness",
         "name": "ApexBuild Construction",
         "url": "https://apexbuild.example.com",
-        "logo": "icon.svg"
+        "logo": "icon.svg",
+        "telephone": "+1-800-APEX-BUILD",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "456 Main Street, Suite 789",
+            "addressLocality": "Construction City",
+            "addressRegion": "USA"
+        }
     }
     </script>
 </head>
@@ -70,7 +81,7 @@
     <section id="about" class="section about reveal">
         <div class="container about-content">
             <div class="about-image animate__animated animate__fadeInLeft">
-                <img src="https://images.unsplash.com/photo-1583455413184-8471a639cc9c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=800" alt="ApexBuild Team at Work" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1583455413184-8471a639cc9c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=800" alt="ApexBuild Team at Work" loading="lazy" width="800" height="600">
             </div>
             <div class="about-text animate__animated animate__fadeInRight">
                 <h2 class="section-title">Decades of Dedication to Construction Excellence</h2>
@@ -140,7 +151,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1616385478000-6d8b7755c926?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwxOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Modern Villa" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1616385478000-6d8b7755c926?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwxOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Modern Villa" loading="lazy" width="1200" height="800">
                         </div>
                         <div class="project-card-inner">
                             <div class="project-info">
@@ -151,7 +162,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1551526594-03b0040a60e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyMHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Office Building" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1551526594-03b0040a60e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyMHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Office Building" loading="lazy" width="1200" height="800">
                         </div>
                         <div class="project-card-inner">
                             <div class="project-info">
@@ -162,7 +173,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1546483388-f3b311970061?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyNXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Warehouse Facility" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1546483388-f3b311970061?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyNXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Warehouse Facility" loading="lazy" width="1200" height="800">
                         </div>
                         <div class="project-card-inner">
                             <div class="project-info">
@@ -173,7 +184,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1623182358745-418282924a4f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Retail Space" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1623182358745-418282924a4f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Retail Space" loading="lazy" width="1200" height="800">
                         </div>
                         <div class="project-card-inner">
                             <div class="project-info">
@@ -198,7 +209,7 @@
                     <p class="testimonial-quote">"ApexBuild didn't just build our house, they crafted a home filled with warmth and character. Their team's dedication and artistry were evident in every detail. Truly exceptional!"</p>
                     <div class="testimonial-author-info">
                         <div class="author-image">
-                            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah Johnson" loading="lazy">
+                            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah Johnson" loading="lazy" width="128" height="128">
                         </div>
                         <div class="author-details">
                             <p class="author-name">Sarah Johnson</p>
@@ -213,7 +224,7 @@
                     <p class="testimonial-quote">"Choosing ApexBuild for our office complex was game-changing. Their efficiency, communication, and the final product were all top-tier. A truly seamless and impressive experience."</p>
                     <div class="testimonial-author-info">
                         <div class="author-image">
-                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Michael Davis" loading="lazy">
+                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Michael Davis" loading="lazy" width="128" height="128">
                         </div>
                         <div class="author-details">
                             <p class="author-name">Michael Davis</p>
@@ -228,7 +239,7 @@
                     <p class="testimonial-quote">"ApexBuild transformed our outdated facility into a modern, efficient hub, exceeding all expectations. Their renovation expertise is unparalleled, delivering ahead of schedule and under budget."</p>
                     <div class="testimonial-author-info">
                         <div class="author-image">
-                            <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Emily White" loading="lazy">
+                            <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Emily White" loading="lazy" width="128" height="128">
                         </div>
                         <div class="author-details">
                             <p class="author-name">Emily White</p>
@@ -262,15 +273,15 @@
                 <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" autocomplete="name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" autocomplete="email" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number (Optional)</label>
-                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" autocomplete="tel">
                     </div>
                     <div class="form-group">
                         <label for="message">Project Details</label>
@@ -290,10 +301,10 @@
                 <h4>About ApexBuild</h4>
                 <p>ApexBuild Construction is dedicated to pushing the boundaries of construction, blending innovation with reliability to create structures that inspire and endure.</p>
                 <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i><span class="visually-hidden">Facebook</span></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span class="visually-hidden">Twitter</span></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i><span class="visually-hidden">Instagram</span></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="visually-hidden">LinkedIn</span></a>
                 </div>
             </div>
             <div class="footer-section">
@@ -330,9 +341,9 @@
     </dialog>
 
     <button id="backToTop" aria-label="Back to top">&uarr;</button>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer integrity="sha384-UpSTlZpLDzenAXs6CRRa5gU7uk1xaEJy+7uIz+c0niFDR3yuAlqzV7w0SgZhmEX3" crossorigin="anonymous"></script>
     <div id="pointerRing" aria-hidden="true"></div>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer integrity="sha384-NMn9+T8zIKnDUstqb5le7vdLNSyAgSU9DtEPT/b7ks9NJQpPk4Dc9b1tI8oyzimc" crossorigin="anonymous"></script>
     <script src="dialog-polyfill.js"></script>
     <script type="module" defer src="script.js"></script>
 
