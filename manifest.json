@@ -1,0 +1,12 @@
+{
+  "name": "Acme Corp",
+  "short_name": "Acme",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#34495e",
+  "theme_color": "#34495e",
+  "icons": [
+    {"src": "https://placehold.co/96x96", "sizes": "96x96", "type": "image/png"}
+  ]
+}
+
