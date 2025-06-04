@@ -201,12 +201,18 @@ if (contactForm) {
         const phone = contactForm.elements['phone'].value.trim();
         const message = contactForm.elements['message'].value.trim();
         if (!name || !email || !message) {
-            alert('Please complete all required fields.');
+            if (formStatus) {
+                formStatus.textContent = 'Please complete all required fields.';
+                setTimeout(() => formStatus.textContent = '', 5000);
+            }
             return;
         }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
+            if (formStatus) {
+                formStatus.textContent = 'Please enter a valid email address.';
+                setTimeout(() => formStatus.textContent = '', 5000);
+            }
             return;
         }
         try {
@@ -258,6 +264,13 @@ const pointerRing = document.getElementById('pointerRing');
 if (pointerRing) {
     window.addEventListener('pointermove', e => {
         pointerRing.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+}
+
+// Dialog polyfill fallback
+if (!('HTMLDialogElement' in window)) {
+    document.querySelectorAll('dialog').forEach(dialog => {
+        dialogPolyfill.registerDialog(dialog);
     });
 }
 

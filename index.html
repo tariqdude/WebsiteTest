@@ -10,10 +10,10 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&cs=tinysrgb&fit=crop&w=1200&h=630&q=80">
     <meta property="og:url" content="https://apexbuild.example.com">
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063823.png">
+    <link rel="icon" href="icon.svg">
     <meta name="theme-color" content="#007bff">
     <link rel="manifest" href="manifest.json">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://images.unsplash.com https://cdn-icons-png.flaticon.com https://randomuser.me data:; style-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; connect-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://images.unsplash.com https://randomuser.me data:; style-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; connect-src 'self' https://formspree.io;">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@
         "@type": "Organization",
         "name": "ApexBuild Construction",
         "url": "https://apexbuild.example.com",
-        "logo": "https://cdn-icons-png.flaticon.com/512/3063/3063823.png"
+        "logo": "icon.svg"
     }
     </script>
 </head>
@@ -334,13 +334,6 @@
     <div id="pointerRing" aria-hidden="true"></div>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="dialog-polyfill.js"></script>
-    <script>
-        if (!('HTMLDialogElement' in window)) {
-            document.querySelectorAll('dialog').forEach(dialog => {
-                dialogPolyfill.registerDialog(dialog);
-            });
-        }
-    </script>
     <script type="module" defer src="script.js"></script>
 
 </body>

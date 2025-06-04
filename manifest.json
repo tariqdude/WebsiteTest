@@ -3,9 +3,9 @@
   "short_name": "ApexBuild",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/3063/3063823.png",
+      "src": "icon.svg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg+xml"
     }
   ],
   "theme_color": "#007bff",
