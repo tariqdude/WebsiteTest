@@ -142,19 +142,40 @@ if (contactForm) {
         const email = contactForm.elements['email'].value.trim();
         const message = contactForm.elements['message'].value.trim();
         if (!name || !email || !message) {
-            alert('Please complete all required fields.');
+            if (formStatus) {
+                formStatus.textContent = 'Please complete all required fields.';
+                formStatus.classList.remove('success');
+                formStatus.classList.add('error');
+                formStatus.focus();
+                setTimeout(() => {
+                    formStatus.textContent = '';
+                    formStatus.classList.remove('error');
+                }, 5000);
+            }
             return;
         }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address.');
+            if (formStatus) {
+                formStatus.textContent = 'Please enter a valid email address.';
+                formStatus.classList.remove('success');
+                formStatus.classList.add('error');
+                formStatus.focus();
+                setTimeout(() => {
+                    formStatus.textContent = '';
+                    formStatus.classList.remove('error');
+                }, 5000);
+            }
             return;
         }
         if (formStatus) {
             formStatus.textContent = 'Thank you for contacting ApexBuild!';
-            setTimeout(() => formStatus.textContent = '', 5000);
-        } else {
-            alert('Thank you for contacting ApexBuild!');
+            formStatus.classList.remove('error');
+            formStatus.classList.add('success');
+            setTimeout(() => {
+                formStatus.textContent = '';
+                formStatus.classList.remove('success');
+            }, 5000);
         }
         contactForm.reset();
     });

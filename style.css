@@ -528,9 +528,15 @@ img {
 }
 .form-status {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 15px 0 20px;
     font-weight: 600;
     color: var(--primary-color);
+}
+.form-status.error {
+    color: #d9534f;
+}
+.form-status.success {
+    color: #28a745;
 }
 .form-group {
     margin-bottom: 40px;
