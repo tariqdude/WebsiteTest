@@ -1,6 +1,33 @@
 // footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// mobile nav toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// theme toggle with localStorage
+const themeToggle = document.getElementById('theme-toggle');
+const root = document.documentElement;
+if (localStorage.theme === 'dark') {
+  root.classList.add('dark');
+}
+themeToggle.addEventListener('click', () => {
+  root.classList.toggle('dark');
+  localStorage.theme = root.classList.contains('dark') ? 'dark' : 'light';
+});
+
+// back to top button
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('show', window.scrollY > 300);
+});
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 // pricing-toggle web component
 class PricingToggle extends HTMLElement {
   connectedCallback() {
