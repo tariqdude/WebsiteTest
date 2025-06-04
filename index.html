@@ -24,7 +24,6 @@
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;h=800&amp;ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyfHxjb25zdHJ1Y3Rpb24lMjBzaXRlfGVufDB8fHx8fA%3D%3D&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1600" as="image" fetchpriority="high">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" integrity="sha384-WDy11dc+3v52BOTt9WHuWenX6bjqGVBwYrU4XtgPIrneMtg1bXhpmWEZECSNrasO" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha384-j8k79CRseh745AwpSHjW97GmPlQe7+0/P1jKKUY7ciLKTMqTbXjdBjaAIc3cVYyg" crossorigin="anonymous"/>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dialog-polyfill.css">
@@ -145,9 +144,8 @@
     <section id="projects" class="section projects reveal">
         <div class="container">
             <h2 class="section-title animate__animated animate__fadeInUp">Our Distinguished Project Portfolio</h2>
-            <div class="swiper-container animate__animated animate__fadeInUp animate__delay-0-5s">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
+            <div class="case-carousel animate__animated animate__fadeInUp animate__delay-0-5s" tabindex="0">
+                    <div class="case-slide active">
                         <div class="project-image">
                             <img src="https://images.unsplash.com/photo-1616385478000-6d8b7755c926?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwxOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Modern Villa" loading="lazy" width="1200" height="800">
                         </div>
@@ -158,7 +156,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
+                    <div class="case-slide">
                         <div class="project-image">
                             <img src="https://images.unsplash.com/photo-1551526594-03b0040a60e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyMHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Office Building" loading="lazy" width="1200" height="800">
                         </div>
@@ -169,7 +167,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
+                    <div class="case-slide">
                         <div class="project-image">
                             <img src="https://images.unsplash.com/photo-1546483388-f3b311970061?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyNXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Warehouse Facility" loading="lazy" width="1200" height="800">
                         </div>
@@ -180,7 +178,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
+                    <div class="case-slide">
                         <div class="project-image">
                             <img src="https://images.unsplash.com/photo-1623182358745-418282924a4f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Retail Space" loading="lazy" width="1200" height="800">
                         </div>
@@ -191,10 +189,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="swiper-button-prev" role="button" tabindex="0" aria-label="Previous slide"></div>
-                <div class="swiper-button-next" role="button" tabindex="0" aria-label="Next slide"></div>
-                <div class="swiper-pagination"></div>
+                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots"></div>
             </div>
         </div>
     </section>
@@ -339,7 +336,6 @@
     </dialog>
 
     <button id="backToTop" aria-label="Back to top">&uarr;</button>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer integrity="sha384-UpSTlZpLDzenAXs6CRRa5gU7uk1xaEJy+7uIz+c0niFDR3yuAlqzV7w0SgZhmEX3" crossorigin="anonymous"></script>
     <div id="pointerRing" aria-hidden="true"></div>
     <script src="dialog-polyfill.js"></script>
     <script type="module" defer src="script.js"></script>
