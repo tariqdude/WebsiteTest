@@ -66,3 +66,27 @@ script.setAttribute('theme', 'github-light');
 script.crossOrigin = 'anonymous';
 script.async = true;
 comments.appendChild(script);
+
+// contact form validation
+const contactForm = document.querySelector("#contact form");
+if (contactForm) {
+  contactForm.addEventListener("submit", e => {
+    const emailInput = contactForm.querySelector("input[type=email]");
+    const messageInput = contactForm.querySelector("textarea[name=message]");
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!emailValid) {
+      e.preventDefault();
+      alert("Please enter a valid email.");
+      emailInput.focus();
+      return;
+    }
+    if (message.length < 10) {
+      e.preventDefault();
+      alert("Message must be at least 10 characters.");
+      messageInput.focus();
+    }
+  });
+}
+
