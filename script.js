@@ -305,7 +305,7 @@ if (yearEl) {
 
 // Pointer ring effect
 const pointerRing = document.getElementById('pointerRing');
-if (pointerRing) {
+if (pointerRing && window.matchMedia('(pointer: fine)').matches) {
     window.addEventListener('pointermove', e => {
         pointerRing.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     });
