@@ -12,13 +12,27 @@
     <meta property="og:url" content="https://apexbuild.example.com">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063823.png">
     <meta name="theme-color" content="#007bff">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://images.unsplash.com https://cdn-icons-png.flaticon.com https://randomuser.me data:; style-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; connect-src 'self';">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;h=800&amp;ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyfHxjb25zdHJ1Y3Rpb24lMjBzaXRlfGVufDB8fHx8fA%3D%3D&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1600" as="image" fetchpriority="high">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ApexBuild Construction",
+        "url": "https://apexbuild.example.com",
+        "logo": "https://cdn-icons-png.flaticon.com/512/3063/3063823.png"
+    }
+    </script>
 </head>
 <body>
     <a href="#mainContent" class="skip-link">Skip to main content</a>
@@ -35,7 +49,8 @@
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-                <button id="darkModeToggle" class="btn btn-secondary" aria-pressed="false">Toggle Theme</button>
+                <button id="darkModeToggle" class="btn btn-secondary" aria-pressed="false" anchor-name="toggleBtn">Toggle Theme</button>
+                <div id="themeTip" class="tooltip" anchor="toggleBtn">Toggle light/dark</div>
         </nav>
     </header>
 <main id="mainContent">
@@ -305,15 +320,18 @@
         </div>
     </footer>
 
-    <div id="cookieConsent" class="cookie-consent">
-        This website uses cookies to enhance your experience.
-        <button id="acceptCookies" class="btn btn-secondary">Accept</button>
-    </div>
+    <dialog id="cookieConsent">
+        <p>This website uses cookies to enhance your experience.</p>
+        <form method="dialog">
+            <button id="acceptCookies" class="btn btn-secondary">Accept</button>
+        </form>
+    </dialog>
 
     <button id="backToTop" aria-label="Back to top">&uarr;</button>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <div id="pointerRing" aria-hidden="true"></div>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="script.js"></script>
+    <script type="module" defer src="script.js"></script>
 
 </body>
 </html>
