@@ -103,32 +103,46 @@ if (canvas && canvas.getContext) {
 // Hero typed text animation
 const typedEl = document.getElementById('typedHero');
 if (typedEl) {
-    const phrases = JSON.parse(typedEl.dataset.texts || '[]');
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
+    const inlinePhrases = JSON.parse(typedEl.dataset.texts || '[]');
 
-    function typeStep() {
-        const current = phrases[phraseIndex] || '';
-        if (!deleting) {
-            typedEl.textContent = current.slice(0, charIndex + 1);
-            charIndex++;
-            if (charIndex === current.length) {
-                deleting = true;
-                return setTimeout(typeStep, 2000);
+    function startTyping(phrases) {
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        function typeStep() {
+            const current = phrases[phraseIndex] || '';
+            if (!deleting) {
+                typedEl.textContent = current.slice(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === current.length) {
+                    deleting = true;
+                    return setTimeout(typeStep, 2000);
+                }
+            } else {
+                typedEl.textContent = current.slice(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    deleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                }
             }
-        } else {
-            typedEl.textContent = current.slice(0, charIndex - 1);
-            charIndex--;
-            if (charIndex === 0) {
-                deleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-            }
+            setTimeout(typeStep, deleting ? 50 : 100);
         }
-        setTimeout(typeStep, deleting ? 50 : 100);
+
+        typeStep();
     }
 
-    typeStep();
+    fetch('phrases.json')
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(data => {
+            if (Array.isArray(data) && data.length) {
+                startTyping(data);
+            } else {
+                startTyping(inlinePhrases);
+            }
+        })
+        .catch(() => startTyping(inlinePhrases));
 }
 
 // Color scheme variants via query params
@@ -258,14 +272,27 @@ if (!disableScrollReveal) {
     const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target);
+                const section = entry.target;
+                const children = Array.from(section.children);
+                let delay = 0;
+                children.forEach(child => {
+                    const custom = parseFloat(child.dataset.revealDelay || '');
+                    const d = isNaN(custom) ? delay : custom;
+                    child.style.transitionDelay = `${d}s`;
+                    child.classList.add('visible');
+                    if (isNaN(custom)) delay += 0.1;
+                });
+                section.classList.add('visible');
+                revealObserver.unobserve(section);
             }
         });
     }, { threshold: 0.2 });
     revealEls.forEach(el => revealObserver.observe(el));
 } else {
-    revealEls.forEach(el => el.classList.add('visible'));
+    revealEls.forEach(section => {
+        section.classList.add('visible');
+        Array.from(section.children).forEach(child => child.classList.add('visible'));
+    });
 }
 
 // Contact form handler
