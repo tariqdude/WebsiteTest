@@ -52,7 +52,7 @@ if (prefersReducedMotion) {
 
 // Simple particle line effect in hero canvas
 const canvas = document.getElementById('particleCanvas');
-if (canvas && canvas.getContext) {
+if (canvas && canvas.getContext && !prefersReducedMotion) {
     const ctx = canvas.getContext('2d');
     let width, height;
     const particles = Array.from({ length: 80 }, () => ({ x: 0, y: 0, vx: 0, vy: 0 }));
@@ -98,11 +98,14 @@ if (canvas && canvas.getContext) {
     window.addEventListener('resize', resize);
     resize();
     requestAnimationFrame(draw);
+} else if (canvas) {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
 }
 
 // Hero typed text animation
 const typedEl = document.getElementById('typedHero');
-if (typedEl) {
+if (typedEl && !prefersReducedMotion) {
     const phrases = JSON.parse(typedEl.dataset.texts || '[]');
     let phraseIndex = 0;
     let charIndex = 0;
@@ -129,6 +132,9 @@ if (typedEl) {
     }
 
     typeStep();
+} else if (typedEl) {
+    const phrases = JSON.parse(typedEl.dataset.texts || '[]');
+    typedEl.textContent = phrases[0] || '';
 }
 
 // Color scheme variants via query params

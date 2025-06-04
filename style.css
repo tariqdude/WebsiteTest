@@ -226,7 +226,6 @@ img {
     font-weight: 800;
     letter-spacing: -1.5px;
     text-shadow: 3px 3px 12px rgba(0,0,0,0.4);
-    animation: fadeInUp 1.2s ease-out both; /* Animate.css */
 }
 #typedHero::after {
     content: '|';
@@ -243,10 +242,6 @@ img {
     margin-right: auto;
     color: #eee;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
-    animation: fadeInUp 1.5s ease-out 0.2s both; /* Animate.css with delay */
-}
-.hero .btn {
-    animation: fadeInUp 1.8s ease-out 0.4s both; /* Animate.css with delay */
 }
 .hero-wave {
     position: absolute;
@@ -258,6 +253,24 @@ img {
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero h1 { animation: fadeInUp 1.2s ease-out both; }
+    .hero p { animation: fadeInUp 1.5s ease-out 0.2s both; }
+    .hero .btn { animation: fadeInUp 1.8s ease-out 0.4s both; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero h1,
+    .hero p,
+    .hero .btn {
+        animation: fadeIn 0.8s ease-out both;
+    }
+    #typedHero::after {
+        content: none;
+        animation: none;
+    }
 }
 
 /* About Section */
@@ -986,12 +999,14 @@ body.dark-mode #scrollProgress {
     html {
         scroll-behavior: auto;
     }
-    *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-    }
     .reveal,
     .reveal.visible {
+        transform: none !important;
+    }
+    .animate__fadeInLeft,
+    .animate__fadeInRight,
+    .animate__fadeInUp {
+        animation-name: fadeIn;
         transform: none !important;
     }
 }
