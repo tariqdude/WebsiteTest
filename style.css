@@ -973,6 +973,12 @@ body.dark-mode #scrollProgress {
     z-index: 1200;
 }
 
+@media (pointer: coarse) {
+    #pointerRing {
+        display: none;
+    }
+}
+
 /* Tooltip anchored to toggle button */
 .tooltip {
     position: absolute;
