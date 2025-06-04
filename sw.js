@@ -10,7 +10,9 @@ const assets = [
   'manifest.json',
   'icon.svg',
   'assets/icon-192.png',
-  'assets/icon-512.png'
+  'assets/icon-512.png',
+  'phrases.json',
+  'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=EB+Garamond:opsz,wght@8..144,400..800&display=swap'
 ];
 
 self.addEventListener('install', event => {
@@ -53,6 +55,16 @@ self.addEventListener('fetch', event => {
     return;
   }
   event.respondWith(
-    caches.match(request).then(resp => resp || fetch(request))
+    caches.match(request).then(cached => {
+      const fetchPromise = fetch(request)
+        .then(networkResponse => {
+          caches.open('dynamic-cache').then(cache => {
+            cache.put(request, networkResponse.clone());
+          });
+          return networkResponse;
+        })
+        .catch(() => cached);
+      return cached || fetchPromise;
+    })
   );
 });
