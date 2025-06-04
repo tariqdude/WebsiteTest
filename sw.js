@@ -1,8 +1,8 @@
-const cacheName = 'apex-cache-v4';
+const cacheName = 'apex-cache-v5';
 const assets = [
   'index.html',
-  'style.css',
-  'script.js',
+  'style.min.css',
+  'script.min.js',
   '404.html',
   'offline.html',
   'privacy.html',

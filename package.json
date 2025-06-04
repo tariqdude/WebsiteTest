@@ -4,14 +4,19 @@
   "description": "This project is a design prototype for a construction company website. It demonstrates a modern, responsive layout with interactive elements.",
   "main": "dialog-polyfill.js",
   "scripts": {
-    "test": "html-validate index.html"
+    "test": "html-validate index.html",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "minify style.css > style.min.css",
+    "build:js": "esbuild script.js --bundle --minify --outfile=script.min.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "html-validate": "^9.5.5"
+    "esbuild": "^0.25.5",
+    "html-validate": "^9.5.5",
+    "minify": "^14.0.0"
   },
   "private": true
 }
