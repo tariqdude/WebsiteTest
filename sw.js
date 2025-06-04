@@ -1,4 +1,4 @@
-const cacheName = 'apex-cache-v2';
+const cacheName = 'apex-cache-v3';
 const assets = [
   'index.html',
   'style.css',
@@ -7,36 +7,48 @@ const assets = [
   'privacy.html',
   'terms.html',
   'manifest.json',
-  'icon.svg'
+  'icon.svg',
+  'assets/icon-192.png',
+  'assets/icon-512.png'
 ];
 
 self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(cacheName).then(cache => cache.addAll(assets))
-    );
+  event.waitUntil(
+    caches.open(cacheName).then(cache => cache.addAll(assets))
+  );
 });
 
 self.addEventListener('activate', event => {
-    event.waitUntil(
-        caches.keys().then(keys => Promise.all(
-            keys.filter(key => key !== cacheName).map(key => caches.delete(key))
-        ))
-    );
+  event.waitUntil(
+    caches.keys().then(keys => Promise.all(
+      keys.filter(key => key !== cacheName).map(key => caches.delete(key))
+    ))
+  );
 });
 
 self.addEventListener('fetch', event => {
-    if (event.request.mode === 'navigate') {
-        event.respondWith(
-            fetch(event.request).then(response => {
-                if (response.status === 404) {
-                    return caches.match('404.html');
-                }
-                return response;
-            }).catch(() => caches.match('404.html'))
-        );
-    } else {
-        event.respondWith(
-            caches.match(event.request).then(resp => resp || fetch(event.request))
-        );
-    }
+  const { request } = event;
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(() => caches.match('index.html'))
+    );
+    return;
+  }
+  if (request.destination === 'image') {
+    event.respondWith(
+      caches.open('image-cache').then(cache =>
+        cache.match(request).then(resp => {
+          const fetchPromise = fetch(request).then(networkResponse => {
+            cache.put(request, networkResponse.clone());
+            return networkResponse;
+          });
+          return resp || fetchPromise;
+        })
+      )
+    );
+    return;
+  }
+  event.respondWith(
+    caches.match(request).then(resp => resp || fetch(request))
+  );
 });
