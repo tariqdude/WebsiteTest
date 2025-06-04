@@ -7,6 +7,7 @@ This project is a design prototype for a construction company website. It demons
 - **Responsive layout** that adapts to desktops and mobile devices
 - **Dark mode** toggle with the preference saved in `localStorage`
 - Animated sections that reveal on scroll
+- Headline in the hero section typed out from rotating phrases
 - Stats counters and an image carousel powered by the View Transitions API
 - Cookie consent banner and back-to-top button
 
@@ -44,7 +45,7 @@ persists on subsequent visits. Available variants correspond to the
 `script.js` contains all the interactive behavior. Key sections include:
 
 - Initializing the case-study carousel
-- Setting up the typed hero text strings
+- Setting up the typed hero text strings via the `data-texts` attribute on `#typedHero`
 - Handling the dark mode toggle and sticky header
 
 Edit these portions to customize animations or disable features as needed.
