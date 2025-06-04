@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApexBuild - Constructing the Future</title>
+    <meta name="description" content="Professional construction services specializing in residential, commercial and industrial projects.">
+    <meta property="og:title" content="ApexBuild - Constructing the Future">
+    <meta property="og:description" content="Professional construction services specializing in residential, commercial and industrial projects.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&cs=tinysrgb&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:url" content="https://apexbuild.example.com">
+    <link rel="canonical" href="https://apexbuild.example.com/">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="icon.svg">
+    <meta name="theme-color" content="#1FE0B1">
+    <link rel="manifest" href="manifest.json">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://images.unsplash.com https://randomuser.me data:; style-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; connect-src 'self' https://formspree.io;">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=EB+Garamond:opsz,wght@8..144,400..800&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=EB+Garamond:opsz,wght@8..144,400..800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="preload" href="style.min.css" as="style">
+    <link rel="preload" href="script.min.js" as="script">
+    <link rel="preload" href="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;h=800&amp;ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyfHxjb25zdHJ1Y3Rpb24lMjBzaXRlfGVufDB8fHx8fA%3D%3D&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1600" as="image" fetchpriority="high">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha384-j8k79CRseh745AwpSHjW97GmPlQe7+0/P1jKKUY7ciLKTMqTbXjdBjaAIc3cVYyg" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style.min.css">
+    <link rel="stylesheet" href="dialog-polyfill.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "ApexBuild Construction",
+        "url": "https://apexbuild.example.com",
+        "logo": "icon.svg",
+        "telephone": "+1-800-APEX-BUILD",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "456 Main Street, Suite 789",
+            "addressLocality": "Construction City",
+            "addressRegion": "USA"
+        }
+    }
+    </script>
+</head>
+<body>
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
+    <div id="scrollProgress"></div>
+
+    <header class="header">
+        <nav class="navbar container" role="navigation" aria-label="Main navigation">
+            <a href="#" class="logo" aria-label="Homepage">ApexBuild</a>
+            <button popovertarget="navMenu" aria-controls="navMenu" class="hamburger" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav id="navMenu" popover>
+                <ul class="nav-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="darkModeToggle" class="btn btn-secondary" aria-pressed="false" aria-describedby="themeTip">Toggle Theme</button>
+            <div id="themeTip" class="tooltip" role="tooltip">Toggle light/dark</div>
+        </nav>
+    </header>
+<main id="mainContent" role="main">
+
+
+    <section class="hero reveal" aria-labelledby="heroHeading">
+        <canvas id="particleCanvas" aria-hidden="true"></canvas>
+        <div class="hero-content container">
+            <h1 id="heroHeading"><span id="typedHero" data-texts='["Construct the future with confidence","Innovating infrastructure excellence","Your vision. Our expertise."]'>Construct the future with confidence</span></h1>
+            <a href="#projects" class="btn">Explore Our Portfolio</a>
+        </div>
+        <div class="hero-wave" data-reveal-delay="0.4"></div>
+    </section>
+
+    <section id="about" aria-labelledby="aboutTitle" class="section about reveal">
+        <div class="container about-content">
+            <div class="about-image animate__animated animate__fadeInLeft" data-reveal-delay="0.2">
+                <img src="https://images.unsplash.com/photo-1583455413184-8471a639cc9c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=800" alt="ApexBuild Team at Work" loading="lazy" width="800" height="600">
+            </div>
+            <div class="about-text animate__animated animate__fadeInRight">
+                <h2 id="aboutTitle" class="section-title">Decades of Dedication to Construction Excellence</h2>
+                <p>Since 2003, ApexBuild has been at the forefront of the construction industry, driven by a passion for creating enduring structures and lasting relationships. We blend time-honored craftsmanship with cutting-edge technology to deliver projects that consistently exceed expectations.</p>
+                <p>Our philosophy is simple: build with integrity, innovate relentlessly, and collaborate closely with our clients. This approach has allowed us to complete over 400 successful projects, earning a client satisfaction rate of 99%. We're not just building buildings; we're building trust and shaping communities.</p>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <span class="stat-number" data-count="20">0</span>
+                        <p class="stat-label">Years of Expertise</p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" data-count="400">0</span>
+                        <p class="stat-label">Projects Completed</p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" data-count="99">0</span>
+                        <p class="stat-label">Percent Satisfaction</p>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-secondary">Learn More About Our Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" aria-labelledby="servicesTitle" class="section services reveal">
+        <div class="container">
+            <h2 id="servicesTitle" class="section-title animate__animated animate__fadeInUp">Comprehensive Construction Services</h2>
+            <div class="services-grid">
+                <div class="service-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <i class="fas fa-pencil-ruler service-icon"></i>
+                    <h3>Design & Planning</h3>
+                    <p>From initial sketches to detailed blueprints, our design team meticulously plans every aspect of your project, ensuring aesthetic appeal and structural integrity.</p>
+                </div>
+                <div class="service-card animate__animated animate__fadeInUp animate__delay-1-2s">
+                    <i class="fas fa-home service-icon"></i>
+                    <h3>Residential Construction</h3>
+                    <p>Building dream homes and multi-family residences with a focus on comfort, quality, and sustainability, tailored to your unique lifestyle.</p>
+                </div>
+                <div class="service-card animate__animated animate__fadeInUp animate__delay-1-4s">
+                    <i class="fas fa-store-alt service-icon"></i>
+                    <h3>Commercial & Retail</h3>
+                    <p>Creating dynamic commercial and retail spaces that foster business growth, from innovative office complexes to vibrant shopping centers.</p>
+                </div>
+                <div class="service-card animate__animated animate__fadeInUp animate__delay-1-6s">
+                    <i class="fas fa-industry service-icon"></i>
+                    <h3>Industrial Solutions</h3>
+                    <p>Providing robust and efficient industrial construction services for manufacturing plants, warehouses, and logistics hubs, built for optimal performance.</p>
+                </div>
+                <div class="service-card animate__animated animate__fadeInUp animate__delay-1-8s">
+                    <i class="fas fa-wrench service-icon"></i>
+                    <h3>Renovation & Retrofitting</h3>
+                    <p>Modernizing and enhancing existing structures with our expert renovation and retrofitting services, improving functionality and value.</p>
+                </div>
+                <div class="service-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <i class="fas fa-clipboard-check service-icon"></i>
+                    <h3>Project Management</h3>
+                    <p>Ensuring seamless project execution from start to finish, our project management team guarantees timely delivery and budget adherence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projectsTitle" class="section projects reveal">
+        <div class="container">
+            <h2 id="projectsTitle" class="section-title animate__animated animate__fadeInUp">Our Distinguished Project Portfolio</h2>
+            <div class="case-carousel animate__animated animate__fadeInUp animate__delay-0-5s" tabindex="0">
+                    <div class="case-slide active">
+                        <div class="project-image">
+                            <picture>
+                                <source srcset="https://images.unsplash.com/photo-1616385478000-6d8b7755c926?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwxOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=600 600w, https://images.unsplash.com/photo-1616385478000-6d8b7755c926?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwxOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200 1200w">
+                                <img src="https://images.unsplash.com/photo-1616385478000-6d8b7755c926?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwxOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Modern Villa" loading="lazy" width="1200" height="800">
+                            </picture>
+                        </div>
+                        <div class="project-card-inner">
+                            <div class="project-info">
+                                <h4>Luxury Lakeside Villa</h4>
+                                <p>Contemporary villa with panoramic lake views, featuring sustainable materials and smart home tech.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-slide">
+                        <div class="project-image">
+                            <picture>
+                                <source srcset="https://images.unsplash.com/photo-1551526594-03b0040a60e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyMHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=600 600w, https://images.unsplash.com/photo-1551526594-03b0040a60e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyMHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200 1200w">
+                                <img src="https://images.unsplash.com/photo-1551526594-03b0040a60e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyMHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Office Building" loading="lazy" width="1200" height="800">
+                            </picture>
+                        </div>
+                        <div class="project-card-inner">
+                            <div class="project-info">
+                                <h4>Innovation Tech Park</h4>
+                                <p>Cutting-edge office complex fostering collaboration and innovation, with green spaces.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-slide">
+                        <div class="project-image">
+                            <picture>
+                                <source srcset="https://images.unsplash.com/photo-1546483388-f3b311970061?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyNXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=600 600w, https://images.unsplash.com/photo-1546483388-f3b311970061?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyNXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200 1200w">
+                                <img src="https://images.unsplash.com/photo-1546483388-f3b311970061?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyNXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Warehouse Facility" loading="lazy" width="1200" height="800">
+                            </picture>
+                        </div>
+                        <div class="project-card-inner">
+                            <div class="project-info">
+                                <h4>Green Logistics Hub</h4>
+                                <p>Eco-friendly industrial warehouse designed for optimal logistics and minimal environmental impact.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-slide">
+                        <div class="project-image">
+                            <picture>
+                                <source srcset="https://images.unsplash.com/photo-1623182358745-418282924a4f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=600 600w, https://images.unsplash.com/photo-1623182358745-418282924a4f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200 1200w">
+                                <img src="https://images.unsplash.com/photo-1623182358745-418282924a4f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Retail Space" loading="lazy" width="1200" height="800">
+                            </picture>
+                        </div>
+                        <div class="project-card-inner">
+                            <div class="project-info">
+                                <h4>Downtown Retail Emporium</h4>
+                                <p>Vibrant retail space revitalizing the city center, designed to enhance customer experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" aria-labelledby="testimonialsTitle" class="section testimonials reveal">
+        <div class="container">
+            <h2 id="testimonialsTitle" class="section-title animate__animated animate__fadeInUp">Client Testimonials</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card animate__animated animate__fadeInLeft animate__delay-0-2s">
+                    <p class="testimonial-quote">"ApexBuild didn't just build our house, they crafted a home filled with warmth and character. Their team's dedication and artistry were evident in every detail. Truly exceptional!"</p>
+                    <div class="testimonial-author-info">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah Johnson" loading="lazy" width="128" height="128">
+                        </div>
+                        <div class="author-details">
+                            <p class="author-name">Sarah Johnson</p>
+                            <p class="author-title">Homeowner, Lakeside Villa</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card animate__animated animate__fadeInUp animate__delay-0-4s">
+                    <p class="testimonial-quote">"Choosing ApexBuild for our office complex was game-changing. Their efficiency, communication, and the final product were all top-tier. A truly seamless and impressive experience."</p>
+                    <div class="testimonial-author-info">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Michael Davis" loading="lazy" width="128" height="128">
+                        </div>
+                        <div class="author-details">
+                            <p class="author-name">Michael Davis</p>
+                            <p class="author-title">CEO, Innovatech Solutions</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card animate__animated animate__fadeInRight animate__delay-0-6s">
+                    <p class="testimonial-quote">"ApexBuild transformed our outdated facility into a modern, efficient hub, exceeding all expectations. Their renovation expertise is unparalleled, delivering ahead of schedule and under budget."</p>
+                    <div class="testimonial-author-info">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Emily White" loading="lazy" width="128" height="128">
+                        </div>
+                        <div class="author-details">
+                            <p class="author-name">Emily White</p>
+                            <p class="author-title">Operations Director, Global Logistics Inc.</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contactTitle" class="section contact reveal">
+        <div class="container contact-content">
+            <div class="contact-info animate__animated animate__fadeInLeft">
+                <h2 id="contactTitle" class="section-title">Connect With ApexBuild</h2>
+                <h3>Let's Discuss Your Next Project</h3>
+                <p>We're ready to turn your construction aspirations into reality. Reach out to us for a consultation, and let's explore how ApexBuild can elevate your project to new heights.</p>
+                <ul class="contact-details-list">
+                    <li><i class="fas fa-map-marker-alt"></i> 456 Main Street, Suite 789, Construction City, USA</li>
+                    <li><i class="fas fa-phone"></i> +1-800-APEX-BUILD</li>
+                    <li><i class="fas fa-envelope"></i> inquiries@apexbuild.com</li>
+                    <li><i class="fas fa-clock"></i> Mon - Fri: 8am - 7pm, Sat: 9am - 1pm</li>
+                </ul>
+            </div>
+            <div class="contact-form animate__animated animate__fadeInRight">
+                <h3>Send a Quick Inquiry</h3>
+                <div id="formStatus" class="form-status" aria-live="polite"></div>
+                <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" autocomplete="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" placeholder="Briefly describe your project" required></textarea>
+                    </div>
+                    <button type="submit" class="btn submit-btn">Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content container">
+            <div class="footer-section">
+                <h4>About ApexBuild</h4>
+                <p>ApexBuild Construction is dedicated to pushing the boundaries of construction, blending innovation with reliability to create structures that inspire and endure.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i><span class="visually-hidden">Facebook</span></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span class="visually-hidden">Twitter</span></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i><span class="visually-hidden">Instagram</span></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="visually-hidden">LinkedIn</span></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#projects">Project Portfolio</a></li>
+                    <li><a href="#testimonials">Client Stories</a></li>
+                    <li><a href="#contact">Get in Touch</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 456 Main Street, Suite 789, Construction City, USA</li>
+                    <li><i class="fas fa-phone"></i> +1-800-APEX-BUILD</li>
+                    <li><i class="fas fa-envelope"></i> inquiries@apexbuild.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                &copy; <span id="currentYear"></span> ApexBuild Construction. All Rights Reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <dialog id="cookieConsent">
+        <p>This website uses cookies to enhance your experience.</p>
+        <form method="dialog">
+            <button id="acceptCookies" aria-label="Accept cookies" class="btn btn-secondary">Accept</button>
+        </form>
+    </dialog>
+
+    <button id="backToTop" aria-label="Back to top">&uarr;</button>
+    <div id="pointerRing" aria-hidden="true"></div>
+    <script src="dialog-polyfill.js"></script>
+    <script type="module" defer src="script.min.js"></script>
+
+</body>
+</html>

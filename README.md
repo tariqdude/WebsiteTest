@@ -94,3 +94,14 @@ npm test
 ```
 
 The provided configuration disables rules so the test will simply validate that `index.html` parses correctly.
+
+## Hugo Setup
+
+This project can be built as a Hugo site located in the `apexbuild` folder. The build relies on Tailwind CSS and TypeScript.
+
+1. Run `npm install` to fetch Node dependencies.
+2. Use `npm run build` to compile Tailwind and TypeScript and then run Hugo.
+3. The final static site is generated into the `public` directory and can be served by Netlify using the included `netlify.toml`.
+
+
+4. Netlify runs `npm run build && hugo --source apexbuild --destination ../public` and serves the `public` folder.
