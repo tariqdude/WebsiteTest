@@ -58,6 +58,13 @@ a {
     color: inherit;
     transition: color 0.3s ease;
 }
+
+/* Visible focus outlines for interactive elements */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--highlight-color);
+    outline-offset: 2px;
+}
 img {
     display: block;
     max-width: 100%;
@@ -908,16 +915,15 @@ body.dark-mode #scrollProgress {
     z-index: 1200;
 }
 
-/* Tooltip using anchor positioning */
+/* Tooltip positioned via JavaScript */
 .tooltip {
     position: absolute;
-    position-anchor: --toggleBtn;
-    left: anchor(center);
-    top: anchor(bottom);
     transform: translate(-50%, 8px);
     background: var(--primary-color);
     color: #fff;
     padding: 6px 10px;
     border-radius: 6px;
     font-size: 0.9rem;
+    white-space: nowrap;
+    z-index: 1200;
 }

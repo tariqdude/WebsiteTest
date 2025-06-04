@@ -40,7 +40,7 @@
 
     <header class="header">
         <nav class="navbar container" role="navigation" aria-label="Main navigation">
-            <a href="#" class="logo">ApexBuild</a>
+            <a href="#" class="logo" aria-label="Homepage">ApexBuild</a>
             <button id="mobileMenuToggle" class="hamburger" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
             <ul id="navMenu" class="nav-links">
                 <li><a href="#about">About Us</a></li>
@@ -49,8 +49,8 @@
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-                <button id="darkModeToggle" class="btn btn-secondary" aria-pressed="false" anchor-name="toggleBtn">Toggle Theme</button>
-                <div id="themeTip" class="tooltip" anchor="toggleBtn">Toggle light/dark</div>
+                <button id="darkModeToggle" class="btn btn-secondary" aria-pressed="false" aria-describedby="themeTip">Toggle Theme</button>
+                <div id="themeTip" class="tooltip" role="tooltip">Toggle light/dark</div>
         </nav>
     </header>
 <main id="mainContent">

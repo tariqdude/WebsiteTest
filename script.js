@@ -87,6 +87,7 @@ if (!prefersReducedMotion) {
 
 // Dark mode toggle
 const darkToggle = document.getElementById('darkModeToggle');
+const themeTip = document.getElementById('themeTip');
 if (darkToggle) {
     const storedPreference = localStorage.getItem('dark-mode');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -100,6 +101,16 @@ if (darkToggle) {
         localStorage.setItem('dark-mode', active);
         darkToggle.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
+    if (themeTip) {
+        function positionTip() {
+            const rect = darkToggle.getBoundingClientRect();
+            themeTip.style.left = rect.left + rect.width / 2 + 'px';
+            themeTip.style.top = rect.bottom + window.scrollY + 'px';
+        }
+        positionTip();
+        window.addEventListener('resize', positionTip);
+        window.addEventListener('scroll', positionTip);
+    }
 }
 
 // Sticky header & back to top button
