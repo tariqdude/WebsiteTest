@@ -9,8 +9,16 @@ navToggle.addEventListener('click', () => {
 
 // Dark mode toggle
 const modeToggle = document.querySelector('.mode-toggle');
+
+// Apply saved preference on load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  document.documentElement.classList.add('dark-mode');
+}
+
 modeToggle.addEventListener('click', () => {
-  document.documentElement.classList.toggle('dark-mode');
+  const isDark = document.documentElement.classList.toggle('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
 // Intersection animations

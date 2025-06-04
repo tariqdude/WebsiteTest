@@ -98,6 +98,8 @@ a:hover {text-decoration: underline;}
 
 .dark-mode{--color-bg:var(--color-dark-bg);--color-text:var(--color-dark-text);}
 
+.dark-mode .card {background:#333; color:var(--color-dark-text);}
+
 .card,.about,.testimonial-grid figure,.contact form{opacity:0;transform:translateY(20px);transition:opacity var(--transition-fast),transform var(--transition-fast);}
 .show{opacity:1;transform:none;}
 
