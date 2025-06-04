@@ -103,3 +103,10 @@ a:hover {text-decoration: underline;}
 .card,.about,.testimonial-grid figure,.contact form{opacity:0;transform:translateY(20px);transition:opacity var(--transition-fast),transform var(--transition-fast);}
 .show{opacity:1;transform:none;}
 
+/* Styles for standalone pages */
+.offline,
+.not-found {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
