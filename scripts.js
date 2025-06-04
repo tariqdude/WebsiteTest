@@ -7,6 +7,14 @@ navToggle.addEventListener('click', () => {
   navMenu.classList.toggle('show');
 });
 
+// Close mobile nav when a link is clicked
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('show');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
 // Dark mode toggle
 const modeToggle = document.querySelector('.mode-toggle');
 
