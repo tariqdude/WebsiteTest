@@ -8,6 +8,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - run: npm ci
+      - run: npm run build:css
       - run: npm install -g @lhci/cli htmlhint stylelint eslint
       - run: htmlhint index.html
       - run: stylelint styles.css
