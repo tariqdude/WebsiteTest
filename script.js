@@ -147,13 +147,16 @@ if (typedEl) {
 
 // Color scheme variants via query params
 const params = new URLSearchParams(window.location.search);
-const variant = params.get('variant');
-if (variant) {
-    localStorage.setItem('apex-variant', variant);
+const urlVariant = params.get('variant');
+let activeVariant = localStorage.getItem('apex-variant');
+
+if (urlVariant) {
+    activeVariant = urlVariant;
+    localStorage.setItem('apex-variant', urlVariant);
 }
-const savedVariant = localStorage.getItem('apex-variant');
-if (savedVariant) {
-    document.body.dataset.variant = savedVariant;
+
+if (activeVariant) {
+    document.body.dataset.variant = activeVariant;
 }
 
 const counterElements = document.querySelectorAll('.stat-number');

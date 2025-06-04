@@ -27,7 +27,22 @@
     }
 }
 
+
 /* Optional color variants */
+body[data-variant='green'] {
+    --accent-color: #28a745;
+    --highlight-color: color-mix(in srgb, var(--accent-color), white 60%);
+}
+
+body[data-variant='red'] {
+    --accent-color: #dc3545;
+    --highlight-color: color-mix(in srgb, var(--accent-color), white 60%);
+}
+
+body[data-variant='purple'] {
+    --accent-color: #6f42c1;
+    --highlight-color: color-mix(in srgb, var(--accent-color), white 60%);
+}
 
 body {
     font-family: 'Inter var', sans-serif;
