@@ -17,6 +17,7 @@
   <meta name="twitter:description" content="Acme Corp provides elite solutions for tomorrow's market.">
   <meta name="twitter:image" content="https://placehold.co/1200x630">
   <meta name="theme-color" content="#34495e">
+  <meta name="color-scheme" content="light dark">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://placehold.co data:; style-src 'self'; script-src 'self';">
   <link rel="icon" type="image/png" sizes="96x96" href="https://placehold.co/96x96">
   <link rel="apple-touch-icon" href="https://placehold.co/180x180">
@@ -62,64 +63,82 @@
 </header>
 <main id="main">
   <section id="features" class="features">
-    <h2>Features</h2>
-    <div class="card-grid">
-      <div class="card"><h3>Feature One</h3><p>Short description.</p></div>
-      <div class="card"><h3>Feature Two</h3><p>Short description.</p></div>
-      <div class="card"><h3>Feature Three</h3><p>Short description.</p></div>
+    <div class="container">
+      <h2>Features</h2>
+      <div class="card-grid">
+        <div class="card"><h3>Feature One</h3><p>Short description.</p></div>
+        <div class="card"><h3>Feature Two</h3><p>Short description.</p></div>
+        <div class="card"><h3>Feature Three</h3><p>Short description.</p></div>
+      </div>
     </div>
   </section>
   <section id="about" class="about">
-    <div class="about-image">
-      <picture>
-        <img src="https://placehold.co/800x600" alt="About us" loading="lazy" width="800" height="600">
-      </picture>
-    </div>
-    <div class="about-text">
-      <h2>About Us</h2>
-      <p>Acme Corp is a leader in innovative business solutions, helping companies reach new heights.</p>
+    <div class="container">
+      <div class="about-image">
+        <picture>
+          <img src="https://placehold.co/800x600" alt="About us" loading="lazy" width="800" height="600">
+        </picture>
+      </div>
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>Acme Corp is a leader in innovative business solutions, helping companies reach new heights.</p>
+      </div>
     </div>
   </section>
   <section id="testimonials" class="testimonials">
-    <h2>What Our Clients Say</h2>
-    <div class="testimonial-grid">
-      <figure>
-        <img src="https://placehold.co/400" alt="Customer 1" loading="lazy" width="400" height="400">
-        <figcaption>"Outstanding service!"</figcaption>
-      </figure>
-      <figure>
-        <img src="https://placehold.co/400" alt="Customer 2" loading="lazy" width="400" height="400">
-        <figcaption>"Truly professional."</figcaption>
-      </figure>
-      <figure>
-        <img src="https://placehold.co/400" alt="Customer 3" loading="lazy" width="400" height="400">
-        <figcaption>"Highly recommended!"</figcaption>
-      </figure>
+    <div class="container">
+      <h2>What Our Clients Say</h2>
+      <div class="testimonial-grid">
+        <figure>
+          <img src="https://placehold.co/400" alt="Customer 1" loading="lazy" width="400" height="400">
+          <figcaption>"Outstanding service!"</figcaption>
+        </figure>
+        <figure>
+          <img src="https://placehold.co/400" alt="Customer 2" loading="lazy" width="400" height="400">
+          <figcaption>"Truly professional."</figcaption>
+        </figure>
+        <figure>
+          <img src="https://placehold.co/400" alt="Customer 3" loading="lazy" width="400" height="400">
+          <figcaption>"Highly recommended!"</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
   <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/mayvlzgv" method="POST">
-      <label>
-        Name
-        <input type="text" name="name" required>
-      </label>
-      <label>
-        Email
-        <input type="email" name="email" required>
-      </label>
-      <label>
-        Message
-        <textarea name="message" rows="5" required></textarea>
-      </label>
-      <button type="submit" class="cta">Send</button>
-    </form>
+    <div class="container">
+      <h2>Contact Us</h2>
+      <form action="https://formspree.io/f/mayvlzgv" method="POST">
+        <label>
+          Name
+          <input type="text" name="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="cta">Send</button>
+      </form>
+    </div>
   </section>
 </main>
 <footer class="footer">
   <div class="social">
-    <a href="#" aria-label="Twitter">T</a>
-    <a href="#" aria-label="LinkedIn">L</a>
+    <a href="#" aria-label="Twitter">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016 3a4.48 4.48 0 00-4.39 5.48A12.94 12.94 0 013 4s-4 9 5 13a13.06 13.06 0 01-8 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+      </svg>
+    </a>
+    <a href="#" aria-label="LinkedIn">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4V9h4v3a4 4 0 014-4z"/>
+        <rect x="2" y="9" width="4" height="12"/>
+        <circle cx="4" cy="4" r="2"/>
+      </svg>
+    </a>
   </div>
   <p>&copy; <span id="year"></span> Acme Corp. All rights reserved.</p>
 </footer>
