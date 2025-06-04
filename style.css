@@ -27,6 +27,17 @@
     }
 }
 
+/* Optional color variants */
+body[data-variant="green"] {
+    --primary-color: #28a745;
+    --secondary-color: #1e7e34;
+}
+
+body[data-variant="red"] {
+    --primary-color: #dc3545;
+    --secondary-color: #c82333;
+}
+
 body {
     font-family: 'Nunito Sans', sans-serif;
     line-height: 1.8;

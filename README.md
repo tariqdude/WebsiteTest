@@ -9,7 +9,6 @@ This project is a design prototype for a construction company website. It demons
 - Animated sections that reveal on scroll
 - Stats counters and image sliders powered by Swiper
 - Cookie consent banner and back-to-top button
-- Dedicated 404 page served for unknown routes
 
 ## Getting Started
 
@@ -31,6 +30,14 @@ Global colors are defined using CSS variables in `style.css` under the `:root` s
 ```
 
 Modify these variables to adjust the site's palette. Additional rules under `body.dark-mode` control the dark theme colors.
+
+### Using Variants
+
+You can also switch between predefined color schemes by appending a
+`variant` query parameter to the URL, e.g. `index.html?variant=green` or
+`?variant=red`. The chosen variant is stored in `localStorage` so it
+persists on subsequent visits. Available variants correspond to the
+`data-variant` rules in `style.css`.
 
 ## Adjusting Scripts
 
