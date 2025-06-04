@@ -863,6 +863,37 @@ img {
     }
 }
 
+@media (max-width: 400px) {
+    .hero {
+        padding: 160px 0 120px;
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1.1rem;
+    }
+    .contact-form {
+        padding: 30px;
+    }
+    .contact-form h3 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    .form-group {
+        margin-bottom: 30px;
+    }
+    .form-group input,
+    .form-group textarea {
+        padding: 14px;
+        font-size: 1rem;
+    }
+    .submit-btn {
+        padding: 16px;
+        font-size: 1rem;
+    }
+}
+
 /* Dark Mode Styles */
 body.dark-mode {
     background-color: var(--bg-dark);
