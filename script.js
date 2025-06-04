@@ -152,16 +152,7 @@ if (darkToggle) {
         localStorage.setItem('dark-mode', active);
         darkToggle.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
-    if (themeTip) {
-        function positionTip() {
-            const rect = darkToggle.getBoundingClientRect();
-            themeTip.style.left = rect.left + rect.width / 2 + 'px';
-            themeTip.style.top = rect.bottom + window.scrollY + 'px';
-        }
-        positionTip();
-        window.addEventListener('resize', positionTip);
-        window.addEventListener('scroll', positionTip);
-    }
+    // Tooltip visibility handled via CSS
 }
 
 // Sticky header & back to top button
@@ -194,14 +185,19 @@ if (backToTop) {
 }
 
 // Mobile navigation
-const menuToggle = document.getElementById('mobileMenuToggle');
+const menuToggle = document.querySelector('[popovertarget="navMenu"]');
 const navMenu = document.getElementById('navMenu');
-if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('open');
-        const expanded = navMenu.classList.contains('open');
-        menuToggle.setAttribute('aria-expanded', expanded);
-    });
+if (menuToggle && navMenu && navMenu.showPopover) {
+    const mq = window.matchMedia('(min-width: 768px)');
+    function updateNav() {
+        if (mq.matches) {
+            navMenu.showPopover();
+        } else {
+            navMenu.hidePopover();
+        }
+    }
+    updateNav();
+    mq.addEventListener('change', updateNav);
 }
 
 // Highlight active nav link on scroll
