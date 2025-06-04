@@ -313,14 +313,30 @@ img {
 .services {
     background-color: #f0f0f0;
     padding-bottom: 120px;
+    container-type: inline-size;
 }
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
     gap: 50px;
+}
+
+@container (min-width: 600px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@container (min-width: 900px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 .service-card {
     container-type: inline-size;
+    display: grid;
+    grid-template-rows: subgrid;
     background-color: white;
     padding: 50px;
     border-radius: 15px;
@@ -710,9 +726,7 @@ img {
     .about-image, .contact-info {
         margin-bottom: 60px;
     }
-    .services-grid {
-        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    }
+    /* .services-grid layout handled with container queries */
 }
 
 @media (max-width: 900px) {
@@ -785,9 +799,7 @@ img {
         font-size: 2.4rem;
         margin-bottom: 60px;
     }
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
+    /* .services-grid layout handled with container queries */
     .service-card {
         padding: 40px;
     }
