@@ -19,9 +19,15 @@
   <header class="glass" id="top" role="banner">
     <nav>
       <a href="#home" class="logo">Biz</a>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
+      <button class="menu-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
     </nav>
   </header>
   <main id="home" role="main">
@@ -64,6 +70,7 @@
   <footer>
     <p>&copy; <span id="year"></span> Example Business</p>
   </footer>
+  <button id="back-to-top" aria-label="Back to top">⬆</button>
   <script src="https://plausible.io/js/plausible.js" async defer data-domain="example.com"></script>
   <script src="main.js" defer></script>
   <script>
