@@ -1,0 +1,15 @@
+{
+  "name": "ApexBuild Construction",
+  "short_name": "ApexBuild",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3063/3063823.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#007bff",
+  "background_color": "#007bff",
+  "display": "standalone",
+  "start_url": "index.html"
+}

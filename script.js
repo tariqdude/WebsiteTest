@@ -231,18 +231,8 @@ if (pointerRing) {
     });
 }
 
-// Service worker for offline caching
+
+// Register service worker
 if ('serviceWorker' in navigator) {
-    const swCode = `
-    const cacheName = 'apex-cache-v1';
-    const assets = ['index.html', 'style.css', 'script.js'];
-    self.addEventListener('install', e => {
-        e.waitUntil(caches.open(cacheName).then(c => c.addAll(assets)));
-    });
-    self.addEventListener('fetch', e => {
-        e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
-    });`;
-    const blob = new Blob([swCode], { type: 'application/javascript' });
-    const url = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(url);
+    navigator.serviceWorker.register('sw.js');
 }
