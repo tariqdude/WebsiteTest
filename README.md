@@ -7,7 +7,7 @@ This project is a design prototype for a construction company website. It demons
 - **Responsive layout** that adapts to desktops and mobile devices
 - **Dark mode** toggle with the preference saved in `localStorage`
 - Animated sections that reveal on scroll
-- Stats counters and image sliders powered by Swiper
+- Stats counters and an image carousel powered by the View Transitions API
 - Cookie consent banner and back-to-top button
 
 ## Getting Started
@@ -43,7 +43,7 @@ persists on subsequent visits. Available variants correspond to the
 
 `script.js` contains all the interactive behavior. Key sections include:
 
-- Initializing the Swiper slider
+- Initializing the case-study carousel
 - Setting up the typed hero text strings
 - Handling the dark mode toggle and sticky header
 

@@ -1,35 +1,48 @@
 // @ts-check
 
-const swiper = new Swiper('.swiper-container', {
-    slidesPerView: 'auto',
-    spaceBetween: 30,
-    centeredSlides: true,
-    loop: true,
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    a11y: {
-        enabled: true,
-    },
-    keyboard: {
-        enabled: true,
-    },
-    breakpoints: {
-        768: {
-            slidesPerView: 2,
-            spaceBetween: 40,
-        },
-        1024: {
-            slidesPerView: 3,
-            spaceBetween: 50,
-        },
-    },
-});
+const carousel = document.querySelector('.case-carousel');
+if (carousel) {
+    const slides = carousel.querySelectorAll('.case-slide');
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    const dotsContainer = carousel.querySelector('.carousel-dots');
+    let index = 0;
+
+    const dots = Array.from(slides, (_, i) => {
+        const b = document.createElement('button');
+        b.className = 'carousel-dot';
+        b.type = 'button';
+        b.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        b.addEventListener('click', () => show(i));
+        dotsContainer?.appendChild(b);
+        return b;
+    });
+
+    function show(newIndex) {
+        if (newIndex === index) return;
+        const update = () => {
+            slides[index].classList.remove('active');
+            dots[index]?.classList.remove('active');
+            index = (newIndex + slides.length) % slides.length;
+            slides[index].classList.add('active');
+            dots[index]?.classList.add('active');
+        };
+        if (document.startViewTransition) {
+            document.startViewTransition(update);
+        } else {
+            update();
+        }
+    }
+
+    prevBtn?.addEventListener('click', () => show(index - 1));
+    nextBtn?.addEventListener('click', () => show(index + 1));
+    carousel.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') prevBtn?.click();
+        if (e.key === 'ArrowRight') nextBtn?.click();
+    });
+    // activate first dot
+    dots[0]?.classList.add('active');
+}
 
 // Motion preference check
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
