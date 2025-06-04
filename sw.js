@@ -1,9 +1,10 @@
-const cacheName = 'apex-cache-v3';
+const cacheName = 'apex-cache-v4';
 const assets = [
   'index.html',
   'style.css',
   'script.js',
   '404.html',
+  'offline.html',
   'privacy.html',
   'terms.html',
   'manifest.json',
@@ -30,7 +31,7 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request).catch(() => caches.match('index.html'))
+      fetch(request).catch(() => caches.match('offline.html'))
     );
     return;
   }
