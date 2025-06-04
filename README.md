@@ -9,6 +9,7 @@ This project is a design prototype for a construction company website. It demons
 - Animated sections that reveal on scroll
 - Stats counters and image sliders powered by Swiper
 - Cookie consent banner and back-to-top button
+- Dedicated 404 page served for unknown routes
 
 ## Getting Started
 
