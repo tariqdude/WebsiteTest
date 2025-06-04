@@ -63,6 +63,7 @@ if (darkToggle) {
 // Sticky header & back to top button
 const header = document.querySelector('.header');
 const backToTop = document.getElementById('backToTop');
+const scrollProgress = document.getElementById('scrollProgress');
 if (backToTop) {
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
@@ -76,6 +77,11 @@ if (backToTop) {
             } else {
                 header.classList.remove('scrolled');
             }
+        }
+        if (scrollProgress) {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / total) * 100;
+            scrollProgress.style.width = progress + '%';
         }
     });
     backToTop.addEventListener('click', () => {
@@ -92,6 +98,23 @@ if (menuToggle && navMenu) {
         const expanded = navMenu.classList.contains('open');
         menuToggle.setAttribute('aria-expanded', expanded);
     });
+}
+
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#navMenu a');
+if (sections.length && navLinks.length) {
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    const target = link.getAttribute('href').substring(1);
+                    link.classList.toggle('active', target === entry.target.id);
+                });
+            }
+        });
+    }, { threshold: 0.6 });
+    sections.forEach(sec => sectionObserver.observe(sec));
 }
 
 // Reveal sections on scroll
