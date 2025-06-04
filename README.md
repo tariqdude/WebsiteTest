@@ -13,7 +13,7 @@ This project is a design prototype for a construction company website. It demons
 
 ## Getting Started
 
-Simply open `index.html` in a modern web browser. No build step is required. For live reloading you can use a local development server such as `npx serve` or `python3 -m http.server`.
+Simply open `index.html` in a modern web browser. For production, run `npm run build` to generate `style.min.css` and `script.min.js` and ensure the HTML files reference these minified assets. For live reloading during development you can use a local development server such as `npx serve` or `python3 -m http.server`.
 
 ## Changing the Color Scheme
 
@@ -55,6 +55,16 @@ Edit these portions to customize animations or disable features as needed.
 - Ensure you have an internet connection so the CDN links for fonts and third-party libraries load correctly.
 - When editing JavaScript, check the browser console for any errors.
 - Use semantic HTML and keep accessibility in mind when extending the markup.
+
+## Building for Production
+
+Run the following command to produce minified assets:
+
+```bash
+npm run build
+```
+
+This will create `style.min.css` and `script.min.js` which are referenced by the HTML files when deploying the site.
 
 ## Contact Form Configuration
 
