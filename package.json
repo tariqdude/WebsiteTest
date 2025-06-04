@@ -1,0 +1,15 @@
+{
+  "name": "example-business",
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "sass styles.scss styles.css",
+    "watch:css": "sass --watch styles.scss:styles.css",
+    "test": "htmlhint index.html && stylelint styles.css && eslint --no-eslintrc main.js || true"
+  },
+  "devDependencies": {
+    "eslint": "^9.28.0",
+    "htmlhint": "^1.4.0",
+    "sass": "^1.89.1",
+    "stylelint": "^16.20.0"
+  }
+}

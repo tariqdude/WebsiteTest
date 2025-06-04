@@ -9,6 +9,14 @@ npm install -g http-server # optional for local preview
 http-server -c-1 .
 ```
 
+### Compile Sass
+
+Run the Sass compiler to generate `styles.css` from the `styles.scss` source:
+
+```bash
+npm run build:css
+```
+
 Visit `http://localhost:8080` and open devtools Lighthouse to verify scores.
 
 ## PWA Install
