@@ -14,6 +14,17 @@ body {
     background-color: #fefefe;
     overflow-x: hidden;
 }
+
+#scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0;
+    background-color: #007bff;
+    z-index: 1100;
+    transition: width 0.25s ease;
+}
 a {
     text-decoration: none;
     color: inherit;
@@ -138,6 +149,14 @@ img {
     color: #007bff;
 }
 .nav-links li a:hover::after, .nav-links li a:focus::after {
+    width: 100%;
+}
+.nav-links li a.active,
+.nav-links li a.active:hover,
+.nav-links li a.active:focus {
+    color: #007bff;
+}
+.nav-links li a.active::after {
     width: 100%;
 }
 
@@ -746,6 +765,9 @@ body.dark-mode .contact {
 }
 body.dark-mode a {
     color: #4da3ff;
+}
+body.dark-mode #scrollProgress {
+    background-color: #4da3ff;
 }
 #darkModeToggle {
     margin-left: auto;
