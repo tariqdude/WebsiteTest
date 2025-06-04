@@ -13,15 +13,13 @@
     <link rel="canonical" href="https://apexbuild.example.com/">
     <meta name="robots" content="index, follow">
     <link rel="icon" href="icon.svg">
-    <meta name="theme-color" content="#007bff">
+    <meta name="theme-color" content="#1FE0B1">
     <link rel="manifest" href="manifest.json">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://images.unsplash.com https://randomuser.me data:; style-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; connect-src 'self' https://formspree.io;">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=EB+Garamond:opsz,wght@8..144,400..800&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=EB+Garamond:opsz,wght@8..144,400..800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;h=800&amp;ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyfHxjb25zdHJ1Y3Rpb24lMjBzaXRlfGVufDB8fHx8fA%3D%3D&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1600" as="image" fetchpriority="high">
@@ -70,10 +68,10 @@
 
 
     <section class="hero reveal">
+        <canvas id="particleCanvas" aria-hidden="true"></canvas>
         <div class="hero-content container">
-            <h1 class="animate__animated"><span id="typedHero"></span></h1>
-            <p class="animate__animated animate__delay-1s">Crafting sustainable structures with precision, innovation, and unwavering commitment to excellence. Your vision, our expertise - a perfect blueprint for success.</p>
-            <a href="#projects" class="btn animate__animated animate__delay-2s">Explore Our Portfolio</a>
+            <h1>Construct the future with confidence</h1>
+            <a href="#projects" class="btn">Explore Our Portfolio</a>
         </div>
         <div class="hero-wave"></div>
     </section>
@@ -343,7 +341,6 @@
     <button id="backToTop" aria-label="Back to top">&uarr;</button>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js" defer integrity="sha384-UpSTlZpLDzenAXs6CRRa5gU7uk1xaEJy+7uIz+c0niFDR3yuAlqzV7w0SgZhmEX3" crossorigin="anonymous"></script>
     <div id="pointerRing" aria-hidden="true"></div>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer integrity="sha384-NMn9+T8zIKnDUstqb5le7vdLNSyAgSU9DtEPT/b7ks9NJQpPk4Dc9b1tI8oyzimc" crossorigin="anonymous"></script>
     <script src="dialog-polyfill.js"></script>
     <script type="module" defer src="script.js"></script>
 

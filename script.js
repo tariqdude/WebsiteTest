@@ -37,16 +37,54 @@ if (prefersReducedMotion) {
     document.documentElement.classList.add('reduce-motion');
 }
 
-// Typed hero text
-const typedHero = document.getElementById('typedHero');
-if (typedHero && !prefersReducedMotion) {
-    new Typed('#typedHero', {
-        strings: ['Building Beyond Expectations', 'Crafting Your Vision'],
-        typeSpeed: 60,
-        backSpeed: 30,
-        backDelay: 2000,
-        loop: true
-    });
+// Simple particle line effect in hero canvas
+const canvas = document.getElementById('particleCanvas');
+if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    const particles = Array.from({ length: 80 }, () => ({ x: 0, y: 0, vx: 0, vy: 0 }));
+    function resize() {
+        width = canvas.offsetWidth;
+        height = canvas.offsetHeight;
+        canvas.width = width;
+        canvas.height = height;
+        particles.forEach(p => {
+            p.x = Math.random() * width;
+            p.y = Math.random() * height;
+            p.vx = (Math.random() - 0.5) * 0.5;
+            p.vy = (Math.random() - 0.5) * 0.5;
+        });
+    }
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > width) p.vx *= -1;
+            if (p.y < 0 || p.y > height) p.vy *= -1;
+            ctx.fillStyle = 'rgba(31,224,177,0.8)';
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+            for (let j = i + 1; j < particles.length; j++) {
+                const q = particles[j];
+                const dx = p.x - q.x;
+                const dy = p.y - q.y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < 80) {
+                    ctx.strokeStyle = `rgba(31,224,177,${1 - dist / 80})`;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(q.x, q.y);
+                    ctx.stroke();
+                }
+            }
+        });
+        requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
 }
 
 // Color scheme variants via query params
@@ -58,9 +96,6 @@ if (variant) {
 const savedVariant = localStorage.getItem('apex-variant');
 if (savedVariant) {
     document.body.dataset.variant = savedVariant;
-    if (typedHero) {
-        typedHero.dataset.variant = savedVariant;
-    }
 }
 
 const counterElements = document.querySelectorAll('.stat-number');
@@ -274,6 +309,21 @@ if (!('HTMLDialogElement' in window)) {
     });
 }
 
+// Core Web Vitals logging
+if ('PerformanceObserver' in window) {
+    const perfEndpoint = '/perf';
+    const po = new PerformanceObserver(list => {
+        for (const entry of list.getEntries()) {
+            fetch(perfEndpoint, {
+                method: 'POST',
+                keepalive: true,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: entry.name, value: entry.startTime })
+            });
+        }
+    });
+    po.observe({ type: 'largest-contentful-paint', buffered: true });
+}
 
 // Register service worker
 if ('serviceWorker' in navigator) {
