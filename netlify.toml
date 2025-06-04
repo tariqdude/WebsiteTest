@@ -1,0 +1,3 @@
+[build]
+  command = "npm run build && hugo --source apexbuild --destination ../public"
+  publish = "public"
