@@ -18,8 +18,7 @@ npx http-server -p 8000
 
 ## PWA features
 
-- **Web App Manifest** (`manifest.json`) defines the name, start URL and theme color, and includes icons at `96x96`, `192x192` and `512x512` so the site can be installed on a home screen.
-- **Service Worker** (`sw.js`) is registered in `scripts.js` to enable basic offline support.
+
 - **Theme color** meta tag customizes the browser UI when the site is installed or opened on mobile.
 
 These features illustrate how to turn a regular static page into a lightweight PWA.
