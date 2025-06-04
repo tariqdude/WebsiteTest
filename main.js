@@ -66,3 +66,27 @@ script.setAttribute('theme', 'github-light');
 script.crossOrigin = 'anonymous';
 script.async = true;
 comments.appendChild(script);
+
+// async contact form
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const formData = new FormData(contactForm);
+    try {
+      const resp = await fetch('https://formspree.io/f/myform', {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      });
+      if (resp.ok) {
+        alert('Message sent!');
+        contactForm.reset();
+      } else {
+        alert('Error sending message.');
+      }
+    } catch (err) {
+      alert('Error sending message.');
+    }
+  });
+}
