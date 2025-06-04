@@ -46,3 +46,13 @@ Edit these portions to customize animations or disable features as needed.
 - Ensure you have an internet connection so the CDN links for fonts and third-party libraries load correctly.
 - When editing JavaScript, check the browser console for any errors.
 - Use semantic HTML and keep accessibility in mind when extending the markup.
+
+## Contact Form Configuration
+
+The contact form uses [Formspree](https://formspree.io/) to process submissions.
+To enable it:
+
+1. Create an account on Formspree and set up a new form.
+2. Copy the endpoint URL provided by Formspree (e.g. `https://formspree.io/f/your-form-id`).
+3. Replace the placeholder URL in `index.html` within the `action` attribute of the contact form.
+4. The script automatically sends form data to this URL using AJAX, so no server setup is required.
