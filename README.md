@@ -49,6 +49,9 @@ persists on subsequent visits. Available variants correspond to the
 
 Edit these portions to customize animations or disable features as needed.
 
+The hero tagline rotates through a set of phrases defined in `script.js`. Update
+the `phrases` array to change the words that cycle below the main heading.
+
 ## Development Tips
 
 - Ensure you have an internet connection so the CDN links for fonts and third-party libraries load correctly.

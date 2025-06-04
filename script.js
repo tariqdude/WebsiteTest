@@ -50,6 +50,40 @@ if (prefersReducedMotion) {
     document.documentElement.classList.add('reduce-motion');
 }
 
+// Cycle hero tagline text
+const heroTyped = document.getElementById('heroTyped');
+if (heroTyped) {
+    const phrases = [
+        'Innovative Designs',
+        'Quality Craftsmanship',
+        'Timely Delivery'
+    ];
+    let pIndex = 0;
+    let cIndex = 0;
+    let deleting = false;
+
+    const type = () => {
+        const text = phrases[pIndex];
+        if (deleting) {
+            heroTyped.textContent = text.slice(0, cIndex--);
+            if (cIndex < 0) {
+                deleting = false;
+                pIndex = (pIndex + 1) % phrases.length;
+            }
+        } else {
+            heroTyped.textContent = text.slice(0, cIndex++);
+            if (cIndex > text.length) {
+                deleting = true;
+                cIndex = text.length;
+                setTimeout(type, 1500);
+                return;
+            }
+        }
+        setTimeout(type, 120);
+    };
+    if (!prefersReducedMotion) type();
+}
+
 // Simple particle line effect in hero canvas
 const canvas = document.getElementById('particleCanvas');
 if (canvas && canvas.getContext) {
