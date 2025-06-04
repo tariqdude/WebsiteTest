@@ -49,15 +49,18 @@ if (typedHero && !prefersReducedMotion) {
     });
 }
 
-// Edge-style personalization from query params
+// Color scheme variants via query params
 const params = new URLSearchParams(window.location.search);
 const variant = params.get('variant');
 if (variant) {
     localStorage.setItem('apex-variant', variant);
 }
 const savedVariant = localStorage.getItem('apex-variant');
-if (savedVariant && typedHero) {
-    typedHero.dataset.variant = savedVariant;
+if (savedVariant) {
+    document.body.dataset.variant = savedVariant;
+    if (typedHero) {
+        typedHero.dataset.variant = savedVariant;
+    }
 }
 
 const counterElements = document.querySelectorAll('.stat-number');
