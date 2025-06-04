@@ -28,3 +28,18 @@ document.querySelectorAll('.card, .about, .testimonial-grid figure, .contact for
 
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 
+// Scroll to top button
+const scrollBtn = document.querySelector('.scroll-top');
+if(scrollBtn){
+  window.addEventListener('scroll', () => {
+    if(window.pageYOffset > 300){
+      scrollBtn.classList.add('show');
+    } else {
+      scrollBtn.classList.remove('show');
+    }
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+}
+

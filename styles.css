@@ -74,6 +74,9 @@ a:hover {text-decoration: underline;}
 .footer a {color:#fff; margin:0 0.5rem;}
 .mode-toggle {position:fixed; bottom:1rem; right:1rem; background:var(--color-accent); border:none; color:#fff; padding:0.5rem; border-radius:50%; font-size:1.2rem; cursor:pointer;}
 
+.scroll-top{position:fixed;bottom:4rem;right:1rem;background:var(--color-accent);border:none;color:#fff;padding:0.5rem;border-radius:50%;font-size:1.2rem;cursor:pointer;display:none;}
+.scroll-top.show{display:block;}
+
 .dark-mode{--color-bg:var(--color-dark-bg);--color-text:var(--color-dark-text);}
 
 .card,.about,.testimonial-grid figure,.contact form{opacity:0;transform:translateY(20px);transition:opacity var(--transition-fast),transform var(--transition-fast);}
