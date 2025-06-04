@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
     <div id="scrollProgress"></div>
 
     <header class="header">
@@ -37,6 +38,8 @@
                 <button id="darkModeToggle" class="btn btn-secondary" aria-pressed="false">Toggle Theme</button>
         </nav>
     </header>
+<main id="mainContent">
+
 
     <section class="hero reveal">
         <div class="hero-content container">
@@ -261,6 +264,8 @@
             </div>
         </div>
     </section>
+</main>
+
 
     <footer class="footer">
         <div class="footer-content container">
@@ -295,7 +300,7 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                &copy; 2023 ApexBuild Construction. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
+                &copy; <span id="currentYear"></span> ApexBuild Construction. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
             </div>
         </div>
     </footer>
