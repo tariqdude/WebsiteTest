@@ -68,3 +68,14 @@ To enable it:
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Running Tests
+
+This project uses [html-validate](https://html-validate.org/) for basic linting of the main HTML page. After cloning the repository, install dependencies and run the test script:
+
+```bash
+npm install
+npm test
+```
+
+The provided configuration disables rules so the test will simply validate that `index.html` parses correctly.
