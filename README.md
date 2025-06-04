@@ -1,6 +1,7 @@
 # Example Business Website
 
 This repo contains a static single-page site ready for GitHub Pages deployment.
+The design uses glassmorphic cards, animated gradient text, diagonal section dividers and a Lottie-powered hero. Feature cards tilt slightly with mouse movement.
 
 ## Quick Start
 

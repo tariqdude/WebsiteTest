@@ -25,34 +25,37 @@
     </nav>
   </header>
   <main id="home" role="main">
-    <section class="hero">
-      <h1 id="hero-title">Amazing Product</h1>
-      <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" alt="Hero" decoding="async" fetchpriority="high">
-    </section>
-    <section id="features">
-      <h2>Features</h2>
-      <div class="cards">
-        <article class="card">Fast</article>
-        <article class="card">Secure</article>
-        <article class="card">Reliable</article>
+    <section class="hero gradient-bg">
+      <div class="hero-inner">
+        <h1 id="hero-title" class="gradient-text">Amazing Product</h1>
+        <div id="hero-animation"></div>
+        <img class="hero-img" src="https://res.cloudinary.com/demo/image/upload/sample.jpg" alt="Hero" decoding="async" fetchpriority="high">
       </div>
     </section>
-    <section id="pricing">
+    <section id="features" class="section divider">
+      <h2>Features</h2>
+      <div class="cards">
+        <article class="card" data-tilt>Fast</article>
+        <article class="card" data-tilt>Secure</article>
+        <article class="card" data-tilt>Reliable</article>
+      </div>
+    </section>
+    <section id="pricing" class="section divider">
       <h2>Pricing</h2>
       <pricing-toggle></pricing-toggle>
     </section>
-    <section id="faq">
+    <section id="faq" class="section divider">
       <h2>FAQ</h2>
       <details>
         <summary>What is this?</summary>
         <p>A sample answer.</p>
       </details>
     </section>
-    <section id="blog">
+    <section id="blog" class="section divider">
       <h2>Blog</h2>
       <div id="comments"></div>
     </section>
-    <section id="contact">
+    <section id="contact" class="section">
       <h2>Contact</h2>
       <form action="https://formspree.io/f/myform" method="POST">
         <input data-test="email" type="email" name="email" required placeholder="Email">
@@ -65,6 +68,7 @@
     <p>&copy; <span id="year"></span> Example Business</p>
   </footer>
   <script src="https://plausible.io/js/plausible.js" async defer data-domain="example.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.7.11/build/player/lottie.min.js" integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb" crossorigin="anonymous" defer></script>
   <script src="main.js" defer></script>
   <script>
     if ('serviceWorker' in navigator) {

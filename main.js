@@ -29,6 +29,30 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.card').forEach(el => observer.observe(el));
 
+// simple 3D tilt effect on cards
+document.querySelectorAll('[data-tilt]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    card.style.transform = `rotateX(${(-y / 20)}deg) rotateY(${(x / 20)}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateX(0) rotateY(0)';
+  });
+});
+
+// Lottie hero animation
+if (window.lottie) {
+  lottie.loadAnimation({
+    container: document.getElementById('hero-animation'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'https://assets6.lottiefiles.com/packages/lf20_touohxv0.json'
+  });
+}
+
 // Utterances comments
 const comments = document.getElementById('comments');
 const script = document.createElement('script');
