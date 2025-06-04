@@ -269,14 +269,27 @@ if (!disableScrollReveal) {
     const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target);
+                const section = entry.target;
+                const children = Array.from(section.children);
+                let delay = 0;
+                children.forEach(child => {
+                    const custom = parseFloat(child.dataset.revealDelay || '');
+                    const d = isNaN(custom) ? delay : custom;
+                    child.style.transitionDelay = `${d}s`;
+                    child.classList.add('visible');
+                    if (isNaN(custom)) delay += 0.1;
+                });
+                section.classList.add('visible');
+                revealObserver.unobserve(section);
             }
         });
     }, { threshold: 0.2 });
     revealEls.forEach(el => revealObserver.observe(el));
 } else {
-    revealEls.forEach(el => el.classList.add('visible'));
+    revealEls.forEach(section => {
+        section.classList.add('visible');
+        Array.from(section.children).forEach(child => child.classList.add('visible'));
+    });
 }
 
 // Contact form handler
