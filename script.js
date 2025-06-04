@@ -103,32 +103,46 @@ if (canvas && canvas.getContext) {
 // Hero typed text animation
 const typedEl = document.getElementById('typedHero');
 if (typedEl) {
-    const phrases = JSON.parse(typedEl.dataset.texts || '[]');
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
+    const inlinePhrases = JSON.parse(typedEl.dataset.texts || '[]');
 
-    function typeStep() {
-        const current = phrases[phraseIndex] || '';
-        if (!deleting) {
-            typedEl.textContent = current.slice(0, charIndex + 1);
-            charIndex++;
-            if (charIndex === current.length) {
-                deleting = true;
-                return setTimeout(typeStep, 2000);
+    function startTyping(phrases) {
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        function typeStep() {
+            const current = phrases[phraseIndex] || '';
+            if (!deleting) {
+                typedEl.textContent = current.slice(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === current.length) {
+                    deleting = true;
+                    return setTimeout(typeStep, 2000);
+                }
+            } else {
+                typedEl.textContent = current.slice(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    deleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                }
             }
-        } else {
-            typedEl.textContent = current.slice(0, charIndex - 1);
-            charIndex--;
-            if (charIndex === 0) {
-                deleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-            }
+            setTimeout(typeStep, deleting ? 50 : 100);
         }
-        setTimeout(typeStep, deleting ? 50 : 100);
+
+        typeStep();
     }
 
-    typeStep();
+    fetch('phrases.json')
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(data => {
+            if (Array.isArray(data) && data.length) {
+                startTyping(data);
+            } else {
+                startTyping(inlinePhrases);
+            }
+        })
+        .catch(() => startTyping(inlinePhrases));
 }
 
 // Color scheme variants via query params
