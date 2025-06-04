@@ -52,8 +52,11 @@ counterElements.forEach(element => {
 // Dark mode toggle
 const darkToggle = document.getElementById('darkModeToggle');
 if (darkToggle) {
-    const prefersDark = localStorage.getItem('dark-mode') === 'true';
-    if (prefersDark) document.body.classList.add('dark-mode');
+    const storedPref = localStorage.getItem('dark-mode');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if ((storedPref === null && systemPrefersDark) || storedPref === 'true') {
+        document.body.classList.add('dark-mode');
+    }
     darkToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
         localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));

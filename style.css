@@ -1,7 +1,13 @@
 /* CSS Reset & Global Styles */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --text-color: #333;
+    --background-color: #fefefe;
+}
 *, *::before, *::after {
-    box-sizing: border-box;
     margin: 0;
+    box-sizing: border-box;
     padding: 0;
 }
 html {
@@ -10,14 +16,32 @@ html {
 body {
     font-family: 'Nunito Sans', sans-serif;
     line-height: 1.8;
-    color: #333;
-    background-color: #fefefe;
+    color: var(--text-color);
+    background-color: var(--background-color);
     overflow-x: hidden;
 }
 a {
     text-decoration: none;
     color: inherit;
     transition: color 0.3s ease;
+}
+.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 10px;
+    padding: 8px 16px;
+    background: var(--primary-color);
+    color: #fff;
+    z-index: 1000;
 }
 img {
     display: block;
@@ -50,13 +74,13 @@ img {
     transform: translateX(-50%);
     width: 100px;
     height: 6px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     border-radius: 6px;
 }
 .btn {
     display: inline-block;
     padding: 16px 40px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border-radius: 8px;
     font-weight: 600;
@@ -72,7 +96,7 @@ img {
     box-shadow: 0 9px 22px rgba(0, 123, 255, 0.45);
 }
 .btn-secondary {
-    background-color: #6c757d;
+    background-color: var(--secondary-color);
     box-shadow: 0 6px 18px rgba(108, 117, 125, 0.35);
 }
 .btn-secondary:hover {
@@ -99,7 +123,7 @@ img {
 .logo {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #007bff;
+    color: var(--primary-color);
     transition: transform 0.3s ease;
 }
 .logo:hover {
@@ -116,7 +140,7 @@ img {
     border: none;
     font-size: 1.8rem;
     cursor: pointer;
-    color: #007bff;
+    color: var(--primary-color);
 }
 .nav-links li a {
     color: #555;
@@ -131,11 +155,11 @@ img {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     transition: width 0.4s ease;
 }
 .nav-links li a:hover, .nav-links li a:focus {
-    color: #007bff;
+    color: var(--primary-color);
 }
 .nav-links li a:hover::after, .nav-links li a:focus::after {
     width: 100%;
@@ -234,7 +258,7 @@ img {
 .stat-number {
     font-size: 3.5rem;
     font-weight: 800;
-    color: #007bff;
+    color: var(--primary-color);
     transition: transform 0.3s ease;
 }
 .stat-number:hover {
@@ -270,7 +294,7 @@ img {
 }
 .service-icon {
     font-size: 4.5rem;
-    color: #007bff;
+    color: var(--primary-color);
     margin-bottom: 40px;
     opacity: 0.9;
     transition: transform 0.4s ease;
@@ -352,7 +376,7 @@ img {
     line-height: 1.8;
 }
 .swiper-pagination-bullet-active {
-    background-color: #007bff;
+    background-color: var(--primary-color);
 }
 
 /* Testimonials Section */
@@ -430,7 +454,7 @@ img {
 }
 .author-name {
     font-weight: 700;
-    color: #333;
+    color: var(--text-color);
     font-size: 1.1rem;
 }
 .author-title {
@@ -482,7 +506,7 @@ img {
     font-weight: 400;
 }
 .contact-details-list li i {
-    color: #007bff;
+    color: var(--primary-color);
     font-size: 1.5rem;
 }
 .contact-form {
@@ -521,7 +545,7 @@ img {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
 }
 .form-group textarea {
@@ -754,7 +778,7 @@ body.dark-mode a {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 50%;
@@ -804,4 +828,12 @@ body.dark-mode a {
 }
 .cookie-consent button {
     margin-left: 15px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+    }
 }

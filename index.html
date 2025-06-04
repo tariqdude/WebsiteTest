@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ApexBuild - Constructing the Future</title>
     <meta name="description" content="Professional construction services specializing in residential, commercial and industrial projects.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#007bff">
     <meta property="og:title" content="ApexBuild - Constructing the Future">
     <meta property="og:description" content="Professional construction services specializing in residential, commercial and industrial projects.">
     <meta property="og:type" content="website">
@@ -20,6 +22,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <a href="#mainContent" class="skip-link">Skip to content</a>
 
     <header class="header">
         <nav class="navbar container">
@@ -35,10 +38,11 @@
                 <button id="darkModeToggle" class="btn btn-secondary">Toggle Theme</button>
         </nav>
     </header>
+<main id="mainContent">
 
     <section class="hero reveal">
         <div class="hero-content container">
-            <h1 class="animate__animated"><span id="typedHero"></span></h1>
+            <h1 class="animate__animated"><span id="typedHero" aria-live="polite" role="status"></span></h1>
             <p class="animate__animated animate__delay-1s">Crafting sustainable structures with precision, innovation, and unwavering commitment to excellence. Your vision, our expertise - a perfect blueprint for success.</p>
             <a href="#projects" class="btn animate__animated animate__delay-2s">Explore Our Portfolio</a>
         </div>
@@ -257,6 +261,7 @@
         </div>
     </section>
 
+</main>
     <footer class="footer">
         <div class="footer-content container">
             <div class="footer-section">
@@ -301,9 +306,9 @@
     </div>
 
     <button id="backToTop" aria-label="Back to top">&uarr;</button>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script src="script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script defer src="script.js"></script>
 
 </body>
 </html>
