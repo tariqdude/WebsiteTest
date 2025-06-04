@@ -1,0 +1,20 @@
+{
+  "name": "websitetest",
+  "version": "1.0.0",
+  "description": "Example Business Website",
+  "main": "main.js",
+  "scripts": {
+    "prebuild": "mkdir -p dist",
+    "build": "npm run minify-js && npm run minify-css",
+    "minify-js": "terser main.js -o dist/main.js --compress --mangle",
+    "minify-css": "postcss styles.css -u cssnano -o dist/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^6.0.1",
+    "postcss-cli": "^10.1.0",
+    "terser": "^5.21.0"
+  }
+}
