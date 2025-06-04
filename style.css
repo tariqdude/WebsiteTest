@@ -110,6 +110,14 @@ img {
     display: flex;
     gap: 50px;
 }
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #007bff;
+}
 .nav-links li a {
     color: #555;
     font-weight: 600;
@@ -643,22 +651,34 @@ img {
         align-items: flex-start;
         padding: 20px 30px;
     }
+    .hamburger {
+        display: block;
+        margin-left: auto;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
     .logo {
         margin-bottom: 20px;
     }
-    .nav-links {
+    #navMenu {
         flex-direction: column;
         width: 100%;
         text-align: center;
         margin-top: 15px;
         gap: 15px;
+        display: none;
     }
-    .nav-links li a {
+    #navMenu.open {
+        display: flex;
+    }
+    #navMenu li a {
         display: block;
         padding: 14px 0;
         border-bottom: 1px solid #eee;
     }
-    .nav-links li:last-child a {
+    #navMenu li:last-child a {
         border-bottom: none;
     }
     .testimonial-card {
@@ -747,4 +767,41 @@ body.dark-mode a {
 }
 #backToTop.show {
     display: block;
+}
+
+/* Reveal Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sticky Header on Scroll */
+.header.scrolled {
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    background-color: rgba(255,255,255,0.95);
+}
+
+/* Cookie Consent */
+.cookie-consent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.9);
+    color: #fff;
+    padding: 15px 20px;
+    text-align: center;
+    z-index: 1000;
+    display: none;
+}
+.cookie-consent.show {
+    display: block;
+}
+.cookie-consent button {
+    margin-left: 15px;
 }

@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ApexBuild - Constructing the Future</title>
+    <meta name="description" content="Professional construction services specializing in residential, commercial and industrial projects.">
+    <meta property="og:title" content="ApexBuild - Constructing the Future">
+    <meta property="og:description" content="Professional construction services specializing in residential, commercial and industrial projects.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1606110793997-a9bb9538aa81?crop=entropy&cs=tinysrgb&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:url" content="https://apexbuild.example.com">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063823.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -17,7 +24,8 @@
     <header class="header">
         <nav class="navbar container">
             <a href="#" class="logo">ApexBuild</a>
-            <ul class="nav-links">
+            <button id="mobileMenuToggle" class="hamburger" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <ul id="navMenu" class="nav-links">
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -28,19 +36,19 @@
         </nav>
     </header>
 
-    <section class="hero">
+    <section class="hero reveal">
         <div class="hero-content container">
-            <h1 class="animate__animated">Building Beyond Expectations</h1>
+            <h1 class="animate__animated"><span id="typedHero"></span></h1>
             <p class="animate__animated animate__delay-1s">Crafting sustainable structures with precision, innovation, and unwavering commitment to excellence. Your vision, our expertise - a perfect blueprint for success.</p>
             <a href="#projects" class="btn animate__animated animate__delay-2s">Explore Our Portfolio</a>
         </div>
         <div class="hero-wave"></div>
     </section>
 
-    <section id="about" class="section about">
+    <section id="about" class="section about reveal">
         <div class="container about-content">
             <div class="about-image animate__animated animate__fadeInLeft">
-                <img src="https://images.unsplash.com/photo-1583455413184-8471a639cc9c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=800" alt="ApexBuild Team at Work">
+                <img src="https://images.unsplash.com/photo-1583455413184-8471a639cc9c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=800" alt="ApexBuild Team at Work" loading="lazy">
             </div>
             <div class="about-text animate__animated animate__fadeInRight">
                 <h2 class="section-title">Decades of Dedication to Construction Excellence</h2>
@@ -65,7 +73,7 @@
         </div>
     </section>
 
-    <section id="services" class="section services">
+    <section id="services" class="section services reveal">
         <div class="container">
             <h2 class="section-title animate__animated animate__fadeInUp">Comprehensive Construction Services</h2>
             <div class="services-grid">
@@ -103,14 +111,14 @@
         </div>
     </section>
 
-    <section id="projects" class="section projects">
+    <section id="projects" class="section projects reveal">
         <div class="container">
             <h2 class="section-title animate__animated animate__fadeInUp">Our Distinguished Project Portfolio</h2>
             <div class="swiper-container animate__animated animate__fadeInUp animate__delay-0-5s">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1616385478000-6d8b7755c926?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwxOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Modern Villa">
+                            <img src="https://images.unsplash.com/photo-1616385478000-6d8b7755c926?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwxOHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Modern Villa" loading="lazy">
                         </div>
                         <div class="project-card-inner">
                             <div class="project-info">
@@ -121,7 +129,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1551526594-03b0040a60e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyMHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Office Building">
+                            <img src="https://images.unsplash.com/photo-1551526594-03b0040a60e7?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyMHx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Office Building" loading="lazy">
                         </div>
                         <div class="project-card-inner">
                             <div class="project-info">
@@ -132,7 +140,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1546483388-f3b311970061?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyNXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Warehouse Facility">
+                            <img src="https://images.unsplash.com/photo-1546483388-f3b311970061?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyNXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Warehouse Facility" loading="lazy">
                         </div>
                         <div class="project-card-inner">
                             <div class="project-info">
@@ -143,7 +151,7 @@
                     </div>
                     <div class="swiper-slide">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1623182358745-418282924a4f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Retail Space">
+                            <img src="https://images.unsplash.com/photo-1623182358745-418282924a4f?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=M3w0NjEzNjd8MHwxfHNlYXJjaHwyOXx8Y29uc3RydWN0aW9ufGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1200" alt="Retail Space" loading="lazy">
                         </div>
                         <div class="project-card-inner">
                             <div class="project-info">
@@ -158,7 +166,7 @@
         </div>
     </section>
 
-    <section id="testimonials" class="section testimonials">
+    <section id="testimonials" class="section testimonials reveal">
         <div class="container">
             <h2 class="section-title animate__animated animate__fadeInUp">Client Testimonials</h2>
             <div class="testimonial-slider">
@@ -166,7 +174,7 @@
                     <p class="testimonial-quote">"ApexBuild didn't just build our house, they crafted a home filled with warmth and character. Their team's dedication and artistry were evident in every detail. Truly exceptional!"</p>
                     <div class="testimonial-author-info">
                         <div class="author-image">
-                            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah Johnson">
+                            <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Sarah Johnson" loading="lazy">
                         </div>
                         <div class="author-details">
                             <p class="author-name">Sarah Johnson</p>
@@ -181,7 +189,7 @@
                     <p class="testimonial-quote">"Choosing ApexBuild for our office complex was game-changing. Their efficiency, communication, and the final product were all top-tier. A truly seamless and impressive experience."</p>
                     <div class="testimonial-author-info">
                         <div class="author-image">
-                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Michael Davis">
+                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Michael Davis" loading="lazy">
                         </div>
                         <div class="author-details">
                             <p class="author-name">Michael Davis</p>
@@ -196,7 +204,7 @@
                     <p class="testimonial-quote">"ApexBuild transformed our outdated facility into a modern, efficient hub, exceeding all expectations. Their renovation expertise is unparalleled, delivering ahead of schedule and under budget."</p>
                     <div class="testimonial-author-info">
                         <div class="author-image">
-                            <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Emily White">
+                            <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Emily White" loading="lazy">
                         </div>
                         <div class="author-details">
                             <p class="author-name">Emily White</p>
@@ -211,7 +219,7 @@
         </div>
     </section>
 
-    <section id="contact" class="section contact">
+    <section id="contact" class="section contact reveal">
         <div class="container contact-content">
             <div class="contact-info animate__animated animate__fadeInLeft">
                 <h2 class="section-title">Connect With ApexBuild</h2>
@@ -287,8 +295,14 @@
         </div>
     </footer>
 
+    <div id="cookieConsent" class="cookie-consent">
+        This website uses cookies to enhance your experience.
+        <button id="acceptCookies" class="btn btn-secondary">Accept</button>
+    </div>
+
     <button id="backToTop" aria-label="Back to top">&uarr;</button>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="script.js"></script>
 
 </body>
