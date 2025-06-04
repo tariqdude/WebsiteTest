@@ -42,7 +42,9 @@ class PricingToggle extends HTMLElement {
     });
   }
 }
-customElements.define('pricing-toggle', PricingToggle);
+if (!customElements.get('pricing-toggle')) {
+  customElements.define('pricing-toggle', PricingToggle);
+}
 
 // reveal on intersect
 const observer = new IntersectionObserver(entries => {
