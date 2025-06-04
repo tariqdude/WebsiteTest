@@ -57,9 +57,12 @@ if (darkToggle) {
     if (storedPreference === 'true' || (storedPreference === null && prefersDarkScheme)) {
         document.body.classList.add('dark-mode');
     }
+    darkToggle.setAttribute('aria-pressed', document.body.classList.contains('dark-mode') ? 'true' : 'false');
     darkToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
+        const active = document.body.classList.contains('dark-mode');
+        localStorage.setItem('dark-mode', active);
+        darkToggle.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
 }
 
