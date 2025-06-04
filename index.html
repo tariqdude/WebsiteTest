@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.jsdelivr.net https://plausible.io; script-src 'self' https://cdn.jsdelivr.net https://plausible.io; style-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://*.cloudinary.com data:; connect-src 'self' https://plausible.io; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; frame-src https://calendly.com https://js.stripe.com https://utteranc.es;">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://example.com/">
+  <link rel="preload" href="styles.css" as="style">
+  <link rel="preload" href="main.js" as="script">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <title>Example Business</title>
+</head>
+<body>
+  <header class="glass" id="top" role="banner">
+    <nav>
+      <a href="#home" class="logo">Biz</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <main id="home" role="main">
+    <section class="hero">
+      <h1 id="hero-title">Amazing Product</h1>
+      <img src="https://res.cloudinary.com/demo/image/upload/sample.jpg" alt="Hero" decoding="async" fetchpriority="high">
+    </section>
+    <section id="features">
+      <h2>Features</h2>
+      <div class="cards">
+        <article class="card">Fast</article>
+        <article class="card">Secure</article>
+        <article class="card">Reliable</article>
+      </div>
+    </section>
+    <section id="pricing">
+      <h2>Pricing</h2>
+      <pricing-toggle></pricing-toggle>
+    </section>
+    <section id="faq">
+      <h2>FAQ</h2>
+      <details>
+        <summary>What is this?</summary>
+        <p>A sample answer.</p>
+      </details>
+    </section>
+    <section id="blog">
+      <h2>Blog</h2>
+      <div id="comments"></div>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <form action="https://formspree.io/f/myform" method="POST">
+        <input data-test="email" type="email" name="email" required placeholder="Email">
+        <textarea data-test="message" name="message" required placeholder="Message"></textarea>
+        <button data-test="submit" type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; <span id="year"></span> Example Business</p>
+  </footer>
+  <script src="https://plausible.io/js/plausible.js" async defer data-domain="example.com"></script>
+  <script src="main.js" defer></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js');
+      });
+    }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Example Business",
+    "url": "https://example.com/",
+    "logo": "https://example.com/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "info@example.com",
+      "contactType": "customer service"
+    }
+  }
+  </script>
+</body>
+</html>
