@@ -9,7 +9,6 @@ This project is a design prototype for a construction company website. It demons
 - Animated sections that reveal on scroll
 - Stats counters and image sliders powered by Swiper
 - Cookie consent banner and back-to-top button
-- URL-based color variants saved in `localStorage`
 
 ## Getting Started
 
