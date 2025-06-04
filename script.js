@@ -180,10 +180,11 @@ if (!disableScrollReveal) {
 const contactForm = document.querySelector('.contact-form form');
 const formStatus = document.getElementById('formStatus');
 if (contactForm) {
-    contactForm.addEventListener('submit', e => {
+    contactForm.addEventListener('submit', async e => {
         e.preventDefault();
         const name = contactForm.elements['name'].value.trim();
         const email = contactForm.elements['email'].value.trim();
+        const phone = contactForm.elements['phone'].value.trim();
         const message = contactForm.elements['message'].value.trim();
         if (!name || !email || !message) {
             alert('Please complete all required fields.');
@@ -194,11 +195,26 @@ if (contactForm) {
             alert('Please enter a valid email address.');
             return;
         }
-        if (formStatus) {
-            formStatus.textContent = 'Thank you for contacting ApexBuild!';
-            setTimeout(() => formStatus.textContent = '', 5000);
-        } else {
-            alert('Thank you for contacting ApexBuild!');
+        try {
+            const resp = await fetch(contactForm.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ name, email, phone, message })
+            });
+            if (formStatus) {
+                formStatus.textContent = resp.ok
+                    ? 'Thank you for contacting ApexBuild!'
+                    : 'Submission failed. Please try again.';
+                setTimeout(() => formStatus.textContent = '', 5000);
+            }
+        } catch (err) {
+            if (formStatus) {
+                formStatus.textContent = 'Submission failed. Please try again.';
+                setTimeout(() => formStatus.textContent = '', 5000);
+            }
         }
         contactForm.reset();
     });
