@@ -19,9 +19,15 @@ const swiper = new Swiper('.swiper-container', {
     },
 });
 
+// Motion preference check
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (prefersReducedMotion) {
+    document.documentElement.classList.add('reduce-motion');
+}
+
 // Typed hero text
 const typedHero = document.getElementById('typedHero');
-if (typedHero) {
+if (typedHero && !prefersReducedMotion) {
     new Typed('#typedHero', {
         strings: ['Building Beyond Expectations', 'Crafting Your Vision'],
         typeSpeed: 60,
@@ -32,22 +38,29 @@ if (typedHero) {
 }
 
 const counterElements = document.querySelectorAll('.stat-number');
-counterElements.forEach(element => {
-    const targetCount = parseInt(element.dataset.count);
-    let currentCount = 0;
-    const increment = targetCount / 200; // Adjust speed by changing the divisor
+if (!prefersReducedMotion) {
+    counterElements.forEach(element => {
+        const targetCount = parseInt(element.dataset.count);
+        let currentCount = 0;
+        const increment = targetCount / 200; // Adjust speed by changing the divisor
 
-    function updateCounter() {
-        if (currentCount < targetCount) {
-            currentCount += increment;
-            element.textContent = Math.ceil(currentCount);
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = targetCount + '+'; // Ensure final value is displayed
+        function updateCounter() {
+            if (currentCount < targetCount) {
+                currentCount += increment;
+                element.textContent = Math.ceil(currentCount);
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = targetCount + '+'; // Ensure final value is displayed
+            }
         }
-    }
-    updateCounter();
-});
+        updateCounter();
+    });
+} else {
+    counterElements.forEach(element => {
+        const targetCount = parseInt(element.dataset.count);
+        element.textContent = targetCount + '+';
+    });
+}
 
 // Dark mode toggle
 const darkToggle = document.getElementById('darkModeToggle');
@@ -121,16 +134,21 @@ if (sections.length && navLinks.length) {
 }
 
 // Reveal sections on scroll
+const disableScrollReveal = prefersReducedMotion;
 const revealEls = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.2 });
-revealEls.forEach(el => revealObserver.observe(el));
+if (!disableScrollReveal) {
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    revealEls.forEach(el => revealObserver.observe(el));
+} else {
+    revealEls.forEach(el => el.classList.add('visible'));
+}
 
 // Contact form handler
 const contactForm = document.querySelector('.contact-form form');

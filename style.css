@@ -852,3 +852,18 @@ body.dark-mode #scrollProgress {
 .cookie-consent button {
     margin-left: 15px;
 }
+
+/* Reduce motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+    .reveal,
+    .reveal.visible {
+        transform: none !important;
+    }
+}
