@@ -64,3 +64,7 @@ To enable it:
 2. Copy the endpoint URL provided by Formspree (e.g. `https://formspree.io/f/your-form-id`).
 3. Replace the placeholder URL in `index.html` within the `action` attribute of the contact form.
 4. The script automatically sends form data to this URL using AJAX, so no server setup is required.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
