@@ -20,8 +20,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://placehold.co data:; style-src 'self'; script-src 'self';">
   <link rel="icon" type="image/png" sizes="96x96" href="https://placehold.co/96x96">
   <link rel="apple-touch-icon" href="https://placehold.co/180x180">
-<style>body{margin:0;font-family:var(--font-family);} .hero{background:url("https://placehold.co/1920x1080") center/cover no-repeat;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;text-align:center;} </style>
-<link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
   <script defer src="scripts.js"></script>
   <script type="application/ld+json">
@@ -44,6 +43,7 @@
   </script>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to main content</a>
 <header class="hero" id="top">
   <nav class="nav" aria-label="Main Navigation">
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
@@ -60,7 +60,7 @@
     <a href="#contact" class="cta">Get Started</a>
   </div>
 </header>
-<main>
+<main id="main">
   <section id="features" class="features">
     <h2>Features</h2>
     <div class="card-grid">
@@ -124,6 +124,7 @@
   <p>&copy; <span id="year"></span> Acme Corp. All rights reserved.</p>
 </footer>
 <button class="mode-toggle" aria-label="Toggle dark mode">🌓</button>
+<button class="scroll-top" aria-label="Back to top">↑</button>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>

@@ -9,8 +9,16 @@ navToggle.addEventListener('click', () => {
 
 // Dark mode toggle
 const modeToggle = document.querySelector('.mode-toggle');
+
+// Apply saved preference on load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  document.documentElement.classList.add('dark-mode');
+}
+
 modeToggle.addEventListener('click', () => {
-  document.documentElement.classList.toggle('dark-mode');
+  const isDark = document.documentElement.classList.toggle('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
 // Intersection animations
@@ -27,4 +35,19 @@ document.querySelectorAll('.card, .about, .testimonial-grid figure, .contact for
 });
 
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+
+// Scroll to top button
+const scrollBtn = document.querySelector('.scroll-top');
+if(scrollBtn){
+  window.addEventListener('scroll', () => {
+    if(window.pageYOffset > 300){
+      scrollBtn.classList.add('show');
+    } else {
+      scrollBtn.classList.remove('show');
+    }
+  });
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+}
 
