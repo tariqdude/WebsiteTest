@@ -751,9 +751,8 @@ img {
         text-align: center;
         margin-top: 15px;
         gap: 15px;
-        display: none;
     }
-    #navMenu.open {
+    #navMenu:popover-open {
         display: flex;
     }
     #navMenu li a {
@@ -835,6 +834,7 @@ body.dark-mode #scrollProgress {
 }
 #darkModeToggle {
     margin-left: auto;
+    position: relative;
 }
 #backToTop {
     position: fixed;
@@ -924,10 +924,12 @@ body.dark-mode #scrollProgress {
     z-index: 1200;
 }
 
-/* Tooltip positioned via JavaScript */
+/* Tooltip anchored to toggle button */
 .tooltip {
     position: absolute;
-    transform: translate(-50%, 8px);
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--accent-color);
     color: #fff;
     padding: 6px 10px;
@@ -935,4 +937,8 @@ body.dark-mode #scrollProgress {
     font-size: 0.9rem;
     white-space: nowrap;
     z-index: 1200;
+    display: none;
+}
+#darkModeToggle:focus + #themeTip {
+    display: block;
 }
