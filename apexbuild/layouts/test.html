@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Demos</title>
+    <link rel="stylesheet" href="style.min.css">
+    <style>
+        .cube-container{perspective:600px;height:200px;width:200px;margin:auto;}
+        .cube{position:relative;transform-style:preserve-3d;animation:spin 5s infinite linear;height:100%;width:100%;}
+        .face{position:absolute;height:200px;width:200px;background:rgba(31,224,177,0.6);border:2px solid #1FE0B1;}
+        .front{transform:translateZ(100px);}
+        .back{transform:rotateY(180deg) translateZ(100px);}
+        .right{transform:rotateY(90deg) translateZ(100px);}
+        .left{transform:rotateY(-90deg) translateZ(100px);}
+        .top{transform:rotateX(90deg) translateZ(100px);}
+        .bottom{transform:rotateX(-90deg) translateZ(100px);}
+        @keyframes spin{from{transform:rotateX(0) rotateY(0);}to{transform:rotateX(360deg) rotateY(360deg);}}
+        .grid-demo{--cols:4;display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:1rem;}
+        .grid-demo div{background:#1FE0B1;padding:1rem;color:white;}
+        .paint-box{background:paint(checkerboard);height:100px;}
+        .observer-target{height:100px;background:#ccc;margin-top:50vh;}
+    </style>
+</head>
+<body class="p-4 space-y-8">
+<h1 class="text-3xl font-bold mb-4">Feature Demos</h1>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">1. CSS 3D Cube</h2>
+  <div class="cube-container">
+    <div class="cube">
+      <div class="face front"></div>
+      <div class="face back"></div>
+      <div class="face right"></div>
+      <div class="face left"></div>
+      <div class="face top"></div>
+      <div class="face bottom"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">2. Canvas Particle Explosion</h2>
+  <canvas id="particleExplosion" class="particle-canvas border w-full h-40"></canvas>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">3. WebGL Shader</h2>
+  <canvas id="glCanvas" class="webgl-canvas border w-full h-40"></canvas>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">4. CSS Grid with Variables</h2>
+  <input id="colRange" type="range" min="1" max="6" value="4" class="mb-2">
+  <div class="grid-demo">
+    <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+  </div>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">5. Web Component</h2>
+  <color-box color="#1FE0B1">Custom Element Content</color-box>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">6. Async Fetch</h2>
+  <button id="fetchBtn" class="btn mb-2">Load Data</button>
+  <pre id="fetchOutput" class="fetch-output p-2 bg-gray-100"></pre>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">7. WebAudio Oscillator</h2>
+  <div class="osc-controls space-x-2">
+    <input id="freqSlider" type="range" min="100" max="1000" value="440">
+    <button id="playTone" class="btn">Play Tone</button>
+  </div>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">8. Speech Synthesis</h2>
+  <input id="speechText" type="text" value="Hello world" class="border p-1">
+  <button id="speakBtn" class="btn speak-btn">Speak</button>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">9. CSS Painting API</h2>
+  <div class="paint-box"></div>
+</section>
+
+<section>
+  <h2 class="text-xl font-semibold mb-2">10. Intersection Observer</h2>
+  <div class="observer-target">Scroll to change color</div>
+</section>
+
+<script>
+  class ColorBox extends HTMLElement {
+    connectedCallback() {
+      this.style.display = 'block';
+      this.style.background = this.getAttribute('color') || '#ddd';
+      this.style.padding = '1rem';
+    }
+  }
+  customElements.define('color-box', ColorBox);
+
+  const fetchOutput = document.getElementById('fetchOutput');
+  document.getElementById('fetchBtn').addEventListener('click', async () => {
+    const data = await fetch('https://jsonplaceholder.typicode.com/todos/1').then(r => r.json());
+    fetchOutput.textContent = JSON.stringify(data, null, 2);
+  });
+
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = new AudioContext();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain).connect(audioCtx.destination);
+  osc.start();
+  gain.gain.value = 0;
+  document.getElementById('freqSlider').addEventListener('input', e => {
+    osc.frequency.setValueAtTime(e.target.value, audioCtx.currentTime);
+  });
+  document.getElementById('playTone').addEventListener('click', () => {
+    gain.gain.setValueAtTime(1, audioCtx.currentTime);
+    setTimeout(() => gain.gain.setValueAtTime(0, audioCtx.currentTime), 500);
+  });
+
+  document.getElementById('speakBtn').addEventListener('click', () => {
+    const text = document.getElementById('speechText').value;
+    speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      e.target.classList.toggle('bg-green-300', e.isIntersecting);
+    });
+  });
+  observer.observe(document.querySelector('.observer-target'));
+
+  const grid = document.querySelector('.grid-demo');
+  document.getElementById('colRange').addEventListener('input', e => {
+    grid.style.setProperty('--cols', e.target.value);
+  });
+
+  if ('paintWorklet' in CSS) {
+    const code = `
+      class Checkerboard {
+        paint(ctx, geom) {
+          const size = 10;
+          for (let y=0; y<geom.height; y+=size) {
+            for (let x=0; x<geom.width; x+=size) {
+              ctx.fillStyle = ((x+y)/size)%2 ? '#eee' : '#ccc';
+              ctx.fillRect(x, y, size, size);
+            }
+          }
+        }
+      }
+      registerPaint('checkerboard', Checkerboard);
+    `;
+    CSS.paintWorklet.addModule(URL.createObjectURL(new Blob([code], {type:'text/javascript'})));
+  }
+
+  const pCanvas = document.getElementById('particleExplosion');
+  const pCtx = pCanvas.getContext('2d');
+  function pResize() { pCanvas.width = pCanvas.clientWidth; pCanvas.height = pCanvas.clientHeight; }
+  window.addEventListener('resize', pResize); pResize();
+  function explode(x, y) {
+    const parts = Array.from({length:50}, () => ({x, y, vx:(Math.random()-0.5)*5, vy:(Math.random()-0.5)*5, life:60}));
+    function draw() {
+      pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
+      parts.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.life--;
+        pCtx.fillRect(p.x,p.y,2,2);
+      });
+      if (parts.some(p=>p.life>0)) requestAnimationFrame(draw);
+    }
+    draw();
+  }
+  pCanvas.addEventListener('click', e => {
+    const rect = pCanvas.getBoundingClientRect();
+    explode(e.clientX - rect.left, e.clientY - rect.top);
+  });
+
+  const glCanvas = document.getElementById('glCanvas');
+  const gl = glCanvas.getContext('webgl');
+  function glSize(){ glCanvas.width = glCanvas.clientWidth; glCanvas.height = glCanvas.clientHeight; gl.viewport(0,0,glCanvas.width, glCanvas.height); }
+  glSize(); window.addEventListener('resize', glSize);
+  const vs = gl.createShader(gl.VERTEX_SHADER);
+  gl.shaderSource(vs, 'attribute vec4 position; void main(){gl_Position=position;}');
+  gl.compileShader(vs);
+  const fs = gl.createShader(gl.FRAGMENT_SHADER);
+  gl.shaderSource(fs, 'precision mediump float; uniform float time; void main(){ gl_FragColor=vec4(abs(sin(time)),0.5,abs(cos(time)),1.0);}');
+  gl.compileShader(fs);
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const posLoc = gl.getAttribLocation(prog, 'position');
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0,0);
+  const timeLoc = gl.getUniformLocation(prog, 'time');
+  function render(time){ gl.uniform1f(timeLoc, time*0.001); gl.drawArrays(gl.TRIANGLE_STRIP,0,4); requestAnimationFrame(render); }
+  requestAnimationFrame(render);
+</script>
+</body>
+</html>
