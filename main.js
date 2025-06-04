@@ -7,6 +7,12 @@ const navLinks = document.querySelector('.nav-links');
 menuToggle.addEventListener('click', () => {
   navLinks.classList.toggle('open');
 });
+menuToggle.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+    e.preventDefault();
+    navLinks.classList.toggle('open');
+  }
+});
 
 // theme toggle with localStorage
 const themeToggle = document.getElementById('theme-toggle');
