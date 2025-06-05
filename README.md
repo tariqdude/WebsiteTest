@@ -37,3 +37,8 @@ npx autoprefixer styles.css -o styles.css
 - **Theme color** meta tag customizes the browser UI when the site is installed or opened on mobile.
 
 These features illustrate how to turn a regular static page into a lightweight PWA.
+
+## Recent Updates
+
+- Relaxed Content Security Policy to allow loading Google Fonts and hero video
+- Added a scroll progress indicator for long pages

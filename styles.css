@@ -235,7 +235,10 @@ a:hover {text-decoration: underline;}
 .footer {text-align:center; padding:2rem 1rem; background:#222; color:#fff;}
 .footer a {color:#fff; margin:0 0.5rem;}
 .footer svg {width:1.5rem; height:1.5rem; vertical-align:middle; stroke: var(--icon-color);}
+
 .mode-toggle {position:fixed; bottom:1rem; right:1rem; background:var(--color-accent); border:none; color:#fff; padding:0.5rem; border-radius:50%; font-size:1.2rem; cursor:pointer;}
+
+.scroll-progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--color-accent);z-index:200;transition:width var(--transition-fast) linear;}
 
 .scroll-top{position:fixed;bottom:4rem;right:1rem;background:var(--color-accent);border:none;color:#fff;padding:0.5rem;border-radius:50%;font-size:1.2rem;cursor:pointer;display:none;}
 .scroll-top.show{display:block;}

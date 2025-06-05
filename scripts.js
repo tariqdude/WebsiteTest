@@ -54,6 +54,7 @@ if('serviceWorker' in navigator){
 }
 
 
+
 // Scroll to top button
 const scrollBtn = document.querySelector('.scroll-top');
 if(scrollBtn){
