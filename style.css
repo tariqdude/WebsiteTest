@@ -706,6 +706,22 @@ button {
   }
 }
 
+/* -----------------------------------------------------------------
+   Fallback for browsers without anchor-position support. We check
+   support for the anchor() value and switch to standard fixed
+   positioning when it's missing. This keeps the CTA pinned near the
+   bottom on older browsers. */
+@supports not (position: anchor(center)) {
+  @media (max-width: 640px) {
+    #pinned-cta {
+      position: fixed; /* fallback */
+      bottom: var(--space-4);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
 /* ===================================== */
 /* CONTACT SECTION */
 /* ===================================== */
