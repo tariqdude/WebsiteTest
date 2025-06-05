@@ -96,6 +96,7 @@ sections.forEach(sec => sectionObserver.observe(sec));
 
 /* ========================= HERO ANIMATIONS ========================= */
 const heroTitle = document.querySelector(".hero-title");
+const skipHero = document.getElementById("skip-hero");
 const heroCtaPrimary = document.getElementById("hero-cta-primary");
 const rotatingObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -105,6 +106,10 @@ const rotatingObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 rotatingObserver.observe(heroTitle);
+
+skipHero?.addEventListener('click', () => {
+  heroTitle.classList.add('visible');
+});
 
 // Magnetic cursor effect on Primary CTA
 document.addEventListener("mousemove", (e) => {
