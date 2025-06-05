@@ -118,6 +118,21 @@ a:hover {text-decoration: underline;}
 
 .dark-mode{--color-bg:var(--color-dark-bg);--color-text:var(--color-dark-text);}
 
+.dark-mode .hero .cta,
+.dark-mode .contact button,
+.dark-mode .mode-toggle,
+.dark-mode .scroll-top{
+  background:#1abc9c;
+  color:#fff;
+}
+
+.dark-mode .hero .cta:hover,
+.dark-mode .contact button:hover,
+.dark-mode .mode-toggle:hover,
+.dark-mode .scroll-top:hover{
+  background:#16a085;
+}
+
 .dark-mode .card {background:#333; color:var(--color-dark-text);}
 
 .card,.about,.testimonial-grid figure,.contact form{opacity:0;transform:translateY(20px);transition:opacity var(--transition-fast),transform var(--transition-fast);}
