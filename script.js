@@ -6,7 +6,7 @@
 
 /* ========================= IMPORTS ========================= */
 import "./paint-worklet.js";         // Registers CSS Paint Worklet for I-Beam
-import { default as ServiceCard } from "serviceCard/serviceCard.js"; // Defines <service-card>
+import "./servicecard.js";                              // Defines <service-card>
 import { initCarousel } from "carousel/carousel.js";               // Testimonials carousel logic
 import { handleForm } from "forms/contactForm.js";                 // Contact form validation/submission
 import { drawMap } from "maps/mapCanvas.js";                       // Live canvas map rendering
@@ -55,7 +55,6 @@ mobileMenu.querySelectorAll("a").forEach(link => {
 
 /* ========================= HERO ANIMATIONS ========================= */
 const heroTitle = document.querySelector(".hero-title");
-const rotatingPhrase = document.getElementById("rotating-phrase");
 const heroCtaPrimary = document.getElementById("hero-cta-primary");
 const rotatingObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
