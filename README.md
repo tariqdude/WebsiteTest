@@ -2,6 +2,13 @@
 
 This repository contains a simple static website demonstrating a basic Progressive Web App (PWA) setup for a fictional business. The site is built with plain HTML, CSS and JavaScript.
 
+## Site Highlights
+
+- Responsive hero section with smooth animations
+- Dedicated pages for features, services, team, testimonials and contact
+- Newsletter signup form powered by JavaScript
+- Dark mode toggle with preference stored locally
+
 ## Serving the site locally
 
 Because service workers require a server context, open the project in a local HTTP server instead of just double-clicking the files. From the project directory run one of the following commands and then visit `http://localhost:8000` in your browser.
