@@ -1,6 +1,9 @@
 // Mobile nav toggle
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
+const spinner = document.getElementById('spinner');
+document.addEventListener('DOMContentLoaded', ()=> spinner.hidden=false);
+window.addEventListener('load', ()=> spinner.hidden=true);
 navToggle.addEventListener('click', () => {
   const expanded = navToggle.getAttribute('aria-expanded') === 'true';
   const newExpanded = !expanded;
@@ -18,18 +21,23 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
   });
 });
 
-// Dark mode toggle
+// Theme toggle with high contrast option
 const modeToggle = document.querySelector('.mode-toggle');
+const themes = ['light','dark','contrast'];
+let themeIndex = themes.indexOf(localStorage.getItem('theme'));
+if(themeIndex === -1) themeIndex = 0;
+applyTheme(themeIndex);
 
-// Apply saved preference on load
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-  document.documentElement.classList.add('dark-mode');
+function applyTheme(i){
+  document.documentElement.classList.toggle('dark-mode', themes[i]==='dark');
+  document.documentElement.classList.toggle('high-contrast', themes[i]==='contrast');
 }
 
 modeToggle.addEventListener('click', () => {
-  const isDark = document.documentElement.classList.toggle('dark-mode');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  themeIndex = (themeIndex + 1) % themes.length;
+  applyTheme(themeIndex);
+  localStorage.setItem('theme', themes[themeIndex]);
+  lottieAnim && lottieAnim.goToAndPlay(0,true);
 });
 
 // Intersection animations
@@ -37,6 +45,9 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('show');
+      if(entry.target.classList.contains('skill-progress')){
+        entry.target.style.width = entry.target.dataset.value + '%';
+      }
     }
   });
 }, {threshold: 0.1});
@@ -45,13 +56,6 @@ document.querySelectorAll('.card, .about, .testimonial-grid figure, .contact for
   observer.observe(el);
 });
 
-let swRegister;
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js').then(reg=>{
-    swRegister=reg;
-    setupPush(reg);
-  });
-}
 
 
 
@@ -90,19 +94,7 @@ if(newsletterForm){
   });
 }
 
-const contactForm = document.querySelector('#contact form');
-if(contactForm){
-  contactForm.addEventListener('submit',e=>{
-    e.preventDefault();
-    const data=new FormData(contactForm);
-    if(navigator.onLine){
-      fetch(contactForm.action,{method:'POST',body:data});
-    }else{
-      saveRecord(formDB,'forms',{url:contactForm.action,data:Object.fromEntries(data)});
-      swRegister && swRegister.sync && swRegister.sync.register('sync-forms');
-      alert('Message saved and will be sent when online.');
-    }
-    contactForm.reset();
+
   });
 }
 
@@ -162,6 +154,7 @@ function sendAnalytics(data){
   }
 }
 sendAnalytics({event:'pageview',url:location.href});
+
 
 // Push notifications
 function setupPush(reg){
