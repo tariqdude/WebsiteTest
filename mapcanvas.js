@@ -6,8 +6,15 @@
 export function drawMap() {
   const canvas = document.getElementById('map-canvas');
   const ctx = canvas.getContext('2d');
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+  function resizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = canvas.offsetWidth * dpr;
+    canvas.height = canvas.offsetHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
 
   function render() {
     const w = canvas.width, h = canvas.height;
@@ -38,8 +45,9 @@ export function drawMap() {
     ctx.beginPath();
     ctx.arc(w * 0.7, h * 0.6, radius, 0, 2 * Math.PI);
     ctx.fill();
+
+    requestAnimationFrame(render);
   }
 
   render();
-  setInterval(render, 100);
 }
