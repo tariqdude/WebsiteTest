@@ -20,23 +20,33 @@ const debugWarn = (...args) => { if (DEBUG_MODE) console.warn(...args); };
 /* ========================= HEADER / NAV BEHAVIOR ========================= */
 const header = document.getElementById("header");
 let lastScrollY = window.scrollY;
-window.addEventListener("scroll", () => {
+
+// Generic throttle helper
+const throttle = (fn, limit) => {
+  let lastCall = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - lastCall >= limit) {
+      lastCall = now;
+      fn(...args);
+    }
+  };
+};
+
+const fab = document.getElementById("back-to-top");
+const handleScroll = () => {
   const currentScrollY = window.scrollY;
   if (currentScrollY > lastScrollY && currentScrollY > 100) {
-    // Scrolling down
     header.classList.add("hidden");
     header.classList.remove("scrolled");
   } else if (currentScrollY < lastScrollY) {
-    // Scrolling up
     header.classList.remove("hidden");
-    if (currentScrollY > 50) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
+    header.classList.toggle("scrolled", currentScrollY > 50);
   }
+  fab.classList.toggle("show", currentScrollY > 500);
   lastScrollY = currentScrollY;
-});
+};
+window.addEventListener("scroll", throttle(handleScroll, 100));
 
 /* ========================= MOBILE MENU ========================= */
 const hamburgerBtn = document.getElementById("hamburger-btn");
@@ -45,15 +55,21 @@ const mobileMenuClose = document.getElementById("mobile-menu-close");
 
 hamburgerBtn.addEventListener("click", () => {
   mobileMenu.classList.add("open");
+  hamburgerBtn.setAttribute("aria-expanded", "true");
+  mobileMenu.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 });
 mobileMenuClose.addEventListener("click", () => {
   mobileMenu.classList.remove("open");
+  hamburgerBtn.setAttribute("aria-expanded", "false");
+  mobileMenu.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 });
 mobileMenu.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => {
     mobileMenu.classList.remove("open");
+    hamburgerBtn.setAttribute("aria-expanded", "false");
+    mobileMenu.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
   });
 });
@@ -244,28 +260,18 @@ initCarousel(); // Initializes Ken Burns carousel from carousel.js
 /* ========================= CTA BANNER ========================= */
 const pinnedCta = document.getElementById("pinned-cta");
 const contactSection = document.getElementById("contact");
-window.addEventListener("scroll", () => {
-  const contactTop = contactSection.getBoundingClientRect().top;
-  if (contactTop < window.innerHeight * 0.5) {
-    pinnedCta.setAttribute("aria-hidden", "false");
-  } else {
-    pinnedCta.setAttribute("aria-hidden", "true");
-  }
-});
+const pinnedObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    pinnedCta.setAttribute("aria-hidden", entry.isIntersecting ? "false" : "true");
+  });
+}, { rootMargin: "0px 0px -50% 0px" });
+pinnedObserver.observe(contactSection);
 
 /* ========================= CONTACT FORM & MAP ========================= */
 handleForm();  // Initializes form validation & submission logic from contactForm.js
 drawMap();     // Draws procedural grid and pulsing markers on map canvas from mapCanvas.js
 
 /* ========================= FOOTER & BACK-TO-TOP ========================= */
-const fab = document.getElementById("back-to-top");
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 500) {
-    fab.classList.add("show");
-  } else {
-    fab.classList.remove("show");
-  }
-});
 fab.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
