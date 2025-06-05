@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alliedmechanical.example.com/sitemap.xml
