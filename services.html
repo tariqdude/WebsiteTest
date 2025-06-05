@@ -28,27 +28,31 @@
 <div id="progressBar" hidden aria-hidden="true" role="progressbar" aria-label="Scroll progress"></div>
 <a href="#main" class="skip">Skip to content</a>
 <header data-menu="closed">
-  <button type="button" id="navToggle" aria-expanded="false" aria-controls="navList">☰</button>
-  <nav inert aria-hidden="true">
-    <ul id="navList">
-      <li><a href="/">Home</a></li>
-      <li><a href="/services.html" aria-current="page">Services</a></li>
-      <li><a href="/about.html">About</a></li>
-    </ul>
-  </nav>
-  <div>
-    <button type="button" id="themeToggle" class="cta">Toggle dark mode</button>
-    <button type="button" id="fontToggle" class="cta" aria-pressed="false">A+</button>
+  <div class="container">
+    <button type="button" id="navToggle" aria-expanded="false" aria-controls="navList">☰</button>
+    <nav inert aria-hidden="true">
+      <ul id="navList">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services.html" aria-current="page">Services</a></li>
+        <li><a href="/about.html">About</a></li>
+      </ul>
+    </nav>
+    <div>
+      <button type="button" id="themeToggle" class="cta">Toggle dark mode</button>
+      <button type="button" id="fontToggle" class="cta" aria-pressed="false">A+</button>
+    </div>
   </div>
 </header>
-<main id="main" tabindex="-1">
-  <h1>Our Services</h1>
-  <h2>Design-Build Contracting</h2>
-  <p>From concept to completion, we handle every aspect of your HVAC design-build project.</p>
-  <h2>Industrial Retrofit Services</h2>
-  <p>Upgrade your existing systems with minimal downtime and maximum efficiency.</p>
-  <h2 id="quote">Request a Quote</h2>
-  <p>Contact us for pricing tailored to your project.</p>
+<main id="main" tabindex="-1" class="section">
+  <div class="container">
+    <h1>Our Services</h1>
+    <h2>Design-Build Contracting</h2>
+    <p>From concept to completion, we handle every aspect of your HVAC design-build project.</p>
+    <h2>Industrial Retrofit Services</h2>
+    <p>Upgrade your existing systems with minimal downtime and maximum efficiency.</p>
+    <h2 id="quote">Request a Quote</h2>
+    <p>Contact us for pricing tailored to your project.</p>
+  </div>
 </main>
 <footer>
   <p>&copy; <span id="year"></span> Allied Mechanical</p>

@@ -28,22 +28,26 @@
 <div id="progressBar" hidden aria-hidden="true" role="progressbar" aria-label="Scroll progress"></div>
 <a href="#main" class="skip">Skip to content</a>
 <header data-menu="closed">
-  <button type="button" id="navToggle" aria-expanded="false" aria-controls="navList">☰</button>
-  <nav inert aria-hidden="true">
-    <ul id="navList">
-      <li><a href="/">Home</a></li>
-      <li><a href="/services.html">Services</a></li>
-      <li><a href="/about.html" aria-current="page">About</a></li>
-    </ul>
-  </nav>
-  <div>
-    <button type="button" id="themeToggle" class="cta">Toggle dark mode</button>
-    <button type="button" id="fontToggle" class="cta" aria-pressed="false">A+</button>
+  <div class="container">
+    <button type="button" id="navToggle" aria-expanded="false" aria-controls="navList">☰</button>
+    <nav inert aria-hidden="true">
+      <ul id="navList">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/about.html" aria-current="page">About</a></li>
+      </ul>
+    </nav>
+    <div>
+      <button type="button" id="themeToggle" class="cta">Toggle dark mode</button>
+      <button type="button" id="fontToggle" class="cta" aria-pressed="false">A+</button>
+    </div>
   </div>
 </header>
-<main id="main" tabindex="-1">
-  <h1>About Allied Mechanical</h1>
-  <p>Allied Mechanical specializes in commercial HVAC installations and service across Chicago.</p>
+<main id="main" tabindex="-1" class="section">
+  <div class="container">
+    <h1>About Allied Mechanical</h1>
+    <p>Allied Mechanical specializes in commercial HVAC installations and service across Chicago.</p>
+  </div>
 </main>
 <footer>
   <p>&copy; <span id="year"></span> Allied Mechanical</p>

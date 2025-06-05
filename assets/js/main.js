@@ -22,8 +22,6 @@ if (quoteBtn) {
   });
 }
 
-const reduceData = navigator.connection?.saveData || matchMedia("(prefers-reduced-data: reduce)").matches;
-if (reduceData) { document.getElementById("gpuCanvas")?.remove(); }
 // handle PWA install prompt
 let deferredPrompt;
 const installBanner = document.getElementById('installBanner');
