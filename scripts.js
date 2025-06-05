@@ -53,28 +53,6 @@ if('serviceWorker' in navigator){
   });
 }
 
-// Collapse sticky nav on scroll down
-const navBar = document.querySelector('.nav');
-let lastScrollY = window.scrollY;
-if(navBar){
-  window.addEventListener('scroll', () => {
-    if(window.scrollY > lastScrollY && window.scrollY > 50){
-      navBar.classList.add('nav-collapsed');
-    } else {
-      navBar.classList.remove('nav-collapsed');
-    }
-    lastScrollY = window.scrollY;
-  });
-}
-
-// Parallax hero background
-const hero = document.querySelector('.hero');
-if(hero){
-  window.addEventListener('scroll', () => {
-    const offset = window.scrollY * 0.5;
-    hero.style.backgroundPositionY = `-${offset}px`;
-  });
-}
 
 // Scroll to top button
 const scrollBtn = document.querySelector('.scroll-top');
