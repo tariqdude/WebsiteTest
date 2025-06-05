@@ -10,8 +10,7 @@ This repository contains a simple GitHub Pages site for Allied Mechanical.
 - Add your images to `assets/img` using the filenames `hero-400.avif`, `hero-800.avif`, `hero-1600.avif`, `hero-1200x630.avif`, `logo-192.png`, and `logo-512.png`. The HTML already references these paths.
 - Place `Inter.var.woff2` inside the `fonts` directory so the `@font-face` rule in `assets/css/main.css` can load it.
 - Edit `services.html` to add or modify service offerings.
-- Update the contact form action in `index.html` to point to your form handler.
-Until these files are provided the site will show broken image links and fallback fonts.
+
 
 Analytics are collected locally using `assets/js/analytics.js` and sent via `navigator.sendBeacon` to `/analytics`. Disable this by removing the import in `index.html`.
 
