@@ -41,7 +41,7 @@ const observer = new IntersectionObserver(entries => {
   });
 }, {threshold: 0.1});
 
-document.querySelectorAll('.card, .about, .testimonial-grid figure, .contact form').forEach(el => {
+document.querySelectorAll('.card, .about, .testimonial-grid figure, .contact form, .team-grid figure, .newsletter form').forEach(el => {
   observer.observe(el);
 });
 
@@ -59,6 +59,17 @@ if(scrollBtn){
   });
   scrollBtn.addEventListener('click', () => {
     window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+}
+
+// Newsletter signup
+const newsletterForm = document.getElementById('newsletter-form');
+if(newsletterForm){
+  const msg = document.getElementById('newsletter-message');
+  newsletterForm.addEventListener('submit', e => {
+    e.preventDefault();
+    newsletterForm.reset();
+    msg.hidden = false;
   });
 }
 

@@ -108,6 +108,13 @@ a:hover {text-decoration: underline;}
 .contact input, .contact textarea {width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px;}
 .contact button {background:var(--color-accent); color:white; border:none; padding:0.75rem; border-radius:4px; cursor:pointer; transition:background var(--transition-fast);} 
 .contact button:hover {background:#128066;}
+.services,.team,.newsletter{padding:4rem 1rem;}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;text-align:center;}
+.team-grid img{border-radius:50%;width:150px;height:150px;object-fit:cover;margin:auto;}
+.newsletter form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;max-width:500px;margin:auto;}
+.newsletter input{padding:0.5rem;border:1px solid #ccc;border-radius:4px;flex:1 1 200px;}
+.newsletter button{background:var(--color-accent);color:#fff;border:none;padding:0.75rem;border-radius:4px;cursor:pointer;transition:background var(--transition-fast);}
+.newsletter button:hover{background:#128066;}
 .footer {text-align:center; padding:2rem 1rem; background:#222; color:#fff;}
 .footer a {color:#fff; margin:0 0.5rem;}
 .footer svg {width:1.5rem; height:1.5rem; vertical-align:middle;}
@@ -135,7 +142,7 @@ a:hover {text-decoration: underline;}
 
 .dark-mode .card {background:#333; color:var(--color-dark-text);}
 
-.card,.about,.testimonial-grid figure,.contact form{opacity:0;transform:translateY(20px);transition:opacity var(--transition-fast),transform var(--transition-fast);}
+.card,.about,.testimonial-grid figure,.contact form,.team-grid figure,.newsletter form{opacity:0;transform:translateY(20px);transition:opacity var(--transition-fast),transform var(--transition-fast);}
 .show{opacity:1;transform:none;}
 
 @media (prefers-reduced-motion: reduce){
@@ -146,14 +153,18 @@ a:hover {text-decoration: underline;}
   .card:hover,
   .about,
   .testimonial-grid figure,
-  .contact form{
+  .contact form,
+  .team-grid figure,
+  .newsletter form{
     transition:none!important;
     transform:none!important;
   }
   .card,
   .about,
   .testimonial-grid figure,
-  .contact form{
+  .contact form,
+  .team-grid figure,
+  .newsletter form{
     opacity:1!important;
   }
 }

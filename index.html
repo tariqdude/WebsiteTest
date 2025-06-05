@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acme Corp - Grow Your Business</title>
   <meta name="description" content="Acme Corp provides elite solutions for tomorrow's market.">
+  <meta name="keywords" content="business, consulting, development, support, acme corp">
   <link rel="canonical" href="https://example.com/">
   <meta property="og:title" content="Acme Corp - Grow Your Business">
   <meta property="og:description" content="Acme Corp provides elite solutions for tomorrow's market.">
@@ -54,9 +55,12 @@
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
     <ul class="nav-menu" aria-hidden="true">
       <li><a href="#features">Features</a></li>
+      <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
     </ul>
   </nav>
   <div class="hero-content">
@@ -73,6 +77,16 @@
         <div class="card"><h3>Feature One</h3><p>Short description.</p></div>
         <div class="card"><h3>Feature Two</h3><p>Short description.</p></div>
         <div class="card"><h3>Feature Three</h3><p>Short description.</p></div>
+      </div>
+    </div>
+  </section>
+  <section id="services" class="services">
+    <div class="container">
+      <h2>Services</h2>
+      <div class="card-grid">
+        <div class="card"><h3>Consulting</h3><p>Expert advice to grow your business.</p></div>
+        <div class="card"><h3>Development</h3><p>Custom solutions tailored to your needs.</p></div>
+        <div class="card"><h3>Support</h3><p>Reliable help when you need it.</p></div>
       </div>
     </div>
   </section>
@@ -108,6 +122,25 @@
       </div>
     </div>
   </section>
+  <section id="team" class="team">
+    <div class="container">
+      <h2>Meet the Team</h2>
+      <div class="team-grid">
+        <figure>
+          <img src="https://placehold.co/200" alt="Team member 1" loading="lazy" width="200" height="200">
+          <figcaption>Jane Doe - CEO</figcaption>
+        </figure>
+        <figure>
+          <img src="https://placehold.co/200" alt="Team member 2" loading="lazy" width="200" height="200">
+          <figcaption>John Smith - CTO</figcaption>
+        </figure>
+        <figure>
+          <img src="https://placehold.co/200" alt="Team member 3" loading="lazy" width="200" height="200">
+          <figcaption>Mary Johnson - CFO</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
   <section id="contact" class="contact">
     <div class="container">
       <h2>Contact Us</h2>
@@ -126,6 +159,19 @@
         </label>
         <button type="submit" class="cta">Send</button>
       </form>
+    </div>
+  </section>
+  <section id="newsletter" class="newsletter">
+    <div class="container">
+      <h2>Stay Updated</h2>
+      <form id="newsletter-form">
+        <label>
+          Email
+          <input type="email" name="newsletter-email" required>
+        </label>
+        <button type="submit" class="cta">Subscribe</button>
+      </form>
+      <p id="newsletter-message" hidden>Thank you for subscribing!</p>
     </div>
   </section>
 </main>
