@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter.var.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @layer reset, base, components;
 @layer reset {
   *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
@@ -62,6 +69,13 @@
     #installBanner[hidden] { display:none; }
     #installBanner { position:fixed; bottom:1rem; left:50%; translate:-50% 0; }
   }
+  .section { padding:clamp(2rem,5vw,4rem) 0; }
+  .grid { display:grid; gap:1.5rem; }
+  @container size inline(700px) { .grid { grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); } }
+  form { display:grid; gap:1rem; max-width:500px; margin-inline:auto; }
+  label { display:flex; flex-direction:column; text-align:left; }
+  input, textarea { padding:.5rem; font:inherit; }
+  textarea { min-height:6rem; resize:vertical; }
 }
 
 @media (prefers-reduced-motion: reduce) { canvas { display:none; } }

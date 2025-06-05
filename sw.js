@@ -4,7 +4,7 @@ self.addEventListener('install', e => {
   e.waitUntil(caches.open(cacheName).then(c => c.addAll([
     '/', '/index.html', '/about.html', '/services.html', '/404.html',
     '/assets/css/main.css', '/assets/js/main.js', '/assets/js/analytics.js'
-    // Add '/fonts/Inter.var.woff2' here once the font file exists
+    '/fonts/Inter.var.woff2', '/assets/img/hero-400.avif', '/assets/img/hero-800.avif', '/assets/img/hero-1600.avif', '/assets/img/hero-1200x630.avif', '/assets/img/logo-192.png', '/assets/img/logo-512.png'
   ])));
   self.skipWaiting();
 });
