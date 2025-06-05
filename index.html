@@ -27,6 +27,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="prefetch" href="https://placehold.co/800x600" as="image">
   <link rel="stylesheet" href="styles.css">
   <script defer src="scripts.js"></script>
   <script type="application/ld+json">
@@ -61,8 +62,27 @@
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#newsletter">Newsletter</a></li>
+      <li class="has-mega"><a href="#">Resources</a>
+        <div class="mega-menu" aria-label="Mega menu">
+          <ul>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">Tutorials</a></li>
+            <li><a href="#">Guides</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+      </li>
     </ul>
   </nav>
+  <div class="hero-bg">
+    <video class="hero-video" autoplay muted loop playsinline poster="https://placehold.co/1920x1080">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="hero-content">
     <h1>Grow Your Business with Us</h1>
     <p>We provide elite solutions for tomorrow's market.</p>
@@ -94,7 +114,9 @@
     <div class="container">
       <div class="about-image">
         <picture>
-          <img src="https://placehold.co/800x600" alt="About us" loading="lazy" width="800" height="600">
+          <img src="https://placehold.co/800x600" alt="About us" loading="lazy"
+               srcset="https://placehold.co/400x300 400w, https://placehold.co/800x600 800w"
+               sizes="(max-width: 600px) 100vw, 800px" width="800" height="600">
         </picture>
       </div>
       <div class="about-text">
@@ -108,15 +130,21 @@
       <h2>What Our Clients Say</h2>
       <div class="testimonial-grid">
         <figure>
-          <img src="https://placehold.co/400" alt="Customer 1" loading="lazy" width="400" height="400">
+          <img src="https://placehold.co/400" alt="Customer 1" loading="lazy"
+               srcset="https://placehold.co/200 200w, https://placehold.co/400 400w"
+               sizes="(max-width: 600px) 100vw, 400px" width="400" height="400">
           <figcaption>"Outstanding service!"</figcaption>
         </figure>
         <figure>
-          <img src="https://placehold.co/400" alt="Customer 2" loading="lazy" width="400" height="400">
+          <img src="https://placehold.co/400" alt="Customer 2" loading="lazy"
+               srcset="https://placehold.co/200 200w, https://placehold.co/400 400w"
+               sizes="(max-width: 600px) 100vw, 400px" width="400" height="400">
           <figcaption>"Truly professional."</figcaption>
         </figure>
         <figure>
-          <img src="https://placehold.co/400" alt="Customer 3" loading="lazy" width="400" height="400">
+          <img src="https://placehold.co/400" alt="Customer 3" loading="lazy"
+               srcset="https://placehold.co/200 200w, https://placehold.co/400 400w"
+               sizes="(max-width: 600px) 100vw, 400px" width="400" height="400">
           <figcaption>"Highly recommended!"</figcaption>
         </figure>
       </div>
@@ -127,15 +155,21 @@
       <h2>Meet the Team</h2>
       <div class="team-grid">
         <figure>
-          <img src="https://placehold.co/200" alt="Team member 1" loading="lazy" width="200" height="200">
+          <img src="https://placehold.co/200" alt="Team member 1" loading="lazy"
+               srcset="https://placehold.co/100 100w, https://placehold.co/200 200w"
+               sizes="(max-width: 600px) 50vw, 200px" width="200" height="200">
           <figcaption>Jane Doe - CEO</figcaption>
         </figure>
         <figure>
-          <img src="https://placehold.co/200" alt="Team member 2" loading="lazy" width="200" height="200">
+          <img src="https://placehold.co/200" alt="Team member 2" loading="lazy"
+               srcset="https://placehold.co/100 100w, https://placehold.co/200 200w"
+               sizes="(max-width: 600px) 50vw, 200px" width="200" height="200">
           <figcaption>John Smith - CTO</figcaption>
         </figure>
         <figure>
-          <img src="https://placehold.co/200" alt="Team member 3" loading="lazy" width="200" height="200">
+          <img src="https://placehold.co/200" alt="Team member 3" loading="lazy"
+               srcset="https://placehold.co/100 100w, https://placehold.co/200 200w"
+               sizes="(max-width: 600px) 50vw, 200px" width="200" height="200">
           <figcaption>Mary Johnson - CFO</figcaption>
         </figure>
       </div>
@@ -194,6 +228,10 @@
 </footer>
 <button class="mode-toggle" aria-label="Toggle dark mode">🌓</button>
 <button class="scroll-top" aria-label="Back to top">↑</button>
+<div id="install-banner" class="install-banner" hidden>
+  <button id="install-btn" class="cta">Add to Home Screen</button>
+</div>
+<div id="network-status" class="network-status" aria-live="polite" hidden>Offline</div>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
