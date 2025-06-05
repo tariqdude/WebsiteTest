@@ -143,3 +143,13 @@ a:hover {text-decoration: underline;}
   }
 }
 
+/* Focus styles for interactive elements */
+.nav-menu a:focus-visible,
+.cta:focus-visible,
+.nav-toggle:focus-visible,
+.mode-toggle:focus-visible,
+.scroll-top:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 2px;
+}
+
