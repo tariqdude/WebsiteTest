@@ -58,6 +58,42 @@ mobileMenu.querySelectorAll("a").forEach(link => {
   });
 });
 
+const setMenuHeight = () => {
+  mobileMenu.style.height = `${window.innerHeight}px`;
+};
+window.addEventListener("resize", setMenuHeight);
+window.addEventListener("orientationchange", setMenuHeight);
+setMenuHeight();
+
+let swipeStartX = null;
+mobileMenu.addEventListener("pointerdown", (e) => {
+  swipeStartX = e.clientX;
+});
+mobileMenu.addEventListener("pointerup", (e) => {
+  if (swipeStartX !== null && Math.abs(e.clientX - swipeStartX) > 50) {
+    mobileMenu.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  swipeStartX = null;
+});
+
+const sections = document.querySelectorAll("main > section[id]");
+const mobileLinks = mobileMenu.querySelectorAll("a");
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      mobileLinks.forEach(link => {
+        if (link.getAttribute("href") === `#${entry.target.id}`) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    }
+  });
+}, { threshold: 0.6 });
+sections.forEach(sec => sectionObserver.observe(sec));
+
 /* ========================= HERO ANIMATIONS ========================= */
 const heroTitle = document.querySelector(".hero-title");
 const heroCtaPrimary = document.getElementById("hero-cta-primary");
