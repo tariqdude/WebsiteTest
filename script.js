@@ -6,11 +6,11 @@
 
 /* ========================= IMPORTS ========================= */
 import "./paint-worklet.js";         // Registers CSS Paint Worklet for I-Beam
-import { default as ServiceCard } from "serviceCard/serviceCard.js"; // Defines <service-card>
-import { initCarousel } from "carousel/carousel.js";               // Testimonials carousel logic
-import { handleForm } from "forms/contactForm.js";                 // Contact form validation/submission
-import { drawMap } from "maps/mapCanvas.js";                       // Live canvas map rendering
-import { initAnalytics } from "analytics/analytics.js";            // Analytics beacon stub
+import "./servicecard.js";           // Defines <service-card>
+import { initCarousel } from "./carousel.js";               // Testimonials carousel logic
+import { handleForm } from "./contactform.js";             // Contact form validation/submission
+import { drawMap } from "./mapcanvas.js";                 // Live canvas map rendering
+import { initAnalytics } from "./analytics.js";            // Analytics beacon stub
 
 /* ========================= HEADER / NAV BEHAVIOR ========================= */
 const header = document.getElementById("header");
