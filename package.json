@@ -1,0 +1,19 @@
+{
+  "name": "websitetest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "analytics.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "postcss style.css -u cssnano -o dist/style.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^10.1.0"
+  }
+}
