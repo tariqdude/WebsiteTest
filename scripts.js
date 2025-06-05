@@ -50,10 +50,19 @@ if(videoMuteBtn){
   videoMuteBtn.addEventListener('click',()=>{
     if(heroVideo){
       heroVideo.muted=!heroVideo.muted;
-      videoMuteBtn.textContent=heroVideo.muted?'🔇':'🔊';
+      const muted=heroVideo.muted;
+      videoMuteBtn.textContent=muted?'🔇':'🔊';
+      videoMuteBtn.setAttribute('aria-pressed',muted);
     }else if(heroYTPlayer){
-      if(heroYTPlayer.isMuted()){heroYTPlayer.unMute();videoMuteBtn.textContent='🔊';}
-      else{heroYTPlayer.mute();videoMuteBtn.textContent='🔇';}
+      if(heroYTPlayer.isMuted()){
+        heroYTPlayer.unMute();
+        videoMuteBtn.textContent='🔊';
+        videoMuteBtn.setAttribute('aria-pressed','false');
+      }else{
+        heroYTPlayer.mute();
+        videoMuteBtn.textContent='🔇';
+        videoMuteBtn.setAttribute('aria-pressed','true');
+      }
     }
   });
 }

@@ -19,6 +19,7 @@ html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
   --color-accent: var(--color-primary);
   --color-dark-bg: #121212;
   --color-dark-text: #f1f1f1;
+  --color-card-bg: #ffffff;
   --icon-color: currentColor;
   --transition-fast: 0.3s ease;
   --transition-slow: 0.6s ease;
@@ -27,6 +28,7 @@ html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
   :root {
     --color-bg: var(--color-dark-bg);
     --color-text: var(--color-dark-text);
+    --color-card-bg: #333333;
     --color-accent: #1abc9c;
   }
 }
@@ -201,7 +203,7 @@ a:hover {text-decoration: underline;}
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:1rem;
 }
-.card {background:white; padding:1rem; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition:transform var(--transition-fast);} 
+.card {background:var(--color-card-bg); padding:1rem; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition:transform var(--transition-fast);}
 .card:hover {transform:translateY(-5px);} 
 .about {
   display:-ms-grid;
@@ -279,7 +281,7 @@ a:hover {text-decoration: underline;}
   background:#16a085;
 }
 
-.dark-mode .card {background:#333; color:var(--color-dark-text);}
+.dark-mode .card {color:var(--color-dark-text);}
 
 .card,.about,.testimonial-grid figure,.contact form,.team-grid figure,.newsletter form{opacity:0;transform:translateY(20px);transition:opacity var(--transition-fast),transform var(--transition-fast);}
 .show{opacity:1;transform:none;}
@@ -380,6 +382,7 @@ select {appearance:none;background:url('data:image/svg+xml,<svg xmlns="http://ww
   --color-bg:#000;
   --color-text:#ff0;
   --color-accent:#f0f;
+  --color-card-bg:#000;
 }
 
 .invalid {border-color:#e74c3c;}
