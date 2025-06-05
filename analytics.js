@@ -9,12 +9,3 @@ export function initAnalytics() {
     navigator.sendBeacon("/analytics", data);
   }
 }
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            heroTitle.classList.add("visible");
-            rotatingPhrase.classList.add("visible");
-            heroCtaPrimary.classList.add("visible");
-            rotatingObserver.unobserve(rotatingPhrase);
-        }
-        });
-    }, { threshold: 0.1 });
