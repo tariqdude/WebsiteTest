@@ -42,6 +42,3 @@ These features illustrate how to turn a regular static page into a lightweight P
 
 - Relaxed Content Security Policy to allow loading Google Fonts and hero video
 - Added a scroll progress indicator for long pages
-- New masonry gallery and animated skills section
-- Multi-step contact form with inline validation
-- High-contrast theme option and Lottie-powered toggle

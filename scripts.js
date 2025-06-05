@@ -56,64 +56,6 @@ document.querySelectorAll('.card, .about, .testimonial-grid figure, .contact for
   observer.observe(el);
 });
 
-// Lazy load images
-const lazyImages = document.querySelectorAll('img[data-src]');
-const imgObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      const img = entry.target;
-      img.src = img.dataset.src;
-      img.removeAttribute('data-src');
-      imgObserver.unobserve(img);
-    }
-  });
-});
-lazyImages.forEach(img => imgObserver.observe(img));
-
-// Animate skill bars
-document.querySelectorAll('.skill-progress').forEach(bar => {
-  observer.observe(bar);
-});
-let swRegister;
-if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("sw.js").then(reg=>{
-    swRegister=reg;
-    setupPush(reg);
-  });
-}
-
-// Collapse sticky nav on scroll down
-const navBar = document.querySelector(".nav");
-let lastScrollY = window.scrollY;
-if(navBar){
-  window.addEventListener("scroll", () => {
-    if(window.scrollY > lastScrollY && window.scrollY > 50){
-      navBar.classList.add("nav-collapsed");
-    } else {
-      navBar.classList.remove("nav-collapsed");
-    }
-    lastScrollY = window.scrollY;
-  });
-}
-
-// Parallax hero background
-const hero = document.querySelector(".hero");
-if(hero){
-  window.addEventListener("scroll", () => {
-    const offset = window.scrollY * 0.5;
-    hero.style.backgroundPositionY = `-${offset}px`;
-  });
-}
-
-// Scroll progress indicator
-const progressBar = document.querySelector(".scroll-progress");
-if(progressBar){
-  window.addEventListener("scroll", () => {
-    const max = document.body.scrollHeight - window.innerHeight;
-    const percent = Math.min(100, (window.scrollY / max) * 100);
-    progressBar.style.width = `${percent}%`;
-  });
-}
 
 
 
@@ -152,42 +94,7 @@ if(newsletterForm){
   });
 }
 
-const contactForm = document.getElementById('contact-form');
-if(contactForm){
-  const steps = contactForm.querySelectorAll('.form-step');
-  const nextBtn = contactForm.querySelector('.next');
-  const prevBtn = contactForm.querySelector('.prev');
-  const progress = contactForm.querySelector('.form-progress');
-  let current = 0;
-  function showStep(i){
-    steps.forEach((s,idx)=>{s.hidden = idx!==i;});
-    progress.value = i+1;
-  }
-  showStep(0);
-  nextBtn.addEventListener('click',()=>{
-    const valid=[...steps[0].querySelectorAll('input')].every(i=>i.reportValidity());
-    if(valid){ current=1; showStep(1); }
-  });
-  prevBtn.addEventListener('click',()=>{current=0;showStep(0);});
-  contactForm.addEventListener('submit',e=>{
-    e.preventDefault();
-    const data=new FormData(contactForm);
-    const msg=document.getElementById('contact-message');
-    if(navigator.onLine){
-      fetch(contactForm.action,{method:'POST',body:data});
-      msg.textContent='Message sent!';
-    }else{
-      saveRecord(formDB,'forms',{url:contactForm.action,data:Object.fromEntries(data)});
-      swRegister && swRegister.sync && swRegister.sync.register('sync-forms');
-      msg.textContent='Saved offline and will send later.';
-    }
-    contactForm.reset();
-    showStep(0);
-    msg.hidden=false;
-  });
-  contactForm.querySelectorAll('input,textarea,select').forEach(el=>{
-    el.addEventListener('invalid',()=>el.classList.add('invalid'));
-    el.addEventListener('input',()=>el.classList.remove('invalid'));
+
   });
 }
 
@@ -248,18 +155,6 @@ function sendAnalytics(data){
 }
 sendAnalytics({event:'pageview',url:location.href});
 
-// Lottie animation for theme toggle
-const lottieContainer=document.getElementById('theme-lottie');
-let lottieAnim=null;
-if(lottieContainer && window.lottie){
-  lottieAnim=window.lottie.loadAnimation({
-    container:lottieContainer,
-    renderer:'svg',
-    loop:false,
-    autoplay:false,
-    path:'https://assets9.lottiefiles.com/temp/lf20_oGlWy5.json'
-  });
-}
 
 // Push notifications
 function setupPush(reg){
