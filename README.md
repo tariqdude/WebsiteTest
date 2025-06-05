@@ -7,10 +7,10 @@ This repository contains a simple GitHub Pages site for Allied Mechanical.
 2. Push changes to the `main` branch — GitHub Pages serves the site automatically.
 
 ## Updating Assets and Services
-- Add your images to `assets/img` and update the `img` element in `index.html` if needed.
-- Place `Inter.var.woff2` inside the `fonts` folder to enable the custom font.
+- Add your images to `assets/img` using the filenames `hero-400.avif`, `hero-800.avif`, `hero-1600.avif`, `hero-1200x630.avif`, `logo-192.png`, and `logo-512.png`. The HTML already references these paths.
+- Place `Inter.var.woff2` inside the `fonts` directory so the `@font-face` rule in `assets/css/main.css` can load it.
 - Edit `services.html` to add or modify service offerings.
-Placeholder data URIs are used in the code so the site functions before you add real assets.
+Until these files are provided the site will show broken image links and fallback fonts.
 
 Analytics are collected locally using `assets/js/analytics.js` and sent via `navigator.sendBeacon` to `/analytics`. Disable this by removing the import in `index.html`.
 

@@ -24,15 +24,8 @@
   <!-- Preload custom font when available -->
   <link rel="preload" href="/fonts/Inter.var.woff2" as="font" type="font/woff2" crossorigin integrity="sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=">
   <style nonce="amNonce">
-    /* Optional custom font - add Inter.var.woff2 to /fonts to enable */
-    @font-face {
-      font-family: 'Inter';
-      src: url('/fonts/Inter.var.woff2') format('woff2-variations');
-      font-weight: 100 900;
-      font-display: swap;
-    }
     body { margin:0; padding: env(safe-area-inset); }
-    /* Use dynamic viewport units where supported with a fallback */
+    /* Use dynamic viewport units with a fallback */
     .hero {
       height:100dvh;
       height:calc(var(--vh, 1vh) * 100);
@@ -102,11 +95,11 @@
   <section class="hero" aria-label="Hero">
     <canvas id="gpuCanvas" aria-hidden="true"></canvas>
     <!-- Placeholder image. Replace data URI with /assets/img/hero.avif -->
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAwJyBoZWlnaHQ9JzkwMCc+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsbD0nI2NjYycvPjx0ZXh0IHg9JzUwJScgeT0nNTAlJyBkb21pbmFudC1iYXNlbGluZT0nbWlkZGxlJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmb250LXNpemU9JzQ4JyBmaWxsPScjMzMzJz5IZXJvIEltYWdlPC90ZXh0Pjwvc3ZnPg=="
+    <img src="/assets/img/hero-1600.avif"
          alt="HVAC systems" width="1600" height="900"
-         srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0MDAnIGhlaWdodD0nMjI1Jy8+ 400w,
-                 data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MDAnaGVpZ2h0PSc0NTAnLz4= 800w,
-                 data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAwJyBoZWlnaHQ9JzkwMCcvPg== 1600w"
+         srcset="/assets/img/hero-400.avif 400w,
+                 /assets/img/hero-800.avif 800w,
+                 /assets/img/hero-1600.avif 1600w"
          sizes="(max-width:600px) 100vw, 50vw" fetchpriority="high" loading="lazy" decoding="async">
     <button class="cta" id="quoteBtn">Get a Quote</button>
     <div id="installBanner" hidden aria-live="polite">
