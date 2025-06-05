@@ -11,14 +11,12 @@ const CACHE_ASSETS = [
   '/index.html',
   '/style.css?v=202506051200',
   '/script.js?v=202506051200',
+  '/data:image/svg+xml;base64,…',
   '/manifest.json',
-  '/offline.html',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg'
+  '/offline.html'
 ];
 
 self.addEventListener('install', (e) => {
-  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_VERSION).then((cache) => cache.addAll(CACHE_ASSETS))
   );
@@ -40,34 +38,18 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
-  const url = new URL(e.request.url);
-  if (url.origin !== location.origin) return;
-
-  if (e.request.mode === 'navigate') {
-    e.respondWith(
-      fetch(e.request)
-        .then((res) => {
-          if (res && res.status === 200) {
-            const clone = res.clone();
-            caches.open(CACHE_VERSION).then((cache) => cache.put(e.request, clone));
-          }
-          return res;
-        })
-        .catch(() => caches.match(e.request).then((cached) => cached || caches.match('/offline.html')))
-    );
-    return;
-  }
-
+  if (new URL(e.request.url).origin !== location.origin) return;
   e.respondWith(
     caches.match(e.request).then((cached) => {
       if (cached) return cached;
       return fetch(e.request).then((res) => {
-        if (res && res.status === 200 && res.type === 'basic') {
-          const clone = res.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(e.request, clone));
-        }
+        if (!res || res.status !== 200 || res.type !== 'basic') return res;
+        const clone = res.clone();
+        caches.open(CACHE_VERSION).then((cache) => cache.put(e.request, clone));
         return res;
       });
-    }).catch(() => caches.match('/offline.html'))
+    }).catch(() => {
+      return caches.match('/offline.html');
+    })
   );
 });
