@@ -12,6 +12,11 @@ import { handleForm } from "./contactform.js";                 // Contact form v
 import { drawMap } from "./mapcanvas.js";                       // Live canvas map rendering
 import { initAnalytics } from "./analytics.js";            // Analytics beacon stub
 
+// Toggle console output during development
+const DEBUG_MODE = false;
+const debugLog = (...args) => { if (DEBUG_MODE) console.log(...args); };
+const debugWarn = (...args) => { if (DEBUG_MODE) console.warn(...args); };
+
 /* ========================= HEADER / NAV BEHAVIOR ========================= */
 const header = document.getElementById("header");
 let lastScrollY = window.scrollY;
@@ -228,8 +233,8 @@ fab.addEventListener("click", () => {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('Service Worker registered:', reg))
-      .catch(err => console.warn('Service Worker registration failed:', err));
+      .then(reg => debugLog('Service Worker registered:', reg))
+      .catch(err => debugWarn('Service Worker registration failed:', err));
   });
 }
 
