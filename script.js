@@ -234,4 +234,8 @@ if ('serviceWorker' in navigator) {
 }
 
 /* ========================= ANALYTICS ========================= */
-requestIdleCallback(initAnalytics);
+const analyticsIdleHandle = (window.requestIdleCallback || function(cb){
+  return setTimeout(cb, 200);
+})(initAnalytics);
+// If cancellation is needed elsewhere, use
+//   (window.cancelIdleCallback || clearTimeout)(analyticsIdleHandle);
