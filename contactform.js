@@ -6,11 +6,14 @@
 export function handleForm() {
   const form = document.getElementById('contact-form');
   const submitBtn = document.getElementById('submit-btn');
+  const msgBox = document.getElementById('form-message');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    // Clear previous errors
+    // Clear previous errors and message
     form.querySelectorAll('.error').forEach(el => el.textContent = '');
+    msgBox.textContent = '';
+    msgBox.classList.remove('success', 'error');
     let hasError = false;
     // Validate required fields
     form.querySelectorAll('[required]').forEach(input => {
@@ -34,9 +37,11 @@ export function handleForm() {
       // Simulated API delay
       await new Promise(r => setTimeout(r, 1500));
       form.reset();
-      alert('Thank you! Your request has been submitted.');
+      msgBox.textContent = 'Thank you! Your request has been submitted.';
+      msgBox.classList.add('success');
     } catch {
-      alert('Something went wrong. Please try again.');
+      msgBox.textContent = 'Something went wrong. Please try again.';
+      msgBox.classList.add('error');
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit';
