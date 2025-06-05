@@ -232,6 +232,22 @@ button {
   height: 100dvh;
   overflow: hidden;
 }
+.skip-hero {
+  position: absolute;
+  left: -999px;
+  top: var(--space-2);
+  background: var(--clr-surface-50);
+  color: var(--clr-primary-900);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-50);
+  text-decoration: none;
+  z-index: 2;
+}
+.skip-hero:focus {
+  left: 50%;
+  transform: translateX(-50%);
+}
 .hero-background {
   position: absolute;
   inset: 0;
@@ -263,13 +279,11 @@ button {
 .hero-title .line-2 {
   display: block;
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 600ms var(--ease-emphasis), transform 600ms var(--ease-emphasis);
+  transition: opacity 600ms var(--ease-emphasis);
 }
 .hero-title.visible .line-1,
 .hero-title.visible .line-2 {
   opacity: 1;
-  transform: translateY(0);
 }
 .hero-subtitle #rotating-phrase {
   display: inline-block;
