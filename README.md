@@ -1,6 +1,6 @@
 # Acme Corp Landing Page
 
-This repository contains a simple static website demonstrating a basic Progressive Web App (PWA) setup for a fictional business. The site is built with plain HTML, CSS and JavaScript.
+This repository contains a simple static website demonstrating a basic Progressive Web App (PWA) setup for a fictional business. The site is built with plain HTML, CSS and JavaScript. A sample `styles.scss` file is included if you wish to use a SCSS workflow.
 
 ## Site Highlights
 
@@ -23,9 +23,22 @@ python3 -m http.server 8000
 npx http-server -p 8000
 ```
 
+### Building CSS from SCSS
+If you prefer using SCSS, run the following command and then optionally autoprefix the result:
+
+```sh
+sass styles.scss styles.css --no-source-map
+npx autoprefixer styles.css -o styles.css
+```
+
 ## PWA features
 
 
 - **Theme color** meta tag customizes the browser UI when the site is installed or opened on mobile.
 
 These features illustrate how to turn a regular static page into a lightweight PWA.
+
+## Recent Updates
+
+- Relaxed Content Security Policy to allow loading Google Fonts and hero video
+- Added a scroll progress indicator for long pages
