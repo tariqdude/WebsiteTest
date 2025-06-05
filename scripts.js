@@ -3,8 +3,10 @@ const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
 navToggle.addEventListener('click', () => {
   const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-  navToggle.setAttribute('aria-expanded', !expanded);
+  const newExpanded = !expanded;
+  navToggle.setAttribute('aria-expanded', newExpanded);
   navMenu.classList.toggle('show');
+  navMenu.setAttribute('aria-hidden', !newExpanded);
 });
 
 // Close mobile nav when a link is clicked
@@ -12,6 +14,7 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
   link.addEventListener('click', () => {
     navMenu.classList.remove('show');
     navToggle.setAttribute('aria-expanded', 'false');
+    navMenu.setAttribute('aria-hidden', 'true');
   });
 });
 
