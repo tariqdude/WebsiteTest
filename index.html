@@ -1044,14 +1044,14 @@
         </ul>
       </nav>
       <!-- Hamburger for mobile -->
-      <button class="hamburger" aria-label="Open menu" id="hamburger-btn">
+      <button class="hamburger" aria-label="Open menu" id="hamburger-btn" aria-controls="mobile-menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </button>
     </div>
     <!-- Mobile overlay menu -->
-    <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -1248,9 +1248,9 @@
         </div>
       </div>
       <div class="badges-container">
-        <img class="badge" src="data:image/svg+xml;base64,…" alt="ISO 9001 Certified badge placeholder">
-        <img class="badge" src="data:image/svg+xml;base64,…" alt="OSHA Compliance badge placeholder">
-        <img class="badge" src="data:image/svg+xml;base64,…" alt="LEED Silver badge placeholder">
+        <img class="badge" src="data:image/svg+xml;base64,…" alt="ISO 9001 Certified badge placeholder" loading="lazy">
+        <img class="badge" src="data:image/svg+xml;base64,…" alt="OSHA Compliance badge placeholder" loading="lazy">
+        <img class="badge" src="data:image/svg+xml;base64,…" alt="LEED Silver badge placeholder" loading="lazy">
       </div>
     </section>
 
@@ -1259,7 +1259,7 @@
       <h2 id="testimonials-heading" class="section-heading">What Our Clients Say</h2>
       <div class="testimonials-container">
         <figure class="testimonial-slide active" data-delay="8000" tabindex="0">
-          <img class="avatar" src="data:image/svg+xml;base64,…" alt="[Client One] avatar placeholder">
+          <img class="avatar" src="data:image/svg+xml;base64,…" alt="[Client One] avatar placeholder" loading="lazy">
           <blockquote class="quote">“Allied Mechanical transformed our facility in just eight weeks—phenomenal expertise!”</blockquote>
           <figcaption><cite>[Client One], [Company A]</cite></figcaption>
           <div class="stars" role="img" aria-label="5 out of 5 stars">
@@ -1271,7 +1271,7 @@
           </div>
         </figure>
         <figure class="testimonial-slide" data-delay="8000" tabindex="0">
-          <img class="avatar" src="data:image/svg+xml;base64,…" alt="[Client Two] avatar placeholder">
+          <img class="avatar" src="data:image/svg+xml;base64,…" alt="[Client Two] avatar placeholder" loading="lazy">
           <blockquote class="quote">“Their team delivered above and beyond, respecting budget and timeline every step of the way.”</blockquote>
           <figcaption><cite>[Client Two], [Company B]</cite></figcaption>
           <div class="stars" role="img" aria-label="5 out of 5 stars">
@@ -1283,7 +1283,7 @@
           </div>
         </figure>
         <figure class="testimonial-slide" data-delay="8000" tabindex="0">
-          <img class="avatar" src="data:image/svg+xml;base64,…" alt="[Client Three] avatar placeholder">
+          <img class="avatar" src="data:image/svg+xml;base64,…" alt="[Client Three] avatar placeholder" loading="lazy">
           <blockquote class="quote">“Unmatched professionalism and technical know-how—our go-to partner for any mechanical challenge.”</blockquote>
           <figcaption><cite>[Client Three], [Company C]</cite></figcaption>
           <div class="stars" role="img" aria-label="5 out of 5 stars">
