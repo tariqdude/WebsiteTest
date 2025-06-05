@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Allied Mechanical provides top-tier commercial HVAC services in Chicago, IL.">
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+  <meta http-equiv="Cross-Origin-Embedder-Policy" content="credentialless">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'nonce-amNonce'; script-src 'self' 'nonce-amNonce'">
+  <link rel="canonical" href="https://www.allied-mechanical.com/">
+  <link rel="prefetch" href="/about.html" as="document">
+  <link rel="prefetch" href="/services.html" as="document">
+  <link rel="modulepreload" href="/assets/js/main.js">
+  <meta property="og:title" content="Allied Mechanical — Commercial HVAC Excellence">
+  <meta property="og:description" content="Allied Mechanical provides top-tier commercial HVAC services in Chicago, IL.">
+  <meta property="og:image" content="https://www.allied-mechanical.com/assets/img/hero-1200x630.avif">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Allied Mechanical — Commercial HVAC Excellence">
+  <meta name="twitter:description" content="Allied Mechanical provides top-tier commercial HVAC services in Chicago, IL.">
+  <meta name="twitter:image" content="https://www.allied-mechanical.com/assets/img/hero-1200x630.avif">
+  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <!-- Preload custom font when available -->
+  <link rel="preload" href="/fonts/Inter.var.woff2" as="font" type="font/woff2" crossorigin integrity="sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=">
+  <style nonce="amNonce">
+    /* Optional custom font - add Inter.var.woff2 to /fonts to enable */
+    @font-face {
+      font-family: 'Inter';
+      src: url('/fonts/Inter.var.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    body { margin:0; padding: env(safe-area-inset); }
+    /* Use dynamic viewport units where supported with a fallback */
+    .hero {
+      height:100dvh;
+      height:calc(var(--vh, 1vh) * 100);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      position:relative;
+    }
+    @container size inline(700px) {
+      .hero { height:70dvh; }
+    }
+    canvas { width:100%; height:100%; position:absolute; inset:0; }
+    @media (prefers-reduced-motion: reduce) {
+      canvas { display:none; }
+    }
+    @media (forced-colors: active) {
+      body { forced-color-adjust:none; }
+    }
+  </style>
+  <script type="importmap" nonce="amNonce">
+    {
+      "imports": {
+        "analytics": "/assets/js/analytics.js"
+      }
+    }
+  </script>
+  <script type="module" src="/assets/js/main.js" nonce="amNonce" defer></script>
+  <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"HVACBusiness",
+      "name":"Allied Mechanical",
+      "url":"https://www.allied-mechanical.com",
+      "logo":"https://www.allied-mechanical.com/assets/img/logo.svg",
+      "telephone":"+1-312-555-0110",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"1234 Industry Rd",
+        "addressLocality":"Chicago",
+        "addressRegion":"IL",
+        "postalCode":"60601"
+      },
+      "areaServed":"Chicago IL",
+      "sameAs":["https://linkedin.com/company/allied-mechanical"]
+    }
+  </script>
+  <title>Allied Mechanical — Commercial HVAC Excellence</title>
+</head>
+<body>
+<div id="progressBar" hidden aria-hidden="true" role="progressbar" aria-label="Scroll progress"></div>
+<a href="#main" class="skip">Skip to content</a>
+<header aria-label="Site header" data-menu="closed">
+  <button type="button" id="navToggle" aria-expanded="false" aria-controls="navList">☰</button>
+  <nav inert aria-hidden="true">
+    <ul id="navList">
+      <li><a href="/" aria-current="page">Home</a></li>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </nav>
+  <div>
+    <button type="button" id="themeToggle" class="cta">Toggle dark mode</button>
+    <button type="button" id="fontToggle" class="cta" aria-pressed="false">A+</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+  <section class="hero" aria-label="Hero">
+    <canvas id="gpuCanvas" aria-hidden="true"></canvas>
+    <!-- Placeholder image. Replace data URI with /assets/img/hero.avif -->
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAwJyBoZWlnaHQ9JzkwMCc+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsbD0nI2NjYycvPjx0ZXh0IHg9JzUwJScgeT0nNTAlJyBkb21pbmFudC1iYXNlbGluZT0nbWlkZGxlJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmb250LXNpemU9JzQ4JyBmaWxsPScjMzMzJz5IZXJvIEltYWdlPC90ZXh0Pjwvc3ZnPg=="
+         alt="HVAC systems" width="1600" height="900"
+         srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0MDAnIGhlaWdodD0nMjI1Jy8+ 400w,
+                 data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4MDAnaGVpZ2h0PSc0NTAnLz4= 800w,
+                 data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAwJyBoZWlnaHQ9JzkwMCcvPg== 1600w"
+         sizes="(max-width:600px) 100vw, 50vw" fetchpriority="high" loading="lazy" decoding="async">
+    <button class="cta" id="quoteBtn">Get a Quote</button>
+    <div id="installBanner" hidden aria-live="polite">
+      <button id="installBtn" class="cta">Install App</button>
+    </div>
+  </section>
+</main>
+<footer>
+  <p>&copy; <span id="year"></span> Allied Mechanical</p>
+</footer>
+<button class="fab" id="callFab" aria-label="Call us">☎</button>
+<button class="fab" id="topBtn" aria-label="Back to top">↑</button>
+</body>
+</html>
