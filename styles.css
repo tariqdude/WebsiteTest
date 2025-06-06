@@ -268,7 +268,9 @@ button {
   justify-content: center;
   text-align: center;
   color: #fff;
-  background: url('/assets/images/hero-bg.webp') center/cover no-repeat fixed;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-tertiary));
+  background-size: 200% 200%;
+  animation: gradientMove 10s ease infinite;
 }
 @supports (-webkit-overflow-scrolling: touch) {
   .hero {
@@ -297,6 +299,11 @@ button {
     opacity: 1;
     transform: translateY(0);
   }
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .hero__title {
   font-family: var(--font-secondary);
