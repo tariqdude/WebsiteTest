@@ -3,8 +3,10 @@
  * @module mapCanvas
  * Purpose: Draw procedural grid and pulsing markers on #map-canvas.
  */
+import { qs } from './utils.js';
+
 export function drawMap() {
-  const canvas = document.getElementById('map-canvas');
+  const canvas = qs('#map-canvas');
   const ctx = canvas.getContext('2d');
   function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
@@ -16,7 +18,8 @@ export function drawMap() {
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  function render() {
+  let animId;
+  const render = () => {
     const w = canvas.width, h = canvas.height;
     ctx.clearRect(0, 0, w, h);
     ctx.strokeStyle = '#b0b0b0';
@@ -46,8 +49,15 @@ export function drawMap() {
     ctx.arc(w * 0.7, h * 0.6, radius, 0, 2 * Math.PI);
     ctx.fill();
 
-    requestAnimationFrame(render);
-  }
+    animId = requestAnimationFrame(render);
+  };
 
-  render();
+  const start = () => { if (!animId) render(); };
+  const stop = () => { if (animId) { cancelAnimationFrame(animId); animId = null; } };
+
+  const visibilityObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => entry.isIntersecting ? start() : stop());
+  });
+  visibilityObserver.observe(canvas);
+  start();
 }

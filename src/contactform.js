@@ -3,22 +3,24 @@
  * @module contactForm
  * Purpose: Validate form fields, handle honeypot, and simulate submission.
  */
+import { qs, qsa } from './utils.js';
+
 export function handleForm() {
-  const form = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('submit-btn');
-  const msgBox = document.getElementById('form-message');
+  const form = qs('#contact-form');
+  const submitBtn = qs('#submit-btn');
+  const msgBox = qs('#form-message');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     // Clear previous errors and message
-    form.querySelectorAll('.error').forEach(el => el.textContent = '');
+    qsa('.error', form).forEach(el => (el.textContent = ''));
     msgBox.textContent = '';
     msgBox.classList.remove('success', 'error');
     let hasError = false;
     // Validate required fields
-    form.querySelectorAll('[required]').forEach(input => {
+    qsa('[required]', form).forEach(input => {
       if (!input.checkValidity() || (input.name === 'address' && input.value !== '')) {
-        const errorEl = document.getElementById(`${input.id}-error`);
+        const errorEl = qs(`#${input.id}-error`);
         if (input.validity.valueMissing) {
           errorEl.textContent = 'This field is required.';
         } else if (input.validity.typeMismatch) {

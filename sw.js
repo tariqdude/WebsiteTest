@@ -9,8 +9,8 @@ const CACHE_VERSION = 'v1.0.0';
 const CACHE_ASSETS = [
   '/',
   '/index.html',
-  '/style.css?v=202506051200',
-  '/script.js?v=202506051200',
+  '/dist/style.css',
+  '/dist/bundle.js',
   '/manifest.json',
   '/offline.html',
   '/icons/icon-192.svg',
