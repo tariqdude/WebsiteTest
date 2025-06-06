@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "echo \"No tests specified\"",
-    "build:css": "cleancss -o styles.min.css styles.css",
+    "build:css": "cleancss -O2 -o styles.min.css styles.css",
     "build:ts": "tsc",
     "build:js": "npm run build:ts && terser scripts.js -o scripts.min.js -c -m",
     "build": "npm run build:css && npm run build:js",
