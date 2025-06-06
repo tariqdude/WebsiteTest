@@ -1,24 +1,26 @@
 // Testimonial carousel logic
 
-  const track = document.querySelector('.carousel__track');
-  if (!track)
-    return;
-  const slides = Array.from(track.children);
-  const prevButton = document.querySelector('.carousel__prev');
-  const nextButton = document.querySelector('.carousel__next');
-  const indicatorsContainer = document.querySelector('.carousel__indicators');
-  const indicators = Array.from(indicatorsContainer.children);
+function initCarousel(): void {
+  const track = document.querySelector<HTMLElement>('.carousel__track')!;
+  if (!track) return;
+  const slides: HTMLElement[] = Array.from(track.children) as HTMLElement[];
+  const prevButton = document.querySelector<HTMLButtonElement>('.carousel__prev')!;
+  const nextButton = document.querySelector<HTMLButtonElement>('.carousel__next')!;
+  const indicatorsContainer = document.querySelector<HTMLElement>('.carousel__indicators')!;
+  const indicators: HTMLElement[] = Array.from(indicatorsContainer.children) as HTMLElement[];
   let currentIndex = 0;
-  let autoRotate;
-  function updateSlide(index) {
-    slides.forEach((slide, i) => {
+  let autoRotate: number;
+
+  function updateSlide(index: number): void {
+    slides.forEach((slide: HTMLElement, i: number) => {
       slide.classList.toggle('carousel__slide--active', i === index);
       slide.setAttribute('aria-hidden', i === index ? 'false' : 'true');
     });
-    indicators.forEach((dot, i) => {
+    indicators.forEach((dot: HTMLElement, i: number) => {
       dot.classList.toggle('carousel__indicator--active', i === index);
     });
   }
+
   function goToNext() {
     currentIndex = (currentIndex + 1) % slides.length;
     updateSlide(currentIndex);
@@ -27,6 +29,7 @@
     currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     updateSlide(currentIndex);
   }
+
   nextButton.addEventListener('click', () => {
     goToNext();
     resetAutoRotate();
@@ -35,36 +38,40 @@
     goToPrev();
     resetAutoRotate();
   });
-  indicators.forEach((dot, idx) => {
+  indicators.forEach((dot: HTMLElement, idx: number) => {
     dot.addEventListener('click', () => {
       currentIndex = idx;
       updateSlide(currentIndex);
       resetAutoRotate();
     });
   });
-  function startAutoRotate() {
+
+  function startAutoRotate(): void {
     autoRotate = setInterval(goToNext, 5000);
   }
-  function resetAutoRotate() {
+  function resetAutoRotate(): void {
     clearInterval(autoRotate);
     startAutoRotate();
   }
-  const carouselRegion = document.querySelector('.testimonials__carousel');
+
+  const carouselRegion = document.querySelector<HTMLElement>('.testimonials__carousel')!;
   carouselRegion.addEventListener('mouseenter', () => clearInterval(autoRotate));
   carouselRegion.addEventListener('mouseleave', () => startAutoRotate());
   carouselRegion.addEventListener('focusin', () => clearInterval(autoRotate));
   carouselRegion.addEventListener('focusout', () => startAutoRotate());
-  carouselRegion.addEventListener('keydown', (e) => {
+
+  carouselRegion.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'ArrowRight') {
       goToNext();
       resetAutoRotate();
-    }
-    else if (e.key === 'ArrowLeft') {
+    } else if (e.key === 'ArrowLeft') {
       goToPrev();
       resetAutoRotate();
     }
   });
+
   updateSlide(currentIndex);
   startAutoRotate();
 }
 
+document.addEventListener('DOMContentLoaded', initCarousel);
