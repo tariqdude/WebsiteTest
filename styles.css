@@ -988,12 +988,4 @@ button {
 .theme-toggle:focus {
   background: var(--color-tertiary);
 }
-.theme-toggle svg {
-  display: none;
-}
-[data-theme='light'] .theme-toggle .icon-sun {
-  display: block;
-}
-[data-theme='dark'] .theme-toggle .icon-moon {
-  display: block;
-}
+
