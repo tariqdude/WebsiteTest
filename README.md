@@ -19,7 +19,7 @@ npx serve .
 
 ## Building / Deployment
 
-CSS and JavaScript have minified counterparts (`styles.min.css` and `scripts.min.js`). Replace references in `index.html` for production deployment.
+Run `npm run build` to generate minified assets (`styles.min.css` and `scripts.min.js`). Reference these files in `index.html` when deploying to production.
 
 The project uses a minimal `package.json` so `npm test` returns success:
 
