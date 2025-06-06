@@ -19,7 +19,15 @@ npx serve .
 
 ## Building / Deployment
 
-Run `npm run build` to generate minified assets (`styles.min.css` and `scripts.min.js`). Reference these files in `index.html` when deploying to production.
+The build process uses [CleanCSS](https://github.com/jakubpawlowicz/clean-css) and
+[Terser](https://github.com/terser/terser) to minify the CSS and JavaScript.
+Execute the following command to produce optimized assets:
+
+```bash
+npm run build
+```
+
+This generates `styles.min.css` and `scripts.min.js` in the project root. Reference these files in `index.html` when deploying to production.
 
 The project uses a minimal `package.json` so `npm test` returns success:
 
