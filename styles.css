@@ -7,19 +7,19 @@
 -------------------------------------------- */
 :root {
   /* Colors */
-  --color-primary: #1e2a38;      /* Dark navy */
-  --color-secondary: #f4a261;    /* Orange accent */
-  --color-tertiary: #2a9d8f;     /* Teal accent */
-  --color-bg: #ffffff;           /* White background */
-  --color-text: #333333;         /* Dark gray text */
-  --color-muted: #777777;        /* Light gray text */
-  --color-border: #e0e0e0;       /* Neutral border */
-  --color-success: #2a9d8f;      /* Green for success messages */
-  --color-error: #e76f51;        /* Red for error messages */
+  --color-primary: #003366;      /* Deep blue */
+  --color-secondary: #ff6f61;    /* Coral */
+  --color-tertiary: #6ca0dc;     /* Light blue */
+  --color-bg: #f9f9f9;           /* Light background */
+  --color-text: #222222;         /* Near-black text */
+  --color-muted: #555555;        /* Muted text */
+  --color-border: #dcdcdc;       /* Neutral border */
+  --color-success: #28a745;      /* Green for success messages */
+  --color-error: #dc3545;        /* Red for error messages */
 
   /* Typography */
-  --font-primary: 'Inter', sans-serif;
-  --font-secondary: 'Poppins', sans-serif;
+  --font-primary: 'Roboto', sans-serif;
+  --font-secondary: 'Lora', serif;
   --font-base-size: 1rem;        /* 16px */
   --font-scale-ratio: 1.25;      /* Powers of 1.25 for heading scales */
   --font-small: calc(var(--font-base-size) * 0.875);   /* 14px */
@@ -150,9 +150,10 @@ button {
 .header__container {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--spacing-medium);
 }
 .header__logo img {
   display: block;
@@ -263,14 +264,12 @@ button {
 .hero {
   position: relative;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   text-align: center;
   color: #fff;
   background: linear-gradient(135deg, var(--color-primary), var(--color-tertiary));
   background-image: url('https://via.placeholder.com/1920x1080');
-
 }
 @supports (-webkit-overflow-scrolling: touch) {
   .hero {
@@ -784,17 +783,7 @@ button {
 .footer__container {
   display: grid;
   gap: var(--spacing-large);
-  grid-template-columns: 1fr;
-}
-@media (min-width: var(--breakpoint-md)) {
-  .footer__container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: var(--breakpoint-lg)) {
-  .footer__container {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 .footer__col {
   display: flex;
