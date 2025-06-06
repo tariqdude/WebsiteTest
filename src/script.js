@@ -30,6 +30,7 @@ const applyTheme = (theme) => {
     themeToggle.setAttribute("aria-pressed", theme === "dark");
     themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
   }
+
 };
 
 if (themeToggle) {
