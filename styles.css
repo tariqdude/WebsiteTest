@@ -268,7 +268,7 @@ button {
   justify-content: center;
   text-align: center;
   color: #fff;
-  background: url('/assets/images/hero-bg.webp') center/cover no-repeat fixed;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-tertiary));
 }
 @supports (-webkit-overflow-scrolling: touch) {
   .hero {
