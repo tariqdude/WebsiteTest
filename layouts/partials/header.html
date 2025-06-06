@@ -1,0 +1,11 @@
+<header class="bg-primary text-white">
+  <nav class="container mx-auto flex items-center justify-between p-4">
+    <a href="{{ .Site.BaseURL }}" class="font-bold">Allied Mechanical</a>
+    <button id="mobile-nav-toggle" aria-expanded="false" class="sm:hidden">Menu</button>
+    <ul id="mobile-nav-menu" class="hidden sm:flex space-x-4">
+      {{ range site.Menus.main }}
+      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+  </nav>
+</header>
