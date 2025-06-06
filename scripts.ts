@@ -89,6 +89,7 @@ function initLazyLoad(): void {
    ========================================================================== */
 const cookieBanner: HTMLElement = document.getElementById('cookieConsent') as HTMLElement;
 const acceptCookiesBtn: HTMLButtonElement = document.getElementById('acceptCookies') as HTMLButtonElement;
+const closeCookiesBtn: HTMLButtonElement | null = document.getElementById('closeCookies') as HTMLButtonElement | null;
 
 function setCookie(name: string, value: string, days: number): void {
   const expires = new Date(Date.now() + days * 864e5).toUTCString();
@@ -112,6 +113,12 @@ acceptCookiesBtn.addEventListener('click', () => {
   setCookie('cookieConsent', 'true', 365);
   cookieBanner.classList.remove('show');
 });
+
+if (closeCookiesBtn) {
+  closeCookiesBtn.addEventListener('click', () => {
+    cookieBanner.classList.remove('show');
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   checkCookieConsent();
