@@ -1,6 +1,6 @@
 // Testimonial carousel logic
 
-function initCarousel() {
+export function initCarousel() {
   const track = document.querySelector('.carousel__track');
   if (!track) return;
   const slides = Array.from(track.children);
@@ -74,4 +74,4 @@ function initCarousel() {
   startAutoRotate();
 }
 
-document.addEventListener('DOMContentLoaded', initCarousel);
+export default initCarousel;
