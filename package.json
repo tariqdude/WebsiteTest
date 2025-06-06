@@ -2,7 +2,10 @@
   "name": "allied-construction-site",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"No tests specified\""
+    "test": "echo \"No tests specified\"",
+    "build:css": "cleancss -o styles.min.css styles.css",
+    "build:js": "terser scripts.js -o scripts.min.js -c -m",
+    "build": "npm run build:css && npm run build:js"
   },
   "description": "This project showcases a responsive multi-page website for a fictional construction company. The site is built with vanilla HTML, CSS and JavaScript and includes the following features:",
   "main": "scripts.js",
