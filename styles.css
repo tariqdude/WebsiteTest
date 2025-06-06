@@ -269,8 +269,7 @@ button {
   text-align: center;
   color: #fff;
   background: linear-gradient(135deg, var(--color-primary), var(--color-tertiary));
-  background-size: 200% 200%;
-  animation: gradientMove 10s ease infinite;
+
 }
 @supports (-webkit-overflow-scrolling: touch) {
   .hero {
