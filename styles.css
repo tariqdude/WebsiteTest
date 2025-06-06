@@ -269,6 +269,7 @@ button {
   text-align: center;
   color: #fff;
   background: linear-gradient(135deg, var(--color-primary), var(--color-tertiary));
+
 }
 @supports (-webkit-overflow-scrolling: touch) {
   .hero {
@@ -297,6 +298,11 @@ button {
     opacity: 1;
     transform: translateY(0);
   }
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .hero__title {
   font-family: var(--font-secondary);
