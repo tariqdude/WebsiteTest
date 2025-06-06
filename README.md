@@ -9,6 +9,8 @@ This project showcases a responsive multi-page website for a fictional construct
 
 All images in the demo use remote placeholders so the repository contains only code.
 
+Site metadata such as the production URL, project name and description is stored in `site-config.json`. Update this file to keep details consistent across pages.
+
 ## Running Locally
 
 Open `index.html` in a browser to view the site. For a simple HTTP server you can run:
