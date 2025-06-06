@@ -87,9 +87,11 @@ async function handleSubmit(e) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+export function initForms() {
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', handleSubmit);
   }
-});
+}
+
+export default initForms;
