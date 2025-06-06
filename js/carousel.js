@@ -1,5 +1,5 @@
 // Testimonial carousel logic
-function initCarousel() {
+
   const track = document.querySelector('.carousel__track');
   if (!track)
     return;
@@ -67,4 +67,4 @@ function initCarousel() {
   updateSlide(currentIndex);
   startAutoRotate();
 }
-document.addEventListener('DOMContentLoaded', initCarousel);
+

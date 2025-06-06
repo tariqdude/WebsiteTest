@@ -77,9 +77,11 @@ async function handleSubmit(e) {
     formMessage.classList.add('error');
   }
 }
-document.addEventListener('DOMContentLoaded', () => {
+
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', handleSubmit);
   }
-});
+}
+
+export default initForms;
