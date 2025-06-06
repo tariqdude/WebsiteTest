@@ -401,4 +401,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initLazyLoad();
   initCarousel();
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeToggleBtn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
 });
