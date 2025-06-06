@@ -3,11 +3,14 @@
  * @module carousel
  * Purpose: Initialize Ken Burns testimonials carousel with keyboard & swipe support.
  */
+import { qs, qsa } from './utils.js';
+
 export function initCarousel() {
-  const slides = document.querySelectorAll('.testimonial-slide');
-  const announcer = document.getElementById('testimonial-announcer');
+  const slides = qsa('.testimonial-slide');
+  const announcer = qs('#testimonial-announcer');
   let currentIndex = 0;
   let timer;
+  const shouldAnimate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function showSlide(index) {
     slides.forEach((slide, i) => {
@@ -28,11 +31,14 @@ export function initCarousel() {
   }
 
   function startCarousel() {
-    timer = setInterval(nextSlide, +slides[currentIndex].dataset.delay);
+    if (shouldAnimate && !timer) {
+      timer = setInterval(nextSlide, +slides[currentIndex].dataset.delay);
+    }
   }
 
   function pauseCarousel() {
     clearInterval(timer);
+    timer = null;
   }
 
   slides.forEach(slide => {
@@ -42,12 +48,12 @@ export function initCarousel() {
     slide.addEventListener('focusout', startCarousel);
   });
 
-  document.getElementById('next-testimonial').addEventListener('click', () => {
+  qs('#next-testimonial').addEventListener('click', () => {
     pauseCarousel();
     nextSlide();
     startCarousel();
   });
-  document.getElementById('prev-testimonial').addEventListener('click', () => {
+  qs('#prev-testimonial').addEventListener('click', () => {
     pauseCarousel();
     prevSlide();
     startCarousel();

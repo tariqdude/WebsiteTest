@@ -91,6 +91,24 @@
   --z-animated: 800;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --clr-surface-100: lch(20 4 280);
+    --clr-surface-50: lch(15 3 280);
+    --clr-surface-900: lch(96 3 280);
+    --clr-primary-900: lch(80 20 253);
+    --clr-neutral-500: lch(80 2 280);
+  }
+}
+
+[data-theme="dark"] {
+  --clr-surface-100: lch(20 4 280);
+  --clr-surface-50: lch(15 3 280);
+  --clr-surface-900: lch(96 3 280);
+  --clr-primary-900: lch(80 20 253);
+  --clr-neutral-500: lch(80 2 280);
+}
+
 /* ===================================== */
 /* GLOBAL LAYOUT & RESET */
 /* ===================================== */
@@ -183,6 +201,20 @@ button {
 .hamburger {
   display: none;
 }
+
+.theme-toggle {
+  margin-left: var(--space-3);
+  padding: var(--space-1);
+  font-size: 1.25rem;
+  background: none;
+  border: 2px solid currentColor;
+  border-radius: var(--radius-sm);
+  color: var(--clr-primary-900);
+  cursor: pointer;
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--clr-accent-600);
+}
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -254,6 +286,7 @@ button {
   animation: hue-shift-giant 30s ease infinite alternate-reverse;
   will-change: background;
   z-index: 1;
+  pointer-events: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-background { animation-play-state: paused; }
@@ -1071,6 +1104,19 @@ button {
   border: 0;
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+.visually-hidden.focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  overflow: visible;
+  background: var(--clr-surface-50);
+  color: var(--clr-primary-900);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  z-index: var(--z-floating);
 }
 
 /* SCROLL-TIMELINE & KEYFRAMES FOR HERO */

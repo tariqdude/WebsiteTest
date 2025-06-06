@@ -6,11 +6,10 @@
 
 /* ========================= IMPORTS ========================= */
 import "./paint-worklet.js";         // Registers CSS Paint Worklet for I-Beam
-import "./servicecard.js";                              // Defines <service-card>
-import { initCarousel } from "./carousel.js";               // Testimonials carousel logic
-import { handleForm } from "./contactform.js";                 // Contact form validation/submission
-import { drawMap } from "./mapcanvas.js";                       // Live canvas map rendering
-import { initAnalytics } from "./analytics.js";            // Analytics beacon stub
+import "./servicecard.js"; // Defines <service-card>
+import { initCarousel } from "./carousel.js"; // Testimonials carousel logic
+import { initAnalytics } from "./analytics.js"; // Analytics beacon stub
+import { throttle, rafThrottle, qs, qsa } from "./utils.js"; // Helper utilities
 
 // Toggle console output during development
 const DEBUG_MODE = false;
@@ -18,22 +17,9 @@ const debugLog = (...args) => { if (DEBUG_MODE) console.log(...args); };
 const debugWarn = (...args) => { if (DEBUG_MODE) console.warn(...args); };
 
 /* ========================= HEADER / NAV BEHAVIOR ========================= */
-const header = document.getElementById("header");
+const header = qs("#header");
 let lastScrollY = window.scrollY;
 
-// Generic throttle helper
-const throttle = (fn, limit) => {
-  let lastCall = 0;
-  return (...args) => {
-    const now = Date.now();
-    if (now - lastCall >= limit) {
-      lastCall = now;
-      fn(...args);
-    }
-  };
-};
-
-const fab = document.getElementById("back-to-top");
 const handleScroll = () => {
   const currentScrollY = window.scrollY;
   if (currentScrollY > lastScrollY && currentScrollY > 100) {
@@ -49,9 +35,9 @@ const handleScroll = () => {
 window.addEventListener("scroll", throttle(handleScroll, 100));
 
 /* ========================= MOBILE MENU ========================= */
-const hamburgerBtn = document.getElementById("hamburger-btn");
-const mobileMenu = document.getElementById("mobile-menu");
-const mobileMenuClose = document.getElementById("mobile-menu-close");
+const hamburgerBtn = qs("#hamburger-btn");
+const mobileMenu = qs("#mobile-menu");
+const mobileMenuClose = qs("#mobile-menu-close");
 
 hamburgerBtn.addEventListener("click", () => {
   mobileMenu.classList.add("open");
@@ -93,8 +79,8 @@ mobileMenu.addEventListener("pointerup", (e) => {
   swipeStartX = null;
 });
 
-const sections = document.querySelectorAll("main > section[id]");
-const mobileLinks = mobileMenu.querySelectorAll("a");
+const sections = qsa("main > section[id]");
+const mobileLinks = qsa("a", mobileMenu);
 const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -111,9 +97,9 @@ const sectionObserver = new IntersectionObserver((entries) => {
 sections.forEach(sec => sectionObserver.observe(sec));
 
 /* ========================= HERO ANIMATIONS ========================= */
-const heroTitle = document.querySelector(".hero-title");
-const skipHero = document.getElementById("skip-hero");
-const heroCtaPrimary = document.getElementById("hero-cta-primary");
+const heroTitle = qs(".hero-title");
+const skipHero = qs("#skip-hero");
+const heroCtaPrimary = qs("#hero-cta-primary");
 const rotatingObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -128,7 +114,7 @@ skipHero?.addEventListener('click', () => {
 });
 
 // Magnetic cursor effect on Primary CTA
-document.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", rafThrottle((e) => {
   const rect = heroCtaPrimary.getBoundingClientRect();
   const dx = e.clientX - (rect.left + rect.width / 2);
   const dy = e.clientY - (rect.top + rect.height / 2);
@@ -138,12 +124,12 @@ document.addEventListener("mousemove", (e) => {
   } else {
     heroCtaPrimary.style.transform = "translate(0, 0) scale(1)";
   }
-});
+}));
 
 // Credentials dialog logic
-const credentialsBtn = document.getElementById("hero-cta-credentials");
-const credentialsDialog = document.getElementById("credentials-dialog");
-const credentialsClose = document.getElementById("credentials-close");
+const credentialsBtn = qs("#hero-cta-credentials");
+const credentialsDialog = qs("#credentials-dialog");
+const credentialsClose = qs("#credentials-close");
 credentialsBtn.addEventListener("click", () => {
   credentialsDialog.showModal();
 });
@@ -152,8 +138,8 @@ credentialsClose.addEventListener("click", () => {
 });
 
 /* ========================= ABOUT SECTION ========================= */
-const aboutSection = document.getElementById("about");
-const aboutParagraphs = aboutSection.querySelectorAll(".about-paragraph");
+const aboutSection = qs("#about");
+const aboutParagraphs = qsa(".about-paragraph", aboutSection);
 const aboutObserver = new IntersectionObserver((entries, obs) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -164,7 +150,7 @@ const aboutObserver = new IntersectionObserver((entries, obs) => {
 }, { threshold: 0.5 });
 aboutParagraphs.forEach(p => aboutObserver.observe(p));
 
-const ibeamCanvas = document.getElementById("ibeam-canvas");
+const ibeamCanvas = qs("#ibeam-canvas");
 const ibeamObserver = new IntersectionObserver((entries, obs) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -179,9 +165,9 @@ ibeamObserver.observe(ibeamCanvas);
 // <service-card> components auto-initialize via serviceCard.js
 
 /* ========================= FEATURED PROJECTS ========================= */
-const projectsContainer = document.querySelector(".projects-container");
-const projectCards = projectsContainer.querySelectorAll(".project-card");
-const projectAnnouncer = document.getElementById("project-announcer");
+const projectsContainer = qs(".projects-container");
+const projectCards = qsa(".project-card", projectsContainer);
+const projectAnnouncer = qs("#project-announcer");
 
 projectsContainer.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") {
@@ -210,7 +196,7 @@ projectCards.forEach((card, index) => {
 });
 
 /* ========================= WHY CHOOSE US ========================= */
-const counters = document.querySelectorAll(".counter");
+const counters = qsa(".counter");
 counters.forEach(counter => {
   const span = counter.querySelector(".count");
   const target = +counter.getAttribute("data-target");
@@ -234,7 +220,7 @@ counters.forEach(counter => {
   observer.observe(counter);
 });
 
-const gauges = document.querySelectorAll(".gauge");
+const gauges = qsa(".gauge");
 gauges.forEach(gauge => {
   const circle = gauge.querySelector(".gauge-foreground");
   const percent = +gauge.getAttribute("data-percent");
@@ -258,8 +244,7 @@ gauges.forEach(gauge => {
 initCarousel(); // Initializes Ken Burns carousel from carousel.js
 
 /* ========================= CTA BANNER ========================= */
-const pinnedCta = document.getElementById("pinned-cta");
-const contactSection = document.getElementById("contact");
+
 const pinnedObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     pinnedCta.setAttribute("aria-hidden", entry.isIntersecting ? "false" : "true");
@@ -268,8 +253,23 @@ const pinnedObserver = new IntersectionObserver((entries) => {
 pinnedObserver.observe(contactSection);
 
 /* ========================= CONTACT FORM & MAP ========================= */
-handleForm();  // Initializes form validation & submission logic from contactForm.js
-drawMap();     // Draws procedural grid and pulsing markers on map canvas from mapCanvas.js
+let contactLoaded = false;
+const loadContactModules = async () => {
+  if (contactLoaded) return;
+  contactLoaded = true;
+  const [{ handleForm }, { drawMap }] = await Promise.all([
+    import("./contactform.js"),
+    import("./mapcanvas.js")
+  ]);
+  handleForm();
+  drawMap();
+};
+new IntersectionObserver((entries, observer) => {
+  if (entries.some(e => e.isIntersecting)) {
+    loadContactModules();
+    observer.disconnect();
+  }
+}, { rootMargin: "200px" }).observe(contactSection);
 
 /* ========================= FOOTER & BACK-TO-TOP ========================= */
 fab.addEventListener("click", () => {
