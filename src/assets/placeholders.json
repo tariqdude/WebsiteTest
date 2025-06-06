@@ -1,0 +1,10 @@
+{
+  "HERO_IMG": "assets/images/hero@2x.jpg",
+  "ICON_HVAC": "assets/icons/hvac.svg",
+  "PROJECT01_AVIF": "assets/images/proj1.avif",
+  "ICON_SPINNER": "assets/icons/spinner.svg",
+  "LOGO_SVG": "assets/icons/logo.svg",
+  "ICON_LINKEDIN": "assets/icons/linkedin.svg",
+  "ICON_X": "assets/icons/x.svg",
+  "INTER_VF_WOFF2": "assets/fonts/Inter.var.woff2"
+}
