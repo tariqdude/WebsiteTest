@@ -20,34 +20,6 @@ const debugWarn = (...args) => { if (DEBUG_MODE) console.warn(...args); };
 const header = qs("#header");
 let lastScrollY = window.scrollY;
 
-const fab = qs("#back-to-top");
-const themeToggle = qs("#theme-toggle");
-const metaTheme = qs('meta[name="theme-color"]');
-
-const applyTheme = (theme) => {
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("theme", theme);
-  if (themeToggle) {
-    themeToggle.setAttribute("aria-pressed", theme === "dark");
-    themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
-  }
-  if (metaTheme) {
-    metaTheme.setAttribute("content", theme === "dark" ? "lch(20 4 280)" : "lch(30 20 253)");
-  }
-};
-
-if (themeToggle) {
-  const saved = localStorage.getItem("theme");
-  if (saved) {
-    applyTheme(saved);
-  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    applyTheme("dark");
-  }
-  themeToggle.addEventListener("click", () => {
-    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    applyTheme(next);
-  });
-}
 const handleScroll = () => {
   const currentScrollY = window.scrollY;
   if (currentScrollY > lastScrollY && currentScrollY > 100) {
@@ -272,8 +244,7 @@ gauges.forEach(gauge => {
 initCarousel(); // Initializes Ken Burns carousel from carousel.js
 
 /* ========================= CTA BANNER ========================= */
-const pinnedCta = qs("#pinned-cta");
-const contactSection = qs("#contact");
+
 const pinnedObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     pinnedCta.setAttribute("aria-hidden", entry.isIntersecting ? "false" : "true");

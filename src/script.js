@@ -22,7 +22,6 @@ let lastScrollY = window.scrollY;
 
 const fab = qs("#back-to-top");
 const themeToggle = qs("#theme-toggle");
-const metaTheme = qs('meta[name="theme-color"]');
 
 const applyTheme = (theme) => {
   document.documentElement.setAttribute("data-theme", theme);
@@ -31,9 +30,7 @@ const applyTheme = (theme) => {
     themeToggle.setAttribute("aria-pressed", theme === "dark");
     themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
   }
-  if (metaTheme) {
-    metaTheme.setAttribute("content", theme === "dark" ? "lch(20 4 280)" : "lch(30 20 253)");
-  }
+
 };
 
 if (themeToggle) {
