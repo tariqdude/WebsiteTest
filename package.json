@@ -6,7 +6,7 @@
     "build:css": "cleancss -o styles.min.css styles.css",
     "build:ts": "tsc",
     "build:js": "npm run build:ts && terser scripts.js -o scripts.min.js -c -m",
-    "build": "npm run build:css && npm run build:js",
+    "build": "cleancss -o styles.min.css styles.css && terser scripts.js -o scripts.min.js",
     "lint": "npx -y eslint@8 --config .eslintrc.json ."
   },
   "description": "This project showcases a responsive multi-page website for a fictional construction company. The site is built with vanilla HTML, CSS and JavaScript and includes the following features:",

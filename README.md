@@ -21,9 +21,10 @@ npx serve .
 
 The build process uses [CleanCSS](https://github.com/jakubpawlowicz/clean-css) and
 [Terser](https://github.com/terser/terser) to minify the CSS and JavaScript.
-Execute the following command to produce optimized assets:
+Install the dependencies and run the build command to produce optimized assets:
 
 ```bash
+npm install
 npm run build
 ```
 
