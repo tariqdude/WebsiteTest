@@ -36,27 +36,42 @@ window.addEventListener('scroll', debounce(handleHeaderShrink, 20));
    ========================================================================== */
 const menuToggle = document.getElementById('menu-toggle');
 const mobileNav = document.getElementById('mobile-nav');
+
+function openMobileNav() {
+  menuToggle.setAttribute('aria-expanded', 'true');
+  mobileNav.setAttribute('aria-hidden', 'false');
+  mobileNav.classList.add('nav--open');
+  const items = mobileNav.querySelectorAll('.nav__item');
+  items.forEach((item, i) => {
+    item.style.animationDelay = `${i * 0.1 + 0.2}s`;
+  });
+}
+
+function closeMobileNav() {
+  menuToggle.setAttribute('aria-expanded', 'false');
+  mobileNav.setAttribute('aria-hidden', 'true');
+  mobileNav.classList.remove('nav--open');
+}
+
 menuToggle.addEventListener('click', () => {
-  const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-  menuToggle.setAttribute('aria-expanded', String(!expanded));
-  mobileNav.setAttribute('aria-hidden', String(expanded));
-  mobileNav.classList.toggle('nav--open');
-  if (!expanded) {
-    // Animate each nav item with a slight delay
-    const items = mobileNav.querySelectorAll('.nav__item');
-    items.forEach((item, i) => {
-      item.style.animationDelay = `${i * 0.1 + 0.2}s`;
-    });
+  const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+  if (expanded) {
+    closeMobileNav();
+  } else {
+    openMobileNav();
   }
 });
 
 /* Close mobile nav when a link is clicked */
 mobileNav.querySelectorAll('.nav__link').forEach(link => {
-  link.addEventListener('click', () => {
-    menuToggle.setAttribute('aria-expanded', 'false');
-    mobileNav.setAttribute('aria-hidden', 'true');
-    mobileNav.classList.remove('nav--open');
-  });
+  link.addEventListener('click', closeMobileNav);
+});
+
+/* Close mobile nav when pressing Escape */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+    closeMobileNav();
+  }
 });
 
 /* =============================================================================
