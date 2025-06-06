@@ -959,3 +959,41 @@ button {
     transition: none;
   }
 }
+
+/* --------------------------------------------
+   DARK THEME SUPPORT
+-------------------------------------------- */
+[data-theme='dark'] {
+  --color-bg: #1e2a38;
+  --color-text: #ffffff;
+  --color-primary: #2a9d8f;
+  --color-secondary: #f4a261;
+  --color-muted: #cccccc;
+  --color-border: #555555;
+}
+
+.theme-toggle {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  transition: background var(--transition-fast);
+}
+.theme-toggle:hover,
+.theme-toggle:focus {
+  background: var(--color-tertiary);
+}
+.theme-toggle svg {
+  display: none;
+}
+[data-theme='light'] .theme-toggle .icon-sun {
+  display: block;
+}
+[data-theme='dark'] .theme-toggle .icon-moon {
+  display: block;
+}

@@ -13,7 +13,7 @@
   <meta property="og:title" content="Allied Construction">
   <meta property="og:description" content="Building excellence across Chicago—commercial, residential, industrial. Request a quote today!">
   <meta property="og:image" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAYUlEQVR4nO3PQQ0AIBDAMMC/sJOFCB4Nyapg2zOzfnZ0wKsGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAtY4wLY1jPyLAAAAABJRU5ErkJggg==">
-  <meta property="og:url" content="https://yourdomain.com">
+  <meta property="og:url" content="https://alliedconstruction.example.com">
   <meta property="og:type" content="website">
 
   <!-- Twitter Card -->
@@ -27,6 +27,7 @@
   <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAYUlEQVR4nO3PQQ0AIBDAMMC/sJOFCB4Nyapg2zOzfnZ0wKsGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAtY4wLY1jPyLAAAAABJRU5ErkJggg==" sizes="16x16" type="image/png">
   <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAYUlEQVR4nO3PQQ0AIBDAMMC/sJOFCB4Nyapg2zOzfnZ0wKsGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAtY4wLY1jPyLAAAAABJRU5ErkJggg==" sizes="180x180">
   <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1e2a38">
 
   <!-- Preconnect & Preload -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -282,6 +283,8 @@
   <header class="header" role="banner" id="site-header">
     <div class="header__container">
 
+      <a href="/" class="header__logo" aria-label="Allied Construction">
+        <img src="https://via.placeholder.com/150x40?text=Logo" alt="Allied Construction logo" width="150" height="40">
       </a>
       <nav id="main-nav" class="nav" role="navigation">
         <ul class="nav__list">
@@ -292,10 +295,14 @@
           <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
         </ul>
       </nav>
-      <button id="menu-toggle" class="header__toggle" aria-label="Open menu" aria-expanded="false">
+      <button id="menu-toggle" class="header__toggle" aria-label="Toggle navigation" aria-controls="mobile-nav" aria-expanded="false">
         <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M3 12h18M3 6h18M3 18h18" stroke="#333" stroke-width="2" stroke-linecap="round"/>
         </svg>
+      </button>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="24" height="24" aria-hidden="true"><use href="#icon-sun"/></svg>
+        <svg class="icon-moon" width="24" height="24" aria-hidden="true"><use href="#icon-moon"/></svg>
       </button>
     </div>
   </header>
@@ -311,10 +318,11 @@
     </ul>
   </nav>
 
+<main id="main-content">
   <!-- HERO SECTION -->
-  <section id="hero" class="hero">
+  <section id="hero" class="hero" style="background-image:url('https://via.placeholder.com/1920x1080');">
     <div class="hero__overlay"></div>
-    <div class="hero__content" id="main-content">
+    <div class="hero__content">
       <h1 class="hero__title">Building Your Vision, From Foundation to Finish</h1>
       <p class="hero__subtitle">Commercial ⋅ Residential ⋅ Industrial Construction</p>
       <div class="hero__cta">
@@ -386,7 +394,7 @@
     <div class="projects__grid">
       <article class="project-card" data-category="residential">
         <picture>
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAYUlEQVR4nO3PQQ0AIBDAMMC/sJOFCB4Nyapg2zOzfnZ0wKsGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAtY4wLY1jPyLAAAAABJRU5ErkJggg==" alt="Downtown Office Tower" width="400" height="300" loading="lazy" class="project-card__img">
+          <img src="https://via.placeholder.com/400x300?text=Project+1" alt="Downtown Office Tower" width="400" height="300" loading="lazy" class="project-card__img">
         </picture>
         <div class="project-card__overlay">
           <h3 class="project-card__title">Downtown Office Tower</h3>
@@ -395,7 +403,7 @@
       </article>
       <article class="project-card" data-category="commercial">
         <picture>
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAYUlEQVR4nO3PQQ0AIBDAMMC/sJOFCB4Nyapg2zOzfnZ0wKsGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAtY4wLY1jPyLAAAAABJRU5ErkJggg==" alt="Luxury Multi-Family Residences" width="400" height="300" loading="lazy" class="project-card__img">
+          <img src="https://via.placeholder.com/400x300?text=Project+2" alt="Luxury Multi-Family Residences" width="400" height="300" loading="lazy" class="project-card__img">
         </picture>
         <div class="project-card__overlay">
           <h3 class="project-card__title">Luxury Multi-Family Residences</h3>
@@ -404,7 +412,7 @@
       </article>
       <article class="project-card" data-category="industrial">
         <picture>
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAAYUlEQVR4nO3PQQ0AIBDAMMC/sJOFCB4Nyapg2zOzfnZ0wKsGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAa0BrQGtAtY4wLY1jPyLAAAAABJRU5ErkJggg==" alt="High-Tech Manufacturing Facility" width="400" height="300" loading="lazy" class="project-card__img">
+          <img src="https://via.placeholder.com/400x300?text=Project+3" alt="High-Tech Manufacturing Facility" width="400" height="300" loading="lazy" class="project-card__img">
         </picture>
         <div class="project-card__overlay">
           <h3 class="project-card__title">High-Tech Manufacturing Facility</h3>
@@ -547,6 +555,8 @@
     </div>
   </section>
 
+</main>
+<a href="#main-nav" class="skip-link">Back to navigation</a>
   <!-- FOOTER SECTION -->
   <footer class="footer" role="contentinfo">
     <div class="footer__container">
@@ -573,12 +583,16 @@
       <div class="footer__col footer__col--social">
         <h4 class="footer__heading">Follow Us</h4>
         <ul class="footer__social-list">
+          <li><a href="https://facebook.com/AlliedConstruction" aria-label="Facebook"><svg width="24" height="24" aria-hidden="true"><use href="#icon-fb"/></svg></a></li>
+          <li><a href="https://twitter.com/AlliedBuild" aria-label="Twitter"><svg width="24" height="24" aria-hidden="true"><use href="#icon-tw"/></svg></a></li>
+          <li><a href="https://instagram.com/AlliedConstruction" aria-label="Instagram"><svg width="24" height="24" aria-hidden="true"><use href="#icon-ig"/></svg></a></li>
+          <li><a href="https://linkedin.com/company/alliedconstruction" aria-label="LinkedIn"><svg width="24" height="24" aria-hidden="true"><use href="#icon-li"/></svg></a></li>
 
         </ul>
       </div>
     </div>
     <div class="footer__bottom-bar">
-      <p class="footer__bottom-text">Built in Chicago • &copy; 2025 Allied Construction</p>
+      <p class="footer__bottom-text">© 2025 Allied Construction, Chicago, IL</p>
     </div>
   </footer>
 
@@ -593,6 +607,7 @@
   <!-- COOKIE CONSENT BANNER -->
   <div id="cookieConsent" class="cookie-consent" aria-live="polite">
     <p>We use cookies to improve your experience. By continuing, you agree to our <a href="/privacy-policy" class="cookie-consent__link">Privacy Policy</a>.</p>
+    <button id="closeCookies" class="cookie-consent__close" aria-label="Dismiss"><svg width="16" height="16" aria-hidden="true"><use href="#icon-check"/></svg></button>
     <button id="acceptCookies" class="btn btn--primary">Accept</button>
   </div>
 
@@ -611,6 +626,22 @@
   <script src="scripts.js" defer></script>
   <!-- SVG Icons -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="icon-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <g stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </g>
+    </symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+    </symbol>
     <symbol id="icon-star" viewBox="0 0 24 24">
       <polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9 12 2"/>
     </symbol>

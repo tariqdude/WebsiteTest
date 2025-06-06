@@ -4,7 +4,7 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/styles.css',
   '/scripts.js',
-  '/offline.html' // Create a simple offline fallback page
+  '/offline.html'
 ];
 
 self.addEventListener('install', event => {
