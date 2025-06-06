@@ -4,9 +4,6 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/styles.css',
   '/scripts.js',
-  '/assets/fonts/Inter-Regular.woff2',
-  '/assets/images/logo-footer.svg',
-  '/assets/images/hero-bg.webp',
   '/offline.html' // Create a simple offline fallback page
 ];
 
