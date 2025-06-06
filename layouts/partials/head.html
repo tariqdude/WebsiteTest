@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .Title }}</title>
+  <meta name="description" content="{{ with .Params.description }}{{ . }}{{ end }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ end }}">
+  <meta property="og:image" content="{{ with .Params.images }}{{ index . 0 }}{{ end }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="{{ resources.Get "css/main.css" | postCSS | minify | fingerprint | relURL }}">
+  <script defer src="/assets/js/main.js"></script>
+  <!-- Google Analytics placeholder -->
+  <script defer>/* GA4 snippet placeholder */</script>
+  <link rel="preload" href="/assets/fonts/placeholder.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body class="antialiased">
+  <a href="#content" class="sr-only focus:not-sr-only">Skip to content</a>
