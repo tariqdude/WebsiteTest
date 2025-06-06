@@ -1,0 +1,10 @@
+@use '01_base/reset';
+@use '01_base/variables';
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.hero {
+  background: url('__HERO_IMG__') center/cover no-repeat;
+  min-height: 100vh;
+}

@@ -1,0 +1,50 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.5;
+}
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-slate);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+:root {
+  --color-slate: #202326;
+  --color-orange: #FF6B00;
+  --color-steel: #6F7C8D;
+  --color-white: #FFFFFF;
+  --shadow-default: rgba(0,0,0,0.08);
+  --space-unit: 1rem;
+  --e1: 0 1px 3px var(--shadow-default);
+  --e2: 0 3px 6px var(--shadow-default);
+  --e3: 0 6px 12px var(--shadow-default);
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.hero {
+  background: url("__HERO_IMG__") center/cover no-repeat;
+  min-height: 100vh;
+}
+
+/*# sourceMappingURL=style.css.map */
