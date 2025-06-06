@@ -1,1 +1,0 @@
-// Deferred testimonials slider initialization
