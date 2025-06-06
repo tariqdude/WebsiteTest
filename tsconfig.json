@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "es2020",
+    "strict": false,
+    "noImplicitAny": false,
+    "rootDir": "./",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "./scripts.ts",
+    "./js/**/*.ts"
+  ]
+}
