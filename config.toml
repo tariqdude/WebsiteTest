@@ -1,0 +1,7 @@
+baseURL = "https://GITHUB_USERNAME.github.io/WebsiteTest/"
+publishDir = "public"
+uglyURLs = false
+
+[module]
+  [[module.imports]]
+    path = "github.com/gohugoio/hugo-mod-jslibs/tailwindcss/v3"

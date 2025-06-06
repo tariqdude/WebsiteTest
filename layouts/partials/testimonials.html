@@ -1,0 +1,16 @@
+<section id="testimonials" class="py-12">
+  <div class="container mx-auto px-4">
+    <div class="swiper" data-module="testimonials">
+      <div class="swiper-wrapper">
+        {{ range seq 1 3 }}
+        <div class="swiper-slide p-6 text-center">
+          <img src="/assets/avatar-{{ . }}.jpg" alt="" class="mx-auto rounded-full h-16 w-16 mb-4" loading="lazy">
+          <blockquote class="italic">"Testimonial {{ . }} goes here."</blockquote>
+          <p class="mt-2 font-semibold">Author {{ . }}</p>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  <script defer src="/assets/js/testimonials.js"></script>
+</section>
