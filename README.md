@@ -26,8 +26,9 @@ Execute the following command to produce optimized assets:
 ```bash
 npm run build
 ```
+This generates `styles.min.css` and `scripts.min.js` in the project root.
 
-This generates `styles.min.css` and `scripts.min.js` in the project root. Reference these files in `index.html` when deploying to production.
+These minified files are now referenced directly in `index.html` for improved performance.
 
 The project uses a minimal `package.json` so `npm test` returns success:
 
