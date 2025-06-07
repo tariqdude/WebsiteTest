@@ -1,4 +1,8 @@
 (() => {
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    document.body.setAttribute('data-theme', saved);
+  }
   const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -42,6 +46,7 @@
     themeBtn.addEventListener('click', () => {
       const theme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
     });
   }
 })();

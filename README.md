@@ -17,3 +17,4 @@ This project is a fully static, responsive landing page ready for GitHub Pages d
 
 ## Deployment
 Enable **GitHub Pages** from the repository settings, choosing the main branch. The included workflow `deploy.yml` can automate publishing when changes are pushed to `main`.
+
