@@ -16,6 +16,7 @@
 
   <link rel="preload" href="/assets/css/main.css" as="style">
   <link rel="stylesheet" href="/assets/css/main.css">
+  <script defer src="/assets/js/lottie.min.js"></script>
   <script defer src="/assets/js/main.js"></script>
   <script>
     if (localStorage.getItem('analyticsConsent') === 'true') {
@@ -53,7 +54,7 @@
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="p-6 bg-white rounded-lg shadow-lg fade-target">
           <div class="mb-4">
-            <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l1.176 3.618h3.806l-3.082 2.243 1.176 3.618L12 9.236l-3.076 2.243 1.176-3.618L7.018 5.618h3.806L12 2z"/></svg>
+            <div id="feature-anim" class="w-16 h-16 mx-auto"></div>
           </div>
           <h3 class="text-xl font-bold mb-2">Fast Launch</h3>
           <p class="text-gray-600">Launch your project in record time with us.</p>
