@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Acme Solutions - Empowering Your Business</title>
+    <title>BuildRight Construction - Building Your Future</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a237e;
+            --primary: #d2691e;
             --secondary: #f5f7fa;
-            --accent: #ffb300;
-            --dark: #232946;
+            --accent: #fbbf24;
+            --dark: #22223b;
             --light: #fff;
-            --gradient: linear-gradient(90deg, #1a237e 60%, #ffb300 100%);
+            --gradient: linear-gradient(90deg, #d2691e 60%, #fbbf24 100%);
             --success: #22c55e;
             --danger: #ef4444;
-            --shadow: 0 4px 32px rgba(26,35,126,0.10);
+            --shadow: 0 4px 32px rgba(210,105,30,0.10);
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --radius-sm: 10px;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -32,7 +35,8 @@
             text-align: center;
             box-shadow: var(--shadow);
             position: relative;
-            border-radius: 0 0 32px 32px;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            overflow: hidden;
         }
         .header-cta {
             position: absolute;
@@ -48,11 +52,12 @@
             text-decoration: none;
             font-size: 1.08rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
         }
         .header-cta a:hover {
             background: #ffe08a;
             color: var(--primary);
+            box-shadow: 0 4px 16px rgba(251,191,36,0.18);
         }
         header h1 {
             font-size: 3.2rem;
@@ -153,7 +158,7 @@
             padding: 90px 24px 60px 24px;
             background: var(--gradient);
             color: var(--light);
-            border-radius: 0 0 40px 40px;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
             box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
@@ -162,6 +167,7 @@
             max-width: 540px;
             margin-right: 64px;
             z-index: 1;
+            text-align: left;
         }
         .hero h2 {
             font-size: 2.7rem;
@@ -176,10 +182,14 @@
         }
         .hero img {
             max-width: 370px;
-            border-radius: 20px;
+            border-radius: var(--radius-md);
             box-shadow: 0 8px 36px rgba(0,0,0,0.13);
             border: 5px solid var(--light);
             z-index: 1;
+            transition: transform 0.3s;
+        }
+        .hero img:hover {
+            transform: scale(1.04) rotate(-2deg);
         }
         .hero-bg-shape {
             position: absolute;
@@ -201,13 +211,14 @@
             font-size: 1.18rem;
             font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 2px 12px rgba(0,0,0,0.09);
             letter-spacing: 0.7px;
         }
         .cta-btn:hover {
             background: #ffe08a;
             transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 24px rgba(251,191,36,0.18);
         }
         .stats-bar {
             display: flex;
@@ -225,6 +236,11 @@
             text-align: center;
             min-width: 130px;
             margin-bottom: 16px;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .stat:hover {
+            box-shadow: 0 6px 24px rgba(210,105,30,0.13);
+            transform: translateY(-4px) scale(1.03);
         }
         .stat strong {
             display: block;
@@ -266,7 +282,7 @@
         }
         .feature-card {
             background: var(--light);
-            border-radius: 20px;
+            border-radius: var(--radius-md);
             box-shadow: 0 2px 18px rgba(0,0,0,0.07);
             padding: 44px 32px;
             flex: 1 1 270px;
@@ -290,7 +306,7 @@
         }
         .feature-card:hover {
             transform: translateY(-12px) scale(1.045);
-            box-shadow: 0 10px 36px rgba(26,35,126,0.13);
+            box-shadow: 0 10px 36px rgba(210,105,30,0.13);
         }
         .feature-card i {
             font-size: 3.1rem;
@@ -384,7 +400,7 @@
         }
         .pricing-card.featured {
             border-bottom: 5px solid var(--primary);
-            box-shadow: 0 8px 32px rgba(26,35,126,0.13);
+            box-shadow: 0 8px 32px rgba(210,105,30,0.13);
             transform: scale(1.04);
         }
         .pricing-card h3 {
@@ -439,6 +455,10 @@
             border-radius: 18px;
             box-shadow: 0 6px 28px rgba(0,0,0,0.11);
             border: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        .about img:hover {
+            transform: scale(1.03) rotate(1deg);
         }
         .about-content {
             flex: 1 1 340px;
@@ -515,7 +535,7 @@
         }
         .team-member:hover {
             transform: translateY(-8px) scale(1.04);
-            box-shadow: 0 8px 28px rgba(26,35,126,0.10);
+            box-shadow: 0 8px 28px rgba(210,105,30,0.10);
         }
         .team-member img {
             width: 82px;
@@ -696,7 +716,7 @@
             transition: background 0.2s, transform 0.2s;
         }
         .contact-form button:hover {
-            background: #0d1333;
+            background: #a0521d;
             transform: translateY(-2px) scale(1.03);
         }
         .form-message {
@@ -796,6 +816,7 @@
             .hero-content {
                 margin-right: 0;
                 margin-bottom: 36px;
+                text-align: center;
             }
             .hero {
                 flex-direction: column;
@@ -889,6 +910,18 @@
                 text-align: center;
             }
         }
+        #features, #about, #team {
+            background: #f8fafc;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(210,105,30,0.03);
+        }
+        .feature-card, .pricing-card {
+            cursor: pointer;
+        }
+        a:focus, button:focus, input:focus, textarea:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
@@ -896,15 +929,15 @@
     <header>
         <button class="nav-toggle" aria-label="Open navigation" id="nav-toggle"><i class="fas fa-bars"></i></button>
         <div class="header-cta">
-            <a href="#contact"><i class="fas fa-paper-plane"></i> Request a Demo</a>
+            <a href="#contact"><i class="fas fa-hard-hat"></i> Request a Quote</a>
         </div>
-        <h1>Acme Solutions</h1>
-        <p>Empowering Your Business with Innovative Digital Solutions</p>
+        <h1>BuildRight Construction</h1>
+        <p>Building Your Future, One Project at a Time</p>
     </header>
     <nav>
         <div class="nav-links" id="nav-links">
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
+            <a href="#features">Services</a>
+            <a href="#projects">Projects</a>
             <a href="#about">About</a>
             <a href="#team">Team</a>
             <a href="#testimonials">Testimonials</a>
@@ -913,21 +946,21 @@
     </nav>
     <section class="hero">
         <div class="hero-content">
-            <h2>Grow Faster with Acme Solutions</h2>
-            <p>We help businesses streamline operations, boost productivity, and reach new heights with tailored software and digital strategies.</p>
-            <a href="#contact"><button class="cta-btn">Get Started</button></a>
+            <h2>Quality Construction for Lasting Results</h2>
+            <p>From residential homes to commercial spaces, BuildRight delivers excellence, safety, and reliability in every build.</p>
+            <a href="#contact"><button class="cta-btn">Get a Free Estimate</button></a>
             <div class="stats-bar" id="stats-bar">
                 <div class="stat">
-                    <strong id="stat-clients">0 <i class="fas fa-arrow-up"></i></strong>
-                    <span>Clients</span>
+                    <strong id="stat-projects">0 <i class="fas fa-arrow-up"></i></strong>
+                    <span>Projects Completed</span>
                 </div>
                 <div class="stat">
-                    <strong id="stat-satisfaction">0% <i class="fas fa-arrow-up"></i></strong>
-                    <span>Satisfaction</span>
+                    <strong id="stat-safety">0% <i class="fas fa-arrow-up"></i></strong>
+                    <span>Safety Record</span>
                 </div>
                 <div class="stat">
                     <strong id="stat-years">0 <i class="fas fa-arrow-up"></i></strong>
-                    <span>Years Experience</span>
+                    <span>Years in Business</span>
                 </div>
                 <div class="stat">
                     <strong id="stat-support">24/7</strong>
@@ -935,176 +968,174 @@
                 </div>
             </div>
         </div>
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Business Growth">
+        <img src="https://images.unsplash.com/photo-1503389152951-9c3d8b6e9c94?auto=format&fit=crop&w=600&q=80" alt="Construction Site">
         <div class="hero-bg-shape" aria-hidden="true"></div>
     </section>
     <section id="features">
-        <h2>Our Features</h2>
+        <h2>Our Services</h2>
         <div class="features">
-            <div class="feature-card">
-                <span class="badge">New</span>
-                <i class="fas fa-chart-line"></i>
-                <h3>Business Analytics</h3>
-                <p>Gain actionable insights with real-time analytics and reporting dashboards.</p>
+            <div class="feature-card" tabindex="0">
+                <span class="badge">Popular</span>
+                <i class="fas fa-home"></i>
+                <h3>Residential Construction</h3>
+                <p>Custom homes, renovations, and additions built to your vision and standards.</p>
                 <ul>
-                    <li>Customizable reports</li>
-                    <li>Data visualization</li>
-                    <li>Export to Excel/PDF</li>
-                    <li>AI-powered predictions</li>
+                    <li>New Home Builds</li>
+                    <li>Remodeling & Additions</li>
+                    <li>Energy-Efficient Upgrades</li>
+                    <li>Design-Build Services</li>
                 </ul>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-cogs"></i>
-                <h3>Automation Tools</h3>
-                <p>Automate repetitive tasks and focus on what matters most to your business.</p>
+            <div class="feature-card" tabindex="0">
+                <i class="fas fa-building"></i>
+                <h3>Commercial Construction</h3>
+                <p>From offices to retail, we deliver functional, modern, and safe commercial spaces.</p>
                 <ul>
-                    <li>Workflow automation</li>
-                    <li>Integrations (Slack, Zapier, etc.)</li>
-                    <li>Scheduled tasks</li>
-                    <li>Custom triggers</li>
+                    <li>Office Buildings</li>
+                    <li>Retail Spaces</li>
+                    <li>Warehouses</li>
+                    <li>Tenant Improvements</li>
                 </ul>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-users"></i>
-                <h3>Team Collaboration</h3>
-                <p>Enhance teamwork with integrated communication and project management tools.</p>
+            <div class="feature-card" tabindex="0">
+                <i class="fas fa-tools"></i>
+                <h3>Renovation & Remodeling</h3>
+                <p>Transform your property with expert renovations and upgrades.</p>
                 <ul>
-                    <li>Shared calendars</li>
-                    <li>Task assignments</li>
-                    <li>Real-time chat</li>
-                    <li>File sharing</li>
+                    <li>Kitchen & Bath Remodels</li>
+                    <li>Basement Finishing</li>
+                    <li>Exterior Upgrades</li>
+                    <li>ADA Compliance</li>
                 </ul>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-lock"></i>
-                <h3>Secure Solutions</h3>
-                <p>Protect your data with enterprise-grade security and compliance features.</p>
+            <div class="feature-card" tabindex="0">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Project Management</h3>
+                <p>End-to-end project oversight for quality, safety, and on-time delivery.</p>
                 <ul>
-                    <li>2FA & SSO</li>
-                    <li>GDPR compliant</li>
-                    <li>Daily backups</li>
-                    <li>Role-based access</li>
+                    <li>Permitting & Inspections</li>
+                    <li>Budget & Timeline Control</li>
+                    <li>Quality Assurance</li>
+                    <li>Safety Management</li>
                 </ul>
             </div>
         </div>
         <div class="feature-table-wrap">
-            <table class="feature-table" aria-label="Feature Comparison Table">
+            <table class="feature-table" aria-label="Service Comparison Table">
                 <thead>
                     <tr>
-                        <th>Feature</th>
-                        <th>Starter</th>
-                        <th>Pro</th>
-                        <th>Enterprise</th>
+                        <th>Service</th>
+                        <th>Residential</th>
+                        <th>Commercial</th>
+                        <th>Renovation</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Analytics Dashboard</td>
+                        <td>Custom Design</td>
                         <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-check"></i></td>
                     </tr>
                     <tr>
-                        <td>Automation</td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Team Collaboration</td>
+                        <td>Project Management</td>
                         <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-check"></i></td>
                     </tr>
                     <tr>
-                        <td>Advanced Security</td>
-                        <td><i class="fas fa-times"></i></td>
+                        <td>Permitting</td>
+                        <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-check"></i></td>
                     </tr>
                     <tr>
-                        <td>Priority Support</td>
+                        <td>Energy Efficiency</td>
+                        <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-times"></i></td>
+                        <td><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>ADA Compliance</td>
                         <td><i class="fas fa-times"></i></td>
+                        <td><i class="fas fa-check"></i></td>
                         <td><i class="fas fa-check"></i></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </section>
-    <section id="pricing" class="pricing-section">
-        <h2>Pricing Plans</h2>
+    <section id="projects" class="pricing-section">
+        <h2>Featured Projects</h2>
         <div class="pricing-cards">
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <div class="price">$19<span style="font-size:1rem;">/mo</span></div>
+            <div class="pricing-card" tabindex="0">
+                <h3>Modern Family Home</h3>
+                <div class="price">Residential</div>
                 <ul>
-                    <li>Analytics Dashboard</li>
-                    <li>Team Collaboration</li>
-                    <li>Email Support</li>
+                    <li>3,500 sq ft custom build</li>
+                    <li>Energy Star certified</li>
+                    <li>Smart home integration</li>
                 </ul>
-                <button class="cta-btn" onclick="window.location='#contact'">Choose Starter</button>
-                <div class="note">Best for small teams</div>
+                <button class="cta-btn" onclick="window.location='#contact'">Request Similar</button>
+                <div class="note">Completed 2023</div>
             </div>
-            <div class="pricing-card featured">
-                <h3>Pro</h3>
-                <div class="price">$49<span style="font-size:1rem;">/mo</span></div>
+            <div class="pricing-card featured" tabindex="0">
+                <h3>Downtown Office Tower</h3>
+                <div class="price">Commercial</div>
                 <ul>
-                    <li>All Starter features</li>
-                    <li>Automation Tools</li>
-                    <li>Advanced Security</li>
-                    <li>Priority Support</li>
+                    <li>12-story steel structure</li>
+                    <li>LEED Gold certified</li>
+                    <li>Open-plan workspaces</li>
                 </ul>
-                <button class="cta-btn" onclick="window.location='#contact'">Choose Pro</button>
-                <div class="note">Most Popular</div>
+                <button class="cta-btn" onclick="window.location='#contact'">Request Similar</button>
+                <div class="note">Award Winner</div>
             </div>
-            <div class="pricing-card">
-                <h3>Enterprise</h3>
-                <div class="price">Custom</div>
+            <div class="pricing-card" tabindex="0">
+                <h3>Historic Renovation</h3>
+                <div class="price">Renovation</div>
                 <ul>
-                    <li>All Pro features</li>
-                    <li>Dedicated Manager</li>
-                    <li>Custom Integrations</li>
-                    <li>24/7 Support</li>
+                    <li>Restored 1920s building</li>
+                    <li>Modern amenities</li>
+                    <li>Preserved original facade</li>
                 </ul>
-                <button class="cta-btn" onclick="window.location='#contact'">Contact Sales</button>
-                <div class="note">For large organizations</div>
+                <button class="cta-btn" onclick="window.location='#contact'">Request Similar</button>
+                <div class="note">Completed 2022</div>
             </div>
         </div>
     </section>
     <section id="about">
-        <h2>About Us</h2>
+        <h2>About BuildRight</h2>
         <div class="about">
-            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Acme Solutions Team">
+            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="BuildRight Construction Team">
             <div class="about-content">
                 <h3>Who We Are</h3>
-                <p>Acme Solutions is a team of passionate professionals dedicated to helping businesses thrive in the digital era. With over a decade of experience, we deliver custom software, consulting, and support to clients worldwide.</p>
+                <p>BuildRight Construction is a trusted name in the industry, known for quality craftsmanship, integrity, and customer satisfaction. We bring decades of experience to every project, big or small.</p>
                 <ul>
-                    <li>10+ years of industry experience</li>
-                    <li>200+ satisfied clients</li>
-                    <li>Award-winning support</li>
-                    <li>Global reach, local expertise</li>
+                    <li>20+ years of construction excellence</li>
+                    <li>500+ projects delivered</li>
+                    <li>Licensed, bonded, and insured</li>
+                    <li>Community-focused and eco-friendly</li>
                 </ul>
                 <div class="about-values">
                     <div class="value-card">
-                        <i class="fas fa-lightbulb"></i>
-                        <h4>Innovation</h4>
-                        <div>We embrace new ideas and technologies to deliver the best solutions.</div>
+                        <i class="fas fa-hard-hat"></i>
+                        <h4>Safety First</h4>
+                        <div>We prioritize safety for our team and your property on every job.</div>
                     </div>
                     <div class="value-card">
                         <i class="fas fa-handshake"></i>
                         <h4>Integrity</h4>
-                        <div>Honesty and transparency are at the core of everything we do.</div>
+                        <div>Honest communication and transparent pricing, always.</div>
                     </div>
                     <div class="value-card">
-                        <i class="fas fa-users"></i>
-                        <h4>Customer Focus</h4>
-                        <div>Your success is our mission. We go the extra mile for our clients.</div>
+                        <i class="fas fa-leaf"></i>
+                        <h4>Sustainability</h4>
+                        <div>Eco-friendly practices and materials for a better tomorrow.</div>
                     </div>
                     <div class="value-card">
                         <i class="fas fa-award"></i>
-                        <h4>Excellence</h4>
-                        <div>We strive for excellence in every project, big or small.</div>
+                        <h4>Quality</h4>
+                        <div>We stand behind our work with a satisfaction guarantee.</div>
                     </div>
                 </div>
             </div>
@@ -1113,40 +1144,38 @@
     <section id="team" class="team">
         <h2>Meet Our Team</h2>
         <div class="team-list">
-            <div class="team-member">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Photo of John Doe">
-                <h4>John Doe</h4>
-                <span>CEO & Founder</span>
-                <div class="bio">Visionary leader with 15+ years in tech and business strategy.</div>
+            <div class="team-member" tabindex="0">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Photo of Tom Builder">
+                <h4>Tom Builder</h4>
+                <span>Founder & CEO</span>
+                <div class="bio">30+ years in construction, passionate about quality and safety.</div>
                 <div class="social-mini">
                     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-            <div class="team-member">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Photo of Jane Smith">
-                <h4>Jane Smith</h4>
-                <span>Lead Developer</span>
-                <div class="bio">Full-stack expert, passionate about scalable, robust solutions.</div>
+            <div class="team-member" tabindex="0">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Photo of Lisa Mason">
+                <h4>Lisa Mason</h4>
+                <span>Project Manager</span>
+                <div class="bio">Expert in project delivery and client communication.</div>
                 <div class="social-mini">
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
-            <div class="team-member">
-                <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Photo of Mike Brown">
-                <h4>Mike Brown</h4>
-                <span>Product Manager</span>
-                <div class="bio">Drives product vision and ensures customer needs are met.</div>
+            <div class="team-member" tabindex="0">
+                <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Photo of Mike Crane">
+                <h4>Mike Crane</h4>
+                <span>Site Supervisor</span>
+                <div class="bio">Ensures every jobsite is safe and efficient.</div>
                 <div class="social-mini">
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-            <div class="team-member">
-                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Photo of Emily White">
-                <h4>Emily White</h4>
-                <span>Customer Success</span>
-                <div class="bio">Dedicated to client satisfaction and long-term partnerships.</div>
+            <div class="team-member" tabindex="0">
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Photo of Emily Stone">
+                <h4>Emily Stone</h4>
+                <span>Lead Architect</span>
+                <div class="bio">Designs innovative, functional spaces for every client.</div>
                 <div class="social-mini">
                     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
@@ -1158,20 +1187,20 @@
             <h2>What Our Clients Say</h2>
             <div class="testimonial-list" id="testimonial-list">
                 <div class="testimonial" style="display:block;">
-                    Acme Solutions transformed our workflow and helped us double our productivity!
-                    <strong>- Sarah L., Operations Manager</strong>
+                    BuildRight exceeded our expectations. The team was professional, timely, and the quality is outstanding!
+                    <strong>- Mark H., Homeowner</strong>
                 </div>
                 <div class="testimonial" style="display:none;">
-                    Their team is responsive, knowledgeable, and truly cares about our success.
-                    <strong>- James T., CEO</strong>
+                    Our office build was seamless from start to finish. Highly recommend BuildRight for any commercial project.
+                    <strong>- Sarah P., Business Owner</strong>
                 </div>
                 <div class="testimonial" style="display:none;">
-                    The automation tools saved us countless hours. Highly recommended!
-                    <strong>- Priya S., Project Lead</strong>
+                    The renovation brought new life to our historic property. Thank you for your attention to detail!
+                    <strong>- Carlos R., Property Manager</strong>
                 </div>
                 <div class="testimonial" style="display:none;">
-                    We love the analytics dashboard. It gives us the clarity we need to make decisions.
-                    <strong>- Alex R., Marketing Director</strong>
+                    Safety and communication were top-notch. We felt informed and confident every step of the way.
+                    <strong>- Priya S., Facility Director</strong>
                 </div>
             </div>
             <div class="testimonial-carousel-controls">
@@ -1193,21 +1222,21 @@
     </section>
     <section class="newsletter">
         <h3>Subscribe to Our Newsletter</h3>
-        <p>Get the latest updates, tips, and exclusive offers straight to your inbox.</p>
+        <p>Get construction tips, project updates, and special offers straight to your inbox.</p>
         <form id="newsletter-form" autocomplete="off" aria-label="Newsletter Subscription">
             <input type="email" id="newsletter-email" placeholder="Your email address" required aria-label="Email address">
             <button type="submit" aria-label="Subscribe to newsletter"><i class="fas fa-envelope"></i> Subscribe</button>
         </form>
         <div id="newsletter-message" role="status" aria-live="polite"></div>
         <div class="newsletter-stats">
-            <i class="fas fa-users"></i> <span id="newsletter-count">3,500+</span> subscribers
+            <i class="fas fa-users"></i> <span id="newsletter-count">2,000+</span> subscribers
         </div>
     </section>
     <section id="contact">
         <h2>Contact Us</h2>
         <form class="contact-form" id="contact-form" autocomplete="off" aria-label="Contact Form">
             <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
-            <h3>Let's Work Together</h3>
+            <h3>Let's Build Together</h3>
             <label for="contact-name">Name</label>
             <input type="text" id="contact-name" name="name" required>
             <label for="contact-email">Email</label>
@@ -1220,12 +1249,12 @@
         </form>
     </section>
     <footer>
-        &copy; 2024 Acme Solutions. All rights reserved.
+        &copy; 2024 BuildRight Construction. All rights reserved.
         <div class="social-links">
             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
     </footer>
     <script>
@@ -1263,9 +1292,9 @@
             requestAnimationFrame(animate);
         }
         window.addEventListener('DOMContentLoaded', () => {
-            animateStat('stat-clients', 200, '', 1200);
-            animateStat('stat-satisfaction', 98, '%', 1200);
-            animateStat('stat-years', 10, '', 1200);
+            animateStat('stat-projects', 500, '', 1200);
+            animateStat('stat-safety', 100, '%', 1200);
+            animateStat('stat-years', 20, '', 1200);
         });
 
         // Testimonial carousel
@@ -1364,7 +1393,7 @@
             document.getElementById('newsletter-form').reset();
             // Animate subscriber count
             const countEl = document.getElementById('newsletter-count');
-            let current = 3500;
+            let current = parseInt(countEl.textContent.replace(/[^0-9]/g, '')) || 2000;
             let end = current + 1;
             let startTime = null;
             function animateCount(ts) {
