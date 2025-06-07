@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.1/dist/simple-lightbox.min.css" rel="stylesheet">
   <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="assets/css/custom.css">
   <meta property="og:title" content="Premium Construction Company">
@@ -27,16 +28,22 @@
     "logo": "https://images.unsplash.com/photo-1531842476314-24461f8e1090?auto=format&fit=crop&w=1200&q=80"
   }
   </script>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' https://unpkg.com">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' https://unpkg.com">
 </head>
-<body class="bg-white text-gray-900" x-data="{dark:false}" :class="{'dark':dark}">
+<body class="bg-white text-gray-900" x-data="{dark:false,open:false}" :class="{'dark':dark}">
+  <div id="progressBar" class="fixed top-0 left-0 h-1 bg-blue-600 w-0 z-50"></div>
   <header class="sticky top-0 bg-white shadow z-50">
     <nav class="container mx-auto flex items-center justify-between p-4">
       <h1 class="font-bold text-xl">Premium Construction</h1>
-      <button class="md:hidden" @click="open=!open" aria-label="Toggle navigation">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
-      <ul class="hidden md:flex space-x-6" id="nav">
+      <div class="flex items-center space-x-4">
+        <button class="hidden md:block" @click="dark=!dark" aria-label="Toggle dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18 9 9 0 000-18zM2 12a10 10 0 1116.32 7.74 8 8 0 11-11-11A10 10 0 012 12z"/></svg>
+        </button>
+        <button class="md:hidden" @click="open=!open" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <ul class="md:flex space-x-6" :class="{'block':open,'hidden':!open}" id="nav" @click.away="open=false">
         <li><a href="#services" class="hover:underline">Services</a></li>
         <li><a href="#projects" class="hover:underline">Projects</a></li>
         <li><a href="#contact" class="hover:underline">Contact</a></li>
@@ -45,9 +52,8 @@
   </header>
 
   <main>
-    <section class="relative" aria-label="Hero">
-      <img src="https://images.unsplash.com/photo-1531842476314-24461f8e1090?auto=format&fit=crop&w=1200&q=80" alt="Modern building" class="w-full h-auto" loading="eager">
-      <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white p-4">
+    <section class="relative h-screen bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1531842476314-24461f8e1090?auto=format&fit=crop&w=1200&q=80');" aria-label="Hero">
+      <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/20 flex flex-col items-center justify-center text-center text-white p-4">
         <h2 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Crafting the Future of Construction</h2>
         <p class="mb-6" data-aos="fade-up" data-aos-delay="100">Innovative solutions for commercial and residential projects.</p>
         <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded" data-aos="fade-up" data-aos-delay="200">Get a Quote</a>
@@ -57,17 +63,17 @@
     <section id="services" class="container mx-auto py-16" aria-label="Services">
       <h3 class="text-3xl font-bold text-center mb-8" data-aos="fade">Our Expertise</h3>
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="p-6 bg-gray-100 rounded" data-aos="fade-up">
+        <div class="p-6 bg-gray-100 rounded transform transition-transform hover:rotate-1 hover:scale-105" data-aos="fade-up">
           <svg class="h-12 w-12 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h3l1 2h4l1-2h3l-8-8-8 8z"/></svg>
           <h4 class="font-bold mb-2">Residential</h4>
           <p>High-quality homes built with precision and care.</p>
         </div>
-        <div class="p-6 bg-gray-100 rounded" data-aos="fade-up" data-aos-delay="100">
+        <div class="p-6 bg-gray-100 rounded transform transition-transform hover:rotate-1 hover:scale-105" data-aos="fade-up" data-aos-delay="100">
           <svg class="h-12 w-12 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l6-6-6-6"/></svg>
           <h4 class="font-bold mb-2">Commercial</h4>
           <p>Durable, innovative spaces for business growth.</p>
         </div>
-        <div class="p-6 bg-gray-100 rounded" data-aos="fade-up" data-aos-delay="200">
+        <div class="p-6 bg-gray-100 rounded transform transition-transform hover:rotate-1 hover:scale-105" data-aos="fade-up" data-aos-delay="200">
           <svg class="h-12 w-12 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-8-9-8-9 8z"/></svg>
           <h4 class="font-bold mb-2">Infrastructure</h4>
           <p>Reliable solutions for large-scale projects.</p>
@@ -80,17 +86,23 @@
         <h3 class="text-3xl font-bold text-center mb-8" data-aos="fade">Featured Projects</h3>
         <div class="grid md:grid-cols-3 gap-8" data-aos="fade-up">
           <div class="bg-white p-4 rounded shadow">
-            <img src="https://images.unsplash.com/flagged/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=400&q=80" alt="Project 1" loading="lazy" class="mb-4 rounded">
+            <a href="https://images.unsplash.com/flagged/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80" class="gallery">
+              <img src="https://images.unsplash.com/flagged/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=400&q=80" alt="Project 1" loading="lazy" class="mb-4 rounded">
+            </a>
             <h4 class="font-bold mb-2">Corporate HQ</h4>
             <p>State-of-the-art commercial facility.</p>
           </div>
           <div class="bg-white p-4 rounded shadow">
-            <img src="https://images.unsplash.com/photo-1503389152951-9f71e6203aff?auto=format&fit=crop&w=400&q=80" alt="Project 2" loading="lazy" class="mb-4 rounded">
+            <a href="https://images.unsplash.com/photo-1503389152951-9f71e6203aff?auto=format&fit=crop&w=1200&q=80" class="gallery">
+              <img src="https://images.unsplash.com/photo-1503389152951-9f71e6203aff?auto=format&fit=crop&w=400&q=80" alt="Project 2" loading="lazy" class="mb-4 rounded">
+            </a>
             <h4 class="font-bold mb-2">Luxury Condos</h4>
             <p>Elegant residential tower with modern amenities.</p>
           </div>
           <div class="bg-white p-4 rounded shadow">
-            <img src="https://images.unsplash.com/photo-1562072541-4d6a9c47f8a8?auto=format&fit=crop&w=400&q=80" alt="Project 3" loading="lazy" class="mb-4 rounded">
+            <a href="https://images.unsplash.com/photo-1562072541-4d6a9c47f8a8?auto=format&fit=crop&w=1200&q=80" class="gallery">
+              <img src="https://images.unsplash.com/photo-1562072541-4d6a9c47f8a8?auto=format&fit=crop&w=400&q=80" alt="Project 3" loading="lazy" class="mb-4 rounded">
+            </a>
             <h4 class="font-bold mb-2">City Bridge</h4>
             <p>Innovative infrastructure connecting communities.</p>
           </div>
@@ -145,6 +157,7 @@
 
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.1/dist/simple-lightbox.min.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
