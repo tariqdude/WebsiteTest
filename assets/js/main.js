@@ -44,4 +44,26 @@
       document.body.setAttribute('data-theme', theme);
     });
   }
+
+  const featureContainer = document.getElementById('feature-anim');
+  if (featureContainer && window.lottie) {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const anim = lottie.loadAnimation({
+      container: featureContainer,
+      renderer: 'svg',
+      loop: true,
+      autoplay: !motionQuery.matches,
+      path: '/assets/js/HamburgerArrow.json'
+    });
+    if (motionQuery.matches) {
+      anim.goToAndStop(0, true);
+    }
+    motionQuery.addEventListener('change', e => {
+      if (e.matches) {
+        anim.pause();
+      } else {
+        anim.play();
+      }
+    });
+  }
 })();
