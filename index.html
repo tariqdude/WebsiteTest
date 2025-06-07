@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta name="description" content="BuildRight Construction: Premier construction services for residential, commercial, and renovation projects. Quality, safety, and innovation.">
     <meta name="keywords" content="construction, building, renovation, commercial, residential, contractor, project management">
-    <meta name="theme-color" content="#d2691e">
+    <meta name="theme-color" content="#b85c13">
     <meta property="og:title" content="BuildRight Construction - Building Your Future">
     <meta property="og:description" content="Premier construction services for residential, commercial, and renovation projects.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1503389152951-9c3d8b6e9c94?auto=format&fit=crop&w=600&q=80">
@@ -29,6 +29,8 @@
             --radius-md: 24px;
             --radius-sm: 12px;
             --glass: rgba(255,255,255,0.7);
+            --nav-bg: rgba(255,255,255,0.98);
+            --nav-blur: blur(8px);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -42,7 +44,7 @@
         header {
             background: var(--gradient);
             color: var(--light);
-            padding: 72px 0 44px 0;
+            padding: 90px 0 56px 0;
             text-align: center;
             box-shadow: var(--shadow);
             position: relative;
@@ -53,46 +55,52 @@
             position: absolute;
             right: 64px;
             top: 48px;
+            z-index: 2;
         }
         .header-cta a {
             background: var(--accent);
             color: var(--dark);
-            padding: 16px 44px;
-            border-radius: 28px;
+            padding: 18px 48px;
+            border-radius: 32px;
             font-weight: 700;
             text-decoration: none;
-            font-size: 1.12rem;
+            font-size: 1.18rem;
             box-shadow: 0 4px 16px rgba(0,0,0,0.09);
             transition: background 0.2s, color 0.2s, box-shadow 0.2s;
             letter-spacing: 1px;
+            border: 2px solid transparent;
         }
-        .header-cta a:hover {
+        .header-cta a:hover, .header-cta a:focus {
             background: #ffe08a;
             color: var(--primary);
             box-shadow: 0 8px 32px rgba(251,191,36,0.18);
+            border: 2px solid var(--primary);
         }
         header h1 {
-            font-size: 3.6rem;
+            font-size: 4.2rem;
             margin-bottom: 18px;
             letter-spacing: 3px;
             font-weight: 900;
             text-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            line-height: 1.1;
         }
         header p {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             opacity: 0.98;
             font-weight: 400;
             margin-bottom: 10px;
             letter-spacing: 1px;
         }
         nav {
-            background: var(--light);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            background: var(--nav-bg);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
             padding: 18px 0;
             text-align: center;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 20;
+            -webkit-backdrop-filter: var(--nav-blur);
+            backdrop-filter: var(--nav-blur);
         }
         nav a {
             color: var(--primary);
@@ -115,10 +123,10 @@
             margin: 0 auto;
             border-radius: 2px;
         }
-        nav a:hover {
+        nav a:hover, nav a:focus {
             color: var(--accent);
         }
-        nav a:hover::after {
+        nav a:hover::after, nav a:focus::after {
             width: 100%;
         }
         .nav-toggle {
@@ -130,7 +138,7 @@
             border: none;
             font-size: 2.2rem;
             color: var(--primary);
-            z-index: 20;
+            z-index: 30;
             cursor: pointer;
         }
         @media (max-width: 700px) {
@@ -142,13 +150,14 @@
             .nav-links {
                 display: none;
                 flex-direction: column;
-                background: var(--light);
+                background: var(--nav-bg);
                 position: absolute;
                 top: 54px;
                 left: 0;
                 width: 100%;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-                z-index: 15;
+                z-index: 25;
+                backdrop-filter: var(--nav-blur);
             }
             .nav-links.open {
                 display: flex;
@@ -168,7 +177,7 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            padding: 110px 24px 70px 24px;
+            padding: 120px 24px 80px 24px;
             background: var(--gradient);
             color: var(--light);
             border-radius: 0 0 var(--radius-lg) var(--radius-lg);
@@ -183,26 +192,27 @@
             text-align: left;
         }
         .hero h2 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             margin-bottom: 32px;
             font-weight: 800;
             text-shadow: 0 4px 16px rgba(0,0,0,0.10);
         }
         .hero p {
-            font-size: 1.28rem;
+            font-size: 1.32rem;
             margin-bottom: 44px;
             opacity: 0.99;
         }
         .hero img {
-            max-width: 420px;
+            max-width: 440px;
             border-radius: var(--radius-md);
             box-shadow: 0 12px 48px rgba(0,0,0,0.15);
             border: 7px solid var(--light);
             z-index: 1;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .hero img:hover {
-            transform: scale(1.06) rotate(-2deg);
+            transform: scale(1.08) rotate(-2deg);
+            box-shadow: 0 20px 60px rgba(184,92,19,0.18);
         }
         .hero-bg-shape {
             position: absolute;
@@ -213,25 +223,27 @@
             background: rgba(255,255,255,0.13);
             border-radius: 50%;
             z-index: 0;
-            filter: blur(6px);
+            filter: blur(8px);
         }
         .cta-btn {
             background: var(--accent);
             color: var(--dark);
-            padding: 20px 64px;
+            padding: 22px 70px;
             border: none;
             border-radius: 36px;
-            font-size: 1.22rem;
+            font-size: 1.28rem;
             font-weight: 800;
             cursor: pointer;
             transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 24px rgba(0,0,0,0.12);
             letter-spacing: 1px;
+            border: 2px solid transparent;
         }
-        .cta-btn:hover {
+        .cta-btn:hover, .cta-btn:focus {
             background: #ffe08a;
-            transform: translateY(-2px) scale(1.07);
-            box-shadow: 0 8px 36px rgba(251,191,36,0.18);
+            transform: translateY(-2px) scale(1.09);
+            box-shadow: 0 12px 40px rgba(251,191,36,0.18);
+            border: 2px solid var(--primary);
         }
         .stats-bar {
             display: flex;
@@ -245,20 +257,21 @@
             background: var(--glass);
             border-radius: 18px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-            padding: 28px 48px;
+            padding: 32px 54px;
             text-align: center;
             min-width: 150px;
             margin-bottom: 16px;
             transition: box-shadow 0.2s, transform 0.2s;
+            -webkit-backdrop-filter: blur(2px);
             backdrop-filter: blur(2px);
         }
-        .stat:hover {
+        .stat:hover, .stat:focus {
             box-shadow: 0 10px 36px rgba(184,92,19,0.15);
-            transform: translateY(-6px) scale(1.05);
+            transform: translateY(-6px) scale(1.07);
         }
         .stat strong {
             display: block;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary);
             font-weight: 900;
         }
@@ -275,15 +288,15 @@
             margin-left: 6px;
         }
         section {
-            padding: 100px 24px;
+            padding: 110px 24px;
             max-width: 1300px;
             margin: 0 auto;
         }
         section > h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.7rem;
             font-weight: 900;
-            margin-bottom: 32px;
+            margin-bottom: 38px;
             color: var(--primary);
             letter-spacing: 1.5px;
             text-shadow: 0 2px 8px rgba(255,179,0,0.07);
@@ -299,9 +312,9 @@
             background: var(--light);
             border-radius: var(--radius-md);
             box-shadow: 0 4px 24px rgba(0,0,0,0.09);
-            padding: 54px 38px;
-            flex: 1 1 300px;
-            max-width: 370px;
+            padding: 64px 44px;
+            flex: 1 1 320px;
+            max-width: 390px;
             text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
             border-bottom: 7px solid var(--accent);
@@ -318,25 +331,26 @@
             border-radius: 14px;
             font-weight: 800;
             letter-spacing: 0.7px;
+            box-shadow: 0 2px 8px rgba(34,197,94,0.13);
         }
-        .feature-card:hover {
-            transform: translateY(-18px) scale(1.07);
-            box-shadow: 0 16px 48px rgba(184,92,19,0.15);
+        .feature-card:hover, .feature-card:focus {
+            transform: translateY(-18px) scale(1.09);
+            box-shadow: 0 20px 60px rgba(184,92,19,0.18);
         }
         .feature-card i {
-            font-size: 3.5rem;
+            font-size: 3.7rem;
             color: var(--primary);
             margin-bottom: 28px;
             display: block;
         }
         .feature-card h3 {
             margin-bottom: 18px;
-            font-size: 1.38rem;
+            font-size: 1.45rem;
             font-weight: 800;
         }
         .feature-card p {
             color: #475569;
-            font-size: 1.13rem;
+            font-size: 1.15rem;
         }
         .feature-card ul {
             margin-top: 22px;
@@ -344,7 +358,7 @@
             list-style: none;
         }
         .feature-card li {
-            font-size: 1.09rem;
+            font-size: 1.13rem;
             margin-bottom: 10px;
             padding-left: 26px;
             position: relative;
@@ -406,9 +420,9 @@
             background: var(--light);
             border-radius: 22px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.09);
-            padding: 54px 38px;
-            flex: 1 1 300px;
-            max-width: 370px;
+            padding: 64px 44px;
+            flex: 1 1 320px;
+            max-width: 390px;
             text-align: center;
             border-bottom: 7px solid var(--accent);
             position: relative;
@@ -416,17 +430,17 @@
         }
         .pricing-card.featured {
             border-bottom: 7px solid var(--primary);
-            box-shadow: 0 16px 48px rgba(184,92,19,0.15);
-            transform: scale(1.07);
+            box-shadow: 0 20px 60px rgba(184,92,19,0.18);
+            transform: scale(1.09);
         }
         .pricing-card h3 {
-            font-size: 1.38rem;
+            font-size: 1.45rem;
             margin-bottom: 16px;
             color: var(--primary);
             font-weight: 900;
         }
         .pricing-card .price {
-            font-size: 2.4rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: var(--accent);
             margin-bottom: 12px;
@@ -439,7 +453,7 @@
         }
         .pricing-card li {
             margin-bottom: 12px;
-            font-size: 1.13rem;
+            font-size: 1.15rem;
             padding-left: 26px;
             position: relative;
         }
@@ -451,12 +465,12 @@
         }
         .pricing-card .cta-btn {
             width: 100%;
-            padding: 16px 0;
-            font-size: 1.13rem;
+            padding: 18px 0;
+            font-size: 1.18rem;
         }
         .pricing-card .note {
             margin-top: 14px;
-            font-size: 1.01rem;
+            font-size: 1.05rem;
             color: #64748b;
         }
         /* End Projects Section */
@@ -468,20 +482,21 @@
             margin-top: 54px;
         }
         .about img {
-            max-width: 480px;
-            border-radius: 22px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.13);
-            border: 5px solid var(--primary);
-            transition: transform 0.3s;
+            max-width: 520px;
+            border-radius: 28px;
+            box-shadow: 0 14px 48px rgba(0,0,0,0.15);
+            border: 6px solid var(--primary);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .about img:hover {
-            transform: scale(1.05) rotate(1deg);
+        .about img:hover, .about img:focus {
+            transform: scale(1.07) rotate(1deg);
+            box-shadow: 0 24px 60px rgba(184,92,19,0.18);
         }
         .about-content {
             flex: 1 1 400px;
         }
         .about-content h3 {
-            font-size: 1.45rem;
+            font-size: 1.55rem;
             margin-bottom: 16px;
             color: var(--primary);
             font-weight: 900;
@@ -493,7 +508,7 @@
         }
         .about-content li {
             margin-bottom: 16px;
-            font-size: 1.15rem;
+            font-size: 1.18rem;
             position: relative;
             padding-left: 38px;
         }
@@ -513,8 +528,8 @@
         }
         .value-card {
             background: #f9fafb;
-            border-radius: 16px;
-            padding: 28px 22px;
+            border-radius: 20px;
+            padding: 32px 26px;
             flex: 1 1 220px;
             min-width: 220px;
             text-align: center;
@@ -522,11 +537,11 @@
         }
         .value-card i {
             color: var(--accent);
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             margin-bottom: 12px;
         }
         .value-card h4 {
-            font-size: 1.15rem;
+            font-size: 1.18rem;
             margin-bottom: 8px;
             color: var(--primary);
             font-weight: 900;
@@ -544,34 +559,34 @@
         }
         .team-member {
             background: var(--light);
-            border-radius: 20px;
+            border-radius: 24px;
             box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-            padding: 38px 28px;
-            max-width: 260px;
+            padding: 44px 32px;
+            max-width: 270px;
             text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
         }
-        .team-member:hover {
-            transform: translateY(-12px) scale(1.07);
-            box-shadow: 0 16px 48px rgba(184,92,19,0.13);
+        .team-member:hover, .team-member:focus {
+            transform: translateY(-12px) scale(1.09);
+            box-shadow: 0 20px 60px rgba(184,92,19,0.15);
         }
         .team-member img {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 18px;
-            border: 4px solid var(--primary);
+            border: 5px solid var(--primary);
         }
         .team-member h4 {
-            font-size: 1.18rem;
+            font-size: 1.22rem;
             margin-bottom: 8px;
             color: var(--primary);
             font-weight: 900;
         }
         .team-member span {
-            font-size: 1.07rem;
+            font-size: 1.09rem;
             color: #64748b;
         }
         .team-member .social-mini {
@@ -583,27 +598,27 @@
             font-size: 1.2rem;
             transition: color 0.2s;
         }
-        .team-member .social-mini a:hover {
+        .team-member .social-mini a:hover, .team-member .social-mini a:focus {
             color: var(--primary);
         }
         .team-member .bio {
             margin-top: 12px;
-            font-size: 1.01rem;
+            font-size: 1.05rem;
             color: #475569;
         }
         .contact-form {
             background: var(--light);
-            border-radius: 24px;
+            border-radius: 28px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.09);
-            padding: 64px 44px;
-            max-width: 640px;
+            padding: 70px 54px;
+            max-width: 700px;
             margin: 0 auto;
         }
         .contact-form h3 {
             margin-bottom: 36px;
             text-align: center;
             color: var(--primary);
-            font-size: 1.45rem;
+            font-size: 1.55rem;
             font-weight: 900;
         }
         .contact-form label {
@@ -614,35 +629,36 @@
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             margin-bottom: 28px;
             border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 1.13rem;
+            border-radius: 14px;
+            font-size: 1.15rem;
             resize: vertical;
             background: #f9fafb;
-            transition: border 0.2s;
+            transition: border 0.2s, box-shadow 0.2s;
         }
         .contact-form input:focus,
         .contact-form textarea:focus {
             border: 2px solid var(--primary);
             outline: none;
+            box-shadow: 0 0 0 2px var(--accent);
         }
         .contact-form button {
             width: 100%;
             background: var(--primary);
             color: var(--light);
-            padding: 18px;
+            padding: 20px;
             border: none;
-            border-radius: 12px;
-            font-size: 1.22rem;
+            border-radius: 14px;
+            font-size: 1.28rem;
             font-weight: 900;
             cursor: pointer;
             transition: background 0.2s, transform 0.2s;
         }
-        .contact-form button:hover {
+        .contact-form button:hover, .contact-form button:focus {
             background: #a0521d;
-            transform: translateY(-2px) scale(1.05);
+            transform: translateY(-2px) scale(1.07);
         }
         .form-message {
             text-align: center;
@@ -659,15 +675,15 @@
         .newsletter {
             background: var(--primary);
             color: var(--light);
-            border-radius: 24px;
-            padding: 54px 28px;
-            margin: 80px auto 0 auto;
-            max-width: 700px;
+            border-radius: 28px;
+            padding: 64px 38px;
+            margin: 90px auto 0 auto;
+            max-width: 750px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.11);
             text-align: center;
         }
         .newsletter h3 {
-            font-size: 1.48rem;
+            font-size: 1.55rem;
             margin-bottom: 18px;
             font-weight: 900;
         }
@@ -679,61 +695,62 @@
             margin-top: 18px;
         }
         .newsletter input[type="email"] {
-            padding: 18px;
-            border-radius: 12px;
+            padding: 20px;
+            border-radius: 14px;
             border: none;
-            font-size: 1.13rem;
-            width: 280px;
+            font-size: 1.15rem;
+            width: 320px;
             max-width: 100%;
         }
         .newsletter button {
             background: var(--accent);
             color: var(--dark);
-            padding: 18px 38px;
+            padding: 20px 44px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-weight: 900;
-            font-size: 1.13rem;
+            font-size: 1.15rem;
             cursor: pointer;
             transition: background 0.2s;
         }
-        .newsletter button:hover {
+        .newsletter button:hover, .newsletter button:focus {
             background: #ffe08a;
         }
         .newsletter .newsletter-stats {
             margin-top: 22px;
-            font-size: 1.09rem;
+            font-size: 1.13rem;
             color: #ffe08a;
         }
         footer {
             background: var(--dark);
             color: var(--light);
             text-align: center;
-            padding: 40px 0 24px 0;
-            font-size: 1.13rem;
-            margin-top: 80px;
+            padding: 48px 0 28px 0;
+            font-size: 1.18rem;
+            margin-top: 90px;
             letter-spacing: 0.3px;
-            border-radius: 28px 28px 0 0;
+            border-radius: 32px 32px 0 0;
         }
         .social-links {
-            margin-top: 20px;
+            margin-top: 24px;
         }
         .social-links a {
             color: var(--accent);
-            margin: 0 16px;
-            font-size: 1.7rem;
-            transition: color 0.2s;
+            margin: 0 18px;
+            font-size: 1.9rem;
+            transition: color 0.2s, transform 0.2s;
         }
-        .social-links a:hover {
+        .social-links a:hover, .social-links a:focus {
             color: var(--light);
+            transform: scale(1.15);
         }
         section:not(:last-child):after {
             content: "";
             display: block;
-            margin: 80px auto 0 auto;
-            width: 100px;
-            height: 5px;
-            border-radius: 2.5px;
+            margin: 90px auto 0 auto;
+            width: 120px;
+            height: 6px;
+            border-radius: 3px;
             background: var(--accent);
             opacity: 0.18;
         }
@@ -779,7 +796,7 @@
                 gap: 32px;
             }
             section {
-                padding: 64px 10px;
+                padding: 70px 10px;
             }
             .hero {
                 padding: 54px 10px 32px 10px;
@@ -838,8 +855,8 @@
         }
         #features, #about, #team {
             background: #f8fafc;
-            border-radius: 28px;
-            box-shadow: 0 4px 18px rgba(184,92,19,0.05);
+            border-radius: 32px;
+            box-shadow: 0 4px 18px rgba(184,92,19,0.07);
         }
         .feature-card, .pricing-card {
             cursor: pointer;
@@ -866,408 +883,16 @@
             100% { opacity: 1; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-<body>
-    <header>
-        <button class="nav-toggle" aria-label="Open navigation" id="nav-toggle"><i class="fas fa-bars"></i></button>
-        <div class="header-cta">
-            <a href="#contact"><i class="fas fa-hard-hat"></i> Request a Quote</a>
-        </div>
-        <h1>BuildRight Construction</h1>
-        <p>Building Your Future, One Project at a Time</p>
-    </header>
-    <nav>
-        <div class="nav-links" id="nav-links">
-            <a href="#features">Services</a>
-            <a href="#projects">Projects</a>
-            <a href="#about">About</a>
-            <a href="#team">Team</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Quality Construction for Lasting Results</h2>
-            <p>From residential homes to commercial spaces, BuildRight delivers excellence, safety, and reliability in every build.</p>
-            <a href="#contact"><button class="cta-btn">Get a Free Estimate</button></a>
-            <div class="stats-bar" id="stats-bar">
-                <div class="stat">
-                    <strong id="stat-projects">0 <i class="fas fa-arrow-up"></i></strong>
-                    <span>Projects Completed</span>
-                </div>
-                <div class="stat">
-                    <strong id="stat-safety">0% <i class="fas fa-arrow-up"></i></strong>
-                    <span>Safety Record</span>
-                </div>
-                <div class="stat">
-                    <strong id="stat-years">0 <i class="fas fa-arrow-up"></i></strong>
-                    <span>Years in Business</span>
-                </div>
-                <div class="stat">
-                    <strong id="stat-support">24/7</strong>
-                    <span>Support</span>
-                </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav aria-label="Main Navigation">
+            <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
             </div>
-        </div>
-        <img src="https://images.unsplash.com/photo-1503389152951-9c3d8b6e9c94?auto=format&fit=crop&w=600&q=80" alt="Construction Site">
-        <div class="hero-bg-shape" aria-hidden="true"></div>
-    </section>
-    <section id="features">
-        <h2>Our Services</h2>
-        <div class="features">
-            <div class="feature-card" tabindex="0">
-                <span class="badge">Popular</span>
-                <i class="fas fa-home"></i>
-                <h3>Residential Construction</h3>
-                <p>Custom homes, renovations, and additions built to your vision and standards.</p>
-                <ul>
-                    <li>New Home Builds</li>
-                    <li>Remodeling & Additions</li>
-                    <li>Energy-Efficient Upgrades</li>
-                    <li>Design-Build Services</li>
-                </ul>
-            </div>
-            <div class="feature-card" tabindex="0">
-                <i class="fas fa-building"></i>
-                <h3>Commercial Construction</h3>
-                <p>From offices to retail, we deliver functional, modern, and safe commercial spaces.</p>
-                <ul>
-                    <li>Office Buildings</li>
-                    <li>Retail Spaces</li>
-                    <li>Warehouses</li>
-                    <li>Tenant Improvements</li>
-                </ul>
-            </div>
-            <div class="feature-card" tabindex="0">
-                <i class="fas fa-tools"></i>
-                <h3>Renovation & Remodeling</h3>
-                <p>Transform your property with expert renovations and upgrades.</p>
-                <ul>
-                    <li>Kitchen & Bath Remodels</li>
-                    <li>Basement Finishing</li>
-                    <li>Exterior Upgrades</li>
-                    <li>ADA Compliance</li>
-                </ul>
-            </div>
-            <div class="feature-card" tabindex="0">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Project Management</h3>
-                <p>End-to-end project oversight for quality, safety, and on-time delivery.</p>
-                <ul>
-                    <li>Permitting & Inspections</li>
-                    <li>Budget & Timeline Control</li>
-                    <li>Quality Assurance</li>
-                    <li>Safety Management</li>
-                </ul>
-            </div>
-        </div>
-        <div class="feature-table-wrap">
-            <table class="feature-table" aria-label="Service Comparison Table">
-                <thead>
-                    <tr>
-                        <th>Service</th>
-                        <th>Residential</th>
-                        <th>Commercial</th>
-                        <th>Renovation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Custom Design</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Project Management</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Permitting</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Energy Efficiency</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>ADA Compliance</td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <section id="projects" class="pricing-section">
-        <h2>Featured Projects</h2>
-        <div class="pricing-cards">
-            <div class="pricing-card" tabindex="0">
-                <h3>Modern Family Home</h3>
-                <div class="price">Residential</div>
-                <ul>
-                    <li>3,500 sq ft custom build</li>
-                    <li>Energy Star certified</li>
-                    <li>Smart home integration</li>
-                </ul>
-                <button class="cta-btn" onclick="window.location='#contact'">Request Similar</button>
-                <div class="note">Completed 2023</div>
-            </div>
-            <div class="pricing-card featured" tabindex="0">
-                <h3>Downtown Office Tower</h3>
-                <div class="price">Commercial</div>
-                <ul>
-                    <li>12-story steel structure</li>
-                    <li>LEED Gold certified</li>
-                    <li>Open-plan workspaces</li>
-                </ul>
-                <button class="cta-btn" onclick="window.location='#contact'">Request Similar</button>
-                <div class="note">Award Winner</div>
-            </div>
-            <div class="pricing-card" tabindex="0">
-                <h3>Historic Renovation</h3>
-                <div class="price">Renovation</div>
-                <ul>
-                    <li>Restored 1920s building</li>
-                    <li>Modern amenities</li>
-                    <li>Preserved original facade</li>
-                </ul>
-                <button class="cta-btn" onclick="window.location='#contact'">Request Similar</button>
-                <div class="note">Completed 2022</div>
-            </div>
-        </div>
-    </section>
-    <section id="about">
-        <h2>About BuildRight</h2>
-        <div class="about">
-            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="BuildRight Construction Team">
-            <div class="about-content">
-                <h3>Who We Are</h3>
-                <p>BuildRight Construction is a trusted name in the industry, known for quality craftsmanship, integrity, and customer satisfaction. We bring decades of experience to every project, big or small.</p>
-                <ul>
-                    <li>20+ years of construction excellence</li>
-                    <li>500+ projects delivered</li>
-                    <li>Licensed, bonded, and insured</li>
-                    <li>Community-focused and eco-friendly</li>
-                </ul>
-                <div class="about-values">
-                    <div class="value-card">
-                        <i class="fas fa-hard-hat"></i>
-                        <h4>Safety First</h4>
-                        <div>We prioritize safety for our team and your property on every job.</div>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-handshake"></i>
-                        <h4>Integrity</h4>
-                        <div>Honest communication and transparent pricing, always.</div>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-leaf"></i>
-                        <h4>Sustainability</h4>
-                        <div>Eco-friendly practices and materials for a better tomorrow.</div>
-                    </div>
-                    <div class="value-card">
-                        <i class="fas fa-award"></i>
-                        <h4>Quality</h4>
-                        <div>We stand behind our work with a satisfaction guarantee.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="team" class="team">
-        <h2>Meet Our Team</h2>
-        <div class="team-list">
-            <div class="team-member" tabindex="0">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Photo of Tom Builder">
-                <h4>Tom Builder</h4>
-                <span>Founder & CEO</span>
-                <div class="bio">30+ years in construction, passionate about quality and safety.</div>
-                <div class="social-mini">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="team-member" tabindex="0">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Photo of Lisa Mason">
-                <h4>Lisa Mason</h4>
-                <span>Project Manager</span>
-                <div class="bio">Expert in project delivery and client communication.</div>
-                <div class="social-mini">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="team-member" tabindex="0">
-                <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Photo of Mike Crane">
-                <h4>Mike Crane</h4>
-                <span>Site Supervisor</span>
-                <div class="bio">Ensures every jobsite is safe and efficient.</div>
-                <div class="social-mini">
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div class="team-member" tabindex="0">
-                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Photo of Emily Stone">
-                <h4>Emily Stone</h4>
-                <span>Lead Architect</span>
-                <div class="bio">Designs innovative, functional spaces for every client.</div>
-                <div class="social-mini">
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="newsletter">
-        <h3>Subscribe to Our Newsletter</h3>
-        <p>Get construction tips, project updates, and special offers straight to your inbox.</p>
-        <form id="newsletter-form" autocomplete="off" aria-label="Newsletter Subscription">
-            <input type="email" id="newsletter-email" placeholder="Your email address" required aria-label="Email address">
-            <button type="submit" aria-label="Subscribe to newsletter"><i class="fas fa-envelope"></i> Subscribe</button>
-        </form>
-        <div id="newsletter-message" role="status" aria-live="polite"></div>
-        <div class="newsletter-stats">
-            <i class="fas fa-users"></i> <span id="newsletter-count">2,000+</span> subscribers
-        </div>
-    </section>
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form class="contact-form" id="contact-form" autocomplete="off" aria-label="Contact Form">
-            <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
-            <h3>Let's Build Together</h3>
-            <label for="contact-name">Name</label>
-            <input type="text" id="contact-name" name="name" required>
-            <label for="contact-email">Email</label>
-            <input type="email" id="contact-email" name="email" required>
-            <label for="contact-phone">Phone (optional)</label>
-            <input type="tel" id="contact-phone" name="phone" pattern="^[0-9+\-\s()]{7,}$">
-            <label for="contact-message">Message</label>
-            <textarea id="contact-message" name="message" rows="4" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-    <footer>
-        &copy; 2024 BuildRight Construction. All rights reserved.
-        <div class="social-links">
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-    </footer>
-    <script>
-        // Hamburger menu for mobile
-        const navToggle = document.getElementById('nav-toggle');
-        const navLinks = document.getElementById('nav-links');
-        navToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('open');
-            navToggle.setAttribute('aria-label', navLinks.classList.contains('open') ? 'Close navigation' : 'Open navigation');
-            navToggle.innerHTML = navLinks.classList.contains('open') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if(window.innerWidth <= 700) {
-                    navLinks.classList.remove('open');
-                    navToggle.setAttribute('aria-label', 'Open navigation');
-                    navToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
-        });
-
-        // Animated stats counter
-        function animateStat(id, end, suffix = '', duration = 1200) {
-            const el = document.getElementById(id);
-            let start = 0;
-            let startTime = null;
-            function animate(ts) {
-                if (!startTime) startTime = ts;
-                let progress = Math.min((ts - startTime) / duration, 1);
-                let value = Math.floor(progress * (end - start) + start);
-                el.innerHTML = value + suffix + (el.innerHTML.includes('fa-arrow-up') ? ' <i class="fas fa-arrow-up"></i>' : '');
-                if (progress < 1) requestAnimationFrame(animate);
-                else el.innerHTML = end + suffix + (el.innerHTML.includes('fa-arrow-up') ? ' <i class="fas fa-arrow-up"></i>' : '');
-            }
-            requestAnimationFrame(animate);
-        }
-        window.addEventListener('DOMContentLoaded', () => {
-            animateStat('stat-projects', 500, '', 1200);
-            animateStat('stat-safety', 100, '%', 1200);
-            animateStat('stat-years', 20, '', 1200);
-        });
-
-        // Contact form validation and fake submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('contact-name').value.trim();
-            const email = document.getElementById('contact-email').value.trim();
-            const phone = document.getElementById('contact-phone').value.trim();
-            const message = document.getElementById('contact-message').value.trim();
-            const msgBox = document.getElementById('form-message');
-            if (!name || !email || !message) {
-                msgBox.textContent = "Please fill in all required fields.";
-                msgBox.className = "form-message error";
-                return;
-            }
-            if (phone && !/^[0-9+\-\s()]{7,}$/.test(phone)) {
-                msgBox.textContent = "Please enter a valid phone number.";
-                msgBox.className = "form-message error";
-                return;
-            }
-            msgBox.textContent = "Sending...";
-            msgBox.className = "form-message";
-            setTimeout(() => {
-                msgBox.textContent = "Thank you for contacting us! We'll get back to you soon.";
-                msgBox.className = "form-message success";
-                document.getElementById('contact-form').reset();
-            }, 1200);
-        });
-
-        // Newsletter form with animated subscriber count
-        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('newsletter-email').value.trim();
-            const msg = document.getElementById('newsletter-message');
-            if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
-                msg.textContent = "Please enter a valid email address.";
-                msg.style.color = "#ef4444";
-                return;
-            }
-            msg.textContent = "Subscribed! Thank you.";
-            msg.style.color = "#22c55e";
-            document.getElementById('newsletter-form').reset();
-            // Animate subscriber count
-            const countEl = document.getElementById('newsletter-count');
-            let current = parseInt(countEl.textContent.replace(/[^0-9]/g, '')) || 2000;
-            let end = current + 1;
-            let startTime = null;
-            function animateCount(ts) {
-                if (!startTime) startTime = ts;
-                let progress = Math.min((ts - startTime) / 800, 1);
-                let value = Math.floor(progress * (end - current) + current);
-                countEl.textContent = value + "+";
-                if (progress < 1) requestAnimationFrame(animateCount);
-                else countEl.textContent = end + "+";
-            }
-            requestAnimationFrame(animateCount);
-            setTimeout(() => { msg.textContent = ""; }, 3000);
-        });
-
-        // Smooth scroll for anchor links (for browsers that don't support scroll-behavior)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        </nav>
