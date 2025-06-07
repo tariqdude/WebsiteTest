@@ -15,10 +15,11 @@
 
   const toggle = document.getElementById('billing-toggle');
   if (toggle) {
-    toggle.addEventListener('change', () => {
+    const inputToggle = toggle as HTMLInputElement;
+    inputToggle.addEventListener('change', () => {
       document.querySelectorAll('[data-price]').forEach(el => {
-        const base = parseInt(el.getAttribute('data-price'), 10);
-        el.textContent = toggle.checked ? '$' + base * 10 : '$' + base;
+        const base = parseInt(el.getAttribute('data-price') || '0', 10);
+        el.textContent = inputToggle.checked ? '$' + base * 10 : '$' + base;
       });
     });
   }
@@ -26,8 +27,8 @@
   document.querySelectorAll('[aria-controls]').forEach(btn => {
     btn.addEventListener('click', () => {
       const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', !expanded);
-      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      btn.setAttribute('aria-expanded', (!expanded).toString());
+      const panel = document.getElementById(btn.getAttribute('aria-controls') || '');
       if (panel) {
         panel.style.maxHeight = expanded ? '0' : panel.scrollHeight + 'px';
       }
@@ -35,7 +36,7 @@
   });
 
   const year = document.getElementById('year');
-  if (year) year.textContent = new Date().getFullYear();
+  if (year) year.textContent = new Date().getFullYear().toString();
 
   const themeBtn = document.getElementById('theme-toggle');
   if (themeBtn) {
