@@ -70,8 +70,9 @@
         <div class="inline-flex mb-8 items-center gap-2">
           <span>Monthly</span>
           <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" value="" id="billing-toggle" class="sr-only peer">
+            <input type="checkbox" value="" id="billing-toggle" class="sr-only peer" aria-required="false" aria-describedby="billing-desc">
             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+              <span id="billing-desc" class="sr-only">Toggle yearly billing</span>
           </label>
           <span>Yearly</span>
         </div>
@@ -138,9 +139,13 @@
 
     <section class="py-20" id="contact">
       <div class="container mx-auto grid md:grid-cols-2 gap-8">
-        <form action="https://formspree.io/f/yourformid" method="POST" class="space-y-4">
-          <div class="float-label"><input id="email" type="email" name="email" required placeholder=" " class="peer w-full p-3 border rounded"><label for="email">Email</label></div>
-          <div class="float-label"><textarea id="message" name="message" required placeholder=" " class="peer w-full p-3 border rounded h-32"></textarea><label for="message">Message</label></div>
+        <form action="https://formspree.io/f/yourformid" method="POST" novalidate class="space-y-4">
+          <div class="float-label"><input id="email" type="email" name="email" required aria-required="true" aria-describedby="email-desc email-error" placeholder=" " class="peer w-full p-3 border rounded"><label for="email">Email</label>
+            <p id="email-desc" class="sr-only">Please enter a valid email address.</p>
+            <p id="email-error" class="text-red-600 text-sm mt-1" aria-live="polite"></p></div>
+          <div class="float-label"><textarea id="message" name="message" required aria-required="true" aria-describedby="message-desc message-error" placeholder=" " class="peer w-full p-3 border rounded h-32"></textarea><label for="message">Message</label>
+            <p id="message-desc" class="sr-only">Tell us how we can help you.</p>
+            <p id="message-error" class="text-red-600 text-sm mt-1" aria-live="polite"></p></div>
           <button type="submit" class="bg-primary text-white py-2 px-4 rounded hover:bg-blue-700 transition">Submit</button>
         </form>
         <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=0,0,0,0" class="w-full h-64 rounded" loading="lazy" title="Map"></iframe>
