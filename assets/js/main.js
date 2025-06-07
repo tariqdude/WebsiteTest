@@ -49,4 +49,48 @@
       localStorage.setItem('theme', theme);
     });
   }
+
+  const form = document.querySelector('#contact form');
+  if (form) {
+    const emailInput = form.querySelector('#email');
+    const messageInput = form.querySelector('#message');
+    const emailError = document.getElementById('email-error');
+    const messageError = document.getElementById('message-error');
+
+    const validators = {
+      email: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      message: value => value.trim().length > 0
+    };
+
+    const showError = (input, el, msg) => {
+      if (el) el.textContent = msg;
+      input.setAttribute('aria-invalid', 'true');
+    };
+
+    const clearError = (input, el) => {
+      if (el) el.textContent = '';
+      input.removeAttribute('aria-invalid');
+    };
+
+    form.addEventListener('submit', e => {
+      let valid = true;
+      if (!validators.email(emailInput.value)) {
+        showError(emailInput, emailError, 'Please enter a valid email.');
+        valid = false;
+      }
+      if (!validators.message(messageInput.value)) {
+        showError(messageInput, messageError, 'Message is required.');
+        valid = false;
+      }
+      if (!valid) e.preventDefault();
+    });
+
+    [emailInput, messageInput].forEach(input => {
+      const errEl = input.id === 'email' ? emailError : messageError;
+      input.addEventListener('input', () => {
+        const isValid = validators[input.id](input.value);
+        if (isValid) clearError(input, errEl);
+      });
+    });
+  }
 })();
