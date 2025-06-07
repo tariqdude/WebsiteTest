@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+<body class="bg-gray-100 text-center flex items-center justify-center h-screen" x-data="{dark:false}" :class="{'dark':dark}">
+  <div>
+    <h1 class="text-6xl font-bold mb-4">404</h1>
+    <p class="mb-4">Sorry, the page you're looking for can't be found.</p>
+    <a href="/" class="text-blue-600 underline">Return Home</a>
+  </div>
+  <button class="absolute top-4 right-4" @click="dark=!dark" aria-label="Toggle dark mode"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18 9 9 0 000-18zM2 12a10 10 0 1116.32 7.74 8 8 0 11-11-11A10 10 0 012 12z"/></svg></button>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</body>
+</html>

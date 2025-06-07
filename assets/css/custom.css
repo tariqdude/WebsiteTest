@@ -1,0 +1,16 @@
+body{
+  font-family: 'Inter', sans-serif;
+}
+
+#progressBar{
+  transition: width 0.2s ease;
+}
+
+a:focus{
+  outline: 2px dashed #2563eb;
+  outline-offset: 2px;
+}
+
+.transition{
+  transition: all 0.3s ease;
+}
