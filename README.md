@@ -9,10 +9,11 @@ This project is a fully static, responsive landing page ready for GitHub Pages d
 - Accessible FAQ accordion
 - Floating label contact form
 - Offline support via Workbox service worker
+- Multilingual support with JSON language files
 
 ## Setup
 1. Fork this repository and clone it locally.
-2. Edit `index.html` to customize text and branding.
+2. Edit `index.html` and the files in `assets/lang/` to customize text and translations.
 3. Commit your changes and push to your GitHub repository.
 
 ## Deployment

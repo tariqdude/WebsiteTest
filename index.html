@@ -20,7 +20,7 @@
 <body class="min-h-screen antialiased bg-white text-gray-900" data-theme="light">
   <header class="bg-gradient-to-r from-primary to-accent text-white">
     <nav class="container mx-auto flex items-center justify-between p-6">
-      <h1 class="text-2xl font-bold">EliteBiz</h1>
+        <h1 class="text-2xl font-bold" data-i18n="header_brand">EliteBiz</h1>
       <button id="theme-toggle" class="p-2" aria-label="Toggle dark mode">
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-12.34l-.71.71M4.05 19.95l-.71-.71M21 12h1M3 12H2m16.95 7.95l-.71-.71M4.76 4.76l-.71-.71"/><circle cx="12" cy="12" r="5"/></svg>
       </button>
@@ -33,9 +33,9 @@
         <source src="data:video/mp4;base64,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" type="video/mp4">
       </video>
       <div class="relative z-10 text-center text-white px-4">
-        <h2 class="font-bold mb-4" style="font-size:clamp(2rem,5vw,4rem)">Your Solution Starts Here</h2>
-        <p class="mb-6">We build the future, today.</p>
-        <a href="#contact" class="inline-block bg-white text-primary font-semibold py-3 px-6 rounded-lg shadow-lg transform transition hover:scale-105">Get Started</a>
+        <h2 class="font-bold mb-4" style="font-size:clamp(2rem,5vw,4rem)" data-i18n="hero_title">Your Solution Starts Here</h2>
+        <p class="mb-6" data-i18n="hero_subtitle">We build the future, today.</p>
+        <a href="#contact" class="inline-block bg-white text-primary font-semibold py-3 px-6 rounded-lg shadow-lg transform transition hover:scale-105" data-i18n="hero_cta">Get Started</a>
       </div>
     </section>
 
@@ -45,22 +45,22 @@
           <div class="mb-4">
             <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l1.176 3.618h3.806l-3.082 2.243 1.176 3.618L12 9.236l-3.076 2.243 1.176-3.618L7.018 5.618h3.806L12 2z"/></svg>
           </div>
-          <h3 class="text-xl font-bold mb-2">Fast Launch</h3>
-          <p class="text-gray-600">Launch your project in record time with us.</p>
+            <h3 class="text-xl font-bold mb-2" data-i18n="feature1_title">Fast Launch</h3>
+            <p class="text-gray-600" data-i18n="feature1_desc">Launch your project in record time with us.</p>
         </div>
         <div class="p-6 bg-white rounded-lg shadow-lg fade-target">
           <div class="mb-4">
             <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM11 11V6h2v5h5v2h-5v5h-2v-5H6v-2h5z"/></svg>
           </div>
-          <h3 class="text-xl font-bold mb-2">Scalable</h3>
-          <p class="text-gray-600">Grow effortlessly with our scalable solutions.</p>
+            <h3 class="text-xl font-bold mb-2" data-i18n="feature2_title">Scalable</h3>
+            <p class="text-gray-600" data-i18n="feature2_desc">Grow effortlessly with our scalable solutions.</p>
         </div>
         <div class="p-6 bg-white rounded-lg shadow-lg fade-target">
           <div class="mb-4">
             <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M21 15V9a2 2 0 00-2-2h-4V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2H3a2 2 0 00-2 2v6a2 2 0 002 2h4v2a2 2 0 002 2h4a2 2 0 002-2v-2h4a2 2 0 002-2z"/></svg>
           </div>
-          <h3 class="text-xl font-bold mb-2">Secure</h3>
-          <p class="text-gray-600">Security at the core of every project.</p>
+            <h3 class="text-xl font-bold mb-2" data-i18n="feature3_title">Secure</h3>
+            <p class="text-gray-600" data-i18n="feature3_desc">Security at the core of every project.</p>
         </div>
       </div>
     </section>
@@ -68,43 +68,43 @@
     <section class="py-20" id="pricing">
       <div class="container mx-auto text-center">
         <div class="inline-flex mb-8 items-center gap-2">
-          <span>Monthly</span>
+          <span data-i18n="billing_monthly">Monthly</span>
           <label class="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" value="" id="billing-toggle" class="sr-only peer">
             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
           </label>
-          <span>Yearly</span>
+          <span data-i18n="billing_yearly">Yearly</span>
         </div>
         <div class="grid gap-8 md:grid-cols-3">
           <div class="p-6 bg-white rounded-lg shadow-lg">
-            <h3 class="text-xl font-bold mb-2">Starter</h3>
+            <h3 class="text-xl font-bold mb-2" data-i18n="plan1_title">Starter</h3>
             <p class="text-4xl font-bold" data-price="19">$19</p>
-            <p class="mt-2">per month</p>
+            <p class="mt-2" data-i18n="per_month">per month</p>
             <ul class="mt-4 space-y-2 text-left">
-              <li>Basic support</li>
-              <li>1 project</li>
+              <li data-i18n="basic_support">Basic support</li>
+              <li data-i18n="one_project">1 project</li>
             </ul>
-            <button class="mt-6 w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-700 transition">Choose</button>
+            <button class="mt-6 w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-700 transition" data-i18n="choose_button">Choose</button>
           </div>
           <div class="p-6 bg-white rounded-lg shadow-lg border-2 border-primary">
-            <h3 class="text-xl font-bold mb-2">Pro</h3>
+            <h3 class="text-xl font-bold mb-2" data-i18n="plan2_title">Pro</h3>
             <p class="text-4xl font-bold" data-price="49">$49</p>
-            <p class="mt-2">per month</p>
+            <p class="mt-2" data-i18n="per_month">per month</p>
             <ul class="mt-4 space-y-2 text-left">
-              <li>Priority support</li>
-              <li>5 projects</li>
+              <li data-i18n="priority_support">Priority support</li>
+              <li data-i18n="five_projects">5 projects</li>
             </ul>
-            <button class="mt-6 w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-700 transition">Choose</button>
+            <button class="mt-6 w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-700 transition" data-i18n="choose_button">Choose</button>
           </div>
           <div class="p-6 bg-white rounded-lg shadow-lg">
-            <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+            <h3 class="text-xl font-bold mb-2" data-i18n="plan3_title">Enterprise</h3>
             <p class="text-4xl font-bold" data-price="99">$99</p>
-            <p class="mt-2">per month</p>
+            <p class="mt-2" data-i18n="per_month">per month</p>
             <ul class="mt-4 space-y-2 text-left">
-              <li>Dedicated support</li>
-              <li>Unlimited projects</li>
+              <li data-i18n="dedicated_support">Dedicated support</li>
+              <li data-i18n="unlimited_projects">Unlimited projects</li>
             </ul>
-            <button class="mt-6 w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-700 transition">Choose</button>
+              <button class="mt-6 w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-700 transition" data-i18n="choose_button">Choose</button>
           </div>
         </div>
       </div>
@@ -112,24 +112,24 @@
 
     <section class="py-20 bg-gray-50" id="faq">
       <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">FAQ</h2>
+        <h2 class="text-3xl font-bold mb-8 text-center" data-i18n="faq_heading">FAQ</h2>
         <div class="space-y-4">
           <div>
             <button class="w-full text-left p-4 bg-white rounded-lg shadow flex justify-between items-center" aria-expanded="false" aria-controls="faq1">
-              <span>What services do you offer?</span>
+                <span data-i18n="faq1_question">What services do you offer?</span>
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             <div id="faq1" class="max-h-0 overflow-hidden transition-all">
-              <p class="p-4">We offer a wide range of digital solutions.</p>
+                <p class="p-4" data-i18n="faq1_answer">We offer a wide range of digital solutions.</p>
             </div>
           </div>
           <div>
             <button class="w-full text-left p-4 bg-white rounded-lg shadow flex justify-between items-center" aria-expanded="false" aria-controls="faq2">
-              <span>How can we contact you?</span>
+                <span data-i18n="faq2_question">How can we contact you?</span>
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             <div id="faq2" class="max-h-0 overflow-hidden transition-all">
-              <p class="p-4">Fill out the contact form below and we will respond.</p>
+                <p class="p-4" data-i18n="faq2_answer">Fill out the contact form below and we will respond.</p>
             </div>
           </div>
         </div>
@@ -139,9 +139,9 @@
     <section class="py-20" id="contact">
       <div class="container mx-auto grid md:grid-cols-2 gap-8">
         <form action="https://formspree.io/f/yourformid" method="POST" class="space-y-4">
-          <div class="float-label"><input id="email" type="email" name="email" required placeholder=" " class="peer w-full p-3 border rounded"><label for="email">Email</label></div>
-          <div class="float-label"><textarea id="message" name="message" required placeholder=" " class="peer w-full p-3 border rounded h-32"></textarea><label for="message">Message</label></div>
-          <button type="submit" class="bg-primary text-white py-2 px-4 rounded hover:bg-blue-700 transition">Submit</button>
+          <div class="float-label"><input id="email" type="email" name="email" required placeholder=" " class="peer w-full p-3 border rounded"><label for="email" data-i18n="contact_email_label">Email</label></div>
+          <div class="float-label"><textarea id="message" name="message" required placeholder=" " class="peer w-full p-3 border rounded h-32"></textarea><label for="message" data-i18n="contact_message_label">Message</label></div>
+          <button type="submit" class="bg-primary text-white py-2 px-4 rounded hover:bg-blue-700 transition" data-i18n="submit_button">Submit</button>
         </form>
         <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=0,0,0,0" class="w-full h-64 rounded" loading="lazy" title="Map"></iframe>
       </div>
@@ -150,7 +150,7 @@
 
   <footer class="bg-gray-800 text-gray-200 py-8">
     <div class="container mx-auto text-center">
-      <p>&copy; <span id="year"></span> EliteBiz. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> EliteBiz. <span data-i18n="footer_rights">All rights reserved.</span></p>
     </div>
   </footer>
 

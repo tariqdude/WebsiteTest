@@ -1,4 +1,24 @@
 (() => {
+  const loadLang = lang => {
+    fetch(`/assets/lang/${lang}.json`)
+      .then(r => r.json())
+      .then(strings => {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (strings[key]) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+              el.placeholder = strings[key];
+            } else {
+              el.textContent = strings[key];
+            }
+          }
+        });
+      });
+  };
+
+  const userLang = localStorage.getItem('lang') || navigator.language.slice(0,2);
+  loadLang(userLang);
   const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
