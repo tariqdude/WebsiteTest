@@ -1,4 +1,12 @@
-(() => {
+function calculatePrice(base, yearly) {
+  return '$' + (yearly ? base * 10 : base);
+}
+
+function getToggledTheme(currentTheme) {
+  return currentTheme === 'dark' ? 'light' : 'dark';
+}
+
+function init() {
   const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -18,7 +26,7 @@
     toggle.addEventListener('change', () => {
       document.querySelectorAll('[data-price]').forEach(el => {
         const base = parseInt(el.getAttribute('data-price'), 10);
-        el.textContent = toggle.checked ? '$' + base * 10 : '$' + base;
+        el.textContent = calculatePrice(base, toggle.checked);
       });
     });
   }
@@ -40,8 +48,14 @@
   const themeBtn = document.getElementById('theme-toggle');
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
-      const theme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const theme = getToggledTheme(document.body.getAttribute('data-theme'));
       document.body.setAttribute('data-theme', theme);
     });
   }
-})();
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { calculatePrice, getToggledTheme };
+} else {
+  init();
+}

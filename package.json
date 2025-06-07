@@ -1,0 +1,16 @@
+{
+  "name": "websitetest",
+  "version": "1.0.0",
+  "description": "This project is a fully static, responsive landing page ready for GitHub Pages deployment. It implements a minimal design system with Tailwind CSS and vanilla JavaScript.",
+  "main": "sw.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
