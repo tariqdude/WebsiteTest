@@ -14,6 +14,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install lint and Lighthouse tools
+        run: |
+          npm install -g htmlhint jshint @lhci/cli
+      - name: Run HTMLHint
+        run: htmlhint index.html offline.html
+      - name: Run JSHint
+        run: jshint assets/js/*.js
+      - name: Lighthouse audit
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: ./.lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
       - uses: actions/upload-pages-artifact@v2
         with:
           path: .
