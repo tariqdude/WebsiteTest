@@ -13,7 +13,8 @@ This project is a fully static, responsive landing page ready for GitHub Pages d
 ## Setup
 1. Fork this repository and clone it locally.
 2. Edit `index.html` to customize text and branding.
-3. Commit your changes and push to your GitHub repository.
+3. Replace the placeholder canonical URL and JSON-LD `url` with your production domain.
+4. Commit your changes and push to your GitHub repository.
 
 ## Deployment
 Enable **GitHub Pages** from the repository settings, choosing the main branch. The included workflow `deploy.yml` can automate publishing when changes are pushed to `main`.
