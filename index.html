@@ -16,6 +16,15 @@
   <link rel="preload" href="/assets/css/main.css" as="style">
   <link rel="stylesheet" href="/assets/css/main.css">
   <script defer src="/assets/js/main.js"></script>
+  <script>
+    if (localStorage.getItem('analyticsConsent') === 'true') {
+      const s = document.createElement('script');
+      s.defer = true;
+      s.dataset.domain = 'example.com';
+      s.src = 'https://plausible.io/js/script.js';
+      document.head.appendChild(s);
+    }
+  </script>
 </head>
 <body class="min-h-screen antialiased bg-white text-gray-900" data-theme="light">
   <header class="bg-gradient-to-r from-primary to-accent text-white">
