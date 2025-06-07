@@ -103,6 +103,48 @@
         nav a:hover::after {
             width: 100%;
         }
+        .nav-toggle {
+            display: none;
+            position: absolute;
+            right: 18px;
+            top: 16px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--primary);
+            z-index: 20;
+            cursor: pointer;
+        }
+        @media (max-width: 700px) {
+            nav {
+                text-align: left;
+                padding: 0;
+                position: static;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--light);
+                position: absolute;
+                top: 54px;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+                z-index: 15;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            nav a {
+                margin: 18px 0;
+                font-size: 1.15rem;
+                padding: 0 24px 8px 24px;
+                display: block;
+            }
+            .nav-toggle {
+                display: block;
+            }
+        }
         .hero {
             display: flex;
             flex-wrap: wrap;
@@ -173,6 +215,7 @@
             gap: 56px;
             margin-top: 44px;
             margin-bottom: -24px;
+            flex-wrap: wrap;
         }
         .stat {
             background: var(--light);
@@ -181,6 +224,7 @@
             padding: 22px 38px;
             text-align: center;
             min-width: 130px;
+            margin-bottom: 16px;
         }
         .stat strong {
             display: block;
@@ -280,7 +324,6 @@
             position: absolute;
             left: 0;
         }
-        /* Advanced: Feature comparison table */
         .feature-table-wrap {
             margin: 44px auto 0 auto;
             max-width: 900px;
@@ -293,6 +336,7 @@
             border-radius: 16px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             margin: 0 auto;
+            min-width: 480px;
         }
         .feature-table th, .feature-table td {
             padding: 16px 18px;
@@ -315,6 +359,74 @@
         .feature-table .fa-times {
             color: var(--danger);
         }
+        /* Pricing Section */
+        .pricing-section {
+            margin-top: 60px;
+        }
+        .pricing-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        .pricing-card {
+            background: var(--light);
+            border-radius: 18px;
+            box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+            padding: 44px 32px;
+            flex: 1 1 270px;
+            max-width: 340px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .pricing-card.featured {
+            border-bottom: 5px solid var(--primary);
+            box-shadow: 0 8px 32px rgba(26,35,126,0.13);
+            transform: scale(1.04);
+        }
+        .pricing-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        .pricing-card .price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .pricing-card ul {
+            list-style: none;
+            margin: 18px 0 24px 0;
+            padding: 0;
+            text-align: left;
+        }
+        .pricing-card li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            padding-left: 22px;
+            position: relative;
+        }
+        .pricing-card li::before {
+            content: "✔";
+            color: var(--success);
+            position: absolute;
+            left: 0;
+        }
+        .pricing-card .cta-btn {
+            width: 100%;
+            padding: 14px 0;
+            font-size: 1.08rem;
+        }
+        .pricing-card .note {
+            margin-top: 10px;
+            font-size: 0.97rem;
+            color: #64748b;
+        }
+        /* End Pricing Section */
         .about {
             display: flex;
             flex-wrap: wrap;
@@ -513,6 +625,12 @@
             border: 1px solid #e5e7eb;
             margin: 0 6px 8px 0;
             font-size: 1rem;
+            width: 100%;
+            max-width: 260px;
+        }
+        .testimonial-add textarea {
+            min-width: 100%;
+            max-width: 100%;
         }
         .testimonial-add button {
             background: var(--accent);
@@ -523,6 +641,8 @@
             font-weight: 700;
             cursor: pointer;
             transition: background 0.2s;
+            width: 100%;
+            max-width: 260px;
         }
         .testimonial-add button:hover {
             background: #ffe08a;
@@ -661,7 +781,6 @@
         .social-links a:hover {
             color: var(--light);
         }
-        /* Subtle section divider */
         section:not(:last-child):after {
             content: "";
             display: block;
@@ -702,6 +821,10 @@
                 flex-direction: column;
                 gap: 18px;
             }
+            .pricing-cards {
+                flex-direction: column;
+                gap: 24px;
+            }
         }
         @media (max-width: 800px) {
             .features, .testimonial-list, .team-list {
@@ -724,6 +847,9 @@
             .feature-table th, .feature-table td {
                 padding: 10px 6px;
             }
+            .feature-table {
+                min-width: 320px;
+            }
         }
         @media (max-width: 500px) {
             header h1 {
@@ -735,8 +861,32 @@
             .about img {
                 max-width: 96vw;
             }
-            .feature-card, .team-member, .testimonial {
+            .feature-card, .team-member, .testimonial, .pricing-card {
                 padding: 24px 8px;
+            }
+            .header-cta a {
+                padding: 10px 18px;
+                font-size: 0.98rem;
+            }
+            .stat {
+                padding: 14px 10px;
+                min-width: 90px;
+            }
+            .contact-form {
+                padding: 24px 6px;
+            }
+            .newsletter {
+                padding: 24px 6px;
+            }
+            .feature-table {
+                font-size: 0.95rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .header-cta {
+                position: static;
+                margin: 12px 0 0 0;
+                text-align: center;
             }
         }
     </style>
@@ -744,6 +894,7 @@
 </head>
 <body>
     <header>
+        <button class="nav-toggle" aria-label="Open navigation" id="nav-toggle"><i class="fas fa-bars"></i></button>
         <div class="header-cta">
             <a href="#contact"><i class="fas fa-paper-plane"></i> Request a Demo</a>
         </div>
@@ -751,32 +902,35 @@
         <p>Empowering Your Business with Innovative Digital Solutions</p>
     </header>
     <nav>
-        <a href="#features">Features</a>
-        <a href="#about">About</a>
-        <a href="#team">Team</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
+        <div class="nav-links" id="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#about">About</a>
+            <a href="#team">Team</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
     <section class="hero">
         <div class="hero-content">
             <h2>Grow Faster with Acme Solutions</h2>
             <p>We help businesses streamline operations, boost productivity, and reach new heights with tailored software and digital strategies.</p>
             <a href="#contact"><button class="cta-btn">Get Started</button></a>
-            <div class="stats-bar">
+            <div class="stats-bar" id="stats-bar">
                 <div class="stat">
-                    <strong>200+ <i class="fas fa-arrow-up"></i></strong>
+                    <strong id="stat-clients">0 <i class="fas fa-arrow-up"></i></strong>
                     <span>Clients</span>
                 </div>
                 <div class="stat">
-                    <strong>98% <i class="fas fa-arrow-up"></i></strong>
+                    <strong id="stat-satisfaction">0% <i class="fas fa-arrow-up"></i></strong>
                     <span>Satisfaction</span>
                 </div>
                 <div class="stat">
-                    <strong>10+ <i class="fas fa-arrow-up"></i></strong>
+                    <strong id="stat-years">0 <i class="fas fa-arrow-up"></i></strong>
                     <span>Years Experience</span>
                 </div>
                 <div class="stat">
-                    <strong>24/7</strong>
+                    <strong id="stat-support">24/7</strong>
                     <span>Support</span>
                 </div>
             </div>
@@ -876,6 +1030,46 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </section>
+    <section id="pricing" class="pricing-section">
+        <h2>Pricing Plans</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">$19<span style="font-size:1rem;">/mo</span></div>
+                <ul>
+                    <li>Analytics Dashboard</li>
+                    <li>Team Collaboration</li>
+                    <li>Email Support</li>
+                </ul>
+                <button class="cta-btn" onclick="window.location='#contact'">Choose Starter</button>
+                <div class="note">Best for small teams</div>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Pro</h3>
+                <div class="price">$49<span style="font-size:1rem;">/mo</span></div>
+                <ul>
+                    <li>All Starter features</li>
+                    <li>Automation Tools</li>
+                    <li>Advanced Security</li>
+                    <li>Priority Support</li>
+                </ul>
+                <button class="cta-btn" onclick="window.location='#contact'">Choose Pro</button>
+                <div class="note">Most Popular</div>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">Custom</div>
+                <ul>
+                    <li>All Pro features</li>
+                    <li>Dedicated Manager</li>
+                    <li>Custom Integrations</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <button class="cta-btn" onclick="window.location='#contact'">Contact Sales</button>
+                <div class="note">For large organizations</div>
+            </div>
         </div>
     </section>
     <section id="about">
@@ -1006,7 +1200,7 @@
         </form>
         <div id="newsletter-message" role="status" aria-live="polite"></div>
         <div class="newsletter-stats">
-            <i class="fas fa-users"></i> 3,500+ subscribers
+            <i class="fas fa-users"></i> <span id="newsletter-count">3,500+</span> subscribers
         </div>
     </section>
     <section id="contact">
@@ -1035,9 +1229,48 @@
         </div>
     </footer>
     <script>
+        // Hamburger menu for mobile
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        navToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-label', navLinks.classList.contains('open') ? 'Close navigation' : 'Open navigation');
+            navToggle.innerHTML = navLinks.classList.contains('open') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth <= 700) {
+                    navLinks.classList.remove('open');
+                    navToggle.setAttribute('aria-label', 'Open navigation');
+                    navToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+
+        // Animated stats counter
+        function animateStat(id, end, suffix = '', duration = 1200) {
+            const el = document.getElementById(id);
+            let start = 0;
+            let startTime = null;
+            function animate(ts) {
+                if (!startTime) startTime = ts;
+                let progress = Math.min((ts - startTime) / duration, 1);
+                let value = Math.floor(progress * (end - start) + start);
+                el.innerHTML = value + suffix + (el.innerHTML.includes('fa-arrow-up') ? ' <i class="fas fa-arrow-up"></i>' : '');
+                if (progress < 1) requestAnimationFrame(animate);
+                else el.innerHTML = end + suffix + (el.innerHTML.includes('fa-arrow-up') ? ' <i class="fas fa-arrow-up"></i>' : '');
+            }
+            requestAnimationFrame(animate);
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            animateStat('stat-clients', 200, '', 1200);
+            animateStat('stat-satisfaction', 98, '%', 1200);
+            animateStat('stat-years', 10, '', 1200);
+        });
+
         // Testimonial carousel
-        const testimonials = document.querySelectorAll('.testimonial-list .testimonial');
-        const dots = document.querySelectorAll('.carousel-dot');
+        let testimonials = document.querySelectorAll('.testimonial-list .testimonial');
+        let dots = document.querySelectorAll('.carousel-dot');
         let currentTestimonial = 0;
         function showTestimonial(idx) {
             testimonials.forEach((el, i) => {
@@ -1049,7 +1282,7 @@
         dots.forEach((dot, idx) => {
             dot.addEventListener('click', () => showTestimonial(idx));
         });
-        setInterval(() => {
+        let testimonialInterval = setInterval(() => {
             let next = (currentTestimonial + 1) % testimonials.length;
             showTestimonial(next);
         }, 6000);
@@ -1078,10 +1311,10 @@
             newDot.className = "carousel-dot";
             document.querySelector('.testimonial-carousel-controls').appendChild(newDot);
 
-            // Update event listeners
-            const allTestimonials = document.querySelectorAll('.testimonial-list .testimonial');
-            const allDots = document.querySelectorAll('.carousel-dot');
-            newDot.addEventListener('click', () => showTestimonial(allTestimonials.length - 1));
+            // Update event listeners and references
+            testimonials = document.querySelectorAll('.testimonial-list .testimonial');
+            dots = document.querySelectorAll('.carousel-dot');
+            newDot.addEventListener('click', () => showTestimonial(testimonials.length - 1));
 
             addMsg.textContent = "Thank you for your feedback!";
             addMsg.className = "form-message success";
@@ -1116,7 +1349,7 @@
             }, 1200);
         });
 
-        // Newsletter form
+        // Newsletter form with animated subscriber count
         document.getElementById('newsletter-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('newsletter-email').value.trim();
@@ -1129,7 +1362,32 @@
             msg.textContent = "Subscribed! Thank you.";
             msg.style.color = "#22c55e";
             document.getElementById('newsletter-form').reset();
+            // Animate subscriber count
+            const countEl = document.getElementById('newsletter-count');
+            let current = 3500;
+            let end = current + 1;
+            let startTime = null;
+            function animateCount(ts) {
+                if (!startTime) startTime = ts;
+                let progress = Math.min((ts - startTime) / 800, 1);
+                let value = Math.floor(progress * (end - current) + current);
+                countEl.textContent = value + "+";
+                if (progress < 1) requestAnimationFrame(animateCount);
+                else countEl.textContent = end + "+";
+            }
+            requestAnimationFrame(animateCount);
             setTimeout(() => { msg.textContent = ""; }, 3000);
+        });
+
+        // Smooth scroll for anchor links (for browsers that don't support scroll-behavior)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
     </script>
 </body>
