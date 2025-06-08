@@ -280,4 +280,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   box-shadow: 0 8px 32px rgba(37,99,235,0.18), 0 1.5px 6px rgba(0,0,0,0.08);
 }
 
+/* Remove inline style for privacy policy link */
+#cookieConsent a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+/* Remove inline style for submit button */
+#contactForm .btn {
+  cursor: pointer;
+}
+/* Remove inline style for form status */
+#formStatus {
+  font-weight: 600;
+  margin-top: .5rem;
+}
+/* Add Safari support for user-select */
+.logo {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* ...existing code... */
