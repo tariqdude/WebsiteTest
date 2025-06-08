@@ -42,20 +42,6 @@
   transition: outline-color .2s;
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition: none !important;
-    animation: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Utility: visually-hidden (for a11y) */
 .visually-hidden {
   position: absolute !important;

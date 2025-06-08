@@ -11,6 +11,110 @@ onReady(() => {
   }, 400);
 });
 
+// The following logic is added for PWA and UX improvements
+// (see index.html for inline script, but this file is for main logic)
+// If you want to move the logic from index.html <script> to here, you can do so:
+
+// Service worker registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js');
+  });
+}
+// Set current year in footer
+(function() {
+  var yearSpan = document.getElementById('year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+})();
+// Cookie consent logic
+(function() {
+  var consent = localStorage.getItem('cookieConsent');
+  var banner = document.getElementById('cookieConsent');
+  var btn = document.getElementById('acceptCookies');
+  if (banner && btn) {
+    if (!consent) banner.classList.remove('hide');
+    btn.onclick = function() {
+      localStorage.setItem('cookieConsent', 'true');
+      banner.classList.add('hide');
+    };
+  }
+})();
+// Theme toggle
+(function() {
+  var btn = document.getElementById('themeToggle');
+  var icon = btn && btn.querySelector('i');
+  var dark = localStorage.getItem('theme') === 'dark';
+  if (dark) document.body.classList.add('dark');
+  if (btn && icon) {
+    btn.onclick = function() {
+      document.body.classList.toggle('dark');
+      var isDark = document.body.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      icon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    };
+    icon.className = document.body.classList.contains('dark') ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+  }
+})();
+// Back-to-top button
+(function() {
+  var btn = document.getElementById('topBtn');
+  window.addEventListener('scroll', function() {
+    if (btn) btn.style.display = window.scrollY > 200 ? 'block' : 'none';
+  });
+  if (btn) btn.onclick = function() { window.scrollTo({top:0,behavior:'smooth'}); };
+})();
+// Smooth scroll for anchor links
+(function() {
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth'});
+      }
+    });
+  });
+})();
+// Contact form validation and feedback
+(function() {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  form.onsubmit = function(e) {
+    e.preventDefault();
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+    var message = form.message.value.trim();
+    var website = form.website.value.trim();
+    var valid = true;
+    form.querySelectorAll('.error-tooltip').forEach(function(el){el.textContent='';});
+    if (website) return false; // honeypot
+    if (!name) { valid=false; form.name.setAttribute('aria-invalid','true'); document.getElementById('nameError').textContent='Name required.'; }
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { valid=false; form.email.setAttribute('aria-invalid','true'); document.getElementById('emailError').textContent='Valid email required.'; }
+    if (!message) { valid=false; form.message.setAttribute('aria-invalid','true'); document.getElementById('messageError').textContent='Message required.'; }
+    if (!valid) return false;
+    var status = document.getElementById('formStatus');
+    var submitText = document.getElementById('submitText');
+    form.querySelector('button[type="submit"]').setAttribute('aria-busy','true');
+    submitText.textContent = 'Sending...';
+    fetch('https://formspree.io/f/mnqekgqj', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    }).then(function(response) {
+      if (response.ok) {
+        status.textContent = 'Thank you! We will be in touch soon.';
+        form.reset();
+      } else {
+        status.textContent = 'There was an error. Please try again.';
+      }
+    }).catch(function() {
+      status.textContent = 'There was an error. Please try again.';
+    }).finally(function() {
+      form.querySelector('button[type="submit"]').setAttribute('aria-busy','false');
+      submitText.textContent = 'Send Message';
+    });
+  };
+})();
 // ===== Cookie Consent =====
 onReady(() => {
   const cookieConsent = document.getElementById('cookieConsent');
@@ -148,7 +252,117 @@ onReady(() => {
   }
 });
 
-// ===== Counters (animate on scroll into view, reduced motion support) =====
+// ===== Gallery Lightbox =====
+onReady(() => {
+  const imgs = document.querySelectorAll('.gallery img');
+  imgs.forEach((img, idx) => {
+    img.addEventListener('click', () => openLightbox(idx));
+    img.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') openLightbox(idx);
+    });
+  });
+  function openLightbox(idx) {
+    const arr = Array.from(document.querySelectorAll('.gallery img'));
+    let current = idx;
+    const overlay = document.createElement('div');
+    overlay.id = 'lightbox';
+    overlay.tabIndex = 0;
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', arr[current].alt);
+    overlay.style.outline = 'none';
+    const showImg = i => {
+      overlay.innerHTML = `<img src="${arr[i].src.replace('600x400','1200x800')}" alt="${arr[i].alt}"><button id='close' tabindex="0" aria-label="Close" style="position:absolute;top:2rem;right:2rem;font-size:2.5rem;background:none;border:none;color:#fff;cursor:pointer;">&times;</button>`;
+    };
+    showImg(current);
+    document.body.appendChild(overlay);
+    overlay.focus();
+    trapFocus(overlay);
+    overlay.addEventListener('keydown', e => {
+      if (e.key === 'Escape') overlay.remove();
+      if (e.key === 'ArrowRight') { current = (current + 1) % arr.length; showImg(current);}
+      if (e.key === 'ArrowLeft') { current = (current - 1 + arr.length) % arr.length; showImg(current);}
+    });
+    overlay.addEventListener('click', e => {
+      if (e.target.id === 'lightbox' || e.target.id === 'close') overlay.remove();
+    });
+    overlay.addEventListener('keydown', e => {
+      if (e.target.id === 'close' && (e.key === 'Enter' || e.key === ' ')) overlay.remove();
+    });
+    overlay.querySelector('#close').addEventListener('click', () => overlay.remove());
+    // Swipe support
+    let startX = null;
+    overlay.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+    overlay.addEventListener('touchend', e => {
+      if (!startX) return;
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+      if (Math.abs(diff) > 30) {
+        current = (current + (diff > 0 ? -1 : 1) + arr.length) % arr.length;
+        showImg(current);
+      }
+      startX = null;
+    });
+  }
+});
+
+// ===== Testimonials Carousel =====
+onReady(() => {
+  const carousel = document.querySelector('.carousel');
+  const cards = carousel.querySelectorAll('.card');
+  const indicators = document.querySelectorAll('.carousel-indicators button');
+  let idx = 0, timer = null;
+  function show(i) {
+    idx = i;
+    cards.forEach((c, j) => {
+      c.style.display = j === i ? 'block' : 'none';
+      c.setAttribute('aria-hidden', j === i ? 'false' : 'true');
+    });
+    indicators.forEach((b, j) => {
+      b.classList.toggle('active', j === i);
+      b.setAttribute('aria-selected', j === i ? 'true' : 'false');
+    });
+    carousel.setAttribute('aria-live', 'polite');
+    setTimeout(() => carousel.setAttribute('aria-live', 'off'), 1000);
+  }
+  function next() { show((idx + 1) % cards.length); }
+  function prev() { show((idx - 1 + cards.length) % cards.length); }
+  function startAuto() {
+    timer = setInterval(next, 7000);
+  }
+  function stopAuto() {
+    clearInterval(timer);
+  }
+  // Init
+  show(0);
+  startAuto();
+  indicators.forEach((btn, i) => {
+    btn.addEventListener('click', () => { show(i); stopAuto(); startAuto(); });
+  });
+  carousel.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { next(); stopAuto(); startAuto(); }
+    if (e.key === 'ArrowLeft') { prev(); stopAuto(); startAuto(); }
+  });
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('focusin', stopAuto);
+  carousel.addEventListener('focusout', startAuto);
+  // Touch swipe support
+  let startX = null;
+  carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+  carousel.addEventListener('touchend', e => {
+    if (!startX) return;
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
+    if (Math.abs(diff) > 30) {
+      if (diff > 0) prev(); else next();
+      stopAuto(); startAuto();
+    }
+    startX = null;
+  });
+});
+
+// ===== Animated Counters =====
 onReady(() => {
   const animateCounter = (el, target, suffix) => {
     let start = target === 0 ? 0 : 1;
@@ -209,218 +423,11 @@ function trapFocus(element) {
   });
 }
 
-// ===== Enhanced Gallery Lightbox: focus trap, ESC close, ARIA improvements =====
+// ===== Service Worker Registration for PWA =====
 onReady(() => {
-  const imgs = document.querySelectorAll('.gallery img');
-  imgs.forEach((img, idx) => {
-    img.addEventListener('click', () => openLightbox(idx));
-    img.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') openLightbox(idx);
-    });
-  });
-  function openLightbox(idx) {
-    const arr = Array.from(document.querySelectorAll('.gallery img'));
-    let current = idx;
-    const overlay = document.createElement('div');
-    overlay.id = 'lightbox';
-    overlay.tabIndex = 0;
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', arr[current].alt);
-    overlay.style.outline = 'none';
-    const showImg = i => {
-      overlay.innerHTML = `<img src="${arr[i].src.replace('600x400','1200x800')}" alt="${arr[i].alt}"><button id='close' tabindex="0" aria-label="Close" style="position:absolute;top:2rem;right:2rem;font-size:2.5rem;background:none;border:none;color:#fff;cursor:pointer;">&times;</button>`;
-    };
-    showImg(current);
-    document.body.appendChild(overlay);
-    overlay.focus();
-    trapFocus(overlay);
-    overlay.addEventListener('keydown', e => {
-      if (e.key === 'Escape') overlay.remove();
-      if (e.key === 'ArrowRight') { current = (current + 1) % arr.length; showImg(current);}
-      if (e.key === 'ArrowLeft') { current = (current - 1 + arr.length) % arr.length; showImg(current);}
-    });
-    overlay.addEventListener('click', e => {
-      if (e.target.id === 'lightbox' || e.target.id === 'close') overlay.remove();
-    });
-    overlay.addEventListener('keydown', e => {
-      if (e.target.id === 'close' && (e.key === 'Enter' || e.key === ' ')) overlay.remove();
-    });
-    overlay.querySelector('#close').addEventListener('click', () => overlay.remove());
-    // Swipe support
-    let startX = null;
-    overlay.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-    overlay.addEventListener('touchend', e => {
-      if (!startX) return;
-      const endX = e.changedTouches[0].clientX;
-      const diff = endX - startX;
-      if (Math.abs(diff) > 30) {
-        current = (current + (diff > 0 ? -1 : 1) + arr.length) % arr.length;
-        showImg(current);
-      }
-      startX = null;
-    });
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
   }
-});
-
-// ===== Enhanced Testimonials Carousel: pause on focus, resume on blur, ARIA improvements =====
-onReady(() => {
-  const carousel = document.querySelector('.carousel');
-  const cards = carousel.querySelectorAll('.card');
-  const indicators = document.querySelectorAll('.carousel-indicators button');
-  let idx = 0, timer = null;
-  function show(i) {
-    idx = i;
-    cards.forEach((c, j) => {
-      c.style.display = j === i ? 'block' : 'none';
-      c.setAttribute('aria-hidden', j === i ? 'false' : 'true');
-    });
-    indicators.forEach((b, j) => {
-      b.classList.toggle('active', j === i);
-      b.setAttribute('aria-selected', j === i ? 'true' : 'false');
-    });
-    carousel.setAttribute('aria-live', 'polite');
-    setTimeout(() => carousel.setAttribute('aria-live', 'off'), 1000);
-  }
-  function next() { show((idx + 1) % cards.length); }
-  function prev() { show((idx - 1 + cards.length) % cards.length); }
-  function startAuto() {
-    timer = setInterval(next, 7000);
-  }
-  function stopAuto() {
-    clearInterval(timer);
-  }
-  // Init
-  show(0);
-  startAuto();
-  indicators.forEach((btn, i) => {
-    btn.addEventListener('click', () => { show(i); stopAuto(); startAuto(); });
-  });
-  carousel.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') { next(); stopAuto(); startAuto(); }
-    if (e.key === 'ArrowLeft') { prev(); stopAuto(); startAuto(); }
-  });
-  carousel.addEventListener('mouseenter', stopAuto);
-  carousel.addEventListener('mouseleave', startAuto);
-  carousel.addEventListener('focusin', stopAuto);
-  carousel.addEventListener('focusout', startAuto);
-  // Touch swipe support
-  let startX = null;
-  carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-  carousel.addEventListener('touchend', e => {
-    if (!startX) return;
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - startX;
-    if (Math.abs(diff) > 30) {
-      if (diff > 0) prev(); else next();
-      stopAuto(); startAuto();
-    }
-    startX = null;
-  });
-});
-
-// ===== Anchor scroll restoration (for smooth scroll and focus) =====
-onReady(() => {
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        target.focus({ preventScroll: true });
-      }
-    });
-  });
-});
-
-// ===== Form: AJAX submit, validation, honeypot, accessibility, improved error handling =====
-onReady(() => {
-  const form = document.getElementById('contactForm');
-  const status = document.getElementById('formStatus');
-  const btn = form.querySelector('button[type="submit"]');
-  const nameInput = form.querySelector('#name');
-  const emailInput = form.querySelector('#email');
-  const messageInput = form.querySelector('#message');
-  const nameError = document.getElementById('nameError');
-  const emailError = document.getElementById('emailError');
-  const messageError = document.getElementById('messageError');
-  const honeypot = form.querySelector('input[name="website"]');
-  function validate() {
-    let valid = true;
-    // Name
-    if (!nameInput.value.trim()) {
-      nameError.textContent = 'Name is required';
-      nameInput.parentElement.classList.add('error');
-      valid = false;
-    } else {
-      nameError.textContent = '';
-      nameInput.parentElement.classList.remove('error');
-    }
-    // Email
-    const emailVal = emailInput.value.trim();
-    if (!emailVal) {
-      emailError.textContent = 'Email is required';
-      emailInput.parentElement.classList.add('error');
-      valid = false;
-    } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailVal)) {
-      emailError.textContent = 'Invalid email address';
-      emailInput.parentElement.classList.add('error');
-      valid = false;
-    } else {
-      emailError.textContent = '';
-      emailInput.parentElement.classList.remove('error');
-    }
-    // Message
-    if (!messageInput.value.trim()) {
-      messageError.textContent = 'Message is required';
-      messageInput.parentElement.classList.add('error');
-      valid = false;
-    } else {
-      messageError.textContent = '';
-      messageInput.parentElement.classList.remove('error');
-    }
-    return valid;
-  }
-  [nameInput, emailInput, messageInput].forEach(input => {
-    input.addEventListener('input', validate);
-  });
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    status.textContent = '';
-    if (honeypot.value) return; // bot detected
-    if (!validate()) {
-      status.textContent = 'Please fix errors above.';
-      status.style.color = '#f44336';
-      return;
-    }
-    btn.disabled = true;
-    btn.setAttribute('aria-busy', 'true');
-    btn.querySelector('#submitText').textContent = 'Sending...';
-    const data = new FormData(form);
-    fetch('https://formspree.io/f/mwkajgyd', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: data
-    }).then(response => {
-      btn.disabled = false;
-      btn.setAttribute('aria-busy', 'false');
-      btn.querySelector('#submitText').textContent = 'Send Message';
-      if (response.ok) {
-        form.reset();
-        status.innerHTML = 'Message sent successfully!';
-        status.style.color = '#4caf50';
-      } else {
-        status.innerHTML = 'Error sending message. Please try again later.';
-        status.style.color = '#f44336';
-      }
-    }).catch(() => {
-      btn.disabled = false;
-      btn.setAttribute('aria-busy', 'false');
-      btn.querySelector('#submitText').textContent = 'Send Message';
-      status.innerHTML = 'Network error. Please try again.';
-      status.style.color = '#f44336';
-    });
-  });
 });
 
 // ===== Footer: Set copyright year =====
