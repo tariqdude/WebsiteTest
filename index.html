@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Allied Construction | Chicago Design‑Build Contractors</title>
   <!-- SEO & Social -->
@@ -14,149 +15,130 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0A66C2" />
   <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- PWA Manifest (data URI) -->
+  <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAibmFtZSI6ICJBbGxpZWQgQ29uc3RydWN0aW9uIiwNCiAgInNob3J0X25hbWUiOiAiQWxsaWVkIiwNCiAgImljb24iOiAiL2ljb24ucG5nIiwNCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZiIsDQogICJ0aGVtZV9jb2xvciI6ICIjMEE2NkMyIiwNCiAgInN0YXJ0X3VybCI6ICIuLyINCn0=">
   <style>
-    /* ===== CSS Variable System ===== */
+    /* ===== CSS Variables ===== */
     :root {
-      --primary: #0A66C2;
-      --primary-dark: #094b91;
-      --accent: #F59E0B;
-      --bg: #fafafa;
-      --surface: #ffffff;
-      --text: #111827;
-      --gray: #f3f4f6;
-      --radius: 12px;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-      --font: 'Poppins', sans-serif;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --primary:#0A66C2; --primary-dark:#094b91; --accent:#F59E0B;
+      --bg:#fafafa; --surface:#ffffff; --text:#111827; --gray:#f3f4f6;
+      --radius:12px; --shadow:0 8px 22px rgba(0,0,0,.06);
+      --font:'Poppins',sans-serif; --transition:.3s cubic-bezier(.4,0,.2,1);
+      --scroll-height:4px;
     }
-    /* Dark‑mode palette */
-    @media (prefers-color-scheme: dark) {
-      :root:not(.light) {
-        --bg: #0f1116;
-        --surface: #1a1d24;
-        --text: #f1f3f9;
-        --gray: #23262e;
-        --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      }
-    }
-    :root.dark {
-      --bg: #0f1116;
-      --surface: #1a1d24;
-      --text: #f1f3f9;
-      --gray: #23262e;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
+    @media(prefers-color-scheme:dark){:root:not(.light){--bg:#0f1116;--surface:#1a1d24;--text:#f1f3f9;--gray:#23262e;--shadow:0 8px 22px rgba(0,0,0,.45);}}
+    :root.dark{--bg:#0f1116;--surface:#1a1d24;--text:#f1f3f9;--gray:#23262e;--shadow:0 8px 22px rgba(0,0,0,.45);}
 
-    /* ===== Reset & Base ===== */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.6; }
-    img { display: block; max-width: 100%; }
-    h2 { font-size: 2rem; margin-bottom: 1rem; text-align: center; color: var(--primary-dark); }
-    a { color: inherit; }
+    /* ===== Base Reset ===== */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6}
+    img{display:block;max-width:100%}
+    h2{font-size:clamp(1.8rem,2.5vw,2.4rem);margin-bottom:1rem;text-align:center;color:var(--primary-dark)}
 
-    .container { max-width: 1200px; margin: auto; padding: 1rem 1.5rem; }
-    .btn { display: inline-block; background: var(--primary); color: #fff; padding: 0.9rem 1.8rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; transition: background var(--transition); }
-    .btn:hover { background: var(--primary-dark); }
+    /* ===== Utilities ===== */
+    .container{max-width:1200px;margin:auto;padding:1rem 1.5rem}
+    .btn{display:inline-block;background:var(--primary);color:#fff;padding:.9rem 1.8rem;border-radius:var(--radius);font-weight:600;text-decoration:none;transition:background var(--transition)}
+    .btn:hover{background:var(--primary-dark)}
+
+    /* ===== Scroll Progress ===== */
+    #progress{position:fixed;left:0;top:0;height:var(--scroll-height);background:var(--accent);width:0%;z-index:2000}
 
     /* ===== Header ===== */
-    header { position: fixed; inset: 0 0 auto 0; background: var(--surface); box-shadow: var(--shadow); z-index: 1000; }
-    nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .logo { font-weight: 800; font-size: 1.35rem; color: var(--primary); letter-spacing: -0.5px; }
-    nav ul { display: flex; list-style: none; gap: 1.4rem; }
-    nav a { font-weight: 600; text-decoration: none; color: var(--text); transition: color var(--transition); }
-    nav a:hover, nav a.active { color: var(--primary); }
-    .hamburger { display: none; font-size: 1.6rem; cursor: pointer; background: none; border: none; color: var(--primary); }
-    #themeToggle { margin-left: 0.75rem; background: none; border: none; font-size: 1.5rem; color: var(--accent); cursor: pointer; transition: transform var(--transition); }
-    #themeToggle:hover { transform: rotate(15deg); }
-
-    @media (max-width: 768px) {
-      nav ul { position: absolute; top: 64px; left: 0; width: 100%; flex-direction: column; background: var(--surface); max-height: 0; overflow: hidden; transition: max-height 0.35s ease; border-top: 1px solid var(--gray); }
-      nav ul.open { max-height: 320px; }
-      .hamburger { display: block; }
-    }
+    header{position:fixed;top:0;left:0;right:0;background:transparent;padding:.25rem 0;transition:background .25s ease,box-shadow .25s ease}
+    header.scrolled{background:var(--surface);box-shadow:var(--shadow)}
+    nav{display:flex;align-items:center;justify-content:space-between;min-height:64px}
+    .logo{font-weight:800;font-size:1.35rem;color:var(--primary);letter-spacing:-.5px}
+    nav ul{display:flex;list-style:none;gap:1.4rem}
+    nav a{font-weight:600;text-decoration:none;color:var(--text);transition:color var(--transition)}
+    nav a:hover,nav a.active{color:var(--primary)}
+    .hamburger{display:none;font-size:1.6rem;cursor:pointer;background:none;border:none;color:var(--primary)}
+    #themeToggle{margin-left:.75rem;background:none;border:none;font-size:1.5rem;color:var(--accent);cursor:pointer;transition:transform var(--transition)}
+    #themeToggle:hover{transform:rotate(15deg)}
+    @media(max-width:768px){nav ul{position:absolute;top:64px;left:0;width:100%;flex-direction:column;background:var(--surface);max-height:0;overflow:hidden;transition:max-height .35s ease;border-top:1px solid var(--gray)}nav ul.open{max-height:370px} .hamburger{display:block}}
 
     /* ===== Hero ===== */
-    .hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center; min-height: 100vh; padding-top: 4rem; }
-    .hero h1 { font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1.15; color: var(--primary-dark); margin-bottom: 1rem; }
-    .hero p { font-size: 1.1rem; max-width: 600px; margin-bottom: 1.5rem; }
-    .hero img { border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:3rem;align-items:center;min-height:100vh;background:url('https://source.unsplash.com/1600x900?chicago-skyline') center/cover fixed;padding-top:6rem}
+    .hero-overlay{background:rgba(0,0,0,.55);position:absolute;inset:0}
+    .hero>*{position:relative;color:#fff}
+    .hero h1{font-size:clamp(2.8rem,5vw,4.2rem);line-height:1.15;margin-bottom:1rem}
+    .hero p{font-size:1.1rem;max-width:600px;margin-bottom:1.5rem}
+    .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem;margin-top:2.5rem}
+    .stat{text-align:center;min-width:120px}
+    .stat strong{display:block;font-size:2.4rem;color:var(--accent)}
 
-    /* ===== Decorative Waves ===== */
-    .wave { display: block; width: 100%; height: 80px; line-height: 0; }
-    .wave svg { width: 100%; height: 100%; fill: var(--surface); }
+    /* ===== Wave ===== */
+    .wave{display:block;width:100%;height:80px;line-height:0}
+    .wave svg{width:100%;height:100%;fill:var(--surface)}
 
-    /* ===== Stats ===== */
-    .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; margin-top: 2.5rem; }
-    .stat { text-align: center; min-width: 120px; }
-    .stat strong { display: block; font-size: 2.2rem; color: var(--accent); }
+    /* ===== Services Cards ===== */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.8rem;margin-top:2rem}
+    .card{background:var(--surface);padding:2.2rem 1.8rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;transition:transform var(--transition),box-shadow var(--transition)}
+    .card:hover{transform:translateY(-7px) scale(1.02);box-shadow:0 18px 36px rgba(0,0,0,.08)}
+    .card i{font-size:2rem;color:var(--primary);margin-bottom:.75rem}
 
-    /* ===== Cards / Services ===== */
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.8rem; margin-top: 2rem; }
-    .card { background: var(--surface); padding: 2.2rem 1.8rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; transition: transform var(--transition), box-shadow var(--transition); }
-    .card:hover { transform: translateY(-7px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07); }
-    .card i { font-size: 2rem; color: var(--primary); margin-bottom: 0.75rem; }
+    /* ===== Awards ===== */
+    .awards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;align-items:center;justify-items:center;margin-top:2rem;filter:grayscale(1);opacity:.8}
+    .awards img{max-height:60px}
 
-    /* ===== Process Steps ===== */
-    .process { background: var(--gray); }
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.8rem; margin-top: 2rem; counter-reset: step; }
-    .step { background: var(--surface); padding: 2rem 1.6rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; }
-    .step::before { counter-increment: step; content: counter(step); position: absolute; top: -18px; left: -18px; width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; box-shadow: var(--shadow); }
-    .step h3 { margin-bottom: 0.5rem; }
+    /* ===== Process ===== */
+    .process{background:var(--gray)}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.8rem;margin-top:2rem;counter-reset:step}
+    .step{background:var(--surface);padding:2rem 1.6rem;border-radius:var(--radius);box-shadow:var(--shadow);position:relative}
+    .step::before{counter-increment:step;content:counter(step);position:absolute;top:-18px;left:-18px;width:40px;height:40px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:var(--shadow)}
+    .step h3{margin-bottom:.5rem}
 
-    /* ===== Gallery / Lightbox ===== */
-    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
-    .gallery img { border-radius: var(--radius); object-fit: cover; aspect-ratio: 4/3; cursor: zoom-in; transition: transform var(--transition); }
-    .gallery img:hover { transform: scale(1.05); }
-    #lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center; z-index: 2000; animation: fadeIn 0.3s ease-out; }
-    #lightbox img { max-width: 92%; max-height: 92%; border-radius: var(--radius); box-shadow: var(--shadow); cursor: zoom-out; }
-    #close { position: absolute; top: 1.4rem; right: 2rem; font-size: 2rem; color: #fff; cursor: pointer; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    /* ===== Gallery ===== */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-top:2rem}
+    .gallery img{border-radius:var(--radius);object-fit:cover;aspect-ratio:4/3;cursor:zoom-in;transition:transform var(--transition)}
+    .gallery img:hover{transform:scale(1.05)}
 
-    /* ===== Testimonials (Carousel) ===== */
-    .testimonials { background: var(--gray); }
-    .carousel { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch; }
-    .carousel::-webkit-scrollbar { display: none; }
-    .carousel .card { min-width: 280px; scroll-snap-align: start; }
-    blockquote { font-style: italic; margin-bottom: 1rem; position: relative; padding-left: 1.5rem; }
-    blockquote::before { content: "\f10d"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: 0; color: var(--primary); }
+    /* ===== Lightbox ===== */
+    #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:2000;animation:fadeIn .3s ease-out}
+    #lightbox img{max-width:92%;max-height:92%;border-radius:var(--radius);box-shadow:var(--shadow);cursor:zoom-out}
+    #close{position:absolute;top:1.4rem;right:2rem;font-size:2rem;color:#fff;cursor:pointer}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-    /* ===== FAQ ===== */
-    .faq details { background: var(--surface); margin-bottom: 1rem; padding: 1rem 1.25rem; border-radius: var(--radius); box-shadow: var(--shadow); }
-    .faq summary { cursor: pointer; font-weight: 600; list-style: none; position: relative; padding-right: 1.5rem; }
-    .faq summary::after { content: "\f078"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; right: 0; transition: transform var(--transition); }
-    .faq details[open] summary::after { transform: rotate(180deg); }
+    /* ===== Testimonials ===== */
+    .testimonials{background:var(--gray)}
+    .carousel{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;-webkit-overflow-scrolling:touch}
+    .carousel::-webkit-scrollbar{display:none}
+    .carousel .card{min-width:280px;scroll-snap-align:start}
+    blockquote{font-style:italic;margin-bottom:1rem;position:relative;padding-left:1.5rem}
+    blockquote::before{content:"\f10d";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;left:0;top:0;color:var(--primary)}
 
-    /* ===== CTA ===== */
-    .call { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #fff; text-align: center; border-radius: var(--radius); padding: 3rem 1rem; margin-top: 2rem; }
-    .call::before { content: ""; position: absolute; inset: 0; background: hsla(0, 0%, 100%, 0.05); transform: skewY(-6deg); }
-    .call h2 { font-size: 2rem; margin-bottom: 1rem; }
+    /* ===== FAQ & Contact same as before... (kept) */
+    .faq details{background:var(--surface);margin-bottom:1rem;padding:1rem 1.25rem;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .faq summary{cursor:pointer;font-weight:600;list-style:none;position:relative;padding-right:1.5rem}
+    .faq summary::after{content:"\f078";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;right:0;transition:transform var(--transition)}
+    .faq details[open] summary::after{transform:rotate(180deg)}
 
-    /* ===== Footer ===== */
-    footer { background: #111; color: #eee; text-align: center; padding: 2.5rem 1rem; font-size: 0.9rem; }
-    footer a { color: var(--accent); }
+    .call{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary)0%,var(--primary-dark)100%);color:#fff;text-align:center;border-radius:var(--radius);padding:3rem 1rem;margin-top:2rem}
+    .call::before{content:"";position:absolute;inset:0;background:hsla(0,0%,100%,.05);transform:skewY(-6deg)}
+    .call h2{font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:1rem}
 
-    /* ===== Animations ===== */
-    [data-animate] { opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    [data-animate].show { opacity: 1; transform: none; }
+    /* ===== Sticky Mobile CTA ===== */
+    #stickyCTA{position:fixed;bottom:0;left:0;right:0;background:var(--primary);color:#fff;display:none;align-items:center;justify-content:space-between;padding:.75rem 1rem;z-index:1500}
+    #stickyCTA a{color:#fff;font-weight:600}
+    @media(max-width:640px){#stickyCTA{display:flex}}
 
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-      [data-animate] { opacity: 1; transform: none; }
-    }
+    /* ===== Back-to-top ===== */
+    #topBtn{position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:1.25rem;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shadow);transition:background var(--transition)}
+    #topBtn:hover{background:var(--primary-dark)}
+    #topBtn.show{display:flex}
 
-    /* ===== Back‑to‑top ===== */
-    #topBtn { position: fixed; bottom: 24px; right: 24px; background: var(--primary); color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.25rem; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow); transition: background var(--transition); }
-    #topBtn:hover { background: var(--primary-dark); }
-    #topBtn.show { display: flex; }
+    /* ===== Reveal ===== */
+    [data-animate]{opacity:0;transform:translateY(40px);transition:opacity .6s ease,transform .6s ease}
+    [data-animate].show{opacity:1;transform:none}
   </style>
 </head>
 <body>
+  <span id="progress"></span>
   <a href="#home" class="skip-link">Skip to content</a>
-  <header>
+  <header id="header">
     <div class="container">
       <nav aria-label="Main navigation">
         <div class="logo">Allied Construction</div>
@@ -165,6 +147,7 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#awards">Awards</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -179,22 +162,18 @@
 
   <main id="home">
     <!-- Hero -->
-    <section class="hero container" data-animate>
-      <div>
-        <h1>Building Your Vision.<br />Engineering Your Future.</h1>
-        <p>From concept to completion, we deliver award‑winning commercial and residential construction solutions across Chicagoland.</p>
+    <section class="hero" data-animate>
+      <div class="hero-overlay"></div>
+      <div class="container" style="position:relative;z-index:1;">
+        <h1>Building Your Vision.<br>Engineering Your Future.</h1>
+        <p>From concept to completion, we deliver award-winning commercial and residential construction solutions across Chicagoland.</p>
         <a href="#contact" class="btn">Request a Quote</a>
-
         <div class="stats">
           <div class="stat"><strong id="years">30+</strong>Years Experience</div>
           <div class="stat"><strong id="projects">150</strong>Projects Delivered</div>
           <div class="stat"><strong id="safety">0</strong>Safety Violations</div>
         </div>
       </div>
-      <picture>
-        <source srcset="https://source.unsplash.com/1600x1200?construction-site" media="(min-width: 768px)" />
-        <img src="https://source.unsplash.com/800x600?construction" alt="Skyscraper construction" loading="lazy" decoding="async" />
-      </picture>
     </section>
 
     <span class="wave"><svg viewBox="0 0 1440 80"><path d="M0,32L80,48C160,64,320,96,480,106.7C640,117,800,107,960,74.7C1120,43,1280,21,1360,10.7L1440,0V80H0Z"></path></svg></span>
@@ -203,7 +182,7 @@
     <section id="about" data-animate>
       <div class="container">
         <h2>About Us</h2>
-        <p>Established in 1995, Allied Construction has earned a reputation for precision craftsmanship, transparent project management, and relentless safety standards. Our union‑trained teams hold <strong>LEED</strong>, <strong>OSHA 30</strong>, and <strong>BPI</strong> certifications, turning blueprints into benchmarks.</p>
+        <p>Established in 1995, Allied Construction has earned a reputation for precision craftsmanship, transparent project management, and relentless safety standards. Our union-trained teams hold <strong>LEED</strong>, <strong>OSHA 30</strong>, and <strong>BPI</strong> certifications, turning blueprints into benchmarks.</p>
       </div>
     </section>
 
@@ -212,10 +191,10 @@
       <div class="container">
         <h2>Our Services</h2>
         <div class="cards">
-          <div class="card"><i class="fa-solid fa-city"></i><h3>Commercial Build‑Outs</h3><p>Turnkey solutions for offices, retail, and industrial spaces—from permits to punch‑list.</p></div>
-          <div class="card"><i class="fa-solid fa-house"></i><h3>Residential Remodeling</h3><p>High‑end kitchens, bathrooms, and whole‑home renovations that add lasting value.</p></div>
-          <div class="card"><i class="fa-solid fa-screwdriver-wrench"></i><h3>HVAC & Mechanical</h3><p>Energy‑efficient systems designed, fabricated, and installed by certified experts.</p></div>
-          <div class="card"><i class="fa-solid fa-solar-panel"></i><h3>Sustainable Retrofits</h3><p>Solar integration, green roofs, and LEED consulting for eco‑forward clients.</p></div>
+          <div class="card"><i class="fa-solid fa-city"></i><h3>Commercial Build-Outs</h3><p>Turnkey solutions for offices, retail, and industrial spaces—from permits to punch-list.</p></div>
+          <div class="card"><i class="fa-solid fa-house"></i><h3>Residential Remodeling</h3><p>High-end kitchens, bathrooms, and whole-home renovations that add lasting value.</p></div>
+          <div class="card"><i class="fa-solid fa-screwdriver-wrench"></i><h3>HVAC & Mechanical</h3><p>Energy-efficient systems designed, fabricated, and installed by certified experts.</p></div>
+          <div class="card"><i class="fa-solid fa-solar-panel"></i><h3>Sustainable Retrofits</h3><p>Solar integration, green roofs, and LEED consulting for eco-forward clients.</p></div>
         </div>
       </div>
     </section>
@@ -248,12 +227,25 @@
       </div>
     </section>
 
+    <!-- Awards -->
+    <section id="awards" data-animate>
+      <div class="container">
+        <h2>Awards & Certifications</h2>
+        <div class="awards">
+          <img src="https://dummyimage.com/120x60/eeeeee/000&text=LEED+Gold" alt="LEED Gold" />
+          <img src="https://dummyimage.com/120x60/eeeeee/000&text=ABC+Excellence" alt="ABC Excellence in Construction" />
+          <img src="https://dummyimage.com/120x60/eeeeee/000&text=Safety+Star" alt="Safety Star" />
+          <img src="https://dummyimage.com/120x60/eeeeee/000&text=Energy+Star" alt="Energy Star Partner" />
+        </div>
+      </div>
+    </section>
+
     <!-- Testimonials -->
     <section id="testimonials" class="testimonials" data-animate>
       <div class="container">
         <h2>What Our Clients Say</h2>
         <div class="carousel">
-          <div class="card"><blockquote>Allied transformed our outdated warehouse into a cutting‑edge HQ—on schedule and under budget.</blockquote><strong>— J. Martinez, CEO, TechEdge</strong></div>
+          <div class="card"><blockquote>Allied transformed our outdated warehouse into a cutting-edge HQ—on schedule and under budget.</blockquote><strong>— J. Martinez, CEO, TechEdge</strong></div>
           <div class="card"><blockquote>Professional, transparent, and meticulous. We couldn't be happier with our new home addition.</blockquote><strong>— S. Patel, Homeowner</strong></div>
           <div class="card"><blockquote>The team handled everything—permits, inspections, and a flawless LEED certification.</blockquote><strong>— L. Chen, Facility Manager, GreenWorks</strong></div>
         </div>
@@ -263,8 +255,8 @@
     <!-- FAQ -->
     <section id="faq" class="faq container" data-animate>
       <h2>Frequently Asked Questions</h2>
-      <details><summary>Are you licensed, bonded, and insured?</summary><p>Absolutely. We hold all required state & city licenses, carry multi‑million‑dollar liability coverage, and are fully bonded.</p></details>
-      <details><summary>Do you offer free estimates?</summary><p>Yes, schedule a site visit and we'll provide a detailed, no‑obligation quote.</p></details>
+      <details><summary>Are you licensed, bonded, and insured?</summary><p>Absolutely. We hold all required state & city licenses, carry multi-million-dollar liability coverage, and are fully bonded.</p></details>
+      <details><summary>Do you offer free estimates?</summary><p>Yes, schedule a site visit and we'll provide a detailed, no-obligation quote.</p></details>
       <details><summary>How do you handle change orders?</summary><p>Changes are documented with transparent pricing and only proceed upon written client approval.</p></details>
     </section>
 
@@ -275,134 +267,81 @@
           <h2>Ready to break ground?</h2>
           <p>Request a free consultation and project estimate.</p>
           <form id="contactForm" style="max-width:600px;margin:auto;margin-top:1.5rem;display:grid;gap:1rem;">
-            <input name="name" type="text" placeholder="Your Name" required style="padding:0.75rem;border:none;border-radius:var(--radius);">
-            <input name="email" type="email" placeholder="Email" required style="padding:0.75rem;border:none;border-radius:var(--radius);">
-            <input name="phone" type="tel" placeholder="Phone (optional)" style="padding:0.75rem;border:none;border-radius:var(--radius);">
-            <textarea name="message" rows="4" placeholder="Project details…" required style="padding:0.75rem;border:none;border-radius:var(--radius);"></textarea>
+            <input name="name" type="text" placeholder="Your Name" required style="padding:.75rem;border:none;border-radius:var(--radius);">
+            <input name="email" type="email" placeholder="Email" required style="padding:.75rem;border:none;border-radius:var(--radius);">
+            <input name="phone" type="tel" placeholder="Phone (optional)" style="padding:.75rem;border:none;border-radius:var(--radius);">
+            <textarea name="message" rows="4" placeholder="Project details…" required style="padding:.75rem;border:none;border-radius:var(--radius);"></textarea>
             <button type="submit" class="btn" style="cursor:pointer;">Send Message</button>
-            <p id="formStatus" aria-live="polite" style="font-weight:600;margin-top:0.5rem;"></p>
+            <p id="formStatus" aria-live="polite" style="font-weight:600;margin-top:.5rem;"></p>
           </form>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Sticky Mobile CTA -->
+  <div id="stickyCTA"><span>Need a quote?</span><a href="#contact">Get in touch</a></div>
+
   <footer>
-    © <span id="year"></span> Allied Construction • <a href="tel:+13125551234">312‑555‑1234</a> • Chicago, IL
+    © <span id="year"></span> Allied Construction • <a href="tel:+13125551234">312-555-1234</a> • Chicago, IL
   </footer>
 
   <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
   <script>
+    /* ===== Header scroll shadow & progress ===== */
+    const header=document.getElementById('header');
+    const progress=document.getElementById('progress');
+    window.addEventListener('scroll',()=>{
+      const scY=window.scrollY;
+      header.classList.toggle('scrolled',scY>80);
+      const max=document.body.scrollHeight-innerHeight;
+      progress.style.width=`${(scY/max)*100}%`;
+    });
+
     /* ===== Mobile Nav ===== */
-    const hamburger = document.getElementById('hamburger');
-    const menu = document.getElementById('menu');
-    hamburger.addEventListener('click', () => {
-      const expanded = menu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', expanded);
+    const hamburger=document.getElementById('hamburger');
+    const menu=document.getElementById('menu');
+    hamburger.addEventListener('click',()=>{
+      const expanded=menu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded',expanded);
     });
 
     /* ===== Theme Toggle ===== */
-    const toggleBtn = document.getElementById('themeToggle');
-    const root = document.documentElement;
-    function setTheme(mode) {
-      root.classList.toggle('dark', mode === 'dark');
-      localStorage.setItem('theme', mode);
-      toggleBtn.innerHTML = mode === 'dark' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
-    }
-    const saved = localStorage.getItem('theme');
-    if (saved) setTheme(saved);
-    toggleBtn.addEventListener('click', () => setTheme(root.classList.contains('dark') ? 'light' : 'dark'));
+    const toggleBtn=document.getElementById('themeToggle');
+    const root=document.documentElement;
+    function setTheme(mode){root.classList.toggle('dark',mode==='dark');localStorage.setItem('theme',mode);toggleBtn.innerHTML=mode==='dark'?'<i class="fa-solid fa-moon"></i>':'<i class="fa-solid fa-sun"></i>'}
+    const saved=localStorage.getItem('theme');if(saved){setTheme(saved)}
+    toggleBtn.addEventListener('click',()=>setTheme(root.classList.contains('dark')?'light':'dark'));
 
-    /* ===== Active Link & Back‑to‑top ===== */
-    const links = document.querySelectorAll('nav a');
-    const topBtn = document.getElementById('topBtn');
-    window.addEventListener('scroll', () => {
-      const fromTop = window.scrollY + 90;
-      links.forEach(link => {
-        const section = document.querySelector(link.getAttribute('href'));
-        if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-          link.classList.add('active');
-        } else link.classList.remove('active');
-      });
-      topBtn.classList.toggle('show', window.scrollY > 700);
+    /* ===== Active link & back-to-top ===== */
+    const links=document.querySelectorAll('nav a');
+    const topBtn=document.getElementById('topBtn');
+    window.addEventListener('scroll',()=>{
+      const fromTop=scrollY+90;
+      links.forEach(l=>{const section=document.querySelector(l.getAttribute('href'));if(section.offsetTop<=fromTop&&section.offsetTop+section.offsetHeight>fromTop){l.classList.add('active')}else l.classList.remove('active')});
+      topBtn.classList.toggle('show',scrollY>700);
     });
-    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    topBtn.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
-    /* ===== Intersection Reveal ===== */
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => e.isIntersecting && e.target.classList.add('show'));
-      }, { threshold: 0.15 });
-      document.querySelectorAll('[data-animate]').forEach(el => io.observe(el));
-    } else {
-      document.querySelectorAll('[data-animate]').forEach(el => el.classList.add('show')); }
+    /* ===== Reveal on scroll ===== */
+    if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting&&e.target.classList.add('show'))},{threshold:.15});document.querySelectorAll('[data-animate]').forEach(el=>io.observe(el))}else{document.querySelectorAll('[data-animate]').forEach(el=>el.classList.add('show'))}
 
     /* ===== Counters ===== */
-    const counters = [
-      { el: '#years', target: 30 },
-      { el: '#projects', target: 150 },
-      { el: '#safety', target: 0 }
-    ];
-    counters.forEach(c => {
-      const el = document.querySelector(c.el);
-      let start = 0;
-      const step = Math.max(1, c.target / 60);
-      const i = setInterval(() => {
-        start += step;
-        el.textContent = Math.ceil(start);
-        if (start >= c.target) clearInterval(i);
-      }, 30);
-    });
+    const counters=[{el:'#years',target:30},{el:'#projects',target:150},{el:'#safety',target:0}];
+    counters.forEach(c=>{const el=document.querySelector(c.el);let start=0;const step=Math.max(1,c.target/60);const i=setInterval(()=>{start+=step;el.textContent=Math.ceil(start);if(start>=c.target)clearInterval(i)},30)});
 
     /* ===== Lightbox ===== */
-    document.querySelectorAll('.gallery img').forEach(img => {
-      img.addEventListener('click', () => {
-        const overlay = document.createElement('div');
-        overlay.id = 'lightbox';
-        overlay.innerHTML = `<img src="${img.src.replace('600x400', '1200x800')}" alt="${img.alt}"><span id="close">&times;</span>`;
-        document.body.appendChild(overlay);
-        overlay.addEventListener('click', e => { if (e.target.id === 'lightbox' || e.target.id === 'close') overlay.remove(); });
-      });
-    });
+    document.querySelectorAll('.gallery img').forEach(img=>img.addEventListener('click',()=>{const overlay=document.createElement('div');overlay.id='lightbox';overlay.innerHTML=`<img src="${img.src.replace('600x400','1200x800')}" alt="${img.alt}"><span id='close'>&times;</span>`;document.body.appendChild(overlay);overlay.addEventListener('click',e=>{if(e.target.id==='lightbox'||e.target.id==='close')overlay.remove()})}));
 
-    /* ===== Form Submission (Formspree) ===== */
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', async e => {
-      e.preventDefault();
-      const status = document.getElementById('formStatus');
-      status.textContent = 'Sending…';
-      const data = new FormData(contactForm);
-      try {
-        const res = await fetch('https://formspree.io/f/your-id', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-        if (res.ok) { status.textContent = 'Thank you! We will be in touch.'; contactForm.reset(); }
-        else { status.textContent = 'Oops! Something went wrong.'; }
-      } catch { status.textContent = 'Network error – please retry.'; }
-    });
+    /* ===== Formspree Submission ===== */
+    const form=document.getElementById('contactForm');form.addEventListener('submit',async e=>{e.preventDefault();const status=document.getElementById('formStatus');status.textContent='Sending…';const data=new FormData(form);try{const res=await fetch('https://formspree.io/f/your-id',{method:'POST',body:data,headers:{Accept:'application/json'}});if(res.ok){status.textContent='Thank you! We will be in touch.';form.reset()}else{status.textContent='Oops! Something went wrong.'}}catch{status.textContent='Network error – please retry.'}});
 
     /* ===== Current Year ===== */
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    document.getElementById('year').textContent=new Date().getFullYear();
 
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Allied Construction",
-    "url": "https://alliedconstruction.github.io/",
-    "logo": "https://source.unsplash.com/featured/?construction-logo",
-    "telephone": "+13125551234",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "123 W Madison St",
-      "addressLocality": "Chicago",
-      "addressRegion": "IL",
-      "postalCode": "60602",
-      "addressCountry": "US"
-    },
-    "sameAs": ["https://www.linkedin.com/company/allied-construction"]
-  }
+    /* ===== Service Worker (offline cache) ===== */
+    if('serviceWorker'in navigator){const code=`self.addEventListener('install',e=>{e.waitUntil(caches.open('allied-v1').then(c=>c.addAll(['/']))});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))})`;const blob=new Blob([code],{type:'text/javascript'});navigator.serviceWorker.register(URL.createObjectURL(blob));}
   </script>
 </body>
 </html>
