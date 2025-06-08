@@ -78,9 +78,11 @@
   <!-- =========================
        Loader & Progress
   ========================== -->
-  <div id="pageloader" aria-label="Loading page" role="status"><span class="spinner"></span></div>
+  <div id="pageloader" aria-label="Loading page" role="status">
+    <span class="spinner"></span>
+  </div>
   <span id="progress" role="presentation"></span>
-  <a href="#home" class="skip-link" aria-label="Skip to main content" tabindex="0">Skip to content</a>
+  <a href="#home" class="skip-link" aria-label="Skip to main content">Skip to content</a>
 
   <!-- =========================
        Cookie Consent
@@ -90,7 +92,7 @@
       We use cookies to improve your experience. By using our site, you agree to our
       <a href="#" class="privacy-link">privacy policy</a>.
     </span>
-    <button id="acceptCookies">Accept</button>
+    <button id="acceptCookies" type="button">Accept</button>
   </div>
 
   <!-- =========================
@@ -99,20 +101,24 @@
   <header id="header" role="banner">
     <div class="container">
       <nav aria-label="Main navigation" role="navigation">
-        <div class="logo" tabindex="0">Allied Construction</div>
+        <div class="logo" aria-label="Allied Construction">Allied Construction</div>
         <ul id="menu">
-          <li><a href="#about" tabindex="0">About</a></li>
-          <li><a href="#services" tabindex="0">Services</a></li>
-          <li><a href="#process" tabindex="0">Process</a></li>
-          <li><a href="#projects" tabindex="0">Projects</a></li>
-          <li><a href="#awards" tabindex="0">Awards</a></li>
-          <li><a href="#testimonials" tabindex="0">Testimonials</a></li>
-          <li><a href="#faq" tabindex="0">FAQ</a></li>
-          <li><a href="#contact" tabindex="0">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#awards">Awards</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-actions">
-          <button id="themeToggle" aria-label="Toggle light/dark mode"><i class="fa-solid fa-sun"></i></button>
-          <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><i class="fa-solid fa-bars"></i></button>
+          <button id="themeToggle" aria-label="Toggle light/dark mode" type="button">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+          <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
         </div>
       </nav>
     </div>
@@ -282,8 +288,10 @@
     </section>
   </main>
 
-  <!-- Sticky Mobile CTA -->
-  <div id="stickyCTA" role="complementary" aria-label="Quick contact" tabindex="0">
+  <!-- =========================
+       Sticky Mobile CTA
+  ========================== -->
+  <div id="stickyCTA" role="complementary" aria-label="Quick contact">
     <span>Need a quote?</span>
     <a href="#contact">Get in touch</a>
   </div>
@@ -292,18 +300,21 @@
        Footer
   ========================== -->
   <footer role="contentinfo">
-    © <span id="year"></span> Allied Construction • <a href="tel:+13125551234">312-555-1234</a> • Chicago, IL
+    © <span id="year"></span> Allied Construction •
+    <a href="tel:+13125551234">312-555-1234</a> • Chicago, IL
   </footer>
 
   <!-- =========================
        Back-to-top Button
   ========================== -->
-  <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+  <button id="topBtn" aria-label="Back to top" type="button">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
 
   <!-- =========================
        Chat Widget Placeholder
   ========================== -->
-  <div id="chatWidget" tabindex="0" aria-label="Open chat support">
+  <div id="chatWidget" aria-label="Open chat support">
     <i class="fa-solid fa-comments"></i> Chat with us
   </div>
 

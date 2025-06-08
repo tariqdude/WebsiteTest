@@ -22,18 +22,9 @@
 }
 /* ...all other CSS from the <style> block... */
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root:not(.light), .dark {
-    --bg: linear-gradient(135deg, #1a2233 0%, #232b3b 100%);
-    --surface: rgba(30,40,60,0.92);
-    --surface-alt: rgba(40,48,70,0.92);
-    --text: #f3f4f6;
-    --text-light: #a1a1aa;
-    --gray: #232b3b;
-    --shadow: 0 8px 32px rgba(16,24,48,0.25), 0 1.5px 6px rgba(0,0,0,0.10);
-  }
-}
+/* =========================
+   Accessibility & Utility
+========================== */
 
 /* Focus-visible for accessibility */
 :focus-visible {
@@ -94,6 +85,10 @@
   transform: none;
 }
 
+/* =========================
+   Layout & Components
+========================== */
+
 /* Carousel accessibility: always hide non-active cards visually but keep accessible */
 .carousel .card {
   display: none;
@@ -140,7 +135,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   outline-offset: 2px;
 }
 
-/* Responsive improvements */
+/* =========================
+   Responsive Improvements
+========================== */
 @media (max-width: 900px) {
   .container {
     max-width: 98vw;
@@ -163,7 +160,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   }
 }
 
-/* Lightbox overlay */
+/* =========================
+   Lightbox Overlay
+========================== */
 #lightbox {
   position: fixed;
   inset: 0;
@@ -195,7 +194,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   to { opacity: 1;}
 }
 
-/* Sticky CTA improvements */
+/* =========================
+   Sticky CTA & Chat Widget
+========================== */
 #stickyCTA {
   position: fixed;
   bottom: 1.5rem;
@@ -222,30 +223,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: 700;
 }
 
-/* Back-to-top button improvements */
-#topBtn {
-  position: fixed;
-  bottom: 2.5rem;
-  right: 2.5rem;
-  background: var(--primary-dark);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 2.7em;
-  height: 2.7em;
-  font-size: 1.5em;
-  box-shadow: var(--shadow);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s;
-  z-index: 1001;
-}
-#topBtn.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Chat widget improvements */
 #chatWidget {
   position: fixed;
   bottom: 6.5rem;
@@ -267,7 +244,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   outline: 2px solid var(--accent);
 }
 
-/* Blog/news card improvements */
+/* =========================
+   Blog/News Card
+========================== */
 .blog-card {
   background: var(--surface-alt);
   border-radius: var(--radius);
@@ -280,6 +259,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   box-shadow: 0 8px 32px rgba(37,99,235,0.18), 0 1.5px 6px rgba(0,0,0,0.08);
 }
 
+/* =========================
+   Miscellaneous
+========================== */
 /* Remove inline style for privacy policy link */
 #cookieConsent a {
   color: var(--primary);

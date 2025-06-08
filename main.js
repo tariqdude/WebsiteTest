@@ -1,10 +1,12 @@
+'use strict';
+
 // ===== Utility: DOM Ready =====
 const onReady = fn => {
   if (document.readyState !== 'loading') fn();
   else document.addEventListener('DOMContentLoaded', fn);
 };
 
-// ===== Loader overlay =====
+// ===== Loader Overlay =====
 onReady(() => {
   setTimeout(() => {
     const loader = document.getElementById('pageloader');
@@ -12,14 +14,14 @@ onReady(() => {
   }, 400);
 });
 
-// ===== Service Worker Registration for PWA =====
+// ===== Service Worker Registration =====
 onReady(() => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
   }
 });
 
-// ===== Set current year in footer =====
+// ===== Set Current Year in Footer =====
 onReady(() => {
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
@@ -59,7 +61,7 @@ onReady(() => {
   }
 });
 
-// ===== Back-to-top button =====
+// ===== Back-to-top Button =====
 onReady(() => {
   const btn = document.getElementById('topBtn');
   window.addEventListener('scroll', () => {
@@ -68,20 +70,20 @@ onReady(() => {
   if (btn) btn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
 });
 
-// ===== Smooth scroll for anchor links =====
+// ===== Smooth Scroll for Anchor Links =====
 onReady(() => {
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
+  document.body.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
+      const target = document.querySelector(e.target.getAttribute('href'));
       if (target) {
         e.preventDefault();
         target.scrollIntoView({behavior:'smooth'});
       }
-    });
+    }
   });
 });
 
-// ===== Contact form validation and feedback =====
+// ===== Contact Form Validation and Feedback =====
 onReady(() => {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -122,7 +124,7 @@ onReady(() => {
   };
 });
 
-// ===== Header scroll shadow, progress, sticky hide/show =====
+// ===== Header Scroll Shadow, Progress, Sticky Hide/Show =====
 onReady(() => {
   const header = document.getElementById('header');
   const progress = document.getElementById('progress');
@@ -195,7 +197,7 @@ onReady(() => {
   });
 });
 
-// ===== Reveal on scroll (IntersectionObserver, prefers-reduced-motion support) =====
+// ===== Reveal on Scroll (IntersectionObserver, prefers-reduced-motion support) =====
 onReady(() => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window && !prefersReducedMotion) {
@@ -359,7 +361,7 @@ onReady(() => {
   animateCounter(document.getElementById('safety'), 0, '');
 });
 
-// ===== Accessibility: Trap focus in modals and improve keyboard navigation =====
+// ===== Accessibility: Trap Focus in Modals =====
 function trapFocus(element) {
   const focusable = element.querySelectorAll('a, button, textarea, input, [tabindex]:not([tabindex="-1"])');
   if (!focusable.length) return;
@@ -380,36 +382,10 @@ function trapFocus(element) {
   });
 }
 
-// ===== Skip link focus management =====
+// ===== Skip Link Focus Management =====
 onReady(() => {
   const skip = document.querySelector('.skip-link');
   if (skip) {
     skip.addEventListener('click', e => {
       const main = document.getElementById('home');
-      if (main) main.focus();
-    });
-  }
-});
-
-// ===== Sticky CTA & Chat Widget: Keyboard accessibility =====
-onReady(() => {
-  const stickyCTA = document.getElementById('stickyCTA');
-  const chatWidget = document.getElementById('chatWidget');
-  if (stickyCTA) {
-    stickyCTA.tabIndex = 0;
-    stickyCTA.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        const link = stickyCTA.querySelector('a');
-        if (link) link.click();
-      }
-    });
-  }
-  if (chatWidget) {
-    chatWidget.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        // Placeholder: open chat modal or focus chat input
-        chatWidget.setAttribute('aria-label', 'Chat support coming soon');
-      }
-    });
-  }
-});
+      if
