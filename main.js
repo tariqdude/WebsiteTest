@@ -7,123 +7,118 @@ const onReady = fn => {
 // ===== Loader overlay =====
 onReady(() => {
   setTimeout(() => {
-    document.getElementById('pageloader').classList.add('hide');
+    const loader = document.getElementById('pageloader');
+    if (loader) loader.classList.add('hide');
   }, 400);
 });
 
-// The following logic is added for PWA and UX improvements
-// (see index.html for inline script, but this file is for main logic)
-// If you want to move the logic from index.html <script> to here, you can do so:
+// ===== Service Worker Registration for PWA =====
+onReady(() => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+});
 
-// Service worker registration
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js');
-  });
-}
-// Set current year in footer
-(function() {
-  var yearSpan = document.getElementById('year');
-  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-})();
-// Cookie consent logic
-(function() {
-  var consent = localStorage.getItem('cookieConsent');
-  var banner = document.getElementById('cookieConsent');
-  var btn = document.getElementById('acceptCookies');
-  if (banner && btn) {
-    if (!consent) banner.classList.remove('hide');
-    btn.onclick = function() {
+// ===== Set current year in footer =====
+onReady(() => {
+  const year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
+});
+
+// ===== Cookie Consent =====
+onReady(() => {
+  const cookieConsent = document.getElementById('cookieConsent');
+  const acceptBtn = document.getElementById('acceptCookies');
+  if (!localStorage.getItem('cookieConsent') && cookieConsent) {
+    cookieConsent.classList.remove('hide');
+  }
+  if (acceptBtn) {
+    acceptBtn.onclick = () => {
       localStorage.setItem('cookieConsent', 'true');
-      banner.classList.add('hide');
+      if (cookieConsent) cookieConsent.classList.add('hide');
     };
   }
-})();
-// Theme toggle
-(function() {
-  var btn = document.getElementById('themeToggle');
-  var icon = btn && btn.querySelector('i');
-  var dark = localStorage.getItem('theme') === 'dark';
-  if (dark) document.body.classList.add('dark');
-  if (btn && icon) {
-    btn.onclick = function() {
-      document.body.classList.toggle('dark');
-      var isDark = document.body.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      icon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+});
+
+// ===== Theme Toggle =====
+onReady(() => {
+  const toggleBtn = document.getElementById('themeToggle');
+  const icon = toggleBtn && toggleBtn.querySelector('i');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const setTheme = mode => {
+    document.body.classList.toggle('dark', mode === 'dark');
+    localStorage.setItem('theme', mode);
+    if (icon) icon.className = mode === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+  };
+  const saved = localStorage.getItem('theme');
+  setTheme(saved ? saved : (prefersDark ? 'dark' : 'light'));
+  if (toggleBtn) {
+    toggleBtn.onclick = () => {
+      setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
     };
-    icon.className = document.body.classList.contains('dark') ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
   }
-})();
-// Back-to-top button
-(function() {
-  var btn = document.getElementById('topBtn');
-  window.addEventListener('scroll', function() {
+});
+
+// ===== Back-to-top button =====
+onReady(() => {
+  const btn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
     if (btn) btn.style.display = window.scrollY > 200 ? 'block' : 'none';
   });
-  if (btn) btn.onclick = function() { window.scrollTo({top:0,behavior:'smooth'}); };
-})();
-// Smooth scroll for anchor links
-(function() {
-  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+  if (btn) btn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// ===== Smooth scroll for anchor links =====
+onReady(() => {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
-      var target = document.querySelector(this.getAttribute('href'));
+      const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         e.preventDefault();
         target.scrollIntoView({behavior:'smooth'});
       }
     });
   });
-})();
-// Contact form validation and feedback
-(function() {
-  var form = document.getElementById('contactForm');
+});
+
+// ===== Contact form validation and feedback =====
+onReady(() => {
+  const form = document.getElementById('contactForm');
   if (!form) return;
   form.onsubmit = function(e) {
     e.preventDefault();
-    var name = form.name.value.trim();
-    var email = form.email.value.trim();
-    var message = form.message.value.trim();
-    var website = form.website.value.trim();
-    var valid = true;
-    form.querySelectorAll('.error-tooltip').forEach(function(el){el.textContent='';});
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+    const website = form.website.value.trim();
+    let valid = true;
+    form.querySelectorAll('.error-tooltip').forEach(el => el.textContent = '');
     if (website) return false; // honeypot
-    if (!name) { valid=false; form.name.setAttribute('aria-invalid','true'); document.getElementById('nameError').textContent='Name required.'; }
-    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { valid=false; form.email.setAttribute('aria-invalid','true'); document.getElementById('emailError').textContent='Valid email required.'; }
-    if (!message) { valid=false; form.message.setAttribute('aria-invalid','true'); document.getElementById('messageError').textContent='Message required.'; }
+    if (!name) { valid = false; form.name.setAttribute('aria-invalid','true'); document.getElementById('nameError').textContent='Name required.'; }
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { valid = false; form.email.setAttribute('aria-invalid','true'); document.getElementById('emailError').textContent='Valid email required.'; }
+    if (!message) { valid = false; form.message.setAttribute('aria-invalid','true'); document.getElementById('messageError').textContent='Message required.'; }
     if (!valid) return false;
-    var status = document.getElementById('formStatus');
-    var submitText = document.getElementById('submitText');
+    const status = document.getElementById('formStatus');
+    const submitText = document.getElementById('submitText');
     form.querySelector('button[type="submit"]').setAttribute('aria-busy','true');
     submitText.textContent = 'Sending...';
     fetch('https://formspree.io/f/mnqekgqj', {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
       body: new FormData(form)
-    }).then(function(response) {
+    }).then(response => {
       if (response.ok) {
         status.textContent = 'Thank you! We will be in touch soon.';
         form.reset();
       } else {
         status.textContent = 'There was an error. Please try again.';
       }
-    }).catch(function() {
+    }).catch(() => {
       status.textContent = 'There was an error. Please try again.';
-    }).finally(function() {
+    }).finally(() => {
       form.querySelector('button[type="submit"]').setAttribute('aria-busy','false');
       submitText.textContent = 'Send Message';
     });
-  };
-})();
-// ===== Cookie Consent =====
-onReady(() => {
-  const cookieConsent = document.getElementById('cookieConsent');
-  if (!localStorage.getItem('cookieConsent')) {
-    cookieConsent.classList.remove('hide');
-  }
-  document.getElementById('acceptCookies').onclick = () => {
-    localStorage.setItem('cookieConsent', '1');
-    cookieConsent.classList.add('hide');
   };
 });
 
@@ -134,14 +129,18 @@ onReady(() => {
   let lastScrollY = 0;
   window.addEventListener('scroll', () => {
     const scY = window.scrollY;
-    header.classList.toggle('scrolled', scY > 80);
-    const max = document.body.scrollHeight - innerHeight;
-    progress.style.width = `${(scY / max) * 100}%`;
+    if (header) header.classList.toggle('scrolled', scY > 80);
+    if (progress) {
+      const max = document.body.scrollHeight - innerHeight;
+      progress.style.width = `${(scY / max) * 100}%`;
+    }
     // Sticky hide/show
-    if (scY > lastScrollY && scY > 120) {
-      header.style.transform = 'translateY(-100%)';
-    } else {
-      header.style.transform = '';
+    if (header) {
+      if (scY > lastScrollY && scY > 120) {
+        header.style.transform = 'translateY(-100%)';
+      } else {
+        header.style.transform = '';
+      }
     }
     lastScrollY = scY;
   }, { passive: true });
@@ -194,49 +193,6 @@ onReady(() => {
       closeMenu();
     }
   });
-});
-
-// ===== Theme Toggle (with transition, system preference on first load) =====
-onReady(() => {
-  const toggleBtn = document.getElementById('themeToggle');
-  const root = document.documentElement;
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const setTheme = mode => {
-    root.classList.toggle('dark', mode === 'dark');
-    root.classList.toggle('light', mode === 'light');
-    localStorage.setItem('theme', mode);
-    toggleBtn.innerHTML = mode === 'dark'
-      ? '<i class="fa-solid fa-moon"></i>'
-      : '<i class="fa-solid fa-sun"></i>';
-    document.body.style.transition = 'background .4s, color .4s';
-  };
-  const saved = localStorage.getItem('theme');
-  if (saved) setTheme(saved);
-  else setTheme(prefersDark ? 'dark' : 'light');
-  toggleBtn.addEventListener('click', () =>
-    setTheme(root.classList.contains('dark') ? 'light' : 'dark')
-  );
-});
-
-// ===== Active link & back-to-top =====
-onReady(() => {
-  const links = document.querySelectorAll('nav a');
-  const topBtn = document.getElementById('topBtn');
-  window.addEventListener('scroll', () => {
-    const fromTop = scrollY + 90;
-    links.forEach(l => {
-      const section = document.querySelector(l.getAttribute('href'));
-      if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-        l.classList.add('active');
-        l.setAttribute('aria-current', 'page');
-      } else {
-        l.classList.remove('active');
-        l.removeAttribute('aria-current');
-      }
-    });
-    topBtn.classList.toggle('show', scrollY > 700);
-  }, { passive: true });
-  topBtn.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 });
 
 // ===== Reveal on scroll (IntersectionObserver, prefers-reduced-motion support) =====
@@ -309,6 +265,7 @@ onReady(() => {
 // ===== Testimonials Carousel =====
 onReady(() => {
   const carousel = document.querySelector('.carousel');
+  if (!carousel) return;
   const cards = carousel.querySelectorAll('.card');
   const indicators = document.querySelectorAll('.carousel-indicators button');
   let idx = 0, timer = null;
@@ -422,19 +379,6 @@ function trapFocus(element) {
     }
   });
 }
-
-// ===== Service Worker Registration for PWA =====
-onReady(() => {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-  }
-});
-
-// ===== Footer: Set copyright year =====
-onReady(() => {
-  const year = document.getElementById('year');
-  if (year) year.textContent = new Date().getFullYear();
-});
 
 // ===== Skip link focus management =====
 onReady(() => {
