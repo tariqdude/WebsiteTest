@@ -1,0 +1,23 @@
+/* =========================
+   CSS Variables & Theme
+========================== */
+/* ...existing code from <style id="main-style"> in index.html... */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --accent: #fbbf24;
+  --bg: linear-gradient(135deg, #f5f7fa 0%, #e0e7ef 100%);
+  --surface: rgba(255,255,255,0.85);
+  --surface-alt: rgba(245,247,250,0.85);
+  --text: #1a2233;
+  --text-light: #6b7280;
+  --gray: #e5e7eb;
+  --radius: 22px;
+  --shadow: 0 8px 32px rgba(30,64,175,0.10), 0 1.5px 6px rgba(0,0,0,0.04);
+  --font: 'Poppins',sans-serif;
+  --transition: .3s cubic-bezier(.4,0,.2,1);
+  --scroll-height: 4px;
+  --max-width: 1240px;
+  --glass-blur: blur(12px);
+}
+/* ...all other CSS from the <style> block... */
