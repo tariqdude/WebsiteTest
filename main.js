@@ -43,7 +43,7 @@ onReady(() => {
   }, { passive: true });
 });
 
-// ===== Mobile Nav (close on link click, ESC, focus trap) =====
+// ===== Mobile Nav (close on link click, ESC, focus trap, click outside) =====
 onReady(() => {
   const hamburger = document.getElementById('hamburger');
   const menu = document.getElementById('menu');
@@ -77,14 +77,23 @@ onReady(() => {
       hamburger.setAttribute('aria-expanded', false);
     }
   }));
+  // Close menu on outside click
+  document.addEventListener('click', e => {
+    if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== hamburger) {
+      menu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+    }
+  });
 });
 
-// ===== Theme Toggle (with transition) =====
+// ===== Theme Toggle (with transition, system preference on first load) =====
 onReady(() => {
   const toggleBtn = document.getElementById('themeToggle');
   const root = document.documentElement;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const setTheme = mode => {
     root.classList.toggle('dark', mode === 'dark');
+    root.classList.toggle('light', mode === 'light');
     localStorage.setItem('theme', mode);
     toggleBtn.innerHTML = mode === 'dark'
       ? '<i class="fa-solid fa-moon"></i>'
@@ -93,6 +102,7 @@ onReady(() => {
   };
   const saved = localStorage.getItem('theme');
   if (saved) setTheme(saved);
+  else setTheme(prefersDark ? 'dark' : 'light');
   toggleBtn.addEventListener('click', () =>
     setTheme(root.classList.contains('dark') ? 'light' : 'dark')
   );
@@ -218,7 +228,7 @@ onReady(() => {
   }
 });
 
-// ===== Testimonials Carousel: auto-advance, indicators, keyboard =====
+// ===== Testimonials Carousel: auto-advance, indicators, keyboard, ARIA live =====
 onReady(() => {
   const carousel = document.querySelector('.carousel');
   const cards = carousel.querySelectorAll('.card');
@@ -228,6 +238,9 @@ onReady(() => {
     idx = i;
     cards.forEach((c, j) => c.style.display = j === i ? 'block' : 'none');
     indicators.forEach((b, j) => b.classList.toggle('active', j === i));
+    // ARIA live update
+    carousel.setAttribute('aria-live', 'polite');
+    setTimeout(() => carousel.setAttribute('aria-live', 'off'), 1000);
   }
   function next() { show((idx + 1) % cards.length); }
   function prev() { show((idx - 1 + cards.length) % cards.length); }
@@ -249,6 +262,20 @@ onReady(() => {
   });
   carousel.addEventListener('mouseenter', stopAuto);
   carousel.addEventListener('mouseleave', startAuto);
+});
+
+// ===== Anchor scroll restoration (for smooth scroll and focus) =====
+onReady(() => {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.focus({ preventScroll: true });
+      }
+    });
+  });
 });
 
 // ===== Form: AJAX submit, validation, honeypot, accessibility =====
@@ -345,4 +372,38 @@ onReady(() => {
 onReady(() => {
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
+});
+
+// ===== Skip link focus management =====
+onReady(() => {
+  const skip = document.querySelector('.skip-link');
+  if (skip) {
+    skip.addEventListener('click', e => {
+      const main = document.getElementById('home');
+      if (main) main.focus();
+    });
+  }
+});
+
+// ===== Sticky CTA & Chat Widget: Keyboard accessibility =====
+onReady(() => {
+  const stickyCTA = document.getElementById('stickyCTA');
+  const chatWidget = document.getElementById('chatWidget');
+  if (stickyCTA) {
+    stickyCTA.tabIndex = 0;
+    stickyCTA.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const link = stickyCTA.querySelector('a');
+        if (link) link.click();
+      }
+    });
+  }
+  if (chatWidget) {
+    chatWidget.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        // Placeholder: open chat modal or focus chat input
+        chatWidget.setAttribute('aria-label', 'Chat support coming soon');
+      }
+    });
+  }
 });

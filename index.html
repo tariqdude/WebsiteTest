@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <!-- =========================
        Meta & SEO
@@ -79,7 +79,7 @@
   ========================== -->
   <div id="pageloader" aria-label="Loading page" role="status"><span class="spinner"></span></div>
   <span id="progress" role="presentation"></span>
-  <a href="#home" class="skip-link">Skip to content</a>
+  <a href="#home" class="skip-link" aria-label="Skip to main content">Skip to content</a>
 
   <!-- =========================
        Cookie Consent
@@ -100,7 +100,7 @@
       <nav aria-label="Main navigation" role="navigation">
         <div class="logo" tabindex="0">Allied Construction</div>
         <ul id="menu">
-          <li><a href="#about">About</a></li>
+          <li><a href="#about" aria-current="page">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#projects">Projects</a></li>
@@ -120,22 +120,22 @@
   <!-- =========================
        Main Content
   ========================== -->
-  <main id="home" tabindex="-1">
+  <main id="home" tabindex="-1" role="main" aria-label="Main content">
     <!-- Hero -->
-    <section class="hero" data-animate aria-label="Hero section">
+    <section class="hero" data-animate aria-label="Hero section" role="region">
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container">
         <h1><span aria-live="polite">Building Your Vision.<br>Engineering Your Future.</span></h1>
         <p>From concept to completion, we deliver award-winning commercial and residential construction solutions across Chicagoland.</p>
         <a href="#contact" class="btn" aria-label="Request a quote, go to contact section">Request a Quote</a>
-        <div class="stats" aria-label="Company statistics">
+        <div class="stats" aria-label="Company statistics" role="region">
           <div class="stat"><strong id="years" aria-live="polite">30+</strong>Years Experience</div>
           <div class="stat"><strong id="projects" aria-live="polite">150</strong>Projects Delivered</div>
           <div class="stat"><strong id="safety" aria-live="polite">0</strong>Safety Violations</div>
         </div>
       </div>
     </section>
-    <span class="wave"><svg viewBox="0 0 1440 80"><path d="M0,32L80,48C160,64,320,96,480,106.7C640,117,800,107,960,74.7C1120,43,1280,21,1360,10.7L1440,0V80H0Z"></path></svg></span>
+    <span class="wave" aria-hidden="true"><svg viewBox="0 0 1440 80"><path d="M0,32L80,48C160,64,320,96,480,106.7C640,117,800,107,960,74.7C1120,43,1280,21,1360,10.7L1440,0V80H0Z"></path></svg></span>
     <!-- About -->
     <section id="about" data-animate>
       <div class="container">
@@ -169,7 +169,7 @@
       </div>
     </section>
     <!-- Projects -->
-    <section id="projects" data-animate aria-label="Featured Projects">
+    <section id="projects" data-animate aria-label="Featured Projects" role="region">
       <div class="container">
         <h2>Featured Projects</h2>
         <div class="gallery" role="list">
@@ -193,10 +193,10 @@
       </div>
     </section>
     <!-- Testimonials -->
-    <section id="testimonials" class="testimonials" data-animate aria-label="Client Testimonials">
+    <section id="testimonials" class="testimonials" data-animate aria-label="Client Testimonials" role="region">
       <div class="container">
         <h2>What Our Clients Say</h2>
-        <div class="carousel" tabindex="0" aria-live="polite">
+        <div class="carousel" tabindex="0" aria-live="polite" role="region">
           <div class="card"><blockquote>Allied transformed our outdated warehouse into a cutting-edge HQ—on schedule and under budget.</blockquote><strong>— J. Martinez, CEO, TechEdge</strong></div>
           <div class="card"><blockquote>Professional, transparent, and meticulous. We couldn't be happier with our new home addition.</blockquote><strong>— S. Patel, Homeowner</strong></div>
           <div class="card"><blockquote>The team handled everything—permits, inspections, and a flawless LEED certification.</blockquote><strong>— L. Chen, Facility Manager, GreenWorks</strong></div>
@@ -238,7 +238,7 @@
       <div class="feed-placeholder">[Instagram feed coming soon]</div>
     </div>
     <!-- Contact -->
-    <section id="contact" data-animate>
+    <section id="contact" data-animate role="region" aria-label="Contact section">
       <div class="container">
         <div class="call">
           <h2>Ready to break ground?</h2>
@@ -250,12 +250,12 @@
             </div>
             <div class="form-group">
               <label for="name" class="visually-hidden">Your Name</label>
-              <input id="name" name="name" type="text" placeholder="Your Name" required autocomplete="name">
+              <input id="name" name="name" type="text" placeholder="Your Name" required autocomplete="name" aria-describedby="nameError">
               <span class="error-tooltip" id="nameError"></span>
             </div>
             <div class="form-group">
               <label for="email" class="visually-hidden">Email</label>
-              <input id="email" name="email" type="email" placeholder="Email" required autocomplete="email">
+              <input id="email" name="email" type="email" placeholder="Email" required autocomplete="email" aria-describedby="emailError">
               <span class="error-tooltip" id="emailError"></span>
             </div>
             <div class="form-group">
@@ -264,7 +264,7 @@
             </div>
             <div class="form-group">
               <label for="message" class="visually-hidden">Project details</label>
-              <textarea id="message" name="message" rows="4" placeholder="Project details…" required></textarea>
+              <textarea id="message" name="message" rows="4" placeholder="Project details…" required aria-describedby="messageError"></textarea>
               <span class="error-tooltip" id="messageError"></span>
             </div>
             <button type="submit" class="btn" style="cursor:pointer;" aria-busy="false"><span id="submitText">Send Message</span></button>
@@ -281,7 +281,7 @@
     </section>
   </main>
   <!-- Sticky Mobile CTA -->
-  <div id="stickyCTA" role="complementary">
+  <div id="stickyCTA" role="complementary" aria-label="Quick contact" tabindex="0">
     <span>Need a quote?</span>
     <a href="#contact">Get in touch</a>
   </div>

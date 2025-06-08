@@ -21,3 +21,89 @@
   --glass-blur: blur(12px);
 }
 /* ...all other CSS from the <style> block... */
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light), .dark {
+    --bg: linear-gradient(135deg, #1a2233 0%, #232b3b 100%);
+    --surface: rgba(30,40,60,0.92);
+    --surface-alt: rgba(40,48,70,0.92);
+    --text: #f3f4f6;
+    --text-light: #a1a1aa;
+    --gray: #232b3b;
+    --shadow: 0 8px 32px rgba(16,24,48,0.25), 0 1.5px 6px rgba(0,0,0,0.10);
+  }
+}
+
+/* Focus-visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Utility: visually-hidden (for a11y) */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px,1px,1px,1px);
+  white-space: nowrap;
+  border: 0; padding: 0; margin: -1px;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  z-index: 1000;
+  font-weight: 600;
+  transition: left 0.2s;
+}
+.skip-link:focus {
+  left: 16px;
+  outline: 2px solid var(--accent);
+}
+
+/* Error state for form fields */
+.form-group.error input,
+.form-group.error textarea {
+  border-color: #f44336 !important;
+  background: #fff0f0 !important;
+}
+.error-tooltip {
+  color: #f44336;
+  font-size: 0.95em;
+  min-height: 1.2em;
+  display: block;
+}
+
+/* Reveal on scroll animation */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s var(--transition), transform .7s var(--transition);
+}
+[data-animate].show {
+  opacity: 1;
+  transform: none;
+}
+
+/* Carousel accessibility: always hide non-active cards */
+.carousel .card {
+  display: none;
+}
+.carousel .card:first-child {
+  display: block;
+}
+
+/* ...existing code... */
