@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Allied Construction | Building Your Vision</title>
+  <!-- SEO & Social -->
+  <meta name="description" content="Allied Construction delivers award‑winning commercial and residential builds across Chicagoland—on time, on budget, on point."/>
+  <meta name="keywords" content="Chicago construction, commercial build‑outs, residential remodeling, HVAC contractor"/>
+  <link rel="canonical" href="https://alliedconstruction.github.io/"/>
+  <meta property="og:title" content="Allied Construction | Building Your Vision"/>
+  <meta property="og:description" content="Award‑winning general contractor transforming concepts into landmarks."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://alliedconstruction.github.io/"/>
+  <meta property="og:image" content="https://source.unsplash.com/featured/1200x630?chicago‑skyline,construction"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="theme-color" content="#0A66C2"/>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+  <style>
+    :root{
+      --primary:#0A66C2;
+      --primary‑dark:#094b91;
+      --bg:#ffffff;
+      --text:#333333;
+      --gray:#f5f7fa;
+      --radius:10px;
+      --font:'Poppins',sans-serif;
+    }
+    @media (prefers‑color‑scheme:dark){
+      :root:not(.light){
+        --bg:#0f1116;
+        --text:#f1f3f9;
+        --gray:#1a1d24;
+      }
+    }
+    :root.dark{
+      --bg:#0f1116;
+      --text:#f1f3f9;
+      --gray:#1a1d24;
+    }
+
+    *{margin:0;padding:0;box‑sizing:border‑box;font‑family:var(--font);}
+    html{scroll‑behavior:smooth;}
+    body{background:var(--bg);color:var(--text);line‑height:1.6;}
+
+    /* ---------- Helper ---------- */
+    .container{max‑width:1200px;margin:auto;padding:1rem 1.5rem;}
+    .btn{display:inline‑block;background:var(--primary);color:#fff;padding:.8rem 1.6rem;border‑radius:4px;text‑decoration:none;font‑weight:600;transition:background .3s;}
+    .btn:hover{background:var(--primary‑dark);}    
+    section{padding:4.5rem 0;position:relative;}
+
+    /* ---------- Header ---------- */
+    header{position:fixed;top:0;left:0;right:0;background:var(--bg);box‑shadow:0 2px 4px rgba(0,0,0,.06);z‑index:1000;transition:background .3s;}
+    nav{display:flex;align‑items:center;justify‑content:space‑between;}
+    .logo{font‑weight:800;font‑size:1.25rem;color:var(--primary);}   
+    nav ul{display:flex;gap:1.25rem;list‑style:none;}
+    nav a{text‑decoration:none;color:var(--text);font‑weight:600;}
+    nav a.active,nav a:hover{color:var(--primary);}    
+    .hamburger{display:none;font‑size:1.5rem;cursor:pointer;}
+    #themeToggle{background:none;border:none;font‑size:1.4rem;margin‑left:.5rem;color:var(--primary);cursor:pointer;}
+
+    @media (max‑width:768px){
+      nav ul{position:absolute;top:64px;left:0;width:100%;flex‑direction:column;background:var(--bg);max‑height:0;overflow:hidden;transition:max‑height .35s ease;border‑top:1px solid #e3e6ee;}
+      nav ul.open{max‑height:320px;}
+      .hamburger{display:block;}
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{display:grid;grid‑template‑columns:repeat(auto‑fit,minmax(280px,1fr));gap:2.5rem;align‑items:center;min‑height:100vh;}
+    .hero h1{font‑size:clamp(2.4rem,5vw,3.8rem);color:var(--primary‑dark);line‑height:1.15;margin‑bottom:1rem;}
+    .hero img{width:100%;border‑radius:var(--radius);filter:drop‑shadow(0 8px 10px rgba(0,0,0,.1));}
+
+    /* ---------- Stats ---------- */
+    .stats{display:flex;justify‑content:space‑around;flex‑wrap:wrap;gap:2rem;margin‑top:2.5rem;}
+    .stat{text‑align:center;}
+    .stat strong{display:block;font‑size:2rem;color:var(--primary);} 
+
+    /* ---------- Services ---------- */
+    .cards{display:grid;grid‑template‑columns:repeat(auto‑fit,minmax(250px,1fr));gap:1.8rem;margin‑top:2rem;}
+    .card{background:var(--bg);padding:2rem;border‑radius:var(--radius);box‑shadow:0 8px 16px rgba(0,0,0,.05);text‑align:center;transition:transform .3s,box‑shadow .3s;}
+    .card:hover{transform:translateY(-6px);box‑shadow:0 12px 24px rgba(0,0,0,.08);} 
+    .card i{font‑size:2rem;color:var(--primary);margin‑bottom:1rem;}
+
+    /* ---------- Projects ---------- */
+    .gallery{display:grid;grid‑template‑columns:repeat(auto‑fill,minmax(280px,1fr));gap:1rem;margin‑top:2rem;}
+    .gallery img{width:100%;border‑radius:var(--radius);object‑fit:cover;aspect‑ratio:4/3;cursor:pointer;transition:transform .3s;}
+    .gallery img:hover{transform:scale(1.03);}   
+
+    /* ---------- Testimonials ---------- */
+    .testimonials{background:var(--gray);} 
+    blockquote{font‑style:italic;margin‑bottom:1rem;position:relative;padding‑left:1.5rem;}
+    blockquote:before{content:"\f10d";font‑family:"Font Awesome 6 Free";font‑weight:900;position:absolute;left:0;top:0;color:var(--primary);}
+
+    /* ---------- CTA ---------- */
+    .call{background:var(--primary);color:#fff;text‑align:center;border‑radius:var(--radius);padding:3rem 1rem;margin‑top:2rem;}
+    .call h2{font‑size:2rem;margin‑bottom:1rem;}
+
+    /* ---------- Footer ---------- */
+    footer{background:#111;color:#eee;text‑align:center;padding:2rem 1rem;}
+    footer a{color:var(--primary);} 
+
+    /* ---------- Scroll Animations ---------- */
+    [data‑animate]{opacity:0;transform:translateY(40px);transition:opacity .6s ease,transform .6s ease;}
+    [data‑animate].show{opacity:1;transform:none;}  
+
+    /* ---------- Scroll to Top ---------- */
+    #topBtn{position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;border:none;border‑radius:50%;width:48px;height:48px;font‑size:1.25rem;display:none;align‑items:center;justify‑content:center;cursor:pointer;box‑shadow:0 4px 8px rgba(0,0,0,.2);} 
+    #topBtn.show{display:flex;}  
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav aria‑label="Main navigation">
+        <div class="logo">Allied Construction</div>
+        <ul id="menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div style="display:flex;align‑items:center;">
+          <button id="themeToggle" aria‑label="Toggle light/dark mode"><i class="fa‑solid fa‑sun"></i></button>
+          <div class="hamburger" id="hamburger" aria‑label="Toggle menu"><i class="fa‑solid fa‑bars"></i></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero container" id="home" data‑animate>
+      <div>
+        <h1>Building Your Vision.<br/>Engineering Your Future.</h1>
+        <p>From concept to completion, we deliver award‑winning commercial and residential construction solutions across Chicagoland.</p>
+        <a href="#contact" class="btn">Request a Quote</a>
+
+        <div class="stats">
+          <div class="stat"><strong id="years">30+</strong>Years Experience</div>
+          <div class="stat"><strong id="projects">150</strong>Projects Delivered</div>
+          <div class="stat"><strong id="safety">0</strong>Safety Violations</div>
+        </div>
+      </div>
+      <div>
+        <img src="https://source.unsplash.com/featured/?tower‑crane,construction" alt="Skyscraper construction" loading="lazy">
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" data‑animate>
+      <div class="container">
+        <h2>About Us</h2>
+        <p>Established in 1995, Allied Construction has earned a reputation for precision craftsmanship, transparent project management, and relentless safety standards. We hold <strong>LEED</strong> and <strong>OSHA 30</strong> certifications, and our union‑trained teams turn blueprints into benchmarks.</p>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" data‑animate>
+      <div class="container">
+        <h2>Our Services</h2>
+        <div class="cards">
+          <div class="card">
+            <i class="fa‑solid fa‑city"></i>
+            <h3>Commercial Build‑Outs</h3>
+            <p>Turnkey solutions for offices, retail, and industrial spaces—from permits to punch‑list.</p>
+          </div>
+          <div class="card">
+            <i class="fa‑solid fa‑house"></i>
+            <h3>Residential Remodeling</h3>
+            <p>High‑end kitchens, bathrooms, and whole‑home renovations that add lasting value.</p>
+          </div>
+          <div class="card">
+            <i class="fa‑solid fa‑screwdriver‑wrench"></i>
+            <h3>HVAC & Mechanical</h3>
+            <p>Energy‑efficient systems designed, fabricated, and installed by certified experts.</p>
+          </div>
+          <div class="card">
+            <i class="fa‑solid fa‑solar‑panel"></i>
+            <h3>Sustainable Retrofits</h3>
+            <p>Solar integration, green roofs, and LEED consulting for eco‑forward clients.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" data‑animate>
+      <div class="container">
+        <h2>Featured Projects</h2>
+        <div class="gallery">
+          <img src="https://source.unsplash.com/random/600x400?industrial‑construction" alt="Industrial build">
+          <img src="https://source.unsplash.com/random/600x400?modern‑office" alt="Office build">
+          <img src="https://source.unsplash.com/random/600x400?residential‑renovation" alt="Residential renovation">
+          <img src="https://source.unsplash.com/random/600x400?solar‑panel,roof" alt="Sustainable retrofit">
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials" data‑animate>
+      <div class="container">
+        <h2>What Our Clients Say</h2>
+        <div class="cards">
+          <div class="card">
+            <blockquote>Allied transformed our outdated warehouse into a cutting‑edge HQ—on schedule and under budget.</blockquote>
+            <strong>— J. Martinez, CEO, TechEdge</strong>
+          </div>
+          <div class="card">
+            <blockquote>Professional, transparent, and meticulous. We couldn't be happier with our new home addition.</blockquote>
+            <strong>— S. Patel, Homeowner</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" data‑animate>
+      <div class="container">
+        <div class="call">
+          <h2>Ready to break ground?</h2>
+          <p>Get in touch for a free consultation and estimate.</p>
+          <a href="mailto:build@alliedconstruction.com" class="btn">Email Us</a>
+        </div>
+
+        <!-- Google Maps thumbnail -->
+        <a href="https://maps.app.goo.gl/xyz" target="_blank" style="display:block;margin‑top:2rem;">
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center=Chicago,IL&zoom=11&size=1200x300&key=YOUR_API_KEY&markers=color:red%7CChicago,IL" alt="Map to office" style="width:100%;border‑radius:var(--radius);">
+        </a>
+
+        <!-- Hidden form for static site form handlers (e.g., Formspree) -->
+        <form action="https://formspree.io/f/your‑id" method="POST" style="display:none;"></form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Allied Construction • <a href="tel:+13125551234">312‑555‑1234</a> • Chicago, IL
+  </footer>
+
+  <button id="topBtn" aria‑label="Back to top"><i class="fa‑solid fa‑arrow‑up"></i></button>
+
+  <script>
+    // Mobile menu toggle
+    const hamburger=document.getElementById('hamburger');
+    const menu=document.getElementById('menu');
+    hamburger.addEventListener('click',()=>menu.classList.toggle('open'));
+
+    // Theme toggle with localStorage
+    const toggleBtn=document.getElementById('themeToggle');
+    const root=document.documentElement;
+    function setTheme(mode){root.classList.toggle('dark',mode==='dark');localStorage.setItem('theme',mode);toggleBtn.innerHTML=mode==='dark'?'\uF185':'\uF186';}
+    const saved=localStorage.getItem('theme');
+    if(saved){setTheme(saved);}  
+    toggleBtn.addEventListener('click',()=>setTheme(root.classList.contains('dark')?'light':'dark'));
+
+    // Scroll active link + back to top button
+    const links=document.querySelectorAll('nav a');
+    const topBtn=document.getElementById('topBtn');
+    window.addEventListener('scroll',()=>{
+      const fromTop=window.scrollY+80;
+      links.forEach(link=>{
+        const section=document.querySelector(link.getAttribute('href'));
+        if(section.offsetTop<=fromTop && section.offsetTop+section.offsetHeight>fromTop){
+          link.classList.add('active');
+        }else link.classList.remove('active');
+      });
+      topBtn.classList.toggle('show',window.scrollY>600);
+    });
+    topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // Reveal‑on‑scroll
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>e.isIntersecting&&e.target.classList.add('show'));},{threshold:.15});
+    document.querySelectorAll('[data‑animate]').forEach(el=>observer.observe(el));
+
+    // Dynamic stats counters
+    const counters=[{el:'#years',target:30},{el:'#projects',target:150},{el:'#safety',target:0}];
+    counters.forEach(c=>{const el=document.querySelector(c.el);let start=0;const step=c.target/60;const i=setInterval(()=>{start+=step;el.textContent=Math.ceil(start);if(start>=c.target)clearInterval(i);},30);});
+
+    // Current year
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Allied Construction",
+    "url":"https://alliedconstruction.github.io/",
+    "logo":"https://source.unsplash.com/featured/?construction‑logo",
+    "telephone":"+13125551234",
+    "address":{"@type":"PostalAddress","streetAddress":"123 W Madison St","addressLocality":"Chicago","addressRegion":"IL","postalCode":"60602","addressCountry":"US"},
+    "sameAs":["https://www.linkedin.com/company/allied‑construction"]
+  }
+  </script>
+</body>
+</html>
