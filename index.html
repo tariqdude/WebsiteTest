@@ -7,12 +7,17 @@
   <title>Allied Construction | Chicago Design-Build Firm</title>
   <!-- SEO & Social -->
   <meta name="description" content="Allied Construction is Chicago’s award‑winning design‑build firm for commercial, industrial & high‑end residential projects. Quality, safety, and sustainability—built into every square foot." />
+  <meta name="keywords" content="construction, design-build, Chicago, commercial, residential, LEED, sustainable, remodeling, industrial, contractor, builder, architecture, engineering" />
   <meta property="og:title" content="Allied Construction | Building Your Vision" />
   <meta property="og:description" content="From skyscrapers to smart homes, we engineer the future of Chicagoland construction." />
   <meta property="og:image" content="https://source.unsplash.com/featured/1200x630?construction,Chicago" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://alliedconstruction.github.io/" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@alliedconstruction" />
+  <meta name="twitter:title" content="Allied Construction | Building Your Vision" />
+  <meta name="twitter:description" content="From skyscrapers to smart homes, we engineer the future of Chicagoland construction." />
+  <meta name="twitter:image" content="https://source.unsplash.com/featured/1200x630?construction,Chicago" />
   <meta name="theme-color" content="#0A66C2" />
   <link rel="canonical" href="https://alliedconstruction.github.io/" />
   <!-- Apple PWA -->
@@ -29,6 +34,10 @@
       "name": "Allied Construction",
       "url": "https://alliedconstruction.github.io/",
       "logo": "/icon.png",
+      "sameAs": [
+        "https://twitter.com/alliedconstruction",
+        "https://www.linkedin.com/company/alliedconstruction"
+      ],
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+1-312-555-1234",
@@ -90,7 +99,10 @@
     @media(max-width:768px){nav ul{position:absolute;top:64px;left:0;width:100%;flex-direction:column;background:var(--surface);max-height:0;overflow:hidden;transition:max-height .35s ease;border-top:1px solid var(--gray)}nav ul.open{max-height:370px} .hamburger{display:block}}
 
     /* ===== Hero ===== */
-    .hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:3rem;align-items:center;min-height:100vh;background:url('https://source.unsplash.com/1600x900?chicago-skyline') center/cover fixed;padding-top:6rem}
+    .hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:3rem;align-items:center;min-height:100vh;background:url('https://source.unsplash.com/1600x900?chicago-skyline') center/cover fixed;padding-top:6rem;background-attachment:fixed;background-position:center;background-repeat:no-repeat;background-size:cover;position:relative;overflow:hidden}
+    @media (max-width: 900px) {
+      .hero { background-attachment: scroll; }
+    }
     .hero-overlay{background:rgba(0,0,0,.55);position:absolute;inset:0}
     .hero>*{position:relative;color:#fff}
     .hero h1{font-size:clamp(2.8rem,5vw,4.2rem);line-height:1.15;margin-bottom:1rem}
@@ -247,6 +259,107 @@
 
     /* Contact form honeypot */
     .honeypot { display: none; }
+
+    /* Parallax hero effect */
+    .hero {
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 900px) {
+      .hero { background-attachment: scroll; }
+    }
+    /* Cookie consent banner */
+    #cookieConsent {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 -2px 16px rgba(0,0,0,.08);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      z-index: 4000;
+      font-size: 1rem;
+      transition: transform .4s;
+    }
+    #cookieConsent.hide { transform: translateY(100%); }
+    #cookieConsent button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: .5rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    #cookieConsent button:hover { background: var(--primary-dark); }
+    /* Blog/news section */
+    .blog { background: var(--gray); padding: 2rem 0; }
+    .blog-list { display: grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap: 2rem; margin-top: 2rem; }
+    .blog-card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.5rem; }
+    .blog-card h3 { margin-bottom: .5rem; }
+    .blog-card time { color: var(--primary); font-size: .95rem; }
+    /* Google Maps embed */
+    .map-embed { border-radius: var(--radius); overflow: hidden; margin-top: 2rem; box-shadow: var(--shadow); }
+    /* Error tooltip for form validation */
+    .error-tooltip {
+      color: #fff;
+      background: #c00;
+      border-radius: 6px;
+      padding: .3em .7em;
+      font-size: .95em;
+      position: absolute;
+      z-index: 10;
+      left: 105%;
+      top: 50%;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+      display: none;
+    }
+    .form-group { position: relative; }
+    .form-group.error input,
+    .form-group.error textarea { border: 2px solid #c00; }
+    .form-group.error .error-tooltip { display: block; }
+    /* Social feed placeholder */
+    .social-feed { margin: 2rem 0; text-align: center; }
+    .social-feed .feed-placeholder {
+      background: var(--gray);
+      border-radius: var(--radius);
+      padding: 2rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 0 auto;
+      max-width: 400px;
+    }
+    /* Chat widget placeholder */
+    #chatWidget {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      z-index: 3000;
+      background: var(--surface);
+      border-radius: 18px 18px 0 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.12);
+      padding: 1rem 1.2rem;
+      min-width: 220px;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      font-size: 1rem;
+      color: var(--primary-dark);
+      cursor: pointer;
+      transition: box-shadow .2s;
+    }
+    #chatWidget:hover { box-shadow: 0 8px 32px rgba(0,0,0,.18); }
   </style>
 </head>
 <body>
@@ -254,6 +367,11 @@
   <div id="pageloader" aria-label="Loading page" role="status"><span class="spinner"></span></div>
   <span id="progress" role="presentation"></span>
   <a href="#home" class="skip-link">Skip to content</a>
+  <!-- Cookie Consent Banner -->
+  <div id="cookieConsent" class="hide" role="alert" aria-live="polite">
+    <span>We use cookies to improve your experience. By using our site, you agree to our <a href="#" style="color:var(--primary);text-decoration:underline;">privacy policy</a>.</span>
+    <button id="acceptCookies">Accept</button>
+  </div>
   <header id="header" role="banner">
     <div class="container">
       <nav aria-label="Main navigation" role="navigation">
@@ -370,28 +488,64 @@
       <details><summary>Do you offer free estimates?</summary><p>Yes, schedule a site visit and we'll provide a detailed, no-obligation quote.</p></details>
       <details><summary>How do you handle change orders?</summary><p>Changes are documented with transparent pricing and only proceed upon written client approval.</p></details>
     </section>
+    <!-- Blog/News Section -->
+    <section class="blog" id="blog" data-animate>
+      <div class="container">
+        <h2>Latest News</h2>
+        <div class="blog-list">
+          <div class="blog-card">
+            <h3>Allied Wins 2024 Green Building Award</h3>
+            <time datetime="2024-05-01">May 1, 2024</time>
+            <p>Our sustainable retrofit project in River North has been recognized for innovation in energy efficiency and design.</p>
+          </div>
+          <div class="blog-card">
+            <h3>Now Offering Smart Home Integration</h3>
+            <time datetime="2024-04-15">April 15, 2024</time>
+            <p>We now provide full smart home automation and IoT solutions for residential clients.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Social Media Feed Placeholder -->
+    <div class="social-feed" data-animate>
+      <div class="feed-placeholder">[Instagram feed coming soon]</div>
+    </div>
     <!-- Contact -->
     <section id="contact" data-animate>
       <div class="container">
         <div class="call">
           <h2>Ready to break ground?</h2>
           <p>Request a free consultation and project estimate.</p>
-          <form id="contactForm" aria-label="Contact form" autocomplete="off">
+          <form id="contactForm" aria-label="Contact form" autocomplete="off" novalidate>
             <div class="honeypot">
               <label for="website">Website</label>
               <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
             </div>
-            <label for="name" class="visually-hidden">Your Name</label>
-            <input id="name" name="name" type="text" placeholder="Your Name" required autocomplete="name">
-            <label for="email" class="visually-hidden">Email</label>
-            <input id="email" name="email" type="email" placeholder="Email" required autocomplete="email">
-            <label for="phone" class="visually-hidden">Phone</label>
-            <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" autocomplete="tel">
-            <label for="message" class="visually-hidden">Project details</label>
-            <textarea id="message" name="message" rows="4" placeholder="Project details…" required></textarea>
+            <div class="form-group">
+              <label for="name" class="visually-hidden">Your Name</label>
+              <input id="name" name="name" type="text" placeholder="Your Name" required autocomplete="name">
+              <span class="error-tooltip" id="nameError"></span>
+            </div>
+            <div class="form-group">
+              <label for="email" class="visually-hidden">Email</label>
+              <input id="email" name="email" type="email" placeholder="Email" required autocomplete="email">
+              <span class="error-tooltip" id="emailError"></span>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="visually-hidden">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="message" class="visually-hidden">Project details</label>
+              <textarea id="message" name="message" rows="4" placeholder="Project details…" required></textarea>
+              <span class="error-tooltip" id="messageError"></span>
+            </div>
             <button type="submit" class="btn" style="cursor:pointer;" aria-busy="false"><span id="submitText">Send Message</span></button>
             <p id="formStatus" aria-live="polite" style="font-weight:600;margin-top:.5rem;"></p>
           </form>
+          <div class="map-embed" aria-label="Our office location">
+            <iframe title="Allied Construction Chicago Map" src="https://www.openstreetmap.org/export/embed.html?bbox=-87.6847%2C41.8369%2C-87.6047%2C41.8969&amp;layer=mapnik&amp;marker=41.8669,-87.6447" style="width:100%;height:260px;border:none;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
           <noscript>
             <p style="color:#fff;background:#c00;padding:1em;border-radius:8px;margin-top:1em;">JavaScript is required to submit this form. Please email us at <a href="mailto:info@alliedconstruction.com" style="color:#fff;text-decoration:underline;">info@alliedconstruction.com</a>.</p>
           </noscript>
@@ -405,6 +559,10 @@
     © <span id="year"></span> Allied Construction • <a href="tel:+13125551234">312-555-1234</a> • Chicago, IL
   </footer>
   <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+  <!-- Chat Widget Placeholder -->
+  <div id="chatWidget" tabindex="0" aria-label="Open chat support">
+    <i class="fa-solid fa-comments"></i> Chat with us
+  </div>
   <script>
     // ===== Loader overlay =====
     window.addEventListener('DOMContentLoaded', () => {
@@ -412,14 +570,31 @@
         document.getElementById('pageloader').classList.add('hide');
       }, 400);
     });
-    // ===== Header scroll shadow & progress =====
+    // ===== Cookie Consent =====
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (!localStorage.getItem('cookieConsent')) {
+      cookieConsent.classList.remove('hide');
+    }
+    document.getElementById('acceptCookies').onclick = () => {
+      localStorage.setItem('cookieConsent', '1');
+      cookieConsent.classList.add('hide');
+    };
+    // ===== Header scroll shadow, progress, sticky hide/show =====
     const header = document.getElementById('header');
     const progress = document.getElementById('progress');
+    let lastScrollY = 0;
     window.addEventListener('scroll', () => {
       const scY = window.scrollY;
       header.classList.toggle('scrolled', scY > 80);
       const max = document.body.scrollHeight - innerHeight;
       progress.style.width = `${(scY / max) * 100}%`;
+      // Sticky hide/show
+      if (scY > lastScrollY && scY > 120) {
+        header.style.transform = 'translateY(-100%)';
+      } else {
+        header.style.transform = '';
+      }
+      lastScrollY = scY;
     });
     // ===== Mobile Nav (close on link click, ESC, focus trap) =====
     const hamburger = document.getElementById('hamburger');
@@ -456,7 +631,7 @@
         hamburger.setAttribute('aria-expanded', false);
       }
     }));
-    // ===== Theme Toggle =====
+    // ===== Theme Toggle (with transition) =====
     const toggleBtn = document.getElementById('themeToggle');
     const root = document.documentElement;
     function setTheme(mode) {
@@ -465,6 +640,7 @@
       toggleBtn.innerHTML = mode === 'dark'
         ? '<i class="fa-solid fa-moon"></i>'
         : '<i class="fa-solid fa-sun"></i>';
+      document.body.style.transition = 'background .4s, color .4s';
     }
     const saved = localStorage.getItem('theme');
     if (saved) setTheme(saved);
@@ -487,7 +663,7 @@
       topBtn.classList.toggle('show', scrollY > 700);
     });
     topBtn.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
-    // ===== Reveal on scroll =====
+    // ===== Reveal on scroll (IntersectionObserver) =====
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(es => {
         es.forEach(e => e.isIntersecting && e.target.classList.add('show'));
@@ -496,34 +672,39 @@
     } else {
       document.querySelectorAll('[data-animate]').forEach(el => el.classList.add('show'));
     }
-    // ===== Counters =====
-    const counters = [
-      { el: '#years', target: 30, suffix: '+' },
-      { el: '#projects', target: 150, suffix: '' },
-      { el: '#safety', target: 0, suffix: '' }
-    ];
-    counters.forEach(c => {
-      const el = document.querySelector(c.el);
-      if (!el) return;
-      let start = c.target === 0 ? 0 : 1;
-      const step = c.target > 0 ? Math.max(1, c.target / 60) : 1;
-      const animate = () => {
-        if (c.target === 0) {
+    // ===== Counters (animate on scroll into view) =====
+    function animateCounter(el, target, suffix) {
+      let start = target === 0 ? 0 : 1;
+      const step = target > 0 ? Math.max(1, target / 60) : 1;
+      let started = false;
+      function run() {
+        if (target === 0) {
           el.textContent = '0';
           return;
         }
         const i = setInterval(() => {
           start += step;
-          if (start >= c.target) {
-            el.textContent = c.target + (c.suffix || '');
+          if (start >= target) {
+            el.textContent = target + (suffix || '');
             clearInterval(i);
           } else {
-            el.textContent = Math.ceil(start) + (c.suffix || '');
+            el.textContent = Math.ceil(start) + (suffix || '');
           }
         }, 30);
-      };
-      animate();
-    });
+      }
+      function onScroll() {
+        if (!started && el.getBoundingClientRect().top < window.innerHeight - 80) {
+          started = true;
+          run();
+          window.removeEventListener('scroll', onScroll);
+        }
+      }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    }
+    animateCounter(document.getElementById('years'), 30, '+');
+    animateCounter(document.getElementById('projects'), 150, '');
+    animateCounter(document.getElementById('safety'), 0, '');
     // ===== Gallery Lightbox (keyboard, swipe) =====
     document.querySelectorAll('.gallery img').forEach((img, idx, arr) => {
       img.addEventListener('click', () => openLightbox(idx));
@@ -563,7 +744,7 @@
         }
       });
     }
-    // ===== Testimonials Carousel (auto-scroll, keyboard, indicators) =====
+    // ===== Testimonials Carousel (auto-scroll, keyboard, indicators, touch/swipe) =====
     const carousel = document.querySelector('.carousel');
     const cards = carousel.querySelectorAll('.card');
     const indicators = document.querySelectorAll('.carousel-indicators button');
@@ -577,6 +758,17 @@
     carousel.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight') showCarousel((carouselIdx + 1) % cards.length);
       if (e.key === 'ArrowLeft') showCarousel((carouselIdx - 1 + cards.length) % cards.length);
+    });
+    // Touch/swipe support
+    let startX = null;
+    carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+    carousel.addEventListener('touchend', e => {
+      if (startX !== null) {
+        const dx = e.changedTouches[0].clientX - startX;
+        if (dx > 50) showCarousel((carouselIdx - 1 + cards.length) % cards.length);
+        if (dx < -50) showCarousel((carouselIdx + 1) % cards.length);
+        startX = null;
+      }
     });
     function autoCarousel() {
       carouselTimer = setInterval(() => showCarousel((carouselIdx + 1) % cards.length), 5000);
@@ -592,11 +784,14 @@
         if (e.key === 'ArrowUp') arr[(i - 1 + arr.length) % arr.length].querySelector('summary').focus();
       });
     });
-    // ===== Contact Form (honeypot, spinner, better validation) =====
+    // ===== Contact Form (honeypot, spinner, better validation, error tooltips) =====
     const form = document.getElementById('contactForm');
     if (form) {
       form.addEventListener('submit', async e => {
         e.preventDefault();
+        // Remove previous errors
+        form.querySelectorAll('.form-group').forEach(g => g.classList.remove('error'));
+        form.querySelectorAll('.error-tooltip').forEach(t => t.textContent = '');
         const status = document.getElementById('formStatus');
         const submitBtn = form.querySelector('button[type=submit]');
         const submitText = document.getElementById('submitText');
@@ -610,16 +805,28 @@
           submitText.textContent = 'Send Message';
           return;
         }
-        // Validation
-        if (!form.name.value.trim() || !form.email.value.trim() || !form.message.value.trim()) {
-          status.textContent = 'Please fill in all required fields.';
-          submitBtn.setAttribute('aria-busy', 'false');
-          submitText.textContent = 'Send Message';
-          return;
+        let valid = true;
+        if (!form.name.value.trim()) {
+          valid = false;
+          form.name.parentElement.classList.add('error');
+          document.getElementById('nameError').textContent = 'Name required';
         }
-        // Email format check
-        if (!/^[^@]+@[^@]+\.[^@]+$/.test(form.email.value.trim())) {
-          status.textContent = 'Please enter a valid email address.';
+        if (!form.email.value.trim()) {
+          valid = false;
+          form.email.parentElement.classList.add('error');
+          document.getElementById('emailError').textContent = 'Email required';
+        } else if (!/^[^@]+@[^@]+\.[^@]+$/.test(form.email.value.trim())) {
+          valid = false;
+          form.email.parentElement.classList.add('error');
+          document.getElementById('emailError').textContent = 'Invalid email';
+        }
+        if (!form.message.value.trim()) {
+          valid = false;
+          form.message.parentElement.classList.add('error');
+          document.getElementById('messageError').textContent = 'Message required';
+        }
+        if (!valid) {
+          status.textContent = 'Please fix errors above.';
           submitBtn.setAttribute('aria-busy', 'false');
           submitText.textContent = 'Send Message';
           return;
@@ -650,7 +857,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         const code = `
-          const CACHE = 'allied-v2';
+          const CACHE = 'allied-v3';
           const OFFLINE_URL = '/offline.html';
           self.addEventListener('install',e=>{
             e.waitUntil(
@@ -679,6 +886,8 @@
       document.head.appendChild(script);
       script.onload = () => window.__forceSmoothScrollPolyfill__ && window.__forceSmoothScrollPolyfill__();
     }
+    // ===== Chat Widget Placeholder =====
+    document.getElementById('chatWidget').onclick = () => alert('Live chat coming soon!');
   </script>
 </body>
 </html>
