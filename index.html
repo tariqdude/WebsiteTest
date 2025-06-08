@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =========================
+       Meta & SEO
+  ========================== -->
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Allied Construction | Chicago Design-Build Firm</title>
-  <!-- SEO & Social -->
   <meta name="description" content="Allied Construction is Chicago’s award‑winning design‑build firm for commercial, industrial & high‑end residential projects. Quality, safety, and sustainability—built into every square foot." />
   <meta name="keywords" content="construction, design-build, Chicago, commercial, residential, LEED, sustainable, remodeling, industrial, contractor, builder, architecture, engineering" />
+  <link rel="canonical" href="https://alliedconstruction.github.io/" />
+
+  <!-- =========================
+       Social & Structured Data
+  ========================== -->
   <meta property="og:title" content="Allied Construction | Building Your Vision" />
   <meta property="og:description" content="From skyscrapers to smart homes, we engineer the future of Chicagoland construction." />
   <meta property="og:image" content="https://source.unsplash.com/featured/1200x630?construction,Chicago" />
@@ -19,14 +26,6 @@
   <meta name="twitter:description" content="From skyscrapers to smart homes, we engineer the future of Chicagoland construction." />
   <meta name="twitter:image" content="https://source.unsplash.com/featured/1200x630?construction,Chicago" />
   <meta name="theme-color" content="#0A66C2" />
-  <link rel="canonical" href="https://alliedconstruction.github.io/" />
-  <!-- Apple PWA -->
-  <link rel="apple-touch-icon" href="/icon.png" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <!-- CSP for security -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://source.unsplash.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline'; img-src * data:; connect-src https://formspree.io https://source.unsplash.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com;"/>
-  <!-- Structured Data -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -52,13 +51,27 @@
       }
     }
   </script>
-  <!-- Fonts & Icons -->
+
+  <!-- =========================
+       Icons, Fonts, Manifest
+  ========================== -->
+  <link rel="apple-touch-icon" href="/icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- PWA Manifest (data URI) -->
   <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAibmFtZSI6ICJBbGxpZWQgQ29uc3RydWN0aW9uIiwNCiAgInNob3J0X25hbWUiOiAiQWxsaWVkIiwNCiAgImljb24iOiAiL2ljb24ucG5nIiwNCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZmZiIsDQogICJ0aGVtZV9jb2xvciI6ICIjMEE2NkMyIiwNCiAgInN0YXJ0X3VybCI6ICIuLyINCn0=">
-  <style>
+
+  <!-- =========================
+       Security
+  ========================== -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://source.unsplash.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline'; img-src * data:; connect-src https://formspree.io https://source.unsplash.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com;"/>
+
+  <!-- =========================
+       Main Styles
+  ========================== -->
+  <style id="main-style">
     /* =========================
        CSS Variables & Theme
     ========================== */
@@ -732,15 +745,27 @@
   </style>
 </head>
 <body>
-  <!-- Loader overlay -->
+  <!-- =========================
+       Loader & Progress
+  ========================== -->
   <div id="pageloader" aria-label="Loading page" role="status"><span class="spinner"></span></div>
   <span id="progress" role="presentation"></span>
   <a href="#home" class="skip-link">Skip to content</a>
-  <!-- Cookie Consent Banner -->
+
+  <!-- =========================
+       Cookie Consent
+  ========================== -->
   <div id="cookieConsent" class="hide" role="alert" aria-live="polite">
-    <span>We use cookies to improve your experience. By using our site, you agree to our <a href="#" style="color:var(--primary);text-decoration:underline;">privacy policy</a>.</span>
+    <span>
+      We use cookies to improve your experience. By using our site, you agree to our
+      <a href="#" style="color:var(--primary);text-decoration:underline;">privacy policy</a>.
+    </span>
     <button id="acceptCookies">Accept</button>
   </div>
+
+  <!-- =========================
+       Header & Navigation
+  ========================== -->
   <header id="header" role="banner">
     <div class="container">
       <nav aria-label="Main navigation" role="navigation">
@@ -755,13 +780,17 @@
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <div style="display:flex;align-items:center;">
+        <div class="nav-actions">
           <button id="themeToggle" aria-label="Toggle light/dark mode"><i class="fa-solid fa-sun"></i></button>
           <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><i class="fa-solid fa-bars"></i></button>
         </div>
       </nav>
     </div>
   </header>
+
+  <!-- =========================
+       Main Content
+  ========================== -->
   <main id="home" tabindex="-1">
     <!-- Hero -->
     <section class="hero" data-animate aria-label="Hero section">
@@ -923,16 +952,33 @@
     </section>
   </main>
   <!-- Sticky Mobile CTA -->
-  <div id="stickyCTA" role="complementary"><span>Need a quote?</span><a href="#contact">Get in touch</a></div>
+  <div id="stickyCTA" role="complementary">
+    <span>Need a quote?</span>
+    <a href="#contact">Get in touch</a>
+  </div>
+  <!-- =========================
+       Footer
+  ========================== -->
   <footer role="contentinfo">
     © <span id="year"></span> Allied Construction • <a href="tel:+13125551234">312-555-1234</a> • Chicago, IL
   </footer>
+
+  <!-- =========================
+       Back-to-top Button
+  ========================== -->
   <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
-  <!-- Chat Widget Placeholder -->
+
+  <!-- =========================
+       Chat Widget Placeholder
+  ========================== -->
   <div id="chatWidget" tabindex="0" aria-label="Open chat support">
     <i class="fa-solid fa-comments"></i> Chat with us
   </div>
-  <script>
+
+  <!-- =========================
+       Main Scripts
+  ========================== -->
+  <script id="main-script">
     // ===== Utility: DOM Ready =====
     const onReady = fn => {
       if (document.readyState !== 'loading') fn();
@@ -1100,7 +1146,7 @@
       animateCounter(document.getElementById('safety'), 0, '');
     });
 
-    // ===== Gallery Lightbox (keyboard, swipe) =====
+    // ===== Gallery Lightbox (keyboard, swipe, focus trap) =====
     onReady(() => {
       const imgs = document.querySelectorAll('.gallery img');
       imgs.forEach((img, idx) => {
@@ -1115,22 +1161,174 @@
         const overlay = document.createElement('div');
         overlay.id = 'lightbox';
         overlay.tabIndex = 0;
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.style.outline = 'none';
         const showImg = i => {
-          overlay.innerHTML = `<img src="${arr[i].src.replace('600x400','1200x800')}" alt="${arr[i].alt}"><span id='close'>&times;</span>`;
+          overlay.innerHTML = `<img src="${arr[i].src.replace('600x400','1200x800')}" alt="${arr[i].alt}"><span id='close' tabindex="0" aria-label="Close">&times;</span>`;
         };
         showImg(current);
         document.body.appendChild(overlay);
         overlay.focus();
-        overlay.addEventListener('click', e => {
-          if (e.target.id === 'lightbox' || e.target.id === 'close') overlay.remove();
-        });
+        // Trap focus inside overlay
         overlay.addEventListener('keydown', e => {
           if (e.key === 'Escape') overlay.remove();
           if (e.key === 'ArrowRight') { current = (current + 1) % arr.length; showImg(current);}
           if (e.key === 'ArrowLeft') { current = (current - 1 + arr.length) % arr.length; showImg(current);}
+          if (e.key === 'Tab') { e.preventDefault(); document.getElementById('close').focus(); }
+        });
+        overlay.addEventListener('click', e => {
+          if (e.target.id === 'lightbox' || e.target.id === 'close') overlay.remove();
+        });
+        overlay.addEventListener('keydown', e => {
+          if (e.target.id === 'close' && (e.key === 'Enter' || e.key === ' ')) overlay.remove();
         });
         // Swipe support
         let startX = null;
         overlay.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
         overlay.addEventListener('touchend', e => {
-          if
+          if (!startX) return;
+          const endX = e.changedTouches[0].clientX;
+          const diff = endX - startX;
+          if (Math.abs(diff) > 30) {
+            current = (current + (diff > 0 ? -1 : 1) + arr.length) % arr.length;
+            showImg(current);
+          }
+          startX = null;
+        });
+      }
+    });
+
+    // ===== Testimonials Carousel: auto-advance, indicators, keyboard =====
+    onReady(() => {
+      const carousel = document.querySelector('.carousel');
+      const cards = carousel.querySelectorAll('.card');
+      const indicators = document.querySelectorAll('.carousel-indicators button');
+      let idx = 0, timer = null;
+      function show(i) {
+        idx = i;
+        cards.forEach((c, j) => c.style.display = j === i ? 'block' : 'none');
+        indicators.forEach((b, j) => b.classList.toggle('active', j === i));
+      }
+      function next() { show((idx + 1) % cards.length); }
+      function prev() { show((idx - 1 + cards.length) % cards.length); }
+      function startAuto() {
+        timer = setInterval(next, 7000);
+      }
+      function stopAuto() {
+        clearInterval(timer);
+      }
+      // Init
+      show(0);
+      startAuto();
+      indicators.forEach((btn, i) => {
+        btn.addEventListener('click', () => { show(i); stopAuto(); startAuto(); });
+      });
+      carousel.setAttribute('tabindex', '0');
+      carousel.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') { next(); stopAuto(); startAuto(); }
+        if (e.key === 'ArrowLeft') { prev(); stopAuto(); startAuto(); }
+      });
+      carousel.addEventListener('mouseenter', stopAuto);
+      carousel.addEventListener('mouseleave', startAuto);
+    });
+
+    // ===== Form: AJAX submit, validation, honeypot, accessibility =====
+    onReady(() => {
+      const form = document.getElementById('contactForm');
+      const status = document.getElementById('formStatus');
+      const btn = form.querySelector('button[type="submit"]');
+      const nameInput = form.querySelector('#name');
+      const emailInput = form.querySelector('#email');
+      const messageInput = form.querySelector('#message');
+      const nameError = document.getElementById('nameError');
+      const emailError = document.getElementById('emailError');
+      const messageError = document.getElementById('messageError');
+      const honeypot = form.querySelector('input[name="website"]');
+      function validate() {
+        let valid = true;
+        // Name
+        if (!nameInput.value.trim()) {
+          nameError.textContent = 'Name is required';
+          nameInput.parentElement.classList.add('error');
+          valid = false;
+        } else {
+          nameError.textContent = '';
+          nameInput.parentElement.classList.remove('error');
+        }
+        // Email
+        const emailVal = emailInput.value.trim();
+        if (!emailVal) {
+          emailError.textContent = 'Email is required';
+          emailInput.parentElement.classList.add('error');
+          valid = false;
+        } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailVal)) {
+          emailError.textContent = 'Invalid email address';
+          emailInput.parentElement.classList.add('error');
+          valid = false;
+        } else {
+          emailError.textContent = '';
+          emailInput.parentElement.classList.remove('error');
+        }
+        // Message
+        if (!messageInput.value.trim()) {
+          messageError.textContent = 'Message is required';
+          messageInput.parentElement.classList.add('error');
+          valid = false;
+        } else {
+          messageError.textContent = '';
+          messageInput.parentElement.classList.remove('error');
+        }
+        return valid;
+      }
+      [nameInput, emailInput, messageInput].forEach(input => {
+        input.addEventListener('input', validate);
+      });
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        status.textContent = '';
+        if (honeypot.value) return; // bot detected
+        if (!validate()) {
+          status.textContent = 'Please fix errors above.';
+          status.style.color = '#f44336';
+          return;
+        }
+        btn.disabled = true;
+        btn.setAttribute('aria-busy', 'true');
+        btn.querySelector('#submitText').textContent = 'Sending...';
+        const data = new FormData(form);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://formspree.io/f/mwkajgyd', true);
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.onload = () => {
+          btn.disabled = false;
+          btn.setAttribute('aria-busy', 'false');
+          btn.querySelector('#submitText').textContent = 'Send Message';
+          if (xhr.status === 200) {
+            form.reset();
+            status.innerHTML = 'Message sent successfully!';
+            status.style.color = '#4caf50';
+          } else {
+            status.innerHTML = 'Error sending message. Please try again later.';
+            status.style.color = '#f44336';
+          }
+        };
+        xhr.onerror = () => {
+          btn.disabled = false;
+          btn.setAttribute('aria-busy', 'false');
+          btn.querySelector('#submitText').textContent = 'Send Message';
+          status.innerHTML = 'Network error. Please try again.';
+          status.style.color = '#f44336';
+        };
+        xhr.send(data);
+      });
+    });
+
+    // ===== Footer: Set copyright year =====
+    onReady(() => {
+      const year = document.getElementById('year');
+      if (year) year.textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
