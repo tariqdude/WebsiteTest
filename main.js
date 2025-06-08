@@ -118,8 +118,10 @@ onReady(() => {
       const section = document.querySelector(l.getAttribute('href'));
       if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
         l.classList.add('active');
+        l.setAttribute('aria-current', 'page');
       } else {
         l.classList.remove('active');
+        l.removeAttribute('aria-current');
       }
     });
     topBtn.classList.toggle('show', scrollY > 700);
@@ -236,8 +238,14 @@ onReady(() => {
   let idx = 0, timer = null;
   function show(i) {
     idx = i;
-    cards.forEach((c, j) => c.style.display = j === i ? 'block' : 'none');
-    indicators.forEach((b, j) => b.classList.toggle('active', j === i));
+    cards.forEach((c, j) => {
+      c.style.display = j === i ? 'block' : 'none';
+      c.setAttribute('aria-hidden', j === i ? 'false' : 'true');
+    });
+    indicators.forEach((b, j) => {
+      b.classList.toggle('active', j === i);
+      b.setAttribute('aria-selected', j === i ? 'true' : 'false');
+    });
     // ARIA live update
     carousel.setAttribute('aria-live', 'polite');
     setTimeout(() => carousel.setAttribute('aria-live', 'off'), 1000);

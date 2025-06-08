@@ -98,12 +98,26 @@ html {
   transform: none;
 }
 
-/* Carousel accessibility: always hide non-active cards */
+/* Carousel accessibility: always hide non-active cards visually but keep accessible */
 .carousel .card {
   display: none;
 }
-.carousel .card:first-child {
+.carousel .card[aria-hidden="false"], .carousel .card:first-child {
   display: block;
+}
+.carousel .card[aria-hidden="true"] {
+  display: none;
+}
+
+/* Carousel indicator active state */
+.carousel-indicators button.active,
+.carousel-indicators button[aria-selected="true"] {
+  background: var(--primary);
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  border: none;
+  outline: 2px solid var(--accent);
 }
 
 /* ...existing code... */
