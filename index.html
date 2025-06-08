@@ -1,141 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Allied Construction | Building Your Vision</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allied Construction | Chicago Design‑Build Contractors</title>
   <!-- SEO & Social -->
-  <meta name="description" content="Allied Construction delivers award‑winning commercial and residential builds across Chicagoland—on time, on budget, on point."/>
-  <meta name="keywords" content="Chicago construction, commercial build‑outs, residential remodeling, HVAC contractor"/>
-  <link rel="canonical" href="https://alliedconstruction.github.io/"/>
-  <meta property="og:title" content="Allied Construction | Building Your Vision"/>
-  <meta property="og:description" content="Award‑winning general contractor transforming concepts into landmarks."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://alliedconstruction.github.io/"/>
-  <meta property="og:image" content="https://source.unsplash.com/featured/1200x630?chicago‑skyline,construction"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="theme-color" content="#0A66C2"/>
+  <meta name="description" content="Allied Construction is Chicago’s award‑winning design‑build firm for commercial, industrial & high‑end residential projects. Quality, safety, and sustainability—built into every square foot." />
+  <meta property="og:title" content="Allied Construction | Building Your Vision" />
+  <meta property="og:description" content="From skyscrapers to smart homes, we engineer the future of Chicagoland construction." />
+  <meta property="og:image" content="https://source.unsplash.com/featured/1200x630?construction,Chicago" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alliedconstruction.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0A66C2" />
   <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    :root{
-      --primary:#0A66C2;
-      --primary‑dark:#094b91;
-      --bg:#ffffff;
-      --text:#333333;
-      --gray:#f5f7fa;
-      --radius:10px;
-      --font:'Poppins',sans-serif;
+    /* ===== CSS Variable System ===== */
+    :root {
+      --primary: #0A66C2;
+      --primary-dark: #094b91;
+      --accent: #F59E0B;
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #111827;
+      --gray: #f3f4f6;
+      --radius: 12px;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      --font: 'Poppins', sans-serif;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    @media (prefers‑color‑scheme:dark){
-      :root:not(.light){
-        --bg:#0f1116;
-        --text:#f1f3f9;
-        --gray:#1a1d24;
+    /* Dark‑mode palette */
+    @media (prefers-color-scheme: dark) {
+      :root:not(.light) {
+        --bg: #0f1116;
+        --surface: #1a1d24;
+        --text: #f1f3f9;
+        --gray: #23262e;
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
       }
     }
-    :root.dark{
-      --bg:#0f1116;
-      --text:#f1f3f9;
-      --gray:#1a1d24;
+    :root.dark {
+      --bg: #0f1116;
+      --surface: #1a1d24;
+      --text: #f1f3f9;
+      --gray: #23262e;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
 
-    *{margin:0;padding:0;box‑sizing:border‑box;font‑family:var(--font);}
-    html{scroll‑behavior:smooth;}
-    body{background:var(--bg);color:var(--text);line‑height:1.6;}
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    h2 { font-size: 2rem; margin-bottom: 1rem; text-align: center; color: var(--primary-dark); }
+    a { color: inherit; }
 
-    /* ---------- Helper ---------- */
-    .container{max‑width:1200px;margin:auto;padding:1rem 1.5rem;}
-    .btn{display:inline‑block;background:var(--primary);color:#fff;padding:.8rem 1.6rem;border‑radius:4px;text‑decoration:none;font‑weight:600;transition:background .3s;}
-    .btn:hover{background:var(--primary‑dark);}    
-    section{padding:4.5rem 0;position:relative;}
+    .container { max-width: 1200px; margin: auto; padding: 1rem 1.5rem; }
+    .btn { display: inline-block; background: var(--primary); color: #fff; padding: 0.9rem 1.8rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; transition: background var(--transition); }
+    .btn:hover { background: var(--primary-dark); }
 
-    /* ---------- Header ---------- */
-    header{position:fixed;top:0;left:0;right:0;background:var(--bg);box‑shadow:0 2px 4px rgba(0,0,0,.06);z‑index:1000;transition:background .3s;}
-    nav{display:flex;align‑items:center;justify‑content:space‑between;}
-    .logo{font‑weight:800;font‑size:1.25rem;color:var(--primary);}   
-    nav ul{display:flex;gap:1.25rem;list‑style:none;}
-    nav a{text‑decoration:none;color:var(--text);font‑weight:600;}
-    nav a.active,nav a:hover{color:var(--primary);}    
-    .hamburger{display:none;font‑size:1.5rem;cursor:pointer;}
-    #themeToggle{background:none;border:none;font‑size:1.4rem;margin‑left:.5rem;color:var(--primary);cursor:pointer;}
+    /* ===== Header ===== */
+    header { position: fixed; inset: 0 0 auto 0; background: var(--surface); box-shadow: var(--shadow); z-index: 1000; }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { font-weight: 800; font-size: 1.35rem; color: var(--primary); letter-spacing: -0.5px; }
+    nav ul { display: flex; list-style: none; gap: 1.4rem; }
+    nav a { font-weight: 600; text-decoration: none; color: var(--text); transition: color var(--transition); }
+    nav a:hover, nav a.active { color: var(--primary); }
+    .hamburger { display: none; font-size: 1.6rem; cursor: pointer; background: none; border: none; color: var(--primary); }
+    #themeToggle { margin-left: 0.75rem; background: none; border: none; font-size: 1.5rem; color: var(--accent); cursor: pointer; transition: transform var(--transition); }
+    #themeToggle:hover { transform: rotate(15deg); }
 
-    @media (max‑width:768px){
-      nav ul{position:absolute;top:64px;left:0;width:100%;flex‑direction:column;background:var(--bg);max‑height:0;overflow:hidden;transition:max‑height .35s ease;border‑top:1px solid #e3e6ee;}
-      nav ul.open{max‑height:320px;}
-      .hamburger{display:block;}
+    @media (max-width: 768px) {
+      nav ul { position: absolute; top: 64px; left: 0; width: 100%; flex-direction: column; background: var(--surface); max-height: 0; overflow: hidden; transition: max-height 0.35s ease; border-top: 1px solid var(--gray); }
+      nav ul.open { max-height: 320px; }
+      .hamburger { display: block; }
     }
 
-    /* ---------- Hero ---------- */
-    .hero{display:grid;grid‑template‑columns:repeat(auto‑fit,minmax(280px,1fr));gap:2.5rem;align‑items:center;min‑height:100vh;}
-    .hero h1{font‑size:clamp(2.4rem,5vw,3.8rem);color:var(--primary‑dark);line‑height:1.15;margin‑bottom:1rem;}
-    .hero img{width:100%;border‑radius:var(--radius);filter:drop‑shadow(0 8px 10px rgba(0,0,0,.1));}
+    /* ===== Hero ===== */
+    .hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center; min-height: 100vh; padding-top: 4rem; }
+    .hero h1 { font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1.15; color: var(--primary-dark); margin-bottom: 1rem; }
+    .hero p { font-size: 1.1rem; max-width: 600px; margin-bottom: 1.5rem; }
+    .hero img { border-radius: var(--radius); box-shadow: var(--shadow); }
 
-    /* ---------- Stats ---------- */
-    .stats{display:flex;justify‑content:space‑around;flex‑wrap:wrap;gap:2rem;margin‑top:2.5rem;}
-    .stat{text‑align:center;}
-    .stat strong{display:block;font‑size:2rem;color:var(--primary);} 
+    /* ===== Decorative Waves ===== */
+    .wave { display: block; width: 100%; height: 80px; line-height: 0; }
+    .wave svg { width: 100%; height: 100%; fill: var(--surface); }
 
-    /* ---------- Services ---------- */
-    .cards{display:grid;grid‑template‑columns:repeat(auto‑fit,minmax(250px,1fr));gap:1.8rem;margin‑top:2rem;}
-    .card{background:var(--bg);padding:2rem;border‑radius:var(--radius);box‑shadow:0 8px 16px rgba(0,0,0,.05);text‑align:center;transition:transform .3s,box‑shadow .3s;}
-    .card:hover{transform:translateY(-6px);box‑shadow:0 12px 24px rgba(0,0,0,.08);} 
-    .card i{font‑size:2rem;color:var(--primary);margin‑bottom:1rem;}
+    /* ===== Stats ===== */
+    .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; margin-top: 2.5rem; }
+    .stat { text-align: center; min-width: 120px; }
+    .stat strong { display: block; font-size: 2.2rem; color: var(--accent); }
 
-    /* ---------- Projects ---------- */
-    .gallery{display:grid;grid‑template‑columns:repeat(auto‑fill,minmax(280px,1fr));gap:1rem;margin‑top:2rem;}
-    .gallery img{width:100%;border‑radius:var(--radius);object‑fit:cover;aspect‑ratio:4/3;cursor:pointer;transition:transform .3s;}
-    .gallery img:hover{transform:scale(1.03);}   
+    /* ===== Cards / Services ===== */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.8rem; margin-top: 2rem; }
+    .card { background: var(--surface); padding: 2.2rem 1.8rem; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; transition: transform var(--transition), box-shadow var(--transition); }
+    .card:hover { transform: translateY(-7px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07); }
+    .card i { font-size: 2rem; color: var(--primary); margin-bottom: 0.75rem; }
 
-    /* ---------- Testimonials ---------- */
-    .testimonials{background:var(--gray);} 
-    blockquote{font‑style:italic;margin‑bottom:1rem;position:relative;padding‑left:1.5rem;}
-    blockquote:before{content:"\f10d";font‑family:"Font Awesome 6 Free";font‑weight:900;position:absolute;left:0;top:0;color:var(--primary);}
+    /* ===== Process Steps ===== */
+    .process { background: var(--gray); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.8rem; margin-top: 2rem; counter-reset: step; }
+    .step { background: var(--surface); padding: 2rem 1.6rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; }
+    .step::before { counter-increment: step; content: counter(step); position: absolute; top: -18px; left: -18px; width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; box-shadow: var(--shadow); }
+    .step h3 { margin-bottom: 0.5rem; }
 
-    /* ---------- CTA ---------- */
-    .call{background:var(--primary);color:#fff;text‑align:center;border‑radius:var(--radius);padding:3rem 1rem;margin‑top:2rem;}
-    .call h2{font‑size:2rem;margin‑bottom:1rem;}
+    /* ===== Gallery / Lightbox ===== */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .gallery img { border-radius: var(--radius); object-fit: cover; aspect-ratio: 4/3; cursor: zoom-in; transition: transform var(--transition); }
+    .gallery img:hover { transform: scale(1.05); }
+    #lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center; z-index: 2000; animation: fadeIn 0.3s ease-out; }
+    #lightbox img { max-width: 92%; max-height: 92%; border-radius: var(--radius); box-shadow: var(--shadow); cursor: zoom-out; }
+    #close { position: absolute; top: 1.4rem; right: 2rem; font-size: 2rem; color: #fff; cursor: pointer; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* ---------- Footer ---------- */
-    footer{background:#111;color:#eee;text‑align:center;padding:2rem 1rem;}
-    footer a{color:var(--primary);} 
+    /* ===== Testimonials (Carousel) ===== */
+    .testimonials { background: var(--gray); }
+    .carousel { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch; }
+    .carousel::-webkit-scrollbar { display: none; }
+    .carousel .card { min-width: 280px; scroll-snap-align: start; }
+    blockquote { font-style: italic; margin-bottom: 1rem; position: relative; padding-left: 1.5rem; }
+    blockquote::before { content: "\f10d"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: 0; color: var(--primary); }
 
-    /* ---------- Scroll Animations ---------- */
-    [data‑animate]{opacity:0;transform:translateY(40px);transition:opacity .6s ease,transform .6s ease;}
-    [data‑animate].show{opacity:1;transform:none;}  
+    /* ===== FAQ ===== */
+    .faq details { background: var(--surface); margin-bottom: 1rem; padding: 1rem 1.25rem; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .faq summary { cursor: pointer; font-weight: 600; list-style: none; position: relative; padding-right: 1.5rem; }
+    .faq summary::after { content: "\f078"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; right: 0; transition: transform var(--transition); }
+    .faq details[open] summary::after { transform: rotate(180deg); }
 
-    /* ---------- Scroll to Top ---------- */
-    #topBtn{position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;border:none;border‑radius:50%;width:48px;height:48px;font‑size:1.25rem;display:none;align‑items:center;justify‑content:center;cursor:pointer;box‑shadow:0 4px 8px rgba(0,0,0,.2);} 
-    #topBtn.show{display:flex;}  
+    /* ===== CTA ===== */
+    .call { position: relative; overflow: hidden; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #fff; text-align: center; border-radius: var(--radius); padding: 3rem 1rem; margin-top: 2rem; }
+    .call::before { content: ""; position: absolute; inset: 0; background: hsla(0, 0%, 100%, 0.05); transform: skewY(-6deg); }
+    .call h2 { font-size: 2rem; margin-bottom: 1rem; }
+
+    /* ===== Footer ===== */
+    footer { background: #111; color: #eee; text-align: center; padding: 2.5rem 1rem; font-size: 0.9rem; }
+    footer a { color: var(--accent); }
+
+    /* ===== Animations ===== */
+    [data-animate] { opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    [data-animate].show { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      [data-animate] { opacity: 1; transform: none; }
+    }
+
+    /* ===== Back‑to‑top ===== */
+    #topBtn { position: fixed; bottom: 24px; right: 24px; background: var(--primary); color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.25rem; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow); transition: background var(--transition); }
+    #topBtn:hover { background: var(--primary-dark); }
+    #topBtn.show { display: flex; }
   </style>
 </head>
 <body>
+  <a href="#home" class="skip-link">Skip to content</a>
   <header>
     <div class="container">
-      <nav aria‑label="Main navigation">
+      <nav aria-label="Main navigation">
         <div class="logo">Allied Construction</div>
         <ul id="menu">
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <div style="display:flex;align‑items:center;">
-          <button id="themeToggle" aria‑label="Toggle light/dark mode"><i class="fa‑solid fa‑sun"></i></button>
-          <div class="hamburger" id="hamburger" aria‑label="Toggle menu"><i class="fa‑solid fa‑bars"></i></div>
+        <div style="display:flex;align-items:center;">
+          <button id="themeToggle" aria-label="Toggle light/dark mode"><i class="fa-solid fa-sun"></i></button>
+          <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
         </div>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="home">
     <!-- Hero -->
-    <section class="hero container" id="home" data‑animate>
+    <section class="hero container" data-animate>
       <div>
-        <h1>Building Your Vision.<br/>Engineering Your Future.</h1>
+        <h1>Building Your Vision.<br />Engineering Your Future.</h1>
         <p>From concept to completion, we deliver award‑winning commercial and residential construction solutions across Chicagoland.</p>
         <a href="#contact" class="btn">Request a Quote</a>
 
@@ -145,94 +191,98 @@
           <div class="stat"><strong id="safety">0</strong>Safety Violations</div>
         </div>
       </div>
-      <div>
-        <img src="https://source.unsplash.com/featured/?tower‑crane,construction" alt="Skyscraper construction" loading="lazy">
-      </div>
+      <picture>
+        <source srcset="https://source.unsplash.com/1600x1200?construction-site" media="(min-width: 768px)" />
+        <img src="https://source.unsplash.com/800x600?construction" alt="Skyscraper construction" loading="lazy" decoding="async" />
+      </picture>
     </section>
 
+    <span class="wave"><svg viewBox="0 0 1440 80"><path d="M0,32L80,48C160,64,320,96,480,106.7C640,117,800,107,960,74.7C1120,43,1280,21,1360,10.7L1440,0V80H0Z"></path></svg></span>
+
     <!-- About -->
-    <section id="about" data‑animate>
+    <section id="about" data-animate>
       <div class="container">
         <h2>About Us</h2>
-        <p>Established in 1995, Allied Construction has earned a reputation for precision craftsmanship, transparent project management, and relentless safety standards. We hold <strong>LEED</strong> and <strong>OSHA 30</strong> certifications, and our union‑trained teams turn blueprints into benchmarks.</p>
+        <p>Established in 1995, Allied Construction has earned a reputation for precision craftsmanship, transparent project management, and relentless safety standards. Our union‑trained teams hold <strong>LEED</strong>, <strong>OSHA 30</strong>, and <strong>BPI</strong> certifications, turning blueprints into benchmarks.</p>
       </div>
     </section>
 
     <!-- Services -->
-    <section id="services" data‑animate>
+    <section id="services" data-animate>
       <div class="container">
         <h2>Our Services</h2>
         <div class="cards">
-          <div class="card">
-            <i class="fa‑solid fa‑city"></i>
-            <h3>Commercial Build‑Outs</h3>
-            <p>Turnkey solutions for offices, retail, and industrial spaces—from permits to punch‑list.</p>
-          </div>
-          <div class="card">
-            <i class="fa‑solid fa‑house"></i>
-            <h3>Residential Remodeling</h3>
-            <p>High‑end kitchens, bathrooms, and whole‑home renovations that add lasting value.</p>
-          </div>
-          <div class="card">
-            <i class="fa‑solid fa‑screwdriver‑wrench"></i>
-            <h3>HVAC & Mechanical</h3>
-            <p>Energy‑efficient systems designed, fabricated, and installed by certified experts.</p>
-          </div>
-          <div class="card">
-            <i class="fa‑solid fa‑solar‑panel"></i>
-            <h3>Sustainable Retrofits</h3>
-            <p>Solar integration, green roofs, and LEED consulting for eco‑forward clients.</p>
-          </div>
+          <div class="card"><i class="fa-solid fa-city"></i><h3>Commercial Build‑Outs</h3><p>Turnkey solutions for offices, retail, and industrial spaces—from permits to punch‑list.</p></div>
+          <div class="card"><i class="fa-solid fa-house"></i><h3>Residential Remodeling</h3><p>High‑end kitchens, bathrooms, and whole‑home renovations that add lasting value.</p></div>
+          <div class="card"><i class="fa-solid fa-screwdriver-wrench"></i><h3>HVAC & Mechanical</h3><p>Energy‑efficient systems designed, fabricated, and installed by certified experts.</p></div>
+          <div class="card"><i class="fa-solid fa-solar-panel"></i><h3>Sustainable Retrofits</h3><p>Solar integration, green roofs, and LEED consulting for eco‑forward clients.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <span class="wave"><svg viewBox="0 0 1440 80"><path d="M0,64L60,58.7C120,53,240,43,360,37.3C480,32,600,32,720,37.3C840,43,960,53,1080,69.3C1200,85,1320,107,1380,117.3L1440,128V0H0Z"></path></svg></span>
+
+    <!-- Process -->
+    <section id="process" class="process" data-animate>
+      <div class="container">
+        <h2>Our 4‑Step Process</h2>
+        <div class="steps">
+          <div class="step"><i class="fa-solid fa-lightbulb"></i><h3>Concept</h3><p>We listen to your vision and develop a clear project roadmap.</p></div>
+          <div class="step"><i class="fa-solid fa-pencil-ruler"></i><h3>Design</h3><p>Our architects craft functional, aesthetic blueprints with value‑engineering.</p></div>
+          <div class="step"><i class="fa-solid fa-hard-hat"></i><h3>Build</h3><p>Certified crews transform plans into reality with rigorous quality control.</p></div>
+          <div class="step"><i class="fa-solid fa-handshake"></i><h3>Handover</h3><p>You receive keys, warranties, and a post‑occupancy sustainability report.</p></div>
         </div>
       </div>
     </section>
 
     <!-- Projects -->
-    <section id="projects" data‑animate>
+    <section id="projects" data-animate>
       <div class="container">
         <h2>Featured Projects</h2>
         <div class="gallery">
-          <img src="https://source.unsplash.com/random/600x400?industrial‑construction" alt="Industrial build">
-          <img src="https://source.unsplash.com/random/600x400?modern‑office" alt="Office build">
-          <img src="https://source.unsplash.com/random/600x400?residential‑renovation" alt="Residential renovation">
-          <img src="https://source.unsplash.com/random/600x400?solar‑panel,roof" alt="Sustainable retrofit">
+          <img src="https://source.unsplash.com/random/600x400?industrial-construction" alt="Industrial build" loading="lazy" decoding="async" />
+          <img src="https://source.unsplash.com/random/600x400?modern-office" alt="Office build" loading="lazy" decoding="async" />
+          <img src="https://source.unsplash.com/random/600x400?residential-renovation" alt="Residential renovation" loading="lazy" decoding="async" />
+          <img src="https://source.unsplash.com/random/600x400?solar-panel-roof" alt="Sustainable retrofit" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="testimonials" data‑animate>
+    <section id="testimonials" class="testimonials" data-animate>
       <div class="container">
         <h2>What Our Clients Say</h2>
-        <div class="cards">
-          <div class="card">
-            <blockquote>Allied transformed our outdated warehouse into a cutting‑edge HQ—on schedule and under budget.</blockquote>
-            <strong>— J. Martinez, CEO, TechEdge</strong>
-          </div>
-          <div class="card">
-            <blockquote>Professional, transparent, and meticulous. We couldn't be happier with our new home addition.</blockquote>
-            <strong>— S. Patel, Homeowner</strong>
-          </div>
+        <div class="carousel">
+          <div class="card"><blockquote>Allied transformed our outdated warehouse into a cutting‑edge HQ—on schedule and under budget.</blockquote><strong>— J. Martinez, CEO, TechEdge</strong></div>
+          <div class="card"><blockquote>Professional, transparent, and meticulous. We couldn't be happier with our new home addition.</blockquote><strong>— S. Patel, Homeowner</strong></div>
+          <div class="card"><blockquote>The team handled everything—permits, inspections, and a flawless LEED certification.</blockquote><strong>— L. Chen, Facility Manager, GreenWorks</strong></div>
         </div>
       </div>
     </section>
 
+    <!-- FAQ -->
+    <section id="faq" class="faq container" data-animate>
+      <h2>Frequently Asked Questions</h2>
+      <details><summary>Are you licensed, bonded, and insured?</summary><p>Absolutely. We hold all required state & city licenses, carry multi‑million‑dollar liability coverage, and are fully bonded.</p></details>
+      <details><summary>Do you offer free estimates?</summary><p>Yes, schedule a site visit and we'll provide a detailed, no‑obligation quote.</p></details>
+      <details><summary>How do you handle change orders?</summary><p>Changes are documented with transparent pricing and only proceed upon written client approval.</p></details>
+    </section>
+
     <!-- Contact -->
-    <section id="contact" data‑animate>
+    <section id="contact" data-animate>
       <div class="container">
         <div class="call">
           <h2>Ready to break ground?</h2>
-          <p>Get in touch for a free consultation and estimate.</p>
-          <a href="mailto:build@alliedconstruction.com" class="btn">Email Us</a>
+          <p>Request a free consultation and project estimate.</p>
+          <form id="contactForm" style="max-width:600px;margin:auto;margin-top:1.5rem;display:grid;gap:1rem;">
+            <input name="name" type="text" placeholder="Your Name" required style="padding:0.75rem;border:none;border-radius:var(--radius);">
+            <input name="email" type="email" placeholder="Email" required style="padding:0.75rem;border:none;border-radius:var(--radius);">
+            <input name="phone" type="tel" placeholder="Phone (optional)" style="padding:0.75rem;border:none;border-radius:var(--radius);">
+            <textarea name="message" rows="4" placeholder="Project details…" required style="padding:0.75rem;border:none;border-radius:var(--radius);"></textarea>
+            <button type="submit" class="btn" style="cursor:pointer;">Send Message</button>
+            <p id="formStatus" aria-live="polite" style="font-weight:600;margin-top:0.5rem;"></p>
+          </form>
         </div>
-
-        <!-- Google Maps thumbnail -->
-        <a href="https://maps.app.goo.gl/xyz" target="_blank" style="display:block;margin‑top:2rem;">
-          <img src="https://maps.googleapis.com/maps/api/staticmap?center=Chicago,IL&zoom=11&size=1200x300&key=YOUR_API_KEY&markers=color:red%7CChicago,IL" alt="Map to office" style="width:100%;border‑radius:var(--radius);">
-        </a>
-
-        <!-- Hidden form for static site form handlers (e.g., Formspree) -->
-        <form action="https://formspree.io/f/your‑id" method="POST" style="display:none;"></form>
       </div>
     </section>
   </main>
@@ -241,61 +291,117 @@
     © <span id="year"></span> Allied Construction • <a href="tel:+13125551234">312‑555‑1234</a> • Chicago, IL
   </footer>
 
-  <button id="topBtn" aria‑label="Back to top"><i class="fa‑solid fa‑arrow‑up"></i></button>
+  <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
   <script>
-    // Mobile menu toggle
-    const hamburger=document.getElementById('hamburger');
-    const menu=document.getElementById('menu');
-    hamburger.addEventListener('click',()=>menu.classList.toggle('open'));
-
-    // Theme toggle with localStorage
-    const toggleBtn=document.getElementById('themeToggle');
-    const root=document.documentElement;
-    function setTheme(mode){root.classList.toggle('dark',mode==='dark');localStorage.setItem('theme',mode);toggleBtn.innerHTML=mode==='dark'?'\uF185':'\uF186';}
-    const saved=localStorage.getItem('theme');
-    if(saved){setTheme(saved);}  
-    toggleBtn.addEventListener('click',()=>setTheme(root.classList.contains('dark')?'light':'dark'));
-
-    // Scroll active link + back to top button
-    const links=document.querySelectorAll('nav a');
-    const topBtn=document.getElementById('topBtn');
-    window.addEventListener('scroll',()=>{
-      const fromTop=window.scrollY+80;
-      links.forEach(link=>{
-        const section=document.querySelector(link.getAttribute('href'));
-        if(section.offsetTop<=fromTop && section.offsetTop+section.offsetHeight>fromTop){
-          link.classList.add('active');
-        }else link.classList.remove('active');
-      });
-      topBtn.classList.toggle('show',window.scrollY>600);
+    /* ===== Mobile Nav ===== */
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+    hamburger.addEventListener('click', () => {
+      const expanded = menu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', expanded);
     });
-    topBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-    // Reveal‑on‑scroll
-    const observer=new IntersectionObserver(entries=>{
-      entries.forEach(e=>e.isIntersecting&&e.target.classList.add('show'));},{threshold:.15});
-    document.querySelectorAll('[data‑animate]').forEach(el=>observer.observe(el));
+    /* ===== Theme Toggle ===== */
+    const toggleBtn = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    function setTheme(mode) {
+      root.classList.toggle('dark', mode === 'dark');
+      localStorage.setItem('theme', mode);
+      toggleBtn.innerHTML = mode === 'dark' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+    }
+    const saved = localStorage.getItem('theme');
+    if (saved) setTheme(saved);
+    toggleBtn.addEventListener('click', () => setTheme(root.classList.contains('dark') ? 'light' : 'dark'));
 
-    // Dynamic stats counters
-    const counters=[{el:'#years',target:30},{el:'#projects',target:150},{el:'#safety',target:0}];
-    counters.forEach(c=>{const el=document.querySelector(c.el);let start=0;const step=c.target/60;const i=setInterval(()=>{start+=step;el.textContent=Math.ceil(start);if(start>=c.target)clearInterval(i);},30);});
+    /* ===== Active Link & Back‑to‑top ===== */
+    const links = document.querySelectorAll('nav a');
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', () => {
+      const fromTop = window.scrollY + 90;
+      links.forEach(link => {
+        const section = document.querySelector(link.getAttribute('href'));
+        if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+          link.classList.add('active');
+        } else link.classList.remove('active');
+      });
+      topBtn.classList.toggle('show', window.scrollY > 700);
+    });
+    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Current year
-    document.getElementById('year').textContent=new Date().getFullYear();
+    /* ===== Intersection Reveal ===== */
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => e.isIntersecting && e.target.classList.add('show'));
+      }, { threshold: 0.15 });
+      document.querySelectorAll('[data-animate]').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('[data-animate]').forEach(el => el.classList.add('show')); }
+
+    /* ===== Counters ===== */
+    const counters = [
+      { el: '#years', target: 30 },
+      { el: '#projects', target: 150 },
+      { el: '#safety', target: 0 }
+    ];
+    counters.forEach(c => {
+      const el = document.querySelector(c.el);
+      let start = 0;
+      const step = Math.max(1, c.target / 60);
+      const i = setInterval(() => {
+        start += step;
+        el.textContent = Math.ceil(start);
+        if (start >= c.target) clearInterval(i);
+      }, 30);
+    });
+
+    /* ===== Lightbox ===== */
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', () => {
+        const overlay = document.createElement('div');
+        overlay.id = 'lightbox';
+        overlay.innerHTML = `<img src="${img.src.replace('600x400', '1200x800')}" alt="${img.alt}"><span id="close">&times;</span>`;
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', e => { if (e.target.id === 'lightbox' || e.target.id === 'close') overlay.remove(); });
+      });
+    });
+
+    /* ===== Form Submission (Formspree) ===== */
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const status = document.getElementById('formStatus');
+      status.textContent = 'Sending…';
+      const data = new FormData(contactForm);
+      try {
+        const res = await fetch('https://formspree.io/f/your-id', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (res.ok) { status.textContent = 'Thank you! We will be in touch.'; contactForm.reset(); }
+        else { status.textContent = 'Oops! Something went wrong.'; }
+      } catch { status.textContent = 'Network error – please retry.'; }
+    });
+
+    /* ===== Current Year ===== */
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"Allied Construction",
-    "url":"https://alliedconstruction.github.io/",
-    "logo":"https://source.unsplash.com/featured/?construction‑logo",
-    "telephone":"+13125551234",
-    "address":{"@type":"PostalAddress","streetAddress":"123 W Madison St","addressLocality":"Chicago","addressRegion":"IL","postalCode":"60602","addressCountry":"US"},
-    "sameAs":["https://www.linkedin.com/company/allied‑construction"]
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Allied Construction",
+    "url": "https://alliedconstruction.github.io/",
+    "logo": "https://source.unsplash.com/featured/?construction-logo",
+    "telephone": "+13125551234",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 W Madison St",
+      "addressLocality": "Chicago",
+      "addressRegion": "IL",
+      "postalCode": "60602",
+      "addressCountry": "US"
+    },
+    "sameAs": ["https://www.linkedin.com/company/allied-construction"]
   }
   </script>
 </body>
