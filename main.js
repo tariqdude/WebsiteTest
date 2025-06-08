@@ -43,14 +43,21 @@ onReady(() => {
   }, { passive: true });
 });
 
-// ===== Mobile Nav (close on link click, ESC, focus trap, click outside) =====
+// ===== Mobile Nav (close on link click, ESC, focus trap, click outside, close on resize) =====
 onReady(() => {
   const hamburger = document.getElementById('hamburger');
   const menu = document.getElementById('menu');
+  let menuOpen = false;
+  const closeMenu = () => {
+    menu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+    menu.onkeydown = null;
+    menuOpen = false;
+  };
   hamburger.addEventListener('click', () => {
-    const expanded = menu.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', expanded);
-    if (expanded) {
+    menuOpen = menu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', menuOpen);
+    if (menuOpen) {
       const focusable = menu.querySelectorAll('a');
       let idx = 0;
       if (focusable[0]) focusable[0].focus();
@@ -61,8 +68,7 @@ onReady(() => {
           focusable[idx].focus();
         }
         if (e.key === 'Escape') {
-          menu.classList.remove('open');
-          hamburger.setAttribute('aria-expanded', false);
+          closeMenu();
           hamburger.focus();
         }
       };
@@ -71,17 +77,17 @@ onReady(() => {
     }
   });
   // Close menu on link click (mobile)
-  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-    if (menu.classList.contains('open')) {
-      menu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', false);
-    }
-  }));
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   // Close menu on outside click
   document.addEventListener('click', e => {
     if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== hamburger) {
-      menu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', false);
+      closeMenu();
+    }
+  });
+  // Close menu on window resize (if > 900px)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900 && menu.classList.contains('open')) {
+      closeMenu();
     }
   });
 });
@@ -129,9 +135,10 @@ onReady(() => {
   topBtn.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
 });
 
-// ===== Reveal on scroll (IntersectionObserver) =====
+// ===== Reveal on scroll (IntersectionObserver, prefers-reduced-motion support) =====
 onReady(() => {
-  if ('IntersectionObserver' in window) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if ('IntersectionObserver' in window && !prefersReducedMotion) {
     const io = new IntersectionObserver(es => {
       es.forEach(e => e.isIntersecting && e.target.classList.add('show'));
     }, { threshold: .15 });
@@ -141,7 +148,7 @@ onReady(() => {
   }
 });
 
-// ===== Counters (animate on scroll into view) =====
+// ===== Counters (animate on scroll into view, reduced motion support) =====
 onReady(() => {
   const animateCounter = (el, target, suffix) => {
     let start = target === 0 ? 0 : 1;
@@ -165,7 +172,11 @@ onReady(() => {
     function onScroll() {
       if (!started && el.getBoundingClientRect().top < window.innerHeight - 80) {
         started = true;
-        run();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          el.textContent = target + (suffix || '');
+        } else {
+          run();
+        }
         window.removeEventListener('scroll', onScroll);
       }
     }
@@ -177,7 +188,28 @@ onReady(() => {
   animateCounter(document.getElementById('safety'), 0, '');
 });
 
-// ===== Gallery Lightbox (keyboard, swipe, focus trap) =====
+// ===== Accessibility: Trap focus in modals and improve keyboard navigation =====
+function trapFocus(element) {
+  const focusable = element.querySelectorAll('a, button, textarea, input, [tabindex]:not([tabindex="-1"])');
+  if (!focusable.length) return;
+  let first = focusable[0], last = focusable[focusable.length - 1];
+  element.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+}
+
+// ===== Enhanced Gallery Lightbox: focus trap, ESC close, ARIA improvements =====
 onReady(() => {
   const imgs = document.querySelectorAll('.gallery img');
   imgs.forEach((img, idx) => {
@@ -194,19 +226,19 @@ onReady(() => {
     overlay.tabIndex = 0;
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', arr[current].alt);
     overlay.style.outline = 'none';
     const showImg = i => {
-      overlay.innerHTML = `<img src="${arr[i].src.replace('600x400','1200x800')}" alt="${arr[i].alt}"><span id='close' tabindex="0" aria-label="Close">&times;</span>`;
+      overlay.innerHTML = `<img src="${arr[i].src.replace('600x400','1200x800')}" alt="${arr[i].alt}"><button id='close' tabindex="0" aria-label="Close" style="position:absolute;top:2rem;right:2rem;font-size:2.5rem;background:none;border:none;color:#fff;cursor:pointer;">&times;</button>`;
     };
     showImg(current);
     document.body.appendChild(overlay);
     overlay.focus();
-    // Trap focus inside overlay
+    trapFocus(overlay);
     overlay.addEventListener('keydown', e => {
       if (e.key === 'Escape') overlay.remove();
       if (e.key === 'ArrowRight') { current = (current + 1) % arr.length; showImg(current);}
       if (e.key === 'ArrowLeft') { current = (current - 1 + arr.length) % arr.length; showImg(current);}
-      if (e.key === 'Tab') { e.preventDefault(); document.getElementById('close').focus(); }
     });
     overlay.addEventListener('click', e => {
       if (e.target.id === 'lightbox' || e.target.id === 'close') overlay.remove();
@@ -214,6 +246,7 @@ onReady(() => {
     overlay.addEventListener('keydown', e => {
       if (e.target.id === 'close' && (e.key === 'Enter' || e.key === ' ')) overlay.remove();
     });
+    overlay.querySelector('#close').addEventListener('click', () => overlay.remove());
     // Swipe support
     let startX = null;
     overlay.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
@@ -230,7 +263,7 @@ onReady(() => {
   }
 });
 
-// ===== Testimonials Carousel: auto-advance, indicators, keyboard, ARIA live =====
+// ===== Enhanced Testimonials Carousel: pause on focus, resume on blur, ARIA improvements =====
 onReady(() => {
   const carousel = document.querySelector('.carousel');
   const cards = carousel.querySelectorAll('.card');
@@ -246,7 +279,6 @@ onReady(() => {
       b.classList.toggle('active', j === i);
       b.setAttribute('aria-selected', j === i ? 'true' : 'false');
     });
-    // ARIA live update
     carousel.setAttribute('aria-live', 'polite');
     setTimeout(() => carousel.setAttribute('aria-live', 'off'), 1000);
   }
@@ -270,6 +302,21 @@ onReady(() => {
   });
   carousel.addEventListener('mouseenter', stopAuto);
   carousel.addEventListener('mouseleave', startAuto);
+  carousel.addEventListener('focusin', stopAuto);
+  carousel.addEventListener('focusout', startAuto);
+  // Touch swipe support
+  let startX = null;
+  carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+  carousel.addEventListener('touchend', e => {
+    if (!startX) return;
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
+    if (Math.abs(diff) > 30) {
+      if (diff > 0) prev(); else next();
+      stopAuto(); startAuto();
+    }
+    startX = null;
+  });
 });
 
 // ===== Anchor scroll restoration (for smooth scroll and focus) =====
@@ -286,7 +333,7 @@ onReady(() => {
   });
 });
 
-// ===== Form: AJAX submit, validation, honeypot, accessibility =====
+// ===== Form: AJAX submit, validation, honeypot, accessibility, improved error handling =====
 onReady(() => {
   const form = document.getElementById('contactForm');
   const status = document.getElementById('formStatus');

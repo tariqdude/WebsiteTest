@@ -39,6 +39,16 @@
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+  transition: outline-color .2s;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Smooth scroll */
@@ -109,15 +119,179 @@ html {
   display: none;
 }
 
-/* Carousel indicator active state */
+/* Carousel indicator styles */
+.carousel-indicators button,
+.carousel-indicators button[aria-selected="true"] {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: none;
+  margin: 0 0.3em;
+  background: var(--gray);
+  transition: background .2s, outline-color .2s, box-shadow .2s;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 transparent;
+}
 .carousel-indicators button.active,
 .carousel-indicators button[aria-selected="true"] {
   background: var(--primary);
-  border-radius: 50%;
-  width: 1em;
-  height: 1em;
-  border: none;
   outline: 2px solid var(--accent);
+  box-shadow: 0 0 0 2px var(--primary), 0 2px 8px rgba(37,99,235,0.10);
+}
+.carousel-indicators button:focus-visible {
+  outline: 2px solid var(--accent);
+  box-shadow: 0 0 0 3px var(--accent);
+}
+.carousel-indicators button:hover:not([aria-selected="true"]) {
+  background: var(--primary-dark);
+  outline: 2px solid var(--primary-dark);
+}
+
+/* Improved focus for interactive elements */
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Responsive improvements */
+@media (max-width: 900px) {
+  .container {
+    max-width: 98vw;
+    padding: 0 1rem;
+  }
+  #menu.open {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    z-index: 100;
+    border-radius: 0 0 var(--radius) var(--radius);
+    animation: fadeInMenu .3s;
+  }
+  @keyframes fadeInMenu {
+    from { opacity: 0; transform: translateY(-10px);}
+    to { opacity: 1; transform: none;}
+  }
+}
+
+/* Lightbox overlay */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(20,30,40,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn .2s;
+}
+#lightbox img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+#lightbox #close {
+  position: absolute;
+  top: 2rem; right: 2rem;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+@keyframes fadeIn {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
+
+/* Sticky CTA improvements */
+#stickyCTA {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  padding: .7em 1.5em;
+  border-radius: 2em;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: .7em;
+  font-weight: 600;
+  z-index: 1000;
+  cursor: pointer;
+  transition: background .2s;
+}
+#stickyCTA:focus-visible {
+  outline: 2px solid var(--accent);
+}
+#stickyCTA a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* Back-to-top button improvements */
+#topBtn {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  background: var(--primary-dark);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.7em;
+  height: 2.7em;
+  font-size: 1.5em;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s;
+  z-index: 1001;
+}
+#topBtn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Chat widget improvements */
+#chatWidget {
+  position: fixed;
+  bottom: 6.5rem;
+  right: 2.5rem;
+  background: var(--surface);
+  color: var(--primary-dark);
+  border-radius: 1.5em;
+  box-shadow: var(--shadow);
+  padding: .7em 1.5em;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: .7em;
+  transition: background .2s;
+}
+#chatWidget:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+/* Blog/news card improvements */
+.blog-card {
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.2em 1.5em;
+  margin-bottom: 1.2em;
+  transition: box-shadow .2s;
+}
+.blog-card:hover, .blog-card:focus-within {
+  box-shadow: 0 8px 32px rgba(37,99,235,0.18), 0 1.5px 6px rgba(0,0,0,0.08);
 }
 
 /* ...existing code... */
