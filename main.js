@@ -475,27 +475,208 @@ const App = {
   scrollNextBtn() {
     const btn = document.getElementById('scrollNextBtn');
     const nextSection = document.getElementById('about');
-    if (btn && nextSection) {
-      btn.addEventListener('click', () => {
-        nextSection.scrollIntoView({behavior:'smooth'});
+    if (!btn || !nextSection) return;
+    btn.onclick = () => {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    };
+    btn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        nextSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  },
+
+  // Language Switcher (EN/ES demo)
+  languageSwitcher() {
+    const enBtn = document.getElementById('langEn');
+    const esBtn = document.getElementById('langEs');
+    const translations = {
+      es: {
+        'About Us': 'Sobre Nosotros',
+        'Our Services': 'Nuestros Servicios',
+        'Our 4‑Step Process': 'Nuestro Proceso de 4 Pasos',
+        'Featured Projects': 'Proyectos Destacados',
+        'Awards & Certifications': 'Premios y Certificaciones',
+        'What Our Clients Say': 'Lo Que Dicen Nuestros Clientes',
+        'Frequently Asked Questions': 'Preguntas Frecuentes',
+        'Latest News': 'Últimas Noticias',
+        'Ready to break ground?': '¿Listo para comenzar?',
+        'Request a free consultation and project estimate.': 'Solicite una consulta y presupuesto gratuitos.',
+        'Subscribe to Our Newsletter': 'Suscríbase a Nuestro Boletín',
+        'Send Message': 'Enviar Mensaje',
+        'Request a Quote': 'Solicitar Cotización',
+        'Search…': 'Buscar…',
+        'Your Name': 'Su Nombre',
+        'Email': 'Correo Electrónico',
+        'Phone (optional)': 'Teléfono (opcional)',
+        'Project details…': 'Detalles del proyecto…',
+        'Copy Phone': 'Copiar Teléfono',
+        'Copy Email': 'Copiar Correo',
+        'Print': 'Imprimir',
+        'vCard': 'vCard',
+        'Subscribe': 'Suscribirse',
+        'Stay updated:': 'Manténgase informado:',
+        'Join our newsletter': 'Únase a nuestro boletín'
+      }
+    };
+    function translateTo(lang) {
+      document.querySelectorAll('h2, h3, .btn, label, input[placeholder], textarea[placeholder], .footer-newsletter-hint span, #siteSearch input').forEach(el => {
+        let txt = el.textContent || el.placeholder;
+        Object.entries(translations[lang]).forEach(([en, es]) => {
+          if (txt && txt.trim() === en) {
+            if (el.placeholder !== undefined) el.placeholder = es;
+            else el.textContent = es;
+          }
+        });
       });
+      // Update aria-labels and button text
+      document.getElementById('searchInput').setAttribute('aria-label', lang === 'es' ? 'Buscar en el sitio' : 'Search site');
+      document.getElementById('newsletterForm').querySelector('button').textContent = lang === 'es' ? 'Suscribirse' : 'Subscribe';
+      document.getElementById('langEn').setAttribute('aria-current', lang === 'en');
+      document.getElementById('langEs').setAttribute('aria-current', lang === 'es');
+    }
+    if (enBtn && esBtn) {
+      enBtn.onclick = () => translateTo('en');
+      esBtn.onclick = () => translateTo('es');
     }
   },
 
-  // Enhanced: Copy Phone/Email, Download vCard, Print
+  // Advanced Search with Suggestions
+  searchSuggestions() {
+    const searchInput = document.getElementById('searchInput');
+    const suggestionsBox = document.getElementById('searchSuggestions');
+    const data = [
+      { label: 'About Us', anchor: '#about' },
+      { label: 'Our Services', anchor: '#services' },
+      { label: 'Process', anchor: '#process' },
+      { label: 'Projects', anchor: '#projects' },
+      { label: 'Awards', anchor: '#awards' },
+      { label: 'Testimonials', anchor: '#testimonials' },
+      { label: 'FAQ', anchor: '#faq' },
+      { label: 'Contact', anchor: '#contact' },
+      { label: 'Newsletter', anchor: '#newsletter' }
+    ];
+    let currentIdx = -1;
+    function showSuggestions(val) {
+      suggestionsBox.innerHTML = '';
+      if (!val) {
+        suggestionsBox.classList.remove('show');
+        return;
+      }
+      const filtered = data.filter(d => d.label.toLowerCase().includes(val.toLowerCase()));
+      if (!filtered.length) {
+        suggestionsBox.classList.remove('show');
+        return;
+      }
+      filtered.forEach((item, idx) => {
+        const li = document.createElement('li');
+        li.textContent = item.label;
+        li.setAttribute('role', 'option');
+        li.setAttribute('tabindex', '-1');
+        li.onclick = () => {
+          window.location.hash = item.anchor;
+          suggestionsBox.classList.remove('show');
+        };
+        suggestionsBox.appendChild(li);
+      });
+      suggestionsBox.classList.add('show');
+      currentIdx = -1;
+    }
+    searchInput.addEventListener('input', e => showSuggestions(e.target.value));
+    searchInput.addEventListener('keydown', e => {
+      const items = suggestionsBox.querySelectorAll('li');
+      if (!items.length) return;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        currentIdx = (currentIdx + 1) % items.length;
+        items.forEach((li, i) => li.setAttribute('aria-selected', i === currentIdx));
+        items[currentIdx].focus();
+      }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        currentIdx = (currentIdx - 1 + items.length) % items.length;
+        items.forEach((li, i) => li.setAttribute('aria-selected', i === currentIdx));
+        items[currentIdx].focus();
+      }
+      if (e.key === 'Enter' && currentIdx >= 0) {
+        items[currentIdx].click();
+      }
+      if (e.key === 'Escape') {
+        suggestionsBox.classList.remove('show');
+      }
+    });
+    document.addEventListener('click', e => {
+      if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+        suggestionsBox.classList.remove('show');
+      }
+    });
+  },
+
+  // Newsletter Double Opt-In Confirmation
+  newsletter() {
+    const form = document.getElementById('newsletterForm');
+    const status = document.getElementById('newsletterStatus');
+    const confirmBox = document.getElementById('newsletterConfirm');
+    if (!form) return;
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      const email = form.newsletterEmail.value.trim();
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        status.textContent = 'Please enter a valid email.';
+        return false;
+      }
+      status.textContent = 'Subscribing...';
+      fetch('https://formspree.io/f/mnqekgqj', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(response => {
+        if (response.ok) {
+          status.textContent = '';
+          confirmBox.hidden = false;
+          form.reset();
+        } else {
+          status.textContent = 'There was an error. Please try again.';
+        }
+      }).catch(() => {
+        status.textContent = 'There was an error. Please try again.';
+      });
+    };
+  },
+
+  // Tooltips for Contact Actions
+  contactTooltips() {
+    document.querySelectorAll('.contact-actions button[data-tooltip]').forEach(btn => {
+      btn.addEventListener('focus', () => btn.setAttribute('data-show-tooltip', 'true'));
+      btn.addEventListener('blur', () => btn.removeAttribute('data-show-tooltip'));
+      btn.addEventListener('mouseleave', () => btn.removeAttribute('data-show-tooltip'));
+    });
+  },
+
+  // Contact Actions: Copy/Print/vCard
   contactActions() {
-    const phone = '312-555-1234';
-    const email = 'info@alliedconstruction.com';
-    document.getElementById('copyPhoneBtn')?.addEventListener('click', () => {
-      navigator.clipboard.writeText(phone);
-      alert('Phone number copied!');
-    });
-    document.getElementById('copyEmailBtn')?.addEventListener('click', () => {
-      navigator.clipboard.writeText(email);
-      alert('Email address copied!');
-    });
-    document.getElementById('downloadVCardBtn')?.addEventListener('click', () => {
-      const vcf = `BEGIN:VCARD
+    const phoneBtn = document.getElementById('copyPhoneBtn');
+    const emailBtn = document.getElementById('copyEmailBtn');
+    const vCardBtn = document.getElementById('downloadVCardBtn');
+    const printBtn = document.getElementById('printPageBtn');
+    if (phoneBtn) {
+      phoneBtn.onclick = () => {
+        navigator.clipboard.writeText('312-555-1234');
+        phoneBtn.setAttribute('data-tooltip', 'Copied!');
+        setTimeout(() => phoneBtn.setAttribute('data-tooltip', 'Copy to clipboard'), 1200);
+      };
+    }
+    if (emailBtn) {
+      emailBtn.onclick = () => {
+        navigator.clipboard.writeText('info@alliedconstruction.com');
+        emailBtn.setAttribute('data-tooltip', 'Copied!');
+        setTimeout(() => emailBtn.setAttribute('data-tooltip', 'Copy to clipboard'), 1200);
+      };
+    }
+    if (vCardBtn) {
+      vCardBtn.onclick = () => {
+        const vcf = `BEGIN:VCARD
 VERSION:3.0
 FN:Allied Construction
 ORG:Allied Construction
@@ -504,192 +685,75 @@ EMAIL:info@alliedconstruction.com
 ADR;TYPE=WORK:;;Chicago;IL;USA
 URL:https://alliedconstruction.github.io/
 END:VCARD`;
-      const blob = new Blob([vcf], {type:'text/vcard'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'AlliedConstruction.vcf';
-      a.click();
-    });
-    document.getElementById('printPageBtn')?.addEventListener('click', () => window.print());
-  },
-
-  // Enhanced: Real-time Clock in Footer
-  realTimeClock() {
-    const clock = document.getElementById('clock');
-    if (!clock) return;
-    function updateClock() {
-      const now = new Date();
-      clock.textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+        const blob = new Blob([vcf], { type: 'text/vcard' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'allied-construction.vcf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        vCardBtn.setAttribute('data-tooltip', 'Downloaded!');
+        setTimeout(() => vCardBtn.setAttribute('data-tooltip', 'Download vCard'), 1200);
+      };
     }
-    updateClock();
-    setInterval(updateClock, 1000);
-  },
-
-  // Additions for upgraded features
-  mobileQuickNav() {
-    const nav = document.getElementById('mobileQuickNav');
-    if (!nav) return;
-    nav.querySelectorAll('button[data-target]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.querySelector(btn.getAttribute('data-target'));
-        if (target) target.scrollIntoView({behavior:'smooth'});
-      });
-    });
-  },
-
-  languageSwitcher() {
-    const en = document.getElementById('langEn');
-    const es = document.getElementById('langEs');
-    if (!en || !es) return;
-    function setLang(lang) {
-      localStorage.setItem('lang', lang);
-      en.setAttribute('aria-current', lang === 'en');
-      es.setAttribute('aria-current', lang === 'es');
-      en.classList.toggle('active', lang === 'en');
-      es.classList.toggle('active', lang === 'es');
-      // Demo: just alert, real i18n would reload content
-      if (lang === 'es') alert('Spanish language coming soon.');
+    if (printBtn) {
+      printBtn.onclick = () => window.print();
     }
-    en.addEventListener('click', () => setLang('en'));
-    es.addEventListener('click', () => setLang('es'));
-    // On load
-    setLang(localStorage.getItem('lang') || 'en');
   },
 
-  siteSearch() {
-    const form = document.getElementById('siteSearch');
-    if (!form) return;
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const q = form.querySelector('input[type="search"]').value.trim();
-      if (q) alert('Search for: ' + q + ' (demo only)');
-    });
-  },
-
-  newsletterSignup() {
-    const form = document.getElementById('newsletterForm');
-    if (!form) return;
-    const status = document.getElementById('newsletterStatus');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const email = form.newsletterEmail.value.trim();
-      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        status.textContent = 'Please enter a valid email.';
-        return;
-      }
-      status.textContent = 'Subscribing...';
-      // Simulate async
-      setTimeout(() => {
-        status.textContent = 'Thank you for subscribing!';
-        form.reset();
-      }, 1200);
-    });
-  },
-
-  copyTooltip() {
-    // Show tooltip on copy actions
-    function showTooltip(btn, msg) {
-      let tip = btn._tooltip;
-      if (!tip) {
-        tip = document.createElement('span');
-        tip.className = 'tooltip';
-        btn._tooltip = tip;
-        btn.parentNode.appendChild(tip);
-      }
-      tip.textContent = msg;
-      const rect = btn.getBoundingClientRect();
-      tip.style.left = (btn.offsetLeft + btn.offsetWidth/2 - 40) + 'px';
-      tip.style.top = (btn.offsetTop - 32) + 'px';
-      tip.style.opacity = 1;
-      setTimeout(() => { tip.style.opacity = 0; }, 1200);
+  // Enhanced: Contact Modal
+  contactModal() {
+    const modal = document.getElementById('contactModal');
+    const openBtn = document.getElementById('openContactBtn');
+    const closeBtn = modal.querySelector('.modal-close');
+    const form = document.getElementById('contactForm');
+    function openModal() {
+      modal.hidden = false;
+      modal.setAttribute('aria-modal', 'true');
+      modal.focus();
+      App.trapFocus(modal);
     }
-    [
-      {id:'copyPhoneBtn', msg:'Copied!'},
-      {id:'copyEmailBtn', msg:'Copied!'}
-    ].forEach(({id, msg}) => {
-      const btn = document.getElementById(id);
-      if (btn) {
-        btn.addEventListener('click', () => showTooltip(btn, msg));
-      }
-    });
-  },
-
-  keyboardHint() {
-    // Show a keyboard navigation hint on first Tab press
-    let shown = false;
-    function showHint() {
-      if (shown) return;
-      shown = true;
-      const hint = document.createElement('div');
-      hint.textContent = 'Tip: Use Tab to navigate, Alt+K for keyboard help.';
-      hint.style.position = 'fixed';
-      hint.style.bottom = '1.5em';
-      hint.style.left = '50%';
-      hint.style.transform = 'translateX(-50%)';
-      hint.style.background = '#181e2a';
-      hint.style.color = '#fff';
-      hint.style.padding = '0.7em 1.5em';
-      hint.style.borderRadius = '1em';
-      hint.style.zIndex = 4001;
-      hint.style.fontSize = '1.05em';
-      hint.style.boxShadow = '0 4px 24px rgba(30,64,175,0.13)';
-      document.body.appendChild(hint);
-      setTimeout(() => { hint.remove(); }, 3500);
+    function closeModal() {
+      modal.hidden = true;
+      modal.removeAttribute('aria-modal');
+      form.reset();
     }
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'Tab') showHint();
-    }, {once:true});
-  },
-
-  liveChatPlaceholder() {
-    // Enhance chat widget ARIA
-    const chat = document.getElementById('chatWidget');
-    if (!chat) return;
-    chat.setAttribute('aria-label', 'Live chat support coming soon');
-    chat.setAttribute('tabindex', '0');
-    chat.addEventListener('focus', () => {
-      const status = chat.querySelector('.chat-status');
-      if (status) status.textContent = 'Live chat launching soon!';
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    modal.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
     });
-    chat.addEventListener('blur', () => {
-      const status = chat.querySelector('.chat-status');
-      if (status) status.textContent = '';
-    });
-  },
-
-  // App Init
-  init() {
-    this.loader();
-    this.sw();
-    this.year();
-    this.cookieConsent();
-    this.theme();
-    this.backToTop();
-    this.smoothScroll();
-    this.navActive();
-    this.contactForm();
-    this.headerScroll();
-    this.mobileNav();
-    this.revealOnScroll();
-    this.galleryLightbox();
-    this.testimonials();
-    this.counters();
-    this.skipLink();
-    this.stickyChat();
-    this.keyboardHelpModal();
-    this.scrollProgressBar();
-    this.scrollNextBtn();
-    this.contactActions();
-    this.realTimeClock();
-    this.mobileQuickNav();
-    this.languageSwitcher();
-    this.siteSearch();
-    this.newsletterSignup();
-    this.copyTooltip();
-    this.keyboardHint();
-    this.liveChatPlaceholder();
   }
-};
 
-// Initialize App on DOM Ready
-App.ready(() => App.init());
+  // App Initialization
+  App.ready(() => {
+    App.loader();
+    App.sw();
+    App.year();
+    App.cookieConsent();
+    App.theme();
+    App.backToTop();
+    App.smoothScroll();
+    App.navActive();
+    App.contactForm();
+    App.headerScroll();
+    App.mobileNav();
+    App.revealOnScroll();
+    App.galleryLightbox();
+    App.testimonials();
+    App.counters();
+    App.trapFocus(document.body);
+    App.skipLink();
+    App.stickyChat();
+    App.keyboardHelpModal();
+    App.scrollProgressBar();
+    App.scrollNextBtn();
+    // Advanced features
+    App.languageSwitcher();
+    App.searchSuggestions();
+    App.newsletter();
+    App.contactTooltips();
+    App.contactActions();
+    App.contactModal();
+  });
