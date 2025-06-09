@@ -59,16 +59,115 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Smooth scroll for anchor links
+// Highlight active nav link on scroll
 document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = Array.from(document.querySelectorAll('.nav-menu a'));
+  const sections = navLinks.map(link => document.querySelector(link.getAttribute('href')));
+  const setActive = () => {
+    let idx = sections.findIndex((section, i) =>
+      section && window.scrollY + 120 < section.offsetTop + section.offsetHeight
+    );
+    if (idx === -1) idx = sections.length - 1;
+    navLinks.forEach((link, i) => {
+      if (i === idx) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+});
+
+// Keyboard accessibility for cards
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card, .testimonial-card').forEach(card => {
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        card.classList.add('focus-effect');
+        setTimeout(() => card.classList.remove('focus-effect'), 200);
+      }
+    });
+  });
+});
+
+// Modal dialog logic for form submission
+function showModal() {
+  const modal = document.getElementById('formModal');
+  const overlay = document.getElementById('modalOverlay');
+  if (modal && overlay) {
+    modal.style.display = 'block';
+    overlay.style.display = 'block';
+    modal.focus();
+    // Trap focus inside modal
+    const focusable = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+    let first = focusable[0], last = focusable[focusable.length - 1];
+    modal.onkeydown = e => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+      if (e.key === 'Escape') closeModal();
+    };
+    // Close on overlay click
+    overlay.onclick = closeModal;
+    // Close on button click
+    document.getElementById('closeModalBtn').onclick = closeModal;
+  }
+}
+function closeModal() {
+  const modal = document.getElementById('formModal');
+  const overlay = document.getElementById('modalOverlay');
+  if (modal && overlay) {
+    modal.style.display = 'none';
+    overlay.style.display = 'none';
+    document.getElementById('contactForm').querySelector('input, textarea').focus();
+  }
+}
+
+// Improved smooth scroll polyfill for older browsers
+(function() {
+  if ('scrollBehavior' in document.documentElement.style) return;
+  window.scrollTo = function(options) {
+    if (typeof options === 'object' && options.top !== undefined) {
+      window.scroll(0, options.top);
+    }
+  };
+})();
+
+// Debounce utility for scroll events
+function debounce(fn, ms) {
+  let t; return (...args) => {
+    clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms);
+  };
+}
+
+// Back-to-top button (debounced for performance)
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('topBtn');
+  window.addEventListener('scroll', debounce(() => {
+    if (btn) btn.style.display = window.scrollY > 200 ? 'flex' : 'none';
+  }, 50));
+  if (btn) {
+    btn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+  }
+});
+
+// Improved smooth scroll for anchor links (with reduced motion support)
+document.addEventListener('DOMContentLoaded', () => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href').slice(1);
       const target = document.getElementById(targetId);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        target.focus({ preventScroll: true });
+        target.scrollIntoView({
+          behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          block: 'start'
+        });
+        setTimeout(() => target.focus({ preventScroll: true }), 300);
       }
     });
   });
@@ -79,16 +178,56 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm');
   if (!form) return;
   const status = document.getElementById('formStatus');
+  const fields = [
+    { id: 'name', error: 'nameError', message: 'Name is required.' },
+    { id: 'email', error: 'emailError', message: 'Enter a valid email.' },
+    { id: 'message', error: 'messageError', message: 'Message is required.' },
+    { id: 'phone', error: 'phoneError', message: 'Enter a valid phone number.' }
+  ];
+  // Add error message elements if not present
+  fields.forEach(f => {
+    let el = document.getElementById(f.error);
+    if (!el) {
+      el = document.createElement('span');
+      el.id = f.error;
+      el.className = 'error-message';
+      const input = document.getElementById(f.id);
+      if (input && input.parentNode) input.parentNode.appendChild(el);
+    }
+  });
   form.onsubmit = async function(e) {
     e.preventDefault();
+    let valid = true;
+    // Clear previous errors
+    fields.forEach(f => {
+      const err = document.getElementById(f.error);
+      if (err) err.textContent = '';
+    });
+    status.textContent = '';
+    status.classList.remove('success');
+    // Validate fields
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
-    if (!name) { status.textContent = 'Name is required.'; status.classList.remove('success'); return; }
-    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.textContent = 'Enter a valid email.'; status.classList.remove('success'); return; }
-    if (!message) { status.textContent = 'Message is required.'; status.classList.remove('success'); return; }
+    const phone = form.phone.value.trim();
+    if (!name) {
+      document.getElementById('nameError').textContent = 'Name is required.';
+      valid = false;
+    }
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      document.getElementById('emailError').textContent = 'Enter a valid email.';
+      valid = false;
+    }
+    if (!message) {
+      document.getElementById('messageError').textContent = 'Message is required.';
+      valid = false;
+    }
+    if (phone && !/^[0-9+\-\s().]{7,}$/.test(phone)) {
+      document.getElementById('phoneError').textContent = 'Enter a valid phone number.';
+      valid = false;
+    }
+    if (!valid) return;
     status.textContent = 'Sending...';
-    status.classList.remove('success');
     try {
       const response = await fetch('https://formspree.io/f/mnqekgqj', {
         method: 'POST',
@@ -96,16 +235,15 @@ document.addEventListener('DOMContentLoaded', () => {
         body: new FormData(form)
       });
       if (response.ok) {
-        status.textContent = 'Thank you! We will be in touch soon.';
+        status.textContent = '';
         status.classList.add('success');
         form.reset();
+        showModal();
       } else {
-        status.textContent = 'There was an error. Please try again.';
-        status.classList.remove('success');
+        status.textContent = 'There was an error. Please try again later.';
       }
-    } catch {
-      status.textContent = 'There was an error. Please try again.';
-      status.classList.remove('success');
+    } catch (err) {
+      status.textContent = 'Network error. Please try again.';
     }
   };
 });

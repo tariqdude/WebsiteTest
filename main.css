@@ -132,6 +132,7 @@ main {
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
+  animation: heroFadeIn 1.2s cubic-bezier(.4,0,.2,1);
 }
 .hero-content {
   max-width: 600px;
@@ -216,6 +217,11 @@ h2 {
   transform: translateY(-3px) scale(1.03);
   border: 1.5px solid var(--accent);
 }
+.card:focus, .testimonial-card:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 8px 32px rgba(251,191,36,0.18);
+}
 .card i {
   font-size: 2.2rem;
   margin-bottom: 0.7rem;
@@ -257,6 +263,11 @@ h2 {
   box-shadow: 0 8px 32px rgba(30,41,59,0.13);
   border: 1.5px solid var(--accent);
 }
+.testimonial-card:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 8px 32px rgba(251,191,36,0.18);
+}
 .testimonial-meta {
   display: block;
   margin-top: 1rem;
@@ -292,6 +303,9 @@ form#contactForm textarea {
   transition: border var(--transition), background var(--transition);
   resize: none;
 }
+form#contactForm input[type="tel"] {
+  /* visually similar to other inputs */
+}
 form#contactForm input:focus,
 form#contactForm textarea:focus {
   border: 2px solid var(--accent);
@@ -308,6 +322,20 @@ form#contactForm textarea:focus {
 }
 #formStatus.success {
   color: #22c55e;
+}
+.form-group input:invalid, .form-group textarea:invalid {
+  border-color: #e11d48;
+}
+.form-group input:invalid:focus, .form-group textarea:invalid:focus {
+  border-color: #e11d48;
+  background: #fff0f3;
+}
+.form-group .error-message {
+  color: #e11d48;
+  font-size: 0.95em;
+  margin-top: 0.2em;
+  min-height: 1.2em;
+  display: block;
 }
 
 .site-footer {
@@ -394,4 +422,97 @@ body.dark #topBtn:hover, body.dark #topBtn:focus {
   .hero { padding: 2rem 0.5rem 1.5rem 0.5rem; }
   .testimonial-card { min-width: 90vw; max-width: 90vw; }
   .cards { grid-template-columns: 1fr; }
+  .btn { width: 100%; }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: none;}
+}
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%) scale(0.95);}
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1);}
+}
+@keyframes overlayFadeIn {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
+@keyframes spin {
+  to { transform: rotate(360deg);}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 2000;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(30,41,59,0.18);
+  transform: translate(-50%, -50%) scale(1);
+  min-width: 320px;
+  max-width: 90vw;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: modalFadeIn 0.3s cubic-bezier(.4,0,.2,1);
+}
+.modal-content {
+  width: 100%;
+  text-align: center;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30,41,59,0.25);
+  z-index: 1999;
+  animation: overlayFadeIn 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+/* Spinner for loading state */
+.spinner {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2.5px solid var(--accent);
+  border-top: 2.5px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-left: 0.5em;
+}
+
+/* Visually hidden (for live region) */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px,1px,1px,1px);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
+/* Enhanced focus/active states */
+.btn:focus-visible, .btn:active {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+#closeModalBtn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.card:active, .testimonial-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(30,41,59,0.10);
 }
