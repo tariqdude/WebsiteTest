@@ -11,65 +11,74 @@
   <link rel="stylesheet" href="main.css" />
 </head>
 <body>
-  <header>
-    <nav>
-      <span class="logo">Allied Construction</span>
-      <button id="themeToggle" aria-label="Toggle light/dark mode"><i class="fa-solid fa-sun"></i></button>
-      <button class="hamburger" id="hamburger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
-      <ul id="menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+  <!-- Loader Overlay -->
+  <div id="pageloader" aria-hidden="true">
+    <span class="loader" aria-label="Loading"></span>
+  </div>
+  <!-- Skip to main content for accessibility -->
+  <a href="#home" class="skip-link">Skip to main content</a>
+  <header role="banner">
+    <nav role="navigation" aria-label="Main navigation">
+      <span class="logo" tabindex="0">Allied Construction</span>
+      <button id="themeToggle" aria-label="Toggle light/dark mode" aria-pressed="false"><i class="fa-solid fa-sun"></i></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      <ul id="menu" role="menubar">
+        <li role="none"><a role="menuitem" href="#about">About</a></li>
+        <li role="none"><a role="menuitem" href="#services">Services</a></li>
+        <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
+        <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
-  <main id="home" tabindex="-1">
-    <section class="hero">
+  <main id="home" tabindex="-1" role="main">
+    <section class="hero" aria-label="Hero section">
       <div>
         <h1>Building Your Vision.<br>Engineering Your Future.</h1>
         <p>We deliver award-winning construction solutions across Chicagoland.</p>
-        <a href="#contact" class="btn">Request a Quote</a>
-        <div class="stats">
+        <a href="#contact" class="btn" aria-label="Request a Quote">Request a Quote</a>
+        <div class="stats" aria-label="Company statistics">
           <div><strong id="years">30+</strong>Years</div>
           <div><strong id="projects">150</strong>Projects</div>
           <div><strong id="safety">0</strong>Safety Issues</div>
         </div>
       </div>
     </section>
-    <section id="about">
-      <h2>About Us</h2>
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Us</h2>
       <p>Since 1995, Allied Construction has delivered quality, safety, and sustainability in every project.</p>
     </section>
-    <section id="services">
-      <h2>Services</h2>
+    <section id="services" aria-labelledby="services-heading">
+      <h2 id="services-heading">Services</h2>
       <div class="cards">
-        <div class="card"><i class="fa-solid fa-city"></i><h3>Commercial</h3></div>
-        <div class="card"><i class="fa-solid fa-house"></i><h3>Residential</h3></div>
-        <div class="card"><i class="fa-solid fa-screwdriver-wrench"></i><h3>HVAC</h3></div>
-        <div class="card"><i class="fa-solid fa-solar-panel"></i><h3>Sustainable</h3></div>
+        <div class="card"><i class="fa-solid fa-city" aria-hidden="true"></i><h3>Commercial</h3></div>
+        <div class="card"><i class="fa-solid fa-house" aria-hidden="true"></i><h3>Residential</h3></div>
+        <div class="card"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><h3>HVAC</h3></div>
+        <div class="card"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i><h3>Sustainable</h3></div>
       </div>
     </section>
-    <section id="projects">
-      <h2>Projects</h2>
+    <section id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
       <div class="gallery">
-        <img src="https://source.unsplash.com/random/600x400?construction" alt="Project 1" loading="lazy" />
-        <img src="https://source.unsplash.com/random/600x400?office" alt="Project 2" loading="lazy" />
-        <img src="https://source.unsplash.com/random/600x400?renovation" alt="Project 3" loading="lazy" />
+        <img src="https://source.unsplash.com/random/600x400?construction" alt="Modern construction project in Chicago" loading="lazy" />
+        <img src="https://source.unsplash.com/random/600x400?office" alt="Office building completed by Allied Construction" loading="lazy" />
+        <img src="https://source.unsplash.com/random/600x400?renovation" alt="Renovation project by Allied Construction" loading="lazy" />
       </div>
     </section>
-    <section id="contact">
-      <h2>Contact</h2>
-      <form id="contactForm" autocomplete="off">
-        <input name="name" placeholder="Your Name" required />
-        <input name="email" type="email" placeholder="Email" required />
-        <textarea name="message" placeholder="Message" required></textarea>
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact</h2>
+      <form id="contactForm" autocomplete="off" novalidate aria-describedby="formStatus">
+        <label for="name" class="visually-hidden">Your Name</label>
+        <input id="name" name="name" placeholder="Your Name" required aria-required="true" />
+        <label for="email" class="visually-hidden">Email</label>
+        <input id="email" name="email" type="email" placeholder="Email" required aria-required="true" />
+        <label for="message" class="visually-hidden">Message</label>
+        <textarea id="message" name="message" placeholder="Message" required aria-required="true"></textarea>
         <button type="submit" class="btn">Send</button>
-        <div id="formStatus"></div>
+        <div id="formStatus" role="status" aria-live="polite"></div>
       </form>
     </section>
   </main>
-  <footer>
+  <footer role="contentinfo">
     © <span id="year"></span> Allied Construction • Chicago, IL
   </footer>
   <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
