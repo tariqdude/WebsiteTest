@@ -1,12 +1,12 @@
 'use strict';
 
-// ===== Utility: DOM Ready =====
+// Utility: DOM Ready
 const onReady = fn => {
   if (document.readyState !== 'loading') fn();
   else document.addEventListener('DOMContentLoaded', fn);
 };
 
-// ===== Loader Overlay =====
+// Loader overlay
 onReady(() => {
   setTimeout(() => {
     const loader = document.getElementById('pageloader');
@@ -14,20 +14,20 @@ onReady(() => {
   }, 400);
 });
 
-// ===== Service Worker Registration =====
+// Service Worker Registration
 onReady(() => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
   }
 });
 
-// ===== Set Current Year in Footer =====
+// Set Current Year in Footer
 onReady(() => {
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 });
 
-// ===== Cookie Consent =====
+// Cookie Consent
 onReady(() => {
   const cookieConsent = document.getElementById('cookieConsent');
   const acceptBtn = document.getElementById('acceptCookies');
@@ -42,7 +42,7 @@ onReady(() => {
   }
 });
 
-// ===== Theme Toggle =====
+// Theme Toggle & Persistence
 onReady(() => {
   const toggleBtn = document.getElementById('themeToggle');
   const icon = toggleBtn && toggleBtn.querySelector('i');
@@ -61,7 +61,7 @@ onReady(() => {
   }
 });
 
-// ===== Back-to-top Button =====
+// Back-to-top Button
 onReady(() => {
   const btn = document.getElementById('topBtn');
   window.addEventListener('scroll', () => {
@@ -70,20 +70,43 @@ onReady(() => {
   if (btn) btn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
 });
 
-// ===== Smooth Scroll for Anchor Links =====
+// Smooth Scroll for Anchor Links (with polyfill fallback)
 onReady(() => {
   document.body.addEventListener('click', function(e) {
     if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
       const target = document.querySelector(e.target.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({behavior:'smooth'});
+        if ('scrollBehavior' in document.documentElement.style) {
+          target.scrollIntoView({behavior:'smooth'});
+        } else {
+          window.location.hash = e.target.getAttribute('href');
+        }
       }
     }
   });
 });
 
-// ===== Contact Form Validation and Feedback =====
+// Dynamic Active Link Highlighting
+onReady(() => {
+  const navLinks = document.querySelectorAll('#menu a');
+  function setActiveLink() {
+    let found = false;
+    navLinks.forEach(link => {
+      link.removeAttribute('aria-current');
+      if (!found && window.location.hash && link.getAttribute('href') === window.location.hash) {
+        link.setAttribute('aria-current', 'page');
+        found = true;
+      }
+    });
+    // Default to first if none matched
+    if (!found && navLinks[0]) navLinks[0].setAttribute('aria-current', 'page');
+  }
+  window.addEventListener('hashchange', setActiveLink);
+  setActiveLink();
+});
+
+// Contact Form Validation and Feedback
 onReady(() => {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -124,7 +147,7 @@ onReady(() => {
   };
 });
 
-// ===== Header Scroll Shadow, Progress, Sticky Hide/Show =====
+// Header Scroll Shadow, Progress, Sticky Hide/Show
 onReady(() => {
   const header = document.getElementById('header');
   const progress = document.getElementById('progress');
@@ -148,7 +171,7 @@ onReady(() => {
   }, { passive: true });
 });
 
-// ===== Mobile Nav (close on link click, ESC, focus trap, click outside, close on resize) =====
+// Mobile Nav (close on link click, ESC, focus trap, click outside, close on resize)
 onReady(() => {
   const hamburger = document.getElementById('hamburger');
   const menu = document.getElementById('menu');
@@ -197,7 +220,7 @@ onReady(() => {
   });
 });
 
-// ===== Reveal on Scroll (IntersectionObserver, prefers-reduced-motion support) =====
+// Reveal on Scroll (IntersectionObserver, prefers-reduced-motion support)
 onReady(() => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if ('IntersectionObserver' in window && !prefersReducedMotion) {
@@ -210,7 +233,7 @@ onReady(() => {
   }
 });
 
-// ===== Gallery Lightbox =====
+// Gallery Lightbox with Focus Trap
 onReady(() => {
   const imgs = document.querySelectorAll('.gallery img');
   imgs.forEach((img, idx) => {
@@ -264,7 +287,7 @@ onReady(() => {
   }
 });
 
-// ===== Testimonials Carousel =====
+// Testimonials Carousel
 onReady(() => {
   const carousel = document.querySelector('.carousel');
   if (!carousel) return;
@@ -321,7 +344,7 @@ onReady(() => {
   });
 });
 
-// ===== Animated Counters =====
+// Animated Counters
 onReady(() => {
   const animateCounter = (el, target, suffix) => {
     let start = target === 0 ? 0 : 1;
@@ -361,7 +384,7 @@ onReady(() => {
   animateCounter(document.getElementById('safety'), 0, '');
 });
 
-// ===== Accessibility: Trap Focus in Modals =====
+// Accessibility: Trap Focus in Modals
 function trapFocus(element) {
   const focusable = element.querySelectorAll('a, button, textarea, input, [tabindex]:not([tabindex="-1"])');
   if (!focusable.length) return;
@@ -382,10 +405,35 @@ function trapFocus(element) {
   });
 }
 
-// ===== Skip Link Focus Management =====
+// Skip Link Focus Management
 onReady(() => {
   const skip = document.querySelector('.skip-link');
   if (skip) {
     skip.addEventListener('click', e => {
       const main = document.getElementById('home');
-      if
+      if (main) main.focus();
+    });
+  }
+});
+
+// Sticky CTA & Chat Widget: Keyboard Accessibility
+onReady(() => {
+  const stickyCTA = document.getElementById('stickyCTA');
+  const chatWidget = document.getElementById('chatWidget');
+  if (stickyCTA) {
+    stickyCTA.tabIndex = 0;
+    stickyCTA.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const link = stickyCTA.querySelector('a');
+        if (link) link.click();
+      }
+    });
+  }
+  if (chatWidget) {
+    chatWidget.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        chatWidget.setAttribute('aria-label', 'Chat support coming soon');
+      }
+    });
+  }
+});
