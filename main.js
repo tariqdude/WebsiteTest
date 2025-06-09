@@ -315,19 +315,6 @@ function headerFooterShadow() {
   });
 }
 
-// Gallery images fade-in effect
-function galleryFadeIn() {
-  const imgs = document.querySelectorAll('.gallery img');
-  imgs.forEach(img => {
-    img.style.opacity = '0';
-    img.style.transition = 'opacity 0.7s cubic-bezier(.4,0,.2,1)';
-    img.addEventListener('load', () => {
-      img.style.opacity = '1';
-    });
-    if (img.complete) img.style.opacity = '1';
-  });
-}
-
 // Floating label support for form (for accessibility)
 function floatingLabels() {
   document.querySelectorAll('.form-group input, .form-group textarea').forEach(field => {
@@ -403,21 +390,6 @@ function skipLinkFocus() {
   }
 }
 
-// Enhance CTA button animation
-function enhanceCTA() {
-  const ctaBtn = document.querySelector('.cta-banner .btn');
-  if (ctaBtn) {
-    ctaBtn.addEventListener('mouseenter', () => {
-      ctaBtn.style.transform = 'scale(1.06)';
-      ctaBtn.style.boxShadow = '0 6px 24px rgba(251,191,36,0.18)';
-    });
-    ctaBtn.addEventListener('mouseleave', () => {
-      ctaBtn.style.transform = '';
-      ctaBtn.style.boxShadow = '';
-    });
-  }
-}
-
 // On DOM ready, initialize all features
 ready(() => {
   loader();
@@ -429,11 +401,9 @@ ready(() => {
   smoothScroll();
   animateStats();
   sectionFadeIn();
-  galleryFadeIn();
   floatingLabels();
   contactForm();
   skipLinkFocus();
-  enhanceCTA();
   animateScrollIndicator();
   prefersReducedMotion();
   themeShortcut();
