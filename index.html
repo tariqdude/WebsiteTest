@@ -112,20 +112,12 @@
             <button id="langEn" aria-label="Switch to English" aria-current="true">EN</button>
             <button id="langEs" aria-label="Switch to Spanish">ES</button>
           </div>
-          <!-- Add search bar -->
-          <form id="siteSearch" role="search" aria-label="Site search" autocomplete="off">
-            <input type="search" id="searchInput" placeholder="Search…" aria-label="Search site" autocomplete="off" aria-autocomplete="list" aria-controls="searchSuggestions">
-            <button type="submit" aria-label="Submit search"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <ul id="searchSuggestions" class="search-suggestions" role="listbox" aria-label="Search suggestions"></ul>
-          </form>
           <ul id="menu">
             <li role="listitem"><a href="#about" aria-current="page">About</a></li>
             <li role="listitem"><a href="#services">Services</a></li>
             <li role="listitem"><a href="#process">Process</a></li>
             <li role="listitem"><a href="#projects">Projects</a></li>
             <li role="listitem"><a href="#awards">Awards</a></li>
-            <li role="listitem"><a href="#testimonials">Testimonials</a></li>
-            <li role="listitem"><a href="#faq">FAQ</a></li>
             <li role="listitem"><a href="#contact">Contact</a></li>
           </ul>
           <div class="nav-actions">
@@ -216,110 +208,44 @@
         </div>
       </div>
     </section>
-    <!-- Testimonials -->
-    <section id="testimonials" class="testimonials" data-animate aria-label="Client Testimonials" role="region">
+    <!-- Advanced Commercial & Industrial Construction -->
+    <section id="commercial-industrial" class="advanced-construction" data-animate aria-label="Commercial & Industrial Construction" role="region">
       <div class="container">
-        <h2>What Our Clients Say</h2>
-        <div class="carousel" tabindex="0" aria-live="off" role="list">
-          <div class="card" role="listitem" aria-hidden="false"><blockquote>Allied transformed our outdated warehouse into a cutting-edge HQ—on schedule and under budget.</blockquote><strong>— J. Martinez, CEO, TechEdge</strong></div>
-          <div class="card" role="listitem" aria-hidden="true"><blockquote>Professional, transparent, and meticulous. We couldn't be happier with our new home addition.</blockquote><strong>— S. Patel, Homeowner</strong></div>
-          <div class="card" role="listitem" aria-hidden="true"><blockquote>The team handled everything—permits, inspections, and a flawless LEED certification.</blockquote><strong>— L. Chen, Facility Manager, GreenWorks</strong></div>
-        </div>
-        <nav class="carousel-indicators" aria-label="Testimonial navigation" role="navigation">
-          <button data-slide="0" aria-label="Show testimonial 1" data-selected="true" aria-selected="true"></button>
-          <button data-slide="1" aria-label="Show testimonial 2" data-selected="false" aria-selected="false"></button>
-          <button data-slide="2" aria-label="Show testimonial 3" data-selected="false" aria-selected="false"></button>
-        </nav>
-      </div>
-    </section>
-    <!-- FAQ -->
-    <section id="faq" class="faq container" data-animate aria-live="polite">
-      <h2>Frequently Asked Questions</h2>
-      <details><summary>Are you licensed, bonded, and insured?</summary><p>Absolutely. We hold all required state & city licenses, carry multi-million-dollar liability coverage, and are fully bonded.</p></details>
-      <details><summary>Do you offer free estimates?</summary><p>Yes, schedule a site visit and we'll provide a detailed, no-obligation quote.</p></details>
-      <details><summary>How do you handle change orders?</summary><p>Changes are documented with transparent pricing and only proceed upon written client approval.</p></details>
-    </section>
-    <!-- Blog/News Section -->
-    <section class="blog" id="blog" data-animate aria-live="polite">
-      <div class="container">
-        <h2>Latest News</h2>
-        <div class="blog-list">
-          <div class="blog-card">
-            <h3>Allied Wins 2024 Green Building Award</h3>
-            <time datetime="2024-05-01">May 1, 2024</time>
-            <p>Our sustainable retrofit project in River North has been recognized for innovation in energy efficiency and design.</p>
+        <h2>Advanced Commercial & Industrial Construction</h2>
+        <div class="advanced-features">
+          <div class="feature">
+            <i class="fa-solid fa-building-circle-check"></i>
+            <h3>Integrated Project Delivery</h3>
+            <p>Seamless collaboration from pre-construction to closeout, leveraging BIM and Lean methodologies for maximum efficiency and cost control.</p>
           </div>
-          <div class="blog-card">
-            <h3>Now Offering Smart Home Integration</h3>
-            <time datetime="2024-04-15">April 15, 2024</time>
-            <p>We now provide full smart home automation and IoT solutions for residential clients.</p>
+          <div class="feature">
+            <i class="fa-solid fa-network-wired"></i>
+            <h3>Smart Infrastructure</h3>
+            <p>Deployment of IoT sensors, automation, and advanced security systems for future-ready facilities and real-time operational insights.</p>
+          </div>
+          <div class="feature">
+            <i class="fa-solid fa-recycle"></i>
+            <h3>Sustainable & Resilient Design</h3>
+            <p>LEED, WELL, and Energy Star certified builds with renewable energy integration, adaptive reuse, and climate resilience strategies.</p>
+          </div>
+          <div class="feature">
+            <i class="fa-solid fa-truck-ramp-box"></i>
+            <h3>Industrial Specialization</h3>
+            <p>Expertise in logistics centers, manufacturing plants, clean rooms, and heavy MEP systems—delivered on aggressive schedules.</p>
+          </div>
+          <div class="feature">
+            <i class="fa-solid fa-user-gear"></i>
+            <h3>Owner-Focused Delivery</h3>
+            <p>Transparent reporting, digital dashboards, and dedicated project managers ensure your vision, budget, and timeline are always in focus.</p>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- Social Media Feed Placeholder -->
-    <div class="social-feed" data-animate aria-hidden="true">
-      <div class="feed-placeholder">[Instagram feed coming soon]</div>
-    </div>
-    <!-- Contact -->
-    <section id="contact" data-animate role="region" aria-label="Contact section">
-      <div class="container">
-        <div class="call">
-          <h2>Ready to break ground?</h2>
-          <p>Request a free consultation and project estimate.</p>
-          <form id="contactForm" aria-label="Contact form" autocomplete="off" novalidate>
-            <div class="honeypot">
-              <label for="website">Website</label>
-              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-            </div>
-            <div class="form-group">
-              <label for="name" class="visually-hidden">Your Name</label>
-              <input id="name" name="name" type="text" placeholder="Your Name" required autocomplete="name" aria-describedby="nameError" aria-invalid="false">
-              <span class="error-tooltip" id="nameError"></span>
-            </div>
-            <div class="form-group">
-              <label for="email" class="visually-hidden">Email</label>
-              <input id="email" name="email" type="email" placeholder="Email" required autocomplete="email" aria-describedby="emailError" aria-invalid="false">
-              <span class="error-tooltip" id="emailError"></span>
-            </div>
-            <div class="form-group">
-              <label for="phone" class="visually-hidden">Phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" autocomplete="tel" inputmode="numeric">
-            </div>
-            <div class="form-group">
-              <label for="message" class="visually-hidden">Project details</label>
-              <textarea id="message" name="message" rows="4" placeholder="Project details…" required aria-describedby="messageError" aria-invalid="false"></textarea>
-              <span class="error-tooltip" id="messageError"></span>
-            </div>
-            <button type="submit" class="btn" aria-busy="false"><span id="submitText">Send Message</span></button>
-            <p id="formStatus" aria-live="polite"></p>
-          </form>
-          <div class="contact-actions">
-            <button id="copyPhoneBtn" type="button" aria-label="Copy phone number" data-tooltip="Copy to clipboard"><i class="fa-solid fa-phone"></i> Copy Phone</button>
-            <button id="copyEmailBtn" type="button" aria-label="Copy email address" data-tooltip="Copy to clipboard"><i class="fa-solid fa-envelope"></i> Copy Email</button>
-            <button id="downloadVCardBtn" type="button" aria-label="Download vCard" data-tooltip="Download vCard"><i class="fa-solid fa-id-card"></i> vCard</button>
-            <button id="printPageBtn" type="button" aria-label="Print this page" data-tooltip="Print page"><i class="fa-solid fa-print"></i> Print</button>
-          </div>
-          <div class="map-embed" aria-label="Our office location">
-            <iframe title="Allied Construction Chicago Map" src="https://www.openstreetmap.org/export/embed.html?bbox=-87.6847%2C41.8369%2C-87.6047%2C41.8969&amp;layer=mapnik&amp;marker=41.8669,-87.6447" width="100%" height="260" style="border:none;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-          <noscript>
-            <p style="color:#fff;background:#c00;padding:1em;border-radius:8px;margin-top:1em;">JavaScript is required to submit this form. Please email us at <a href="mailto:info@alliedconstruction.com" style="color:#fff;text-decoration:underline;">info@alliedconstruction.com</a>.</p>
-          </noscript>
+        <div class="advanced-gallery">
+          <img src="https://source.unsplash.com/featured/600x400?bim,construction" alt="BIM-enabled construction site" loading="lazy" />
+          <img src="https://source.unsplash.com/featured/600x400?industrial-facility" alt="Modern industrial facility" loading="lazy" />
+          <img src="https://source.unsplash.com/featured/600x400?smart-building" alt="Smart building infrastructure" loading="lazy" />
         </div>
-      </div>
-    </section>
-    <!-- Add newsletter signup in blog/news section -->
-    <section class="newsletter" id="newsletter" data-animate aria-live="polite">
-      <div class="container">
-        <h2>Subscribe to Our Newsletter</h2>
-        <form id="newsletterForm" autocomplete="off" aria-label="Newsletter signup">
-          <input type="email" id="newsletterEmail" name="newsletterEmail" placeholder="Your email address" required autocomplete="email" aria-label="Email for newsletter">
-          <button type="submit" class="btn" aria-label="Subscribe to newsletter">Subscribe</button>
-          <span id="newsletterStatus" aria-live="polite"></span>
-        </form>
-        <div id="newsletterConfirm" class="newsletter-confirm" hidden>
-          <p>Check your email to confirm your subscription.</p>
+        <div class="advanced-cta">
+          <a href="#contact" class="btn" aria-label="Request a commercial/industrial quote">Request a Commercial/Industrial Quote</a>
         </div>
       </div>
     </section>
@@ -356,14 +282,6 @@
   <button id="topBtn" aria-label="Back to top" type="button" aria-live="polite">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
-
-  <!-- =========================
-       Chat Widget Placeholder
-  ========================== -->
-  <div id="chatWidget" aria-label="Open chat support" tabindex="0" aria-live="polite">
-    <i class="fa-solid fa-comments"></i> Chat with us
-    <span class="chat-status" aria-live="polite"></span>
-  </div>
 
   <!-- =========================
        Scroll Progress Bar (enhanced)
