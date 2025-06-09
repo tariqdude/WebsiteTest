@@ -74,6 +74,9 @@
   ========================== -->
   <link rel="stylesheet" href="main.css" />
   <meta name="color-scheme" content="light dark">
+  <meta name="darkreader-lock" content="true">
+  <!-- Add dark mode meta for PWA -->
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#181e2a">
 </head>
 <body>
   <!-- =========================
@@ -104,6 +107,16 @@
       <div class="header-inner">
         <nav aria-label="Main navigation" role="navigation">
           <div class="logo" aria-label="Allied Construction">Allied Construction</div>
+          <!-- Add language switcher -->
+          <div class="lang-switcher" aria-label="Language switcher">
+            <button id="langEn" aria-label="Switch to English" aria-current="true">EN</button>
+            <button id="langEs" aria-label="Switch to Spanish">ES</button>
+          </div>
+          <!-- Add search bar -->
+          <form id="siteSearch" role="search" aria-label="Site search" autocomplete="off">
+            <input type="search" id="searchInput" placeholder="Search…" aria-label="Search site" autocomplete="off">
+            <button type="submit" aria-label="Submit search"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
           <ul id="menu">
             <li role="listitem"><a href="#about" aria-current="page">About</a></li>
             <li role="listitem"><a href="#services">Services</a></li>
@@ -270,7 +283,7 @@
             </div>
             <div class="form-group">
               <label for="phone" class="visually-hidden">Phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" autocomplete="tel">
+              <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" autocomplete="tel" inputmode="numeric">
             </div>
             <div class="form-group">
               <label for="message" class="visually-hidden">Project details</label>
@@ -295,6 +308,17 @@
         </div>
       </div>
     </section>
+    <!-- Add newsletter signup in blog/news section -->
+    <section class="newsletter" id="newsletter" data-animate aria-live="polite">
+      <div class="container">
+        <h2>Subscribe to Our Newsletter</h2>
+        <form id="newsletterForm" autocomplete="off" aria-label="Newsletter signup">
+          <input type="email" id="newsletterEmail" name="newsletterEmail" placeholder="Your email address" required autocomplete="email" aria-label="Email for newsletter">
+          <button type="submit" class="btn" aria-label="Subscribe to newsletter">Subscribe</button>
+          <span id="newsletterStatus" aria-live="polite"></span>
+        </form>
+      </div>
+    </section>
   </main>
 
   <!-- =========================
@@ -316,6 +340,10 @@
       <a href="https://www.linkedin.com/company/alliedconstruction" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
     </span>
     <span id="clock" aria-label="Current time" style="margin-left:1em;"></span>
+    <!-- Add newsletter signup hint -->
+    <div class="footer-newsletter-hint">
+      <span>Stay updated: <a href="#newsletter" aria-label="Go to newsletter signup">Join our newsletter</a></span>
+    </div>
   </footer>
 
   <!-- =========================
@@ -366,159 +394,6 @@
        Main Scripts
   ========================== -->
   <script src="main.js" defer></script>
-  <script>
-    // Prefetch gallery images for smoother UX (already present)
-    document.addEventListener('DOMContentLoaded', function() {
-      const galleryImgs = [
-        "https://source.unsplash.com/random/1200x800?industrial-construction",
-        "https://source.unsplash.com/random/1200x800?modern-office",
-        "https://source.unsplash.com/random/1200x800?residential-renovation",
-        "https://source.unsplash.com/random/1200x800?solar-panel-roof"
-      ];
-      galleryImgs.forEach(src => {
-        const img = new Image();
-        img.src = src;
-      });
-    });
-
-    // Improvement: Lazy load all images except those in the hero section
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('img:not(.hero img)').forEach(img => {
-        if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
-      });
-    });
-
-    // Improvement: Announce when chat widget is focused for accessibility
-    document.addEventListener('DOMContentLoaded', function() {
-      const chatWidget = document.getElementById('chatWidget');
-      if (chatWidget) {
-        chatWidget.addEventListener('focus', () => {
-          const status = chatWidget.querySelector('.chat-status');
-          if (status) status.textContent = 'Chat support coming soon.';
-        });
-        chatWidget.addEventListener('blur', () => {
-          const status = chatWidget.querySelector('.chat-status');
-          if (status) status.textContent = '';
-        });
-      }
-    });
-
-    // Improvement: Keyboard shortcut for back-to-top (Alt+U)
-    document.addEventListener('keydown', function(e) {
-      if ((e.altKey || e.ctrlKey) && (e.key === 'u' || e.key === 'U')) {
-        const btn = document.getElementById('topBtn');
-        if (btn) btn.click();
-      }
-    });
-
-    // Enhanced: Scroll Progress Bar
-    document.addEventListener('DOMContentLoaded', function() {
-      const bar = document.getElementById('scrollProgressBar');
-      if (!bar) return;
-      bar.style.position = 'fixed';
-      bar.style.top = '0';
-      bar.style.left = '0';
-      bar.style.height = '4px';
-      bar.style.background = 'linear-gradient(90deg,#fbbf24,#2563eb)';
-      bar.style.width = '0';
-      bar.style.zIndex = '3000';
-      bar.style.transition = 'width .2s';
-      window.addEventListener('scroll', function() {
-        const max = document.body.scrollHeight - window.innerHeight;
-        bar.style.width = `${(window.scrollY / max) * 100}%`;
-      });
-    });
-
-    // Enhanced: Keyboard Help Modal
-    document.addEventListener('DOMContentLoaded', function() {
-      const modal = document.getElementById('keyboardHelpModal');
-      const closeBtn = modal?.querySelector('.modal-close');
-      function showModal() {
-        modal.hidden = false;
-        modal.focus();
-        document.body.style.overflow = 'hidden';
-      }
-      function hideModal() {
-        modal.hidden = true;
-        document.body.style.overflow = '';
-      }
-      document.addEventListener('keydown', function(e) {
-        if ((e.altKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
-          e.preventDefault();
-          showModal();
-        }
-        if (e.key === 'Escape' && !modal.hidden) hideModal();
-      });
-      closeBtn?.addEventListener('click', hideModal);
-      modal?.addEventListener('click', e => { if (e.target === modal) hideModal(); });
-    });
-
-    // Enhanced: Scroll to Next Section Button
-    document.addEventListener('DOMContentLoaded', function() {
-      const btn = document.getElementById('scrollNextBtn');
-      const nextSection = document.getElementById('about');
-      if (btn && nextSection) {
-        btn.style.position = 'absolute';
-        btn.style.left = '50%';
-        btn.style.bottom = '2.5rem';
-        btn.style.transform = 'translateX(-50%)';
-        btn.style.background = '#fff';
-        btn.style.color = '#2563eb';
-        btn.style.borderRadius = '50%';
-        btn.style.width = '2.7em';
-        btn.style.height = '2.7em';
-        btn.style.boxShadow = '0 4px 24px rgba(37,99,235,0.13)';
-        btn.style.fontSize = '1.5em';
-        btn.style.border = 'none';
-        btn.style.zIndex = '1201';
-        btn.addEventListener('click', () => {
-          nextSection.scrollIntoView({behavior:'smooth'});
-        });
-      }
-    });
-
-    // Enhanced: Copy Phone/Email, Download vCard, Print
-    document.addEventListener('DOMContentLoaded', function() {
-      const phone = '312-555-1234';
-      const email = 'info@alliedconstruction.com';
-      document.getElementById('copyPhoneBtn')?.addEventListener('click', () => {
-        navigator.clipboard.writeText(phone);
-        alert('Phone number copied!');
-      });
-      document.getElementById('copyEmailBtn')?.addEventListener('click', () => {
-        navigator.clipboard.writeText(email);
-        alert('Email address copied!');
-      });
-      document.getElementById('downloadVCardBtn')?.addEventListener('click', () => {
-        const vcf = `BEGIN:VCARD
-VERSION:3.0
-FN:Allied Construction
-ORG:Allied Construction
-TEL;TYPE=WORK,VOICE:+1-312-555-1234
-EMAIL:info@alliedconstruction.com
-ADR;TYPE=WORK:;;Chicago;IL;USA
-URL:https://alliedconstruction.github.io/
-END:VCARD`;
-        const blob = new Blob([vcf], {type:'text/vcard'});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'AlliedConstruction.vcf';
-        a.click();
-      });
-      document.getElementById('printPageBtn')?.addEventListener('click', () => window.print());
-    });
-
-    // Enhanced: Real-time Clock in Footer
-    document.addEventListener('DOMContentLoaded', function() {
-      const clock = document.getElementById('clock');
-      if (!clock) return;
-      function updateClock() {
-        const now = new Date();
-        clock.textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
-      }
-      updateClock();
-      setInterval(updateClock, 1000);
-    });
-  </script>
+  <!-- Remove all inline <script> blocks, all JS is now in main.js -->
 </body>
 </html>

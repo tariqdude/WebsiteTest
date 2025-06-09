@@ -525,6 +525,138 @@ END:VCARD`;
     setInterval(updateClock, 1000);
   },
 
+  // Additions for upgraded features
+  mobileQuickNav() {
+    const nav = document.getElementById('mobileQuickNav');
+    if (!nav) return;
+    nav.querySelectorAll('button[data-target]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.querySelector(btn.getAttribute('data-target'));
+        if (target) target.scrollIntoView({behavior:'smooth'});
+      });
+    });
+  },
+
+  languageSwitcher() {
+    const en = document.getElementById('langEn');
+    const es = document.getElementById('langEs');
+    if (!en || !es) return;
+    function setLang(lang) {
+      localStorage.setItem('lang', lang);
+      en.setAttribute('aria-current', lang === 'en');
+      es.setAttribute('aria-current', lang === 'es');
+      en.classList.toggle('active', lang === 'en');
+      es.classList.toggle('active', lang === 'es');
+      // Demo: just alert, real i18n would reload content
+      if (lang === 'es') alert('Spanish language coming soon.');
+    }
+    en.addEventListener('click', () => setLang('en'));
+    es.addEventListener('click', () => setLang('es'));
+    // On load
+    setLang(localStorage.getItem('lang') || 'en');
+  },
+
+  siteSearch() {
+    const form = document.getElementById('siteSearch');
+    if (!form) return;
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const q = form.querySelector('input[type="search"]').value.trim();
+      if (q) alert('Search for: ' + q + ' (demo only)');
+    });
+  },
+
+  newsletterSignup() {
+    const form = document.getElementById('newsletterForm');
+    if (!form) return;
+    const status = document.getElementById('newsletterStatus');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = form.newsletterEmail.value.trim();
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        status.textContent = 'Please enter a valid email.';
+        return;
+      }
+      status.textContent = 'Subscribing...';
+      // Simulate async
+      setTimeout(() => {
+        status.textContent = 'Thank you for subscribing!';
+        form.reset();
+      }, 1200);
+    });
+  },
+
+  copyTooltip() {
+    // Show tooltip on copy actions
+    function showTooltip(btn, msg) {
+      let tip = btn._tooltip;
+      if (!tip) {
+        tip = document.createElement('span');
+        tip.className = 'tooltip';
+        btn._tooltip = tip;
+        btn.parentNode.appendChild(tip);
+      }
+      tip.textContent = msg;
+      const rect = btn.getBoundingClientRect();
+      tip.style.left = (btn.offsetLeft + btn.offsetWidth/2 - 40) + 'px';
+      tip.style.top = (btn.offsetTop - 32) + 'px';
+      tip.style.opacity = 1;
+      setTimeout(() => { tip.style.opacity = 0; }, 1200);
+    }
+    [
+      {id:'copyPhoneBtn', msg:'Copied!'},
+      {id:'copyEmailBtn', msg:'Copied!'}
+    ].forEach(({id, msg}) => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener('click', () => showTooltip(btn, msg));
+      }
+    });
+  },
+
+  keyboardHint() {
+    // Show a keyboard navigation hint on first Tab press
+    let shown = false;
+    function showHint() {
+      if (shown) return;
+      shown = true;
+      const hint = document.createElement('div');
+      hint.textContent = 'Tip: Use Tab to navigate, Alt+K for keyboard help.';
+      hint.style.position = 'fixed';
+      hint.style.bottom = '1.5em';
+      hint.style.left = '50%';
+      hint.style.transform = 'translateX(-50%)';
+      hint.style.background = '#181e2a';
+      hint.style.color = '#fff';
+      hint.style.padding = '0.7em 1.5em';
+      hint.style.borderRadius = '1em';
+      hint.style.zIndex = 4001;
+      hint.style.fontSize = '1.05em';
+      hint.style.boxShadow = '0 4px 24px rgba(30,64,175,0.13)';
+      document.body.appendChild(hint);
+      setTimeout(() => { hint.remove(); }, 3500);
+    }
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') showHint();
+    }, {once:true});
+  },
+
+  liveChatPlaceholder() {
+    // Enhance chat widget ARIA
+    const chat = document.getElementById('chatWidget');
+    if (!chat) return;
+    chat.setAttribute('aria-label', 'Live chat support coming soon');
+    chat.setAttribute('tabindex', '0');
+    chat.addEventListener('focus', () => {
+      const status = chat.querySelector('.chat-status');
+      if (status) status.textContent = 'Live chat launching soon!';
+    });
+    chat.addEventListener('blur', () => {
+      const status = chat.querySelector('.chat-status');
+      if (status) status.textContent = '';
+    });
+  },
+
   // App Init
   init() {
     this.loader();
@@ -549,6 +681,13 @@ END:VCARD`;
     this.scrollNextBtn();
     this.contactActions();
     this.realTimeClock();
+    this.mobileQuickNav();
+    this.languageSwitcher();
+    this.siteSearch();
+    this.newsletterSignup();
+    this.copyTooltip();
+    this.keyboardHint();
+    this.liveChatPlaceholder();
   }
 };
 
