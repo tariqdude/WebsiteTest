@@ -59,7 +59,7 @@ const App = {
     if (btn) btn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
   },
 
-  // Mobile Nav (ARIA expanded)
+  // Mobile Nav (ARIA expanded, keyboard accessible, focus trap)
   mobileNav() {
     const hamburger = document.getElementById('hamburger');
     const menu = document.getElementById('menu');
@@ -68,6 +68,39 @@ const App = {
       const open = !menu.classList.contains('open');
       menu.classList.toggle('open', open);
       hamburger.setAttribute('aria-expanded', open);
+      if (open) {
+        // Focus first link
+        const firstLink = menu.querySelector('a');
+        if (firstLink) firstLink.focus();
+      }
+    });
+    hamburger.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && !menu.classList.contains('open')) {
+        e.preventDefault();
+        hamburger.click();
+      }
+    });
+    menu.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        menu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+        hamburger.focus();
+      }
+    });
+    // Focus trap fallback (in case HTML script fails)
+    menu.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        const focusable = menu.querySelectorAll('a');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          last.focus();
+          e.preventDefault();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          first.focus();
+          e.preventDefault();
+        }
+      }
     });
     menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
       menu.classList.remove('open');
@@ -123,7 +156,7 @@ const App = {
     });
   },
 
-  // Animate stats numbers when visible
+  // Animate stats numbers when visible (IntersectionObserver, reduced motion support)
   animateStats() {
     const stats = [
       { id: 'years', end: 30, suffix: '+', duration: 1200 },
@@ -132,6 +165,10 @@ const App = {
     ];
     let animated = false;
     function animateValue(el, end, suffix, duration) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.textContent = end + suffix;
+        return;
+      }
       let start = 0, startTime = null;
       function step(ts) {
         if (!startTime) startTime = ts;
@@ -143,22 +180,49 @@ const App = {
       }
       requestAnimationFrame(step);
     }
-    function onScroll() {
+    function trigger() {
       if (animated) return;
-      const statsDiv = document.querySelector('.stats');
-      if (!statsDiv) return;
-      const rect = statsDiv.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 80) {
-        stats.forEach(s => {
-          const el = document.getElementById(s.id);
-          if (el) animateValue(el, s.end, s.suffix, s.duration);
-        });
-        animated = true;
-        window.removeEventListener('scroll', onScroll);
-      }
+      stats.forEach(s => {
+        const el = document.getElementById(s.id);
+        if (el) animateValue(el, s.end, s.suffix, s.duration);
+      });
+      animated = true;
     }
-    window.addEventListener('scroll', onScroll);
-    onScroll();
+    const statsDiv = document.querySelector('.stats');
+    if (!statsDiv) return;
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          trigger();
+          observer.disconnect();
+        }
+      }, { threshold: 0.3 });
+      observer.observe(statsDiv);
+    } else {
+      // fallback
+      function onScroll() {
+        const rect = statsDiv.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80) {
+          trigger();
+          window.removeEventListener('scroll', onScroll);
+        }
+      }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    }
+  },
+
+  // Gallery images fade-in effect
+  galleryFadeIn() {
+    const imgs = document.querySelectorAll('.gallery img');
+    imgs.forEach(img => {
+      img.style.opacity = '0';
+      img.style.transition = 'opacity 0.7s cubic-bezier(.4,0,.2,1)';
+      img.addEventListener('load', () => {
+        img.style.opacity = '1';
+      });
+      if (img.complete) img.style.opacity = '1';
+    });
   },
 
   // Contact Form Validation and Feedback (improved, ARIA live region)
@@ -217,4 +281,25 @@ document.addEventListener('DOMContentLoaded', () => {
   if (skip) {
     skip.addEventListener('click', e => {
       const main = document.getElementById('home');
-      if
+      if (main) {
+        e.preventDefault();
+        main.setAttribute('tabindex', '-1');
+        main.focus({ preventScroll: true });
+      }
+    });
+  }
+});
+
+// On DOM ready, initialize all features (add galleryFadeIn)
+App.ready(() => {
+  App.loader();
+  App.year();
+  App.theme();
+  App.backToTop();
+  App.mobileNav();
+  App.navHighlight();
+  App.smoothScroll();
+  App.animateStats();
+  App.contactForm();
+  App.galleryFadeIn();
+});
