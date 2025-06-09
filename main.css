@@ -887,6 +887,122 @@ footer a:hover, footer a:focus {
 }
 
 /* =========================
+   Modal (Keyboard Help)
+========================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(30,40,60,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+  transition: opacity .2s;
+}
+.modal[hidden] { display: none !important; }
+.modal-content {
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 2.5rem 2rem 2rem 2rem;
+  min-width: 320px;
+  max-width: 95vw;
+  outline: none;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--primary-dark);
+  cursor: pointer;
+  transition: color var(--transition);
+}
+.modal-close:hover, .modal-close:focus { color: var(--accent); }
+.modal h2 { margin-top: 0; font-size: 1.3rem; }
+.modal ul { margin: 1.2em 0 0 0; padding: 0 0 0 1.2em; }
+.modal li { margin-bottom: 0.7em; font-size: 1.08rem; }
+
+/* =========================
+   Scroll Progress Bar
+========================== */
+#scrollProgressBar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 4px;
+  background: linear-gradient(90deg,#fbbf24,#2563eb);
+  width: 0;
+  z-index: 3000;
+  transition: width .2s;
+}
+
+/* =========================
+   Scroll to Next Section Button
+========================== */
+#scrollNextBtn {
+  position: absolute;
+  left: 50%;
+  bottom: 2.5rem;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #2563eb;
+  border-radius: 50%;
+  width: 2.7em;
+  height: 2.7em;
+  box-shadow: 0 4px 24px rgba(37,99,235,0.13);
+  font-size: 1.5em;
+  border: none;
+  z-index: 1201;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+#scrollNextBtn:hover, #scrollNextBtn:focus {
+  background: var(--primary);
+  color: #fff;
+  transform: translateX(-50%) scale(1.08);
+}
+
+/* =========================
+   Contact Actions
+========================== */
+.contact-actions {
+  display: flex;
+  gap: 1.2em;
+  margin: 1.2em 0 1.5em 0;
+  flex-wrap: wrap;
+}
+.contact-actions button {
+  background: var(--surface-alt);
+  color: var(--primary-dark);
+  border-radius: 2em;
+  padding: 0.5em 1.3em;
+  font-weight: 600;
+  font-size: 1.02rem;
+  border: none;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.06);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition), transform var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+}
+.contact-actions button:hover, .contact-actions button:focus {
+  background: var(--accent);
+  color: var(--primary-dark);
+  box-shadow: 0 4px 16px rgba(251,191,36,0.13);
+  transform: scale(1.06);
+}
+.contact-actions i {
+  font-size: 1.1em;
+}
+
+/* =========================
    Responsive
 ========================== */
 @media (max-width: 900px) {

@@ -436,6 +436,95 @@ const App = {
     }
   },
 
+  // Enhanced: Keyboard Help Modal
+  keyboardHelpModal() {
+    const modal = document.getElementById('keyboardHelpModal');
+    if (!modal) return;
+    const closeBtn = modal.querySelector('.modal-close');
+    function showModal() {
+      modal.hidden = false;
+      modal.focus();
+      document.body.style.overflow = 'hidden';
+    }
+    function hideModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if ((e.altKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        showModal();
+      }
+      if (e.key === 'Escape' && !modal.hidden) hideModal();
+    });
+    closeBtn?.addEventListener('click', hideModal);
+    modal?.addEventListener('click', e => { if (e.target === modal) hideModal(); });
+  },
+
+  // Enhanced: Scroll Progress Bar
+  scrollProgressBar() {
+    const bar = document.getElementById('scrollProgressBar');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      const max = document.body.scrollHeight - window.innerHeight;
+      bar.style.width = `${(window.scrollY / max) * 100}%`;
+    });
+  },
+
+  // Enhanced: Scroll to Next Section Button
+  scrollNextBtn() {
+    const btn = document.getElementById('scrollNextBtn');
+    const nextSection = document.getElementById('about');
+    if (btn && nextSection) {
+      btn.addEventListener('click', () => {
+        nextSection.scrollIntoView({behavior:'smooth'});
+      });
+    }
+  },
+
+  // Enhanced: Copy Phone/Email, Download vCard, Print
+  contactActions() {
+    const phone = '312-555-1234';
+    const email = 'info@alliedconstruction.com';
+    document.getElementById('copyPhoneBtn')?.addEventListener('click', () => {
+      navigator.clipboard.writeText(phone);
+      alert('Phone number copied!');
+    });
+    document.getElementById('copyEmailBtn')?.addEventListener('click', () => {
+      navigator.clipboard.writeText(email);
+      alert('Email address copied!');
+    });
+    document.getElementById('downloadVCardBtn')?.addEventListener('click', () => {
+      const vcf = `BEGIN:VCARD
+VERSION:3.0
+FN:Allied Construction
+ORG:Allied Construction
+TEL;TYPE=WORK,VOICE:+1-312-555-1234
+EMAIL:info@alliedconstruction.com
+ADR;TYPE=WORK:;;Chicago;IL;USA
+URL:https://alliedconstruction.github.io/
+END:VCARD`;
+      const blob = new Blob([vcf], {type:'text/vcard'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'AlliedConstruction.vcf';
+      a.click();
+    });
+    document.getElementById('printPageBtn')?.addEventListener('click', () => window.print());
+  },
+
+  // Enhanced: Real-time Clock in Footer
+  realTimeClock() {
+    const clock = document.getElementById('clock');
+    if (!clock) return;
+    function updateClock() {
+      const now = new Date();
+      clock.textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  },
+
   // App Init
   init() {
     this.loader();
@@ -455,6 +544,11 @@ const App = {
     this.counters();
     this.skipLink();
     this.stickyChat();
+    this.keyboardHelpModal();
+    this.scrollProgressBar();
+    this.scrollNextBtn();
+    this.contactActions();
+    this.realTimeClock();
   }
 };
 

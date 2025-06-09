@@ -73,6 +73,7 @@
        Main Styles
   ========================== -->
   <link rel="stylesheet" href="main.css" />
+  <meta name="color-scheme" content="light dark">
 </head>
 <body>
   <!-- =========================
@@ -279,6 +280,12 @@
             <button type="submit" class="btn" aria-busy="false"><span id="submitText">Send Message</span></button>
             <p id="formStatus" aria-live="polite"></p>
           </form>
+          <div class="contact-actions">
+            <button id="copyPhoneBtn" type="button" aria-label="Copy phone number"><i class="fa-solid fa-phone"></i> Copy Phone</button>
+            <button id="copyEmailBtn" type="button" aria-label="Copy email address"><i class="fa-solid fa-envelope"></i> Copy Email</button>
+            <button id="downloadVCardBtn" type="button" aria-label="Download vCard"><i class="fa-solid fa-id-card"></i> vCard</button>
+            <button id="printPageBtn" type="button" aria-label="Print this page"><i class="fa-solid fa-print"></i> Print</button>
+          </div>
           <div class="map-embed" aria-label="Our office location">
             <iframe title="Allied Construction Chicago Map" src="https://www.openstreetmap.org/export/embed.html?bbox=-87.6847%2C41.8369%2C-87.6047%2C41.8969&amp;layer=mapnik&amp;marker=41.8669,-87.6447" width="100%" height="260" style="border:none;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
@@ -303,11 +310,12 @@
   ========================== -->
   <footer role="contentinfo">
     © <span id="year" aria-live="polite"></span> Allied Construction •
-    <a href="tel:+13125551234">312-555-1234</a> • Chicago, IL
+    <a href="tel:+13125551234" id="footerPhone">312-555-1234</a> • Chicago, IL
     <span class="footer-social">
       <a href="https://twitter.com/alliedconstruction" aria-label="Twitter" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
       <a href="https://www.linkedin.com/company/alliedconstruction" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
     </span>
+    <span id="clock" aria-label="Current time" style="margin-left:1em;"></span>
   </footer>
 
   <!-- =========================
@@ -324,6 +332,35 @@
     <i class="fa-solid fa-comments"></i> Chat with us
     <span class="chat-status" aria-live="polite"></span>
   </div>
+
+  <!-- =========================
+       Scroll Progress Bar (enhanced)
+  ========================== -->
+  <div id="scrollProgressBar" aria-hidden="true"></div>
+
+  <!-- =========================
+       Keyboard Help Modal
+  ========================== -->
+  <div id="keyboardHelpModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="keyboardHelpTitle" tabindex="-1" hidden>
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close" tabindex="0">&times;</button>
+      <h2 id="keyboardHelpTitle">Keyboard Shortcuts</h2>
+      <ul>
+        <li><strong>Alt+U</strong>: Back to top</li>
+        <li><strong>Alt+S</strong>: Focus search (if present)</li>
+        <li><strong>Alt+K</strong>: Show this help</li>
+        <li><strong>Tab</strong>: Navigate links/buttons</li>
+        <li><strong>Esc</strong>: Close modals/menus</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =========================
+       Scroll to Next Section Button
+  ========================== -->
+  <button id="scrollNextBtn" aria-label="Scroll to next section" type="button">
+    <i class="fa-solid fa-arrow-down"></i>
+  </button>
 
   <!-- =========================
        Main Scripts
@@ -372,6 +409,115 @@
         const btn = document.getElementById('topBtn');
         if (btn) btn.click();
       }
+    });
+
+    // Enhanced: Scroll Progress Bar
+    document.addEventListener('DOMContentLoaded', function() {
+      const bar = document.getElementById('scrollProgressBar');
+      if (!bar) return;
+      bar.style.position = 'fixed';
+      bar.style.top = '0';
+      bar.style.left = '0';
+      bar.style.height = '4px';
+      bar.style.background = 'linear-gradient(90deg,#fbbf24,#2563eb)';
+      bar.style.width = '0';
+      bar.style.zIndex = '3000';
+      bar.style.transition = 'width .2s';
+      window.addEventListener('scroll', function() {
+        const max = document.body.scrollHeight - window.innerHeight;
+        bar.style.width = `${(window.scrollY / max) * 100}%`;
+      });
+    });
+
+    // Enhanced: Keyboard Help Modal
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('keyboardHelpModal');
+      const closeBtn = modal?.querySelector('.modal-close');
+      function showModal() {
+        modal.hidden = false;
+        modal.focus();
+        document.body.style.overflow = 'hidden';
+      }
+      function hideModal() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+      }
+      document.addEventListener('keydown', function(e) {
+        if ((e.altKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+          e.preventDefault();
+          showModal();
+        }
+        if (e.key === 'Escape' && !modal.hidden) hideModal();
+      });
+      closeBtn?.addEventListener('click', hideModal);
+      modal?.addEventListener('click', e => { if (e.target === modal) hideModal(); });
+    });
+
+    // Enhanced: Scroll to Next Section Button
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('scrollNextBtn');
+      const nextSection = document.getElementById('about');
+      if (btn && nextSection) {
+        btn.style.position = 'absolute';
+        btn.style.left = '50%';
+        btn.style.bottom = '2.5rem';
+        btn.style.transform = 'translateX(-50%)';
+        btn.style.background = '#fff';
+        btn.style.color = '#2563eb';
+        btn.style.borderRadius = '50%';
+        btn.style.width = '2.7em';
+        btn.style.height = '2.7em';
+        btn.style.boxShadow = '0 4px 24px rgba(37,99,235,0.13)';
+        btn.style.fontSize = '1.5em';
+        btn.style.border = 'none';
+        btn.style.zIndex = '1201';
+        btn.addEventListener('click', () => {
+          nextSection.scrollIntoView({behavior:'smooth'});
+        });
+      }
+    });
+
+    // Enhanced: Copy Phone/Email, Download vCard, Print
+    document.addEventListener('DOMContentLoaded', function() {
+      const phone = '312-555-1234';
+      const email = 'info@alliedconstruction.com';
+      document.getElementById('copyPhoneBtn')?.addEventListener('click', () => {
+        navigator.clipboard.writeText(phone);
+        alert('Phone number copied!');
+      });
+      document.getElementById('copyEmailBtn')?.addEventListener('click', () => {
+        navigator.clipboard.writeText(email);
+        alert('Email address copied!');
+      });
+      document.getElementById('downloadVCardBtn')?.addEventListener('click', () => {
+        const vcf = `BEGIN:VCARD
+VERSION:3.0
+FN:Allied Construction
+ORG:Allied Construction
+TEL;TYPE=WORK,VOICE:+1-312-555-1234
+EMAIL:info@alliedconstruction.com
+ADR;TYPE=WORK:;;Chicago;IL;USA
+URL:https://alliedconstruction.github.io/
+END:VCARD`;
+        const blob = new Blob([vcf], {type:'text/vcard'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'AlliedConstruction.vcf';
+        a.click();
+      });
+      document.getElementById('printPageBtn')?.addEventListener('click', () => window.print());
+    });
+
+    // Enhanced: Real-time Clock in Footer
+    document.addEventListener('DOMContentLoaded', function() {
+      const clock = document.getElementById('clock');
+      if (!clock) return;
+      function updateClock() {
+        const now = new Date();
+        clock.textContent = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
     });
   </script>
 </body>
