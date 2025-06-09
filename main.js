@@ -219,7 +219,7 @@ function animateStats() {
 
 // Section fade-in on scroll (IntersectionObserver)
 function sectionFadeIn() {
-  const sections = document.querySelectorAll('main section');
+  const sections = document.querySelectorAll('main section, .cta-banner, #testimonials');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -332,6 +332,21 @@ function skipLinkFocus() {
   }
 }
 
+// Enhance CTA button animation
+function enhanceCTA() {
+  const ctaBtn = document.querySelector('.cta-banner .btn');
+  if (ctaBtn) {
+    ctaBtn.addEventListener('mouseenter', () => {
+      ctaBtn.style.transform = 'scale(1.06)';
+      ctaBtn.style.boxShadow = '0 6px 24px rgba(251,191,36,0.18)';
+    });
+    ctaBtn.addEventListener('mouseleave', () => {
+      ctaBtn.style.transform = '';
+      ctaBtn.style.boxShadow = '';
+    });
+  }
+}
+
 // On DOM ready, initialize all features
 ready(() => {
   loader();
@@ -347,4 +362,5 @@ ready(() => {
   floatingLabels();
   contactForm();
   skipLinkFocus();
+  enhanceCTA();
 });

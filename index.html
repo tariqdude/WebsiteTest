@@ -30,6 +30,7 @@
   <header role="banner">
     <nav role="navigation" aria-label="Main navigation">
       <span class="logo" tabindex="0">Allied Construction</span>
+      <span class="tagline" aria-hidden="true">Chicago’s Premier Design-Build Firm</span>
       <button id="themeToggle" aria-label="Toggle light/dark mode" aria-pressed="false" tabindex="0"><i class="fa-solid fa-sun"></i></button>
       <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="menu" aria-expanded="false" tabindex="0"><i class="fa-solid fa-bars"></i></button>
       <ul id="menu" role="menubar">
@@ -42,6 +43,7 @@
   </header>
   <main id="home" tabindex="-1" role="main">
     <section class="hero" aria-label="Hero section">
+      <div class="hero-bg"></div>
       <div>
         <h1>Building Your Vision.<br>Engineering Your Future.</h1>
         <p>We deliver award-winning construction solutions across Chicagoland.</p>
@@ -56,10 +58,12 @@
         </div>
       </div>
     </section>
+    <div class="section-divider"></div>
     <section id="about" aria-labelledby="about-heading">
       <h2 id="about-heading">About Us</h2>
       <p>Since 1995, Allied Construction has delivered quality, safety, and sustainability in every project.</p>
     </section>
+    <div class="section-divider"></div>
     <section id="services" aria-labelledby="services-heading">
       <h2 id="services-heading">Services</h2>
       <div class="cards">
@@ -69,6 +73,7 @@
         <div class="card" tabindex="0"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i><h3>Sustainable</h3></div>
       </div>
     </section>
+    <div class="section-divider"></div>
     <section id="projects" aria-labelledby="projects-heading">
       <h2 id="projects-heading">Projects</h2>
       <div class="gallery">
@@ -77,6 +82,22 @@
         <img src="https://source.unsplash.com/random/600x400?renovation" alt="Renovation project by Allied Construction" loading="lazy" tabindex="0" />
       </div>
     </section>
+    <div class="section-divider"></div>
+    <!-- Testimonial Section -->
+    <section id="testimonials" aria-labelledby="testimonials-heading">
+      <h2 id="testimonials-heading">What Our Clients Say</h2>
+      <div class="testimonials">
+        <blockquote>
+          <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
+          <footer>— Sarah M., Commercial Client</footer>
+        </blockquote>
+        <blockquote>
+          <p>“The team delivered on time and within budget. Highly recommended for any design-build needs!”</p>
+          <footer>— John D., Residential Client</footer>
+        </blockquote>
+      </div>
+    </section>
+    <div class="section-divider"></div>
     <section id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Contact</h2>
       <form id="contactForm" autocomplete="off" novalidate aria-describedby="formStatus">
@@ -95,6 +116,11 @@
         <button type="submit" class="btn" tabindex="0">Send</button>
         <div id="formStatus" role="status" aria-live="polite"></div>
       </form>
+    </section>
+    <!-- Call-to-Action Banner -->
+    <section class="cta-banner" aria-label="Get Started">
+      <h2>Ready to Build Your Vision?</h2>
+      <a href="#contact" class="btn btn-lg" aria-label="Contact Allied Construction">Contact Us Today</a>
     </section>
   </main>
   <footer role="contentinfo">
