@@ -12,29 +12,40 @@
   <link rel="stylesheet" href="main.css" />
 </head>
 <body>
+  <!-- Loading overlay -->
+  <div id="loadingOverlay" class="loading-overlay" aria-hidden="false">
+    <div class="loading-spinner" aria-label="Loading"></div>
+  </div>
+  <!-- Scroll progress bar -->
+  <div id="scrollProgress" class="scroll-progress"></div>
   <a href="#main" class="skip-link">Skip to main content</a>
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <nav class="navbar" aria-label="Main navigation">
       <div class="nav-brand">
         <span class="logo">Allied Construction</span>
       </div>
       <button id="themeToggle" aria-label="Toggle light/dark mode"><i class="fa-solid fa-sun"></i></button>
       <button id="hamburger" aria-label="Open menu" aria-controls="menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-      <ul id="menu" class="nav-menu">
-        <li><a href="#about" tabindex="0" aria-current="page">About</a></li>
-        <li><a href="#services" tabindex="0">Services</a></li>
-        <li><a href="#testimonials" tabindex="0">Testimonials</a></li>
-        <li><a href="#contact" tabindex="0">Contact</a></li>
+      <ul id="menu" class="nav-menu" role="menubar">
+        <li><a href="#about" aria-current="page" role="menuitem">About</a></li>
+        <li><a href="#services" role="menuitem">Services</a></li>
+        <li><a href="#projects" role="menuitem">Projects</a></li>
+        <li><a href="#testimonials" role="menuitem">Testimonials</a></li>
+        <li><a href="#contact" role="menuitem">Contact</a></li>
       </ul>
     </nav>
   </header>
-  <main id="main" tabindex="-1">
+  <main id="main" tabindex="-1" role="main">
     <section class="hero" aria-live="polite">
       <div class="hero-content">
-        <h1>Build Better. Build Allied.</h1>
+        <h1 class="hero-headline">Build Better. Build Allied.</h1>
         <p>Chicago’s trusted design-build partner for commercial, industrial, and residential projects.</p>
         <a href="#contact" class="btn btn-primary">Get a Quote</a>
       </div>
+      <!-- Scroll down arrow -->
+      <button class="scroll-down-arrow" id="scrollDownArrow" aria-label="Scroll to About">
+        <i class="fa-solid fa-arrow-down"></i>
+      </button>
     </section>
     <section id="about" class="about-section">
       <div class="section-content">
@@ -69,22 +80,51 @@
         </div>
       </div>
     </section>
-    <section id="testimonials" class="testimonials-section">
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section" aria-labelledby="projectsHeading">
       <div class="section-content">
-        <h2>What Clients Say</h2>
-        <div class="testimonial-cards">
-          <div class="testimonial-card" tabindex="0">
-            <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
-            <span class="testimonial-meta">– John D.</span>
+        <h2 id="projectsHeading">Recent Projects</h2>
+        <div class="cards projects-cards">
+          <div class="card project-card" tabindex="0">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Modern Office Interior" class="project-img" />
+            <h3>Modern Office Buildout</h3>
+            <p>Downtown Chicago, 2023<br>LEED Gold certified workspace for 200+ employees.</p>
           </div>
-          <div class="testimonial-card" tabindex="0">
-            <p>“From start to finish, the Allied team was communicative and reliable. Highly recommended!”</p>
-            <span class="testimonial-meta">– Sarah K.</span>
+          <div class="card project-card" tabindex="0">
+            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Luxury Home Exterior" class="project-img" />
+            <h3>Luxury Home Renovation</h3>
+            <p>Lincoln Park, 2022<br>Historic home, modernized with sustainable materials.</p>
           </div>
-          <div class="testimonial-card" tabindex="0">
-            <p>“Their sustainable solutions helped us save on energy costs. We’ll work with them again.”</p>
-            <span class="testimonial-meta">– Mike R.</span>
+          <div class="card project-card" tabindex="0">
+            <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Industrial Facility" class="project-img" />
+            <h3>Industrial Facility Upgrade</h3>
+            <p>West Side, 2023<br>HVAC and solar retrofit for energy efficiency.</p>
           </div>
+        </div>
+      </div>
+    </section>
+    <section id="testimonials" class="testimonials-section" aria-labelledby="testimonialsHeading">
+      <div class="section-content">
+        <h2 id="testimonialsHeading">What Clients Say</h2>
+        <!-- Carousel wrapper -->
+        <div class="testimonial-carousel" role="region" aria-roledescription="carousel" aria-label="Client testimonials">
+          <button class="carousel-btn prev" id="testimonialPrev" aria-label="Previous testimonial"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="testimonial-cards" id="testimonialCards">
+            <!-- ...existing testimonial cards... -->
+            <div class="testimonial-card" tabindex="0">
+              <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
+              <span class="testimonial-meta">– John D.</span>
+            </div>
+            <div class="testimonial-card" tabindex="0">
+              <p>“From start to finish, the Allied team was communicative and reliable. Highly recommended!”</p>
+              <span class="testimonial-meta">– Sarah K.</span>
+            </div>
+            <div class="testimonial-card" tabindex="0">
+              <p>“Their sustainable solutions helped us save on energy costs. We’ll work with them again.”</p>
+              <span class="testimonial-meta">– Mike R.</span>
+            </div>
+          </div>
+          <button class="carousel-btn next" id="testimonialNext" aria-label="Next testimonial"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
       </div>
     </section>
@@ -93,29 +133,30 @@
         <h2>Contact</h2>
         <form id="contactForm" autocomplete="on" novalidate aria-describedby="formLiveRegion">
           <div class="form-group">
-            <input id="name" name="name" placeholder="Your Name" required aria-label="Your Name" autocomplete="name" aria-describedby="nameError" />
+            <input id="name" name="name" placeholder="Your Name" required aria-label="Your Name" autocomplete="name" aria-describedby="nameError" aria-invalid="false" />
           </div>
           <div class="form-group">
-            <input id="email" name="email" type="email" placeholder="Email" required aria-label="Email" autocomplete="email" aria-describedby="emailError" />
+            <input id="email" name="email" type="email" placeholder="Email" required aria-label="Email" autocomplete="email" aria-describedby="emailError" aria-invalid="false" />
+            <button type="button" id="copyEmailBtn" class="copy-email-btn" aria-label="Copy email address" tabindex="0"><i class="fa-solid fa-copy"></i></button>
           </div>
           <div class="form-group">
-            <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" aria-label="Phone" autocomplete="tel" aria-describedby="phoneError" pattern="^[0-9+\-\s().]{7,}$" />
+            <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" aria-label="Phone" autocomplete="tel" aria-describedby="phoneError" pattern="^[0-9+\-\s().]{7,}$" aria-invalid="false" />
           </div>
           <div class="form-group">
-            <textarea id="message" name="message" placeholder="Message" required aria-label="Message" aria-describedby="messageError"></textarea>
+            <textarea id="message" name="message" placeholder="Message" required aria-label="Message" aria-describedby="messageError" aria-invalid="false"></textarea>
           </div>
           <button type="submit" class="btn btn-primary" id="submitBtn">
             <span id="submitBtnText">Send</span>
             <span id="submitSpinner" class="spinner" aria-hidden="true" style="display:none;"></span>
           </button>
-          <div id="formStatus" role="status" aria-live="polite"></div>
+          <div id="formStatus" role="status" aria-live="polite" aria-busy="false"></div>
         </form>
         <!-- Modal for form submission feedback -->
         <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" tabindex="-1" style="display:none;">
           <div class="modal-content">
             <h3 id="modalTitle">Thank you!</h3>
             <p id="modalDesc">Your message has been sent. We’ll get back to you soon.</p>
-            <button id="closeModalBtn" class="btn btn-primary" aria-label="Close dialog">Close</button>
+            <button id="closeModalBtn" class="btn btn-primary" aria-label="Close dialog" type="button">Close</button>
           </div>
         </div>
         <div id="modalOverlay" class="modal-overlay" tabindex="-1" style="display:none;"></div>
@@ -124,6 +165,30 @@
       </div>
     </section>
   </main>
+  <!-- Sticky CTA for mobile -->
+  <a href="#contact" class="sticky-cta" id="stickyCta" aria-label="Request a Quote">
+    <i class="fa-solid fa-envelope"></i> Request a Quote
+  </a>
+  <!-- WhatsApp floating button -->
+  <a href="https://wa.me/11234567890" class="whatsapp-btn" id="whatsappBtn" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  <!-- Keyboard help modal -->
+  <div id="helpModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="helpModalTitle" aria-describedby="helpModalDesc" tabindex="-1" style="display:none;">
+    <div class="modal-content">
+      <h3 id="helpModalTitle">Keyboard Shortcuts</h3>
+      <ul id="helpModalDesc" style="text-align:left;">
+        <li><b>?</b>: Show this help</li>
+        <li><b>Alt+1</b>: Go to About</li>
+        <li><b>Alt+2</b>: Go to Services</li>
+        <li><b>Alt+3</b>: Go to Projects</li>
+        <li><b>Alt+4</b>: Go to Testimonials</li>
+        <li><b>Alt+5</b>: Go to Contact</li>
+        <li><b>Esc</b>: Close modals</li>
+      </ul>
+      <button id="closeHelpModalBtn" class="btn btn-primary" aria-label="Close help dialog" type="button">Close</button>
+    </div>
+  </div>
   <footer class="site-footer">
     <div>
       © <span id="year"></span> Allied Construction • Chicago, IL
