@@ -54,7 +54,14 @@ function backToTop() {
     }
   }
   window.addEventListener('scroll', onScroll);
-  if (btn) btn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+  if (btn) {
+    btn.onclick = () => {
+      window.scrollTo({top:0,behavior:'smooth'});
+      btn.setAttribute('aria-live', 'polite');
+      btn.setAttribute('aria-label', 'Returned to top');
+      setTimeout(() => btn.setAttribute('aria-label', 'Back to top'), 1200);
+    };
+  }
 }
 
 // Mobile Nav (ARIA expanded, keyboard accessible, focus trap)
@@ -119,7 +126,27 @@ function mobileNav() {
   });
 }
 
-// Highlight active nav link on scroll
+// Enhanced: Animate scroll indicator arrow
+function animateScrollIndicator() {
+  const indicator = document.querySelector('.scroll-indicator span');
+  if (!indicator) return;
+  let anim;
+  function pulse() {
+    indicator.style.boxShadow = '0 0 0 8px rgba(251,191,36,0.13)';
+    anim = setTimeout(() => {
+      indicator.style.boxShadow = '';
+      anim = setTimeout(pulse, 1200);
+    }, 800);
+  }
+  pulse();
+  // Stop animation if prefers-reduced-motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    clearTimeout(anim);
+    indicator.style.boxShadow = '';
+  }
+}
+
+// Improved navHighlight for better section detection
 function navHighlight() {
   const sections = ['about', 'services', 'projects', 'contact'];
   const navLinks = Array.from(document.querySelectorAll('#menu a'));
@@ -127,7 +154,10 @@ function navHighlight() {
     let current = '';
     for (const id of sections) {
       const el = document.getElementById(id);
-      if (el && window.scrollY + 120 >= el.offsetTop) current = id;
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom > 120) current = id;
+      }
     }
     navLinks.forEach(link => {
       if (link.getAttribute('href') === `#${current}`) {
@@ -161,7 +191,24 @@ function smoothScroll() {
   });
 }
 
-// Animate stats numbers when visible (IntersectionObserver, reduced motion support)
+// Add reduced motion support
+function prefersReducedMotion() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.body.classList.add('reduced-motion');
+  }
+}
+
+// Keyboard shortcut for theme toggle (Alt+T)
+function themeShortcut() {
+  document.addEventListener('keydown', function(e) {
+    if ((e.altKey || e.ctrlKey) && e.key.toLowerCase() === 't') {
+      const btn = document.getElementById('themeToggle');
+      if (btn) btn.click();
+    }
+  });
+}
+
+// Animate .stats numbers with bounce at end
 function animateStats() {
   const stats = [
     { id: 'years', end: 30, suffix: '+', duration: 1200 },
@@ -181,7 +228,13 @@ function animateStats() {
       const value = Math.floor(progress * (end - start) + start);
       el.textContent = value + suffix;
       if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = end + suffix;
+      else {
+        el.textContent = end + suffix;
+        el.animate([
+          { transform: 'scale(1.1)', color: '#fbbf24' },
+          { transform: 'scale(1)', color: '' }
+        ], { duration: 250, easing: 'cubic-bezier(.4,0,.2,1)' });
+      }
     }
     requestAnimationFrame(step);
   }
@@ -217,14 +270,17 @@ function animateStats() {
   }
 }
 
-// Section fade-in on scroll (IntersectionObserver)
+// Animate section fade-in with staggered delay
 function sectionFadeIn() {
   const sections = document.querySelectorAll('main section, .cta-banner, #testimonials');
   if ('IntersectionObserver' in window) {
+    let delay = 0;
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          entry.target.style.transitionDelay = `${delay * 0.08}s`;
+          delay++;
           observer.unobserve(entry.target);
         }
       });
@@ -242,6 +298,21 @@ function sectionFadeIn() {
     window.addEventListener('scroll', reveal);
     reveal();
   }
+}
+
+// Header/footer shadow on scroll
+function headerFooterShadow() {
+  const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      if (header) header.classList.add('scrolled');
+      if (footer) footer.classList.add('scrolled');
+    } else {
+      if (header) header.classList.remove('scrolled');
+      if (footer) footer.classList.remove('scrolled');
+    }
+  });
 }
 
 // Gallery images fade-in effect
@@ -363,4 +434,8 @@ ready(() => {
   contactForm();
   skipLinkFocus();
   enhanceCTA();
+  animateScrollIndicator();
+  prefersReducedMotion();
+  themeShortcut();
+  headerFooterShadow();
 });

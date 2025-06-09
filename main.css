@@ -345,6 +345,11 @@ section.visible {
   object-fit: cover;
   transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform .18s, box-shadow .18s;
   opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: none;}
 }
 .gallery img[style*="opacity: 1"] {
   opacity: 1 !important;
@@ -602,8 +607,8 @@ footer:hover, footer:focus-within {
 
 /* Improved color contrast for dark mode */
 body.dark {
-  --bg: #181e2a;
-  --surface: #232b3b;
+  --bg: #111827;
+  --surface: #1e293b;
   --text: #f3f4f6;
   --card-gradient: linear-gradient(120deg, #232b3b 0%, #1d253a 100%);
   --primary: #60a5fa;
@@ -611,102 +616,112 @@ body.dark {
   --danger: #fb7185;
   --success: #22d3ee;
 }
-
-/* Enhanced focus ring for accessibility */
-:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px var(--accent), 0 2px 8px rgba(37,99,235,0.09);
+body.dark .card, body.dark .hero, body.dark #testimonials, body.dark .cta-banner, body.dark form#contactForm {
+  background: rgba(30,41,59,0.92);
+  color: #f3f4f6;
+  border-color: #334155;
 }
-
-/* Reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+body.dark .btn {
+  background: var(--accent);
+  color: #232b3b;
 }
-
-@media (max-width: 700px) {
-  main { padding: 1rem 0.3rem; }
-  .hero { padding: 2rem 0.5rem 1.2rem 0.5rem; }
-  .stats { flex-direction: column; gap: 0.7rem; }
-  .cards, .gallery { grid-template-columns: 1fr; }
-  form#contactForm { max-width: 100%; }
-}
-@media (max-width: 500px) {
-  .hero h1 { font-size: 1.3rem; }
-  h2 { font-size: 1.05rem; }
-}
-
-/* Section divider */
-.section-divider {
-  width: 100%;
-  max-width: 900px;
-  margin: 2.5rem auto 2rem auto;
-  border-bottom: 1.5px dashed #e0e7ff;
-  opacity: 0.7;
-}
-@media (max-width: 700px) {
-  .section-divider { margin: 1.5rem auto 1rem auto; }
-}
-
-/* Testimonials */
-#testimonials {
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 2rem 1.2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.testimonials {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.testimonials blockquote {
-  background: var(--card-gradient);
-  border-radius: var(--radius);
-  box-shadow: 0 2px 12px rgba(37,99,235,0.07);
-  padding: 1.2rem 1rem 1rem 1rem;
-  margin: 0 0 1rem 0;
-  font-style: italic;
+body.dark .btn:hover, body.dark .btn:focus {
+  background: #fff;
   color: var(--primary);
-  max-width: 340px;
-  border-left: 4px solid var(--accent);
-  position: relative;
-}
-.testimonials blockquote footer {
-  font-size: 0.98rem;
-  color: #64748b;
-  font-style: normal;
-  margin-top: 0.7em;
-  font-weight: 600;
-}
-@media (max-width: 700px) {
-  .testimonials { flex-direction: column; gap: 1rem; }
 }
 
-/* CTA Banner */
-.cta-banner {
-  background: linear-gradient(90deg, var(--primary) 0%, #0A66C2 100%);
-  color: #fff;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  text-align: center;
-  padding: 2.2rem 1rem 2rem 1rem;
-  margin: 2.5rem 0 0 0;
-  position: relative;
-  overflow: hidden;
+/* Glassmorphism for cards, hero, testimonials, CTA, and form */
+.card, .hero, #testimonials, .cta-banner, form#contactForm {
+  backdrop-filter: blur(3px) saturate(1.1);
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.10);
 }
-.cta-banner h2 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  margin-bottom: 1.2rem;
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+/* Animated underline for nav links */
+#menu li a {
+  position: relative;
+}
+#menu li a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 25%;
+  bottom: 6px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(.4,0,.2,1), left 0.3s cubic-bezier(.4,0,.2,1);
+}
+#menu li a:hover::after, #menu li a:focus::after {
+  width: 50%;
+  left: 25%;
+}
+
+/* Button glow on hover/focus */
+.btn:hover, .btn:focus {
+  box-shadow: 0 4px 18px 0 rgba(251,191,36,0.18), 0 0 0 4px #fbbf2433;
+  background: #fff;
+  color: var(--primary);
+}
+
+/* Card hover/focus effect */
+.card {
+  transition: box-shadow var(--transition), transform .18s, background 0.22s;
+}
+.card:hover, .card:focus {
+  background: linear-gradient(120deg, #fbbf24 0%, #e0e7ff 100%);
+  color: var(--primary);
+  box-shadow: 0 8px 32px rgba(251,191,36,0.13);
+  transform: translateY(-4px) scale(1.04);
+}
+
+/* Hero h1 glow */
+.hero h1 {
+  text-shadow: 0 2px 16px rgba(251,191,36,0.13), 0 2px 8px rgba(0,0,0,0.07);
+}
+
+/* CTA banner animated border */
+.cta-banner {
+  border: 2.5px solid transparent;
+  background-clip: padding-box;
+  animation: ctaBorder 3s linear infinite alternate;
+}
+@keyframes ctaBorder {
+  0% { border-color: var(--primary);}
+  100% { border-color: var(--accent);}
+}
+
+/* Gallery images fade-in-up animation */
+.gallery img {
+  animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: none;}
+}
+
+/* Stats strong pulse on hover/focus */
+.stats strong:hover, .stats strong:focus {
+  animation: pulseStat 0.7s;
+}
+@keyframes pulseStat {
+  0% { color: var(--accent);}
+  50% { color: var(--primary);}
+  100% { color: var(--accent);}
+}
+
+/* Subtle shadow for header and footer on scroll */
+header, footer {
+  transition: box-shadow 0.3s;
+}
+header.scrolled, footer.scrolled {
+  box-shadow: 0 4px 24px rgba(37,99,235,0.15);
+}
+
+/* Responsive tweaks for very small screens */
+@media (max-width: 400px) {
+  .hero, .cta-banner, #testimonials, form#contactForm {
+    padding: 1rem 0.3rem;
+  }
 }
