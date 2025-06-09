@@ -32,13 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const open = !menu.classList.contains('open');
     menu.classList.toggle('open', open);
     hamburger.setAttribute('aria-expanded', open);
+    if (open) {
+      menu.querySelector('a').focus();
+    }
   });
   menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
     menu.classList.remove('open');
     hamburger.setAttribute('aria-expanded', false);
   }));
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 700) {
+    if (window.innerWidth > 800) {
       menu.classList.remove('open');
       hamburger.setAttribute('aria-expanded', false);
     }
@@ -56,6 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Smooth scroll for anchor links
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href').slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.focus({ preventScroll: true });
+      }
+    });
+  });
+});
+
 // Simple contact form validation
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm');
@@ -66,10 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
-    if (!name) { status.textContent = 'Name is required.'; return; }
-    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.textContent = 'Enter a valid email.'; return; }
-    if (!message) { status.textContent = 'Message is required.'; return; }
+    if (!name) { status.textContent = 'Name is required.'; status.classList.remove('success'); return; }
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { status.textContent = 'Enter a valid email.'; status.classList.remove('success'); return; }
+    if (!message) { status.textContent = 'Message is required.'; status.classList.remove('success'); return; }
     status.textContent = 'Sending...';
+    status.classList.remove('success');
     try {
       const response = await fetch('https://formspree.io/f/mnqekgqj', {
         method: 'POST',

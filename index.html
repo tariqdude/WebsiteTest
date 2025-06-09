@@ -11,70 +11,104 @@
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
-  <header>
-    <nav>
-      <span class="logo">Allied Construction</span>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="nav-brand">
+        <span class="logo">Allied Construction</span>
+      </div>
       <button id="themeToggle" aria-label="Toggle light/dark mode"><i class="fa-solid fa-sun"></i></button>
-      <button id="hamburger" aria-label="Menu" aria-controls="menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-      <ul id="menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <button id="hamburger" aria-label="Open menu" aria-controls="menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      <ul id="menu" class="nav-menu">
+        <li><a href="#about" tabindex="0">About</a></li>
+        <li><a href="#services" tabindex="0">Services</a></li>
+        <li><a href="#testimonials" tabindex="0">Testimonials</a></li>
+        <li><a href="#contact" tabindex="0">Contact</a></li>
       </ul>
     </nav>
   </header>
-  <main id="main">
+  <main id="main" tabindex="-1">
     <section class="hero">
-      <div>
+      <div class="hero-content">
         <h1>Build Better. Build Allied.</h1>
         <p>Chicago’s trusted design-build partner for commercial, industrial, and residential projects.</p>
-        <a href="#contact" class="btn">Get a Quote</a>
+        <a href="#contact" class="btn btn-primary">Get a Quote</a>
       </div>
     </section>
-    <section id="about">
-      <h2>About Us</h2>
-      <p>Since 1995, Allied Construction has delivered quality, safety, and sustainability in every project. We focus on clear communication, reliability, and results.</p>
-    </section>
-    <section id="services">
-      <h2>Our Services</h2>
-      <div class="cards">
-        <div class="card"><i class="fa-solid fa-city"></i><h3>Commercial</h3></div>
-        <div class="card"><i class="fa-solid fa-house"></i><h3>Residential</h3></div>
-        <div class="card"><i class="fa-solid fa-screwdriver-wrench"></i><h3>HVAC</h3></div>
-        <div class="card"><i class="fa-solid fa-solar-panel"></i><h3>Sustainable</h3></div>
+    <section id="about" class="about-section">
+      <div class="section-content">
+        <h2>About Us</h2>
+        <p>Since 1995, Allied Construction has delivered quality, safety, and sustainability in every project. We focus on clear communication, reliability, and results.</p>
       </div>
     </section>
-    <section id="testimonials">
-      <h2>What Clients Say</h2>
-      <div class="testimonial-cards">
-        <div class="testimonial-card">
-          <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
-          <span class="testimonial-meta">– John D.</span>
-        </div>
-        <div class="testimonial-card">
-          <p>“From start to finish, the Allied team was communicative and reliable. Highly recommended!”</p>
-          <span class="testimonial-meta">– Sarah K.</span>
-        </div>
-        <div class="testimonial-card">
-          <p>“Their sustainable solutions helped us save on energy costs. We’ll work with them again.”</p>
-          <span class="testimonial-meta">– Mike R.</span>
+    <section id="services" class="services-section">
+      <div class="section-content">
+        <h2>Our Services</h2>
+        <div class="cards">
+          <div class="card">
+            <i class="fa-solid fa-city"></i>
+            <h3>Commercial</h3>
+            <p>Office, retail, and industrial spaces built to the highest standards.</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-house"></i>
+            <h3>Residential</h3>
+            <p>Custom homes, renovations, and luxury living solutions.</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <h3>HVAC</h3>
+            <p>Efficient, reliable heating and cooling for every environment.</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-solar-panel"></i>
+            <h3>Sustainable</h3>
+            <p>Green building, solar, and energy-saving solutions.</p>
+          </div>
         </div>
       </div>
     </section>
-    <section id="contact">
-      <h2>Contact</h2>
-      <form id="contactForm" autocomplete="off" novalidate>
-        <input id="name" name="name" placeholder="Your Name" required />
-        <input id="email" name="email" type="email" placeholder="Email" required />
-        <textarea id="message" name="message" placeholder="Message" required></textarea>
-        <button type="submit" class="btn">Send</button>
-        <div id="formStatus" role="status" aria-live="polite"></div>
-      </form>
+    <section id="testimonials" class="testimonials-section">
+      <div class="section-content">
+        <h2>What Clients Say</h2>
+        <div class="testimonial-cards">
+          <div class="testimonial-card">
+            <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
+            <span class="testimonial-meta">– John D.</span>
+          </div>
+          <div class="testimonial-card">
+            <p>“From start to finish, the Allied team was communicative and reliable. Highly recommended!”</p>
+            <span class="testimonial-meta">– Sarah K.</span>
+          </div>
+          <div class="testimonial-card">
+            <p>“Their sustainable solutions helped us save on energy costs. We’ll work with them again.”</p>
+            <span class="testimonial-meta">– Mike R.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="contact-section">
+      <div class="section-content">
+        <h2>Contact</h2>
+        <form id="contactForm" autocomplete="off" novalidate>
+          <div class="form-group">
+            <input id="name" name="name" placeholder="Your Name" required aria-label="Your Name" />
+          </div>
+          <div class="form-group">
+            <input id="email" name="email" type="email" placeholder="Email" required aria-label="Email" />
+          </div>
+          <div class="form-group">
+            <textarea id="message" name="message" placeholder="Message" required aria-label="Message"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+          <div id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
     </section>
   </main>
-  <footer>
-    © <span id="year"></span> Allied Construction • Chicago, IL
+  <footer class="site-footer">
+    <div>
+      © <span id="year"></span> Allied Construction • Chicago, IL
+    </div>
   </footer>
   <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
   <script src="main.js" defer></script>
