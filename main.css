@@ -254,6 +254,11 @@ section {
   transform: translateY(30px);
   transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
 }
+section.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
 @keyframes fadeInSection {
   from { opacity: 0; transform: translateY(20px);}
   to { opacity: 1; transform: none;}
@@ -304,7 +309,11 @@ section {
   box-shadow: 0 4px 18px rgba(0,0,0,0.07);
   aspect-ratio: 3/2;
   object-fit: cover;
-  transition: transform .18s, box-shadow .18s;
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform .18s, box-shadow .18s;
+  opacity: 0;
+}
+.gallery img[style*="opacity: 1"] {
+  opacity: 1 !important;
 }
 .gallery img:hover, .gallery img:focus {
   transform: scale(1.04) rotate(-1deg);
@@ -557,10 +566,23 @@ footer:hover, footer:focus-within {
   transition: background 0.22s, color 0.22s;
 }
 
+/* Improved color contrast for dark mode */
+body.dark {
+  --bg: #181e2a;
+  --surface: #232b3b;
+  --text: #f3f4f6;
+  --card-gradient: linear-gradient(120deg, #232b3b 0%, #1d253a 100%);
+  --primary: #60a5fa;
+  --accent: #fbbf24;
+  --danger: #fb7185;
+  --success: #22d3ee;
+}
+
 /* Enhanced focus ring for accessibility */
 :focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
+  box-shadow: 0 0 0 3px var(--accent), 0 2px 8px rgba(37,99,235,0.09);
 }
 
 /* Reduced motion for accessibility */
@@ -583,10 +605,4 @@ footer:hover, footer:focus-within {
 @media (max-width: 500px) {
   .hero h1 { font-size: 1.3rem; }
   h2 { font-size: 1.05rem; }
-}
-body.dark {
-  --bg: #181e2a;
-  --surface: #232b3b;
-  --text: #f3f4f6;
-  --card-gradient: linear-gradient(120deg, #232b3b 0%, #1d253a 100%);
 }
