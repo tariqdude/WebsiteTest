@@ -20,10 +20,10 @@
   <header role="banner">
     <nav role="navigation" aria-label="Main navigation">
       <span class="logo" tabindex="0">Allied Construction</span>
-      <button id="themeToggle" aria-label="Toggle light/dark mode" aria-pressed="false"><i class="fa-solid fa-sun"></i></button>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      <button id="themeToggle" aria-label="Toggle light/dark mode" aria-pressed="false" tabindex="0"><i class="fa-solid fa-sun"></i></button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="menu" aria-expanded="false" tabindex="0"><i class="fa-solid fa-bars"></i></button>
       <ul id="menu" role="menubar">
-        <li role="none"><a role="menuitem" href="#about">About</a></li>
+        <li role="none"><a role="menuitem" href="#about" aria-current="page">About</a></li>
         <li role="none"><a role="menuitem" href="#services">Services</a></li>
         <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
         <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
@@ -35,8 +35,8 @@
       <div>
         <h1>Building Your Vision.<br>Engineering Your Future.</h1>
         <p>We deliver award-winning construction solutions across Chicagoland.</p>
-        <a href="#contact" class="btn" aria-label="Request a Quote">Request a Quote</a>
-        <div class="stats" aria-label="Company statistics">
+        <a href="#contact" class="btn" aria-label="Request a Quote" tabindex="0">Request a Quote</a>
+        <div class="stats" aria-label="Company statistics" aria-live="polite">
           <div><strong id="years">30+</strong>Years</div>
           <div><strong id="projects">150</strong>Projects</div>
           <div><strong id="safety">0</strong>Safety Issues</div>
@@ -50,30 +50,30 @@
     <section id="services" aria-labelledby="services-heading">
       <h2 id="services-heading">Services</h2>
       <div class="cards">
-        <div class="card"><i class="fa-solid fa-city" aria-hidden="true"></i><h3>Commercial</h3></div>
-        <div class="card"><i class="fa-solid fa-house" aria-hidden="true"></i><h3>Residential</h3></div>
-        <div class="card"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><h3>HVAC</h3></div>
-        <div class="card"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i><h3>Sustainable</h3></div>
+        <div class="card" tabindex="0"><i class="fa-solid fa-city" aria-hidden="true"></i><h3>Commercial</h3></div>
+        <div class="card" tabindex="0"><i class="fa-solid fa-house" aria-hidden="true"></i><h3>Residential</h3></div>
+        <div class="card" tabindex="0"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><h3>HVAC</h3></div>
+        <div class="card" tabindex="0"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i><h3>Sustainable</h3></div>
       </div>
     </section>
     <section id="projects" aria-labelledby="projects-heading">
       <h2 id="projects-heading">Projects</h2>
       <div class="gallery">
-        <img src="https://source.unsplash.com/random/600x400?construction" alt="Modern construction project in Chicago" loading="lazy" />
-        <img src="https://source.unsplash.com/random/600x400?office" alt="Office building completed by Allied Construction" loading="lazy" />
-        <img src="https://source.unsplash.com/random/600x400?renovation" alt="Renovation project by Allied Construction" loading="lazy" />
+        <img src="https://source.unsplash.com/random/600x400?construction" alt="Modern construction project in Chicago" loading="lazy" tabindex="0" />
+        <img src="https://source.unsplash.com/random/600x400?office" alt="Office building completed by Allied Construction" loading="lazy" tabindex="0" />
+        <img src="https://source.unsplash.com/random/600x400?renovation" alt="Renovation project by Allied Construction" loading="lazy" tabindex="0" />
       </div>
     </section>
     <section id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Contact</h2>
       <form id="contactForm" autocomplete="off" novalidate aria-describedby="formStatus">
         <label for="name" class="visually-hidden">Your Name</label>
-        <input id="name" name="name" placeholder="Your Name" required aria-required="true" />
+        <input id="name" name="name" placeholder="Your Name" required aria-required="true" tabindex="0" />
         <label for="email" class="visually-hidden">Email</label>
-        <input id="email" name="email" type="email" placeholder="Email" required aria-required="true" />
+        <input id="email" name="email" type="email" placeholder="Email" required aria-required="true" tabindex="0" />
         <label for="message" class="visually-hidden">Message</label>
-        <textarea id="message" name="message" placeholder="Message" required aria-required="true"></textarea>
-        <button type="submit" class="btn">Send</button>
+        <textarea id="message" name="message" placeholder="Message" required aria-required="true" tabindex="0"></textarea>
+        <button type="submit" class="btn" tabindex="0">Send</button>
         <div id="formStatus" role="status" aria-live="polite"></div>
       </form>
     </section>
@@ -81,7 +81,7 @@
   <footer role="contentinfo">
     © <span id="year"></span> Allied Construction • Chicago, IL
   </footer>
-  <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+  <button id="topBtn" aria-label="Back to top" tabindex="0"><i class="fa-solid fa-arrow-up"></i></button>
   <script src="main.js" defer></script>
 </body>
 </html>

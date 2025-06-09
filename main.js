@@ -81,7 +81,87 @@ const App = {
     });
   },
 
-  // Contact Form Validation and Feedback (improved)
+  // Highlight active nav link on scroll
+  navHighlight() {
+    const sections = ['about', 'services', 'projects', 'contact'];
+    const navLinks = Array.from(document.querySelectorAll('#menu a'));
+    function onScroll() {
+      let current = '';
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY + 120 >= el.offsetTop) current = id;
+      }
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${current}`) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  },
+
+  // Smooth scroll for anchor links (with offset for sticky header)
+  smoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          const yOffset = window.innerWidth > 700 ? 70 : 56;
+          const y = target.getBoundingClientRect().top + window.pageYOffset - yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          setTimeout(() => {
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
+          }, 400);
+        }
+      });
+    });
+  },
+
+  // Animate stats numbers when visible
+  animateStats() {
+    const stats = [
+      { id: 'years', end: 30, suffix: '+', duration: 1200 },
+      { id: 'projects', end: 150, suffix: '', duration: 1200 },
+      { id: 'safety', end: 0, suffix: '', duration: 1200 }
+    ];
+    let animated = false;
+    function animateValue(el, end, suffix, duration) {
+      let start = 0, startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        const progress = Math.min((ts - startTime) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        el.textContent = value + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = end + suffix;
+      }
+      requestAnimationFrame(step);
+    }
+    function onScroll() {
+      if (animated) return;
+      const statsDiv = document.querySelector('.stats');
+      if (!statsDiv) return;
+      const rect = statsDiv.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 80) {
+        stats.forEach(s => {
+          const el = document.getElementById(s.id);
+          if (el) animateValue(el, s.end, s.suffix, s.duration);
+        });
+        animated = true;
+        window.removeEventListener('scroll', onScroll);
+      }
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  },
+
+  // Contact Form Validation and Feedback (improved, ARIA live region)
   contactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
@@ -99,10 +179,14 @@ const App = {
       if (!valid) {
         status.textContent = errorMsg;
         status.setAttribute('aria-live', 'assertive');
+        status.classList.remove('success');
+        status.style.color = '';
         return false;
       }
       status.textContent = 'Sending...';
       status.setAttribute('aria-live', 'polite');
+      status.classList.remove('success');
+      status.style.color = '';
       try {
         const response = await fetch('https://formspree.io/f/mnqekgqj', {
           method: 'POST',
@@ -111,12 +195,17 @@ const App = {
         });
         if (response.ok) {
           status.textContent = 'Thank you! We will be in touch soon.';
+          status.classList.add('success');
           form.reset();
         } else {
           status.textContent = 'There was an error. Please try again.';
+          status.setAttribute('aria-live', 'assertive');
+          status.classList.remove('success');
         }
       } catch {
         status.textContent = 'There was an error. Please try again.';
+        status.setAttribute('aria-live', 'assertive');
+        status.classList.remove('success');
       }
     };
   }
@@ -128,16 +217,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if (skip) {
     skip.addEventListener('click', e => {
       const main = document.getElementById('home');
-      if (main) main.focus();
-    });
-  }
-});
-
-App.ready(() => {
-  App.loader();
-  App.year();
-  App.theme();
-  App.backToTop();
-  App.mobileNav();
-  App.contactForm();
-});
+      if
