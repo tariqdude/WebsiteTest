@@ -190,7 +190,7 @@
       </div>
     </section>
     <!-- Awards -->
-    <section id="awards" data-animate>
+    <section id="awards" data-animate aria-live="polite">
       <div class="container">
         <h2>Awards & Certifications</h2>
         <div class="awards">
@@ -206,26 +206,26 @@
       <div class="container">
         <h2>What Our Clients Say</h2>
         <div class="carousel" tabindex="0" aria-live="off" role="list">
-          <div class="card" role="listitem"><blockquote>Allied transformed our outdated warehouse into a cutting-edge HQ—on schedule and under budget.</blockquote><strong>— J. Martinez, CEO, TechEdge</strong></div>
-          <div class="card" role="listitem"><blockquote>Professional, transparent, and meticulous. We couldn't be happier with our new home addition.</blockquote><strong>— S. Patel, Homeowner</strong></div>
-          <div class="card" role="listitem"><blockquote>The team handled everything—permits, inspections, and a flawless LEED certification.</blockquote><strong>— L. Chen, Facility Manager, GreenWorks</strong></div>
+          <div class="card" role="listitem" aria-hidden="false"><blockquote>Allied transformed our outdated warehouse into a cutting-edge HQ—on schedule and under budget.</blockquote><strong>— J. Martinez, CEO, TechEdge</strong></div>
+          <div class="card" role="listitem" aria-hidden="true"><blockquote>Professional, transparent, and meticulous. We couldn't be happier with our new home addition.</blockquote><strong>— S. Patel, Homeowner</strong></div>
+          <div class="card" role="listitem" aria-hidden="true"><blockquote>The team handled everything—permits, inspections, and a flawless LEED certification.</blockquote><strong>— L. Chen, Facility Manager, GreenWorks</strong></div>
         </div>
         <nav class="carousel-indicators" aria-label="Testimonial navigation" role="navigation">
-          <button data-slide="0" aria-label="Show testimonial 1" data-selected="true"></button>
-          <button data-slide="1" aria-label="Show testimonial 2" data-selected="false"></button>
-          <button data-slide="2" aria-label="Show testimonial 3" data-selected="false"></button>
+          <button data-slide="0" aria-label="Show testimonial 1" data-selected="true" aria-selected="true"></button>
+          <button data-slide="1" aria-label="Show testimonial 2" data-selected="false" aria-selected="false"></button>
+          <button data-slide="2" aria-label="Show testimonial 3" data-selected="false" aria-selected="false"></button>
         </nav>
       </div>
     </section>
     <!-- FAQ -->
-    <section id="faq" class="faq container" data-animate>
+    <section id="faq" class="faq container" data-animate aria-live="polite">
       <h2>Frequently Asked Questions</h2>
       <details><summary>Are you licensed, bonded, and insured?</summary><p>Absolutely. We hold all required state & city licenses, carry multi-million-dollar liability coverage, and are fully bonded.</p></details>
       <details><summary>Do you offer free estimates?</summary><p>Yes, schedule a site visit and we'll provide a detailed, no-obligation quote.</p></details>
       <details><summary>How do you handle change orders?</summary><p>Changes are documented with transparent pricing and only proceed upon written client approval.</p></details>
     </section>
     <!-- Blog/News Section -->
-    <section class="blog" id="blog" data-animate>
+    <section class="blog" id="blog" data-animate aria-live="polite">
       <div class="container">
         <h2>Latest News</h2>
         <div class="blog-list">
@@ -243,7 +243,7 @@
       </div>
     </section>
     <!-- Social Media Feed Placeholder -->
-    <div class="social-feed" data-animate>
+    <div class="social-feed" data-animate aria-hidden="true">
       <div class="feed-placeholder">[Instagram feed coming soon]</div>
     </div>
     <!-- Contact -->
@@ -259,12 +259,12 @@
             </div>
             <div class="form-group">
               <label for="name" class="visually-hidden">Your Name</label>
-              <input id="name" name="name" type="text" placeholder="Your Name" required autocomplete="name" aria-describedby="nameError">
+              <input id="name" name="name" type="text" placeholder="Your Name" required autocomplete="name" aria-describedby="nameError" aria-invalid="false">
               <span class="error-tooltip" id="nameError"></span>
             </div>
             <div class="form-group">
               <label for="email" class="visually-hidden">Email</label>
-              <input id="email" name="email" type="email" placeholder="Email" required autocomplete="email" aria-describedby="emailError">
+              <input id="email" name="email" type="email" placeholder="Email" required autocomplete="email" aria-describedby="emailError" aria-invalid="false">
               <span class="error-tooltip" id="emailError"></span>
             </div>
             <div class="form-group">
@@ -273,7 +273,7 @@
             </div>
             <div class="form-group">
               <label for="message" class="visually-hidden">Project details</label>
-              <textarea id="message" name="message" rows="4" placeholder="Project details…" required aria-describedby="messageError"></textarea>
+              <textarea id="message" name="message" rows="4" placeholder="Project details…" required aria-describedby="messageError" aria-invalid="false"></textarea>
               <span class="error-tooltip" id="messageError"></span>
             </div>
             <button type="submit" class="btn" aria-busy="false"><span id="submitText">Send Message</span></button>
@@ -293,36 +293,86 @@
   <!-- =========================
        Sticky Mobile CTA
   ========================== -->
-  <div id="stickyCTA" role="complementary" aria-label="Quick contact">
+  <div id="stickyCTA" role="complementary" aria-label="Quick contact" aria-live="polite">
     <span>Need a quote?</span>
-    <a href="#contact">Get in touch</a>
+    <a href="#contact" class="cta-link" tabindex="0">Get in touch</a>
   </div>
 
   <!-- =========================
        Footer
   ========================== -->
   <footer role="contentinfo">
-    © <span id="year"></span> Allied Construction •
+    © <span id="year" aria-live="polite"></span> Allied Construction •
     <a href="tel:+13125551234">312-555-1234</a> • Chicago, IL
+    <span class="footer-social">
+      <a href="https://twitter.com/alliedconstruction" aria-label="Twitter" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
+      <a href="https://www.linkedin.com/company/alliedconstruction" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
+    </span>
   </footer>
 
   <!-- =========================
        Back-to-top Button
   ========================== -->
-  <button id="topBtn" aria-label="Back to top" type="button">
+  <button id="topBtn" aria-label="Back to top" type="button" aria-live="polite">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
   <!-- =========================
        Chat Widget Placeholder
   ========================== -->
-  <div id="chatWidget" aria-label="Open chat support">
+  <div id="chatWidget" aria-label="Open chat support" tabindex="0" aria-live="polite">
     <i class="fa-solid fa-comments"></i> Chat with us
+    <span class="chat-status" aria-live="polite"></span>
   </div>
 
   <!-- =========================
        Main Scripts
   ========================== -->
   <script src="main.js" defer></script>
+  <script>
+    // Prefetch gallery images for smoother UX (already present)
+    document.addEventListener('DOMContentLoaded', function() {
+      const galleryImgs = [
+        "https://source.unsplash.com/random/1200x800?industrial-construction",
+        "https://source.unsplash.com/random/1200x800?modern-office",
+        "https://source.unsplash.com/random/1200x800?residential-renovation",
+        "https://source.unsplash.com/random/1200x800?solar-panel-roof"
+      ];
+      galleryImgs.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    });
+
+    // Improvement: Lazy load all images except those in the hero section
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('img:not(.hero img)').forEach(img => {
+        if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+      });
+    });
+
+    // Improvement: Announce when chat widget is focused for accessibility
+    document.addEventListener('DOMContentLoaded', function() {
+      const chatWidget = document.getElementById('chatWidget');
+      if (chatWidget) {
+        chatWidget.addEventListener('focus', () => {
+          const status = chatWidget.querySelector('.chat-status');
+          if (status) status.textContent = 'Chat support coming soon.';
+        });
+        chatWidget.addEventListener('blur', () => {
+          const status = chatWidget.querySelector('.chat-status');
+          if (status) status.textContent = '';
+        });
+      }
+    });
+
+    // Improvement: Keyboard shortcut for back-to-top (Alt+U)
+    document.addEventListener('keydown', function(e) {
+      if ((e.altKey || e.ctrlKey) && (e.key === 'u' || e.key === 'U')) {
+        const btn = document.getElementById('topBtn');
+        if (btn) btn.click();
+      }
+    });
+  </script>
 </body>
 </html>
