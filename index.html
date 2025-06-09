@@ -5,182 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Allied Construction | Chicago Design-Build Firm</title>
   <meta name="description" content="Allied Construction is Chicago’s award‑winning design‑build firm for commercial, industrial & high‑end residential projects." />
-  <meta name="theme-color" content="#1d4ed8" />
-  <meta property="og:title" content="Allied Construction | Chicago Design-Build Firm" />
-  <meta property="og:description" content="Allied Construction is Chicago’s award‑winning design‑build firm for commercial, industrial & high‑end residential projects." />
-  <meta property="og:image" content="https://source.unsplash.com/random/600x400?construction" />
-  <meta property="og:type" content="website" />
-  <link rel="icon" href="/icon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="main.css" />
 </head>
 <body>
-  <!-- Animated Gradient Background -->
-  <div class="animated-bg" aria-hidden="true"></div>
-  <!-- Loader Overlay -->
-  <div id="pageloader" aria-hidden="true">
-    <span class="loader" aria-label="Loading"></span>
-    <noscript>
-      <style>
-        #pageloader { display: none !important; }
-      </style>
-    </noscript>
-  </div>
-  <!-- Skip to main content for accessibility -->
-  <a href="#home" class="skip-link">Skip to main content</a>
-  <header role="banner">
-    <nav role="navigation" aria-label="Main navigation">
-      <span class="logo" tabindex="0">Allied Construction</span>
-      <span class="tagline" aria-hidden="true">Chicago’s Premier Design-Build Firm</span>
-      <button id="themeToggle" aria-label="Toggle light/dark mode" aria-pressed="false" tabindex="0"><i class="fa-solid fa-sun"></i></button>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="menu" aria-expanded="false" tabindex="0"><i class="fa-solid fa-bars"></i></button>
-      <ul id="menu" role="menubar">
-        <li role="none"><a role="menuitem" href="#about">About</a></li>
-        <li role="none"><a role="menuitem" href="#services">Services</a></li>
-        <li role="none"><a role="menuitem" href="#projects">Projects</a></li>
-        <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <nav>
+      <span class="logo">Allied Construction</span>
+      <button id="themeToggle" aria-label="Toggle light/dark mode"><i class="fa-solid fa-sun"></i></button>
+      <button id="hamburger" aria-label="Menu" aria-controls="menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      <ul id="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
-  <main id="home" tabindex="-1" role="main">
-    <section class="hero" aria-label="Hero section">
-      <div class="hero-bg"></div>
+  <main id="main">
+    <section class="hero">
       <div>
-        <h1>Building Your Vision.<br>Engineering Your Future.</h1>
-        <p>We deliver award-winning construction solutions across Chicagoland.</p>
-        <a href="#contact" class="btn" aria-label="Request a Quote" tabindex="0">Request a Quote</a>
-        <div class="scroll-indicator" aria-hidden="true">
-          <span></span>
-        </div>
-        <div class="stats" aria-label="Company statistics" aria-live="polite">
-          <div tabindex="0"><strong id="years">30+</strong>Years</div>
-          <div tabindex="0"><strong id="projects">150</strong>Projects</div>
-          <div tabindex="0"><strong id="safety">0</strong>Safety Issues</div>
-        </div>
+        <h1>Build Better. Build Allied.</h1>
+        <p>Chicago’s trusted design-build partner for commercial, industrial, and residential projects.</p>
+        <a href="#contact" class="btn">Get a Quote</a>
       </div>
     </section>
-    <!-- SVG Wave Divider -->
-    <div class="wave-divider" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,60 C360,120 1080,0 1440,60 L1440,90 L0,90 Z" fill="#e0e7ff"/>
-      </svg>
-    </div>
-    <div class="section-divider"></div>
-    <section id="about" aria-labelledby="about-heading">
-      <h2 id="about-heading">About Us</h2>
-      <p>Since 1995, Allied Construction has delivered quality, safety, and sustainability in every project.</p>
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Since 1995, Allied Construction has delivered quality, safety, and sustainability in every project. We focus on clear communication, reliability, and results.</p>
     </section>
-    <div class="wave-divider flip" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,60 C360,0 1080,120 1440,60 L1440,90 L0,90 Z" fill="#f3f6fa"/>
-      </svg>
-    </div>
-    <div class="section-divider"></div>
-    <section id="services" aria-labelledby="services-heading">
-      <h2 id="services-heading">Services</h2>
+    <section id="services">
+      <h2>Our Services</h2>
       <div class="cards">
-        <div class="card" tabindex="0"><i class="fa-solid fa-city" aria-hidden="true"></i><h3>Commercial</h3></div>
-        <div class="card" tabindex="0"><i class="fa-solid fa-house" aria-hidden="true"></i><h3>Residential</h3></div>
-        <div class="card" tabindex="0"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><h3>HVAC</h3></div>
-        <div class="card" tabindex="0"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i><h3>Sustainable</h3></div>
+        <div class="card"><i class="fa-solid fa-city"></i><h3>Commercial</h3></div>
+        <div class="card"><i class="fa-solid fa-house"></i><h3>Residential</h3></div>
+        <div class="card"><i class="fa-solid fa-screwdriver-wrench"></i><h3>HVAC</h3></div>
+        <div class="card"><i class="fa-solid fa-solar-panel"></i><h3>Sustainable</h3></div>
       </div>
     </section>
-    <div class="wave-divider" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,60 C360,120 1080,0 1440,60 L1440,90 L0,90 Z" fill="#e0e7ff"/>
-      </svg>
-    </div>
-    <!-- Begin Advanced Media Section -->
-    <section id="media" aria-labelledby="media-heading">
-      <h2 id="media-heading">See Allied Construction in Action</h2>
-      <div class="media-content">
-        <div class="media-video" aria-label="Featured Video">
-          <iframe width="560" height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            tabindex="0"></iframe>
+    <section id="testimonials">
+      <h2>What Clients Say</h2>
+      <div class="testimonial-cards">
+        <div class="testimonial-card">
+          <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
+          <span class="testimonial-meta">– John D.</span>
         </div>
-        <div class="media-description">
-          <h3>Our Latest Project Showcase</h3>
-          <p>
-            Watch how Allied Construction transforms visions into reality. This video highlights our recent work, innovative techniques, and commitment to quality across Chicago. For more videos, visit our <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube channel</a>.
-          </p>
+        <div class="testimonial-card">
+          <p>“From start to finish, the Allied team was communicative and reliable. Highly recommended!”</p>
+          <span class="testimonial-meta">– Sarah K.</span>
+        </div>
+        <div class="testimonial-card">
+          <p>“Their sustainable solutions helped us save on energy costs. We’ll work with them again.”</p>
+          <span class="testimonial-meta">– Mike R.</span>
         </div>
       </div>
     </section>
-    <div class="wave-divider" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,60 C360,120 1080,0 1440,60 L1440,90 L0,90 Z" fill="#e0e7ff"/>
-      </svg>
-    </div>
-    <!-- Testimonials Section -->
-    <section id="testimonials" aria-labelledby="testimonials-heading">
-      <h2 id="testimonials-heading">What Our Clients Say</h2>
-      <div class="testimonial-carousel" aria-roledescription="carousel">
-        <button class="testimonial-nav prev" aria-label="Previous testimonial"><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="testimonial-cards">
-          <div class="testimonial-card" aria-label="Testimonial 1">
-            <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
-            <div class="testimonial-meta">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Photo of John D." />
-              <span>John D., Commercial Client</span>
-            </div>
-          </div>
-          <div class="testimonial-card" aria-label="Testimonial 2">
-            <p>“From start to finish, the Allied team was communicative and reliable. Highly recommended!”</p>
-            <div class="testimonial-meta">
-              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Photo of Sarah K." />
-              <span>Sarah K., Residential Client</span>
-            </div>
-          </div>
-          <div class="testimonial-card" aria-label="Testimonial 3">
-            <p>“Their sustainable solutions helped us save on energy costs. We’ll work with them again.”</p>
-            <div class="testimonial-meta">
-              <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Photo of Mike R." />
-              <span>Mike R., Industrial Client</span>
-            </div>
-          </div>
-        </div>
-        <button class="testimonial-nav next" aria-label="Next testimonial"><i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-    </section>
-    <!-- CTA Banner -->
-    <div class="cta-banner" tabindex="0" aria-label="Ready to start your project?">
-      <div>
-        <h2>Ready to Build Your Future?</h2>
-        <p>Contact Allied Construction for a free consultation and let’s bring your vision to life.</p>
-        <a href="#contact" class="btn btn-lg" aria-label="Get Started">Get Started</a>
-      </div>
-    </div>
-    <div class="section-divider"></div>
-    <section id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Contact</h2>
-      <form id="contactForm" autocomplete="off" novalidate aria-describedby="formStatus">
-        <div class="form-group">
-          <input id="name" name="name" placeholder=" " required aria-required="true" tabindex="0" />
-          <label for="name">Your Name</label>
-        </div>
-        <div class="form-group">
-          <input id="email" name="email" type="email" placeholder=" " required aria-required="true" tabindex="0" />
-          <label for="email">Email</label>
-        </div>
-        <div class="form-group">
-          <textarea id="message" name="message" placeholder=" " required aria-required="true" tabindex="0"></textarea>
-          <label for="message">Message</label>
-        </div>
-        <button type="submit" class="btn" tabindex="0">Send</button>
+    <section id="contact">
+      <h2>Contact</h2>
+      <form id="contactForm" autocomplete="off" novalidate>
+        <input id="name" name="name" placeholder="Your Name" required />
+        <input id="email" name="email" type="email" placeholder="Email" required />
+        <textarea id="message" name="message" placeholder="Message" required></textarea>
+        <button type="submit" class="btn">Send</button>
         <div id="formStatus" role="status" aria-live="polite"></div>
       </form>
     </section>
   </main>
-  <footer role="contentinfo">
+  <footer>
     © <span id="year"></span> Allied Construction • Chicago, IL
   </footer>
-  <button id="topBtn" aria-label="Back to top" tabindex="0"><i class="fa-solid fa-arrow-up"></i></button>
+  <button id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
   <script src="main.js" defer></script>
 </body>
 </html>
