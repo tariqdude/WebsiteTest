@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="main.css" />
 </head>
 <body>
+  <!-- Animated Gradient Background -->
+  <div class="animated-bg" aria-hidden="true"></div>
   <!-- Loader Overlay -->
   <div id="pageloader" aria-hidden="true">
     <span class="loader" aria-label="Loading"></span>
@@ -58,11 +60,22 @@
         </div>
       </div>
     </section>
+    <!-- SVG Wave Divider -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,60 C360,120 1080,0 1440,60 L1440,90 L0,90 Z" fill="#e0e7ff"/>
+      </svg>
+    </div>
     <div class="section-divider"></div>
     <section id="about" aria-labelledby="about-heading">
       <h2 id="about-heading">About Us</h2>
       <p>Since 1995, Allied Construction has delivered quality, safety, and sustainability in every project.</p>
     </section>
+    <div class="wave-divider flip" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,60 C360,0 1080,120 1440,60 L1440,90 L0,90 Z" fill="#f3f6fa"/>
+      </svg>
+    </div>
     <div class="section-divider"></div>
     <section id="services" aria-labelledby="services-heading">
       <h2 id="services-heading">Services</h2>
@@ -73,7 +86,11 @@
         <div class="card" tabindex="0"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i><h3>Sustainable</h3></div>
       </div>
     </section>
-    <div class="section-divider"></div>
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,60 C360,120 1080,0 1440,60 L1440,90 L0,90 Z" fill="#e0e7ff"/>
+      </svg>
+    </div>
     <!-- Begin Advanced Media Section -->
     <section id="media" aria-labelledby="media-heading">
       <h2 id="media-heading">See Allied Construction in Action</h2>
@@ -95,6 +112,50 @@
         </div>
       </div>
     </section>
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,60 C360,120 1080,0 1440,60 L1440,90 L0,90 Z" fill="#e0e7ff"/>
+      </svg>
+    </div>
+    <!-- Testimonials Section -->
+    <section id="testimonials" aria-labelledby="testimonials-heading">
+      <h2 id="testimonials-heading">What Our Clients Say</h2>
+      <div class="testimonial-carousel" aria-roledescription="carousel">
+        <button class="testimonial-nav prev" aria-label="Previous testimonial"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="testimonial-cards">
+          <div class="testimonial-card" aria-label="Testimonial 1">
+            <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
+            <div class="testimonial-meta">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Photo of John D." />
+              <span>John D., Commercial Client</span>
+            </div>
+          </div>
+          <div class="testimonial-card" aria-label="Testimonial 2">
+            <p>“From start to finish, the Allied team was communicative and reliable. Highly recommended!”</p>
+            <div class="testimonial-meta">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Photo of Sarah K." />
+              <span>Sarah K., Residential Client</span>
+            </div>
+          </div>
+          <div class="testimonial-card" aria-label="Testimonial 3">
+            <p>“Their sustainable solutions helped us save on energy costs. We’ll work with them again.”</p>
+            <div class="testimonial-meta">
+              <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Photo of Mike R." />
+              <span>Mike R., Industrial Client</span>
+            </div>
+          </div>
+        </div>
+        <button class="testimonial-nav next" aria-label="Next testimonial"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </section>
+    <!-- CTA Banner -->
+    <div class="cta-banner" tabindex="0" aria-label="Ready to start your project?">
+      <div>
+        <h2>Ready to Build Your Future?</h2>
+        <p>Contact Allied Construction for a free consultation and let’s bring your vision to life.</p>
+        <a href="#contact" class="btn btn-lg" aria-label="Get Started">Get Started</a>
+      </div>
+    </div>
     <div class="section-divider"></div>
     <section id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Contact</h2>

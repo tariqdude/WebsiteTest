@@ -317,6 +317,11 @@ section.visible {
   position: relative;
   overflow: hidden;
   outline: none;
+  animation: cardPop 0.7s cubic-bezier(.4,0,.2,1);
+}
+@keyframes cardPop {
+  0% { opacity: 0; transform: scale(0.95);}
+  100% { opacity: 1; transform: scale(1);}
 }
 .card:hover, .card:focus {
   box-shadow: 0 8px 32px rgba(37,99,235,0.13);
@@ -654,4 +659,239 @@ header.scrolled, footer.scrolled {
   .hero, .cta-banner, #testimonials, form#contactForm {
     padding: 1rem 0.3rem;
   }
+}
+
+/* Animated Gradient Background */
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(120deg, #e0e7ff 0%, #f3f6fa 50%, #c7d2fe 100%);
+  background-size: 200% 200%;
+  animation: gradientMove 16s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* SVG Wave Divider */
+.wave-divider {
+  width: 100vw;
+  margin: -2.5rem 0 -2.5rem 0;
+  line-height: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+.wave-divider svg {
+  display: block;
+  width: 100%;
+  height: 60px;
+}
+.wave-divider.flip svg {
+  transform: scaleY(-1);
+}
+
+/* Testimonials Carousel */
+#testimonials {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.5rem 1rem 2rem 1rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#testimonials h2 {
+  color: var(--primary);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+.testimonial-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  position: relative;
+}
+.testimonial-cards {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+  width: 320px;
+  overflow: hidden;
+}
+.testimonial-card {
+  min-width: 320px;
+  max-width: 320px;
+  background: rgba(255,255,255,0.93);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+  margin: 0 0.5rem;
+  text-align: left;
+  position: relative;
+  opacity: 0.97;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.testimonial-card p {
+  font-size: 1.08rem;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+.testimonial-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+.testimonial-meta img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(251,191,36,0.13);
+}
+.testimonial-meta span {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1rem;
+}
+.testimonial-nav {
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(251,191,36,0.13);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+}
+.testimonial-nav:hover, .testimonial-nav:focus {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 18px 0 rgba(251,191,36,0.18);
+}
+@media (max-width: 400px) {
+  .testimonial-cards, .testimonial-card {
+    min-width: 90vw;
+    max-width: 90vw;
+  }
+}
+
+/* CTA Banner */
+.cta-banner {
+  background: linear-gradient(120deg, #fbbf24 0%, #60a5fa 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.13);
+  padding: 2.2rem 1.2rem 2rem 1.2rem;
+  margin: 2.5rem 0 2.5rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: ctaPulse 4s infinite alternate;
+}
+.cta-banner h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(37,99,235,0.13);
+}
+.cta-banner p {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  color: #f3f4f6;
+}
+.cta-banner .btn {
+  background: #fff;
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 800;
+  border-radius: 2em;
+  box-shadow: 0 2px 12px rgba(251,191,36,0.13);
+}
+.cta-banner .btn:hover, .cta-banner .btn:focus {
+  background: var(--accent);
+  color: #fff;
+}
+@keyframes ctaPulse {
+  0% { box-shadow: 0 8px 32px rgba(251,191,36,0.13);}
+  100% { box-shadow: 0 8px 48px rgba(251,191,36,0.22);}
+}
+
+/* Enhanced Form Styles */
+form#contactForm {
+  background: rgba(255,255,255,0.93);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px rgba(37,99,235,0.08);
+  padding: 2rem 1.2rem 1.2rem 1.2rem;
+  margin-top: 1.2rem;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-group input, .form-group textarea {
+  background: rgba(240,245,255,0.85);
+  border: 1.5px solid #e0e7ff;
+  border-radius: var(--radius);
+  padding: 1em 1em 0.7em 1em;
+  font-size: 1rem;
+  font-family: var(--font);
+  margin-bottom: 0.5rem;
+  width: 100%;
+  transition: border 0.18s, background 0.18s;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.04);
+}
+.form-group input:focus, .form-group textarea:focus {
+  border: 2px solid var(--accent);
+  background: #fff;
+}
+.form-group label {
+  position: absolute;
+  left: 1.2em;
+  top: 1.1em;
+  color: #64748b;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.18s;
+  background: transparent;
+}
+.form-group input:focus + label,
+.form-group input.filled + label,
+.form-group textarea:focus + label,
+.form-group textarea.filled + label {
+  top: -0.7em;
+  left: 0.9em;
+  font-size: 0.88em;
+  color: var(--primary);
+  background: #fff;
+  padding: 0 0.3em;
+  border-radius: 0.5em;
+}
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+#formStatus {
+  margin-top: 0.7em;
+  font-size: 1rem;
+  min-height: 1.5em;
+  color: var(--danger);
+  font-weight: 600;
+  text-align: center;
+}
+#formStatus.success {
+  color: var(--success);
 }
