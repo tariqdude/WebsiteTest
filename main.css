@@ -45,6 +45,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
+}
+.site-header.scrolled {
+  box-shadow: 0 6px 24px rgba(30,41,59,0.18), 0 2px 12px rgba(30,41,59,0.08);
 }
 .navbar {
   display: flex;
@@ -384,6 +388,20 @@ h2 {
 @keyframes spin {
   to { transform: rotate(360deg);}
 }
+@keyframes scrollBarAnim {
+  0% { filter: brightness(1);}
+  100% { filter: brightness(1.15);}
+}
+@keyframes whatsappPulse {
+  0% { box-shadow: 0 0 0 0 #25d36644;}
+  70% { box-shadow: 0 0 0 12px #25d36611;}
+  100% { box-shadow: 0 0 0 0 #25d36600;}
+}
+
+/* Print styles */
+@media print {
+  .print-btn, .whatsapp-btn, .sticky-cta, #topBtn, .scroll-progress { display: none !important; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -468,6 +486,71 @@ h2 {
 .card:active, .testimonial-card:active {
   transform: scale(0.98);
   box-shadow: 0 2px 8px rgba(30,41,59,0.10);
+}
+
+/* Animated scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0; height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  z-index: 2001;
+  width: 0;
+  transition: width 0.2s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 2px 8px rgba(30,41,59,0.10);
+  animation: scrollBarAnim 2s linear infinite alternate;
+}
+
+/* WhatsApp floating button pulse */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 90px;
+  right: 24px;
+  z-index: 1200;
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 4px 16px rgba(30,41,59,0.18);
+  animation: whatsappPulse 1.6s infinite;
+  transition: background 0.2s;
+}
+.whatsapp-btn:hover, .whatsapp-btn:focus {
+  background: #128c7e;
+}
+
+/* Print page floating button */
+.print-btn {
+  position: fixed;
+  bottom: 34px;
+  right: 24px;
+  z-index: 1200;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 16px rgba(30,41,59,0.18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.print-btn:hover, .print-btn:focus {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+/* Dark mode transition */
+html, body, [data-theme] {
+  transition: background 0.4s, color 0.4s;
 }
 
 /* Advanced theming */

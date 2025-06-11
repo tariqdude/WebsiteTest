@@ -193,15 +193,43 @@ ready(() => {
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   updateScrollProgress();
 
-  // Sticky CTA hide if contact section is in view or on desktop
+  // Sticky header shadow on scroll
+  const siteHeader = document.getElementById('siteHeader');
+  function toggleHeaderShadow() {
+    if (!siteHeader) return;
+    if (window.scrollY > 10) siteHeader.classList.add('scrolled');
+    else siteHeader.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', toggleHeaderShadow, { passive: true });
+  toggleHeaderShadow();
+
+  // Hero headline typing effect
+  const heroHeadline = document.getElementById('heroHeadline');
+  if (heroHeadline) {
+    const text = "Build Better. Build Allied.";
+    heroHeadline.textContent = "";
+    let idx = 0;
+    function typeNext() {
+      if (idx <= text.length) {
+        heroHeadline.textContent = text.slice(0, idx);
+        idx++;
+        setTimeout(typeNext, idx === text.length ? 400 : 55);
+      } else {
+        heroHeadline.classList.add('animated');
+      }
+    }
+    setTimeout(typeNext, 400);
+  }
+
+  // Improved sticky CTA hide if embed section is in view or on desktop
   const stickyCta = document.getElementById('stickyCta');
   function toggleStickyCta() {
     if (!stickyCta) return;
-    const contact = document.getElementById('contact');
+    const embed = document.getElementById('embed');
     const isMobile = window.innerWidth <= 700;
     let hide = false;
-    if (contact) {
-      const rect = contact.getBoundingClientRect();
+    if (embed) {
+      const rect = embed.getBoundingClientRect();
       hide = rect.top < window.innerHeight && rect.bottom > 0;
     }
     stickyCta.style.display = (isMobile && !hide) ? 'flex' : 'none';
@@ -210,32 +238,17 @@ ready(() => {
   window.addEventListener('resize', toggleStickyCta);
   toggleStickyCta();
 
-  // Keyboard help modal
-  const helpModal = document.getElementById('helpModal');
-  const closeHelpModalBtn = document.getElementById('closeHelpModalBtn');
-  function showHelpModal() {
-    if (helpModal) {
-      helpModal.style.display = 'block';
-      helpModal.focus();
-      // Trap focus
-      const focusable = helpModal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
-      let first = focusable[0], last = focusable[focusable.length - 1];
-      helpModal.onkeydown = e => {
-        if (e.key === 'Tab') {
-          if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault(); last.focus();
-          } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault(); first.focus();
-          }
-        }
-        if (e.key === 'Escape') closeHelpModal();
-      };
-    }
+  // Print page button logic
+  const printBtn = document.getElementById('printBtn');
+  if (printBtn) {
+    printBtn.onclick = () => window.print();
+    printBtn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        printBtn.click();
+      }
+    });
   }
-  function closeHelpModal() {
-    if (helpModal) helpModal.style.display = 'none';
-  }
-  if (closeHelpModalBtn) closeHelpModalBtn.onclick = closeHelpModal;
 
   // Keyboard shortcuts
   document.addEventListener('keydown', function(e) {
@@ -253,6 +266,10 @@ ready(() => {
       if (e.key === '3') document.querySelector('a[href="#projects"]')?.click();
       if (e.key === '4') document.querySelector('a[href="#testimonials"]')?.click();
       if (e.key === '5') document.querySelector('a[href="#contact"]')?.click();
+    }
+    // Alt+0 for scroll to top
+    if (e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey && e.key === '0') {
+      window.scrollTo({top:0,behavior:'smooth'});
     }
     // Esc closes help modal
     if (e.key === 'Escape') closeHelpModal();
