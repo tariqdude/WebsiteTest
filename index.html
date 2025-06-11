@@ -23,6 +23,9 @@
   <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=180&q=80" />
   <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="main.css" />
+  <style>
+    .visually-hidden { position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px;pointer-events:none!important;}
+  </style>
 </head>
 <body data-advanced="true">
   <!-- Loading overlay -->
@@ -42,7 +45,7 @@
       <div class="nav-brand">
         <span class="logo" aria-label="Allied Construction Home">Allied Construction</span>
       </div>
-      <button id="themeToggle" aria-label="Toggle light/dark mode" aria-pressed="false"><i class="fa-solid fa-sun"></i></button>
+      <button id="themeToggle" aria-label="Toggle light/dark mode" aria-pressed="false" title="Toggle theme (light/dark/auto)"><i class="fa-solid fa-sun"></i></button>
       <button id="hamburger" aria-label="Open menu" aria-controls="menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
       <ul id="menu" class="nav-menu" role="menubar">
         <li><a href="#about" aria-current="page" role="menuitem" tabindex="2">About</a></li>
@@ -56,6 +59,8 @@
     <section class="hero" aria-live="polite" data-aos="fade-up">
       <div class="hero-content">
         <h1 class="hero-headline" id="heroHeadline" aria-live="polite"></h1>
+        <!-- ARIA live region for screen readers -->
+        <div class="visually-hidden" aria-live="polite" id="heroHeadlineLive"></div>
         <p id="heroSub">Chicago’s trusted design-build partner for commercial, industrial, and residential projects.</p>
         <a href="#embed" class="btn btn-primary" tabindex="6">Get a Quote</a>
       </div>

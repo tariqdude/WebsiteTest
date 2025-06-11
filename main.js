@@ -6,49 +6,125 @@ function ready(fn) {
   else document.addEventListener('DOMContentLoaded', fn);
 }
 
+// Helper: Detect prefers-reduced-motion
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+// Helper: Throttle
+function throttle(fn, wait) {
+  let last = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - last >= wait) {
+      last = now;
+      fn.apply(this, args);
+    }
+  };
+}
+
+// Helper: Lock/unlock scroll for modals
+function lockScroll(lock = true) {
+  document.body.style.overflow = lock ? 'hidden' : '';
+}
+
+// Helper: Set favicon based on theme
+function setFavicon(theme) {
+  const favicon = document.querySelector('link[rel="icon"]');
+  if (!favicon) return;
+  const color = theme === 'dark' ? '%231d4ed8' : '%231d4ed8';
+  favicon.href = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='${color}'/><text x='50' y='60' font-size='50' text-anchor='middle' fill='white' font-family='Montserrat'>A</text></svg>`;
+}
+
 ready(() => {
   // Set current year in footer (advanced: use data-year)
   document.querySelectorAll('[data-year]').forEach(el => {
     el.textContent = new Date().getFullYear();
   });
 
-  // Advanced theme toggle using data-theme on <html>
+  // Advanced theme toggle: light/dark/system/auto
   const html = document.documentElement;
   const themeBtn = document.getElementById('themeToggle');
   const themeIcon = themeBtn && themeBtn.querySelector('i');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let themeMode = localStorage.getItem('themeMode') || 'auto';
+  function getSystemTheme() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
   function setTheme(mode) {
-    html.setAttribute('data-theme', mode);
-    document.body.classList.toggle('dark', mode === 'dark');
-    localStorage.setItem('theme', mode);
-    if (themeIcon) themeIcon.className = mode === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-    if (themeBtn) themeBtn.setAttribute('aria-pressed', mode === 'dark');
+    themeMode = mode;
+    localStorage.setItem('themeMode', mode);
+    let theme = mode === 'auto' ? getSystemTheme() : mode;
+    html.setAttribute('data-theme', theme);
+    document.body.classList.toggle('dark', theme === 'dark');
+    if (themeIcon) themeIcon.className = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    if (themeBtn) themeBtn.setAttribute('aria-pressed', theme === 'dark');
+    setFavicon(theme);
   }
-  const savedTheme = localStorage.getItem('theme');
-  setTheme(savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light'));
+  setTheme(themeMode);
   if (themeBtn) {
-    themeBtn.onclick = () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    themeBtn.onclick = () => {
+      // Cycle: light → dark → auto → light
+      const next = { light: 'dark', dark: 'auto', auto: 'light' }[themeMode] || 'light';
+      setTheme(next);
+    };
+    themeBtn.title = 'Toggle theme (light/dark/auto)';
   }
+  // Listen for system theme changes if in auto mode
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (themeMode === 'auto') setTheme('auto');
+  });
 
-  // Animate hero headline/subtitle on load
+  // Keyboard shortcut: Alt+T to toggle theme
+  document.addEventListener('keydown', e => {
+    if (e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey && (e.key === 't' || e.key === 'T')) {
+      if (themeBtn) themeBtn.click();
+    }
+  });
+
+  // Focus ring only for keyboard navigation
+  function handleFocusRing() {
+    function showRing(e) {
+      if (e.key === 'Tab') document.body.classList.add('show-focus-ring');
+    }
+    function hideRing() {
+      document.body.classList.remove('show-focus-ring');
+    }
+    window.addEventListener('keydown', showRing);
+    window.addEventListener('mousedown', hideRing);
+    window.addEventListener('touchstart', hideRing);
+  }
+  handleFocusRing();
+
+  // Animate hero headline/subtitle on load (with ARIA live)
   setTimeout(() => {
     document.getElementById('heroHeadline')?.classList.add('animated');
     document.getElementById('heroSub')?.classList.add('animated');
+    // ARIA live update for screen readers
+    const live = document.createElement('div');
+    live.setAttribute('aria-live', 'polite');
+    live.className = 'visually-hidden';
+    live.textContent = 'Build Better. Build Allied.';
+    document.body.appendChild(live);
+    setTimeout(() => live.remove(), 2000);
   }, 400);
 
-  // Animate On Scroll (AOS) for [data-aos] elements
+  // Intersection Observer for AOS/fade-in (better perf)
   function aosInit() {
     const els = document.querySelectorAll('[data-aos]');
-    function animate() {
-      els.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 60) {
-          el.classList.add('aos-animate');
-        }
-      });
+    if ('IntersectionObserver' in window && !prefersReducedMotion()) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('aos-animate');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(el => observer.observe(el));
+    } else {
+      // Fallback: show all
+      els.forEach(el => el.classList.add('aos-animate'));
     }
-    window.addEventListener('scroll', animate, { passive: true });
-    animate();
   }
   aosInit();
 
@@ -138,7 +214,6 @@ ready(() => {
   });
 
   // Improved smooth scroll for anchor links (with reduced motion support)
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href').slice(1);
@@ -146,7 +221,7 @@ ready(() => {
       if (target) {
         e.preventDefault();
         target.scrollIntoView({
-          behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          behavior: prefersReducedMotion() ? 'auto' : 'smooth',
           block: 'start'
         });
         setTimeout(() => target.focus({ preventScroll: true }), 300);
@@ -154,7 +229,7 @@ ready(() => {
     });
   });
 
-  // Modal dialog logic for form submission
+  // Modal dialog logic for form submission (add scroll lock)
   function showModal() {
     const modal = document.getElementById('formModal');
     const overlay = document.getElementById('modalOverlay');
@@ -162,6 +237,7 @@ ready(() => {
       modal.style.display = 'block';
       overlay.style.display = 'block';
       modal.focus();
+      lockScroll(true);
       // Trap focus inside modal
       const focusable = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
       let first = focusable[0], last = focusable[focusable.length - 1];
@@ -185,6 +261,7 @@ ready(() => {
     if (modal && overlay) {
       modal.style.display = 'none';
       overlay.style.display = 'none';
+      lockScroll(false);
       const form = document.getElementById('contactForm');
       if (form) {
         const firstInput = form.querySelector('input, textarea');
@@ -197,12 +274,13 @@ ready(() => {
   window.showModal = showModal;
   window.closeModal = closeModal;
 
-  // Keyboard help modal logic (advanced)
+  // Keyboard help modal logic (add scroll lock)
   function showHelpModal() {
     const modal = document.getElementById('helpModal');
     if (!modal) return;
     modal.style.display = 'block';
     modal.focus();
+    lockScroll(true);
     document.body.setAttribute('aria-hidden', 'true');
     // Trap focus inside modal
     const focusable = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
@@ -223,6 +301,7 @@ ready(() => {
     const modal = document.getElementById('helpModal');
     if (!modal) return;
     modal.style.display = 'none';
+    lockScroll(false);
     document.body.removeAttribute('aria-hidden');
     // Return focus to theme toggle for accessibility
     document.getElementById('themeToggle')?.focus();
@@ -241,15 +320,22 @@ ready(() => {
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   updateScrollProgress();
 
-  // Sticky header shadow on scroll
-  const siteHeader = document.getElementById('siteHeader');
-  function toggleHeaderShadow() {
+  // Sticky header: hide on scroll down, show on scroll up (mobile/desktop)
+  let lastScrollY = window.scrollY;
+  let headerHidden = false;
+  function handleHeaderHide() {
+    const curr = window.scrollY;
     if (!siteHeader) return;
-    if (window.scrollY > 10) siteHeader.classList.add('scrolled');
-    else siteHeader.classList.remove('scrolled');
+    if (curr > lastScrollY && curr > 80 && !headerHidden) {
+      siteHeader.style.transform = 'translateY(-100%)';
+      headerHidden = true;
+    } else if (curr < lastScrollY && headerHidden) {
+      siteHeader.style.transform = '';
+      headerHidden = false;
+    }
+    lastScrollY = curr;
   }
-  window.addEventListener('scroll', toggleHeaderShadow, { passive: true });
-  toggleHeaderShadow();
+  window.addEventListener('scroll', throttle(handleHeaderHide, 80), { passive: true });
 
   // Hero headline typing effect
   const heroHeadline = document.getElementById('heroHeadline');
@@ -286,15 +372,15 @@ ready(() => {
   window.addEventListener('resize', toggleStickyCta);
   toggleStickyCta();
 
-  // Print page button logic
+  // Print page button logic (add before/after print events)
   const printBtn = document.getElementById('printBtn');
   if (printBtn) {
-    printBtn.onclick = () => window.print();
-    printBtn.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        printBtn.click();
-      }
+    printBtn.onclick = () => {
+      document.body.classList.add('printing');
+      window.print();
+    };
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('printing');
     });
   }
 
@@ -322,23 +408,14 @@ ready(() => {
     if (e.key === 'Escape') closeHelpModal();
   });
 
-  // Loading overlay: hide when page is loaded
+  // Loading overlay: hide when page is loaded (add reduced motion support)
   const loadingOverlay = document.getElementById('loadingOverlay');
   window.addEventListener('load', () => {
     if (loadingOverlay) {
       loadingOverlay.setAttribute('aria-hidden', 'true');
-      setTimeout(() => loadingOverlay.style.display = 'none', 400);
+      setTimeout(() => loadingOverlay.style.display = 'none', prefersReducedMotion() ? 0 : 400);
     }
   });
-
-  // Auto dark mode by time (7pm-7am)
-  function autoDarkMode() {
-    const hour = new Date().getHours();
-    if (!localStorage.getItem('theme')) {
-      setTheme(hour >= 19 || hour < 7 ? 'dark' : 'light');
-    }
-  }
-  autoDarkMode();
 
   // Scroll-down arrow in hero
   const scrollDownArrow = document.getElementById('scrollDownArrow');
@@ -349,16 +426,23 @@ ready(() => {
     };
   }
 
-  // Fade-in cards on scroll
+  // Fade-in cards on scroll (use IntersectionObserver)
   function fadeInOnScroll() {
-    document.querySelectorAll('.card, .project-card, .testimonial-card').forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 60) {
-        el.classList.add('visible');
-      }
-    });
+    const els = document.querySelectorAll('.card, .project-card, .testimonial-card');
+    if ('IntersectionObserver' in window && !prefersReducedMotion()) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => observer.observe(el));
+    } else {
+      els.forEach(el => el.classList.add('visible'));
+    }
   }
-  window.addEventListener('scroll', fadeInOnScroll, { passive: true });
   fadeInOnScroll();
 
   // Copy email button (advanced: visual feedback)
@@ -391,7 +475,7 @@ function debounce(fn, ms) {
   };
 }
 
-// Improved smooth scroll polyfill for older browsers
+// Improved smooth scroll polyfill for all anchor links
 (function() {
   if ('scrollBehavior' in document.documentElement.style) return;
   window.scrollTo = function(options) {

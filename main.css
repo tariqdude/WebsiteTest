@@ -62,7 +62,8 @@ a:focus-visible, button:focus-visible, .card:focus-visible {
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), background 0.3s;
+  transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), background 0.3s, transform 0.3s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
 }
 .site-header.scrolled {
   box-shadow: 0 6px 24px rgba(30,41,59,0.18), 0 2px 12px rgba(30,41,59,0.08);
@@ -511,6 +512,7 @@ h2 {
   border: 0;
   padding: 0;
   margin: -1px;
+  pointer-events: none !important;
 }
 
 /* Enhanced focus/active states */
@@ -768,4 +770,63 @@ html, body, [data-theme] {
   outline: 2.5px solid var(--accent);
   background: var(--primary);
   color: #fff;
+}
+
+/* Focus ring only for keyboard navigation */
+body.show-focus-ring :focus-visible {
+  outline: 2.5px solid var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent), 0 8px 32px rgba(251,191,36,0.18) !important;
+}
+body:not(.show-focus-ring) :focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Theme toggle button: auto/system mode indicator */
+#themeToggle[aria-pressed="mixed"] i::after {
+  content: "A";
+  font-size: 0.7em;
+  margin-left: 0.3em;
+  color: var(--accent);
+  font-weight: 900;
+  vertical-align: super;
+}
+
+/* Sticky header hide/show transition */
+.site-header {
+  /* ...existing code... */
+  transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), background 0.3s, transform 0.3s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+
+/* Print mode body class */
+body.printing * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Visually hidden for ARIA live regions */
+.visually-hidden {
+  /* ...existing code... */
+  pointer-events: none !important;
+}
+
+/* Favicon transition (for theme changes) */
+link[rel="icon"] {
+  transition: filter 0.3s;
+}
+
+/* Modal accessibility: focus ring */
+.modal:focus-visible {
+  outline: 2.5px solid var(--accent);
+  box-shadow: 0 0 0 4px var(--accent);
+}
+
+/* Reduced motion: disable all transitions/animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
 }
