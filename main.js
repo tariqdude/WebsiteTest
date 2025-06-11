@@ -1,18 +1,11 @@
 'use strict';
 
-// Helper: DOM ready
-function ready(fn) {
-  if (document.readyState !== 'loading') fn();
-  else document.addEventListener('DOMContentLoaded', fn);
-}
-
-// Helper: Detect prefers-reduced-motion
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
-// Helper: Throttle
-function throttle(fn, wait) {
+// --- Utility Functions ---
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+const ready = fn => (document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn));
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const throttle = (fn, wait) => {
   let last = 0;
   return (...args) => {
     const now = Date.now();
@@ -21,35 +14,39 @@ function throttle(fn, wait) {
       fn.apply(this, args);
     }
   };
-}
-
-// Helper: Lock/unlock scroll for modals
-function lockScroll(lock = true) {
-  document.body.style.overflow = lock ? 'hidden' : '';
-}
-
-// Helper: Set favicon based on theme
-function setFavicon(theme) {
-  const favicon = document.querySelector('link[rel="icon"]');
+};
+const debounce = (fn, ms) => {
+  let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); };
+};
+const lockScroll = lock => { document.body.style.overflow = lock ? 'hidden' : ''; };
+const setFavicon = theme => {
+  const favicon = $('link[rel="icon"]');
   if (!favicon) return;
   const color = theme === 'dark' ? '%231d4ed8' : '%231d4ed8';
   favicon.href = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='${color}'/><text x='50' y='60' font-size='50' text-anchor='middle' fill='white' font-family='Montserrat'>A</text></svg>`;
-}
+};
+const setThemeColorMeta = color => {
+  let meta = $('meta[name="theme-color"]');
+  if (!meta) {
+    meta = document.createElement('meta');
+    meta.name = 'theme-color';
+    document.head.appendChild(meta);
+  }
+  meta.content = color;
+};
 
+// --- Main ---
 ready(() => {
-  // Set current year in footer (advanced: use data-year)
-  document.querySelectorAll('[data-year]').forEach(el => {
-    el.textContent = new Date().getFullYear();
-  });
+  // Year in footer
+  $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
-  // Advanced theme toggle: light/dark/system/auto
+  // --- Theme Management ---
   const html = document.documentElement;
-  const themeBtn = document.getElementById('themeToggle');
+  const themeBtn = $('#themeToggle');
   const themeIcon = themeBtn && themeBtn.querySelector('i');
   let themeMode = localStorage.getItem('themeMode') || 'auto';
-  function getSystemTheme() {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
+  const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const getThemeColor = theme => theme === 'dark' ? '#181a23' : '#f8fafc';
   function setTheme(mode) {
     themeMode = mode;
     localStorage.setItem('themeMode', mode);
@@ -59,47 +56,38 @@ ready(() => {
     if (themeIcon) themeIcon.className = theme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
     if (themeBtn) themeBtn.setAttribute('aria-pressed', theme === 'dark');
     setFavicon(theme);
+    setThemeColorMeta(getThemeColor(theme));
   }
   setTheme(themeMode);
   if (themeBtn) {
     themeBtn.onclick = () => {
-      // Cycle: light → dark → auto → light
       const next = { light: 'dark', dark: 'auto', auto: 'light' }[themeMode] || 'light';
       setTheme(next);
     };
     themeBtn.title = 'Toggle theme (light/dark/auto)';
   }
-  // Listen for system theme changes if in auto mode
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if (themeMode === 'auto') setTheme('auto');
   });
-
-  // Keyboard shortcut: Alt+T to toggle theme
   document.addEventListener('keydown', e => {
     if (e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey && (e.key === 't' || e.key === 'T')) {
-      if (themeBtn) themeBtn.click();
+      themeBtn?.click();
     }
   });
 
-  // Focus ring only for keyboard navigation
-  function handleFocusRing() {
-    function showRing(e) {
-      if (e.key === 'Tab') document.body.classList.add('show-focus-ring');
-    }
-    function hideRing() {
-      document.body.classList.remove('show-focus-ring');
-    }
+  // --- Focus Ring for Keyboard Users ---
+  (() => {
+    function showRing(e) { if (e.key === 'Tab') document.body.classList.add('show-focus-ring'); }
+    function hideRing() { document.body.classList.remove('show-focus-ring'); }
     window.addEventListener('keydown', showRing);
     window.addEventListener('mousedown', hideRing);
     window.addEventListener('touchstart', hideRing);
-  }
-  handleFocusRing();
+  })();
 
-  // Animate hero headline/subtitle on load (with ARIA live)
+  // --- Animate Hero Headline/Sub (ARIA live) ---
   setTimeout(() => {
-    document.getElementById('heroHeadline')?.classList.add('animated');
-    document.getElementById('heroSub')?.classList.add('animated');
-    // ARIA live update for screen readers
+    $('#heroHeadline')?.classList.add('animated');
+    $('#heroSub')?.classList.add('animated');
     const live = document.createElement('div');
     live.setAttribute('aria-live', 'polite');
     live.className = 'visually-hidden';
@@ -108,11 +96,11 @@ ready(() => {
     setTimeout(() => live.remove(), 2000);
   }, 400);
 
-  // Intersection Observer for AOS/fade-in (better perf)
-  function aosInit() {
-    const els = document.querySelectorAll('[data-aos]');
+  // --- IntersectionObserver for AOS/Fade-in ---
+  function observeAOS() {
+    const els = $$('[data-aos]');
     if ('IntersectionObserver' in window && !prefersReducedMotion()) {
-      const observer = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('aos-animate');
@@ -122,15 +110,14 @@ ready(() => {
       }, { threshold: 0.15 });
       els.forEach(el => observer.observe(el));
     } else {
-      // Fallback: show all
       els.forEach(el => el.classList.add('aos-animate'));
     }
   }
-  aosInit();
+  observeAOS();
 
-  // Mobile nav
-  const hamburger = document.getElementById('hamburger');
-  const menu = document.getElementById('menu');
+  // --- Mobile Nav ---
+  const hamburger = $('#hamburger');
+  const menu = $('#menu');
   if (hamburger && menu) {
     hamburger.addEventListener('click', () => {
       const open = !menu.classList.contains('open');
@@ -138,7 +125,7 @@ ready(() => {
       hamburger.setAttribute('aria-expanded', open);
       if (open) menu.querySelector('a').focus();
     });
-    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    $$('.nav-menu a', menu).forEach(link => link.addEventListener('click', () => {
       menu.classList.remove('open');
       hamburger.setAttribute('aria-expanded', false);
     }));
@@ -156,8 +143,8 @@ ready(() => {
     });
   }
 
-  // Back-to-top button (debounced)
-  const topBtn = document.getElementById('topBtn');
+  // --- Back-to-top Button ---
+  const topBtn = $('#topBtn');
   function toggleTopBtn() {
     if (topBtn) topBtn.style.display = window.scrollY > 200 ? 'flex' : 'none';
   }
@@ -173,9 +160,9 @@ ready(() => {
     });
   }
 
-  // Highlight active nav link on scroll
-  const navLinks = Array.from(document.querySelectorAll('.nav-menu a'));
-  const sections = navLinks.map(link => document.querySelector(link.getAttribute('href')));
+  // --- Nav Highlight on Scroll ---
+  const navLinks = $$('.nav-menu a');
+  const sections = navLinks.map(link => $(link.getAttribute('href')));
   function setActive() {
     let idx = sections.findIndex((section, i) =>
       section && window.scrollY + 120 < section.offsetTop + section.offsetHeight
@@ -189,15 +176,14 @@ ready(() => {
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
 
-  // Keyboard accessibility for cards (advanced: arrow navigation)
-  const allCards = Array.from(document.querySelectorAll('.card, .testimonial-card'));
+  // --- Keyboard Navigation for Cards ---
+  const allCards = $$('.card, .testimonial-card');
   allCards.forEach((card, idx) => {
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         card.classList.add('focus-effect');
         setTimeout(() => card.classList.remove('focus-effect'), 200);
       }
-      // Arrow navigation between cards
       if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
         e.preventDefault();
         const next = allCards[idx + 1] || allCards[0];
@@ -213,8 +199,8 @@ ready(() => {
     card.addEventListener('blur', () => card.classList.remove('focus-effect'));
   });
 
-  // Improved smooth scroll for anchor links (with reduced motion support)
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
+  // --- Smooth Scroll for Anchor Links ---
+  $$( 'a[href^="#"]' ).forEach(link => {
     link.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href').slice(1);
       const target = document.getElementById(targetId);
@@ -229,60 +215,8 @@ ready(() => {
     });
   });
 
-  // Modal dialog logic for form submission (add scroll lock)
-  function showModal() {
-    const modal = document.getElementById('formModal');
-    const overlay = document.getElementById('modalOverlay');
-    if (modal && overlay) {
-      modal.style.display = 'block';
-      overlay.style.display = 'block';
-      modal.focus();
-      lockScroll(true);
-      // Trap focus inside modal
-      const focusable = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
-      let first = focusable[0], last = focusable[focusable.length - 1];
-      modal.onkeydown = e => {
-        if (e.key === 'Tab') {
-          if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault(); last.focus();
-          } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault(); first.focus();
-          }
-        }
-        if (e.key === 'Escape') closeModal();
-      };
-      overlay.onclick = closeModal;
-      document.getElementById('closeModalBtn').onclick = closeModal;
-    }
-  }
-  function closeModal() {
-    const modal = document.getElementById('formModal');
-    const overlay = document.getElementById('modalOverlay');
-    if (modal && overlay) {
-      modal.style.display = 'none';
-      overlay.style.display = 'none';
-      lockScroll(false);
-      const form = document.getElementById('contactForm');
-      if (form) {
-        const firstInput = form.querySelector('input, textarea');
-        if (firstInput) firstInput.focus();
-      }
-    }
-  }
-
-  // Expose modal functions globally for form handler
-  window.showModal = showModal;
-  window.closeModal = closeModal;
-
-  // Keyboard help modal logic (add scroll lock)
-  function showHelpModal() {
-    const modal = document.getElementById('helpModal');
-    if (!modal) return;
-    modal.style.display = 'block';
-    modal.focus();
-    lockScroll(true);
-    document.body.setAttribute('aria-hidden', 'true');
-    // Trap focus inside modal
+  // --- Modal Dialog Logic (with Focus Trap, Scroll Lock) ---
+  function trapFocus(modal) {
     const focusable = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
     let first = focusable[0], last = focusable[focusable.length - 1];
     modal.onkeydown = e => {
@@ -293,24 +227,63 @@ ready(() => {
           e.preventDefault(); first.focus();
         }
       }
-      if (e.key === 'Escape') closeHelpModal();
+      if (e.key === 'Escape') closeModal();
     };
-    document.getElementById('closeHelpModalBtn').onclick = closeHelpModal;
+  }
+  function showModal() {
+    const modal = $('#formModal');
+    const overlay = $('#modalOverlay');
+    if (modal && overlay) {
+      modal.style.display = 'block';
+      overlay.style.display = 'block';
+      modal.focus();
+      lockScroll(true);
+      trapFocus(modal);
+      overlay.onclick = closeModal;
+      $('#closeModalBtn').onclick = closeModal;
+    }
+  }
+  function closeModal() {
+    const modal = $('#formModal');
+    const overlay = $('#modalOverlay');
+    if (modal && overlay) {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+      lockScroll(false);
+      const form = $('#contactForm');
+      if (form) {
+        const firstInput = form.querySelector('input, textarea');
+        if (firstInput) firstInput.focus();
+      }
+    }
+  }
+  window.showModal = showModal;
+  window.closeModal = closeModal;
+
+  // --- Keyboard Help Modal (with Focus Trap, Scroll Lock) ---
+  function showHelpModal() {
+    const modal = $('#helpModal');
+    if (!modal) return;
+    modal.style.display = 'block';
+    modal.focus();
+    lockScroll(true);
+    document.body.setAttribute('aria-hidden', 'true');
+    trapFocus(modal);
+    $('#closeHelpModalBtn').onclick = closeHelpModal;
   }
   function closeHelpModal() {
-    const modal = document.getElementById('helpModal');
+    const modal = $('#helpModal');
     if (!modal) return;
     modal.style.display = 'none';
     lockScroll(false);
     document.body.removeAttribute('aria-hidden');
-    // Return focus to theme toggle for accessibility
-    document.getElementById('themeToggle')?.focus();
+    $('#themeToggle')?.focus();
   }
   window.showHelpModal = showHelpModal;
   window.closeHelpModal = closeHelpModal;
 
-  // Scroll progress bar
-  const scrollProgress = document.getElementById('scrollProgress');
+  // --- Scroll Progress Bar ---
+  const scrollProgress = $('#scrollProgress');
   function updateScrollProgress() {
     const h = document.documentElement, b = document.body;
     const st = h.scrollTop || b.scrollTop, sh = h.scrollHeight - h.clientHeight;
@@ -320,7 +293,8 @@ ready(() => {
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   updateScrollProgress();
 
-  // Sticky header: hide on scroll down, show on scroll up (mobile/desktop)
+  // --- Sticky Header Hide/Show on Scroll ---
+  const siteHeader = $('#siteHeader');
   let lastScrollY = window.scrollY;
   let headerHidden = false;
   function handleHeaderHide() {
@@ -337,8 +311,8 @@ ready(() => {
   }
   window.addEventListener('scroll', throttle(handleHeaderHide, 80), { passive: true });
 
-  // Hero headline typing effect
-  const heroHeadline = document.getElementById('heroHeadline');
+  // --- Hero Headline Typing Effect ---
+  const heroHeadline = $('#heroHeadline');
   if (heroHeadline) {
     const text = "Build Better. Build Allied.";
     heroHeadline.textContent = "";
@@ -355,25 +329,38 @@ ready(() => {
     setTimeout(typeNext, 400);
   }
 
-  // Improved sticky CTA hide if embed section is in view or on desktop
-  const stickyCta = document.getElementById('stickyCta');
-  function toggleStickyCta() {
+  // --- Sticky CTA Hide When Embed In View (IntersectionObserver) ---
+  const stickyCta = $('#stickyCta');
+  function stickyCtaObserver() {
     if (!stickyCta) return;
-    const embed = document.getElementById('embed');
+    const embed = $('#embed');
     const isMobile = window.innerWidth <= 700;
-    let hide = false;
-    if (embed) {
-      const rect = embed.getBoundingClientRect();
-      hide = rect.top < window.innerHeight && rect.bottom > 0;
+    if ('IntersectionObserver' in window && embed) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          stickyCta.style.display = (isMobile && !entry.isIntersecting) ? 'flex' : 'none';
+        });
+      }, { threshold: 0.1 });
+      observer.observe(embed);
+      window.addEventListener('resize', () => observer.observe(embed));
+    } else {
+      function fallback() {
+        let hide = false;
+        if (embed) {
+          const rect = embed.getBoundingClientRect();
+          hide = rect.top < window.innerHeight && rect.bottom > 0;
+        }
+        stickyCta.style.display = (isMobile && !hide) ? 'flex' : 'none';
+      }
+      window.addEventListener('scroll', fallback, { passive: true });
+      window.addEventListener('resize', fallback);
+      fallback();
     }
-    stickyCta.style.display = (isMobile && !hide) ? 'flex' : 'none';
   }
-  window.addEventListener('scroll', toggleStickyCta, { passive: true });
-  window.addEventListener('resize', toggleStickyCta);
-  toggleStickyCta();
+  stickyCtaObserver();
 
-  // Print page button logic (add before/after print events)
-  const printBtn = document.getElementById('printBtn');
+  // --- Print Button and Print Mode ---
+  const printBtn = $('#printBtn');
   if (printBtn) {
     printBtn.onclick = () => {
       document.body.classList.add('printing');
@@ -384,32 +371,28 @@ ready(() => {
     });
   }
 
-  // Keyboard shortcuts
+  // --- Keyboard Shortcuts ---
   document.addEventListener('keydown', function(e) {
-    // Show help modal with '?'
     if ((e.key === '?' || e.key === '/') && !e.ctrlKey && !e.altKey && !e.metaKey) {
       if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
         showHelpModal();
         e.preventDefault();
       }
     }
-    // Alt+1..4 for nav (updated for new nav structure)
     if (e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
-      if (e.key === '1') document.querySelector('a[href="#about"]')?.click();
-      if (e.key === '2') document.querySelector('a[href="#services"]')?.click();
-      if (e.key === '3') document.querySelector('a[href="#projects"]')?.click();
-      if (e.key === '4') document.querySelector('a[href="#embed"]')?.click();
+      if (e.key === '1') $('a[href="#about"]')?.click();
+      if (e.key === '2') $('a[href="#services"]')?.click();
+      if (e.key === '3') $('a[href="#projects"]')?.click();
+      if (e.key === '4') $('a[href="#embed"]')?.click();
     }
-    // Alt+0 for scroll to top
     if (e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey && e.key === '0') {
       window.scrollTo({top:0,behavior:'smooth'});
     }
-    // Esc closes help modal
     if (e.key === 'Escape') closeHelpModal();
   });
 
-  // Loading overlay: hide when page is loaded (add reduced motion support)
-  const loadingOverlay = document.getElementById('loadingOverlay');
+  // --- Loading Overlay Hide ---
+  const loadingOverlay = $('#loadingOverlay');
   window.addEventListener('load', () => {
     if (loadingOverlay) {
       loadingOverlay.setAttribute('aria-hidden', 'true');
@@ -417,20 +400,20 @@ ready(() => {
     }
   });
 
-  // Scroll-down arrow in hero
-  const scrollDownArrow = document.getElementById('scrollDownArrow');
+  // --- Scroll Down Arrow in Hero ---
+  const scrollDownArrow = $('#scrollDownArrow');
   if (scrollDownArrow) {
     scrollDownArrow.onclick = () => {
-      const about = document.getElementById('about');
+      const about = $('#about');
       if (about) about.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
   }
 
-  // Fade-in cards on scroll (use IntersectionObserver)
+  // --- Fade-in Cards on Scroll (IntersectionObserver) ---
   function fadeInOnScroll() {
-    const els = document.querySelectorAll('.card, .project-card, .testimonial-card');
+    const els = $$('.card, .project-card, .testimonial-card');
     if ('IntersectionObserver' in window && !prefersReducedMotion()) {
-      const observer = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
@@ -445,9 +428,9 @@ ready(() => {
   }
   fadeInOnScroll();
 
-  // Copy email button (advanced: visual feedback)
-  const copyEmailBtn = document.getElementById('copyEmailBtn');
-  const emailInput = document.getElementById('email');
+  // --- Copy Email Button (Visual Feedback) ---
+  const copyEmailBtn = $('#copyEmailBtn');
+  const emailInput = $('#email');
   if (copyEmailBtn && emailInput) {
     copyEmailBtn.onclick = () => {
       navigator.clipboard.writeText(emailInput.value || emailInput.placeholder || '').then(() => {
@@ -468,14 +451,7 @@ ready(() => {
   }
 });
 
-// Debounce utility for scroll events
-function debounce(fn, ms) {
-  let t; return (...args) => {
-    clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms);
-  };
-}
-
-// Improved smooth scroll polyfill for all anchor links
+// --- Smooth Scroll Polyfill for All Anchor Links ---
 (function() {
   if ('scrollBehavior' in document.documentElement.style) return;
   window.scrollTo = function(options) {
@@ -485,4 +461,5 @@ function debounce(fn, ms) {
   };
 })();
 
-// All high-level features (accessibility, smooth scroll, nav highlight, contact form UX, modal dialog, back-to-top, theme toggle) are implemented as required.
+// --- Restore Scroll Position on Back/Forward ---
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
