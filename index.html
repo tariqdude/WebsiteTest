@@ -35,8 +35,7 @@
         <li><a href="#about" aria-current="page" role="menuitem">About</a></li>
         <li><a href="#services" role="menuitem">Services</a></li>
         <li><a href="#projects" role="menuitem">Projects</a></li>
-        <li><a href="#testimonials" role="menuitem">Testimonials</a></li>
-        <li><a href="#contact" role="menuitem">Contact</a></li>
+        <li><a href="#embed" role="menuitem">Form/Sheet</a></li>
       </ul>
     </nav>
   </header>
@@ -45,7 +44,7 @@
       <div class="hero-content">
         <h1 class="hero-headline" id="heroHeadline">Build Better. Build Allied.</h1>
         <p id="heroSub">Chicago’s trusted design-build partner for commercial, industrial, and residential projects.</p>
-        <a href="#contact" class="btn btn-primary">Get a Quote</a>
+        <a href="#embed" class="btn btn-primary">Get a Quote</a>
       </div>
       <!-- Scroll down arrow -->
       <button class="scroll-down-arrow" id="scrollDownArrow" aria-label="Scroll to About">
@@ -108,70 +107,25 @@
         </div>
       </div>
     </section>
-    <section id="testimonials" class="testimonials-section" aria-labelledby="testimonialsHeading" data-aos="fade-up">
+    <!-- BEGIN: Advanced Embeddable Section -->
+    <section id="embed" class="embed-section advanced" data-aos="fade-up">
       <div class="section-content">
-        <h2 id="testimonialsHeading">What Clients Say</h2>
-        <!-- Carousel wrapper -->
-        <div class="testimonial-carousel" role="region" aria-roledescription="carousel" aria-label="Client testimonials">
-          <button class="carousel-btn prev" id="testimonialPrev" aria-label="Previous testimonial"><i class="fa-solid fa-chevron-left"></i></button>
-          <div class="testimonial-cards" id="testimonialCards">
-            <!-- ...existing testimonial cards... -->
-            <div class="testimonial-card" tabindex="0" data-aos="fade-right">
-              <p>“Allied Construction exceeded our expectations. Their attention to detail and professionalism made our project a success.”</p>
-              <span class="testimonial-meta">– John D.</span>
-            </div>
-            <div class="testimonial-card" tabindex="0" data-aos="fade-right" data-aos-delay="100">
-              <p>“From start to finish, the Allied team was communicative and reliable. Highly recommended!”</p>
-              <span class="testimonial-meta">– Sarah K.</span>
-            </div>
-            <div class="testimonial-card" tabindex="0" data-aos="fade-right" data-aos-delay="200">
-              <p>“Their sustainable solutions helped us save on energy costs. We’ll work with them again.”</p>
-              <span class="testimonial-meta">– Mike R.</span>
-            </div>
-          </div>
-          <button class="carousel-btn next" id="testimonialNext" aria-label="Next testimonial"><i class="fa-solid fa-chevron-right"></i></button>
+        <h2>Custom Form or Sheet</h2>
+        <p>You can embed a Google Form, Google Sheet, or any iframe-based widget here. Edit this section as needed.</p>
+        <!-- Example Google Form embed (replace src with your own) -->
+        <div class="embed-container" style="width:100%;max-width:700px;margin:0 auto;">
+          <!-- Replace the src below with your Google Form or Sheet embed link -->
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfD7w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w/viewform?embedded=true"
+            width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Embedded Google Form" allowfullscreen>
+            Loading…
+          </iframe>
         </div>
       </div>
     </section>
-    <section id="contact" class="contact-section" data-aos="fade-up">
-      <div class="section-content">
-        <h2>Contact</h2>
-        <form id="contactForm" autocomplete="on" novalidate aria-describedby="formLiveRegion">
-          <div class="form-group">
-            <input id="name" name="name" placeholder="Your Name" required aria-label="Your Name" autocomplete="name" aria-describedby="nameError" aria-invalid="false" />
-          </div>
-          <div class="form-group">
-            <input id="email" name="email" type="email" placeholder="Email" required aria-label="Email" autocomplete="email" aria-describedby="emailError" aria-invalid="false" />
-            <button type="button" id="copyEmailBtn" class="copy-email-btn" aria-label="Copy email address" tabindex="0"><i class="fa-solid fa-copy"></i></button>
-          </div>
-          <div class="form-group">
-            <input id="phone" name="phone" type="tel" placeholder="Phone (optional)" aria-label="Phone" autocomplete="tel" aria-describedby="phoneError" pattern="^[0-9+\-\s().]{7,}$" aria-invalid="false" />
-          </div>
-          <div class="form-group">
-            <textarea id="message" name="message" placeholder="Message" required aria-label="Message" aria-describedby="messageError" aria-invalid="false"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" id="submitBtn">
-            <span id="submitBtnText">Send</span>
-            <span id="submitSpinner" class="spinner" aria-hidden="true" style="display:none;"></span>
-          </button>
-          <div id="formStatus" role="status" aria-live="polite" aria-busy="false"></div>
-        </form>
-        <!-- Modal for form submission feedback -->
-        <div id="formModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" tabindex="-1" style="display:none;">
-          <div class="modal-content">
-            <h3 id="modalTitle">Thank you!</h3>
-            <p id="modalDesc">Your message has been sent. We’ll get back to you soon.</p>
-            <button id="closeModalBtn" class="btn btn-primary" aria-label="Close dialog" type="button">Close</button>
-          </div>
-        </div>
-        <div id="modalOverlay" class="modal-overlay" tabindex="-1" style="display:none;"></div>
-        <!-- Visually hidden live region for accessibility -->
-        <div id="formLiveRegion" class="visually-hidden" aria-live="assertive"></div>
-      </div>
-    </section>
+    <!-- END: Advanced Embeddable Section -->
   </main>
   <!-- Sticky CTA for mobile -->
-  <a href="#contact" class="sticky-cta" id="stickyCta" aria-label="Request a Quote">
+  <a href="#embed" class="sticky-cta" id="stickyCta" aria-label="Request a Quote">
     <i class="fa-solid fa-envelope"></i> Request a Quote
   </a>
   <!-- WhatsApp floating button -->
@@ -187,8 +141,7 @@
         <li><b>Alt+1</b>: Go to About</li>
         <li><b>Alt+2</b>: Go to Services</li>
         <li><b>Alt+3</b>: Go to Projects</li>
-        <li><b>Alt+4</b>: Go to Testimonials</li>
-        <li><b>Alt+5</b>: Go to Contact</li>
+        <li><b>Alt+4</b>: Go to Form/Sheet</li>
         <li><b>Esc</b>: Close modals</li>
       </ul>
       <button id="closeHelpModalBtn" class="btn btn-primary" aria-label="Close help dialog" type="button">Close</button>

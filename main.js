@@ -139,101 +139,6 @@ ready(() => {
     });
   });
 
-  // Simple contact form validation and UX
-  const form = document.getElementById('contactForm');
-  if (form) {
-    const status = document.getElementById('formStatus');
-    const submitBtn = document.getElementById('submitBtn');
-    const submitSpinner = document.getElementById('submitSpinner');
-    const submitBtnText = document.getElementById('submitBtnText');
-    const fields = [
-      { id: 'name', error: 'nameError', message: 'Name is required.' },
-      { id: 'email', error: 'emailError', message: 'Enter a valid email.' },
-      { id: 'message', error: 'messageError', message: 'Message is required.' },
-      { id: 'phone', error: 'phoneError', message: 'Enter a valid phone number.' }
-    ];
-    // Add error message elements if not present
-    fields.forEach(f => {
-      let el = document.getElementById(f.error);
-      if (!el) {
-        el = document.createElement('span');
-        el.id = f.error;
-        el.className = 'error-message';
-        const input = document.getElementById(f.id);
-        if (input && input.parentNode) input.parentNode.appendChild(el);
-      }
-    });
-    form.onsubmit = async function(e) {
-      e.preventDefault();
-      let valid = true;
-      // Clear previous errors
-      fields.forEach(f => {
-        const err = document.getElementById(f.error);
-        if (err) err.textContent = '';
-        const input = document.getElementById(f.id);
-        if (input) input.setAttribute('aria-invalid', 'false');
-      });
-      status.textContent = '';
-      status.classList.remove('success');
-      status.setAttribute('aria-busy', 'true');
-      // Validate fields
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const message = form.message.value.trim();
-      const phone = form.phone.value.trim();
-      if (!name) {
-        document.getElementById('nameError').textContent = 'Name is required.';
-        document.getElementById('name').setAttribute('aria-invalid', 'true');
-        valid = false;
-      }
-      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        document.getElementById('emailError').textContent = 'Enter a valid email.';
-        document.getElementById('email').setAttribute('aria-invalid', 'true');
-        valid = false;
-      }
-      if (!message) {
-        document.getElementById('messageError').textContent = 'Message is required.';
-        document.getElementById('message').setAttribute('aria-invalid', 'true');
-        valid = false;
-      }
-      if (phone && !/^[0-9+\-\s().]{7,}$/.test(phone)) {
-        document.getElementById('phoneError').textContent = 'Enter a valid phone number.';
-        document.getElementById('phone').setAttribute('aria-invalid', 'true');
-        valid = false;
-      }
-      if (!valid) {
-        status.setAttribute('aria-busy', 'false');
-        return;
-      }
-      // Show spinner and disable submit
-      if (submitSpinner) submitSpinner.style.display = '';
-      if (submitBtn) submitBtn.disabled = true;
-      if (submitBtnText) submitBtnText.textContent = 'Sending...';
-      status.textContent = '';
-      try {
-        const response = await fetch('https://formspree.io/f/mnqekgqj', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
-        });
-        if (response.ok) {
-          status.textContent = '';
-          status.classList.add('success');
-          form.reset();
-          showModal();
-        } else {
-          status.textContent = 'There was an error. Please try again later.';
-        }
-      } catch (err) {
-        status.textContent = 'Network error. Please try again.';
-      }
-      if (submitSpinner) submitSpinner.style.display = 'none';
-      if (submitBtn) submitBtn.disabled = false;
-      if (submitBtnText) submitBtnText.textContent = 'Send';
-      status.setAttribute('aria-busy', 'false');
-    };
-  }
-
   // Modal dialog logic for form submission
   function showModal() {
     const modal = document.getElementById('formModal');
@@ -412,30 +317,6 @@ ready(() => {
         copyEmailBtn.click();
       }
     });
-  }
-
-  // Testimonial carousel (advanced: keyboard navigation)
-  const testimonialCards = document.getElementById('testimonialCards');
-  const testimonialPrev = document.getElementById('testimonialPrev');
-  const testimonialNext = document.getElementById('testimonialNext');
-  if (testimonialCards && testimonialPrev && testimonialNext) {
-    let idx = 0;
-    const cards = testimonialCards.querySelectorAll('.testimonial-card');
-    function show(idxNew, focus = true) {
-      idx = (idxNew + cards.length) % cards.length;
-      testimonialCards.style.transform = `translateX(-${idx * 100}%)`;
-      cards.forEach((c, i) => c.setAttribute('tabindex', i === idx ? '0' : '-1'));
-      if (focus) cards[idx].focus();
-    }
-    testimonialPrev.onclick = () => show(idx - 1);
-    testimonialNext.onclick = () => show(idx + 1);
-    cards.forEach((card, i) => {
-      card.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft') testimonialPrev.click();
-        if (e.key === 'ArrowRight') testimonialNext.click();
-      });
-    });
-    show(0, false);
   }
 });
 
