@@ -43,7 +43,7 @@ const animateThemeTransition = () => {
 };
 
 // --- Main ---
-ready(() => {
+ready(async () => {
   // Year in footer
   $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
@@ -492,6 +492,50 @@ ready(() => {
       }
     });
     copyEmailBtn.setAttribute('aria-live', 'polite');
+  }
+
+  function greetUser() {
+    console.log('Hello from Allied Construction! Enjoy your visit.');
+  }
+  greetUser();
+
+  // PWA: service-worker registration
+  if ('serviceWorker' in navigator) {
+    try {
+      await navigator.serviceWorker.register('/sw.js');
+      console.log('Service Worker registered');
+    } catch (err) {
+      console.error('SW registration failed:', err);
+    }
+  }
+
+  // Performance: log Largest Contentful Paint
+  new PerformanceObserver(list => {
+    list.getEntries().forEach(e => console.log('LCP:', e.startTime));
+  }).observe({ type: 'largest-contentful-paint', buffered: true });
+
+  // PWA: install prompt UI
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const btn = document.getElementById('installBtn');
+    if (btn) {
+      btn.style.display = 'block';
+      btn.onclick = async () => {
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        console.log('PWA install:', choice.outcome);
+        btn.style.display = 'none';
+      };
+    }
+  });
+
+  // Dynamic import example (analytics)
+  if (navigator.onLine) {
+    import('./analytics.js')
+      .then(mod => mod.initAnalytics())
+      .catch(() => {/* no analytics */});
   }
 });
 

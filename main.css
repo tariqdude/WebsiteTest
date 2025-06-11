@@ -22,6 +22,28 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* global smooth scrolling */
+html { scroll-behavior: smooth; }
+/* snap sections into view */
+main { scroll-snap-type: y proximity; }
+section { scroll-snap-align: start; }
+/* fluid headline */
+.hero h1 { font-size: clamp(2rem, 5vw, 3rem); }
+/* tint form controls */
+input, button, select, textarea { accent-color: var(--accent); }
+/* container query for cards */
+.cards { container: cards / inline-size; }
+@container cards (min-width: 640px) {
+  .card { padding: 2rem; }
+}
+/* backdrop blur if supported */
+@supports (backdrop-filter: blur(4px)) {
+  .site-header, .card {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(4px);
+  }
+}
+
 .skip-link {
   position: absolute;
   left: -999px;
@@ -893,12 +915,10 @@ html, body, [data-theme] {
   background: rgba(35,38,58,0.98);
 }
 
-/* Advanced transitions for theme and UI */
-html, body, [data-theme] {
-  transition: background 0.5s cubic-bezier(.4,0,.2,1), color 0.5s cubic-bezier(.4,0,.2,1), border-color 0.5s cubic-bezier(.4,0,.2,1);
-}
-.card, .project-card, .testimonial-card, .embed-section, .modal, .site-header {
-  transition: box-shadow 0.35s, background 0.35s, color 0.35s, border-color 0.35s;
+/* Grow effect on hover */
+.grow:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
 }
 
 /* ...existing code... */
