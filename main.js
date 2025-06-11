@@ -22,6 +22,7 @@ ready(() => {
     document.body.classList.toggle('dark', mode === 'dark');
     localStorage.setItem('theme', mode);
     if (themeIcon) themeIcon.className = mode === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    if (themeBtn) themeBtn.setAttribute('aria-pressed', mode === 'dark');
   }
   const savedTheme = localStorage.getItem('theme');
   setTheme(savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light'));
@@ -71,6 +72,12 @@ ready(() => {
         hamburger.setAttribute('aria-expanded', false);
       }
     });
+    hamburger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hamburger.click();
+      }
+    });
   }
 
   // Back-to-top button (debounced)
@@ -82,6 +89,12 @@ ready(() => {
   toggleTopBtn();
   if (topBtn) {
     topBtn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+    topBtn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        topBtn.click();
+      }
+    });
   }
 
   // Highlight active nav link on scroll
@@ -120,6 +133,8 @@ ready(() => {
         prev.focus();
       }
     });
+    card.addEventListener('focus', () => card.classList.add('focus-effect'));
+    card.addEventListener('blur', () => card.classList.remove('focus-effect'));
   });
 
   // Improved smooth scroll for anchor links (with reduced motion support)
@@ -181,6 +196,39 @@ ready(() => {
   // Expose modal functions globally for form handler
   window.showModal = showModal;
   window.closeModal = closeModal;
+
+  // Keyboard help modal logic (advanced)
+  function showHelpModal() {
+    const modal = document.getElementById('helpModal');
+    if (!modal) return;
+    modal.style.display = 'block';
+    modal.focus();
+    document.body.setAttribute('aria-hidden', 'true');
+    // Trap focus inside modal
+    const focusable = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+    let first = focusable[0], last = focusable[focusable.length - 1];
+    modal.onkeydown = e => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+      if (e.key === 'Escape') closeHelpModal();
+    };
+    document.getElementById('closeHelpModalBtn').onclick = closeHelpModal;
+  }
+  function closeHelpModal() {
+    const modal = document.getElementById('helpModal');
+    if (!modal) return;
+    modal.style.display = 'none';
+    document.body.removeAttribute('aria-hidden');
+    // Return focus to theme toggle for accessibility
+    document.getElementById('themeToggle')?.focus();
+  }
+  window.showHelpModal = showHelpModal;
+  window.closeHelpModal = closeHelpModal;
 
   // Scroll progress bar
   const scrollProgress = document.getElementById('scrollProgress');
@@ -259,13 +307,12 @@ ready(() => {
         e.preventDefault();
       }
     }
-    // Alt+1..5 for nav
+    // Alt+1..4 for nav (updated for new nav structure)
     if (e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
       if (e.key === '1') document.querySelector('a[href="#about"]')?.click();
       if (e.key === '2') document.querySelector('a[href="#services"]')?.click();
       if (e.key === '3') document.querySelector('a[href="#projects"]')?.click();
-      if (e.key === '4') document.querySelector('a[href="#testimonials"]')?.click();
-      if (e.key === '5') document.querySelector('a[href="#contact"]')?.click();
+      if (e.key === '4') document.querySelector('a[href="#embed"]')?.click();
     }
     // Alt+0 for scroll to top
     if (e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey && e.key === '0') {

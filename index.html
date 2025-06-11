@@ -6,9 +6,22 @@
   <title>Allied Construction | Chicago Design-Build Firm</title>
   <meta name="description" content="Allied Construction is Chicago’s award‑winning design‑build firm for commercial, industrial & high‑end residential projects." />
   <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#1d4ed8" />
+  <meta name="author" content="Allied Construction" />
+  <meta property="og:title" content="Allied Construction | Chicago Design-Build Firm" />
+  <meta property="og:description" content="Award-winning design-build firm for commercial, industrial & high-end residential projects in Chicago." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alliedconstruction.example.com/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Allied Construction | Chicago Design-Build Firm" />
+  <meta name="twitter:description" content="Award-winning design-build firm for commercial, industrial & high-end residential projects in Chicago." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231d4ed8'/><text x='50' y='60' font-size='50' text-anchor='middle' fill='white' font-family='Montserrat'>A</text></svg>">
+  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=180&q=80" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="main.css" />
 </head>
 <body data-advanced="true">
@@ -22,20 +35,20 @@
     </noscript>
   </div>
   <!-- Scroll progress bar -->
-  <div id="scrollProgress" class="scroll-progress"></div>
-  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
+  <a href="#main" class="skip-link" tabindex="1">Skip to main content</a>
   <header class="site-header" role="banner" id="siteHeader">
     <nav class="navbar" aria-label="Main navigation">
       <div class="nav-brand">
-        <span class="logo">Allied Construction</span>
+        <span class="logo" aria-label="Allied Construction Home">Allied Construction</span>
       </div>
-      <button id="themeToggle" aria-label="Toggle light/dark mode"><i class="fa-solid fa-sun"></i></button>
+      <button id="themeToggle" aria-label="Toggle light/dark mode" aria-pressed="false"><i class="fa-solid fa-sun"></i></button>
       <button id="hamburger" aria-label="Open menu" aria-controls="menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
       <ul id="menu" class="nav-menu" role="menubar">
-        <li><a href="#about" aria-current="page" role="menuitem">About</a></li>
-        <li><a href="#services" role="menuitem">Services</a></li>
-        <li><a href="#projects" role="menuitem">Projects</a></li>
-        <li><a href="#embed" role="menuitem">Form/Sheet</a></li>
+        <li><a href="#about" aria-current="page" role="menuitem" tabindex="2">About</a></li>
+        <li><a href="#services" role="menuitem" tabindex="3">Services</a></li>
+        <li><a href="#projects" role="menuitem" tabindex="4">Projects</a></li>
+        <li><a href="#embed" role="menuitem" tabindex="5">Form/Sheet</a></li>
       </ul>
     </nav>
   </header>
@@ -44,39 +57,44 @@
       <div class="hero-content">
         <h1 class="hero-headline" id="heroHeadline" aria-live="polite"></h1>
         <p id="heroSub">Chicago’s trusted design-build partner for commercial, industrial, and residential projects.</p>
-        <a href="#embed" class="btn btn-primary">Get a Quote</a>
+        <a href="#embed" class="btn btn-primary" tabindex="6">Get a Quote</a>
       </div>
       <!-- Scroll down arrow -->
-      <button class="scroll-down-arrow" id="scrollDownArrow" aria-label="Scroll to About">
+      <button class="scroll-down-arrow" id="scrollDownArrow" aria-label="Scroll to About" tabindex="7">
         <i class="fa-solid fa-arrow-down"></i>
       </button>
     </section>
-    <section id="about" class="about-section" data-aos="fade-up">
+    <section id="about" class="about-section" data-aos="fade-up" aria-labelledby="aboutHeading">
       <div class="section-content">
-        <h2>About Us</h2>
+        <h2 id="aboutHeading">About Us</h2>
         <p>Since 1995, Allied Construction has delivered quality, safety, and sustainability in every project. We focus on clear communication, reliability, and results.</p>
+        <ul>
+          <li><strong>Founded:</strong> 1995</li>
+          <li><strong>Location:</strong> Chicago, IL</li>
+          <li><strong>Certifications:</strong> LEED, OSHA, Energy Star</li>
+        </ul>
       </div>
     </section>
-    <section id="services" class="services-section" data-aos="fade-up">
+    <section id="services" class="services-section" data-aos="fade-up" aria-labelledby="servicesHeading">
       <div class="section-content">
-        <h2>Our Services</h2>
-        <div class="cards">
-          <div class="card" tabindex="0" data-aos="zoom-in">
+        <h2 id="servicesHeading">Our Services</h2>
+        <div class="cards" role="list">
+          <div class="card" tabindex="0" data-aos="zoom-in" aria-label="Commercial Construction">
             <i class="fa-solid fa-city"></i>
             <h3>Commercial</h3>
             <p>Office, retail, and industrial spaces built to the highest standards.</p>
           </div>
-          <div class="card" tabindex="0" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card" tabindex="0" data-aos="zoom-in" data-aos-delay="100" aria-label="Residential Construction">
             <i class="fa-solid fa-house"></i>
             <h3>Residential</h3>
             <p>Custom homes, renovations, and luxury living solutions.</p>
           </div>
-          <div class="card" tabindex="0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card" tabindex="0" data-aos="zoom-in" data-aos-delay="200" aria-label="HVAC Services">
             <i class="fa-solid fa-screwdriver-wrench"></i>
             <h3>HVAC</h3>
             <p>Efficient, reliable heating and cooling for every environment.</p>
           </div>
-          <div class="card" tabindex="0" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card" tabindex="0" data-aos="zoom-in" data-aos-delay="300" aria-label="Sustainable Solutions">
             <i class="fa-solid fa-solar-panel"></i>
             <h3>Sustainable</h3>
             <p>Green building, solar, and energy-saving solutions.</p>
@@ -88,19 +106,19 @@
     <section id="projects" class="projects-section" aria-labelledby="projectsHeading" data-aos="fade-up">
       <div class="section-content">
         <h2 id="projectsHeading">Recent Projects</h2>
-        <div class="cards projects-cards">
-          <div class="card project-card" tabindex="0" data-aos="flip-left">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Modern Office Interior" class="project-img" />
+        <div class="cards projects-cards" role="list">
+          <div class="card project-card" tabindex="0" data-aos="flip-left" aria-label="Modern Office Buildout">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Modern Office Interior" class="project-img" loading="lazy" />
             <h3>Modern Office Buildout</h3>
             <p>Downtown Chicago, 2023<br>LEED Gold certified workspace for 200+ employees.</p>
           </div>
-          <div class="card project-card" tabindex="0" data-aos="flip-left" data-aos-delay="100">
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Luxury Home Exterior" class="project-img" />
+          <div class="card project-card" tabindex="0" data-aos="flip-left" data-aos-delay="100" aria-label="Luxury Home Renovation">
+            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Luxury Home Exterior" class="project-img" loading="lazy" />
             <h3>Luxury Home Renovation</h3>
             <p>Lincoln Park, 2022<br>Historic home, modernized with sustainable materials.</p>
           </div>
-          <div class="card project-card" tabindex="0" data-aos="flip-left" data-aos-delay="200">
-            <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Industrial Facility" class="project-img" />
+          <div class="card project-card" tabindex="0" data-aos="flip-left" data-aos-delay="200" aria-label="Industrial Facility Upgrade">
+            <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Industrial Facility" class="project-img" loading="lazy" />
             <h3>Industrial Facility Upgrade</h3>
             <p>West Side, 2023<br>HVAC and solar retrofit for energy efficiency.</p>
           </div>
@@ -108,15 +126,15 @@
       </div>
     </section>
     <!-- BEGIN: Advanced Embeddable Section -->
-    <section id="embed" class="embed-section advanced" data-aos="fade-up">
+    <section id="embed" class="embed-section advanced" data-aos="fade-up" aria-labelledby="embedHeading">
       <div class="section-content">
-        <h2>Custom Form or Sheet</h2>
+        <h2 id="embedHeading">Custom Form or Sheet</h2>
         <p>You can embed a Google Form, Google Sheet, or any iframe-based widget here. Edit this section as needed.</p>
         <!-- Example Google Form embed (replace src with your own) -->
         <div class="embed-container" style="width:100%;max-width:700px;margin:0 auto;">
           <!-- Replace the src below with your Google Form or Sheet embed link -->
           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfD7w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w/viewform?embedded=true"
-            width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Embedded Google Form" allowfullscreen>
+            width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Embedded Google Form" allowfullscreen aria-label="Embedded Google Form">
             Loading…
           </iframe>
         </div>
