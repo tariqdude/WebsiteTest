@@ -35,6 +35,13 @@ const setThemeColorMeta = color => {
   meta.content = color;
 };
 
+// --- Advanced Theme Animated Transition ---
+const animateThemeTransition = () => {
+  const body = document.body;
+  body.classList.add('theme-transition');
+  setTimeout(() => body.classList.remove('theme-transition'), 500);
+};
+
 // --- Main ---
 ready(() => {
   // Year in footer
@@ -48,6 +55,7 @@ ready(() => {
   const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   const getThemeColor = theme => theme === 'dark' ? '#181a23' : '#f8fafc';
   function setTheme(mode) {
+    animateThemeTransition();
     themeMode = mode;
     localStorage.setItem('themeMode', mode);
     let theme = mode === 'auto' ? getSystemTheme() : mode;
@@ -88,6 +96,9 @@ ready(() => {
   setTimeout(() => {
     $('#heroHeadline')?.classList.add('animated');
     $('#heroSub')?.classList.add('animated');
+    // Animate color transition
+    $('#heroHeadline')?.style.setProperty('color', 'var(--accent)');
+    $('#heroSub')?.style.setProperty('color', 'var(--accent)');
     const live = document.createElement('div');
     live.setAttribute('aria-live', 'polite');
     live.className = 'visually-hidden';
@@ -96,7 +107,7 @@ ready(() => {
     setTimeout(() => live.remove(), 2000);
   }, 400);
 
-  // --- IntersectionObserver for AOS/Fade-in ---
+  // --- IntersectionObserver for AOS/Fade-in (robust) ---
   function observeAOS() {
     const els = $$('[data-aos]');
     if ('IntersectionObserver' in window && !prefersReducedMotion()) {
@@ -115,7 +126,7 @@ ready(() => {
   }
   observeAOS();
 
-  // --- Mobile Nav ---
+  // --- Mobile Nav (improved accessibility) ---
   const hamburger = $('#hamburger');
   const menu = $('#menu');
   if (hamburger && menu) {
@@ -141,9 +152,11 @@ ready(() => {
         hamburger.click();
       }
     });
+    hamburger.setAttribute('aria-haspopup', 'true');
+    hamburger.setAttribute('aria-expanded', false);
   }
 
-  // --- Back-to-top Button ---
+  // --- Back-to-top Button (with ARIA live) ---
   const topBtn = $('#topBtn');
   function toggleTopBtn() {
     if (topBtn) topBtn.style.display = window.scrollY > 200 ? 'flex' : 'none';
@@ -158,9 +171,10 @@ ready(() => {
         topBtn.click();
       }
     });
+    topBtn.setAttribute('aria-live', 'polite');
   }
 
-  // --- Nav Highlight on Scroll ---
+  // --- Nav Highlight on Scroll (improved) ---
   const navLinks = $$('.nav-menu a');
   const sections = navLinks.map(link => $(link.getAttribute('href')));
   function setActive() {
@@ -169,16 +183,22 @@ ready(() => {
     );
     if (idx === -1) idx = sections.length - 1;
     navLinks.forEach((link, i) => {
-      if (i === idx) link.setAttribute('aria-current', 'page');
-      else link.removeAttribute('aria-current');
+      if (i === idx) {
+        link.setAttribute('aria-current', 'page');
+        link.classList.add('active');
+      } else {
+        link.removeAttribute('aria-current');
+        link.classList.remove('active');
+      }
     });
   }
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
 
-  // --- Keyboard Navigation for Cards ---
+  // --- Keyboard Navigation for Cards (improved) ---
   const allCards = $$('.card, .testimonial-card');
   allCards.forEach((card, idx) => {
+    card.setAttribute('tabindex', '0');
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         card.classList.add('focus-effect');
@@ -199,7 +219,7 @@ ready(() => {
     card.addEventListener('blur', () => card.classList.remove('focus-effect'));
   });
 
-  // --- Smooth Scroll for Anchor Links ---
+  // --- Smooth Scroll for Anchor Links (improved) ---
   $$( 'a[href^="#"]' ).forEach(link => {
     link.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href').slice(1);
@@ -213,9 +233,10 @@ ready(() => {
         setTimeout(() => target.focus({ preventScroll: true }), 300);
       }
     });
+    link.setAttribute('role', 'link');
   });
 
-  // --- Modal Dialog Logic (with Focus Trap, Scroll Lock) ---
+  // --- Modal Dialog Logic (with Focus Trap, Scroll Lock, ARIA) ---
   function trapFocus(modal) {
     const focusable = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
     let first = focusable[0], last = focusable[focusable.length - 1];
@@ -241,6 +262,8 @@ ready(() => {
       trapFocus(modal);
       overlay.onclick = closeModal;
       $('#closeModalBtn').onclick = closeModal;
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('role', 'dialog');
     }
   }
   function closeModal() {
@@ -260,7 +283,7 @@ ready(() => {
   window.showModal = showModal;
   window.closeModal = closeModal;
 
-  // --- Keyboard Help Modal (with Focus Trap, Scroll Lock) ---
+  // --- Keyboard Help Modal (with Focus Trap, Scroll Lock, ARIA) ---
   function showHelpModal() {
     const modal = $('#helpModal');
     if (!modal) return;
@@ -270,6 +293,8 @@ ready(() => {
     document.body.setAttribute('aria-hidden', 'true');
     trapFocus(modal);
     $('#closeHelpModalBtn').onclick = closeHelpModal;
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('role', 'dialog');
   }
   function closeHelpModal() {
     const modal = $('#helpModal');
@@ -282,18 +307,21 @@ ready(() => {
   window.showHelpModal = showHelpModal;
   window.closeHelpModal = closeHelpModal;
 
-  // --- Scroll Progress Bar ---
+  // --- Scroll Progress Bar (animated) ---
   const scrollProgress = $('#scrollProgress');
   function updateScrollProgress() {
     const h = document.documentElement, b = document.body;
     const st = h.scrollTop || b.scrollTop, sh = h.scrollHeight - h.clientHeight;
     const pct = sh > 0 ? (st / sh) * 100 : 0;
-    if (scrollProgress) scrollProgress.style.width = pct + '%';
+    if (scrollProgress) {
+      scrollProgress.style.width = pct + '%';
+      scrollProgress.setAttribute('aria-valuenow', Math.round(pct));
+    }
   }
   window.addEventListener('scroll', updateScrollProgress, { passive: true });
   updateScrollProgress();
 
-  // --- Sticky Header Hide/Show on Scroll ---
+  // --- Sticky Header Hide/Show on Scroll (with shadow) ---
   const siteHeader = $('#siteHeader');
   let lastScrollY = window.scrollY;
   let headerHidden = false;
@@ -302,16 +330,18 @@ ready(() => {
     if (!siteHeader) return;
     if (curr > lastScrollY && curr > 80 && !headerHidden) {
       siteHeader.style.transform = 'translateY(-100%)';
+      siteHeader.classList.add('scrolled');
       headerHidden = true;
     } else if (curr < lastScrollY && headerHidden) {
       siteHeader.style.transform = '';
+      siteHeader.classList.remove('scrolled');
       headerHidden = false;
     }
     lastScrollY = curr;
   }
   window.addEventListener('scroll', throttle(handleHeaderHide, 80), { passive: true });
 
-  // --- Hero Headline Typing Effect ---
+  // --- Hero Headline Typing Effect (with gradient) ---
   const heroHeadline = $('#heroHeadline');
   if (heroHeadline) {
     const text = "Build Better. Build Allied.";
@@ -327,6 +357,11 @@ ready(() => {
       }
     }
     setTimeout(typeNext, 400);
+    heroHeadline.style.background = 'linear-gradient(90deg, var(--accent), var(--primary), var(--accent))';
+    heroHeadline.style.backgroundSize = '200% 200%';
+    heroHeadline.style.webkitBackgroundClip = 'text';
+    heroHeadline.style.backgroundClip = 'text';
+    heroHeadline.style.color = 'transparent';
   }
 
   // --- Sticky CTA Hide When Embed In View (IntersectionObserver) ---
@@ -356,10 +391,11 @@ ready(() => {
       window.addEventListener('resize', fallback);
       fallback();
     }
+    stickyCta.setAttribute('aria-live', 'polite');
   }
   stickyCtaObserver();
 
-  // --- Print Button and Print Mode ---
+  // --- Print Button and Print Mode (with ARIA) ---
   const printBtn = $('#printBtn');
   if (printBtn) {
     printBtn.onclick = () => {
@@ -369,9 +405,10 @@ ready(() => {
     window.addEventListener('afterprint', () => {
       document.body.classList.remove('printing');
     });
+    printBtn.setAttribute('aria-live', 'polite');
   }
 
-  // --- Keyboard Shortcuts ---
+  // --- Keyboard Shortcuts (improved) ---
   document.addEventListener('keydown', function(e) {
     if ((e.key === '?' || e.key === '/') && !e.ctrlKey && !e.altKey && !e.metaKey) {
       if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
@@ -388,28 +425,33 @@ ready(() => {
     if (e.altKey && !e.shiftKey && !e.ctrlKey && !e.metaKey && e.key === '0') {
       window.scrollTo({top:0,behavior:'smooth'});
     }
-    if (e.key === 'Escape') closeHelpModal();
+    if (e.key === 'Escape') {
+      closeHelpModal();
+      closeModal();
+    }
   });
 
-  // --- Loading Overlay Hide ---
+  // --- Loading Overlay Hide (animated) ---
   const loadingOverlay = $('#loadingOverlay');
   window.addEventListener('load', () => {
     if (loadingOverlay) {
       loadingOverlay.setAttribute('aria-hidden', 'true');
+      loadingOverlay.style.opacity = '0';
       setTimeout(() => loadingOverlay.style.display = 'none', prefersReducedMotion() ? 0 : 400);
     }
   });
 
-  // --- Scroll Down Arrow in Hero ---
+  // --- Scroll Down Arrow in Hero (improved) ---
   const scrollDownArrow = $('#scrollDownArrow');
   if (scrollDownArrow) {
     scrollDownArrow.onclick = () => {
       const about = $('#about');
       if (about) about.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
+    scrollDownArrow.setAttribute('aria-live', 'polite');
   }
 
-  // --- Fade-in Cards on Scroll (IntersectionObserver) ---
+  // --- Fade-in Cards on Scroll (IntersectionObserver, robust) ---
   function fadeInOnScroll() {
     const els = $$('.card, .project-card, .testimonial-card');
     if ('IntersectionObserver' in window && !prefersReducedMotion()) {
@@ -425,10 +467,11 @@ ready(() => {
     } else {
       els.forEach(el => el.classList.add('visible'));
     }
+    els.forEach(el => el.setAttribute('aria-live', 'polite'));
   }
   fadeInOnScroll();
 
-  // --- Copy Email Button (Visual Feedback) ---
+  // --- Copy Email Button (Visual Feedback, ARIA) ---
   const copyEmailBtn = $('#copyEmailBtn');
   const emailInput = $('#email');
   if (copyEmailBtn && emailInput) {
@@ -448,6 +491,7 @@ ready(() => {
         copyEmailBtn.click();
       }
     });
+    copyEmailBtn.setAttribute('aria-live', 'polite');
   }
 });
 
