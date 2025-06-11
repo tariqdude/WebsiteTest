@@ -551,3 +551,377 @@ ready(async () => {
 
 // --- Restore Scroll Position on Back/Forward ---
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+class AdvancedWebsite {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    this.setupEventListeners();
+    this.handleLoading();
+    this.setupScrollEffects();
+    this.setupFormValidation();
+    this.setupAnimations();
+    this.setupServiceInteractions();
+  }
+
+  setupEventListeners() {
+    // Navigation toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    navToggle?.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const isExpanded = navMenu.classList.contains('active');
+      navToggle.setAttribute('aria-expanded', isExpanded);
+    });
+
+    // Close mobile menu when clicking on links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          const headerHeight = document.querySelector('.header').offsetHeight;
+          const targetPosition = target.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // CTA button interaction
+    const ctaButton = document.querySelector('.cta-button');
+    ctaButton?.addEventListener('click', () => {
+      this.showNotification('Welcome! Explore our amazing features below.', 'success');
+      document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Back to top button
+    const backToTopButton = document.querySelector('.back-to-top');
+    backToTopButton?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  handleLoading() {
+    const loadingScreen = document.querySelector('.loading-screen');
+    
+    // Simulate loading time and hide loading screen
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        loadingScreen?.classList.add('hidden');
+        setTimeout(() => {
+          loadingScreen?.remove();
+        }, 500);
+      }, 1000);
+    });
+  }
+
+  setupScrollEffects() {
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
+    const backToTopButton = document.querySelector('.back-to-top');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Header hide/show on scroll
+      if (scrollTop > lastScrollTop && scrollTop > 100) {
+        header.style.transform = 'translateY(-100%)';
+      } else {
+        header.style.transform = 'translateY(0)';
+      }
+      lastScrollTop = scrollTop;
+
+      // Back to top button visibility
+      if (scrollTop > 500) {
+        backToTopButton?.classList.add('visible');
+      } else {
+        backToTopButton?.classList.remove('visible');
+      }
+
+      // Parallax effect for floating shapes
+      this.updateParallax(scrollTop);
+    });
+  }
+
+  updateParallax(scrollTop) {
+    const shapes = document.querySelectorAll('.shape');
+    shapes.forEach((shape, index) => {
+      const speed = 0.5 + (index * 0.2);
+      const yPos = -(scrollTop * speed);
+      shape.style.transform = `translate3d(0, ${yPos}px, 0)`;
+    });
+  }
+
+  setupAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements with animation attributes
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      el.classList.add('fade-up');
+      observer.observe(el);
+    });
+  }
+
+  setupFormValidation() {
+    const form = document.querySelector('.contact-form');
+    if (!form) return;
+
+    const validators = {
+      name: (value) => {
+        if (!value.trim()) return 'Name is required';
+        if (value.trim().length < 2) return 'Name must be at least 2 characters';
+        return null;
+      },
+      email: (value) => {
+        if (!value.trim()) return 'Email is required';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) return 'Please enter a valid email address';
+        return null;
+      },
+      message: (value) => {
+        if (!value.trim()) return 'Message is required';
+        if (value.trim().length < 10) return 'Message must be at least 10 characters';
+        return null;
+      }
+    };
+
+    // Real-time validation
+    Object.keys(validators).forEach(fieldName => {
+      const field = form.querySelector(`[name="${fieldName}"]`);
+      const errorElement = field?.parentElement.querySelector('.error-message');
+
+      field?.addEventListener('blur', () => {
+        this.validateField(field, validators[fieldName], errorElement);
+      });
+
+      field?.addEventListener('input', () => {
+        if (field.classList.contains('error')) {
+          this.validateField(field, validators[fieldName], errorElement);
+        }
+      });
+    });
+
+    // Form submission
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      let isValid = true;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+
+      // Validate all fields
+      Object.keys(validators).forEach(fieldName => {
+        const field = form.querySelector(`[name="${fieldName}"]`);
+        const errorElement = field?.parentElement.querySelector('.error-message');
+        const fieldValid = this.validateField(field, validators[fieldName], errorElement);
+        if (!fieldValid) isValid = false;
+      });
+
+      if (isValid) {
+        this.submitForm(data);
+      }
+    });
+  }
+
+  validateField(field, validator, errorElement) {
+    const error = validator(field.value);
+    
+    if (error) {
+      field.classList.add('error');
+      if (errorElement) errorElement.textContent = error;
+      return false;
+    } else {
+      field.classList.remove('error');
+      if (errorElement) errorElement.textContent = '';
+      return true;
+    }
+  }
+
+  async submitForm(data) {
+    const submitButton = document.querySelector('.submit-button');
+    const originalText = submitButton.textContent;
+    
+    try {
+      submitButton.textContent = 'Sending...';
+      submitButton.disabled = true;
+
+      // Simulate API call
+      await this.delay(2000);
+      
+      this.showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+      document.querySelector('.contact-form').reset();
+      
+    } catch (error) {
+      this.showNotification('Failed to send message. Please try again.', 'error');
+    } finally {
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+    }
+  }
+
+  setupServiceInteractions() {
+    const serviceItems = document.querySelectorAll('.service-item');
+    
+    serviceItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const service = item.dataset.service;
+        this.showServiceDetails(service);
+      });
+
+      // Add ripple effect
+      item.addEventListener('mousedown', (e) => {
+        this.createRipple(e, item);
+      });
+    });
+  }
+
+  showServiceDetails(service) {
+    const serviceDetails = {
+      'web-dev': 'Our web development services include modern frameworks like React, Vue, and Angular, along with robust backend solutions.',
+      'mobile-dev': 'We create native iOS and Android apps, as well as cross-platform solutions using React Native and Flutter.',
+      'ui-ux': 'Our design team focuses on user research, wireframing, prototyping, and creating beautiful, intuitive interfaces.'
+    };
+
+    const detail = serviceDetails[service] || 'Service details coming soon!';
+    this.showNotification(detail, 'info');
+  }
+
+  createRipple(event, element) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.cssText = `
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.3);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      width: ${size}px;
+      height: ${size}px;
+      left: ${x}px;
+      top: ${y}px;
+      pointer-events: none;
+    `;
+    
+    element.style.position = 'relative';
+    element.style.overflow = 'hidden';
+    element.appendChild(ripple);
+    
+    setTimeout(() => ripple.remove(), 600);
+  }
+
+  showNotification(message, type = 'info') {
+    // Remove existing notifications
+    document.querySelectorAll('.notification').forEach(n => n.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.style.cssText = `
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      padding: 1rem 1.5rem;
+      background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+      color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      z-index: 10000;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      max-width: 300px;
+      word-wrap: break-word;
+    `;
+    
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+      notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Auto remove
+    setTimeout(() => {
+      notification.style.transform = 'translateX(100%)';
+      setTimeout(() => notification.remove(), 300);
+    }, 5000);
+  }
+
+  delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+}
+
+// Add dynamic ripple animation CSS
+const rippleCSS = `
+  @keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+`;
+
+const style = document.createElement('style');
+style.textContent = rippleCSS;
+document.head.appendChild(style);
+
+// Initialize the website when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new AdvancedWebsite();
+});
+
+// Add keyboard navigation support
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    // Close mobile menu if open
+    const navMenu = document.querySelector('.nav-menu');
+    const navToggle = document.querySelector('.nav-toggle');
+    if (navMenu?.classList.contains('active')) {
+      navMenu.classList.remove('active');
+      navToggle?.setAttribute('aria-expanded', 'false');
+    }
+  }
+});
+
+// Performance monitoring
+if ('PerformanceObserver' in window) {
+  const observer = new PerformanceObserver((list) => {
+    list.getEntries().forEach((entry) => {
+      if (entry.entryType === 'largest-contentful-paint') {
+        console.log('LCP:', entry.startTime);
+      }
+    });
+  });
+  
+  observer.observe({ entryTypes: ['largest-contentful-paint'] });
+}
