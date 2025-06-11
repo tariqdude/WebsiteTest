@@ -678,6 +678,7 @@ form#contactForm textarea:focus {
   z-index: 1999;
   animation: overlayFadeIn 0.2s cubic-bezier(.4,0,.2,1);
   cursor: pointer;
+  backdrop-filter: blur(2px);
 }
 
 /* Spinner for loading state */
@@ -692,6 +693,7 @@ form#contactForm textarea:focus {
   vertical-align: middle;
   margin-left: 0.5em;
   background: transparent;
+  filter: drop-shadow(0 0 4px var(--accent));
 }
 
 /* Visually hidden (for live region) */
@@ -725,4 +727,150 @@ form#contactForm textarea:focus {
   box-shadow: 0 2px 8px rgba(30,41,59,0.10);
 }
 
-/* All accessibility, focus, modal, spinner, and responsive styles are present as required. */
+/* Advanced theming */
+[data-theme="dark"] {
+  --primary: #1d4ed8;
+  --accent: #fbbf24;
+  --bg: #181a23;
+  --text: #e5e7ef;
+  --surface: #23263a;
+  --shadow: 0 2px 12px rgba(30,41,59,0.18);
+}
+[data-theme="dark"] body {
+  background: var(--bg);
+  color: var(--text);
+}
+[data-theme="dark"] .site-header,
+[data-theme="dark"] .card,
+[data-theme="dark"] .testimonial-card,
+[data-theme="dark"] .modal,
+[data-theme="dark"] form#contactForm {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 2px 16px rgba(30,41,59,0.22);
+}
+[data-theme="dark"] .nav-menu li a {
+  color: var(--text);
+}
+[data-theme="dark"] .nav-menu li a:hover,
+[data-theme="dark"] .nav-menu li a:focus {
+  background: var(--primary);
+  color: #fff;
+}
+[data-theme="dark"] .btn {
+  background: var(--accent);
+  color: #181a23;
+}
+[data-theme="dark"] .btn:hover,
+[data-theme="dark"] .btn:focus {
+  background: #23263a;
+  color: var(--accent);
+}
+[data-theme="dark"] .scroll-progress {
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+[data-theme="dark"] .sticky-cta {
+  background: var(--accent);
+  color: var(--primary);
+}
+[data-theme="dark"] .sticky-cta:hover,
+[data-theme="dark"] .sticky-cta:focus {
+  background: var(--primary);
+  color: #fff;
+}
+[data-theme="dark"] .whatsapp-btn {
+  background: #128c7e;
+}
+[data-theme="dark"] .whatsapp-btn:hover,
+[data-theme="dark"] .whatsapp-btn:focus {
+  background: #25d366;
+}
+[data-theme="dark"] .loading-overlay {
+  background: rgba(24,26,35,0.97);
+}
+[data-theme="dark"] .modal-overlay {
+  background: rgba(24,26,35,0.45);
+}
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+  background: #23263a;
+  color: var(--text);
+  border-color: #334155;
+}
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group textarea:focus {
+  background: #181a23;
+  border-color: var(--accent);
+}
+[data-theme="dark"] .form-group input:invalid,
+[data-theme="dark"] .form-group textarea:invalid {
+  border-color: #e11d48;
+  background: #2a1a1d;
+}
+[data-theme="dark"] .form-group .error-message {
+  color: #f87171;
+}
+
+/* Animate On Scroll (AOS) classes */
+[data-aos] {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 0.7s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: none;
+}
+[data-aos="fade-up"] { transform: translateY(40px);}
+[data-aos="fade-up"].aos-animate { transform: none;}
+[data-aos="zoom-in"] { transform: scale(0.92);}
+[data-aos="zoom-in"].aos-animate { transform: scale(1);}
+[data-aos="flip-left"] { transform: rotateY(30deg);}
+[data-aos="flip-left"].aos-animate { transform: none;}
+[data-aos="fade-right"] { transform: translateX(-40px);}
+[data-aos="fade-right"].aos-animate { transform: none;}
+
+/* Copy email button feedback */
+.copy-email-btn.copied {
+  background: var(--accent);
+  color: var(--primary);
+  animation: copiedPulse 0.7s;
+}
+@keyframes copiedPulse {
+  0% { box-shadow: 0 0 0 0 var(--accent);}
+  70% { box-shadow: 0 0 0 8px rgba(251,191,36,0);}
+  100% { box-shadow: 0 0 0 0 rgba(251,191,36,0);}
+}
+
+/* Keyboard focus effect for cards */
+.card.focus-effect, .testimonial-card.focus-effect {
+  box-shadow: 0 0 0 4px var(--accent), 0 8px 32px rgba(251,191,36,0.18);
+  transition: box-shadow 0.2s;
+}
+
+/* Advanced class for JS/CSS hooks */
+body[data-advanced="true"] .advanced {
+  /* Custom advanced styles can go here */
+}
+
+/* Enhanced modal overlay and spinner */
+.modal-overlay {
+  /* ...existing code... */
+  backdrop-filter: blur(2px);
+}
+.spinner {
+  /* ...existing code... */
+  filter: drop-shadow(0 0 4px var(--accent));
+}
+
+/* Dynamic hero headline/subtitle transitions */
+.hero-headline, #heroSub {
+  transition: color 0.4s, text-shadow 0.4s;
+}
+.hero-headline.animated, #heroSub.animated {
+  color: var(--accent);
+  text-shadow: 0 2px 8px var(--primary), 0 1px 0 #fff;
+}
+
+/* ...existing code... */

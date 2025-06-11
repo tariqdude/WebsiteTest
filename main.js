@@ -7,15 +7,18 @@ function ready(fn) {
 }
 
 ready(() => {
-  // Set current year in footer
-  const year = document.getElementById('year');
-  if (year) year.textContent = new Date().getFullYear();
+  // Set current year in footer (advanced: use data-year)
+  document.querySelectorAll('[data-year]').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
 
-  // Theme toggle (light/dark)
+  // Advanced theme toggle using data-theme on <html>
+  const html = document.documentElement;
   const themeBtn = document.getElementById('themeToggle');
   const themeIcon = themeBtn && themeBtn.querySelector('i');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   function setTheme(mode) {
+    html.setAttribute('data-theme', mode);
     document.body.classList.toggle('dark', mode === 'dark');
     localStorage.setItem('theme', mode);
     if (themeIcon) themeIcon.className = mode === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
@@ -23,8 +26,30 @@ ready(() => {
   const savedTheme = localStorage.getItem('theme');
   setTheme(savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light'));
   if (themeBtn) {
-    themeBtn.onclick = () => setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+    themeBtn.onclick = () => setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   }
+
+  // Animate hero headline/subtitle on load
+  setTimeout(() => {
+    document.getElementById('heroHeadline')?.classList.add('animated');
+    document.getElementById('heroSub')?.classList.add('animated');
+  }, 400);
+
+  // Animate On Scroll (AOS) for [data-aos] elements
+  function aosInit() {
+    const els = document.querySelectorAll('[data-aos]');
+    function animate() {
+      els.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 60) {
+          el.classList.add('aos-animate');
+        }
+      });
+    }
+    window.addEventListener('scroll', animate, { passive: true });
+    animate();
+  }
+  aosInit();
 
   // Mobile nav
   const hamburger = document.getElementById('hamburger');
@@ -75,12 +100,24 @@ ready(() => {
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
 
-  // Keyboard accessibility for cards
-  document.querySelectorAll('.card, .testimonial-card').forEach(card => {
+  // Keyboard accessibility for cards (advanced: arrow navigation)
+  const allCards = Array.from(document.querySelectorAll('.card, .testimonial-card'));
+  allCards.forEach((card, idx) => {
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         card.classList.add('focus-effect');
         setTimeout(() => card.classList.remove('focus-effect'), 200);
+      }
+      // Arrow navigation between cards
+      if (['ArrowRight', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault();
+        const next = allCards[idx + 1] || allCards[0];
+        next.focus();
+      }
+      if (['ArrowLeft', 'ArrowUp'].includes(e.key)) {
+        e.preventDefault();
+        const prev = allCards[idx - 1] || allCards[allCards.length - 1];
+        prev.focus();
       }
     });
   });
@@ -355,7 +392,7 @@ ready(() => {
   window.addEventListener('scroll', fadeInOnScroll, { passive: true });
   fadeInOnScroll();
 
-  // Copy email button
+  // Copy email button (advanced: visual feedback)
   const copyEmailBtn = document.getElementById('copyEmailBtn');
   const emailInput = document.getElementById('email');
   if (copyEmailBtn && emailInput) {
@@ -369,24 +406,36 @@ ready(() => {
         }, 1200);
       });
     };
+    copyEmailBtn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        copyEmailBtn.click();
+      }
+    });
   }
 
-  // Testimonial carousel
+  // Testimonial carousel (advanced: keyboard navigation)
   const testimonialCards = document.getElementById('testimonialCards');
   const testimonialPrev = document.getElementById('testimonialPrev');
   const testimonialNext = document.getElementById('testimonialNext');
   if (testimonialCards && testimonialPrev && testimonialNext) {
     let idx = 0;
     const cards = testimonialCards.querySelectorAll('.testimonial-card');
-    function show(idxNew) {
+    function show(idxNew, focus = true) {
       idx = (idxNew + cards.length) % cards.length;
       testimonialCards.style.transform = `translateX(-${idx * 100}%)`;
       cards.forEach((c, i) => c.setAttribute('tabindex', i === idx ? '0' : '-1'));
-      cards[idx].focus();
+      if (focus) cards[idx].focus();
     }
     testimonialPrev.onclick = () => show(idx - 1);
     testimonialNext.onclick = () => show(idx + 1);
-    show(0);
+    cards.forEach((card, i) => {
+      card.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') testimonialPrev.click();
+        if (e.key === 'ArrowRight') testimonialNext.click();
+      });
+    });
+    show(0, false);
   }
 });
 
