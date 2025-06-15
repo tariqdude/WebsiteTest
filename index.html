@@ -3,40 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BuildPro Construction</title>
+  <title>BuildPro Construction | Dynamic Website Builder</title>
+  <meta name="description" content="BuildPro Construction specializes in innovative, reliable, and sustainable commercial and residential projects.">
+  <meta property="og:title" content="BuildPro Construction">
+  <meta property="og:description" content="Commercial & Residential Excellence. Building America One Structure at a Time.">
+  <meta property="og:image" content="hero.jpg">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico">
 </head>
 <body>
-  <!-- Header -->
+  <!-- Loading Spinner -->
+  <div id="loadingOverlay" aria-label="Loading" role="status">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Responsive Navigation -->
   <header id="mainHeader">
     <div class="logo">BuildPro</div>
-    <nav>
+    <nav id="mainNav" aria-label="Main Navigation">
       <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#certs">Certifications</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#hero" tabindex="0">Home</a></li>
+        <li><a href="#about" tabindex="0">About</a></li>
+        <li><a href="#services" tabindex="0">Services</a></li>
+        <li><a href="#projects" tabindex="0">Projects</a></li>
+        <li><a href="#team" tabindex="0">Team</a></li>
+        <li><a href="#media" tabindex="0">Media</a></li>
+        <li><a href="#contact" tabindex="0">Contact</a></li>
       </ul>
     </nav>
+    <button id="navToggle" aria-label="Open navigation" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="dark-icon">&#9788;</span>
+    </button>
   </header>
-  
+
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <video autoplay muted loop poster="hero.jpg" id="heroVideo">
       <source src="construction.mp4" type="video/mp4">
-      <!-- fallback image for mobile or if video fails -->
       <img src="hero.jpg" alt="Construction Site">
     </video>
     <div class="hero-overlay">
       <h1>Building America One Structure at a Time</h1>
       <p>Commercial & Residential Excellence</p>
       <a href="#contact" class="cta-btn">Schedule a Call</a>
-      <div class="scroll-down">&#8595;</div>
+      <div class="scroll-down" tabindex="0" aria-label="Scroll down">&#8595;</div>
     </div>
   </section>
-  
+
   <!-- About Section -->
   <section id="about" class="about section">
     <div class="container">
@@ -44,7 +61,7 @@
       <p>BuildPro Construction specializes in innovative, reliable, and sustainable commercial and residential projects, delivering on-time and on-budget for over 20 years.</p>
     </div>
   </section>
-  
+
   <!-- Services Section -->
   <section id="services" class="services section">
     <div class="container">
@@ -73,13 +90,13 @@
       </div>
     </div>
   </section>
-  
+
   <!-- Projects Section -->
   <section id="projects" class="projects section">
     <div class="container">
       <h2>Latest Projects</h2>
       <div class="project-slider">
-        <button class="slider-btn left">&#10094;</button>
+        <button class="slider-btn left" aria-label="Previous project">&#10094;</button>
         <div class="slides">
           <div class="slide active">
             <img src="proj1.jpg" alt="High-rise Tower">
@@ -103,11 +120,11 @@
             </div>
           </div>
         </div>
-        <button class="slider-btn right">&#10095;</button>
+        <button class="slider-btn right" aria-label="Next project">&#10095;</button>
       </div>
     </div>
   </section>
-  
+
   <!-- Why Choose Us Section -->
   <section class="why-choose section">
     <div class="container">
@@ -140,62 +157,41 @@
       </div>
     </div>
   </section>
-  
+
   <!-- Team Section -->
   <section id="team" class="team section">
     <div class="container">
-      <h2>Meet the Team</h2>
+      <h2>Meet Our Team</h2>
       <div class="team-cards">
         <div class="team-card">
-          <img src="ceo.jpg" alt="Jane Smith">
+          <img src="team1.jpg" alt="Jane Smith, CEO">
           <div class="team-info">
             <h4>Jane Smith</h4>
             <p>CEO & Founder</p>
           </div>
         </div>
         <div class="team-card">
-          <img src="pm.jpg" alt="Carlos Gomez">
+          <img src="team2.jpg" alt="John Doe, Project Manager">
           <div class="team-info">
-            <h4>Carlos Gomez</h4>
-            <p>Lead Project Manager</p>
+            <h4>John Doe</h4>
+            <p>Project Manager</p>
           </div>
         </div>
         <div class="team-card">
-          <img src="engineer.jpg" alt="Priya Patel">
+          <img src="team3.jpg" alt="Emily Lee, Architect">
           <div class="team-info">
-            <h4>Priya Patel</h4>
-            <p>Chief Engineer</p>
+            <h4>Emily Lee</h4>
+            <p>Lead Architect</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
-  <!-- Certifications / Awards -->
-  <section id="certs" class="certs section">
+
+  <!-- Partners/Clients Carousel -->
+  <section id="partners" class="partners section">
     <div class="container">
-      <h2>Certifications & Awards</h2>
-      <div class="certs-grid">
-        <div class="cert-item">
-          <img src="leed.png" alt="LEED Certified">
-          <span>LEED Gold</span>
-        </div>
-        <div class="cert-item">
-          <img src="osha.png" alt="OSHA">
-          <span>OSHA Certified</span>
-        </div>
-        <div class="cert-item">
-          <img src="award1.png" alt="Best Builder">
-          <span>Best Builder 2024</span>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Partners Section -->
-  <section class="partners section">
-    <div class="container">
-      <h2>Our Partners</h2>
+      <h2>Our Partners & Clients</h2>
       <div class="partners-carousel">
         <div class="partner-logo"><img src="client1.png" alt="Partner 1"></div>
         <div class="partner-logo"><img src="client2.png" alt="Partner 2"></div>
@@ -204,7 +200,19 @@
       </div>
     </div>
   </section>
-  
+
+  <!-- Video Media Section -->
+  <section id="media" class="media-section section">
+    <div class="container">
+      <h2>Featured Video</h2>
+      <div class="media-embed-wrapper">
+        <iframe class="media-embed" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen tabindex="0"></iframe>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact" class="contact section">
     <div class="container">
@@ -219,13 +227,17 @@
           <strong>Hours:</strong> Mon-Fri 8am-6pm
         </div>
         <div>
-          <a href="https://calendly.com/" class="schedule-btn" target="_blank">Schedule a Call</a>
-          <a href="https://maps.google.com/?q=100+Main+St,+Chicago,+IL" class="map-link" target="_blank">View on Map</a>
+          <a href="https://calendly.com/" class="schedule-btn" target="_blank" rel="noopener">Schedule a Call</a>
+          <a href="https://maps.google.com/?q=100+Main+St,+Chicago,+IL" class="map-link" target="_blank" rel="noopener">View on Map</a>
         </div>
       </div>
     </div>
   </section>
-  
+
+  <!-- Dynamic Section Builder Root -->
+  <main id="sectionsRoot"></main>
+  <button id="addSectionBtn" class="fab" title="Add Section" aria-label="Add Section">+</button>
+
   <!-- Footer -->
   <footer>
     <div class="footer-content">
@@ -237,17 +249,25 @@
         <a href="#team">Team</a>
       </div>
       <div class="footer-social">
-        <a href="#" aria-label="Facebook">&#xf09a;</a>
-        <a href="#" aria-label="LinkedIn">&#xf0e1;</a>
-        <a href="#" aria-label="Instagram">&#xf16d;</a>
+        <a href="#" aria-label="Facebook"><span class="fa">&#xf09a;</span></a>
+        <a href="#" aria-label="LinkedIn"><span class="fa">&#xf0e1;</span></a>
+        <a href="#" aria-label="Instagram"><span class="fa">&#xf16d;</span></a>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2025 BuildPro Construction. All rights reserved.
-      <span id="scrollToTop" title="Back to top">&#8679;</span>
+      &copy; <span id="year"></span> BuildPro Construction. All rights reserved.
+      <span id="scrollToTop" title="Back to top" tabindex="0">&#8679;</span>
     </div>
   </footer>
-  
+
+  <!-- Video Lightbox Modal -->
+  <div id="videoModal" class="modal" aria-modal="true" role="dialog" tabindex="-1">
+    <div class="modal-content">
+      <span class="close-modal" id="closeVideoModal" aria-label="Close">&times;</span>
+      <iframe id="modalVideo" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
