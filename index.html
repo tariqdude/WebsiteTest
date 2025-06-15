@@ -1,252 +1,336 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BuildPro Construction | Dynamic Website Builder</title>
-  <meta name="description" content="BuildPro Construction specializes in innovative, reliable, and sustainable commercial and residential projects.">
+  <title>BuildPro Construction | Modern Construction Solutions</title>
+  <meta name="description" content="BuildPro Construction delivers innovative, sustainable, and reliable commercial and residential projects.">
   <meta property="og:title" content="BuildPro Construction">
-  <meta property="og:description" content="Commercial & Residential Excellence. Building America One Structure at a Time.">
+  <meta property="og:description" content="Modern, Sustainable, and Reliable Construction Solutions.">
   <meta property="og:image" content="hero.jpg">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="favicon.ico">
 </head>
 <body>
+  <!-- Skip to Content Link -->
+  <a href="#mainContent" class="skip-link" tabindex="0">Skip to main content</a>
+
   <!-- Loading Spinner -->
   <div id="loadingOverlay" aria-label="Loading" role="status">
     <div class="spinner"></div>
   </div>
 
-  <!-- Responsive Navigation -->
-  <header id="mainHeader">
-    <div class="logo">BuildPro</div>
-    <nav id="mainNav" aria-label="Main Navigation">
-      <ul>
-        <li><a href="#hero" tabindex="0">Home</a></li>
-        <li><a href="#about" tabindex="0">About</a></li>
-        <li><a href="#services" tabindex="0">Services</a></li>
-        <li><a href="#projects" tabindex="0">Projects</a></li>
-        <li><a href="#team" tabindex="0">Team</a></li>
-        <li><a href="#media" tabindex="0">Media</a></li>
-        <li><a href="#contact" tabindex="0">Contact</a></li>
-      </ul>
-    </nav>
-    <button id="navToggle" aria-label="Open navigation" aria-expanded="false">
-      <span class="hamburger"></span>
-    </button>
-    <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-      <span class="dark-icon">&#9788;</span>
-    </button>
+  <!-- Sticky Navigation -->
+  <header id="mainHeader" class="sticky" role="banner">
+    <div class="container nav-container">
+      <a href="#home" class="logo" aria-label="BuildPro Home">BuildPro</a>
+      <nav id="mainNav" aria-label="Main Navigation" role="navigation">
+        <ul>
+          <li><a href="#home" tabindex="0" aria-current="page">Home</a></li>
+          <li><a href="#about" tabindex="0">About</a></li>
+          <li><a href="#services" tabindex="0">Services</a></li>
+          <li><a href="#projects" tabindex="0">Projects</a></li>
+          <li><a href="#testimonials" tabindex="0">Testimonials</a></li>
+          <li><a href="#blog" tabindex="0">Blog</a></li>
+          <li><a href="#faq" tabindex="0">FAQ</a></li>
+          <li><a href="#contact" tabindex="0">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="navToggle" aria-label="Open navigation" aria-expanded="false" tabindex="0">
+        <span class="hamburger"></span>
+      </button>
+      <button id="darkModeToggle" aria-label="Toggle dark mode" title="Toggle dark mode" tabindex="0">
+        <span class="dark-icon">&#9788;</span>
+      </button>
+    </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <video autoplay muted loop poster="hero.jpg" id="heroVideo">
-      <source src="construction.mp4" type="video/mp4">
-      <img src="hero.jpg" alt="Construction Site">
-    </video>
-    <div class="hero-overlay">
-      <h1>Building America One Structure at a Time</h1>
-      <p>Commercial & Residential Excellence</p>
-      <a href="#contact" class="cta-btn">Schedule a Call</a>
-      <div class="scroll-down" tabindex="0" aria-label="Scroll down">&#8595;</div>
-    </div>
-  </section>
+  <main id="mainContent" tabindex="-1">
+    <!-- Hero Section -->
+    <section class="hero" id="home" aria-label="Hero">
+      <div class="hero-bg">
+        <video autoplay muted loop poster="hero.jpg" id="heroVideo">
+          <source src="construction.mp4" type="video/mp4">
+          <img src="hero.jpg" alt="Modern construction site with cranes and workers" loading="lazy">
+        </video>
+        <div class="hero-gradient"></div>
+      </div>
+      <div class="hero-content container">
+        <h1>Modern Construction, Timeless Quality</h1>
+        <p>Building the future with innovation, sustainability, and trust.</p>
+        <div class="hero-cta-group">
+          <a href="#contact" class="cta-btn primary">Get a Free Quote</a>
+          <a href="#projects" class="cta-btn secondary">View Projects</a>
+        </div>
+        <div class="scroll-down" tabindex="0" aria-label="Scroll down">&#8595;</div>
+      </div>
+    </section>
 
-  <!-- About Section -->
-  <section id="about" class="about section">
-    <div class="container">
-      <h2>About BuildPro</h2>
-      <p>BuildPro Construction specializes in innovative, reliable, and sustainable commercial and residential projects, delivering on-time and on-budget for over 20 years.</p>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="services section">
-    <div class="container">
-      <h2>Our Services</h2>
-      <div class="service-cards">
-        <div class="service-card">
-          <div class="icon">&#128736;</div>
-          <h3>General Contracting</h3>
-          <p>Expert management of construction from concept to completion.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">&#128187;</div>
-          <h3>Design-Build</h3>
-          <p>Integrated design and build for streamlined, efficient delivery.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">&#128295;</div>
-          <h3>Renovations</h3>
-          <p>Modernizing spaces while minimizing downtime and cost.</p>
-        </div>
-        <div class="service-card">
-          <div class="icon">&#127963;</div>
-          <h3>Site Management</h3>
-          <p>Full on-site supervision for safety and quality control.</p>
+    <!-- About Section -->
+    <section id="about" class="about section" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <h2 id="about-heading">About BuildPro</h2>
+            <p>With over 20 years of experience, BuildPro Construction is a leader in delivering innovative, sustainable, and reliable commercial and residential projects. Our team is dedicated to exceeding client expectations with every build.</p>
+            <ul class="about-list">
+              <li><span>&#9989;</span> Licensed &amp; Insured</li>
+              <li><span>&#127941;</span> 20+ Years Experience</li>
+              <li><span>&#128170;</span> OSHA Compliant</li>
+              <li><span>&#127960;</span> LEED Certified</li>
+            </ul>
+          </div>
+          <div class="about-img">
+            <img src="about.jpg" alt="BuildPro team collaborating on a project" loading="lazy">
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects section">
-    <div class="container">
-      <h2>Latest Projects</h2>
-      <div class="project-slider">
-        <button class="slider-btn left" aria-label="Previous project">&#10094;</button>
-        <div class="slides">
-          <div class="slide active">
-            <img src="proj1.jpg" alt="High-rise Tower">
-            <div class="slide-caption">
-              <h4>High-Rise Office Tower</h4>
-              <p>Completed in 2025, this LEED-certified building sets a new standard.</p>
+    <!-- Services Section -->
+    <section id="services" class="services section" aria-labelledby="services-heading">
+      <div class="container">
+        <h2 id="services-heading">Our Services</h2>
+        <div class="service-cards">
+          <div class="service-card">
+            <div class="icon">&#128736;</div>
+            <h3>General Contracting</h3>
+            <p>Expert management of construction from concept to completion.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">&#128187;</div>
+            <h3>Design-Build</h3>
+            <p>Integrated design and build for streamlined, efficient delivery.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">&#128295;</div>
+            <h3>Renovations</h3>
+            <p>Modernizing spaces while minimizing downtime and cost.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">&#127963;</div>
+            <h3>Site Management</h3>
+            <p>Full on-site supervision for safety and quality control.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">&#128736;</div>
+            <h3>Green Building</h3>
+            <p>Eco-friendly solutions for sustainable construction.</p>
+          </div>
+          <div class="service-card">
+            <div class="icon">&#128736;</div>
+            <h3>Consulting</h3>
+            <p>Expert advice for planning, budgeting, and compliance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section" aria-labelledby="projects-heading">
+      <div class="container">
+        <h2 id="projects-heading">Featured Projects</h2>
+        <div class="project-slider">
+          <button class="slider-btn left" aria-label="Previous project" tabindex="0">&#10094;</button>
+          <div class="slides">
+            <div class="slide active">
+              <img src="proj1.jpg" alt="High-rise office tower, LEED-certified" loading="lazy">
+              <div class="slide-caption">
+                <h4>High-Rise Office Tower</h4>
+                <p>LEED-certified, completed in 2025. A new standard for sustainable offices.</p>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="proj2.jpg" alt="Luxury urban homes, modern design" loading="lazy">
+              <div class="slide-caption">
+                <h4>Luxury Urban Homes</h4>
+                <p>Energy-efficient homes with striking modern design.</p>
+              </div>
+            </div>
+            <div class="slide">
+              <img src="proj3.jpg" alt="Public transit hub renovation" loading="lazy">
+              <div class="slide-caption">
+                <h4>Transit Hub Renovation</h4>
+                <p>Major city project completed ahead of schedule and under budget.</p>
+              </div>
             </div>
           </div>
-          <div class="slide">
-            <img src="proj2.jpg" alt="Luxury Homes">
-            <div class="slide-caption">
-              <h4>Luxury Urban Homes</h4>
-              <p>Energy-efficient homes with striking modern design.</p>
+          <button class="slider-btn right" aria-label="Next project" tabindex="0">&#10095;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <h2 id="testimonials-heading">What Our Clients Say</h2>
+        <div class="testimonials-cards">
+          <div class="testimonial-card">
+            <p>"BuildPro exceeded our expectations. The project was delivered on time and the quality is outstanding!"</p>
+            <div class="testimonial-author">
+              <img src="client1.jpg" alt="Portrait of Sarah K., Commercial Client" loading="lazy">
+              <span>Sarah K., Commercial Client</span>
             </div>
           </div>
-          <div class="slide">
-            <img src="proj3.jpg" alt="Public Transit Hub">
-            <div class="slide-caption">
-              <h4>Transit Hub Renovation</h4>
-              <p>Major city project completed ahead of schedule and under budget.</p>
+          <div class="testimonial-card">
+            <p>"Professional, reliable, and innovative. We highly recommend BuildPro for any construction needs."</p>
+            <div class="testimonial-author">
+              <img src="client2.jpg" alt="Portrait of Mike D., Homeowner" loading="lazy">
+              <span>Mike D., Homeowner</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p>"Their green building expertise helped us achieve our sustainability goals. Fantastic team!"</p>
+            <div class="testimonial-author">
+              <img src="client3.jpg" alt="Portrait of Linda S., Developer" loading="lazy">
+              <span>Linda S., Developer</span>
             </div>
           </div>
         </div>
-        <button class="slider-btn right" aria-label="Next project">&#10095;</button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Why Choose Us Section -->
-  <section class="why-choose section">
-    <div class="container">
-      <h2>Why Choose BuildPro?</h2>
-      <div class="features-grid">
-        <div class="feature">
-          <div class="feature-icon">&#9989;</div>
-          <span>Licensed & Insured</span>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#127941;</div>
-          <span>20+ Years Experience</span>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#128170;</div>
-          <span>OSHA Compliant</span>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#127960;</div>
-          <span>LEED Certified</span>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#9201;</div>
-          <span>On-Time & On-Budget</span>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#129309;</div>
-          <span>Union & Minority-Owned</span>
+    <!-- Blog Preview Section -->
+    <section id="blog" class="blog section" aria-labelledby="blog-heading">
+      <div class="container">
+        <h2 id="blog-heading">Latest Insights</h2>
+        <div class="blog-cards">
+          <article class="blog-card">
+            <img src="blog1.jpg" alt="Sustainable construction site" loading="lazy">
+            <div>
+              <h3>Sustainable Construction Trends in 2024</h3>
+              <p>Discover how green building practices are shaping the future of construction.</p>
+              <a href="#" class="read-more">Read More &rarr;</a>
+            </div>
+          </article>
+          <article class="blog-card">
+            <img src="blog2.jpg" alt="Smart building technology" loading="lazy">
+            <div>
+              <h3>Smart Buildings: The Next Frontier</h3>
+              <p>Explore the latest in smart technology integration for modern structures.</p>
+              <a href="#" class="read-more">Read More &rarr;</a>
+            </div>
+          </article>
+          <article class="blog-card">
+            <img src="blog3.jpg" alt="Project management planning" loading="lazy">
+            <div>
+              <h3>Project Management Best Practices</h3>
+              <p>Tips from our experts on delivering projects on time and on budget.</p>
+              <a href="#" class="read-more">Read More &rarr;</a>
+            </div>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Team Section -->
-  <section id="team" class="team section">
-    <div class="container">
-      <h2>Meet Our Team</h2>
-      <div class="team-cards">
-        <div class="team-card">
-          <img src="team1.jpg" alt="Jane Smith, CEO">
-          <div class="team-info">
-            <h4>Jane Smith</h4>
-            <p>CEO & Founder</p>
+    <!-- FAQ Section -->
+    <section id="faq" class="faq section" aria-labelledby="faq-heading">
+      <div class="container">
+        <h2 id="faq-heading">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">What areas do you serve?</button>
+            <div class="faq-answer">We serve Chicago and the greater Midwest region. Contact us for specific locations.</div>
           </div>
-        </div>
-        <div class="team-card">
-          <img src="team2.jpg" alt="John Doe, Project Manager">
-          <div class="team-info">
-            <h4>John Doe</h4>
-            <p>Project Manager</p>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">Are you licensed and insured?</button>
+            <div class="faq-answer">Yes, BuildPro is fully licensed and insured for all commercial and residential projects.</div>
           </div>
-        </div>
-        <div class="team-card">
-          <img src="team3.jpg" alt="Emily Lee, Architect">
-          <div class="team-info">
-            <h4>Emily Lee</h4>
-            <p>Lead Architect</p>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">Do you offer free consultations?</button>
+            <div class="faq-answer">Absolutely! Schedule a free consultation to discuss your project needs.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">Can you help with green building certifications?</button>
+            <div class="faq-answer">Yes, our team specializes in LEED and other green building certifications.</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Partners/Clients Carousel -->
-  <section id="partners" class="partners section">
-    <div class="container">
-      <h2>Our Partners & Clients</h2>
-      <div class="partners-carousel">
-        <div class="partner-logo"><img src="client1.png" alt="Partner 1"></div>
-        <div class="partner-logo"><img src="client2.png" alt="Partner 2"></div>
-        <div class="partner-logo"><img src="client3.png" alt="Partner 3"></div>
-        <div class="partner-logo"><img src="client4.png" alt="Partner 4"></div>
+    <!-- Newsletter Signup -->
+    <section class="newsletter section" aria-labelledby="newsletter-heading">
+      <div class="container">
+        <h2 id="newsletter-heading">Stay Updated</h2>
+        <form class="newsletter-form" id="newsletterForm" autocomplete="off">
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+          <button type="submit" class="cta-btn primary" aria-label="Subscribe to newsletter">Subscribe</button>
+        </form>
+        <div id="newsletterMsg" class="newsletter-msg" aria-live="polite"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Video Media Section -->
-  <section id="media" class="media-section section">
-    <div class="container">
-      <h2>Featured Video</h2>
-      <div class="media-embed-wrapper">
-        <iframe class="media-embed" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen tabindex="0"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact section">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <div class="contact-details">
-        <div>
-          <strong>Call:</strong> <a href="tel:+15555555555">+1 (555) 555-5555</a><br>
-          <strong>Email:</strong> <a href="mailto:info@buildpro.com">info@buildpro.com</a>
+    <!-- Contact Section -->
+    <section id="contact" class="contact section" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 id="contact-heading">Contact Us</h2>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p><strong>Call:</strong> <a href="tel:+15555555555">+1 (555) 555-5555</a></p>
+            <p><strong>Email:</strong> <a href="mailto:info@buildpro.com">info@buildpro.com</a></p>
+            <p><strong>Address:</strong> 100 Main St, Chicago, IL</p>
+            <p><strong>Hours:</strong> Mon-Fri 8am-6pm</p>
+          </div>
+          <form class="contact-form" id="contactForm" autocomplete="off">
+            <input type="text" name="name" placeholder="Your Name" required aria-label="Name">
+            <input type="email" name="email" placeholder="Your Email" required aria-label="Email">
+            <textarea name="message" placeholder="Your Message" required aria-label="Message"></textarea>
+            <button type="submit" class="cta-btn primary" aria-label="Send Message">Send Message</button>
+          </form>
         </div>
-        <div>
-          <strong>Address:</strong> 100 Main St, Chicago, IL<br>
-          <strong>Hours:</strong> Mon-Fri 8am-6pm
-        </div>
-        <div>
-          <a href="https://calendly.com/" class="schedule-btn" target="_blank" rel="noopener">Schedule a Call</a>
-          <a href="https://maps.google.com/?q=100+Main+St,+Chicago,+IL" class="map-link" target="_blank" rel="noopener">View on Map</a>
+        <div id="contactMsg" class="contact-msg" aria-live="polite"></div>
+        <div class="contact-actions">
+          <a href="https://calendly.com/" class="schedule-btn" target="_blank" rel="noopener noreferrer">Schedule a Call</a>
+          <a href="https://maps.google.com/?q=100+Main+St,+Chicago,+IL" class="map-link" target="_blank" rel="noopener noreferrer">View on Map</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Dynamic Section Builder Root -->
-  <main id="sectionsRoot"></main>
-  <button id="addSectionBtn" class="fab" title="Add Section" aria-label="Add Section">+</button>
+    <!-- Partners/Clients Carousel -->
+    <section id="partners" class="partners section" aria-labelledby="partners-heading">
+      <div class="container">
+        <h2 id="partners-heading">Our Partners &amp; Clients</h2>
+        <div class="partners-carousel">
+          <div class="partner-logo"><img src="client1.png" alt="Logo of Partner 1" loading="lazy"></div>
+          <div class="partner-logo"><img src="client2.png" alt="Logo of Partner 2" loading="lazy"></div>
+          <div class="partner-logo"><img src="client3.png" alt="Logo of Partner 3" loading="lazy"></div>
+          <div class="partner-logo"><img src="client4.png" alt="Logo of Partner 4" loading="lazy"></div>
+          <div class="partner-logo"><img src="client5.png" alt="Logo of Partner 5" loading="lazy"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Media Section -->
+    <section id="media" class="media-section section" aria-labelledby="media-heading">
+      <div class="container">
+        <h2 id="media-heading">Featured Video</h2>
+        <div class="media-embed-wrapper">
+          <iframe class="media-embed" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen tabindex="0"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Section Builder Root -->
+    <section aria-label="Custom Sections">
+      <main id="sectionsRoot"></main>
+      <button id="addSectionBtn" class="fab" title="Add Section" aria-label="Add Section">+</button>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer>
-    <div class="footer-content">
+  <footer role="contentinfo">
+    <div class="footer-content container">
       <div class="footer-logo">BuildPro</div>
       <div class="footer-links">
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#projects">Projects</a>
-        <a href="#team">Team</a>
+        <a href="#blog">Blog</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
       </div>
       <div class="footer-social">
         <a href="#" aria-label="Facebook"><span class="fa">&#xf09a;</span></a>

@@ -355,3 +355,138 @@ window.moveSection = moveSection;
 
 addSectionBtn.onclick = addSection;
 renderSections();
+
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.classList.remove('open');
+      item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    });
+    if (!expanded) {
+      this.setAttribute('aria-expanded', 'true');
+      this.parentElement.classList.add('open');
+    }
+  });
+});
+
+// Newsletter Signup (demo, no backend)
+const newsletterForm = document.getElementById('newsletterForm');
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.email.value.trim();
+    const msg = document.getElementById('newsletterMsg');
+    if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
+      msg.textContent = 'Please enter a valid email address.';
+      msg.style.color = '#e74c3c';
+      return;
+    }
+    msg.textContent = 'Thank you for subscribing!';
+    msg.style.color = '#1767ff';
+    this.reset();
+    setTimeout(() => { msg.textContent = ''; }, 4000);
+  });
+}
+
+// Contact Form (demo, no backend)
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const message = this.message.value.trim();
+    const msg = document.getElementById('contactMsg');
+    if (!name || !email || !message) {
+      msg.textContent = 'Please fill out all fields.';
+      msg.style.color = '#e74c3c';
+      return;
+    }
+    msg.textContent = 'Message sent! We will get back to you soon.';
+    msg.style.color = '#1767ff';
+    this.reset();
+    setTimeout(() => { msg.textContent = ''; }, 4000);
+  });
+}
+
+// Skip link focus management
+const skipLink = document.querySelector('.skip-link');
+if (skipLink) {
+  skipLink.addEventListener('click', function(e) {
+    const main = document.getElementById('mainContent');
+    if (main) {
+      main.setAttribute('tabindex', '-1');
+      main.focus();
+    }
+  });
+}
+
+// Set aria-current on nav links based on scroll position
+const navLinks = document.querySelectorAll('#mainNav a');
+const sections = Array.from(document.querySelectorAll('main > section[id]'));
+function updateNavCurrent() {
+  let idx = 0;
+  const scroll = window.scrollY + 120;
+  for (let i = 0; i < sections.length; i++) {
+    if (sections[i].offsetTop <= scroll) idx = i;
+  }
+  navLinks.forEach((a, i) => a.setAttribute('aria-current', i === idx ? 'page' : 'false'));
+}
+window.addEventListener('scroll', updateNavCurrent);
+window.addEventListener('DOMContentLoaded', updateNavCurrent);
+
+// Smooth scroll polyfill for older browsers
+if (!('scrollBehavior' in document.documentElement.style)) {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo(0, top);
+      }
+    });
+  });
+}
+
+// Lazy load images (for browsers without native support)
+if (!('loading' in HTMLImageElement.prototype)) {
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    if (!img.src) img.src = img.dataset.src || img.getAttribute('src');
+  });
+}
+
+// Modal focus trap
+function trapFocus(modal) {
+  const focusable = modal.querySelectorAll('a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  modal.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    }
+  });
+}
+if (videoModal) {
+  videoModal.addEventListener('transitionend', () => {
+    if (videoModal.classList.contains('active')) trapFocus(videoModal);
+  });
+}
+
+// Section reveal animation improvements
+const revealEls = document.querySelectorAll('.feature, .service-card, .team-card, .testimonial-card, .blog-card, .faq-item');
+revealEls.forEach(el => el.classList.add('pre-in-view'));
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      entry.target.classList.remove('pre-in-view');
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObserver.observe(el));
