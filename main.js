@@ -1,64 +1,64 @@
-(function() {
-    'use strict';
+// Minimal, modern JS for navigation, back-to-top, and contact form
 
-    // Configuration
-    const CONFIG = {
-        debounceDelay: 16,
-        animationDelay: 100,
-        messageTimeout: 5000,
-        scrollOffset: 100,
-        breakpoints: {
-            mobile: 768,
-            tablet: 1024
-        }
-    };
-
-    // State management
-    const state = {
-        currentImageIndex: 0,
-        isModalOpen: false,
-        isMobileMenuOpen: false,
-        visibleImages: [],
-        animatedElements: new Set()
-    };
-
-    // Cache DOM elements
-    const elements = {};
-
-    function cacheElements() {
-        elements.hamburger = document.querySelector('.hamburger');
-        elements.navMenu = document.querySelector('.nav-menu');
-        elements.navLinks = document.querySelectorAll('.nav-link');
-        elements.navbar = document.querySelector('.navbar');
-        elements.sections = document.querySelectorAll('section[id]');
-        elements.filterBtns = document.querySelectorAll('.filter-btn');
-        elements.galleryItems = document.querySelectorAll('.gallery-item');
-        elements.modal = document.getElementById('imageModal');
-        elements.modalImg = document.getElementById('modalImage');
-        elements.modalCaption = document.querySelector('.modal-caption');
-        elements.modalClose = document.querySelector('.modal-close');
-        elements.contactForm = document.querySelector('.contact-form');
-        elements.heroStats = document.querySelector('.hero-stats');
-        elements.loader = document.getElementById('global-loader');
-        elements.ariaLive = document.getElementById('aria-live');
-        elements.backToTop = document.getElementById('backToTop');
-        elements.privacyModal = document.getElementById('privacyModal');
-        elements.acceptPrivacy = document.getElementById('acceptPrivacy');
-        elements.modalToolbar = null; // will be set after modal is shown
-        elements.modalCounter = null;
-        elements.modalThumbnails = null;
-        elements.modalDownload = null;
-        elements.modalShare = null;
-        elements.modalFullscreen = null;
-        elements.modalAriaAnnouncer = null;
+document.addEventListener('DOMContentLoaded', () => {
+  // Mobile nav toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  // Nav link active state
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+      navLinks.classList.remove('open');
+    });
+  });
+  // Back to top button
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTop.style.display = 'flex';
+    } else {
+      backToTop.style.display = 'none';
     }
-
-    // Initialize application
-    function init() {
-        try {
-            showLoader();
-            showMessage('Loading website...', 'info');
-            cacheElements();
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  // Contact form feedback
+  const contactForm = document.querySelector('.contact-form');
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = contactForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+      contactForm.reset();
+      showToast('Message sent! We will contact you soon.');
+    }, 1200);
+  });
+  // Simple toast
+  function showToast(msg) {
+    let toast = document.createElement('div');
+    toast.textContent = msg;
+    toast.style.cssText = `
+      position:fixed;bottom:2em;left:50%;transform:translateX(-50%);
+      background:var(--primary);color:#fff;padding:1em 2em;
+      border-radius:var(--radius);box-shadow:var(--shadow);z-index:9999;
+      font-weight:600;opacity:0;transition:opacity .2s;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = 1; }, 10);
+    setTimeout(() => {
+      toast.style.opacity = 0;
+      setTimeout(() => toast.remove(), 300);
+    }, 2200);
+  }
+});
             initMobileMenu();
             initSmoothScrolling();
             initNavbarEffects();
