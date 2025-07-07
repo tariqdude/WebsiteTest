@@ -64,7 +64,7 @@
             initNavbarEffects();
             initGallery();
             initContactForm();
-            initAnimations();
+            initAnimations(); // <-- enhanced below
             initLazyLoading();
             initAccessibility();
             initTouchGestures();
@@ -511,6 +511,15 @@
                 }
             });
         });
+
+        // Improved: Remove error on focus
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.classList.remove('error');
+                const existingError = input.parentNode.querySelector('.error-message');
+                if (existingError) existingError.remove();
+            });
+        });
     }
 
     function handleFormSubmit(e) {
@@ -811,8 +820,10 @@
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 elements.backToTop.style.display = 'flex';
+                elements.backToTop.classList.add('fade-in', 'visible');
             } else {
                 elements.backToTop.style.display = 'none';
+                elements.backToTop.classList.remove('visible');
             }
         });
         elements.backToTop.addEventListener('click', () => {
