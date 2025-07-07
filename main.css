@@ -803,6 +803,107 @@ body {
     color: white;
 }
 
+/* Spinner Loader */
+.spinner {
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    left: 8px;
+    top: -40px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    z-index: 10000;
+    font-weight: 600;
+    transition: top 0.2s;
+}
+.skip-link:focus {
+    top: 8px;
+    outline: 2px solid #fff;
+}
+
+/* Back to Top Button */
+#backToTop {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+#backToTop:hover, #backToTop:focus {
+    background: var(--primary-dark);
+    transform: translateY(-4px) scale(1.08);
+    outline: 2px solid #fff;
+}
+
+/* Privacy Modal Overlay */
+#privacyModal.modal {
+    display: none;
+    background: rgba(0,0,0,0.7);
+    align-items: center;
+    justify-content: center;
+}
+#privacyModal.show {
+    display: flex;
+    opacity: 1;
+}
+#privacyModal .modal-content {
+    background: #fff;
+    color: #222;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-xl);
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+}
+#privacyModal .modal-close {
+    color: #222;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+#privacyModal .btn-primary {
+    margin-top: 1rem;
+}
+
+/* ARIA Live Region */
+#aria-live {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 /* Mobile Responsiveness - Enhanced */
 @media (max-width: 768px) {
     .nav-menu {
@@ -925,6 +1026,26 @@ body {
     .filter-btn {
         padding: 0.5rem 1rem;
         font-size: 0.875rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1e1e1e;
+        --text-primary: #f0f0f0;
+        --border-color: #444444;
+    }
+    body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+    }
+    .navbar {
+        background: rgba(30, 30, 30, 0.95);
+        border-bottom: 1px solid var(--border-color);
+    }
+    .footer {
+        background: #121212;
     }
 }
 

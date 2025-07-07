@@ -39,11 +39,18 @@
         elements.modalClose = document.querySelector('.modal-close');
         elements.contactForm = document.querySelector('.contact-form');
         elements.heroStats = document.querySelector('.hero-stats');
+        elements.loader = document.getElementById('global-loader');
+        elements.ariaLive = document.getElementById('aria-live');
+        elements.backToTop = document.getElementById('backToTop');
+        elements.privacyModal = document.getElementById('privacyModal');
+        elements.acceptPrivacy = document.getElementById('acceptPrivacy');
     }
 
     // Initialize application
     function init() {
         try {
+            showLoader();
+            showMessage('Loading website...', 'info');
             cacheElements();
             initMobileMenu();
             initSmoothScrolling();
@@ -54,13 +61,34 @@
             initLazyLoading();
             initAccessibility();
             initTouchGestures();
-            
+            initBackToTop();
+            initPrivacyNotice();
+
             // Set initial state
             updateVisibleImages();
-            
-            console.log('Website initialized successfully');
+
+            setTimeout(() => {
+                hideLoader();
+                // ...existing code to clear the loading message...
+            }, 1000);
         } catch (error) {
             console.error('Initialization error:', error);
+            showMessage('Initialization error. Please try refreshing the page.', 'error');
+            hideLoader();
+        }
+    }
+
+    // Loader spinner
+    function showLoader() {
+        if (elements.loader) {
+            elements.loader.style.display = 'flex';
+            elements.loader.setAttribute('aria-hidden', 'false');
+        }
+    }
+    function hideLoader() {
+        if (elements.loader) {
+            elements.loader.style.display = 'none';
+            elements.loader.setAttribute('aria-hidden', 'true');
         }
     }
 
@@ -146,8 +174,6 @@
     function initNavbarEffects() {
         if (!elements.navbar) return;
 
-        let ticking = false;
-
         const updateNavbar = () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
@@ -156,18 +182,10 @@
             
             // Update active navigation
             updateActiveNavigation(scrollTop);
-            
-            ticking = false;
         };
 
-        const onScroll = () => {
-            if (!ticking) {
-                requestAnimationFrame(updateNavbar);
-                ticking = true;
-            }
-        };
-
-        window.addEventListener('scroll', onScroll, { passive: true });
+        // Replace manual ticking logic with debounce
+        window.addEventListener('scroll', debounce(updateNavbar, CONFIG.debounceDelay), { passive: true });
     }
 
     function updateActiveNavigation(scrollTop) {
@@ -564,60 +582,59 @@
         });
         
         document.body.insertBefore(skipLink, document.body.firstChild);
+
+        // ARIA live region for dynamic messages
+        if (elements.ariaLive) {
+            elements.ariaLive.textContent = '';
+        }
     }
 
-    // Enhanced lazy loading
-    function initLazyLoading() {
-        if (!('IntersectionObserver' in window)) return;
-
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
-
-    // Enhanced touch gestures
-    function initTouchGestures() {
-        let touchStartX = 0;
-        let touchStartY = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-
-        document.addEventListener('touchend', (e) => {
-            if (!touchStartX || !touchStartY || !state.isModalOpen) return;
-
-            const touchEndX = e.changedTouches[0].clientX;
-            const touchEndY = e.changedTouches[0].clientY;
-            const diffX = touchStartX - touchEndX;
-            const diffY = touchStartY - touchEndY;
-
-            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-                if (diffX > 0) {
-                    changeImage(1); // Swipe left - next image
-                } else {
-                    changeImage(-1); // Swipe right - previous image
-                }
+    // Enhanced Back to Top button
+    function initBackToTop() {
+        if (!elements.backToTop) return;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                elements.backToTop.style.display = 'flex';
+            } else {
+                elements.backToTop.style.display = 'none';
             }
+        });
+        elements.backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('main-content')?.focus();
+        });
+    }
 
-            touchStartX = 0;
-            touchStartY = 0;
-        }, { passive: true });
+    // Privacy Notice Modal
+    function initPrivacyNotice() {
+        if (!elements.privacyModal || !elements.acceptPrivacy) return;
+        const consent = localStorage.getItem('privacyAccepted');
+        if (!consent) {
+            showPrivacyModal();
+        }
+        elements.acceptPrivacy.addEventListener('click', () => {
+            localStorage.setItem('privacyAccepted', 'true');
+            hidePrivacyModal();
+        });
+        elements.privacyModal.querySelector('.modal-close').addEventListener('click', hidePrivacyModal);
+        elements.privacyModal.addEventListener('click', (e) => {
+            if (e.target === elements.privacyModal) hidePrivacyModal();
+        });
+    }
+    function showPrivacyModal() {
+        elements.privacyModal.style.display = 'flex';
+        setTimeout(() => elements.privacyModal.classList.add('show'), 10);
+        elements.privacyModal.setAttribute('aria-hidden', 'false');
+        elements.privacyModal.querySelector('.modal-content').focus();
+        document.body.style.overflow = 'hidden';
+    }
+    function hidePrivacyModal() {
+        elements.privacyModal.classList.remove('show');
+        setTimeout(() => {
+            elements.privacyModal.style.display = 'none';
+            elements.privacyModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }, 300);
     }
 
     // Utility functions
@@ -662,6 +679,11 @@
             messageEl.style.transform = 'translateX(100%)';
             setTimeout(() => messageEl.remove(), 300);
         }, CONFIG.messageTimeout);
+
+        // ARIA live region update
+        if (elements.ariaLive) {
+            elements.ariaLive.textContent = message;
+        }
     }
 
     function trackEvent(eventName, parameters = {}) {
@@ -672,6 +694,15 @@
             gtag('event', eventName, parameters);
         }
     }
+
+    // Refined debounce utility using arrow function
+    const debounce = (func, wait) => {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    };
 
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {

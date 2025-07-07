@@ -13,14 +13,28 @@
     <meta property="og:title" content="YourBusiness - Professional Excellence Delivered">
     <meta property="og:description" content="Transform your business with our expert professional services. Trusted by 500+ clients.">
     <meta property="og:url" content="https://yourbusiness.com">
+    <meta property="og:image" content="https://yourbusiness.com/og-image.png">
+    
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YourBusiness - Professional Excellence Delivered">
+    <meta name="twitter:description" content="Transform your business with our expert professional services. Trusted by 500+ clients.">
+    <meta name="twitter:image" content="https://yourbusiness.com/og-image.png">
     
     <!-- Preload critical resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     <link rel="preload" href="main.css" as="style">
     
+    <!-- Preconnect for performance improvements -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
+    
+    <!-- Favicon and theme color -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#2563eb">
     
     <!-- Structured data for SEO -->
     <script type="application/ld+json">
@@ -40,6 +54,11 @@
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link sr-only" tabindex="0">Skip to main content</a>
+    <div id="global-loader" aria-hidden="true" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:20000;background:rgba(255,255,255,0.8);align-items:center;justify-content:center;">
+        <div class="spinner" aria-label="Loading"></div>
+    </div>
+    <div id="aria-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     <!-- Navigation -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
@@ -62,7 +81,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main id="main-content">
+    <main id="main-content" role="main" tabindex="-1">
         <!-- Hero Section -->
         <section id="hero" class="hero" aria-labelledby="hero-title">
             <div class="hero-container">
@@ -312,6 +331,21 @@
         </div>
     </div>
 
+    <!-- Back to Top Button -->
+    <button id="backToTop" aria-label="Back to top" style="display:none;position:fixed;bottom:2rem;right:2rem;z-index:3000;background:var(--primary-color);color:#fff;border:none;border-radius:50%;width:48px;height:48px;box-shadow:0 2px 8px rgba(0,0,0,0.2);font-size:1.5rem;cursor:pointer;transition:background 0.2s;">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Privacy Notice Modal -->
+    <div id="privacyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title" aria-hidden="true" style="display:none;">
+        <div class="modal-content" style="max-width:500px;padding:2rem;background:#fff;color:#222;position:relative;">
+            <button class="modal-close" aria-label="Close privacy notice" style="position:absolute;top:1rem;right:1rem;font-size:2rem;background:none;border:none;cursor:pointer;">&times;</button>
+            <h2 id="privacy-title">Privacy Notice</h2>
+            <p>We use cookies and similar technologies to enhance your experience. By using this site, you agree to our <a href="#">Privacy Policy</a>.</p>
+            <button id="acceptPrivacy" class="btn-primary" style="margin-top:1rem;">Accept</button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="container">
@@ -338,13 +372,6 @@
         </div>
     </footer>
 
-    <script src="main.js"></script>
-</body>
-</html>
-            </div>
-        </div>
-    </footer>
-
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
 </body>
 </html>
