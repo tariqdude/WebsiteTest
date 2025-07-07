@@ -44,6 +44,13 @@
         elements.backToTop = document.getElementById('backToTop');
         elements.privacyModal = document.getElementById('privacyModal');
         elements.acceptPrivacy = document.getElementById('acceptPrivacy');
+        elements.modalToolbar = null; // will be set after modal is shown
+        elements.modalCounter = null;
+        elements.modalThumbnails = null;
+        elements.modalDownload = null;
+        elements.modalShare = null;
+        elements.modalFullscreen = null;
+        elements.modalAriaAnnouncer = null;
     }
 
     // Initialize application
@@ -267,8 +274,17 @@
     function initGalleryModal() {
         if (!elements.modal) return;
 
+        // Set toolbar/thumbnails/counter elements after DOM is ready
+        elements.modalToolbar = elements.modal.querySelector('.modal-toolbar');
+        elements.modalCounter = elements.modal.querySelector('#modal-counter');
+        elements.modalThumbnails = elements.modal.querySelector('#modal-thumbnails');
+        elements.modalDownload = elements.modal.querySelector('.modal-download');
+        elements.modalShare = elements.modal.querySelector('.modal-share');
+        elements.modalFullscreen = elements.modal.querySelector('.modal-fullscreen');
+        elements.modalAriaAnnouncer = elements.modal.querySelector('#modal-aria-announcer');
+
         const closeModal = () => {
-            elements.modal.classList.remove('show');
+            elements.modal.classList.remove('show', 'fullscreen');
             setTimeout(() => {
                 elements.modal.style.display = 'none';
             }, 300);
@@ -284,7 +300,6 @@
 
         document.addEventListener('keydown', (e) => {
             if (!state.isModalOpen) return;
-            
             switch(e.key) {
                 case 'Escape':
                     closeModal();
@@ -298,10 +313,37 @@
             }
         });
 
+        // Toolbar controls
+        elements.modalDownload?.addEventListener('click', () => {
+            const src = elements.modalImg.src;
+            const link = document.createElement('a');
+            link.href = src;
+            link.download = src.split('/').pop().split('?')[0] || 'image.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+        elements.modalShare?.addEventListener('click', async () => {
+            const src = elements.modalImg.src;
+            const title = elements.modalCaption.querySelector('h4')?.textContent || document.title;
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title, url: src });
+                } catch {}
+            } else {
+                navigator.clipboard?.writeText(src);
+                showMessage('Image URL copied to clipboard!', 'success');
+            }
+        });
+        elements.modalFullscreen?.addEventListener('click', () => {
+            elements.modal.classList.toggle('fullscreen');
+        });
+
         // Expose to global scope
         window.openModal = openModal;
         window.closeModal = closeModal;
         window.changeImage = changeImage;
+        window.selectModalImage = selectModalImage;
     }
 
     function setupGalleryItems() {
@@ -357,6 +399,30 @@
             elements.modal.focus();
         });
 
+        // Set modal image and caption
+        setModalImageByGalleryItem(galleryItem);
+
+        // Build thumbnails
+        buildModalThumbnails();
+
+        // Update counter
+        updateModalCounter();
+
+        state.currentImageIndex = state.visibleImages.indexOf(galleryItem);
+        state.isModalOpen = true;
+        document.body.style.overflow = 'hidden';
+
+        // Analytics event for modal open
+        trackEvent('gallery_modal_open', { title, img: img.src });
+    }
+
+    function setModalImageByGalleryItem(galleryItem) {
+        const img = galleryItem.querySelector('img');
+        const title = galleryItem.querySelector('h4')?.textContent || '';
+        const description = galleryItem.querySelector('p')?.textContent || '';
+        const tags = (galleryItem.getAttribute('data-tags') || '').split(',').filter(Boolean);
+        const metaList = galleryItem.querySelector('.gallery-meta')?.innerHTML || '';
+
         elements.modalImg.src = img.src;
         elements.modalImg.alt = img.alt;
         // Enhanced modal caption with tags and meta
@@ -374,13 +440,47 @@
             <p style="margin-bottom:0.5rem;">${description}</p>
             ${metaHtml}
         `;
+        // ARIA live announce
+        if (elements.modalAriaAnnouncer) {
+            elements.modalAriaAnnouncer.textContent = `${title}. ${description}`;
+        }
+    }
 
-        state.currentImageIndex = state.visibleImages.indexOf(galleryItem);
-        state.isModalOpen = true;
-        document.body.style.overflow = 'hidden';
+    function buildModalThumbnails() {
+        if (!elements.modalThumbnails) return;
+        elements.modalThumbnails.innerHTML = '';
+        state.visibleImages.forEach((item, idx) => {
+            const img = item.querySelector('img');
+            const thumb = document.createElement('img');
+            thumb.src = img.src;
+            thumb.alt = img.alt;
+            thumb.className = 'modal-thumbnail' + (idx === state.currentImageIndex ? ' active' : '');
+            thumb.setAttribute('tabindex', '0');
+            thumb.setAttribute('aria-label', `Show image ${idx + 1}`);
+            thumb.addEventListener('click', () => selectModalImage(idx));
+            thumb.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    selectModalImage(idx);
+                }
+            });
+            elements.modalThumbnails.appendChild(thumb);
+        });
+    }
 
-        // Analytics event for modal open
-        trackEvent('gallery_modal_open', { title, img: img.src });
+    function selectModalImage(idx) {
+        if (idx < 0 || idx >= state.visibleImages.length) return;
+        state.currentImageIndex = idx;
+        setModalImageByGalleryItem(state.visibleImages[idx]);
+        updateModalCounter();
+        // Update thumbnail highlight
+        const thumbs = elements.modalThumbnails.querySelectorAll('.modal-thumbnail');
+        thumbs.forEach((t, i) => t.classList.toggle('active', i === idx));
+    }
+
+    function updateModalCounter() {
+        if (!elements.modalCounter) return;
+        elements.modalCounter.textContent = `${state.currentImageIndex + 1} / ${state.visibleImages.length}`;
     }
 
     function changeImage(direction) {
@@ -395,31 +495,7 @@
             state.currentImageIndex = state.visibleImages.length - 1;
         }
 
-        const newItem = state.visibleImages[state.currentImageIndex];
-        const img = newItem.querySelector('img');
-        const title = newItem.querySelector('h4')?.textContent || '';
-        const description = newItem.querySelector('p')?.textContent || '';
-        const tags = (newItem.getAttribute('data-tags') || '').split(',').filter(Boolean);
-        const metaList = newItem.querySelector('.gallery-meta')?.innerHTML || '';
-
-        if (elements.modalImg && elements.modalCaption) {
-            elements.modalImg.src = img.src;
-            elements.modalImg.alt = img.alt;
-            let tagsHtml = '';
-            if (tags.length) {
-                tagsHtml = `<div class="gallery-tags" style="margin-bottom:0.5rem;">${tags.map(tag => `<span class="tag">${tag.charAt(0).toUpperCase() + tag.slice(1)}</span>`).join(' ')}</div>`;
-            }
-            let metaHtml = '';
-            if (metaList) {
-                metaHtml = `<ul class="gallery-meta" style="margin-bottom:0.5rem;">${metaList}</ul>`;
-            }
-            elements.modalCaption.innerHTML = `
-                ${tagsHtml}
-                <h4 style="margin-bottom:0.5rem;">${title}</h4>
-                <p style="margin-bottom:0.5rem;">${description}</p>
-                ${metaHtml}
-            `;
-        }
+        selectModalImage(state.currentImageIndex);
     }
 
     // Enhanced contact form

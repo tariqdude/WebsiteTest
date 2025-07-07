@@ -568,12 +568,21 @@
     <!-- Image Modal -->
     <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true" tabindex="-1">
         <button class="modal-close" aria-label="Close image gallery" tabindex="0">&times;</button>
+        <div class="modal-toolbar">
+            <span class="modal-counter" id="modal-counter" aria-live="polite"></span>
+            <button class="modal-download" aria-label="Download image" tabindex="0"><i class="fas fa-download"></i></button>
+            <button class="modal-share" aria-label="Share image" tabindex="0"><i class="fas fa-share-alt"></i></button>
+            <button class="modal-fullscreen" aria-label="Toggle fullscreen" tabindex="0"><i class="fas fa-expand"></i></button>
+            <span class="modal-esc-hint" aria-hidden="true">Press <kbd>Esc</kbd> to close</span>
+        </div>
         <img class="modal-content" id="modalImage" alt="">
         <div class="modal-caption" id="modal-title"></div>
+        <div class="modal-thumbnails" id="modal-thumbnails" aria-label="Gallery thumbnails"></div>
         <div class="modal-nav">
             <button class="modal-prev" onclick="changeImage(-1)" aria-label="Previous image" tabindex="0">&#10094;</button>
             <button class="modal-next" onclick="changeImage(1)" aria-label="Next image" tabindex="0">&#10095;</button>
         </div>
+        <div id="modal-aria-announcer" class="sr-only" aria-live="polite"></div>
     </div>
 
     <!-- Back to Top Button -->
