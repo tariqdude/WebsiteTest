@@ -194,71 +194,182 @@
             <div class="container">
                 <header class="section-header">
                     <h2 id="gallery-title">Our Work Gallery</h2>
-                    <p>Take a look at some of our recent projects and achievements</p>
+                    <p>Explore our portfolio: projects, team moments, and events that define our journey and success.</p>
                 </header>
                 <div class="gallery-filters" role="tablist" aria-label="Filter gallery by category">
                     <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
                     <button class="filter-btn" data-filter="projects" role="tab" aria-selected="false">Projects</button>
                     <button class="filter-btn" data-filter="team" role="tab" aria-selected="false">Team</button>
                     <button class="filter-btn" data-filter="events" role="tab" aria-selected="false">Events</button>
+                    <button class="filter-btn" data-filter="awards" role="tab" aria-selected="false">Awards</button>
                 </div>
                 <div class="gallery-grid" role="tabpanel" aria-label="Gallery images">
-                    <article class="gallery-item" data-category="projects">
+                    <!-- Project Alpha -->
+                    <article class="gallery-item" data-category="projects" data-tags="innovation,delivery" tabindex="0" aria-label="Project Alpha: Innovative solution delivery">
                         <img src="https://picsum.photos/400/300?random=1" alt="Project Alpha - Innovative solution delivery showcase" loading="lazy">
                         <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Innovation</span>
+                                <span class="tag">Delivery</span>
+                            </div>
                             <h4>Project Alpha</h4>
-                            <p>Innovative solution delivery</p>
+                            <p>Innovative solution delivery for a Fortune 500 client, leveraging AI and cloud technologies.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-calendar-alt"></i> 2023</li>
+                                <li><i class="fas fa-user-tie"></i> Lead: Jane Doe</li>
+                            </ul>
                             <button class="view-btn" onclick="openModal(this)" aria-label="View Project Alpha in full screen">
                                 <i class="fas fa-expand" aria-hidden="true"></i>
                             </button>
                         </div>
                     </article>
-                    <article class="gallery-item" data-category="team">
+                    <!-- Team Photo -->
+                    <article class="gallery-item" data-category="team" data-tags="teamwork,people" tabindex="0" aria-label="Our Team: Dedicated professionals">
                         <img src="https://picsum.photos/400/300?random=2" alt="Team Photo - Dedicated professionals" loading="lazy">
                         <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Teamwork</span>
+                                <span class="tag">People</span>
+                            </div>
                             <h4>Our Team</h4>
-                            <p>Dedicated professionals</p>
+                            <p>Meet the experts behind our success—collaborative, skilled, and passionate professionals.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-users"></i> 25 Members</li>
+                                <li><i class="fas fa-award"></i> 10+ Certifications</li>
+                            </ul>
                             <button class="view-btn" onclick="openModal(this)" aria-label="View Team Photo in full screen">
                                 <i class="fas fa-expand" aria-hidden="true"></i>
                             </button>
                         </div>
                     </article>
-                    <article class="gallery-item" data-category="projects">
+                    <!-- Project Beta -->
+                    <article class="gallery-item" data-category="projects" data-tags="strategy,implementation" tabindex="0" aria-label="Project Beta: Strategic implementation">
                         <img src="https://picsum.photos/400/300?random=3" alt="Project Beta - Strategic implementation" loading="lazy">
                         <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Strategy</span>
+                                <span class="tag">Implementation</span>
+                            </div>
                             <h4>Project Beta</h4>
-                            <p>Strategic implementation</p>
+                            <p>Strategic implementation for digital transformation in the healthcare sector.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-calendar-alt"></i> 2022</li>
+                                <li><i class="fas fa-user-tie"></i> Lead: John Smith</li>
+                            </ul>
                             <button class="view-btn" onclick="openModal(this)" aria-label="View Project Beta in full screen">
                                 <i class="fas fa-expand" aria-hidden="true"></i>
                             </button>
                         </div>
                     </article>
-                    <article class="gallery-item" data-category="events">
+                    <!-- Annual Conference -->
+                    <article class="gallery-item" data-category="events" data-tags="networking,conference" tabindex="0" aria-label="Annual Conference: Industry networking event">
                         <img src="https://picsum.photos/400/300?random=4" alt="Company Event - Industry networking event" loading="lazy">
                         <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Networking</span>
+                                <span class="tag">Conference</span>
+                            </div>
                             <h4>Annual Conference</h4>
-                            <p>Industry networking event</p>
+                            <p>Our flagship event bringing together industry leaders and innovators for knowledge sharing.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-calendar-alt"></i> 2023</li>
+                                <li><i class="fas fa-map-marker-alt"></i> New York</li>
+                            </ul>
                             <button class="view-btn" onclick="openModal(this)" aria-label="View Event Photo in full screen">
                                 <i class="fas fa-expand" aria-hidden="true"></i>
                             </button>
                         </div>
                     </article>
-                    <article class="gallery-item" data-category="projects">
+                    <!-- Project Gamma -->
+                    <article class="gallery-item" data-category="projects" data-tags="digital,transformation" tabindex="0" aria-label="Project Gamma: Digital transformation">
                         <img src="https://picsum.photos/400/300?random=5" alt="Project Gamma - Digital transformation" loading="lazy">
                         <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Digital</span>
+                                <span class="tag">Transformation</span>
+                            </div>
                             <h4>Project Gamma</h4>
-                            <p>Digital transformation</p>
+                            <p>End-to-end digital transformation for a retail giant, boosting efficiency by 40%.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-calendar-alt"></i> 2021</li>
+                                <li><i class="fas fa-user-tie"></i> Lead: Emily Clark</li>
+                            </ul>
                             <button class="view-btn" onclick="openModal(this)" aria-label="View Project Gamma in full screen">
                                 <i class="fas fa-expand" aria-hidden="true"></i>
                             </button>
                         </div>
                     </article>
-                    <article class="gallery-item" data-category="team">
+                    <!-- Team Workshop -->
+                    <article class="gallery-item" data-category="team" data-tags="workshop,skills" tabindex="0" aria-label="Team Workshop: Skill development session">
                         <img src="https://picsum.photos/400/300?random=6" alt="Team Workshop - Skill development session" loading="lazy">
                         <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Workshop</span>
+                                <span class="tag">Skills</span>
+                            </div>
                             <h4>Team Workshop</h4>
-                            <p>Skill development session</p>
+                            <p>Interactive skill development session focused on agile methodologies and leadership.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-calendar-alt"></i> 2023</li>
+                                <li><i class="fas fa-chalkboard-teacher"></i> Facilitator: Mark Lee</li>
+                            </ul>
                             <button class="view-btn" onclick="openModal(this)" aria-label="View Team Workshop Photo in full screen">
+                                <i class="fas fa-expand" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </article>
+                    <!-- Award: Best Consulting Firm -->
+                    <article class="gallery-item" data-category="awards" data-tags="award,recognition" tabindex="0" aria-label="Award: Best Consulting Firm 2023">
+                        <img src="https://picsum.photos/400/300?random=7" alt="Award - Best Consulting Firm 2023" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Award</span>
+                                <span class="tag">Recognition</span>
+                            </div>
+                            <h4>Best Consulting Firm 2023</h4>
+                            <p>Honored as the Best Consulting Firm of 2023 by Industry Leaders Association.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-trophy"></i> Industry Leaders Association</li>
+                            </ul>
+                            <button class="view-btn" onclick="openModal(this)" aria-label="View Award Photo in full screen">
+                                <i class="fas fa-expand" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </article>
+                    <!-- Event: Charity Hackathon -->
+                    <article class="gallery-item" data-category="events" data-tags="charity,hackathon" tabindex="0" aria-label="Charity Hackathon: Giving back to the community">
+                        <img src="https://picsum.photos/400/300?random=8" alt="Charity Hackathon - Giving back to the community" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Charity</span>
+                                <span class="tag">Hackathon</span>
+                            </div>
+                            <h4>Charity Hackathon</h4>
+                            <p>Our team collaborated to build solutions for local non-profits in a 48-hour hackathon.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-calendar-alt"></i> 2022</li>
+                                <li><i class="fas fa-hands-helping"></i> Community Impact</li>
+                            </ul>
+                            <button class="view-btn" onclick="openModal(this)" aria-label="View Charity Hackathon Photo in full screen">
+                                <i class="fas fa-expand" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </article>
+                    <!-- Project Delta -->
+                    <article class="gallery-item" data-category="projects" data-tags="automation,cloud" tabindex="0" aria-label="Project Delta: Cloud automation">
+                        <img src="https://picsum.photos/400/300?random=9" alt="Project Delta - Cloud automation" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-tags">
+                                <span class="tag">Automation</span>
+                                <span class="tag">Cloud</span>
+                            </div>
+                            <h4>Project Delta</h4>
+                            <p>Automated cloud infrastructure deployment for a fintech startup, reducing costs by 30%.</p>
+                            <ul class="gallery-meta">
+                                <li><i class="fas fa-calendar-alt"></i> 2023</li>
+                                <li><i class="fas fa-user-tie"></i> Lead: Sarah Kim</li>
+                            </ul>
+                            <button class="view-btn" onclick="openModal(this)" aria-label="View Project Delta in full screen">
                                 <i class="fas fa-expand" aria-hidden="true"></i>
                             </button>
                         </div>

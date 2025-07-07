@@ -222,11 +222,9 @@
         elements.filterBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 const filter = this.getAttribute('data-filter');
-                
                 // Update active filter
                 elements.filterBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                
                 // Filter items with staggered animation
                 filterGalleryItems(filter);
                 updateVisibleImages();
@@ -237,17 +235,26 @@
     function filterGalleryItems(filter) {
         elements.galleryItems.forEach((item, index) => {
             const category = item.getAttribute('data-category');
-            const shouldShow = filter === 'all' || category === filter;
-            
+            const tags = (item.getAttribute('data-tags') || '').split(',');
+            let shouldShow = false;
+            if (filter === 'all') {
+                shouldShow = true;
+            } else if (category === filter) {
+                shouldShow = true;
+            } else if (tags.includes(filter)) {
+                shouldShow = true;
+            }
             if (shouldShow) {
                 item.style.display = 'block';
                 setTimeout(() => {
                     item.style.opacity = '1';
                     item.style.transform = 'scale(1)';
+                    item.setAttribute('tabindex', '0');
                 }, index * 50);
             } else {
                 item.style.opacity = '0';
                 item.style.transform = 'scale(0.8)';
+                item.setAttribute('tabindex', '-1');
                 setTimeout(() => {
                     item.style.display = 'none';
                 }, 300);
@@ -299,9 +306,9 @@
         elements.galleryItems.forEach((item, index) => {
             item.style.opacity = '1';
             item.style.transform = 'scale(1)';
-            item.style.transition = 'all 0.3s ease';
-            
-            // Add keyboard support
+            item.style.transition = 'all 0.3s cubic-bezier(.25,.8,.25,1)';
+            item.setAttribute('tabindex', '0');
+            // Keyboard support for opening modal
             const viewBtn = item.querySelector('.view-btn');
             if (viewBtn) {
                 viewBtn.setAttribute('tabindex', '0');
@@ -312,11 +319,19 @@
                     }
                 });
             }
+            // Keyboard: open modal on Enter/Space when focused on gallery-item
+            item.addEventListener('keydown', (e) => {
+                if ((e.key === 'Enter' || e.key === ' ') && !item.classList.contains('modal-open')) {
+                    e.preventDefault();
+                    const btn = item.querySelector('.view-btn');
+                    if (btn) openModal(btn);
+                }
+            });
         });
     }
 
     function updateVisibleImages() {
-        state.visibleImages = Array.from(elements.galleryItems).filter(item => 
+        state.visibleImages = Array.from(elements.galleryItems).filter(item =>
             item.style.display !== 'none'
         );
     }
@@ -327,6 +342,8 @@
         const img = galleryItem.querySelector('img');
         const title = galleryItem.querySelector('h4')?.textContent || '';
         const description = galleryItem.querySelector('p')?.textContent || '';
+        const tags = (galleryItem.getAttribute('data-tags') || '').split(',').filter(Boolean);
+        const metaList = galleryItem.querySelector('.gallery-meta')?.innerHTML || '';
 
         if (!elements.modal || !elements.modalImg || !elements.modalCaption) return;
 
@@ -340,7 +357,21 @@
 
         elements.modalImg.src = img.src;
         elements.modalImg.alt = img.alt;
-        elements.modalCaption.innerHTML = `<h4>${title}</h4><p>${description}</p>`;
+        // Enhanced modal caption with tags and meta
+        let tagsHtml = '';
+        if (tags.length) {
+            tagsHtml = `<div class="gallery-tags" style="margin-bottom:0.5rem;">${tags.map(tag => `<span class="tag">${tag.charAt(0).toUpperCase() + tag.slice(1)}</span>`).join(' ')}</div>`;
+        }
+        let metaHtml = '';
+        if (metaList) {
+            metaHtml = `<ul class="gallery-meta" style="margin-bottom:0.5rem;">${metaList}</ul>`;
+        }
+        elements.modalCaption.innerHTML = `
+            ${tagsHtml}
+            <h4 style="margin-bottom:0.5rem;">${title}</h4>
+            <p style="margin-bottom:0.5rem;">${description}</p>
+            ${metaHtml}
+        `;
 
         state.currentImageIndex = state.visibleImages.indexOf(galleryItem);
         state.isModalOpen = true;
@@ -366,11 +397,26 @@
         const img = newItem.querySelector('img');
         const title = newItem.querySelector('h4')?.textContent || '';
         const description = newItem.querySelector('p')?.textContent || '';
+        const tags = (newItem.getAttribute('data-tags') || '').split(',').filter(Boolean);
+        const metaList = newItem.querySelector('.gallery-meta')?.innerHTML || '';
 
         if (elements.modalImg && elements.modalCaption) {
             elements.modalImg.src = img.src;
             elements.modalImg.alt = img.alt;
-            elements.modalCaption.innerHTML = `<h4>${title}</h4><p>${description}</p>`;
+            let tagsHtml = '';
+            if (tags.length) {
+                tagsHtml = `<div class="gallery-tags" style="margin-bottom:0.5rem;">${tags.map(tag => `<span class="tag">${tag.charAt(0).toUpperCase() + tag.slice(1)}</span>`).join(' ')}</div>`;
+            }
+            let metaHtml = '';
+            if (metaList) {
+                metaHtml = `<ul class="gallery-meta" style="margin-bottom:0.5rem;">${metaList}</ul>`;
+            }
+            elements.modalCaption.innerHTML = `
+                ${tagsHtml}
+                <h4 style="margin-bottom:0.5rem;">${title}</h4>
+                <p style="margin-bottom:0.5rem;">${description}</p>
+                ${metaHtml}
+            `;
         }
     }
 
