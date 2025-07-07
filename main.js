@@ -64,8 +64,6 @@
             initNavbarEffects();
             initGallery();
             initContactForm();
-            initNewsletterForm(); // <-- Added
-            initFAQAccessibility(); // <-- Added
             initAnimations();
             initLazyLoading();
             initAccessibility();
@@ -607,157 +605,159 @@
         }, 2000);
     }
 
-    // Newsletter signup form
-    function initNewsletterForm() {
-        const form = document.querySelector('.newsletter-form');
-        if (!form) return;
-        const emailInput = form.querySelector('input[type="email"]');
-        form.addEventListener('submit', function(e) {
+    // Privacy Notice Modal
+    function initPrivacyNotice() {
+        if (!elements.privacyModal || !elements.acceptPrivacy) return;
+        const consent = localStorage.getItem('privacyAccepted');
+        if (!consent) {
+            showPrivacyModal();
+        }
+        elements.acceptPrivacy.addEventListener('click', () => {
+            localStorage.setItem('privacyAccepted', 'true');
+            hidePrivacyModal();
+        });
+        elements.privacyModal.querySelector('.modal-close').addEventListener('click', hidePrivacyModal);
+        elements.privacyModal.addEventListener('click', (e) => {
+            if (e.target === elements.privacyModal) hidePrivacyModal();
+        });
+    }
+    function showPrivacyModal() {
+        elements.privacyModal.style.display = 'flex';
+        setTimeout(() => elements.privacyModal.classList.add('show'), 10);
+        elements.privacyModal.setAttribute('aria-hidden', 'false');
+        elements.privacyModal.querySelector('.modal-content').focus();
+        document.body.style.overflow = 'hidden';
+    }
+    function hidePrivacyModal() {
+        elements.privacyModal.classList.remove('show');
+        setTimeout(() => {
+            elements.privacyModal.style.display = 'none';
+            elements.privacyModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    // Add PWA install prompt support
+    let deferredPrompt;
+    function initPWAInstallPrompt() {
+        window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
-            if (!emailInput.value.trim()) {
-                showFieldError(emailInput, 'Please enter your email.');
-                return;
-            }
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
-                showFieldError(emailInput, 'Please enter a valid email address.');
-                return;
-            }
-            // Simulate API call
-            const btn = form.querySelector('button[type="submit"]');
-            const originalText = btn.textContent;
-            btn.textContent = 'Subscribing...';
-            btn.disabled = true;
-            btn.classList.add('loading');
-            setTimeout(() => {
-                showMessage('Thank you for subscribing to our newsletter!', 'success');
-                form.reset();
-                btn.textContent = originalText;
-                btn.disabled = false;
-                btn.classList.remove('loading');
-                trackEvent('newsletter_signup', { email: emailInput.value.trim() });
-            }, 1500);
-        });
-        emailInput.addEventListener('input', () => {
-            emailInput.classList.remove('error');
-            const err = emailInput.parentNode.querySelector('.error-message');
-            if (err) err.remove();
+            deferredPrompt = e;
+            showPWAInstallPrompt();
         });
     }
-
-    // FAQ accessibility (keyboard and ARIA)
-    function initFAQAccessibility() {
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const summary = item.querySelector('summary');
-            summary.setAttribute('tabindex', '0');
-            summary.setAttribute('role', 'button');
-            summary.setAttribute('aria-expanded', item.hasAttribute('open'));
-            summary.addEventListener('click', () => {
-                faqItems.forEach(i => {
-                    if (i !== item) i.removeAttribute('open');
-                });
-                summary.setAttribute('aria-expanded', item.hasAttribute('open'));
-            });
-            summary.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    summary.click();
+    function showPWAInstallPrompt() {
+        let pwaPrompt = document.getElementById('pwa-install');
+        if (!pwaPrompt) {
+            pwaPrompt = document.createElement('div');
+            pwaPrompt.id = 'pwa-install';
+            pwaPrompt.innerHTML = `
+                <span>Install this app for a better experience!</span>
+                <button id="pwa-install-btn" class="btn-primary" style="margin-left:1rem;">Install</button>
+                <button id="pwa-dismiss-btn" class="btn-secondary" style="margin-left:0.5rem;">Dismiss</button>
+            `;
+            document.body.appendChild(pwaPrompt);
+        }
+        pwaPrompt.classList.add('show');
+        document.getElementById('pwa-install-btn').onclick = async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    showMessage('App installed!', 'success');
                 }
-            });
-        });
-    }
-
-    // Enhanced animations
-    function initAnimations() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+                deferredPrompt = null;
+                pwaPrompt.classList.remove('show');
+            }
         };
-
-        const observer = new IntersectionObserver(handleIntersection, observerOptions);
-        const statsObserver = new IntersectionObserver(handleStatsIntersection, observerOptions);
-
-        // Observe elements
-        const animateElements = document.querySelectorAll(
-            '.about, .gallery, .contact, .feature-item, .gallery-item, .contact-item, .testimonials, .testimonial, .faq, .faq-item, .blog, .blog-post, .newsletter'
-        );
-        animateElements.forEach(el => {
-            el.classList.add('fade-in');
-            observer.observe(el);
-        });
-
-        if (elements.heroStats) {
-            statsObserver.observe(elements.heroStats);
-        }
+        document.getElementById('pwa-dismiss-btn').onclick = () => {
+            pwaPrompt.classList.remove('show');
+        };
     }
 
-    function handleIntersection(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !state.animatedElements.has(entry.target)) {
-                entry.target.classList.add('visible');
-                state.animatedElements.add(entry.target);
-                
-                // Stagger child animations
-                const children = entry.target.querySelectorAll('.feature-item, .gallery-item, .contact-item');
-                children.forEach((child, index) => {
-                    setTimeout(() => {
-                        child.style.opacity = '1';
-                        child.style.transform = 'translateY(0)';
-                    }, index * CONFIG.animationDelay);
-                });
-            }
-        });
-    }
+    // Utility functions
+    function showMessage(message, type = 'info') {
+        const existingMessage = document.querySelector('.message-popup');
+        if (existingMessage) existingMessage.remove();
 
-    function handleStatsIntersection(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const stats = entry.target.querySelectorAll('.stat-number');
-                stats.forEach(stat => animateCounter(stat));
-                entry.target.observer?.unobserve(entry.target);
-            }
-        });
-    }
-
-    function animateCounter(element) {
-        const target = parseInt(element.textContent.replace(/\D/g, ''));
-        const suffix = element.textContent.replace(/\d/g, '');
-        let current = 0;
-        const increment = target / 50;
+        const messageEl = document.createElement('div');
+        messageEl.className = `message-popup message-${type}`;
         
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                element.textContent = target + suffix;
-                clearInterval(timer);
-            } else {
-                element.textContent = Math.floor(current) + suffix;
-            }
-        }, 40);
+        const icon = type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ';
+        messageEl.innerHTML = `<span class="message-icon">${icon}</span><span>${message}</span>`;
+        
+        Object.assign(messageEl.style, {
+            position: 'fixed',
+            top: '100px',
+            right: '20px',
+            padding: '1rem 1.5rem',
+            borderRadius: 'var(--border-radius)',
+            color: 'white',
+            fontWeight: '600',
+            zIndex: '10000',
+            transform: 'translateX(100%)',
+            transition: 'transform var(--transition-base)',
+            backgroundColor: type === 'error' ? 'var(--error-color)' : 
+                           type === 'success' ? 'var(--success-color)' : 
+                           'var(--primary-color)',
+            boxShadow: 'var(--shadow-lg)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            maxWidth: '400px'
+        });
+
+        document.body.appendChild(messageEl);
+
+        requestAnimationFrame(() => {
+            messageEl.style.transform = 'translateX(0)';
+        });
+
+        setTimeout(() => {
+            messageEl.style.transform = 'translateX(100%)';
+            setTimeout(() => messageEl.remove(), 300);
+        }, CONFIG.messageTimeout);
+
+        // ARIA live region update
+        if (elements.ariaLive) {
+            elements.ariaLive.textContent = message;
+        }
     }
 
-    // Accessibility enhancements
-    function initAccessibility() {
-        // Add ARIA labels where missing
-        const hamburger = elements.hamburger;
-        if (hamburger) {
-            hamburger.setAttribute('aria-label', 'Toggle navigation menu');
-            hamburger.setAttribute('aria-expanded', 'false');
+    function trackEvent(eventName, parameters = {}) {
+        console.log('Event tracked:', eventName, parameters);
+        
+        // Add analytics integration here
+        if (typeof gtag !== 'undefined') {
+            gtag('event', eventName, parameters);
         }
+    }
 
-        if (elements.navMenu) {
-            elements.navMenu.setAttribute('aria-hidden', 'true');
-        }
+    // Refined debounce utility using arrow function
+    const debounce = (func, wait) => {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    };
 
-        // Add skip link
-        const skipLink = document.createElement('a');
-        skipLink.href = '#main-content';
-        skipLink.textContent = 'Skip to main content';
-        skipLink.className = 'sr-only';
-        skipLink.style.cssText = `
-            position: absolute;
-            top: -40px;
-            left: 6px;
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    // Export functions for global access
+    window.BusinessWebsite = {
+        init,
+        showMessage,
+        trackEvent,
+        state: () => ({ ...state }) // Return a copy of state
+    };
+
+})();
             background: var(--primary-color);
             color: white;
             padding: 8px;
