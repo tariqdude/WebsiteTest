@@ -5,28 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YourBusiness - Professional Excellence Delivered Every Time</title>
     <meta name="description" content="Transform your business with our expert professional services. 500+ happy clients, 98% success rate, 5 years of proven excellence. Get started today.">
-    <meta name="keywords" content="professional services, business consulting, expert solutions, digital transformation">
+    <meta name="keywords" content="professional services, business consulting, expert solutions, digital transformation, business growth, digital strategy, consulting firm, enterprise solutions">
     <meta name="author" content="YourBusiness">
+    <meta name="robots" content="index, follow">
+    <meta name="color-scheme" content="light dark">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="manifest" href="manifest.json">
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="YourBusiness - Professional Excellence Delivered">
+    <meta property="og:title" content="YourBusiness - Professional Excellence Delivered Every Time">
     <meta property="og:description" content="Transform your business with our expert professional services. Trusted by 500+ clients.">
     <meta property="og:url" content="https://yourbusiness.com">
     <meta property="og:image" content="https://yourbusiness.com/og-image.png">
+    <meta property="og:site_name" content="YourBusiness">
     
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="YourBusiness - Professional Excellence Delivered">
+    <meta name="twitter:title" content="YourBusiness - Professional Excellence Delivered Every Time">
     <meta name="twitter:description" content="Transform your business with our expert professional services. Trusted by 500+ clients.">
     <meta name="twitter:image" content="https://yourbusiness.com/og-image.png">
+    <meta name="twitter:site" content="@yourbusiness">
     
     <!-- Preload critical resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     <link rel="preload" href="main.css" as="style">
+    <link rel="preload" href="main.js" as="script">
     
     <!-- Preconnect for performance improvements -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
     <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -35,6 +43,9 @@
     <!-- Favicon and theme color -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#2563eb">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     
     <!-- Structured data for SEO -->
     <script type="application/ld+json">
@@ -45,10 +56,18 @@
         "description": "Professional services company delivering excellence",
         "url": "https://yourbusiness.com",
         "logo": "https://yourbusiness.com/logo.png",
+        "sameAs": [
+            "https://facebook.com/yourbusiness",
+            "https://twitter.com/yourbusiness",
+            "https://linkedin.com/company/yourbusiness",
+            "https://instagram.com/yourbusiness"
+        ],
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+1-555-123-4567",
-            "contactType": "customer service"
+            "contactType": "customer service",
+            "areaServed": "US",
+            "availableLanguage": ["English", "Spanish"]
         }
     }
     </script>
@@ -62,15 +81,15 @@
     <!-- Navigation -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="nav-brand">
+            <a href="#hero" class="nav-brand" aria-label="YourBusiness Home">
                 <i class="fas fa-star logo-icon" aria-hidden="true"></i>
                 <span class="brand-text">YourBusiness</span>
-            </div>
-            <ul class="nav-menu" role="menubar" aria-hidden="true">
-                <li role="none"><a href="#hero" class="nav-link" role="menuitem">Home</a></li>
-                <li role="none"><a href="#about" class="nav-link" role="menuitem">About</a></li>
-                <li role="none"><a href="#gallery" class="nav-link" role="menuitem">Gallery</a></li>
-                <li role="none"><a href="#contact" class="nav-link" role="menuitem">Contact</a></li>
+            </a>
+            <ul class="nav-menu" id="nav-menu" role="menubar" aria-hidden="true">
+                <li role="none"><a href="#hero" class="nav-link" role="menuitem" tabindex="0">Home</a></li>
+                <li role="none"><a href="#about" class="nav-link" role="menuitem" tabindex="0">About</a></li>
+                <li role="none"><a href="#gallery" class="nav-link" role="menuitem" tabindex="0">Gallery</a></li>
+                <li role="none"><a href="#contact" class="nav-link" role="menuitem" tabindex="0">Contact</a></li>
             </ul>
             <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
                 <span class="bar" aria-hidden="true"></span>
@@ -321,13 +340,13 @@
     </main>
 
     <!-- Image Modal -->
-    <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
-        <button class="modal-close" aria-label="Close image gallery">&times;</button>
+    <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true" tabindex="-1">
+        <button class="modal-close" aria-label="Close image gallery" tabindex="0">&times;</button>
         <img class="modal-content" id="modalImage" alt="">
         <div class="modal-caption" id="modal-title"></div>
         <div class="modal-nav">
-            <button class="modal-prev" onclick="changeImage(-1)" aria-label="Previous image">&#10094;</button>
-            <button class="modal-next" onclick="changeImage(1)" aria-label="Next image">&#10095;</button>
+            <button class="modal-prev" onclick="changeImage(-1)" aria-label="Previous image" tabindex="0">&#10094;</button>
+            <button class="modal-next" onclick="changeImage(1)" aria-label="Next image" tabindex="0">&#10095;</button>
         </div>
     </div>
 
@@ -337,7 +356,7 @@
     </button>
 
     <!-- Privacy Notice Modal -->
-    <div id="privacyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title" aria-hidden="true" style="display:none;">
+    <div id="privacyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title" aria-hidden="true" style="display:none;" tabindex="-1">
         <div class="modal-content" style="max-width:500px;padding:2rem;background:#fff;color:#222;position:relative;">
             <button class="modal-close" aria-label="Close privacy notice" style="position:absolute;top:1rem;right:1rem;font-size:2rem;background:none;border:none;cursor:pointer;">&times;</button>
             <h2 id="privacy-title">Privacy Notice</h2>
@@ -355,10 +374,10 @@
                     <span class="brand-text">YourBusiness</span>
                     <p>Professional excellence delivered every time. Building lasting partnerships through quality service and innovative solutions.</p>
                     <div class="social-links" role="list" aria-label="Social media links">
-                        <a href="#" aria-label="Visit our Facebook page" role="listitem"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Follow us on Twitter" role="listitem"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Connect on LinkedIn" role="listitem"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Follow us on Instagram" role="listitem"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://facebook.com/yourbusiness" aria-label="Visit our Facebook page" role="listitem" target="_blank" rel="noopener"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com/yourbusiness" aria-label="Follow us on Twitter" role="listitem" target="_blank" rel="noopener"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://linkedin.com/company/yourbusiness" aria-label="Connect on LinkedIn" role="listitem" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                        <a href="https://instagram.com/yourbusiness" aria-label="Follow us on Instagram" role="listitem" target="_blank" rel="noopener"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>

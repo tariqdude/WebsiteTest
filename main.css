@@ -1122,3 +1122,100 @@ body {
         --text-secondary: #000000;
     }
 }
+
+/* --- Enhanced focus and active states for accessibility --- */
+a:focus-visible, button:focus-visible, .nav-link:focus-visible, .view-btn:focus-visible, .modal-close:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+    z-index: 10001;
+}
+
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* --- Subtle hover/active for all clickable elements --- */
+a, button, .nav-link, .btn-primary, .btn-secondary, .view-btn, .modal-close {
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+/* --- Modal accessibility improvements --- */
+.modal[aria-hidden="false"], #privacyModal[aria-hidden="false"] {
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+}
+.modal[aria-hidden="true"], #privacyModal[aria-hidden="true"] {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+/* --- Message popup styling --- */
+.message-popup {
+    font-family: var(--font-family);
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    min-width: 220px;
+    pointer-events: auto;
+    opacity: 0.98;
+}
+.message-popup .message-icon {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+}
+
+/* --- Retina/high-DPI image support --- */
+img, .logo-icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* --- PWA install prompt (hidden by default) --- */
+#pwa-install {
+    display: none;
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    padding: 1rem 2rem;
+    z-index: 10001;
+    font-size: 1rem;
+    align-items: center;
+    gap: 1rem;
+}
+#pwa-install.show {
+    display: flex;
+}
+
+/* --- Improved dark mode for modal and popups --- */
+@media (prefers-color-scheme: dark) {
+    .modal-content, #privacyModal .modal-content, #pwa-install {
+        background: #23272f !important;
+        color: #f0f0f0 !important;
+    }
+    .message-popup {
+        background: #23272f !important;
+        color: #f0f0f0 !important;
+    }
+}
+
+/* --- Add smooth scroll for all browsers --- */
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* --- Add reduced motion for all transitions/animations --- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}

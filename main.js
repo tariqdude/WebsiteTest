@@ -63,6 +63,7 @@
             initTouchGestures();
             initBackToTop();
             initPrivacyNotice();
+            initPWAInstallPrompt(); // <-- Added
 
             // Set initial state
             updateVisibleImages();
@@ -326,40 +327,46 @@
         const img = galleryItem.querySelector('img');
         const title = galleryItem.querySelector('h4')?.textContent || '';
         const description = galleryItem.querySelector('p')?.textContent || '';
-        
+
         if (!elements.modal || !elements.modalImg || !elements.modalCaption) return;
-        
+
         elements.modal.style.display = 'block';
         requestAnimationFrame(() => {
             elements.modal.classList.add('show');
+            elements.modal.setAttribute('aria-hidden', 'false');
+            elements.modal.setAttribute('tabindex', '0');
+            elements.modal.focus();
         });
-        
+
         elements.modalImg.src = img.src;
         elements.modalImg.alt = img.alt;
         elements.modalCaption.innerHTML = `<h4>${title}</h4><p>${description}</p>`;
-        
+
         state.currentImageIndex = state.visibleImages.indexOf(galleryItem);
         state.isModalOpen = true;
         document.body.style.overflow = 'hidden';
+
+        // Analytics event for modal open
+        trackEvent('gallery_modal_open', { title, img: img.src });
     }
 
     function changeImage(direction) {
         if (state.visibleImages.length === 0) return;
-        
+
         state.currentImageIndex += direction;
-        
+
         if (state.currentImageIndex >= state.visibleImages.length) {
             state.currentImageIndex = 0;
         }
         if (state.currentImageIndex < 0) {
             state.currentImageIndex = state.visibleImages.length - 1;
         }
-        
+
         const newItem = state.visibleImages[state.currentImageIndex];
         const img = newItem.querySelector('img');
         const title = newItem.querySelector('h4')?.textContent || '';
         const description = newItem.querySelector('p')?.textContent || '';
-        
+
         if (elements.modalImg && elements.modalCaption) {
             elements.modalImg.src = img.src;
             elements.modalImg.alt = img.alt;
@@ -587,6 +594,29 @@
         if (elements.ariaLive) {
             elements.ariaLive.textContent = '';
         }
+
+        // Modal keyboard trap
+        if (elements.modal) {
+            elements.modal.addEventListener('keydown', function(e) {
+                if (!state.isModalOpen) return;
+                const focusable = elements.modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        }
+                    } else {
+                        if (document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                }
+            });
+        }
     }
 
     // Enhanced Back to Top button
@@ -635,6 +665,44 @@
             elements.privacyModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
         }, 300);
+    }
+
+    // Add PWA install prompt support
+    let deferredPrompt;
+    function initPWAInstallPrompt() {
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showPWAInstallPrompt();
+        });
+    }
+    function showPWAInstallPrompt() {
+        let pwaPrompt = document.getElementById('pwa-install');
+        if (!pwaPrompt) {
+            pwaPrompt = document.createElement('div');
+            pwaPrompt.id = 'pwa-install';
+            pwaPrompt.innerHTML = `
+                <span>Install this app for a better experience!</span>
+                <button id="pwa-install-btn" class="btn-primary" style="margin-left:1rem;">Install</button>
+                <button id="pwa-dismiss-btn" class="btn-secondary" style="margin-left:0.5rem;">Dismiss</button>
+            `;
+            document.body.appendChild(pwaPrompt);
+        }
+        pwaPrompt.classList.add('show');
+        document.getElementById('pwa-install-btn').onclick = async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    showMessage('App installed!', 'success');
+                }
+                deferredPrompt = null;
+                pwaPrompt.classList.remove('show');
+            }
+        };
+        document.getElementById('pwa-dismiss-btn').onclick = () => {
+            pwaPrompt.classList.remove('show');
+        };
     }
 
     // Utility functions
