@@ -684,253 +684,249 @@ body {
     }
 }
 
-/* Enhanced Gallery */
-.gallery {
+/* --- Testimonials Section --- */
+.testimonials {
     padding: 6rem 0;
     background: var(--bg-secondary);
 }
-
-.gallery-filters {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--border-color);
-    background: white;
-    color: var(--text-secondary);
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    border-color: var(--primary-color);
-    background: var(--primary-color);
-    color: white;
-}
-
-.gallery-grid {
+.testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
-    /* Add slight perspective for depth */
-    perspective: 800px;
+    justify-content: center;
 }
-
-.gallery-item {
-    position: relative;
-    border-radius: var(--border-radius);
-    overflow: hidden;
+.testimonial {
     background: white;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
-    transition: all var(--transition-base), box-shadow 0.4s cubic-bezier(.25,.8,.25,1);
-    cursor: pointer;
-    outline: none;
-    position: relative;
-    min-height: 250px;
-}
-
-.gallery-item:focus-within,
-.gallery-item:focus-visible {
-    box-shadow: 0 0 0 4px var(--accent-color), var(--shadow-xl);
-    z-index: 2;
-}
-
-.gallery-item:hover {
-    transform: translateY(-8px) scale(1.03) rotateY(1deg);
-    box-shadow: var(--shadow-xl), 0 0 0 4px var(--primary-light);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-    will-change: transform;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    filter: brightness(0.98) contrast(1.05);
-    transition: transform var(--transition-slow), filter 0.3s;
-}
-
-.gallery-item:hover img,
-.gallery-item:focus-within img {
-    transform: scale(1.08);
-    filter: brightness(1.05) contrast(1.1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(0deg, rgba(30,41,59,0.92) 80%, transparent 100%);
-    color: white;
     padding: 2rem 1.5rem 1.5rem;
-    transform: translateY(100%);
-    transition: transform var(--transition-base), background 0.3s;
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
-    pointer-events: none;
-    min-height: 60%;
+    position: relative;
+    font-size: 1.1rem;
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    align-items: flex-start;
+    min-height: 220px;
 }
-
-.gallery-item:hover .gallery-overlay,
-.gallery-item:focus-within .gallery-overlay {
-    transform: translateY(0);
-    pointer-events: auto;
-    background: linear-gradient(0deg, rgba(30,41,59,0.97) 90%, transparent 100%);
+.testimonial p {
+    font-style: italic;
+    margin-bottom: 1.5rem;
 }
-
-.gallery-tags {
+.testimonial footer {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+.testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+}
+.testimonial-name {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.testimonial-role {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
 }
 
-.tag {
-    display: inline-block;
-    background: var(--accent-color);
-    color: #fff;
-    font-size: 0.75rem;
+/* --- FAQ Section --- */
+.faq {
+    padding: 6rem 0;
+    background: white;
+}
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.faq-item {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem 1.5rem;
+    font-size: 1.05rem;
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.2s;
+}
+.faq-item[open] {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+.faq-item summary {
     font-weight: 600;
-    border-radius: 6px;
-    padding: 0.25em 0.75em;
-    margin-bottom: 0.25em;
-    letter-spacing: 0.03em;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    color: var(--primary-color);
+    cursor: pointer;
+    outline: none;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+.faq-item div {
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
 }
 
-.gallery-overlay h4 {
+/* --- Blog/Insights Section --- */
+.blog {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+.blog-post {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 350px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.blog-post:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+.blog-post img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.blog-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.blog-content h3 {
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #fff;
+    color: var(--primary-color);
 }
-
-.gallery-overlay p {
-    font-size: 1rem;
-    color: #e0e7ef;
-    margin-bottom: 0.75rem;
-    line-height: 1.5;
-}
-
-.gallery-meta {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    font-size: 0.95rem;
-    color: #cbd5e1;
+.blog-content p {
+    color: var(--text-secondary);
     margin-bottom: 1rem;
-    padding: 0;
+    font-size: 1rem;
+}
+.btn-small {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.95rem;
+}
+
+/* --- Newsletter Signup Section --- */
+.newsletter {
+    padding: 5rem 0;
+    background: white;
+    text-align: center;
+}
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
     flex-wrap: wrap;
 }
+.newsletter-form input[type="email"] {
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    min-width: 220px;
+    outline: none;
+    transition: border 0.2s;
+}
+.newsletter-form input[type="email"]:focus {
+    border-color: var(--primary-color);
+}
+.newsletter-form .btn-primary {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
 
-.gallery-meta li {
+/* --- Footer Contact --- */
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: flex-start;
+}
+.footer-contact {
+    min-width: 220px;
+}
+.footer-contact h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.footer-contact ul {
+    list-style: none;
+    padding: 0;
+    color: #94a3b8;
+}
+.footer-contact li {
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
-    gap: 0.4em;
+    gap: 0.5rem;
+}
+.footer-contact a {
+    color: #94a3b8;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+.footer-contact a:hover {
+    color: var(--primary-color);
 }
 
-.gallery-meta i {
-    color: var(--accent-color);
-    font-size: 1em;
+/* --- Responsive Tweaks --- */
+@media (max-width: 1024px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    .footer-contact {
+        text-align: center;
+    }
 }
-
-.view-btn {
-    position: absolute;
-    bottom: 1.25rem;
-    right: 1.25rem;
-    z-index: 2;
-    background: var(--primary-color);
-    color: #fff;
-    border: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    font-size: 1.25rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-    opacity: 0.95;
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    pointer-events: auto;
-}
-
-.view-btn:hover,
-.view-btn:focus-visible {
-    background: var(--accent-color);
-    color: #fff;
-    transform: scale(1.12);
-    outline: 2px solid #fff;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.22);
-}
-
-.gallery-item:focus-within .view-btn {
-    outline: 2px solid var(--accent-color);
-}
-
-.gallery-item[tabindex="0"]:focus {
-    outline: 3px solid var(--accent-color);
-    z-index: 10;
-}
-
-/* Modal - Enhanced for Gallery */
-.modal-content#modalImage {
-    max-width: 900px;
-    max-height: 80vh;
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-xl), 0 0 0 6px var(--primary-light);
-    background: #fff;
-    object-fit: contain;
-}
-
-.modal-caption#modal-title {
-    font-size: 1.15rem;
-    color: #fff;
-    background: rgba(30,41,59,0.85);
-    padding: 1.25rem 2rem;
-    border-radius: var(--border-radius);
-    margin-top: 1rem;
-    max-width: 90vw;
-    word-break: break-word;
-}
-
 @media (max-width: 768px) {
-    .gallery-grid {
+    .testimonials-grid,
+    .blog-grid {
         grid-template-columns: 1fr;
     }
-    .gallery-item {
-        min-height: 180px;
+    .newsletter-form {
+        flex-direction: column;
+        gap: 1rem;
     }
-    .modal-content#modalImage {
-        max-width: 98vw;
-        max-height: 60vh;
-    }
-    .modal-caption#modal-title {
-        padding: 1rem;
-        font-size: 1rem;
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
     }
 }
-
 @media (max-width: 480px) {
-    .gallery-overlay {
-        padding: 1rem 0.75rem 0.75rem;
+    .testimonials,
+    .faq,
+    .blog,
+    .newsletter {
+        padding: 3rem 0;
     }
-    .gallery-meta {
-        gap: 0.75rem;
-        font-size: 0.85rem;
+    .testimonial {
+        padding: 1.25rem 0.75rem 1rem;
     }
-    .tag {
-        font-size: 0.7rem;
-        padding: 0.18em 0.5em;
+    .blog-content {
+        padding: 1rem;
     }
 }
 
@@ -1423,6 +1419,10 @@ html {
 /* --- Add reduced motion for all transitions/animations --- */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
         transition: none !important;
         animation: none !important;
     }

@@ -57,13 +57,15 @@
             initNavbarEffects();
             initGallery();
             initContactForm();
+            initNewsletterForm(); // <-- Added
+            initFAQAccessibility(); // <-- Added
             initAnimations();
             initLazyLoading();
             initAccessibility();
             initTouchGestures();
             initBackToTop();
             initPrivacyNotice();
-            initPWAInstallPrompt(); // <-- Added
+            initPWAInstallPrompt();
 
             // Set initial state
             updateVisibleImages();
@@ -529,6 +531,66 @@
         }, 2000);
     }
 
+    // Newsletter signup form
+    function initNewsletterForm() {
+        const form = document.querySelector('.newsletter-form');
+        if (!form) return;
+        const emailInput = form.querySelector('input[type="email"]');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!emailInput.value.trim()) {
+                showFieldError(emailInput, 'Please enter your email.');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+                showFieldError(emailInput, 'Please enter a valid email address.');
+                return;
+            }
+            // Simulate API call
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Subscribing...';
+            btn.disabled = true;
+            btn.classList.add('loading');
+            setTimeout(() => {
+                showMessage('Thank you for subscribing to our newsletter!', 'success');
+                form.reset();
+                btn.textContent = originalText;
+                btn.disabled = false;
+                btn.classList.remove('loading');
+                trackEvent('newsletter_signup', { email: emailInput.value.trim() });
+            }, 1500);
+        });
+        emailInput.addEventListener('input', () => {
+            emailInput.classList.remove('error');
+            const err = emailInput.parentNode.querySelector('.error-message');
+            if (err) err.remove();
+        });
+    }
+
+    // FAQ accessibility (keyboard and ARIA)
+    function initFAQAccessibility() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const summary = item.querySelector('summary');
+            summary.setAttribute('tabindex', '0');
+            summary.setAttribute('role', 'button');
+            summary.setAttribute('aria-expanded', item.hasAttribute('open'));
+            summary.addEventListener('click', () => {
+                faqItems.forEach(i => {
+                    if (i !== item) i.removeAttribute('open');
+                });
+                summary.setAttribute('aria-expanded', item.hasAttribute('open'));
+            });
+            summary.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    summary.click();
+                }
+            });
+        });
+    }
+
     // Enhanced animations
     function initAnimations() {
         const observerOptions = {
@@ -540,7 +602,9 @@
         const statsObserver = new IntersectionObserver(handleStatsIntersection, observerOptions);
 
         // Observe elements
-        const animateElements = document.querySelectorAll('.about, .gallery, .contact, .feature-item, .gallery-item, .contact-item');
+        const animateElements = document.querySelectorAll(
+            '.about, .gallery, .contact, .feature-item, .gallery-item, .contact-item, .testimonials, .testimonial, .faq, .faq-item, .blog, .blog-post, .newsletter'
+        );
         animateElements.forEach(el => {
             el.classList.add('fade-in');
             observer.observe(el);
