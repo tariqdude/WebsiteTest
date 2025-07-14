@@ -122,33 +122,14 @@ Since 2003, Midwest Climate Solutions has been the trusted partner
         if (window.scrollY > 50) {
           navbar.style.background = 'rgba(255, 255, 255, 0.95)';
           navbar.style.backdropFilter = 'blur(10px)';
+          navbar.style.boxShadow = '0 2px 15px rgba(0,0,0,0.08)';
         } else {
           navbar.style.background = 'var(--white)';
           navbar.style.backdropFilter = 'none';
+          navbar.style.boxShadow = 'none';
         }
       });
     });
-
-    // Function to show different content types in hero section
-    function showContent(type) {
-      // Hide all content
-      document.querySelectorAll('.media-content').forEach((content) => {
-        content.classList.remove('active');
-      });
-
-      // Show selected content
-      const targetContent = document.getElementById(type + '-content');
-      if (targetContent) {
-        targetContent.classList.add('active');
-      }
-
-      // Update button states
-      document.querySelectorAll('.hero-buttons .btn').forEach((btn) => {
-        btn.style.opacity = '0.7';
-      });
-
-      event.target.style.opacity = '1';
-    }
 
     // Intersection Observer for animations
     const observerOptions = {
