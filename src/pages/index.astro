@@ -3,41 +3,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Midwest Climate Solutions - Commercial HVAC Experts">
-  <header>
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="logo">
-          <i class="fas fa-fan"></i>
-          <span>Midwest Climate Solutions</span>
-        </div>
-        <ul class="nav-menu">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+  <header class="bg-white shadow-lg fixed top-0 w-full z-50">
+    <nav class="container mx-auto flex justify-between items-center h-24 px-6">
+      <div class="flex items-center">
+        <i class="fas fa-fan text-orange-500 text-4xl mr-3"></i>
+        <span class="font-extrabold text-blue-800 text-3xl uppercase tracking-wide">Midwest Climate Solutions</span>
+      </div>
+      <ul class="hidden md:flex space-x-12">
+        <li><a href="#home" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Home<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
+        <li><a href="#services" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Services<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
+        <li><a href="#projects" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Projects<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
+        <li><a href="#about" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">About<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
+        <li><a href="#testimonials" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Testimonials<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
+        <li><a href="#contact" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Contact<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
+      </ul>
+      <div class="md:hidden flex flex-col space-y-1 cursor-pointer" id="hamburger">
+        <span class="block w-8 h-1 bg-gray-800 transition-all duration-300 ease-in-out"></span>
+        <span class="block w-8 h-1 bg-gray-800 transition-all duration-300 ease-in-out"></span>
+        <span class="block w-8 h-1 bg-gray-800 transition-all duration-300 ease-in-out"></span>
       </div>
     </nav>
+    <div id="mobile-menu" class="md:hidden bg-white shadow-lg fixed top-24 left-0 w-full transform -translate-x-full transition-transform duration-300 ease-in-out">
+      <ul class="flex flex-col items-center py-6 space-y-4">
+        <li><a href="#home" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Home</a></li>
+        <li><a href="#services" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Services</a></li>
+        <li><a href="#projects" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Projects</a></li>
+        <li><a href="#about" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">About</a></li>
+        <li><a href="#testimonials" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Testimonials</a></li>
+        <li><a href="#contact" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Contact</a></li>
+      </ul>
+    </div>
   </header>
 
   <main>
     <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="container hero-content">
-        <div class="hero-text">
-          <h1>Leading Commercial HVAC Solutions</h1>
-          <p>
-            Optimizing indoor environments for businesses across the Great Lakes
-            region with advanced HVAC systems and unparalleled service.
-          </p>
-          <div class="hero-buttons">
+    <section id="home" class="relative bg-gradient-to-br from-blue-800 to-blue-600 text-white py-32 min-h-screen flex items-center overflow-hidden">
+      <div class="absolute inset-0 bg-cover bg-center opacity-15" style="background-image: url('https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-3xl">
+          <h1 class="text-6xl font-extrabold mb-4 leading-tight">Leading Commercial HVAC Solutions</h1>
+          <p class="text-xl text-blue-100 mb-8 max-w-2xl">Optimizing indoor environments for businesses across the Great Lakes region with advanced HVAC systems and unparalleled service.</p>
+          <div class="flex space-x-6">
             <a href="#contact" class="btn btn-primary">Get a Quote</a>
             <a href="#projects" class="btn btn-secondary">View Our Work</a>
           </div>
@@ -46,104 +52,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="services">
-      <div class="container">
-        <h2>Our Comprehensive HVAC Services</h2>
-        <div class="services-grid">
-          <div class="service-card">
-            <i class="fas fa-fan"></i>
-            <h3>HVAC System Installation</h3>
-            <p>
-              Expert installation of new commercial HVAC systems, tailored to
-              your facility's unique needs.
-            </p>
+    <section id="services" class="py-24 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-bold text-center text-blue-800 mb-16 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mx-auto after:mt-4 after:rounded-full">Our Comprehensive HVAC Services</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <i class="fas fa-fan text-blue-700 text-5xl mb-6"></i>
+            <h3 class="text-2xl font-semibold text-blue-800 mb-3">HVAC System Installation</h3>
+            <p class="text-gray-600">Expert installation of new commercial HVAC systems, tailored to your facility's unique needs.</p>
           </div>
-          <div class="service-card">
-            <i class="fas fa-wrench"></i>
-            <h3>Preventative Maintenance</h3>
-            <p>
-              Proactive maintenance programs to ensure peak performance,
-              efficiency, and longevity of your systems.
-            </p>
+          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <i class="fas fa-wrench text-blue-700 text-5xl mb-6"></i>
+            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Preventative Maintenance</h3>
+            <p class="text-gray-600">Proactive maintenance programs to ensure peak performance, efficiency, and longevity of your systems.</p>
           </div>
-          <div class="service-card">
-            <i class="fas fa-fire-extinguisher"></i>
-            <h3>Emergency Repairs</h3>
-            <p>
-              24/7 rapid response for critical HVAC system breakdowns,
-              minimizing downtime and discomfort.
-            </p>
+          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <i class="fas fa-fire-extinguisher text-blue-700 text-5xl mb-6"></i>
+            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Emergency Repairs</h3>
+            <p class="text-gray-600">24/7 rapid response for critical HVAC system breakdowns, minimizing downtime and discomfort.</p>
           </div>
-          <div class="service-card">
-            <i class="fas fa-leaf"></i>
-            <h3>Energy Management Solutions</h3>
-            <p>
-              Implementing smart controls and strategies to reduce energy
-              consumption and operational costs.
-            </p>
+          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <i class="fas fa-leaf text-blue-700 text-5xl mb-6"></i>
+            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Energy Management Solutions</h3>
+            <p class="text-gray-600">Implementing smart controls and strategies to reduce energy consumption and operational costs.</p>
           </div>
-          <div class="service-card">
-            <i class="fas fa-wind"></i>
-            <h3>Indoor Air Quality (IAQ)</h3>
-            <p>
-              Solutions for superior indoor air quality, including filtration,
-              ventilation, and humidity control.
-            </p>
+          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <i class="fas fa-wind text-blue-700 text-5xl mb-6"></i>
+            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Indoor Air Quality (IAQ)</h3>
+            <p class="text-gray-600">Solutions for superior indoor air quality, including filtration, ventilation, and humidity control.</p>
           </div>
-          <div class="service-card">
-            <i class="fas fa-robot"></i>
-            <h3>Building Automation Systems (BAS)</h3>
-            <p>
-              Integrating advanced BAS for centralized control and optimized
-              building performance.
-            </p>
+          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <i class="fas fa-robot text-blue-700 text-5xl mb-6"></i>
+            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Building Automation Systems (BAS)</h3>
+            <p class="text-gray-600">Integrating advanced BAS for centralized control and optimized building performance.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
-      <div class="container">
-        <h2>Recent HVAC Projects</h2>
-        <div class="projects-grid">
-          <div class="project-card">
-            <img
-              src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-              alt="Office HVAC Upgrade"
-            />
-            <div class="project-card-content">
-              <h3>Office Building HVAC Upgrade</h3>
-              <p>
-                Modernized climate control systems for a multi-story office
-                complex, enhancing comfort and efficiency.
-              </p>
+    <section id="projects" class="py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-bold text-center text-blue-800 mb-16 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mx-auto after:mt-4 after:rounded-full">Recent HVAC Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <img src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Office HVAC Upgrade" class="w-full h-72 object-cover transition duration-500 ease-in-out transform hover:scale-105" />
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-blue-800 mb-2">Office Building HVAC Upgrade</h3>
+              <p class="text-gray-600">Modernized climate control systems for a multi-story office complex, enhancing comfort and efficiency.</p>
             </div>
           </div>
-          <div class="project-card">
-            <img
-              src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-              alt="Retail HVAC Installation"
-            />
-            <div class="project-card-content">
-              <h3>Retail Space HVAC Installation</h3>
-              <p>
-                Designed and installed a new, high-efficiency HVAC system for a
-                large retail establishment.
-              </p>
+          <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <img src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Retail HVAC Installation" class="w-full h-72 object-cover transition duration-500 ease-in-out transform hover:scale-105" />
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-blue-800 mb-2">Retail Space HVAC Installation</h3>
+              <p class="text-gray-600">Designed and installed a new, high-efficiency HVAC system for a large retail establishment.</p>
             </div>
           </div>
-          <div class="project-card">
-            <img
-              src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-              alt="Industrial HVAC Solution"
-            />
-            <div class="project-card-content">
-              <h3>Industrial Facility Climate Control</h3>
-              <p>
-                Implemented a robust HVAC solution for a manufacturing plant,
-                ensuring optimal working conditions.
-              </p>
+          <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+            <img src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Industrial HVAC Solution" class="w-full h-72 object-cover transition duration-500 ease-in-out transform hover:scale-105" />
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-blue-800 mb-2">Industrial Facility Climate Control</h3>
+              <p class="text-gray-600">Implemented a robust HVAC solution for a manufacturing plant, ensuring optimal working conditions.</p>
             </div>
           </div>
         </div>
@@ -151,122 +121,120 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <div class="about-content">
-          <div class="about-text">
-            <h2>About Midwest Climate Solutions</h2>
-            <p>
-              Since 2003, Midwest Climate Solutions has been the trusted partner
-              for commercial HVAC needs across the region. We are committed to
-              delivering superior climate control, energy efficiency, and
-              unparalleled service, ensuring optimal indoor environments for
-              businesses of all sizes.
-            </p>
-            <div class="stats">
-              <div class="stat">
-                <h3>1000+</h3>
-                <p>Systems Serviced</p>
+    <section id="about" class="py-24 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div class="lg:order-2">
+            <h2 class="text-5xl font-bold text-blue-800 mb-8 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mt-4 after:rounded-full">About Midwest Climate Solutions</h2>
+            <p class="text-lg text-gray-700 mb-8">Since 2003, Midwest Climate Solutions has been the trusted partner for commercial HVAC needs across the region. We are committed to delivering superior climate control, energy efficiency, and unparalleled service, ensuring optimal indoor environments for businesses of all sizes.</p>
+            <div class="grid grid-cols-3 gap-8 text-center mt-12">
+              <div>
+                <h3 class="text-5xl font-extrabold text-orange-500">1000+</h3>
+                <p class="text-blue-700 font-semibold">Systems Serviced</p>
               </div>
-              <div class="stat">
-                <h3>20+</h3>
-                <p>Years Expertise</p>
+              <div>
+                <h3 class="text-5xl font-extrabold text-orange-500">20+</h3>
+                <p class="text-blue-700 font-semibold">Years Expertise</p>
               </div>
-              <div class="stat">
-                <h3>99%</h3>
-                <p>Client Satisfaction</p>
+              <div>
+                <h3 class="text-5xl font-extrabold text-orange-500">99%</h3>
+                <p class="text-blue-700 font-semibold">Client Satisfaction</p>
               </div>
             </div>
           </div>
-          <div class="about-image">
-            <img
-              src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-              alt="HVAC Technicians"
-            />
+          <div class="lg:order-1 relative pt-[65%] rounded-xl shadow-2xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="HVAC Technicians" class="absolute inset-0 w-full h-full object-cover rounded-xl" />
           </div>
         </div>
       </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-      <div class="container">
-        <h2>What Our Clients Say About Our HVAC Services</h2>
-        <div class="testimonial-slider">
-          <div class="testimonial-card">
-            <p>
-              "Midwest Climate Solutions provided an outstanding HVAC
-              installation for our new office. Their team was highly
-              professional and the system works flawlessly!"
+    <section id="testimonials" class="py-24 bg-blue-700 text-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-bold text-center text-white mb-16 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mx-auto after:mt-4 after:rounded-full">What Our Clients Say About Our HVAC Services</h2>
+        <div class="relative overflow-hidden h-64 flex items-center" id="testimonial-slider">
+          <div class="testimonial-card min-w-full p-8 text-center flex flex-col justify-center items-center">
+            <p class="text-2xl italic text-blue-100 mb-6 max-w-4xl relative before:content-['\201C'] before:absolute before:-top-4 before:-left-10 before:text-6xl before:text-white before:opacity-20 after:content-['\201D'] after:absolute after:-bottom-4 after:-right-10 after:text-6xl after:text-white after:opacity-20">
+              "Midwest Climate Solutions provided an outstanding HVAC installation for our new office. Their team was highly professional and the system works flawlessly!"
             </p>
-            <h4>- Sarah L., Office Manager</h4>
+            <h4 class="text-lg font-bold text-orange-400">- Sarah L., Office Manager</h4>
           </div>
-          <div class="testimonial-card">
-            <p>
-              "Their preventative maintenance program has significantly reduced
-              our energy costs and kept our systems running efficiently. Highly
-              recommend their expertise."
+          <div class="testimonial-card min-w-full p-8 text-center flex flex-col justify-center items-center">
+            <p class="text-2xl italic text-blue-100 mb-6 max-w-4xl relative before:content-['\201C'] before:absolute before:-top-4 before:-left-10 before:text-6xl before:text-white before:opacity-20 after:content-['\201D'] after:absolute after:-bottom-4 after:-right-10 after:text-6xl after:text-white after:opacity-20">
+              "Their preventative maintenance program has significantly reduced our energy costs and kept our systems running efficiently. Highly recommend their expertise."
             </p>
-            <h4>- John D., Property Manager</h4>
+            <h4 class="text-lg font-bold text-orange-400">- John D., Property Manager</h4>
           </div>
-          <div class="testimonial-card">
-            <p>
-              "When our HVAC system failed unexpectedly, Midwest Climate
-              Solutions responded immediately and had us back up and running in
-              no time. Excellent emergency service!"
+          <div class="testimonial-card min-w-full p-8 text-center flex flex-col justify-center items-center">
+            <p class="text-2xl italic text-blue-100 mb-6 max-w-4xl relative before:content-['\201C'] before:absolute before:-top-4 before:-left-10 before:text-6xl before:text-white before:opacity-20 after:content-['\201D'] after:absolute after:-bottom-4 after:-right-10 after:text-6xl after:text-white after:opacity-20">
+              "When our HVAC system failed unexpectedly, Midwest Climate Solutions responded immediately and had us back up and running in no time. Excellent emergency service!"
             </p>
-            <h4>- Mark T., Restaurant Owner</h4>
+            <h4 class="text-lg font-bold text-orange-400">- Mark T., Restaurant Owner</h4>
           </div>
         </div>
-        <div class="slider-nav">
-          <span class="dot active" data-slide="0"></span>
-          <span class="dot" data-slide="1"></span>
-          <span class="dot" data-slide="2"></span>
+        <div class="flex justify-center space-x-3 mt-12" id="slider-nav">
+          <span class="dot w-4 h-4 bg-white opacity-50 rounded-full cursor-pointer transition duration-300 ease-in-out hover:opacity-100 active:bg-orange-500" data-slide="0"></span>
+          <span class="dot w-4 h-4 bg-white opacity-50 rounded-full cursor-pointer transition duration-300 ease-in-out hover:opacity-100" data-slide="1"></span>
+          <span class="dot w-4 h-4 bg-white opacity-50 rounded-full cursor-pointer transition duration-300 ease-in-out hover:opacity-100" data-slide="2"></span>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2>Get In Touch</h2>
-        <div class="contact-content">
-          <div class="contact-info">
-            <div class="contact-item">
-              <i class="fas fa-phone"></i>
-              <div>
-                <h3>Phone</h3>
-                <p>(555) 123-4567</p>
+    <section id="contact" class="py-24 bg-gray-800 text-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-5xl font-bold text-center text-white mb-16 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mx-auto after:mt-4 after:rounded-full">Get In Touch</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <div class="space-y-8">
+              <div class="flex items-start space-x-6">
+                <i class="fas fa-phone text-orange-500 text-4xl flex-shrink-0"></i>
+                <div>
+                  <h3 class="text-3xl font-semibold mb-1">Phone</h3>
+                  <p class="text-gray-300 text-lg">(555) 123-4567</p>
+                </div>
               </div>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <div>
-                <h3>Email</h3>
-                <p>info@midwestclimatesolutions.com</p>
+              <div class="flex items-start space-x-6">
+                <i class="fas fa-envelope text-orange-500 text-4xl flex-shrink-0"></i>
+                <div>
+                  <h3 class="text-3xl font-semibold mb-1">Email</h3>
+                  <p class="text-gray-300 text-lg">info@midwestclimatesolutions.com</p>
+                </div>
               </div>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <div>
-                <h3>Address</h3>
-                <p>456 Climate Dr, Metroville, IL 60601</p>
+              <div class="flex items-start space-x-6">
+                <i class="fas fa-map-marker-alt text-orange-500 text-4xl flex-shrink-0"></i>
+                <div>
+                  <h3 class="text-3xl font-semibold mb-1">Address</h3>
+                  <p class="text-gray-300 text-lg">456 Climate Dr, Metroville, IL 60601</p>
+                </div>
               </div>
             </div>
           </div>
-          <form class="contact-form">
-            <input type="text" placeholder="Your Name" required />
-            <input type="email" placeholder="Your Email" required />
-            <textarea placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit" class="btn btn-primary">Send Message</button>
-          </form>
+          <div class="bg-white p-10 rounded-xl shadow-2xl">
+            <form class="space-y-6">
+              <div>
+                <label for="name" class="sr-only">Your Name</label>
+                <input type="text" id="name" placeholder="Your Name" required class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out text-gray-800 bg-gray-100" />
+              </div>
+              <div>
+                <label for="email" class="sr-only">Your Email</label>
+                <input type="email" id="email" placeholder="Your Email" required class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out text-gray-800 bg-gray-100" />
+              </div>
+              <div>
+                <label for="message" class="sr-only">Your Message</label>
+                <textarea id="message" placeholder="Your Message" rows="6" required class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out text-gray-800 bg-gray-100 resize-y"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-full">Send Message</button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
+  <footer class="bg-gray-900 text-gray-400 py-8 text-center">
+    <div class="container mx-auto px-6">
       <p>&copy; 2024 Midwest Climate Solutions. All rights reserved.</p>
     </div>
   </footer>
@@ -274,19 +242,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <script is:inline>
     document.addEventListener('DOMContentLoaded', function () {
       // Mobile navigation toggle
-      const hamburger = document.querySelector('.hamburger');
-      const navMenu = document.querySelector('.nav-menu');
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
 
       hamburger.addEventListener('click', function () {
+        mobileMenu.classList.toggle('-translate-x-full');
         hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
       });
 
       // Close mobile menu when clicking on a link
-      document.querySelectorAll('.nav-menu a').forEach((link) => {
+      document.querySelectorAll('#mobile-menu a').forEach((link) => {
         link.addEventListener('click', function () {
+          mobileMenu.classList.add('-translate-x-full');
           hamburger.classList.remove('active');
-          navMenu.classList.remove('active');
         });
       });
 
@@ -305,86 +273,76 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
 
       // Contact form handling
-      const contactForm = document.querySelector('.contact-form');
+      const contactForm = document.querySelector('#contact form');
       contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-
-        // Simple form validation
+        
         const inputs = this.querySelectorAll('input, textarea');
         let isValid = true;
-
-        inputs.forEach((input) => {
-          if (!input.value.trim()) {
-            isValid = false;
-            input.style.borderColor = 'red';
-          } else {
-            input.style.borderColor = 'var(--color-light)';
-          }
+        
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                isValid = false;
+                input.classList.add('border-red-500');
+            } else {
+                input.classList.remove('border-red-500');
+            }
         });
-
+        
         if (isValid) {
-          alert('Thank you for your message! We will get back to you soon.');
-          this.reset();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
         } else {
-          alert('Please fill in all fields.');
+            alert('Please fill in all fields.');
         }
       });
 
       // Navbar background on scroll
       window.addEventListener('scroll', function () {
-        const navbar = document.querySelector('.navbar');
+        const navbar = document.querySelector('header');
         if (window.scrollY > 50) {
-          navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-          navbar.style.backdropFilter = 'blur(15px)';
-          navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+          navbar.classList.add('bg-white', 'shadow-lg');
+          navbar.classList.remove('bg-transparent', 'shadow-none');
         } else {
-          navbar.style.background = 'var(--color-white)';
-          navbar.style.backdropFilter = 'none';
-          navbar.style.boxShadow = 'none';
+          navbar.classList.remove('bg-white', 'shadow-lg');
+          navbar.classList.add('bg-transparent', 'shadow-none');
         }
       });
-    });
 
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px',
-    };
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      };
 
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      }, observerOptions);
 
-    // Observe elements for animation
-    document.addEventListener('DOMContentLoaded', function () {
-      const animateElements = document.querySelectorAll(
-        '.service-card, .project-card, .about-content, .testimonial-card, .contact-content'
-      );
-
-      animateElements.forEach((el) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      // Observe elements for animation
+      document.querySelectorAll('.service-card, .project-card, .about-content, .testimonial-card, .contact-content').forEach((el) => {
+        el.classList.add('opacity-0', 'translate-y-8'); // Initial state for animation
         observer.observe(el);
       });
 
       // Testimonial Slider
-      const testimonialSlider = document.querySelector('.testimonial-slider');
-      const dots = document.querySelectorAll('.slider-nav .dot');
+      const testimonialSlider = document.getElementById('testimonial-slider');
+      const dots = document.querySelectorAll('#slider-nav .dot');
       let currentSlide = 0;
 
       function showSlide(index) {
         testimonialSlider.style.transform = `translateX(${-index * 100}%)`;
         dots.forEach((dot, i) => {
           if (i === index) {
-            dot.classList.add('active');
+            dot.classList.add('active', 'bg-orange-500', 'opacity-100');
+            dot.classList.remove('bg-white', 'opacity-50');
           } else {
-            dot.classList.remove('active');
+            dot.classList.remove('active', 'bg-orange-500', 'opacity-100');
+            dot.classList.add('bg-white', 'opacity-50');
           }
         });
         currentSlide = index;
@@ -406,4 +364,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       showSlide(0); // Initialize slider
     });
   </script>
+
+  <style is:global>
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(2rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 0.8s ease-out forwards;
+    }
+  </style>
 </BaseLayout>
