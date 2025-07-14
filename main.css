@@ -58,6 +58,7 @@ body {
 .logo i {
     margin-right: 10px;
     font-size: 2rem;
+    /* Changed from fa-hard-hat to fa-fan for HVAC theme */
 }
 
 .nav-menu {
