@@ -107,7 +107,7 @@ const observer = new IntersectionObserver(function(entries) {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', function() {
-    const animateElements = document.querySelectorAll('.service-card, .about-content, .contact-content');
+    const animateElements = document.querySelectorAll('.service-card, .about-content, .contact-content, .project-card, .testimonial-card');
     
     animateElements.forEach(el => {
         el.style.opacity = '0';
@@ -115,4 +115,36 @@ document.addEventListener('DOMContentLoaded', function() {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+
+    // Testimonial Slider
+    const testimonialSlider = document.querySelector('.testimonial-slider');
+    const dots = document.querySelectorAll('.slider-nav .dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        testimonialSlider.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+        currentSlide = index;
+    }
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            const slideIndex = parseInt(this.dataset.slide);
+            showSlide(slideIndex);
+        });
+    });
+
+    // Auto-advance slider
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % dots.length;
+        showSlide(currentSlide);
+    }, 5000); // Change slide every 5 seconds
+
+    showSlide(0); // Initialize slider
 });
