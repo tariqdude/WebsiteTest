@@ -129,40 +129,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Hero Section -->
     <section 
       id="home" 
-      class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-20 min-h-screen flex items-center overflow-hidden"
+      class="relative bg-gradient-radial from-primary-900 via-primary-800 to-primary-900 text-white py-20 min-h-screen flex items-center overflow-hidden"
       aria-label="Hero section"
     >
-      <!-- Background Pattern -->
-      <div class="absolute inset-0 opacity-10" aria-hidden="true">
-        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"60\" height=\"60\" viewBox=\"0 0 60 60\"><g fill=\"%23ffffff\" fill-opacity=\"0.1\"><circle cx=\"30\" cy=\"30\" r=\"2\"/></g></svg>');"></div>
+      <!-- Enhanced Background -->
+      <div class="absolute inset-0" aria-hidden="true">
+        <div class="absolute inset-0 bg-gradient-conic opacity-20"></div>
+        <div class="absolute inset-0 bg-grid opacity-5"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-secondary-500/10 rounded-full blur-2xl animate-float-delayed"></div>
       </div>
       
+      <!-- Glassmorphism overlay -->
+      <div class="absolute inset-0 glass-dark opacity-30"></div>
+      
       <div class="container mx-auto px-4 sm:px-6 relative z-10">
-        <div class="max-w-4xl">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight text-shadow-lg focus:outline-none" tabindex="-1">
-            <span class="block sm:inline">Leading Commercial</span> 
-            <span class="text-orange-400 block sm:inline">HVAC Solutions</span>
+        <div class="max-w-5xl animate-fadeInUp">
+          <h1 class="text-display-2xs sm:text-display-xs md:text-display-sm lg:text-display-md font-display font-black mb-6 sm:mb-8 leading-display tracking-tight" tabindex="-1">
+            <span class="block animate-slideInLeft">Leading Commercial</span> 
+            <span class="text-gradient-accent block animate-slideInRight animation-delay-300">HVAC Solutions</span>
           </h1>
-          <p class="text-base sm:text-lg md:text-xl text-blue-100 mb-6 sm:mb-8 max-w-2xl leading-relaxed">
+          <p class="text-lg sm:text-xl md:text-2xl text-primary-100 mb-8 sm:mb-10 max-w-3xl leading-relaxed animate-fadeInUp animation-delay-600">
             Optimizing indoor environments for businesses across the Great Lakes region with advanced HVAC systems, energy-efficient solutions, and unparalleled service excellence.
           </p>
-          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-12 animate-fadeInUp animation-delay-900">
             <a 
               href="#contact" 
-              class="btn btn-primary text-center focus:ring-4 focus:ring-blue-300 group min-h-touch flex items-center justify-center shadow-mobile-button"
+              class="btn-hover-lift bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-glow-accent hover:shadow-glow-accent-lg transition-all duration-300 min-h-touch flex-center group"
               onclick="window.analytics?.trackEvent('cta_click', {location: 'hero', type: 'quote'})"
             >
-              <i class="fas fa-calculator mr-2 group-hover:animate-pulse text-sm sm:text-base" aria-hidden="true"></i>
-              <span class="text-sm sm:text-base font-semibold">Get Free Quote</span>
-              <span class="ml-2 text-xs bg-orange-500 px-2 py-1 rounded-full hidden sm:inline">24h Response</span>
+              <i class="fas fa-calculator mr-3 group-hover:animate-wiggle text-lg" aria-hidden="true"></i>
+              <span class="font-bold">Get Free Quote</span>
+              <span class="ml-3 bg-white/20 px-3 py-1 rounded-full text-sm hidden sm:inline">24h Response</span>
             </a>
             <a 
               href="tel:+15551234567" 
-              class="btn btn-secondary text-center focus:ring-4 focus:ring-orange-300 min-h-touch flex items-center justify-center shadow-mobile-button"
+              class="btn-hover-glow glass border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg min-h-touch flex-center group"
               onclick="window.analytics?.trackPhoneCall('hero_cta')"
             >
-              <i class="fas fa-phone mr-2 text-sm sm:text-base" aria-hidden="true"></i>
-              <span class="text-sm sm:text-base font-semibold">
+              <i class="fas fa-phone mr-3 group-hover:animate-shake text-lg" aria-hidden="true"></i>
+              <span class="font-bold">
                 <span class="hidden sm:inline">Call Emergency: (555) 123-4567</span>
                 <span class="sm:hidden">Emergency Call</span>
               </span>
@@ -170,69 +176,143 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           
           <!-- Trust Indicators -->
-          <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-blue-200">
-            <div class="flex items-center">
-              <i class="fas fa-shield-check mr-1 sm:mr-2 text-green-400 text-sm" aria-hidden="true"></i>
-              <span class="mobile-sm sm:text-sm">Licensed & Insured</span>
+          <div class="flex flex-wrap items-center justify-center sm:justify-start gap-6 sm:gap-8 animate-fadeInUp animation-delay-1200">
+            <div class="flex items-center glass px-4 py-2 rounded-full">
+              <i class="fas fa-shield-check mr-2 text-success-400 text-lg animate-pulse" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">Licensed & Insured</span>
             </div>
-            <div class="flex items-center">
-              <i class="fas fa-clock mr-1 sm:mr-2 text-yellow-400 text-sm" aria-hidden="true"></i>
-              <span class="mobile-sm sm:text-sm">24/7 Emergency</span>
+            <div class="flex items-center glass px-4 py-2 rounded-full">
+              <i class="fas fa-clock mr-2 text-warning-400 text-lg" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">24/7 Emergency</span>
             </div>
-            <div class="flex items-center">
-              <i class="fas fa-star mr-1 sm:mr-2 text-orange-400 text-sm" aria-hidden="true"></i>
-              <span class="mobile-sm sm:text-sm">4.9/5 Rating</span>
+            <div class="flex items-center glass px-4 py-2 rounded-full">
+              <i class="fas fa-star mr-2 text-accent-400 text-lg animate-glow" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">4.9/5 Rating</span>
             </div>
-            <div class="flex items-center">
-              <i class="fas fa-tools mr-1 sm:mr-2 text-blue-400 text-sm" aria-hidden="true"></i>
-              <span class="mobile-sm sm:text-sm">20+ Years</span>
+            <div class="flex items-center glass px-4 py-2 rounded-full">
+              <i class="fas fa-tools mr-2 text-secondary-400 text-lg" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">20+ Years</span>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <i class="fas fa-chevron-down text-white text-2xl opacity-70" aria-hidden="true"></i>
+      <!-- Enhanced Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounceGentle">
+        <div class="glass px-4 py-2 rounded-full">
+          <i class="fas fa-chevron-down text-white text-xl opacity-80" aria-hidden="true"></i>
+        </div>
       </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 md:py-24 bg-gray-50" aria-labelledby="services-heading">
+    <section id="services" class="py-20 md:py-32 bg-gradient-subtle" aria-labelledby="services-heading">
       <div class="container mx-auto px-6">
-        <h2 id="services-heading" class="section-heading">Our Comprehensive HVAC Services</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12" role="list">
-          <article class="service-card card p-8 text-center group" role="listitem">
-            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300" aria-hidden="true">
-              <i class="fas fa-fan text-blue-600 group-hover:text-white text-2xl transition-colors duration-300"></i>
+        <div class="text-center max-w-4xl mx-auto mb-16 animate-fadeInUp">
+          <h2 id="services-heading" class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
+            Our Comprehensive <span class="text-gradient-primary">HVAC Services</span>
+          </h2>
+          <p class="text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto">
+            From cutting-edge installations to emergency repairs, we deliver comprehensive HVAC solutions that keep your business running efficiently.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" role="list">
+          <article class="card card-hover group animate-fadeInUp" role="listitem">
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-fan text-primary-600 text-3xl group-hover:animate-spin"></i>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">HVAC System Installation</h3>
-            <p class="text-gray-600 leading-relaxed">Expert installation of new commercial HVAC systems, tailored to your facility's unique requirements and energy efficiency goals.</p>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-primary transition-all duration-300">
+              HVAC System Installation
+            </h3>
+            <p class="text-neutral-600 leading-relaxed mb-6">
+              Expert installation of new commercial HVAC systems, tailored to your facility's unique requirements and energy efficiency goals.
+            </p>
+            <div class="flex items-center text-primary-600 font-semibold group-hover:text-primary-700">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </div>
           </article>
           
-          <article class="service-card card p-8 text-center group" role="listitem">
-            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300" aria-hidden="true">
+          <article class="card card-hover group animate-fadeInUp animation-delay-200" role="listitem">
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
               <i class="fas fa-wrench text-blue-600 group-hover:text-white text-2xl transition-colors duration-300"></i>
+              <i class="fas fa-wrench text-secondary-600 text-3xl group-hover:animate-wiggle"></i>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Preventative Maintenance</h3>
-            <p class="text-gray-600 leading-relaxed">Proactive maintenance programs to ensure peak performance, maximum efficiency, and extended lifespan of your HVAC systems.</p>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-secondary transition-all duration-300">
+              Preventative Maintenance
+            </h3>
+            <p class="text-neutral-600 leading-relaxed mb-6">
+              Proactive maintenance programs to ensure peak performance, maximum efficiency, and extended lifespan of your HVAC systems.
+            </p>
+            <div class="flex items-center text-secondary-600 font-semibold group-hover:text-secondary-700">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </div>
           </article>
           
-          <article class="service-card card p-8 text-center group" role="listitem">
-            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300" aria-hidden="true">
-              <i class="fas fa-tools text-blue-600 group-hover:text-white text-2xl transition-colors duration-300"></i>
+          <article class="card card-hover group animate-fadeInUp animation-delay-400" role="listitem">
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-error-100 to-error-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-tools text-error-600 text-3xl group-hover:animate-shake"></i>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Emergency Repairs</h3>
-            <p class="text-gray-600 leading-relaxed">24/7 rapid response for critical HVAC system breakdowns, minimizing downtime and maintaining comfortable environments.</p>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-error-600 transition-all duration-300">
+              Emergency Repairs
+            </h3>
+            <p class="text-neutral-600 leading-relaxed mb-6">
+              24/7 rapid response for critical HVAC system breakdowns, minimizing downtime and maintaining comfortable environments.
+            </p>
+            <div class="flex items-center text-error-600 font-semibold group-hover:text-error-700">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </div>
           </article>
           
-          <article class="service-card card p-8 text-center group" role="listitem">
-            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300" aria-hidden="true">
-              <i class="fas fa-leaf text-blue-600 group-hover:text-white text-2xl transition-colors duration-300"></i>
+          <article class="card card-hover group animate-fadeInUp animation-delay-600" role="listitem">
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-success-100 to-success-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-leaf text-success-600 text-3xl group-hover:animate-glow"></i>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Energy Efficiency Solutions</h3>
-            <p class="text-gray-600 leading-relaxed">Smart controls and energy management strategies to significantly reduce consumption and operational costs.</p>
-          </div>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-accent transition-all duration-300">
+              Energy Efficiency Solutions
+            </h3>
+            <p class="text-neutral-600 leading-relaxed mb-6">
+              Smart controls and energy management strategies to significantly reduce consumption and operational costs.
+            </p>
+            <div class="flex items-center text-success-600 font-semibold group-hover:text-success-700">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </article>
+          
+          <article class="card card-hover group animate-fadeInUp animation-delay-800" role="listitem">
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-accent-100 to-accent-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-thermometer-half text-accent-600 text-3xl group-hover:animate-float"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-accent transition-all duration-300">
+              Indoor Air Quality
+            </h3>
+            <p class="text-neutral-600 leading-relaxed mb-6">
+              Advanced filtration and air purification systems to ensure healthy, clean air in your commercial environment.
+            </p>
+            <div class="flex items-center text-accent-600 font-semibold group-hover:text-accent-700">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </article>
+          
+          <article class="card card-hover group animate-fadeInUp animation-delay-1000" role="listitem">
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-warning-100 to-warning-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-chart-line text-warning-600 text-3xl group-hover:animate-pulse"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-secondary transition-all duration-300">
+              System Optimization
+            </h3>
+            <p class="text-neutral-600 leading-relaxed mb-6">
+              Performance analysis and system upgrades to maximize efficiency, reduce costs, and improve overall comfort.
+            </p>
+            <div class="flex items-center text-warning-600 font-semibold group-hover:text-warning-700">
+              <span>Learn More</span>
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </div>
           
           <div class="service-card card p-8 text-center group">
             <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
