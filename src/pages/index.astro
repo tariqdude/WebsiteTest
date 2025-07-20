@@ -2,230 +2,521 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Midwest Climate Solutions - Commercial HVAC Experts">
-  <header class="bg-white shadow-lg fixed top-0 w-full z-50">
-    <nav class="container mx-auto flex justify-between items-center h-24 px-6">
+<BaseLayout 
+  title="Midwest Climate Solutions - Commercial HVAC Experts"
+  description="Leading commercial HVAC solutions for businesses across the Great Lakes region. Expert installation, maintenance, and energy-efficient climate control systems."
+>
+  <!-- Navigation Header -->
+  <header class="bg-transparent fixed top-0 w-full z-50 transition-all duration-300">
+    <nav class="container mx-auto flex justify-between items-center h-20 px-6" role="navigation" aria-label="Main navigation">
       <div class="flex items-center">
-        <i class="fas fa-fan text-orange-500 text-4xl mr-3"></i>
-        <span class="font-extrabold text-blue-800 text-3xl uppercase tracking-wide">Midwest Climate Solutions</span>
+        <i class="fas fa-fan text-orange-500 text-3xl mr-3 animate-spin-slow" aria-hidden="true"></i>
+        <span class="font-bold text-white text-2xl lg:text-3xl tracking-wide">
+          Midwest Climate Solutions
+        </span>
       </div>
-      <ul class="hidden md:flex space-x-12">
-        <li><a href="#home" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Home<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
-        <li><a href="#services" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Services<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
-        <li><a href="#projects" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Projects<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
-        <li><a href="#about" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">About<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
-        <li><a href="#testimonials" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Testimonials<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
-        <li><a href="#contact" class="text-gray-800 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out relative group">Contact<span class="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 transition-all duration-300 ease-in-out group-hover:w-full"></span></a></li>
+      
+      <!-- Desktop Navigation -->
+      <ul class="hidden lg:flex space-x-8 xl:space-x-12">
+        <li><a href="#home" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group">
+          Home
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+        </a></li>
+        <li><a href="#services" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group">
+          Services
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+        </a></li>
+        <li><a href="#projects" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group">
+          Projects
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+        </a></li>
+        <li><a href="#about" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group">
+          About
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+        </a></li>
+        <li><a href="#contact" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group">
+          Contact
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+        </a></li>
       </ul>
-      <div class="md:hidden flex flex-col space-y-1 cursor-pointer" id="hamburger">
-        <span class="block w-8 h-1 bg-gray-800 transition-all duration-300 ease-in-out"></span>
-        <span class="block w-8 h-1 bg-gray-800 transition-all duration-300 ease-in-out"></span>
-        <span class="block w-8 h-1 bg-gray-800 transition-all duration-300 ease-in-out"></span>
-      </div>
+      
+      <!-- Mobile Menu Toggle -->
+      <button 
+        class="lg:hidden flex flex-col space-y-1.5 cursor-pointer p-2" 
+        id="hamburger"
+        aria-expanded="false"
+        aria-label="Toggle mobile menu"
+      >
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+      </button>
     </nav>
-    <div id="mobile-menu" class="md:hidden bg-white shadow-lg fixed top-24 left-0 w-full transform -translate-x-full transition-transform duration-300 ease-in-out">
+    
+    <!-- Mobile Navigation Menu -->
+    <div 
+      id="mobile-menu" 
+      class="lg:hidden bg-white shadow-xl fixed top-20 left-0 w-full transform -translate-x-full transition-transform duration-300 ease-out"
+      role="menu"
+    >
       <ul class="flex flex-col items-center py-6 space-y-4">
-        <li><a href="#home" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Home</a></li>
-        <li><a href="#services" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Services</a></li>
-        <li><a href="#projects" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Projects</a></li>
-        <li><a href="#about" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">About</a></li>
-        <li><a href="#testimonials" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Testimonials</a></li>
-        <li><a href="#contact" class="text-gray-800 hover:text-blue-700 font-semibold text-lg">Contact</a></li>
+        <li><a href="#home" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">Home</a></li>
+        <li><a href="#services" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">Services</a></li>
+        <li><a href="#projects" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">Projects</a></li>
+        <li><a href="#about" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">About</a></li>
+        <li><a href="#contact" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">Contact</a></li>
       </ul>
     </div>
   </header>
 
   <main>
     <!-- Hero Section -->
-    <section id="home" class="relative bg-gradient-to-br from-blue-800 to-blue-600 text-white py-32 min-h-screen flex items-center overflow-hidden">
-      <div class="absolute inset-0 bg-cover bg-center opacity-15" style="background-image: url('https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+    <section 
+      id="home" 
+      class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white py-20 min-h-screen flex items-center overflow-hidden"
+    >
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"60\" height=\"60\" viewBox=\"0 0 60 60\"><g fill=\"%23ffffff\" fill-opacity=\"0.1\"><circle cx=\"30\" cy=\"30\" r=\"2\"/></g></svg>');"></div>
+      </div>
+      
       <div class="container mx-auto px-6 relative z-10">
-        <div class="max-w-3xl">
-          <h1 class="text-6xl font-extrabold mb-4 leading-tight">Leading Commercial HVAC Solutions</h1>
-          <p class="text-xl text-blue-100 mb-8 max-w-2xl">Optimizing indoor environments for businesses across the Great Lakes region with advanced HVAC systems and unparalleled service.</p>
-          <div class="flex space-x-6">
-            <a href="#contact" class="btn btn-primary">Get a Quote</a>
-            <a href="#projects" class="btn btn-secondary">View Our Work</a>
+        <div class="max-w-4xl">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-shadow-lg">
+            Leading Commercial <span class="text-orange-400">HVAC Solutions</span>
+          </h1>
+          <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl leading-relaxed">
+            Optimizing indoor environments for businesses across the Great Lakes region with advanced HVAC systems, energy-efficient solutions, and unparalleled service excellence.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <a href="#contact" class="btn btn-primary text-center">
+              <i class="fas fa-envelope mr-2" aria-hidden="true"></i>
+              Get Free Quote
+            </a>
+            <a href="#projects" class="btn btn-outline text-center">
+              <i class="fas fa-eye mr-2" aria-hidden="true"></i>
+              View Our Work
+            </a>
           </div>
         </div>
+      </div>
+      
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <i class="fas fa-chevron-down text-white text-2xl opacity-70" aria-hidden="true"></i>
       </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 bg-gray-50">
+    <section id="services" class="py-16 md:py-24 bg-gray-50">
       <div class="container mx-auto px-6">
-        <h2 class="text-5xl font-bold text-center text-blue-800 mb-16 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mx-auto after:mt-4 after:rounded-full">Our Comprehensive HVAC Services</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <i class="fas fa-fan text-blue-700 text-5xl mb-6"></i>
-            <h3 class="text-2xl font-semibold text-blue-800 mb-3">HVAC System Installation</h3>
-            <p class="text-gray-600">Expert installation of new commercial HVAC systems, tailored to your facility's unique needs.</p>
+        <h2 class="section-heading">Our Comprehensive HVAC Services</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div class="service-card card p-8 text-center group">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
+              <i class="fas fa-fan text-blue-600 group-hover:text-white text-2xl transition-colors duration-300" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">HVAC System Installation</h3>
+            <p class="text-gray-600 leading-relaxed">Expert installation of new commercial HVAC systems, tailored to your facility's unique requirements and energy efficiency goals.</p>
           </div>
-          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <i class="fas fa-wrench text-blue-700 text-5xl mb-6"></i>
-            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Preventative Maintenance</h3>
-            <p class="text-gray-600">Proactive maintenance programs to ensure peak performance, efficiency, and longevity of your systems.</p>
+          
+          <div class="service-card card p-8 text-center group">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
+              <i class="fas fa-wrench text-blue-600 group-hover:text-white text-2xl transition-colors duration-300" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Preventative Maintenance</h3>
+            <p class="text-gray-600 leading-relaxed">Proactive maintenance programs to ensure peak performance, maximum efficiency, and extended lifespan of your HVAC systems.</p>
           </div>
-          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <i class="fas fa-fire-extinguisher text-blue-700 text-5xl mb-6"></i>
-            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Emergency Repairs</h3>
-            <p class="text-gray-600">24/7 rapid response for critical HVAC system breakdowns, minimizing downtime and discomfort.</p>
+          
+          <div class="service-card card p-8 text-center group">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
+              <i class="fas fa-tools text-blue-600 group-hover:text-white text-2xl transition-colors duration-300" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Emergency Repairs</h3>
+            <p class="text-gray-600 leading-relaxed">24/7 rapid response for critical HVAC system breakdowns, minimizing downtime and maintaining comfortable environments.</p>
           </div>
-          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <i class="fas fa-leaf text-blue-700 text-5xl mb-6"></i>
-            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Energy Management Solutions</h3>
-            <p class="text-gray-600">Implementing smart controls and strategies to reduce energy consumption and operational costs.</p>
+          
+          <div class="service-card card p-8 text-center group">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
+              <i class="fas fa-leaf text-blue-600 group-hover:text-white text-2xl transition-colors duration-300" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Energy Efficiency Solutions</h3>
+            <p class="text-gray-600 leading-relaxed">Smart controls and energy management strategies to significantly reduce consumption and operational costs.</p>
           </div>
-          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <i class="fas fa-wind text-blue-700 text-5xl mb-6"></i>
-            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Indoor Air Quality (IAQ)</h3>
-            <p class="text-gray-600">Solutions for superior indoor air quality, including filtration, ventilation, and humidity control.</p>
+          
+          <div class="service-card card p-8 text-center group">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
+              <i class="fas fa-wind text-blue-600 group-hover:text-white text-2xl transition-colors duration-300" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Indoor Air Quality</h3>
+            <p class="text-gray-600 leading-relaxed">Advanced air quality solutions including filtration systems, ventilation optimization, and humidity control.</p>
           </div>
-          <div class="bg-white rounded-xl shadow-lg p-8 text-center transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <i class="fas fa-robot text-blue-700 text-5xl mb-6"></i>
-            <h3 class="text-2xl font-semibold text-blue-800 mb-3">Building Automation Systems (BAS)</h3>
-            <p class="text-gray-600">Integrating advanced BAS for centralized control and optimized building performance.</p>
+          
+          <div class="service-card card p-8 text-center group">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
+              <i class="fas fa-microchip text-blue-600 group-hover:text-white text-2xl transition-colors duration-300" aria-hidden="true"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Building Automation</h3>
+            <p class="text-gray-600 leading-relaxed">Cutting-edge building automation systems for centralized control and optimized facility performance.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-24 bg-white">
+    <section id="projects" class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-6">
-        <h2 class="text-5xl font-bold text-center text-blue-800 mb-16 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mx-auto after:mt-4 after:rounded-full">Recent HVAC Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <img src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Office HVAC Upgrade" class="w-full h-72 object-cover transition duration-500 ease-in-out transform hover:scale-105" />
-            <div class="p-6">
-              <h3 class="text-2xl font-semibold text-blue-800 mb-2">Office Building HVAC Upgrade</h3>
-              <p class="text-gray-600">Modernized climate control systems for a multi-story office complex, enhancing comfort and efficiency.</p>
+        <h2 class="section-heading">Recent HVAC Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          <article class="project-card card overflow-hidden group">
+            <div class="relative overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Modern office building with advanced HVAC system" 
+                class="w-full h-64 object-cover transition duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
             </div>
-          </div>
-          <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <img src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Retail HVAC Installation" class="w-full h-72 object-cover transition duration-500 ease-in-out transform hover:scale-105" />
             <div class="p-6">
-              <h3 class="text-2xl font-semibold text-blue-800 mb-2">Retail Space HVAC Installation</h3>
-              <p class="text-gray-600">Designed and installed a new, high-efficiency HVAC system for a large retail establishment.</p>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Office Building HVAC Upgrade</h3>
+              <p class="text-gray-600 leading-relaxed">Complete modernization of climate control systems for a 15-story office complex, improving energy efficiency by 40%.</p>
+              <div class="mt-4">
+                <span class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Commercial</span>
+              </div>
             </div>
-          </div>
-          <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden transform transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-            <img src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Industrial HVAC Solution" class="w-full h-72 object-cover transition duration-500 ease-in-out transform hover:scale-105" />
+          </article>
+          
+          <article class="project-card card overflow-hidden group">
+            <div class="relative overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Retail space with efficient HVAC installation" 
+                class="w-full h-64 object-cover transition duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+            </div>
             <div class="p-6">
-              <h3 class="text-2xl font-semibold text-blue-800 mb-2">Industrial Facility Climate Control</h3>
-              <p class="text-gray-600">Implemented a robust HVAC solution for a manufacturing plant, ensuring optimal working conditions.</p>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Retail Space Climate Control</h3>
+              <p class="text-gray-600 leading-relaxed">Custom HVAC design and installation for a 50,000 sq ft retail establishment with zone-specific temperature control.</p>
+              <div class="mt-4">
+                <span class="inline-block bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">Retail</span>
+              </div>
             </div>
-          </div>
+          </article>
+          
+          <article class="project-card card overflow-hidden group">
+            <div class="relative overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Industrial facility with specialized HVAC system" 
+                class="w-full h-64 object-cover transition duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Manufacturing Facility Solution</h3>
+              <p class="text-gray-600 leading-relaxed">Industrial-grade HVAC system for a manufacturing plant, ensuring optimal working conditions and air quality standards.</p>
+              <div class="mt-4">
+                <span class="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Industrial</span>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 bg-gray-50">
+    <section id="about" class="py-16 md:py-24 bg-gray-50">
       <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div class="lg:order-2">
-            <h2 class="text-5xl font-bold text-blue-800 mb-8 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mt-4 after:rounded-full">About Midwest Climate Solutions</h2>
-            <p class="text-lg text-gray-700 mb-8">Since 2003, Midwest Climate Solutions has been the trusted partner for commercial HVAC needs across the region. We are committed to delivering superior climate control, energy efficiency, and unparalleled service, ensuring optimal indoor environments for businesses of all sizes.</p>
-            <div class="grid grid-cols-3 gap-8 text-center mt-12">
-              <div>
-                <h3 class="text-5xl font-extrabold text-orange-500">1000+</h3>
-                <p class="text-blue-700 font-semibold">Systems Serviced</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class="about-content lg:order-2">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              About <span class="text-blue-600">Midwest Climate Solutions</span>
+            </h2>
+            <div class="w-16 h-1 bg-orange-500 mb-8 rounded-full"></div>
+            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+              Since 2003, Midwest Climate Solutions has been the trusted partner for commercial HVAC needs across the Great Lakes region. We are committed to delivering superior climate control solutions, energy efficiency innovations, and unparalleled service excellence.
+            </p>
+            <p class="text-gray-600 mb-8 leading-relaxed">
+              Our team of certified technicians and engineers brings decades of combined experience to every project, ensuring optimal indoor environments for businesses of all sizes and industries.
+            </p>
+            
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
+              <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                <div class="text-3xl lg:text-4xl font-bold text-orange-500 mb-2">1000+</div>
+                <div class="text-sm text-gray-600 font-medium uppercase tracking-wide">Systems Serviced</div>
               </div>
-              <div>
-                <h3 class="text-5xl font-extrabold text-orange-500">20+</h3>
-                <p class="text-blue-700 font-semibold">Years Expertise</p>
+              <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                <div class="text-3xl lg:text-4xl font-bold text-orange-500 mb-2">20+</div>
+                <div class="text-sm text-gray-600 font-medium uppercase tracking-wide">Years Experience</div>
               </div>
-              <div>
-                <h3 class="text-5xl font-extrabold text-orange-500">99%</h3>
-                <p class="text-blue-700 font-semibold">Client Satisfaction</p>
+              <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                <div class="text-3xl lg:text-4xl font-bold text-orange-500 mb-2">99%</div>
+                <div class="text-sm text-gray-600 font-medium uppercase tracking-wide">Client Satisfaction</div>
               </div>
             </div>
           </div>
-          <div class="lg:order-1 relative pt-[65%] rounded-xl shadow-2xl overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1583912277729-c15917f7900d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="HVAC Technicians" class="absolute inset-0 w-full h-full object-cover rounded-xl" />
+          
+          <div class="lg:order-1 relative">
+            <div class="relative rounded-xl overflow-hidden shadow-2xl">
+              <img 
+                src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="HVAC technicians working on commercial system" 
+                class="w-full h-96 lg:h-[500px] object-cover"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent"></div>
+            </div>
+            
+            <!-- Floating Badge -->
+            <div class="absolute -bottom-6 -right-6 bg-orange-500 text-white p-6 rounded-xl shadow-xl">
+              <div class="text-center">
+                <div class="text-2xl font-bold">24/7</div>
+                <div class="text-sm font-medium">Emergency Service</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-24 bg-blue-700 text-white">
-      <div class="container mx-auto px-6">
-        <h2 class="text-5xl font-bold text-center text-white mb-16 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mx-auto after:mt-4 after:rounded-full">What Our Clients Say About Our HVAC Services</h2>
-        <div class="relative overflow-hidden h-64 flex items-center" id="testimonial-slider">
-          <div class="testimonial-card min-w-full p-8 text-center flex flex-col justify-center items-center">
-            <p class="text-2xl italic text-blue-100 mb-6 max-w-4xl relative before:content-['\201C'] before:absolute before:-top-4 before:-left-10 before:text-6xl before:text-white before:opacity-20 after:content-['\201D'] after:absolute after:-bottom-4 after:-right-10 after:text-6xl after:text-white after:opacity-20">
-              "Midwest Climate Solutions provided an outstanding HVAC installation for our new office. Their team was highly professional and the system works flawlessly!"
-            </p>
-            <h4 class="text-lg font-bold text-orange-400">- Sarah L., Office Manager</h4>
+    <section id="testimonials" class="py-16 md:py-24 bg-blue-800 text-white relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"0 0 40 40\"><g fill=\"%23ffffff\" fill-opacity=\"0.1\"><rect width=\"2\" height=\"2\" x=\"19\" y=\"19\"/></g></svg>');"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12">
+          What Our Clients Say
+        </h2>
+        <div class="w-16 h-1 bg-orange-500 mx-auto mb-16 rounded-full"></div>
+        
+        <div class="relative overflow-hidden h-auto" id="testimonial-slider">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card w-full p-8 text-center flex flex-col justify-center items-center">
+            <div class="max-w-4xl mx-auto">
+              <i class="fas fa-quote-left text-6xl text-orange-400 mb-6 opacity-50" aria-hidden="true"></i>
+              <blockquote class="text-lg md:text-xl lg:text-2xl italic text-blue-100 mb-8 leading-relaxed">
+                "Midwest Climate Solutions provided an outstanding HVAC installation for our new office. Their team was highly professional, completed the project on time, and the system works flawlessly. We couldn't be happier!"
+              </blockquote>
+              <cite class="text-lg font-semibold text-orange-400">Sarah L., Office Manager</cite>
+            </div>
           </div>
-          <div class="testimonial-card min-w-full p-8 text-center flex flex-col justify-center items-center">
-            <p class="text-2xl italic text-blue-100 mb-6 max-w-4xl relative before:content-['\201C'] before:absolute before:-top-4 before:-left-10 before:text-6xl before:text-white before:opacity-20 after:content-['\201D'] after:absolute after:-bottom-4 after:-right-10 after:text-6xl after:text-white after:opacity-20">
-              "Their preventative maintenance program has significantly reduced our energy costs and kept our systems running efficiently. Highly recommend their expertise."
-            </p>
-            <h4 class="text-lg font-bold text-orange-400">- John D., Property Manager</h4>
+          
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card w-full p-8 text-center flex flex-col justify-center items-center">
+            <div class="max-w-4xl mx-auto">
+              <i class="fas fa-quote-left text-6xl text-orange-400 mb-6 opacity-50" aria-hidden="true"></i>
+              <blockquote class="text-lg md:text-xl lg:text-2xl italic text-blue-100 mb-8 leading-relaxed">
+                "Their preventative maintenance program has significantly reduced our energy costs and kept our systems running efficiently year-round. The team is knowledgeable and always professional. Highly recommend!"
+              </blockquote>
+              <cite class="text-lg font-semibold text-orange-400">John D., Property Manager</cite>
+            </div>
           </div>
-          <div class="testimonial-card min-w-full p-8 text-center flex flex-col justify-center items-center">
-            <p class="text-2xl italic text-blue-100 mb-6 max-w-4xl relative before:content-['\201C'] before:absolute before:-top-4 before:-left-10 before:text-6xl before:text-white before:opacity-20 after:content-['\201D'] after:absolute after:-bottom-4 after:-right-10 after:text-6xl after:text-white after:opacity-20">
-              "When our HVAC system failed unexpectedly, Midwest Climate Solutions responded immediately and had us back up and running in no time. Excellent emergency service!"
-            </p>
-            <h4 class="text-lg font-bold text-orange-400">- Mark T., Restaurant Owner</h4>
+          
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card w-full p-8 text-center flex flex-col justify-center items-center">
+            <div class="max-w-4xl mx-auto">
+              <i class="fas fa-quote-left text-6xl text-orange-400 mb-6 opacity-50" aria-hidden="true"></i>
+              <blockquote class="text-lg md:text-xl lg:text-2xl italic text-blue-100 mb-8 leading-relaxed">
+                "When our HVAC system failed unexpectedly during peak hours, Midwest Climate Solutions responded immediately and had us back up and running within hours. Their emergency service is exceptional!"
+              </blockquote>
+              <cite class="text-lg font-semibold text-orange-400">Mark T., Restaurant Owner</cite>
+            </div>
           </div>
         </div>
-        <div class="flex justify-center space-x-3 mt-12" id="slider-nav">
-          <span class="dot w-4 h-4 bg-white opacity-50 rounded-full cursor-pointer transition duration-300 ease-in-out hover:opacity-100 active:bg-orange-500" data-slide="0"></span>
-          <span class="dot w-4 h-4 bg-white opacity-50 rounded-full cursor-pointer transition duration-300 ease-in-out hover:opacity-100" data-slide="1"></span>
-          <span class="dot w-4 h-4 bg-white opacity-50 rounded-full cursor-pointer transition duration-300 ease-in-out hover:opacity-100" data-slide="2"></span>
+        
+        <!-- Navigation Dots -->
+        <div class="flex justify-center space-x-3 mt-12" id="slider-nav" role="tablist" aria-label="Testimonial navigation">
+          <button 
+            class="dot w-3 h-3 bg-white/50 hover:bg-white/80 rounded-full cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-400" 
+            data-slide="0"
+            role="tab"
+            aria-label="View testimonial 1"
+          ></button>
+          <button 
+            class="dot w-3 h-3 bg-white/50 hover:bg-white/80 rounded-full cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-400" 
+            data-slide="1"
+            role="tab"
+            aria-label="View testimonial 2"
+          ></button>
+          <button 
+            class="dot w-3 h-3 bg-white/50 hover:bg-white/80 rounded-full cursor-pointer transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-400" 
+            data-slide="2"
+            role="tab"
+            aria-label="View testimonial 3"
+          ></button>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-gray-800 text-white">
+    <section id="contact" class="py-16 md:py-24 bg-gray-900 text-white">
       <div class="container mx-auto px-6">
-        <h2 class="text-5xl font-bold text-center text-white mb-16 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-orange-500 after:mx-auto after:mt-4 after:rounded-full">Get In Touch</h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div class="space-y-8">
-              <div class="flex items-start space-x-6">
-                <i class="fas fa-phone text-orange-500 text-4xl flex-shrink-0"></i>
-                <div>
-                  <h3 class="text-3xl font-semibold mb-1">Phone</h3>
-                  <p class="text-gray-300 text-lg">(555) 123-4567</p>
-                </div>
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Get In Touch</h2>
+          <div class="w-16 h-1 bg-orange-500 mx-auto mb-6 rounded-full"></div>
+          <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            Ready to optimize your commercial HVAC system? Contact us for a free consultation and quote.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <!-- Contact Information -->
+          <div class="contact-content space-y-8">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                <i class="fas fa-phone text-white text-xl" aria-hidden="true"></i>
               </div>
-              <div class="flex items-start space-x-6">
-                <i class="fas fa-envelope text-orange-500 text-4xl flex-shrink-0"></i>
-                <div>
-                  <h3 class="text-3xl font-semibold mb-1">Email</h3>
-                  <p class="text-gray-300 text-lg">info@midwestclimatesolutions.com</p>
-                </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">Phone</h3>
+                <a href="tel:+15551234567" class="text-gray-300 hover:text-orange-400 text-lg transition-colors duration-300">
+                  (555) 123-4567
+                </a>
+                <p class="text-sm text-gray-400 mt-1">24/7 Emergency Service Available</p>
               </div>
-              <div class="flex items-start space-x-6">
-                <i class="fas fa-map-marker-alt text-orange-500 text-4xl flex-shrink-0"></i>
-                <div>
-                  <h3 class="text-3xl font-semibold mb-1">Address</h3>
-                  <p class="text-gray-300 text-lg">456 Climate Dr, Metroville, IL 60601</p>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                <i class="fas fa-envelope text-white text-xl" aria-hidden="true"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">Email</h3>
+                <a href="mailto:info@midwestclimatesolutions.com" class="text-gray-300 hover:text-orange-400 text-lg transition-colors duration-300">
+                  info@midwestclimatesolutions.com
+                </a>
+                <p class="text-sm text-gray-400 mt-1">We respond within 24 hours</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                <i class="fas fa-map-marker-alt text-white text-xl" aria-hidden="true"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">Address</h3>
+                <address class="text-gray-300 text-lg not-italic">
+                  456 Climate Drive<br>
+                  Metroville, IL 60601
+                </address>
+                <p class="text-sm text-gray-400 mt-1">Serving the Great Lakes Region</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                <i class="fas fa-clock text-white text-xl" aria-hidden="true"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">Business Hours</h3>
+                <div class="text-gray-300 text-lg">
+                  <div>Mon - Fri: 7:00 AM - 6:00 PM</div>
+                  <div>Sat: 8:00 AM - 4:00 PM</div>
+                  <div>Sun: Emergency Service Only</div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="bg-white p-10 rounded-xl shadow-2xl">
-            <form class="space-y-6">
-              <div>
-                <label for="name" class="sr-only">Your Name</label>
-                <input type="text" id="name" placeholder="Your Name" required class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out text-gray-800 bg-gray-100" />
+          
+          <!-- Contact Form -->
+          <div class="bg-white p-8 lg:p-10 rounded-xl shadow-2xl">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-6">Request a Free Quote</h3>
+            <form class="space-y-6" novalidate>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                  <input 
+                    type="text" 
+                    id="name" 
+                    name="name"
+                    required 
+                    class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                
+                <div>
+                  <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company</label>
+                  <input 
+                    type="text" 
+                    id="company" 
+                    name="company"
+                    class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50"
+                    placeholder="Enter company name"
+                  />
+                </div>
               </div>
-              <div>
-                <label for="email" class="sr-only">Your Email</label>
-                <input type="email" id="email" placeholder="Your Email" required class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out text-gray-800 bg-gray-100" />
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email"
+                    required 
+                    class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone"
+                    class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50"
+                    placeholder="(555) 123-4567"
+                  />
+                </div>
               </div>
+              
               <div>
-                <label for="message" class="sr-only">Your Message</label>
-                <textarea id="message" placeholder="Your Message" rows="6" required class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out text-gray-800 bg-gray-100 resize-y"></textarea>
+                <label for="service" class="block text-sm font-medium text-gray-700 mb-2">Service Interest</label>
+                <select 
+                  id="service" 
+                  name="service"
+                  class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50"
+                >
+                  <option value="">Select a service</option>
+                  <option value="installation">HVAC Installation</option>
+                  <option value="maintenance">Preventative Maintenance</option>
+                  <option value="repair">Emergency Repair</option>
+                  <option value="energy">Energy Efficiency Upgrade</option>
+                  <option value="air-quality">Indoor Air Quality</option>
+                  <option value="automation">Building Automation</option>
+                  <option value="consultation">General Consultation</option>
+                </select>
               </div>
-              <button type="submit" class="btn btn-primary w-full">Send Message</button>
+              
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                <textarea 
+                  id="message" 
+                  name="message"
+                  rows="6" 
+                  required 
+                  class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50 resize-y"
+                  placeholder="Tell us about your HVAC needs, building size, current system, or any specific requirements..."
+                ></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary w-full text-lg">
+                <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>
+                Send Message
+              </button>
+              
+              <p class="text-sm text-gray-600 text-center">
+                * Required fields. We respect your privacy and never share your information.
+              </p>
             </form>
           </div>
         </div>
@@ -233,152 +524,375 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
   </main>
 
-  <footer class="bg-gray-900 text-gray-400 py-8 text-center">
+  <footer class="bg-gray-950 text-gray-400 py-12">
     <div class="container mx-auto px-6">
-      <p>&copy; 2024 Midwest Climate Solutions. All rights reserved.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <i class="fas fa-fan text-orange-500 text-2xl mr-2" aria-hidden="true"></i>
+            <span class="font-semibold text-white text-xl">Midwest Climate Solutions</span>
+          </div>
+          <p class="text-gray-400 leading-relaxed">
+            Your trusted partner for commercial HVAC solutions across the Great Lakes region since 2003.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-white font-semibold mb-4">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="#services" class="hover:text-orange-400 transition-colors duration-300">HVAC Installation</a></li>
+            <li><a href="#services" class="hover:text-orange-400 transition-colors duration-300">Preventative Maintenance</a></li>
+            <li><a href="#services" class="hover:text-orange-400 transition-colors duration-300">Emergency Repairs</a></li>
+            <li><a href="#services" class="hover:text-orange-400 transition-colors duration-300">Energy Solutions</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-white font-semibold mb-4">Contact Info</h4>
+          <div class="space-y-2">
+            <div>456 Climate Drive, Metroville, IL 60601</div>
+            <div>Phone: <a href="tel:+15551234567" class="hover:text-orange-400 transition-colors duration-300">(555) 123-4567</a></div>
+            <div>Email: <a href="mailto:info@midwestclimatesolutions.com" class="hover:text-orange-400 transition-colors duration-300">info@midwestclimatesolutions.com</a></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8 text-center">
+        <p>&copy; {new Date().getFullYear()} Midwest Climate Solutions. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
+  <!-- Enhanced JavaScript functionality -->
   <script is:inline>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Mobile navigation toggle
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobile-menu');
+    // Main functionality class
+    class WebsiteController {
+      constructor() {
+        this.currentSlide = 0;
+        this.totalSlides = 3;
+        this.slideInterval = null;
+        this.init();
+      }
 
-      hamburger.addEventListener('click', function () {
-        mobileMenu.classList.toggle('-translate-x-full');
-        hamburger.classList.toggle('active');
-      });
+      init() {
+        this.setupMobileNavigation();
+        this.setupSmoothScrolling();
+        this.setupContactForm();
+        this.setupScrollNavbar();
+        this.setupIntersectionObserver();
+        this.setupTestimonialSlider();
+      }
 
-      // Close mobile menu when clicking on a link
-      document.querySelectorAll('#mobile-menu a').forEach((link) => {
-        link.addEventListener('click', function () {
-          mobileMenu.classList.add('-translate-x-full');
-          hamburger.classList.remove('active');
+      setupMobileNavigation() {
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (!hamburger || !mobileMenu) return;
+
+        hamburger.addEventListener('click', () => {
+          const isOpen = !mobileMenu.classList.contains('-translate-x-full');
+          
+          if (isOpen) {
+            mobileMenu.classList.add('-translate-x-full');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          } else {
+            mobileMenu.classList.remove('-translate-x-full');
+            hamburger.classList.add('active');
+            hamburger.setAttribute('aria-expanded', 'true');
+          }
         });
-      });
 
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener('click', function (e) {
+        // Close menu when clicking on links
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('-translate-x-full');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      setupSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = anchor.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
+            if (target) {
+              const offsetTop = target.offsetTop - 80;
+              window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+      }
+
+      setupContactForm() {
+        const form = document.querySelector('#contact form');
+        if (!form) return;
+
+        form.addEventListener('submit', (e) => {
           e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
+          
+          const formData = new FormData(form);
+          const name = formData.get('name')?.toString().trim() || '';
+          const email = formData.get('email')?.toString().trim() || '';
+          const message = formData.get('message')?.toString().trim() || '';
+          
+          if (this.validateForm({ name, email, message })) {
+            this.submitForm(form);
+          }
+        });
+      }
+
+      validateForm({ name, email, message }) {
+        let isValid = true;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        // Reset previous error states
+        document.querySelectorAll('.border-red-500').forEach(el => {
+          el.classList.remove('border-red-500');
+        });
+        
+        if (!name) {
+          document.getElementById('name').classList.add('border-red-500');
+          isValid = false;
+        }
+        
+        if (!email || !emailRegex.test(email)) {
+          document.getElementById('email').classList.add('border-red-500');
+          isValid = false;
+        }
+        
+        if (!message) {
+          document.getElementById('message').classList.add('border-red-500');
+          isValid = false;
+        }
+        
+        if (!isValid) {
+          this.showAlert('Please fill in all required fields correctly.', 'error');
+        }
+        
+        return isValid;
+      }
+
+      submitForm(form) {
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission
+        setTimeout(() => {
+          this.showAlert('Thank you for your message! We\'ll get back to you soon.', 'success');
+          form.reset();
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }, 1500);
+      }
+
+      showAlert(message, type = 'info') {
+        const alertDiv = document.createElement('div');
+        const bgColor = type === 'error' ? 'bg-red-100 border-red-400 text-red-700' : 'bg-green-100 border-green-400 text-green-700';
+        
+        alertDiv.className = `fixed top-20 right-4 ${bgColor} px-6 py-4 rounded-lg border shadow-lg z-50 max-w-md transform transition-all duration-300`;
+        alertDiv.innerHTML = `
+          <div class="flex items-center">
+            <span class="flex-1">${message}</span>
+            <button class="ml-4 text-current opacity-70 hover:opacity-100" onclick="this.parentElement.parentElement.remove()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        `;
+        
+        document.body.appendChild(alertDiv);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+          if (alertDiv.parentNode) {
+            alertDiv.remove();
+          }
+        }, 5000);
+      }
+
+      setupScrollNavbar() {
+        let ticking = false;
+        
+        const updateNavbar = () => {
+          const navbar = document.querySelector('header');
+          if (!navbar) return;
+
+          if (window.scrollY > 50) {
+            navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-lg');
+            navbar.classList.remove('bg-transparent');
+            // Update text colors for better contrast on white background
+            navbar.querySelectorAll('.nav-link').forEach(link => {
+              link.classList.remove('text-white', 'hover:text-orange-400');
+              link.classList.add('text-gray-800', 'hover:text-blue-600');
+            });
+          } else {
+            navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-lg');
+            navbar.classList.add('bg-transparent');
+            // Restore original colors for transparent background
+            navbar.querySelectorAll('.nav-link').forEach(link => {
+              link.classList.remove('text-gray-800', 'hover:text-blue-600');
+              link.classList.add('text-white', 'hover:text-orange-400');
             });
           }
-        });
-      });
+          
+          ticking = false;
+        };
 
-      // Contact form handling
-      const contactForm = document.querySelector('#contact form');
-      contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        
-        const inputs = this.querySelectorAll('input, textarea');
-        let isValid = true;
-        
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                isValid = false;
-                input.classList.add('border-red-500');
-            } else {
-                input.classList.remove('border-red-500');
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(updateNavbar);
+            ticking = true;
+          }
+        });
+      }
+
+      setupIntersectionObserver() {
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const element = entry.target;
+              element.classList.add('animate-fade-in-up');
+              observer.unobserve(element);
             }
+          });
+        }, observerOptions);
+
+        // Observe elements for animation
+        const animatedElements = document.querySelectorAll(
+          '.service-card, .project-card, .about-content, .contact-content'
+        );
+        
+        animatedElements.forEach(el => {
+          el.classList.add('opacity-0', 'translate-y-8');
+          observer.observe(el);
+        });
+      }
+
+      setupTestimonialSlider() {
+        const slider = document.getElementById('testimonial-slider');
+        const dots = document.querySelectorAll('#slider-nav .dot');
+        
+        if (!slider || dots.length === 0) return;
+
+        this.showSlide(0);
+        
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => this.showSlide(index));
+        });
+
+        this.startSlideshow();
+        
+        // Pause on hover
+        slider.addEventListener('mouseenter', () => this.pauseSlideshow());
+        slider.addEventListener('mouseleave', () => this.startSlideshow());
+      }
+
+      showSlide(index) {
+        const slider = document.getElementById('testimonial-slider');
+        const dots = document.querySelectorAll('#slider-nav .dot');
+        
+        if (!slider || !dots.length) return;
+
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('bg-orange-500', i === index);
+          dot.classList.toggle('opacity-100', i === index);
+          dot.classList.toggle('bg-white/50', i !== index);
+          dot.classList.toggle('opacity-50', i !== index);
         });
         
-        if (isValid) {
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
-        } else {
-            alert('Please fill in all fields.');
-        }
-      });
-
-      // Navbar background on scroll
-      window.addEventListener('scroll', function () {
-        const navbar = document.querySelector('header');
-        if (window.scrollY > 50) {
-          navbar.classList.add('bg-white', 'shadow-lg');
-          navbar.classList.remove('bg-transparent', 'shadow-none');
-        } else {
-          navbar.classList.remove('bg-white', 'shadow-lg');
-          navbar.classList.add('bg-transparent', 'shadow-none');
-        }
-      });
-
-      // Intersection Observer for animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      };
-
-      const observer = new IntersectionObserver(function (entries) {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-          }
-        });
-      }, observerOptions);
-
-      // Observe elements for animation
-      document.querySelectorAll('.service-card, .project-card, .about-content, .testimonial-card, .contact-content').forEach((el) => {
-        el.classList.add('opacity-0', 'translate-y-8'); // Initial state for animation
-        observer.observe(el);
-      });
-
-      // Testimonial Slider
-      const testimonialSlider = document.getElementById('testimonial-slider');
-      const dots = document.querySelectorAll('#slider-nav .dot');
-      let currentSlide = 0;
-
-      function showSlide(index) {
-        testimonialSlider.style.transform = `translateX(${-index * 100}%)`;
-        dots.forEach((dot, i) => {
-          if (i === index) {
-            dot.classList.add('active', 'bg-orange-500', 'opacity-100');
-            dot.classList.remove('bg-white', 'opacity-50');
-          } else {
-            dot.classList.remove('active', 'bg-orange-500', 'opacity-100');
-            dot.classList.add('bg-white', 'opacity-50');
-          }
-        });
-        currentSlide = index;
+        this.currentSlide = index;
       }
 
-      dots.forEach((dot) => {
-        dot.addEventListener('click', function () {
-          const slideIndex = parseInt(this.dataset.slide);
-          showSlide(slideIndex);
-        });
-      });
-
-      // Auto-advance slider
-      setInterval(() => {
-        currentSlide = (currentSlide + 1) % dots.length;
-        showSlide(currentSlide);
-      }, 5000); // Change slide every 5 seconds
-
-      showSlide(0); // Initialize slider
-    });
-  </script>
-
-  <style is:global>
-    @keyframes fade-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(2rem);
+      startSlideshow() {
+        this.pauseSlideshow();
+        this.slideInterval = setInterval(() => {
+          this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+          this.showSlide(this.currentSlide);
+        }, 6000);
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      pauseSlideshow() {
+        if (this.slideInterval) {
+          clearInterval(this.slideInterval);
+          this.slideInterval = null;
+        }
       }
     }
 
-    .animate-fade-in-up {
-      animation: fade-in-up 0.8s ease-out forwards;
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new WebsiteController();
+    });
+  </script>
+
+  <!-- Custom styles for animations and utilities -->
+  <style>
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .animate-spin-slow {
+      animation: spin-slow 8s linear infinite;
+    }
+
+    /* Testimonial slider styles */
+    #testimonial-slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    
+    .testimonial-card {
+      flex-shrink: 0;
+      width: 100%;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+    }
+    
+    /* Mobile navigation animation */
+    #hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    #hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    #hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    /* Form validation styles */
+    .form-error input:invalid,
+    .form-error textarea:invalid {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 1px #ef4444;
+    }
+    
+    /* Smooth focus transitions */
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      transform: translateY(-1px);
     }
   </style>
 </BaseLayout>
