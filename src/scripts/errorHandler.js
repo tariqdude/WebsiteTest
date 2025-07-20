@@ -1,61 +1,94 @@
-// Error handling and validation utilities
+// Enhanced error handling and validation utilities
 export class ErrorHandler {
+  static notificationQueue = [];
+  static maxNotifications = 3;
+
   static showError(message, container = document.body) {
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg shadow-lg z-50 max-w-md transform transition-all duration-300';
-    errorDiv.innerHTML = `
-      <div class="flex items-center">
-        <i class="fas fa-exclamation-triangle mr-3 text-red-500"></i>
-        <div class="flex-1">
-          <strong class="font-semibold">Error:</strong>
-          <p class="mt-1">${message}</p>
-        </div>
-        <button class="ml-4 text-red-500 hover:text-red-700 transition-colors" onclick="this.parentElement.parentElement.remove()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    `;
-    
-    container.appendChild(errorDiv);
-    
-    // Auto-remove after 6 seconds
-    setTimeout(() => {
-      if (errorDiv.parentNode) {
-        errorDiv.style.transform = 'translateX(100%)';
-        setTimeout(() => errorDiv.remove(), 300);
-      }
-    }, 6000);
-    
-    return errorDiv;
+    return this.showNotification(message, 'error', container);
   }
   
   static showSuccess(message, container = document.body) {
-    const successDiv = document.createElement('div');
-    successDiv.className = 'fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-lg z-50 max-w-md transform transition-all duration-300';
-    successDiv.innerHTML = `
-      <div class="flex items-center">
-        <i class="fas fa-check-circle mr-3 text-green-500"></i>
-        <div class="flex-1">
-          <strong class="font-semibold">Success:</strong>
-          <p class="mt-1">${message}</p>
-        </div>
-        <button class="ml-4 text-green-500 hover:text-green-700 transition-colors" onclick="this.parentElement.parentElement.remove()">
-          <i class="fas fa-times"></i>
-        </button>
+    return this.showNotification(message, 'success', container);
+  }
+
+  static showNotification(message, type = 'info', container = document.body) {
+    // Prevent notification spam
+    if (this.notificationQueue.length >= this.maxNotifications) {
+      const oldest = this.notificationQueue.shift();
+      if (oldest && oldest.parentNode) {
+        oldest.remove();
+      }
+    }
+
+    const typeConfig = {
+      error: {
+        icon: 'fas fa-exclamation-triangle',
+        bgClass: 'bg-error-50 border-error-200 text-error-700',
+        iconClass: 'text-error-500',
+        buttonClass: 'text-error-500 hover:text-error-700'
+      },
+      success: {
+        icon: 'fas fa-check-circle',
+        bgClass: 'bg-success-50 border-success-200 text-success-700',
+        iconClass: 'text-success-500',
+        buttonClass: 'text-success-500 hover:text-success-700'
+      },
+      info: {
+        icon: 'fas fa-info-circle',
+        bgClass: 'bg-primary-50 border-primary-200 text-primary-700',
+        iconClass: 'text-primary-500',
+        buttonClass: 'text-primary-500 hover:text-primary-700'
+      }
+    };
+
+    const config = typeConfig[type] || typeConfig.info;
+    const notificationDiv = document.createElement('div');
+    notificationDiv.className = `fixed top-4 right-4 ${config.bgClass} border px-4 py-3 rounded-lg shadow-lg z-50 max-w-md transform transition-all duration-300 animate-fade-in-down`;
+    
+    // Use document.createDocumentFragment() for better performance
+    const fragment = document.createDocumentFragment();
+    const flexContainer = document.createElement('div');
+    flexContainer.className = 'flex items-center';
+    
+    flexContainer.innerHTML = `
+      <i class="${config.icon} mr-3 ${config.iconClass}"></i>
+      <div class="flex-1">
+        <strong class="font-semibold capitalize">${type}:</strong>
+        <p class="mt-1">${message}</p>
       </div>
+      <button class="ml-4 ${config.buttonClass} transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-current rounded" aria-label="Close notification">
+        <i class="fas fa-times"></i>
+      </button>
     `;
     
-    container.appendChild(successDiv);
+    const closeButton = flexContainer.querySelector('button');
+    closeButton.addEventListener('click', () => this.removeNotification(notificationDiv));
     
-    // Auto-remove after 5 seconds
-    setTimeout(() => {
-      if (successDiv.parentNode) {
-        successDiv.style.transform = 'translateX(100%)';
-        setTimeout(() => successDiv.remove(), 300);
-      }
-    }, 5000);
+    notificationDiv.appendChild(flexContainer);
+    container.appendChild(notificationDiv);
+    this.notificationQueue.push(notificationDiv);
     
-    return successDiv;
+    // Auto-remove with different timeouts based on type
+    const timeout = type === 'error' ? 8000 : 5000;
+    setTimeout(() => this.removeNotification(notificationDiv), timeout);
+    
+    return notificationDiv;
+  }
+
+  static removeNotification(element) {
+    if (element && element.parentNode) {
+      element.style.transform = 'translateX(100%)';
+      element.style.opacity = '0';
+      setTimeout(() => {
+        if (element.parentNode) {
+          element.remove();
+          const index = this.notificationQueue.indexOf(element);
+          if (index > -1) {
+            this.notificationQueue.splice(index, 1);
+          }
+        }
+      }, 300);
+    }
   }
   
   static showLoading(container, message = 'Loading...') {

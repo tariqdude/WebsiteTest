@@ -5,7 +5,7 @@ interface Props {
   canonical?: string;
 }
 
-const { title, description = "Leading commercial HVAC solutions for businesses across the Great Lakes region", canonical } = Astro.props;
+const { title, description = "Professional digital solutions and web development services for modern businesses", canonical } = Astro.props;
 const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
 ---
 
@@ -20,34 +20,33 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <!-- Basic SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="commercial HVAC, HVAC installation, HVAC repair, HVAC maintenance, energy efficiency, Chicago HVAC, Illinois commercial HVAC, emergency HVAC service" />
+    <meta name="keywords" content="web development, digital solutions, web design, e-commerce, digital marketing, responsive design, custom websites, business solutions" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="author" content="Midwest Climate Solutions" />
+    <meta name="author" content="Digital Solutions" />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Business Meta Tags -->
-    <meta name="business.hours" content="Mo-Fr 07:00-18:00, Sa 08:00-16:00" />
+    <meta name="business.hours" content="Mo-Fr 09:00-18:00" />
     <meta name="business.phone" content="(555) 123-4567" />
-    <meta name="business.area" content="Illinois, Great Lakes Region" />
-    <meta name="geo.region" content="US-IL" />
-    <meta name="geo.placename" content="Metroville" />
-    <meta name="geo.position" content="41.8781;-87.6298" />
+    <meta name="business.area" content="Nationwide Digital Services" />
+    <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="Digital Agency" />
     
     <!-- Enhanced SEO Meta Tags -->
-    <meta name="subject" content="Commercial HVAC Services" />
-    <meta name="copyright" content="© 2025 Midwest Climate Solutions" />
-    <meta name="abstract" content="Professional commercial HVAC solutions serving businesses across Illinois with installation, repair, and maintenance services." />
-    <meta name="topic" content="HVAC Services" />
-    <meta name="summary" content="Leading provider of commercial HVAC solutions with 24/7 emergency service, preventative maintenance, and energy-efficient installations." />
-    <meta name="classification" content="Business Services" />
-    <meta name="designer" content="Midwest Climate Solutions" />
-    <meta name="reply-to" content="info@midwestclimatesolutions.com" />
-    <meta name="owner" content="Midwest Climate Solutions" />
+    <meta name="subject" content="Digital Solutions & Web Development" />
+    <meta name="copyright" content="© 2025 Digital Solutions" />
+    <meta name="abstract" content="Professional digital solutions and web development services for modern businesses seeking online growth." />
+    <meta name="topic" content="Web Development & Digital Services" />
+    <meta name="summary" content="Leading provider of custom web development, digital marketing, and e-commerce solutions for businesses." />
+    <meta name="classification" content="Technology Services" />
+    <meta name="designer" content="Digital Solutions" />
+    <meta name="reply-to" content="info@digitalsolutions.com" />
+    <meta name="owner" content="Digital Solutions" />
     <meta name="url" content={canonicalURL} />
     <meta name="identifier-URL" content={canonicalURL} />
     <meta name="directory" content="submission" />
-    <meta name="category" content="HVAC Services" />
-    <meta name="coverage" content="Illinois, Great Lakes Region" />
+    <meta name="category" content="Digital Services" />
+    <meta name="coverage" content="Worldwide" />
     <meta name="distribution" content="Global" />
     <meta name="rating" content="Safe For Kids" />
     
@@ -72,94 +71,72 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "HVACBusiness",
-          "@id": `${canonicalURL}#hvacbusiness`,
-          "name": "Midwest Climate Solutions",
-          "alternateName": "Midwest HVAC",
+          "@type": "ProfessionalService",
+          "@id": `${canonicalURL}#digitalagency`,
+          "name": "Digital Solutions",
+          "alternateName": "Digital Agency",
           "url": canonicalURL.toString(),
           "logo": {
             "@type": "ImageObject",
             "url": `${Astro.site}WebsiteTest/logo.png`
           },
           "description": description,
-          "foundingDate": "2010",
-          "slogan": "Your Comfort, Our Priority",
+          "foundingDate": "2020",
+          "slogan": "Digital Growth, Delivered",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "456 Climate Drive",
-            "addressLocality": "Metroville",
-            "addressRegion": "IL",
-            "postalCode": "60601",
+            "streetAddress": "123 Tech Avenue",
+            "addressLocality": "Digital City",
+            "addressRegion": "CA",
+            "postalCode": "90210",
             "addressCountry": "US"
           },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 41.8781,
-            "longitude": -87.6298
-          },
           "telephone": "(555) 123-4567",
-          "email": "info@midwestclimatesolutions.com",
+          "email": "info@digitalsolutions.com",
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
               "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              "opens": "07:00",
+              "opens": "09:00",
               "closes": "18:00"
-            },
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": "Saturday",
-              "opens": "08:00",
-              "closes": "16:00"
             }
           ],
           "serviceArea": {
-            "@type": "GeoCircle",
-            "geoMidpoint": {
-              "@type": "GeoCoordinates",
-              "latitude": 41.8781,
-              "longitude": -87.6298
-            },
-            "geoRadius": "160934"
+            "@type": "Country",
+            "name": "United States"
           },
-          "priceRange": "$$",
-          "paymentAccepted": ["Cash", "Credit Card", "Check"],
+          "priceRange": "$$$",
+          "paymentAccepted": ["Credit Card", "PayPal", "Bank Transfer"],
           "currenciesAccepted": "USD",
-          "hasCredential": [
-            {
-              "@type": "EducationalOccupationalCredential",
-              "credentialCategory": "NATE Certification"
-            }
-          ],
           "areaServed": {
-            "@type": "State",
-            "name": "Illinois"
+            "@type": "Country",
+            "name": "United States"
           },
           "makesOffer": [
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Emergency HVAC Service"
+                "name": "Web Development Services"
               },
-              "price": "150.00",
+              "price": "2999.00",
               "priceCurrency": "USD"
             }
           ],
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
-            "reviewCount": "127"
+            "reviewCount": "89"
           },
           "review": [
             {
               "@type": "Review",
               "author": {
                 "@type": "Person",
-                "name": "Sarah L."
+                "name": "Michael R."
               },
               "datePublished": "2024-03-15",
-              "reviewBody": "Outstanding HVAC installation for our office building. Professional team, on time and under budget.",
+              "reviewBody": "Outstanding web development service. Professional team delivered exactly what we needed on time and within budget.",
               "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5"
@@ -171,9 +148,9 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
           "@type": "WebSite",
           "@id": `${canonicalURL}#website`,
           "url": canonicalURL.toString(),
-          "name": "Midwest Climate Solutions",
+          "name": "Digital Solutions",
           "publisher": {
-            "@id": `${canonicalURL}#hvacbusiness`
+            "@id": `${canonicalURL}#digitalagency`
           }
         }
       ]
@@ -193,7 +170,7 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Midwest HVAC" />
+    <meta name="apple-mobile-web-app-title" content="Digital Solutions" />
     <meta name="msapplication-TileColor" content="#3b82f6" />
     <meta name="msapplication-config" content="/WebsiteTest/browserconfig.xml" />
     

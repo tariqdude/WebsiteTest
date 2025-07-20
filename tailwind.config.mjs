@@ -4,10 +4,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'display': ['Inter', 'system-ui', 'sans-serif'], // For headings
       },
       screens: {
-        'xs': '475px', // Extra small breakpoint for better mobile control
+        'xs': '475px',
       },
       spacing: {
         '4.5': '1.125rem',
@@ -29,7 +30,6 @@ export default {
         '112': '28rem',
         '128': '32rem',
         '144': '36rem',
-        // Safe area insets
         'safe-top': 'env(safe-area-inset-top)',
         'safe-bottom': 'env(safe-area-inset-bottom)',
         'safe-left': 'env(safe-area-inset-left)',

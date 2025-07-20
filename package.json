@@ -7,7 +7,11 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "optimize": "./optimize-build.sh",
+    "build:optimized": "npm run optimize && npm run build",
+    "check": "astro check",
+    "lint": "astro check --watch"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

@@ -21,7 +21,7 @@ export default defineConfig({
       cssMinify: true,
       rollupOptions: {
         output: {
-          // Optimize chunk splitting
+          // Optimize chunk splitting for better caching
           manualChunks: {
             vendor: ['astro'],
             utils: ['src/scripts/websiteController.js', 'src/scripts/errorHandler.js', 'src/scripts/analytics.js']
@@ -42,19 +42,24 @@ export default defineConfig({
           entryFileNames: 'assets/js/[name]-[hash].js'
         }
       },
-      // Terser options for better compression
+      // Optimize Terser for better compression and performance
       terserOptions: {
         compress: {
           drop_console: true,
           drop_debugger: true,
-          pure_funcs: ['console.log', 'console.info'],
-          passes: 2
+          pure_funcs: ['console.log', 'console.info', 'console.debug'],
+          passes: 3,
+          unsafe: true,
+          unsafe_comps: true,
+          unsafe_math: true
         },
         mangle: {
-          safari10: true
+          safari10: true,
+          toplevel: true
         },
         format: {
-          comments: false
+          comments: false,
+          beautify: false
         }
       }
     },
