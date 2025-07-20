@@ -15,10 +15,6 @@ export default defineConfig({
     format: 'preserve'
   },
   compressHTML: true,
-  // Performance optimizations
-  experimental: {
-    optimizeHoistedScript: true
-  },
   vite: {
     build: {
       minify: 'terser',

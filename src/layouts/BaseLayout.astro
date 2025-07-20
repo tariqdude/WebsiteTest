@@ -81,23 +81,22 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <title>{title}</title>
     
     <!-- Structured Data - Enhanced Local Business Schema -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "HVACBusiness",
-          "@id": "{canonicalURL}#hvacbusiness",
+          "@id": `${canonicalURL}#hvacbusiness`,
           "name": "Midwest Climate Solutions",
           "alternateName": "Midwest HVAC",
-          "url": "{canonicalURL}",
+          "url": canonicalURL.toString(),
           "logo": {
             "@type": "ImageObject",
-            "url": "{Astro.site}WebsiteTest/logo.png",
+            "url": `${Astro.site}WebsiteTest/logo.png`,
             "width": 300,
             "height": 100
           },
-          "description": "{description}",
+          "description": description,
           "foundingDate": "2010",
           "slogan": "Your Comfort, Our Priority",
           "address": {
@@ -238,27 +237,26 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
         },
         {
           "@type": "WebSite",
-          "@id": "{canonicalURL}#website",
-          "url": "{canonicalURL}",
+          "@id": `${canonicalURL}#website`,
+          "url": canonicalURL.toString(),
           "name": "Midwest Climate Solutions",
-          "description": "{description}",
+          "description": description,
           "publisher": {
-            "@id": "{canonicalURL}#hvacbusiness"
+            "@id": `${canonicalURL}#hvacbusiness`
           },
           "potentialAction": [
             {
               "@type": "SearchAction",
               "target": {
                 "@type": "EntryPoint",
-                "urlTemplate": "{canonicalURL}/search?q={{search_term_string}}"
+                "urlTemplate": `${canonicalURL}/search?q={search_term_string}`
               },
               "query-input": "required name=search_term_string"
             }
           ]
         }
       ]
-    }
-    </script>
+    })}></script>
     
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>

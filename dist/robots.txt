@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://tariqdude.github.io/WebsiteTest/sitemap.xml
+
+# Disallow common admin/system directories (if they exist)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_astro/
+Disallow: /node_modules/
+
+# Allow specific assets and important files
+Allow: /assets/
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /favicon.ico
+Allow: /site.webmanifest
+
+# Commercial HVAC specific directives
+# Encourage indexing of business-critical pages
+Allow: /services/
+Allow: /contact/
+Allow: /about/
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
