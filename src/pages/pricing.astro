@@ -3,201 +3,303 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout 
-  title="HVAC Pricing & Service Plans - Midwest Climate Solutions"
-  description="Transparent pricing for commercial HVAC services. Emergency repairs, maintenance plans, installations, and free consultations with no hidden fees."
->
-  <main id="main-content" class="pt-20" role="main">
+  title="Digital Services Pricing & Plans - Digital Solutions"
+  description="Transparent pricing for web development, design, and digital marketing services. Custom packages and flexible solutions with no hidden fees    <!-- Project Pricing Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
+              Project <span class="text-primary-600">Pricing</span>
+            </h2>
+            <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+              Transparent pricing for different project sizes and complexity levels.
+            </p>
+          </div>in id="main-content" class="pt-20" role="main">
     <!-- Hero Section -->
     <section class="bg-gradient-radial from-primary-900 via-primary-800 to-primary-900 text-white py-20">
       <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center animate-fadeInUp">
           <h1 class="text-display-xs sm:text-display-sm md:text-display-md font-display font-black mb-6">
             <span class="block">Transparent</span>
-            <span class="text-gradient-accent">HVAC Pricing</span>
+            <span class="text-gradient-accent">Digital Pricing</span>
           </h1>
           <p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-            No hidden fees, no surprises. Our competitive pricing structure is designed to deliver maximum value for your HVAC investment.
+            No hidden fees, no surprises. Our competitive pricing structure is designed to deliver maximum value for your digital investment.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Emergency Service Section -->
+    <!-- Pricing Plans Section -->
     <section class="py-20 bg-gradient-subtle">
       <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-16">
             <h2 class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
-              <span class="text-error-600">Emergency</span> Service Pricing
+              Choose Your <span class="text-gradient-primary">Digital Plan</span>
             </h2>
             <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
-              When your HVAC system fails, we're here 24/7 with rapid response and transparent pricing.
+              Flexible pricing options to fit every business size and budget. Scale up as you grow.
             </p>
           </div>
 
-          <div class="card card-hover bg-error-50 border-2 border-error-200 max-w-lg mx-auto text-center p-8">
-            <div class="flex-center mb-6">
-              <div class="w-16 h-16 bg-error-600 rounded-full flex-center">
-                <i class="fas fa-tools text-white text-2xl"></i>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+            <!-- Starter Plan -->
+            <div class="card card-hover bg-white border-2 border-neutral-200 text-center p-8">
+              <div class="flex-center mb-6">
+                <div class="w-16 h-16 bg-primary-600 rounded-full flex-center">
+                  <i class="fas fa-rocket text-white text-2xl"></i>
+                </div>
               </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Starter</h3>
+              <div class="text-5xl font-black text-primary-600 mb-4">$2,999</div>
+              <p class="text-neutral-600 mb-6">
+                Perfect for small businesses and startups looking to establish their online presence.
+              </p>
+              <ul class="text-left text-neutral-700 space-y-2 mb-8">
+                <li class="flex items-center">
+                  <i class="fas fa-check text-primary-500 mr-3"></i>
+                  5-Page Custom Website
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-primary-500 mr-3"></i>
+                  Mobile Responsive Design
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-primary-500 mr-3"></i>
+                  Basic SEO Setup
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-primary-500 mr-3"></i>
+                  Contact Form Integration
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-primary-500 mr-3"></i>
+                  1 Month Free Support
+                </li>
+              </ul>
+              <a href="#contact" class="btn-hover-lift bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 block">
+                Get Started
+              </a>
             </div>
-            <h3 class="text-2xl font-bold text-error-800 mb-4">Emergency Service Call</h3>
-            <div class="text-5xl font-black text-error-600 mb-4">$150</div>
-            <p class="text-error-700 mb-6">
-              Includes service call, diagnostic, and first hour of labor. Additional labor at $85/hour.
-            </p>
-            <ul class="text-left text-error-700 space-y-2 mb-8">
-              <li class="flex items-center">
-                <i class="fas fa-check text-error-600 mr-3"></i>
-                <span>24/7 availability</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-error-600 mr-3"></i>
-                <span>2-hour response guarantee</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-error-600 mr-3"></i>
-                <span>Complete system diagnosis</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-check text-error-600 mr-3"></i>
-                <span>Upfront pricing before work begins</span>
-              </li>
-            </ul>
-            <a 
-              href="tel:+15551234567" 
-              class="btn-hover-lift bg-error-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-error hover:bg-error-700 transition-all duration-300 w-full flex-center"
-              onclick="window.analytics?.trackPhoneCall('emergency_pricing')"
-            >
-              <i class="fas fa-phone mr-3"></i>
-              Call Emergency Line
-            </a>
+
+            <!-- Professional Plan -->
+            <div class="card card-hover bg-accent-50 border-2 border-accent-400 text-center p-8 relative transform scale-105">
+              <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span class="bg-accent-500 text-white px-4 py-2 rounded-full text-sm font-semibold">Most Popular</span>
+              </div>
+              <div class="flex-center mb-6">
+                <div class="w-16 h-16 bg-accent-600 rounded-full flex-center">
+                  <i class="fas fa-star text-white text-2xl"></i>
+                </div>
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Professional</h3>
+              <div class="text-5xl font-black text-accent-600 mb-4">$7,999</div>
+              <p class="text-neutral-600 mb-6">
+                Ideal for growing businesses that need advanced features and functionality.
+              </p>
+              <ul class="text-left text-neutral-700 space-y-2 mb-8">
+                <li class="flex items-center">
+                  <i class="fas fa-check text-accent-500 mr-3"></i>
+                  15-Page Custom Website
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-accent-500 mr-3"></i>
+                  E-commerce Integration
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-accent-500 mr-3"></i>
+                  Advanced SEO Package
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-accent-500 mr-3"></i>
+                  Content Management System
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-accent-500 mr-3"></i>
+                  Analytics Integration
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-accent-500 mr-3"></i>
+                  3 Months Free Support
+                </li>
+              </ul>
+              <a href="#contact" class="btn-hover-lift bg-accent-600 hover:bg-accent-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 block">
+                Get Started
+              </a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="card card-hover bg-white border-2 border-neutral-200 text-center p-8">
+              <div class="flex-center mb-6">
+                <div class="w-16 h-16 bg-secondary-600 rounded-full flex-center">
+                  <i class="fas fa-crown text-white text-2xl"></i>
+                </div>
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Enterprise</h3>
+              <div class="text-5xl font-black text-secondary-600 mb-4">Custom</div>
+              <p class="text-neutral-600 mb-6">
+                Custom solutions for large organizations with complex requirements.
+              </p>
+              <ul class="text-left text-neutral-700 space-y-2 mb-8">
+                <li class="flex items-center">
+                  <i class="fas fa-check text-secondary-500 mr-3"></i>
+                  Unlimited Pages
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-secondary-500 mr-3"></i>
+                  Custom Applications
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-secondary-500 mr-3"></i>
+                  Advanced Integrations
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-secondary-500 mr-3"></i>
+                  Dedicated Project Manager
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-secondary-500 mr-3"></i>
+                  Priority Support
+                </li>
+                <li class="flex items-center">
+                  <i class="fas fa-check text-secondary-500 mr-3"></i>
+                  Ongoing Maintenance
+                </li>
+              </ul>
+              <a href="#contact" class="btn-hover-lift bg-secondary-600 hover:bg-secondary-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 block">
+                Contact Us
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Maintenance Plans Section -->
-    <section class="py-20 bg-white">
+    <!-- Additional Services Section -->
+    <section class="py-20 bg-neutral-50">
       <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-16">
             <h2 class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
-              <span class="text-success-600">Maintenance</span> Plans
+              Additional <span class="text-primary-600">Services</span>
             </h2>
             <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
-              Proactive maintenance to keep your systems running efficiently and prevent costly breakdowns.
+              Expand your digital presence with our specialized services and ongoing support packages.
             </p>
           </div>
 
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Basic Plan -->
-            <div class="card card-hover border-2 border-neutral-200 text-center p-8">
+            <!-- Digital Marketing -->
+            <div class="card card-hover bg-white border-2 border-neutral-200 text-center p-8">
               <div class="flex-center mb-6">
-                <div class="w-16 h-16 bg-neutral-600 rounded-full flex-center">
-                  <i class="fas fa-wrench text-white text-2xl"></i>
+                <div class="w-16 h-16 bg-accent-600 rounded-full flex-center">
+                  <i class="fas fa-bullhorn text-white text-2xl"></i>
                 </div>
               </div>
-              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Basic Plan</h3>
-              <div class="text-4xl font-black text-neutral-600 mb-4">$99</div>
-              <p class="text-neutral-600 mb-6">Per unit, per visit</p>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Digital Marketing</h3>
+              <div class="text-4xl font-black text-accent-600 mb-4">$1,500</div>
+              <p class="text-neutral-600 mb-6">Per month</p>
               <ul class="text-left text-neutral-700 space-y-3 mb-8">
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success-500 mr-3 mt-1"></i>
-                  <span>Semi-annual service visits</span>
+                  <i class="fas fa-check text-accent-500 mr-3 mt-1"></i>
+                  <span>Social Media Management</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success-500 mr-3 mt-1"></i>
-                  <span>Filter replacement</span>
+                  <i class="fas fa-check text-accent-500 mr-3 mt-1"></i>
+                  <span>Content Creation</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success-500 mr-3 mt-1"></i>
-                  <span>Basic system inspection</span>
+                  <i class="fas fa-check text-accent-500 mr-3 mt-1"></i>
+                  <span>SEO Optimization</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check text-success-500 mr-3 mt-1"></i>
-                  <span>Performance report</span>
+                  <i class="fas fa-check text-accent-500 mr-3 mt-1"></i>
+                  <span>Analytics & Reporting</span>
                 </li>
               </ul>
+              <a href="#contact" class="btn-hover-lift bg-accent-600 hover:bg-accent-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 block">
+                Get Started
+              </a>
             </div>
 
-            <!-- Comprehensive Plan -->
-            <div class="card card-hover border-2 border-success-200 bg-success-50 text-center p-8 relative">
+            <!-- Maintenance & Support -->
+            <div class="card card-hover bg-success-50 border-2 border-success-200 text-center p-8 relative">
               <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <span class="bg-success-600 text-white px-4 py-2 rounded-full text-sm font-bold">POPULAR</span>
               </div>
               <div class="flex-center mb-6">
                 <div class="w-16 h-16 bg-success-600 rounded-full flex-center">
-                  <i class="fas fa-cogs text-white text-2xl"></i>
+                  <i class="fas fa-tools text-white text-2xl"></i>
                 </div>
               </div>
-              <h3 class="text-2xl font-bold text-success-800 mb-4">Comprehensive Plan</h3>
-              <div class="text-4xl font-black text-success-600 mb-4">$149</div>
-              <p class="text-success-700 mb-6">Per unit, per visit</p>
+              <h3 class="text-2xl font-bold text-success-800 mb-4">Website Maintenance</h3>
+              <div class="text-4xl font-black text-success-600 mb-4">$299</div>
+              <p class="text-success-700 mb-6">Per month</p>
               <ul class="text-left text-success-700 space-y-3 mb-8">
                 <li class="flex items-start">
                   <i class="fas fa-check text-success-600 mr-3 mt-1"></i>
-                  <span>Quarterly service visits</span>
+                  <span>Regular Updates & Backups</span>
                 </li>
                 <li class="flex items-start">
                   <i class="fas fa-check text-success-600 mr-3 mt-1"></i>
-                  <span>Premium filter replacement</span>
+                  <span>Security Monitoring</span>
                 </li>
                 <li class="flex items-start">
                   <i class="fas fa-check text-success-600 mr-3 mt-1"></i>
-                  <span>Complete system tune-up</span>
+                  <span>Performance Optimization</span>
                 </li>
                 <li class="flex items-start">
                   <i class="fas fa-check text-success-600 mr-3 mt-1"></i>
-                  <span>Energy efficiency analysis</span>
+                  <span>Priority Support</span>
                 </li>
                 <li class="flex items-start">
                   <i class="fas fa-check text-success-600 mr-3 mt-1"></i>
-                  <span>Priority emergency service</span>
-                </li>
-                <li class="flex items-start">
-                  <i class="fas fa-check text-success-600 mr-3 mt-1"></i>
-                  <span>10% discount on repairs</span>
+                  <span>Content Updates</span>
                 </li>
               </ul>
+              <a href="#contact" class="btn-hover-lift bg-success-600 hover:bg-success-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 block">
+                Get Started
+              </a>
             </div>
 
-            <!-- Premium Plan -->
-            <div class="card card-hover border-2 border-primary-200 text-center p-8">
+            <!-- Branding Package -->
+            <div class="card card-hover bg-white border-2 border-primary-200 text-center p-8">
               <div class="flex-center mb-6">
                 <div class="w-16 h-16 bg-primary-600 rounded-full flex-center">
-                  <i class="fas fa-star text-white text-2xl"></i>
+                  <i class="fas fa-palette text-white text-2xl"></i>
                 </div>
               </div>
-              <h3 class="text-2xl font-bold text-primary-900 mb-4">Premium Plan</h3>
-              <div class="text-4xl font-black text-primary-600 mb-4">$199</div>
-              <p class="text-primary-700 mb-6">Per unit, per visit</p>
+              <h3 class="text-2xl font-bold text-primary-900 mb-4">Branding Package</h3>
+              <div class="text-4xl font-black text-primary-600 mb-4">$2,500</div>
+              <p class="text-primary-700 mb-6">One-time</p>
               <ul class="text-left text-primary-700 space-y-3 mb-8">
                 <li class="flex items-start">
                   <i class="fas fa-check text-primary-600 mr-3 mt-1"></i>
-                  <span>Monthly service visits</span>
+                  <span>Logo Design</span>
                 </li>
                 <li class="flex items-start">
                   <i class="fas fa-check text-primary-600 mr-3 mt-1"></i>
-                  <span>HEPA filter upgrades</span>
+                  <span>Brand Guidelines</span>
                 </li>
                 <li class="flex items-start">
                   <i class="fas fa-check text-primary-600 mr-3 mt-1"></i>
-                  <span>Complete system optimization</span>
+                  <span>Business Cards & Collateral</span>
                 </li>
                 <li class="flex items-start">
                   <i class="fas fa-check text-primary-600 mr-3 mt-1"></i>
-                  <span>Real-time monitoring setup</span>
+                  <span>Social Media Templates</span>
                 </li>
                 <li class="flex items-start">
                   <i class="fas fa-check text-primary-600 mr-3 mt-1"></i>
-                  <span>24/7 priority support</span>
-                </li>
-                <li class="flex items-start">
-                  <i class="fas fa-check text-primary-600 mr-3 mt-1"></i>
-                  <span>20% discount on all services</span>
+                  <span>Brand Strategy Consultation</span>
                 </li>
               </ul>
+              <a href="#contact" class="btn-hover-lift bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 block">
+                Get Started
+              </a>
+            </div>
             </div>
           </div>
         </div>
@@ -210,66 +312,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-16">
             <h2 class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
-              Installation <span class="text-gradient-primary">Pricing Ranges</span>
+              Project <span class="text-gradient-primary">Pricing Ranges</span>
             </h2>
             <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
-              Professional installation pricing based on building size and system complexity.
+              Transparent pricing for different project sizes and complexity levels.
             </p>
           </div>
 
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Small Commercial -->
+            <!-- Small Business -->
             <div class="card card-hover text-center p-6">
               <div class="flex-center mb-4">
                 <div class="w-12 h-12 bg-primary-100 rounded-full flex-center">
-                  <i class="fas fa-building text-primary-600 text-xl"></i>
+                  <i class="fas fa-store text-primary-600 text-xl"></i>
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-neutral-900 mb-2">Small Commercial</h3>
-              <p class="text-sm text-neutral-600 mb-4">Up to 5,000 sq ft</p>
-              <div class="text-2xl font-bold text-primary-600">$8K - $15K</div>
+              <h3 class="text-lg font-bold text-neutral-900 mb-2">Small Business</h3>
+              <p class="text-sm text-neutral-600 mb-4">1-10 pages</p>
+              <div class="text-2xl font-bold text-primary-600">$2K - $8K</div>
             </div>
 
-            <!-- Medium Commercial -->
+            <!-- Medium Business -->
             <div class="card card-hover text-center p-6">
               <div class="flex-center mb-4">
                 <div class="w-12 h-12 bg-success-100 rounded-full flex-center">
-                  <i class="fas fa-city text-success-600 text-xl"></i>
+                  <i class="fas fa-building text-success-600 text-xl"></i>
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-neutral-900 mb-2">Medium Commercial</h3>
-              <p class="text-sm text-neutral-600 mb-4">5,000 - 15,000 sq ft</p>
-              <div class="text-2xl font-bold text-success-600">$15K - $35K</div>
+              <h3 class="text-lg font-bold text-neutral-900 mb-2">Medium Business</h3>
+              <p class="text-sm text-neutral-600 mb-4">10-25 pages</p>
+              <div class="text-2xl font-bold text-success-600">$8K - $20K</div>
             </div>
 
-            <!-- Large Commercial -->
+            <!-- Large Business -->
             <div class="card card-hover text-center p-6">
               <div class="flex-center mb-4">
                 <div class="w-12 h-12 bg-accent-100 rounded-full flex-center">
-                  <i class="fas fa-warehouse text-accent-600 text-xl"></i>
+                  <i class="fas fa-city text-accent-600 text-xl"></i>
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-neutral-900 mb-2">Large Commercial</h3>
-              <p class="text-sm text-neutral-600 mb-4">15,000 - 50,000 sq ft</p>
-              <div class="text-2xl font-bold text-accent-600">$35K - $80K</div>
+              <h3 class="text-lg font-bold text-neutral-900 mb-2">Large Business</h3>
+              <p class="text-sm text-neutral-600 mb-4">25-50 pages</p>
+              <div class="text-2xl font-bold text-accent-600">$20K - $50K</div>
             </div>
 
-            <!-- Industrial -->
+            <!-- Enterprise -->
             <div class="card card-hover text-center p-6">
               <div class="flex-center mb-4">
                 <div class="w-12 h-12 bg-secondary-100 rounded-full flex-center">
-                  <i class="fas fa-industry text-secondary-600 text-xl"></i>
+                  <i class="fas fa-globe text-secondary-600 text-xl"></i>
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-neutral-900 mb-2">Industrial</h3>
-              <p class="text-sm text-neutral-600 mb-4">50,000+ sq ft</p>
+              <h3 class="text-lg font-bold text-neutral-900 mb-2">Enterprise</h3>
+              <p class="text-sm text-neutral-600 mb-4">50+ pages</p>
               <div class="text-2xl font-bold text-secondary-600">Custom Quote</div>
             </div>
           </div>
 
           <div class="text-center mt-12">
             <p class="text-neutral-600 mb-6">
-              *Pricing varies based on system complexity, existing infrastructure, and specific requirements
+              *Pricing varies based on project complexity, features, and specific requirements
             </p>
             <a 
               href="#contact" 
@@ -289,13 +391,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="card card-hover bg-gradient-to-r from-accent-50 to-accent-100 border-2 border-accent-200 text-center p-12">
             <div class="flex-center mb-6">
               <div class="w-20 h-20 bg-accent-600 rounded-full flex-center">
-                <i class="fas fa-clipboard-check text-white text-3xl"></i>
+                <i class="fas fa-comments text-white text-3xl"></i>
               </div>
             </div>
-            <h2 class="text-3xl font-bold text-accent-900 mb-4">Free Energy Audit & Consultation</h2>
+            <h2 class="text-3xl font-bold text-accent-900 mb-4">Free Strategy Consultation</h2>
             <div class="text-5xl font-black text-accent-600 mb-6">$0</div>
             <p class="text-xl text-accent-800 mb-8 max-w-2xl mx-auto">
-              Comprehensive system evaluation with no obligation. Discover potential savings and optimization opportunities.
+              Comprehensive digital strategy session with no obligation. Discover opportunities for growth and optimization.
             </p>
             
             <div class="grid md:grid-cols-2 gap-6 mb-8">
@@ -304,19 +406,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <ul class="space-y-2 text-accent-700">
                   <li class="flex items-center">
                     <i class="fas fa-check text-accent-600 mr-3"></i>
-                    <span>Complete system inspection</span>
+                    <span>Website audit & analysis</span>
                   </li>
                   <li class="flex items-center">
                     <i class="fas fa-check text-accent-600 mr-3"></i>
-                    <span>Energy efficiency analysis</span>
+                    <span>Digital strategy review</span>
                   </li>
                   <li class="flex items-center">
                     <i class="fas fa-check text-accent-600 mr-3"></i>
-                    <span>Cost-saving projections</span>
+                    <span>Growth opportunity assessment</span>
                   </li>
                   <li class="flex items-center">
                     <i class="fas fa-check text-accent-600 mr-3"></i>
-                    <span>Maintenance recommendations</span>
+                    <span>Custom strategy recommendations</span>
                   </li>
                 </ul>
               </div>
@@ -325,11 +427,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <ul class="space-y-2 text-accent-700">
                   <li class="flex items-center">
                     <i class="fas fa-check text-accent-600 mr-3"></i>
-                    <span>Detailed written report</span>
+                    <span>Detailed strategy report</span>
                   </li>
                   <li class="flex items-center">
                     <i class="fas fa-check text-accent-600 mr-3"></i>
-                    <span>Priority scheduling</span>
+                    <span>Priority project scheduling</span>
                   </li>
                   <li class="flex items-center">
                     <i class="fas fa-check text-accent-600 mr-3"></i>
@@ -354,16 +456,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
-    <!-- Financing Options Section -->
+    <!-- Payment Options Section -->
     <section class="py-20 bg-gradient-subtle">
       <div class="container mx-auto px-6">
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-16">
             <h2 class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
-              Flexible <span class="text-gradient-secondary">Financing Options</span>
+              Flexible <span class="text-gradient-secondary">Payment Options</span>
             </h2>
             <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
-              Make your HVAC investment affordable with our flexible financing solutions.
+              Choose the payment plan that works best for your business and budget.
             </p>
           </div>
 
@@ -371,15 +473,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="card card-hover text-center p-8">
               <div class="flex-center mb-6">
                 <div class="w-16 h-16 bg-secondary-100 rounded-full flex-center">
-                  <i class="fas fa-percentage text-secondary-600 text-2xl"></i>
+                  <i class="fas fa-credit-card text-secondary-600 text-2xl"></i>
                 </div>
               </div>
-              <h3 class="text-xl font-bold text-neutral-900 mb-4">0% Interest</h3>
-              <p class="text-neutral-600 mb-4">12 months same as cash</p>
+              <h3 class="text-xl font-bold text-neutral-900 mb-4">Full Payment</h3>
+              <p class="text-neutral-600 mb-4">Pay in full upfront</p>
               <ul class="text-sm text-neutral-600 space-y-2">
-                <li>• No interest for 12 months</li>
-                <li>• Qualified applicants</li>
-                <li>• Quick approval process</li>
+                <li>• 5% discount on total project</li>
+                <li>• Immediate project start</li>
+                <li>• No additional fees</li>
               </ul>
             </div>
 
@@ -389,12 +491,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                   <i class="fas fa-calendar-alt text-primary-600 text-2xl"></i>
                 </div>
               </div>
-              <h3 class="text-xl font-bold text-neutral-900 mb-4">Extended Terms</h3>
-              <p class="text-neutral-600 mb-4">Up to 10 years financing</p>
+              <h3 class="text-xl font-bold text-neutral-900 mb-4">Split Payment</h3>
+              <p class="text-neutral-600 mb-4">50% upfront, 50% on completion</p>
               <ul class="text-sm text-neutral-600 space-y-2">
-                <li>• Low monthly payments</li>
-                <li>• Competitive rates</li>
-                <li>• Flexible terms</li>
+                <li>• No additional fees</li>
+                <li>• Secure milestone payments</li>
+                <li>• Most popular option</li>
               </ul>
             </div>
 
@@ -404,12 +506,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                   <i class="fas fa-handshake text-success-600 text-2xl"></i>
                 </div>
               </div>
-              <h3 class="text-xl font-bold text-neutral-900 mb-4">Custom Plans</h3>
-              <p class="text-neutral-600 mb-4">Tailored to your budget</p>
+              <h3 class="text-xl font-bold text-neutral-900 mb-4">Monthly Plans</h3>
+              <p class="text-neutral-600 mb-4">Spread payments over time</p>
               <ul class="text-sm text-neutral-600 space-y-2">
-                <li>• Seasonal payment options</li>
-                <li>• Business-friendly terms</li>
-                <li>• Energy savings offset</li>
+                <li>• 3, 6, or 12 month options</li>
+                <li>• Small processing fee</li>
+                <li>• Perfect for cash flow</li>
               </ul>
             </div>
           </div>
@@ -425,7 +527,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             Ready to Get Started?
           </h2>
           <p class="text-xl text-primary-100 mb-12 max-w-3xl mx-auto">
-            Contact us today for a free consultation and custom quote tailored to your specific needs.
+            Contact us today for a free consultation and custom quote for your digital project.
           </p>
           
           <div class="grid md:grid-cols-2 gap-8">
@@ -442,7 +544,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </a>
             
             <a 
-              href="mailto:info@midwestclimatesolutions.com" 
+              href="mailto:info@digitalsolutions.com" 
               class="btn-hover-lift glass border border-white/30 text-white px-8 py-6 rounded-xl font-bold text-lg flex-center group"
             >
               <i class="fas fa-envelope mr-3 group-hover:animate-glow text-xl"></i>

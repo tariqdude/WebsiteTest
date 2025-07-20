@@ -4,13 +4,13 @@ import BackgroundManager from '../components/BackgroundManager.astro';
 ---
 
 <BaseLayout 
-  title="Midwest Climate Solutions - Commercial HVAC Experts"
-  description="Leading commercial HVAC solutions for businesses across the Great Lakes region. Expert installation, maintenance, and energy-efficient climate control systems."
+  title="Digital Solutions Agency - Modern Web Development & Design"
+  description="Transform your business with cutting-edge web solutions. Expert web development, design, and digital marketing services for modern businesses."
 >
   <!-- Dynamic Background Manager -->
   <BackgroundManager 
     defaultType="youtube"
-    youtubeId="jfKfPfyJRdk"
+    youtubeId="LXb3EKWsInQ"
     images={[]}
     enableControls={true}
   />
@@ -29,10 +29,10 @@ import BackgroundManager from '../components/BackgroundManager.astro';
   <header class="bg-transparent backdrop-blur-sm fixed top-0 w-full z-50 transition-all duration-300" id="main-nav">
     <nav class="container mx-auto flex justify-between items-center h-16 sm:h-20 px-4 sm:px-6" role="navigation" aria-label="Main navigation">
       <div class="flex items-center">
-        <i class="fas fa-fan text-orange-500 text-2xl sm:text-3xl mr-2 sm:mr-3 animate-spin-slow" aria-hidden="true"></i>
+        <i class="fas fa-rocket text-accent-500 text-2xl sm:text-3xl mr-2 sm:mr-3 animate-bounce-gentle" aria-hidden="true"></i>
         <span class="font-bold text-white text-lg sm:text-2xl lg:text-3xl tracking-wide">
-          <span class="hidden sm:inline">Midwest Climate Solutions</span>
-          <span class="sm:hidden">MCS HVAC</span>
+          <span class="hidden sm:inline">Digital Solutions</span>
+          <span class="sm:hidden">DigiSol</span>
         </span>
       </div>
       
@@ -55,23 +55,23 @@ import BackgroundManager from '../components/BackgroundManager.astro';
           <div class="absolute top-full left-0 mt-2 w-64 glass backdrop-blur-lg rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
             <div class="py-4">
               <a href="#services" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
-                <i class="fas fa-cogs mr-3"></i>
-                All Services
+                <i class="fas fa-code mr-3"></i>
+                Web Development
               </a>
               <a href="/pricing" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
                 <i class="fas fa-dollar-sign mr-3"></i>
                 Pricing & Plans
               </a>
-              <a href="#emergency" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
-                <i class="fas fa-phone mr-3"></i>
-                Emergency Service
+              <a href="#portfolio" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
+                <i class="fas fa-eye mr-3"></i>
+                Portfolio
               </a>
             </div>
           </div>
         </li>
         
-        <li><a href="#projects" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
-          Projects
+        <li><a href="#portfolio" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+          Portfolio
           <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
         <li><a href="#about" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
@@ -107,15 +107,15 @@ import BackgroundManager from '../components/BackgroundManager.astro';
         <li><a href="#home" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Home</a></li>
         <li><a href="#services" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Services</a></li>
         <li><a href="/pricing" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Pricing</a></li>
-        <li><a href="#projects" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Projects</a></li>
+        <li><a href="#projects" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Portfolio</a></li>
         <li><a href="#about" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">About</a></li>
         <li><a href="#contact" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Contact</a></li>
       </ul>
       <!-- Call to Action Button in Mobile Menu -->
       <div class="px-6 sm:px-8 pb-6 sm:pb-8">
-        <a href="tel:+15551234567" class="btn btn-primary w-full text-center text-lg min-h-touch flex items-center justify-center shadow-mobile-button">
-          <i class="fas fa-phone mr-2" aria-hidden="true"></i>
-          Call Now: (555) 123-4567
+        <a href="#contact" class="btn btn-primary w-full text-center text-lg min-h-touch flex items-center justify-center shadow-mobile-button">
+          <i class="fas fa-rocket mr-2" aria-hidden="true"></i>
+          Get Started Today
         </a>
       </div>
     </div>
@@ -197,23 +197,23 @@ import BackgroundManager from '../components/BackgroundManager.astro';
       <div class="container mx-auto px-6">
         <div class="text-center max-w-4xl mx-auto mb-16 animate-fadeInUp">
           <h2 id="services-heading" class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
-            Our Comprehensive <span class="text-gradient-primary">HVAC Services</span>
+            Our Digital <span class="text-gradient-primary">Services</span>
           </h2>
           <p class="text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto">
-            From cutting-edge installations to emergency repairs, we deliver comprehensive HVAC solutions that keep your business running efficiently.
+            From cutting-edge web development to stunning design, we deliver comprehensive digital solutions that drive your business forward.
           </p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" role="list">
           <article class="card card-hover group animate-fadeInUp" role="listitem">
             <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-fan text-primary-600 text-3xl group-hover:animate-spin"></i>
+              <i class="fas fa-code text-primary-600 text-3xl group-hover:animate-pulse"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-primary transition-all duration-300">
-              HVAC System Installation
+              Web Development
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Expert installation of new commercial HVAC systems, tailored to your facility's unique requirements and energy efficiency goals.
+              Custom web applications and websites built with modern technologies. Fast, responsive, and optimized for performance and SEO.
             </p>
             <div class="flex items-center text-primary-600 font-semibold group-hover:text-primary-700">
               <span>Learn More</span>
@@ -223,14 +223,13 @@ import BackgroundManager from '../components/BackgroundManager.astro';
           
           <article class="card card-hover group animate-fadeInUp animation-delay-200" role="listitem">
             <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-wrench text-blue-600 group-hover:text-white text-2xl transition-colors duration-300"></i>
-              <i class="fas fa-wrench text-secondary-600 text-3xl group-hover:animate-wiggle"></i>
+              <i class="fas fa-palette text-secondary-600 text-3xl group-hover:animate-wiggle"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-secondary transition-all duration-300">
-              Preventative Maintenance
+              UI/UX Design
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Proactive maintenance programs to ensure peak performance, maximum efficiency, and extended lifespan of your HVAC systems.
+              Beautiful, intuitive designs that convert visitors into customers. User-centered approach with modern aesthetics and seamless experiences.
             </p>
             <div class="flex items-center text-secondary-600 font-semibold group-hover:text-secondary-700">
               <span>Learn More</span>
@@ -239,16 +238,16 @@ import BackgroundManager from '../components/BackgroundManager.astro';
           </article>
           
           <article class="card card-hover group animate-fadeInUp animation-delay-400" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-error-100 to-error-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-tools text-error-600 text-3xl group-hover:animate-shake"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-accent-100 to-accent-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-rocket text-accent-600 text-3xl group-hover:animate-bounce"></i>
             </div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-error-600 transition-all duration-300">
-              Emergency Repairs
+            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-accent-600 transition-all duration-300">
+              Digital Marketing
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              24/7 rapid response for critical HVAC system breakdowns, minimizing downtime and maintaining comfortable environments.
+              Strategic digital marketing campaigns that boost your online presence. SEO, social media, and content marketing that delivers results.
             </p>
-            <div class="flex items-center text-error-600 font-semibold group-hover:text-error-700">
+            <div class="flex items-center text-accent-600 font-semibold group-hover:text-accent-700">
               <span>Learn More</span>
               <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
             </div>
@@ -256,13 +255,13 @@ import BackgroundManager from '../components/BackgroundManager.astro';
           
           <article class="card card-hover group animate-fadeInUp animation-delay-600" role="listitem">
             <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-success-100 to-success-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-leaf text-success-600 text-3xl group-hover:animate-glow"></i>
+              <i class="fas fa-mobile-alt text-success-600 text-3xl group-hover:animate-bounce"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-accent transition-all duration-300">
-              Energy Efficiency Solutions
+              Mobile Development
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Smart controls and energy management strategies to significantly reduce consumption and operational costs.
+              Native and cross-platform mobile apps that engage users and drive business growth. iOS, Android, and progressive web apps.
             </p>
             <div class="flex items-center text-success-600 font-semibold group-hover:text-success-700">
               <span>Learn More</span>
@@ -271,113 +270,127 @@ import BackgroundManager from '../components/BackgroundManager.astro';
           </article>
           
           <article class="card card-hover group animate-fadeInUp animation-delay-800" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-accent-100 to-accent-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-thermometer-half text-accent-600 text-3xl group-hover:animate-float"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-warning-100 to-warning-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-cloud text-warning-600 text-3xl group-hover:animate-float"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-accent transition-all duration-300">
-              Indoor Air Quality
+              Cloud Solutions
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Advanced filtration and air purification systems to ensure healthy, clean air in your commercial environment.
+              Scalable cloud infrastructure and hosting solutions. Secure, reliable, and optimized for performance and growth.
             </p>
-            <div class="flex items-center text-accent-600 font-semibold group-hover:text-accent-700">
+            <div class="flex items-center text-warning-600 font-semibold group-hover:text-warning-700">
               <span>Learn More</span>
               <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
             </div>
           </article>
           
           <article class="card card-hover group animate-fadeInUp animation-delay-1000" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-warning-100 to-warning-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-chart-line text-warning-600 text-3xl group-hover:animate-pulse"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-error-100 to-error-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-chart-line text-error-600 text-3xl group-hover:animate-pulse"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-secondary transition-all duration-300">
-              System Optimization
+              Analytics & Optimization
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Performance analysis and system upgrades to maximize efficiency, reduce costs, and improve overall comfort.
+              Data-driven insights and performance optimization. Track metrics, understand users, and continuously improve results.
             </p>
-            <div class="flex items-center text-warning-600 font-semibold group-hover:text-warning-700">
+            <div class="flex items-center text-error-600 font-semibold group-hover:text-error-700">
               <span>Learn More</span>
               <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
             </div>
-          
-          <div class="service-card card p-8 text-center group">
-            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
-              <i class="fas fa-wind text-blue-600 group-hover:text-white text-2xl transition-colors duration-300" aria-hidden="true"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Indoor Air Quality</h3>
-            <p class="text-gray-600 leading-relaxed">Advanced air quality solutions including filtration systems, ventilation optimization, and humidity control.</p>
-          </div>
-          
-          <div class="service-card card p-8 text-center group">
-            <div class="w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-600 transition-colors duration-300">
-              <i class="fas fa-microchip text-blue-600 group-hover:text-white text-2xl transition-colors duration-300" aria-hidden="true"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-4">Building Automation</h3>
-            <p class="text-gray-600 leading-relaxed">Cutting-edge building automation systems for centralized control and optimized facility performance.</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-16 md:py-24 bg-white">
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 md:py-24 bg-white">
       <div class="container mx-auto px-6">
-        <h2 class="section-heading">Recent HVAC Projects</h2>
+        <div class="text-center max-w-4xl mx-auto mb-16 animate-fadeInUp">
+          <h2 class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
+            Our Digital <span class="text-gradient-primary">Portfolio</span>
+          </h2>
+          <p class="text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto">
+            Showcasing our latest web development and design projects that deliver exceptional results for our clients.
+          </p>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          <article class="project-card card overflow-hidden group">
+          <article class="card overflow-hidden group hover:shadow-xl transition-all duration-300">
             <div class="relative overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Modern office building with advanced HVAC system" 
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Modern e-commerce website dashboard" 
                 class="w-full h-64 object-cover transition duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <div class="flex space-x-2">
+                  <span class="bg-white/20 text-white text-xs px-2 py-1 rounded">React</span>
+                  <span class="bg-white/20 text-white text-xs px-2 py-1 rounded">Node.js</span>
+                  <span class="bg-white/20 text-white text-xs px-2 py-1 rounded">MongoDB</span>
+                </div>
+              </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Office Building HVAC Upgrade</h3>
-              <p class="text-gray-600 leading-relaxed">Complete modernization of climate control systems for a 15-story office complex, improving energy efficiency by 40%.</p>
-              <div class="mt-4">
-                <span class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Commercial</span>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">E-Commerce Platform</h3>
+              <p class="text-gray-600 leading-relaxed mb-4">Complete online store with advanced features, inventory management, and seamless payment integration.</p>
+              <div class="flex justify-between items-center">
+                <span class="inline-block bg-primary-100 text-primary-800 text-sm px-3 py-1 rounded-full">Web App</span>
+                <a href="#" class="text-primary-600 hover:text-primary-700 font-semibold">View Project →</a>
               </div>
             </div>
           </article>
           
-          <article class="project-card card overflow-hidden group">
+          <article class="card overflow-hidden group hover:shadow-xl transition-all duration-300">
             <div class="relative overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Retail space with efficient HVAC installation" 
+                src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Mobile app interface design" 
                 class="w-full h-64 object-cover transition duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Retail Space Climate Control</h3>
-              <p class="text-gray-600 leading-relaxed">Custom HVAC design and installation for a 50,000 sq ft retail establishment with zone-specific temperature control.</p>
-              <div class="mt-4">
-                <span class="inline-block bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">Retail</span>
+              <div class="absolute inset-0 bg-gradient-to-t from-secondary-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <div class="flex space-x-2">
+                  <span class="bg-white/20 text-white text-xs px-2 py-1 rounded">React Native</span>
+                  <span class="bg-white/20 text-white text-xs px-2 py-1 rounded">Firebase</span>
+                </div>
               </div>
             </div>
-          </article>
-          
-          <article class="project-card card overflow-hidden group">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Fitness Tracking App</h3>
+              <p class="text-gray-600 leading-relaxed mb-4">Cross-platform mobile app with real-time tracking, social features, and personalized workout plans.</p>
+              <div class="flex justify-between items-center">
+                <span class="inline-block bg-secondary-100 text-secondary-800 text-sm px-3 py-1 rounded-full">Mobile App</span>
+                <a href="#" class="text-secondary-600 hover:text-secondary-700 font-semibold">View Project →</a>
+              </div>
+            </div>
+          </article>          
+          <article class="card overflow-hidden group hover:shadow-xl transition-all duration-300">
             <div class="relative overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Industrial facility with specialized HVAC system" 
+                src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Corporate website design" 
                 class="w-full h-64 object-cover transition duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-accent-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <div class="flex space-x-2">
+                  <span class="bg-white/20 text-white text-xs px-2 py-1 rounded">Next.js</span>
+                  <span class="bg-white/20 text-white text-xs px-2 py-1 rounded">Tailwind</span>
+                  <span class="bg-white/20 text-white text-xs px-2 py-1 rounded">Headless CMS</span>
+                </div>
+              </div>
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-gray-900 mb-3">Manufacturing Facility Solution</h3>
-              <p class="text-gray-600 leading-relaxed">Industrial-grade HVAC system for a manufacturing plant, ensuring optimal working conditions and air quality standards.</p>
-              <div class="mt-4">
-                <span class="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Industrial</span>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">Corporate Website</h3>
+              <p class="text-gray-600 leading-relaxed mb-4">Modern corporate website with content management system, SEO optimization, and performance analytics.</p>
+              <div class="flex justify-between items-center">
+                <span class="inline-block bg-accent-100 text-accent-800 text-sm px-3 py-1 rounded-full">Website</span>
+                <a href="#" class="text-accent-600 hover:text-accent-700 font-semibold">View Project →</a>
               </div>
             </div>
           </article>
@@ -391,28 +404,28 @@ import BackgroundManager from '../components/BackgroundManager.astro';
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div class="about-content lg:order-2">
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              About <span class="text-blue-600">Midwest Climate Solutions</span>
+              About <span class="text-gradient-primary">Digital Solutions</span>
             </h2>
-            <div class="w-16 h-1 bg-orange-500 mb-8 rounded-full"></div>
+            <div class="w-16 h-1 bg-accent-500 mb-8 rounded-full"></div>
             <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-              Since 2003, Midwest Climate Solutions has been the trusted partner for commercial HVAC needs across the Great Lakes region. We are committed to delivering superior climate control solutions, energy efficiency innovations, and unparalleled service excellence.
+              Since 2018, Digital Solutions has been at the forefront of web development and digital innovation. We create exceptional digital experiences that drive business growth and connect brands with their audiences.
             </p>
             <p class="text-gray-600 mb-8 leading-relaxed">
-              Our team of certified technicians and engineers brings decades of combined experience to every project, ensuring optimal indoor environments for businesses of all sizes and industries.
+              Our team of talented developers, designers, and digital strategists brings passion and expertise to every project, delivering solutions that are not just functional, but truly transformative.
             </p>
             
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
               <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                <div class="text-3xl lg:text-4xl font-bold text-orange-500 mb-2">1000+</div>
-                <div class="text-sm text-gray-600 font-medium uppercase tracking-wide">Systems Serviced</div>
+                <div class="text-3xl lg:text-4xl font-bold text-accent-500 mb-2">200+</div>
+                <div class="text-sm text-gray-600 font-medium uppercase tracking-wide">Projects Delivered</div>
               </div>
               <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                <div class="text-3xl lg:text-4xl font-bold text-orange-500 mb-2">20+</div>
+                <div class="text-3xl lg:text-4xl font-bold text-accent-500 mb-2">5+</div>
                 <div class="text-sm text-gray-600 font-medium uppercase tracking-wide">Years Experience</div>
               </div>
               <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                <div class="text-3xl lg:text-4xl font-bold text-orange-500 mb-2">99%</div>
+                <div class="text-3xl lg:text-4xl font-bold text-accent-500 mb-2">98%</div>
                 <div class="text-sm text-gray-600 font-medium uppercase tracking-wide">Client Satisfaction</div>
               </div>
             </div>
@@ -421,12 +434,12 @@ import BackgroundManager from '../components/BackgroundManager.astro';
           <div class="lg:order-1 relative">
             <div class="relative rounded-xl overflow-hidden shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="HVAC technicians working on commercial system" 
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Digital team collaborating on projects" 
                 class="w-full h-96 lg:h-[500px] object-cover"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-primary-900/20 to-transparent"></div>
             </div>
             
             <!-- Floating Badge -->
