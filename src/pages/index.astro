@@ -66,7 +66,7 @@ import BackgroundManager from '../components/BackgroundManager.astro';
                 <i class="fas fa-tools mr-3"></i>
                 General Contracting
               </a>
-              <a href="/pricing" class="block px-6 py-3 text-white hover:text-orange-400 hover:bg-white/10 transition-colors">
+              <a href="/WebsiteTest/pricing" class="block px-6 py-3 text-white hover:text-orange-400 hover:bg-white/10 transition-colors">
                 <i class="fas fa-dollar-sign mr-3"></i>
                 Pricing & Quotes
               </a>
@@ -110,7 +110,7 @@ import BackgroundManager from '../components/BackgroundManager.astro';
       <ul class="flex flex-col items-center py-6 sm:py-8 space-y-4 sm:space-y-6">
         <li><a href="#home" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Home</a></li>
         <li><a href="#services" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Services</a></li>
-        <li><a href="/pricing" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Pricing</a></li>
+        <li><a href="/WebsiteTest/pricing" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Pricing</a></li>
         <li><a href="#projects" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Projects</a></li>
         <li><a href="#about" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">About</a></li>
         <li><a href="#contact" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Contact</a></li>
@@ -134,6 +134,20 @@ import BackgroundManager from '../components/BackgroundManager.astro';
     >
       <!-- Content overlay for readability -->
       <div class="absolute inset-0 bg-black/20 z-10"></div>
+      
+      <!-- Floating Geometric Decorations -->
+      <div class="absolute inset-0 z-5 pointer-events-none">
+        <!-- Top Right Floating Circle -->
+        <div class="absolute top-20 right-10 w-32 h-32 bg-gradient-to-br from-orange-400/20 to-blue-400/20 rounded-full animate-float"></div>
+        <!-- Bottom Left Floating Triangle -->
+        <div class="absolute bottom-32 left-16 w-0 h-0 border-l-[30px] border-l-transparent border-r-[30px] border-r-transparent border-b-[50px] border-b-blue-400/30 animate-float-reverse"></div>
+        <!-- Middle Right Floating Square -->
+        <div class="absolute top-1/2 right-20 w-20 h-20 bg-gradient-to-tr from-orange-500/25 to-transparent rounded-lg rotate-45 animate-pulse-slow"></div>
+        <!-- Top Left Floating Hexagon -->
+        <div class="absolute top-40 left-20 w-16 h-16 bg-blue-500/20 transform rotate-45 animate-float-delayed"></div>
+        <!-- Background Grid Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0); background-size: 40px 40px;"></div>
+      </div>
       
       <div class="container mx-auto px-4 sm:px-6 relative z-20">
         <div class="max-w-5xl animate-fadeInUp text-center">
@@ -197,8 +211,20 @@ import BackgroundManager from '../components/BackgroundManager.astro';
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 md:py-32 bg-gradient-subtle" aria-labelledby="services-heading">
-      <div class="container mx-auto px-6">
+    <section id="services" class="py-20 md:py-32 bg-gradient-subtle relative overflow-hidden" aria-labelledby="services-heading">
+      <!-- Floating Background Decorations -->
+      <div class="absolute inset-0 pointer-events-none">
+        <!-- Top Floating Circles -->
+        <div class="absolute top-16 left-10 w-24 h-24 bg-blue-200/30 rounded-full animate-float"></div>
+        <div class="absolute top-32 right-16 w-16 h-16 bg-orange-200/40 rounded-full animate-float-reverse"></div>
+        <!-- Bottom Floating Shapes -->
+        <div class="absolute bottom-20 right-10 w-20 h-20 bg-gradient-to-br from-purple-200/30 to-blue-200/30 transform rotate-45 animate-pulse-slow"></div>
+        <div class="absolute bottom-40 left-16 w-12 h-12 bg-green-200/40 rounded-full animate-float-delayed"></div>
+        <!-- Subtle Grid Pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(45deg, transparent 40%, rgba(59, 130, 246, 0.1) 50%, transparent 60%), linear-gradient(-45deg, transparent 40%, rgba(249, 115, 22, 0.1) 50%, transparent 60%); background-size: 60px 60px;"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-4xl mx-auto mb-16 animate-fadeInUp">
           <h2 id="services-heading" class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
             Our Professional <span class="text-gradient-primary">Services</span>
@@ -309,8 +335,20 @@ import BackgroundManager from '../components/BackgroundManager.astro';
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-16 md:py-24 bg-white">
-      <div class="container mx-auto px-6">
+    <section id="portfolio" class="py-16 md:py-24 bg-white relative overflow-hidden">
+      <!-- Floating Background Decorations -->
+      <div class="absolute inset-0 pointer-events-none">
+        <!-- Corner Decorations -->
+        <div class="absolute top-16 left-12 w-20 h-20 bg-gradient-to-br from-orange-300/25 to-blue-300/25 rounded-full animate-float"></div>
+        <div class="absolute bottom-24 right-16 w-24 h-24 bg-gradient-to-tl from-blue-400/20 to-orange-400/20 transform rotate-45 animate-float-reverse"></div>
+        <!-- Side Floating Elements -->
+        <div class="absolute top-1/2 left-8 w-14 h-14 bg-orange-400/30 rounded-full animate-pulse-slow"></div>
+        <div class="absolute top-1/3 right-10 w-16 h-16 bg-blue-400/25 transform rotate-45 animate-float-delayed"></div>
+        <!-- Subtle Background Pattern -->
+        <div class="absolute inset-0 opacity-3" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(59, 130, 246, 0.05) 20px, rgba(59, 130, 246, 0.05) 21px);"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-4xl mx-auto mb-16 animate-fadeInUp">
           <h2 class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
             Our Construction <span class="text-gradient-primary">Projects</span>
@@ -403,8 +441,18 @@ import BackgroundManager from '../components/BackgroundManager.astro';
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 md:py-24 bg-gray-50">
-      <div class="container mx-auto px-6">
+    <section id="about" class="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
+      <!-- Floating Background Decorations -->
+      <div class="absolute inset-0 pointer-events-none">
+        <!-- Geometric Shapes -->
+        <div class="absolute top-20 right-20 w-28 h-28 bg-gradient-to-br from-blue-300/20 to-orange-300/20 rounded-full animate-float"></div>
+        <div class="absolute bottom-32 left-10 w-16 h-16 bg-orange-400/25 transform rotate-45 animate-float-reverse"></div>
+        <div class="absolute top-1/3 left-1/4 w-12 h-12 bg-blue-400/30 rounded-full animate-pulse-slow"></div>
+        <!-- Subtle Pattern Overlay -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.3) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(249, 115, 22, 0.3) 2px, transparent 2px); background-size: 80px 80px;"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div class="about-content lg:order-2">
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -549,6 +597,19 @@ import BackgroundManager from '../components/BackgroundManager.astro';
       <!-- Background Pattern -->
       <div class="absolute inset-0 opacity-5">
         <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"0 0 40 40\"><g fill=\"%23ffffff\" fill-opacity=\"0.1\"><rect width=\"2\" height=\"2\" x=\"19\" y=\"19\"/></g></svg>');"></div>
+      </div>
+      
+      <!-- Additional Floating Elements -->
+      <div class="absolute inset-0 pointer-events-none">
+        <!-- Quote Mark Decorations -->
+        <div class="absolute top-16 left-16 text-6xl text-white/10 animate-float">"</div>
+        <div class="absolute bottom-20 right-20 text-6xl text-white/10 animate-float-reverse">"</div>
+        <!-- Floating Stars -->
+        <div class="absolute top-1/4 right-1/4 text-orange-400/30 text-2xl animate-pulse-slow">★</div>
+        <div class="absolute bottom-1/3 left-1/4 text-orange-400/30 text-xl animate-float-delayed">★</div>
+        <!-- Glowing Orbs -->
+        <div class="absolute top-32 right-32 w-20 h-20 bg-orange-400/20 rounded-full blur-xl animate-float"></div>
+        <div class="absolute bottom-32 left-32 w-16 h-16 bg-blue-400/20 rounded-full blur-lg animate-float-reverse"></div>
       </div>
       
       <div class="container mx-auto px-4 sm:px-6 relative">
@@ -1000,8 +1061,20 @@ import BackgroundManager from '../components/BackgroundManager.astro';
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 md:py-24 bg-gray-900 text-white">
-      <div class="container mx-auto px-6">
+    <section id="contact" class="py-16 md:py-24 bg-gray-900 text-white relative overflow-hidden">
+      <!-- Floating Background Decorations -->
+      <div class="absolute inset-0 pointer-events-none">
+        <!-- Glowing Orbs -->
+        <div class="absolute top-20 right-24 w-32 h-32 bg-gradient-to-br from-orange-500/30 to-blue-500/30 rounded-full blur-lg animate-float"></div>
+        <div class="absolute bottom-32 left-20 w-24 h-24 bg-gradient-to-tr from-blue-400/25 to-orange-400/25 rounded-full blur-sm animate-float-reverse"></div>
+        <!-- Geometric Elements -->
+        <div class="absolute top-1/3 left-12 w-16 h-16 bg-orange-400/20 transform rotate-45 animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-16 w-20 h-20 bg-blue-400/20 rounded-full animate-float-delayed"></div>
+        <!-- Grid Overlay -->
+        <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(249, 115, 22, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(249, 115, 22, 0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+      </div>
+      
+      <div class="container mx-auto px-6 relative z-10">
         <div class="text-center mb-16">
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Get In Touch</h2>
           <div class="w-16 h-1 bg-orange-500 mx-auto mb-6 rounded-full"></div>
