@@ -68,6 +68,32 @@
   .text-shadow-lg {
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
+  
+  /* Error & Validation States */
+  .input-error {
+    @apply border-error bg-red-50 focus:border-error focus:ring-error shadow-error;
+  }
+  
+  .input-success {
+    @apply border-success bg-green-50 focus:border-success focus:ring-success shadow-success;
+  }
+  
+  .error-message {
+    @apply text-red-600 text-sm mt-1 flex items-center;
+  }
+  
+  .success-message {
+    @apply text-green-600 text-sm mt-1 flex items-center;
+  }
+  
+  /* Loading States */
+  .loading-overlay {
+    @apply absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50;
+  }
+  
+  .spinner {
+    @apply animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600;
+  }
 }
 
 /* Custom animations */

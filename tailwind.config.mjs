@@ -62,6 +62,15 @@ export default {
       },
       backdropBlur: {
         xs: '2px',
+      },
+      boxShadow: {
+        'error': '0 0 0 3px rgba(239, 68, 68, 0.1)',
+        'success': '0 0 0 3px rgba(34, 197, 94, 0.1)',
+        'focus': '0 0 0 3px rgba(59, 130, 246, 0.1)',
+      },
+      borderColor: {
+        'error': '#ef4444',
+        'success': '#22c55e',
       }
     },
   },
