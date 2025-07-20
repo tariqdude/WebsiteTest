@@ -150,11 +150,7 @@ const {
         </div>
       </div>
     </div>
-        Load Video
-      </button>
-    </div>
-
-    <!-- Video Upload Controls -->
+        <!-- Video Upload Controls -->
     <div id="video-controls" class="space-y-4 hidden">
       <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wide">Video Settings</h4>
       
@@ -260,7 +256,7 @@ const {
   </div>
 )}
 
-<script define:vars={{ defaultType, youtubeId, videoSrc, images, enableControls }}>
+<script is:inline define:vars={{ defaultType, youtubeId, videoSrc, images, enableControls }}>
   class BackgroundManager {
     constructor() {
       this.currentType = defaultType;
@@ -402,7 +398,6 @@ const {
       document.getElementById('mute-video').checked = true;
       this.setVideoMute(true);
     }
-    }
 
     loadYouTubeAPI() {
       if (window.YT) return;
@@ -433,7 +428,7 @@ const {
           playsinline: 1
         },
         events: {
-          onReady: (event) => {
+          onReady: () => {
             this.handleResize();
           }
         }

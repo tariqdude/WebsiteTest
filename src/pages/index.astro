@@ -596,7 +596,7 @@ import BackgroundManager from '../components/BackgroundManager.astro';
     <section id="testimonials" class="py-12 sm:py-16 md:py-24 bg-blue-800 text-white relative overflow-hidden">
       <!-- Background Pattern -->
       <div class="absolute inset-0 opacity-5">
-        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"0 0 40 40\"><g fill=\"%23ffffff\" fill-opacity=\"0.1\"><rect width=\"2\" height=\"2\" x=\"19\" y=\"19\"/></g></svg>');"></div>
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><g fill='%23ffffff' fill-opacity='0.1'><rect width='2' height='2' x='19' y='19'/></g></svg>');"></div>
       </div>
       
       <!-- Additional Floating Elements -->
@@ -1508,7 +1508,7 @@ import BackgroundManager from '../components/BackgroundManager.astro';
         }
       }
 
-      showFieldError(fieldId, message) {
+      showFieldError(fieldId) {
         const field = document.getElementById(fieldId);
         if (field) {
           field.classList.add('border-red-500');
@@ -1813,5 +1813,5 @@ import BackgroundManager from '../components/BackgroundManager.astro';
   </style>
 
   <!-- Initialize main application -->
-  <script type="module" src="/src/scripts/main.js"></script>
+  <script is:inline type="module" src="/src/scripts/main.js"></script>
 </BaseLayout>

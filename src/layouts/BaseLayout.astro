@@ -67,7 +67,7 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <meta name="twitter:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
     
     <!-- Structured Data - Enhanced Local Business Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@graph": [
         {
@@ -227,7 +227,7 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <meta name="msapplication-config" content="/WebsiteTest/browserconfig.xml" />
     
     <!-- Enhanced Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
