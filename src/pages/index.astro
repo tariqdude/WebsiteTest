@@ -549,6 +549,338 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
+    <!-- Service Area Map Section -->
+    <section id="service-area" class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Our Service Area</h2>
+          <div class="w-16 h-1 bg-orange-500 mx-auto mb-6 rounded-full"></div>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Serving commercial and industrial clients throughout the Great Lakes region with comprehensive HVAC solutions
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <!-- Map Placeholder -->
+          <div class="relative bg-blue-100 rounded-2xl overflow-hidden shadow-2xl">
+            <div class="aspect-video bg-gradient-to-br from-blue-200 to-blue-400 relative">
+              <!-- Map pins -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="relative w-full h-full">
+                  <!-- Main office pin -->
+                  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div class="relative">
+                      <i class="fas fa-map-marker-alt text-4xl text-red-500 animate-pulse"></i>
+                      <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white px-3 py-1 rounded-lg shadow-lg text-sm font-semibold text-gray-800 whitespace-nowrap">
+                        Metroville, IL (HQ)
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Service area cities -->
+                  <div class="absolute top-1/3 left-1/4 text-orange-500 text-2xl">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-medium text-gray-700 whitespace-nowrap">
+                      Chicago
+                    </div>
+                  </div>
+                  
+                  <div class="absolute top-2/3 left-3/4 text-orange-500 text-2xl">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-medium text-gray-700 whitespace-nowrap">
+                      Milwaukee
+                    </div>
+                  </div>
+                  
+                  <div class="absolute top-1/4 right-1/4 text-orange-500 text-2xl">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-medium text-gray-700 whitespace-nowrap">
+                      Detroit
+                    </div>
+                  </div>
+                  
+                  <div class="absolute bottom-1/4 left-1/3 text-orange-500 text-2xl">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-medium text-gray-700 whitespace-nowrap">
+                      Indianapolis
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Service radius indicator -->
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-4 border-orange-500/30 rounded-full animate-pulse"></div>
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 border-2 border-orange-500/50 rounded-full"></div>
+            </div>
+          </div>
+          
+          <!-- Service area information -->
+          <div class="space-y-8">
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">100-Mile Service Radius</h3>
+              <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                We proudly serve commercial and industrial clients within a 100-mile radius of our Metroville headquarters, ensuring prompt service and support when you need it most.
+              </p>
+              
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <div class="text-3xl font-bold text-blue-600 mb-1">24/7</div>
+                  <div class="text-sm text-gray-600">Emergency Service</div>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <div class="text-3xl font-bold text-green-600 mb-1">2 Hour</div>
+                  <div class="text-sm text-gray-600">Response Time</div>
+                </div>
+              </div>
+              
+              <h4 class="font-semibold text-gray-900 mb-3">Primary Service Cities:</h4>
+              <div class="grid grid-cols-2 gap-2 text-gray-600">
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  Chicago, IL
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  Milwaukee, WI
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  Detroit, MI
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  Indianapolis, IN
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  Grand Rapids, MI
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  Madison, WI
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex space-x-4">
+              <a 
+                href="#contact" 
+                class="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-xl text-center transition-colors duration-300 focus:ring-4 focus:ring-orange-300"
+              >
+                Get Service Quote
+              </a>
+              <a 
+                href="tel:+15551234567" 
+                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl text-center transition-colors duration-300 focus:ring-4 focus:ring-blue-300"
+                onclick="window.analytics?.trackPhoneCall('service_area')"
+              >
+                Call Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Information Section -->
+    <section id="pricing" class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Transparent Pricing</h2>
+          <div class="w-16 h-1 bg-orange-500 mx-auto mb-6 rounded-full"></div>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            No hidden fees, no surprises. Our competitive pricing structure is designed to deliver maximum value for your HVAC investment.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <!-- Emergency Service Pricing -->
+          <div class="bg-red-50 border-2 border-red-200 p-8 rounded-2xl text-center relative">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span class="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold">24/7 EMERGENCY</span>
+            </div>
+            <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Emergency Service</h3>
+            <div class="text-4xl font-bold text-red-600 mb-2">$150</div>
+            <div class="text-gray-600 mb-6">Service call + diagnostic</div>
+            <ul class="text-left space-y-3 mb-8">
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>24/7 availability</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>2-hour response time</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Complete system diagnosis</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Upfront repair estimate</span>
+              </li>
+            </ul>
+            <a 
+              href="tel:+15551234567" 
+              class="block w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+              onclick="window.analytics?.trackPhoneCall('emergency_pricing')"
+            >
+              Call Emergency Line
+            </a>
+          </div>
+          
+          <!-- Maintenance Pricing -->
+          <div class="bg-green-50 border-2 border-green-200 p-8 rounded-2xl text-center relative">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span class="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">MOST POPULAR</span>
+            </div>
+            <i class="fas fa-tools text-4xl text-green-500 mb-4"></i>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Maintenance Plans</h3>
+            <div class="text-4xl font-bold text-green-600 mb-2">$99</div>
+            <div class="text-gray-600 mb-6">per unit/visit</div>
+            <ul class="text-left space-y-3 mb-8">
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Bi-annual service visits</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Priority scheduling</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>15% off repairs</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Comprehensive inspection</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Parts & labor warranty</span>
+              </li>
+            </ul>
+            <a 
+              href="#contact" 
+              class="block w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+            >
+              Get Maintenance Quote
+            </a>
+          </div>
+          
+          <!-- Consultation Pricing -->
+          <div class="bg-blue-50 border-2 border-blue-200 p-8 rounded-2xl text-center relative">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-bold">FREE</span>
+            </div>
+            <i class="fas fa-clipboard-list text-4xl text-blue-500 mb-4"></i>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Energy Audit</h3>
+            <div class="text-4xl font-bold text-blue-600 mb-2">FREE</div>
+            <div class="text-gray-600 mb-6">comprehensive assessment</div>
+            <ul class="text-left space-y-3 mb-8">
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Complete system analysis</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Efficiency recommendations</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Cost-saving projections</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>Written report</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check text-green-500 mr-3"></i>
+                <span>No obligation quote</span>
+              </li>
+            </ul>
+            <a 
+              href="#contact" 
+              class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+            >
+              Schedule Free Audit
+            </a>
+          </div>
+        </div>
+        
+        <!-- Installation Pricing Ranges -->
+        <div class="bg-gray-50 rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Installation Pricing Ranges</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+              <i class="fas fa-snowflake text-3xl text-blue-500 mb-3"></i>
+              <h4 class="font-semibold text-gray-900 mb-2">Small Commercial</h4>
+              <div class="text-sm text-gray-600 mb-2">Up to 3,000 sq ft</div>
+              <div class="text-2xl font-bold text-blue-600">$8K - $15K</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+              <i class="fas fa-building text-3xl text-green-500 mb-3"></i>
+              <h4 class="font-semibold text-gray-900 mb-2">Mid-Size Office</h4>
+              <div class="text-sm text-gray-600 mb-2">3,000 - 10,000 sq ft</div>
+              <div class="text-2xl font-bold text-green-600">$15K - $35K</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+              <i class="fas fa-industry text-3xl text-orange-500 mb-3"></i>
+              <h4 class="font-semibold text-gray-900 mb-2">Large Commercial</h4>
+              <div class="text-sm text-gray-600 mb-2">10,000 - 50,000 sq ft</div>
+              <div class="text-2xl font-bold text-orange-600">$35K - $100K</div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md text-center">
+              <i class="fas fa-warehouse text-3xl text-purple-500 mb-3"></i>
+              <h4 class="font-semibold text-gray-900 mb-2">Industrial Complex</h4>
+              <div class="text-sm text-gray-600 mb-2">50,000+ sq ft</div>
+              <div class="text-2xl font-bold text-purple-600">$100K+</div>
+            </div>
+          </div>
+          
+          <div class="mt-8 text-center">
+            <p class="text-gray-600 mb-4">
+              <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+              Pricing varies based on system complexity, building requirements, and energy efficiency goals.
+            </p>
+            <a 
+              href="#contact" 
+              class="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300"
+            >
+              <i class="fas fa-calculator mr-2"></i>
+              Get Custom Quote
+            </a>
+          </div>
+        </div>
+        
+        <!-- Financing Options -->
+        <div class="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+          <h3 class="text-2xl font-bold mb-4">Flexible Financing Available</h3>
+          <p class="text-lg mb-6 opacity-90">
+            Make your HVAC upgrade affordable with our flexible financing options
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+              <i class="fas fa-percent text-3xl mb-3"></i>
+              <div class="font-semibold">0% APR Options</div>
+              <div class="text-sm opacity-80">Qualified buyers</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+              <i class="fas fa-calendar-alt text-3xl mb-3"></i>
+              <div class="font-semibold">Up to 84 Months</div>
+              <div class="text-sm opacity-80">Extended payment terms</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+              <i class="fas fa-check-circle text-3xl mb-3"></i>
+              <div class="font-semibold">Easy Approval</div>
+              <div class="text-sm opacity-80">Quick application process</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-16 md:py-24 bg-gray-900 text-white">
       <div class="container mx-auto px-6">

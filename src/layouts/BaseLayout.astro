@@ -31,12 +31,45 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <meta name="geo.placename" content="Metroville">  
     <meta name="geo.position" content="41.8781;-87.6298">
     
+    <!-- Additional SEO Meta Tags -->
+    <meta name="author" content="Midwest Climate Solutions">
+    <meta name="rating" content="General">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="language" content="EN">
+    <meta name="category" content="Business">
+    <meta name="coverage" content="Worldwide">
+    <meta name="target" content="business owners, facility managers, property managers">
+    
+    <!-- Business Specific Meta -->
+    <meta name="business.hours" content="Mo-Fr 07:00-18:00, Sa 08:00-16:00">
+    <meta name="business.phone" content="(555) 123-4567">
+    <meta name="business.address" content="456 Climate Drive, Metroville, IL 60601">
+    <meta name="business.services" content="HVAC Installation, Repair, Maintenance, Commercial Systems">
+    
+    <!-- Local SEO -->
+    <meta name="geo.icbm" content="41.8781, -87.6298">
+    <meta name="ICBM" content="41.8781, -87.6298">
+    <meta name="DC.title" content={title}>
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Midwest Climate Solutions - Professional HVAC Services" />
+    <meta property="og:site_name" content="Midwest Climate Solutions" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="business:contact_data:street_address" content="456 Climate Drive" />
+    <meta property="business:contact_data:locality" content="Metroville" />
+    <meta property="business:contact_data:region" content="IL" />
+    <meta property="business:contact_data:postal_code" content="60601" />
+    <meta property="business:contact_data:country_name" content="United States" />
+    <meta property="business:contact_data:phone_number" content="(555) 123-4567" />
+    <meta property="business:contact_data:email" content="info@midwestclimatesolutions.com" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -47,44 +80,183 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     
     <title>{title}</title>
     
-    <!-- Structured Data -->
+    <!-- Structured Data - Enhanced Local Business Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "HVACBusiness",
-      "name": "Midwest Climate Solutions",
-      "url": "{canonicalURL}",
-      "logo": "{Astro.site}WebsiteTest/logo.png",
-      "description": "{description}",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "456 Climate Drive",
-        "addressLocality": "Metroville",
-        "addressRegion": "IL",
-        "postalCode": "60601",
-        "addressCountry": "US"
-      },
-      "telephone": "(555) 123-4567",
-      "email": "info@midwestclimatesolutions.com",
-      "openingHours": [
-        "Mo-Fr 07:00-18:00",
-        "Sa 08:00-16:00"
-      ],
-      "serviceArea": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": 41.8781,
-          "longitude": -87.6298
+      "@graph": [
+        {
+          "@type": "HVACBusiness",
+          "@id": "{canonicalURL}#hvacbusiness",
+          "name": "Midwest Climate Solutions",
+          "alternateName": "Midwest HVAC",
+          "url": "{canonicalURL}",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{Astro.site}WebsiteTest/logo.png",
+            "width": 300,
+            "height": 100
+          },
+          "description": "{description}",
+          "foundingDate": "2010",
+          "slogan": "Your Comfort, Our Priority",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "456 Climate Drive",
+            "addressLocality": "Metroville",
+            "addressRegion": "IL",
+            "postalCode": "60601",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.8781,
+            "longitude": -87.6298
+          },
+          "telephone": "(555) 123-4567",
+          "email": "info@midwestclimatesolutions.com",
+          "faxNumber": "(555) 123-4568",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "07:00",
+              "closes": "18:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Saturday",
+              "opens": "08:00",
+              "closes": "16:00"
+            }
+          ],
+          "serviceArea": [
+            {
+              "@type": "State",
+              "name": "Illinois"
+            },
+            {
+              "@type": "City",
+              "name": "Chicago"
+            },
+            {
+              "@type": "City", 
+              "name": "Metroville"
+            },
+            {
+              "@type": "City",
+              "name": "Oak Park"
+            },
+            {
+              "@type": "City",
+              "name": "Evanston"
+            }
+          ],
+          "areaServed": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": 41.8781,
+              "longitude": -87.6298
+            },
+            "geoRadius": "100 mi"
+          },
+          "priceRange": "$$-$$$",
+          "paymentAccepted": ["Cash", "Credit Card", "Check", "Invoice"],
+          "currenciesAccepted": "USD",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "127",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "HVAC Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "HVAC Installation",
+                  "description": "Professional heating, ventilation, and air conditioning installation services"
+                }
+              },
+              {
+                "@type": "Offer", 
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "HVAC Repair",
+                  "description": "Emergency and scheduled HVAC repair services"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "HVAC Maintenance",
+                  "description": "Preventive maintenance and service contracts"
+                }
+              }
+            ]
+          },
+          "knowsAbout": [
+            "HVAC Systems",
+            "Commercial Air Conditioning", 
+            "Industrial Heating",
+            "Energy Efficiency",
+            "Building Automation",
+            "Refrigeration Systems"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/midwestclimatesolutions",
+            "https://www.linkedin.com/company/midwest-climate-solutions",
+            "https://www.bbb.org/midwest-climate-solutions"
+          ],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "(555) 123-4567",
+              "contactType": "customer service",
+              "availableLanguage": ["English", "Spanish"],
+              "hoursAvailable": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "07:00",
+                "closes": "18:00"
+              }
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "(555) 123-HELP",
+              "contactType": "emergency",
+              "availableLanguage": "English",
+              "hoursAvailable": "24/7"
+            }
+          ]
         },
-        "geoRadius": 100
-      },
-      "priceRange": "$$",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "127"
-      }
+        {
+          "@type": "WebSite",
+          "@id": "{canonicalURL}#website",
+          "url": "{canonicalURL}",
+          "name": "Midwest Climate Solutions",
+          "description": "{description}",
+          "publisher": {
+            "@id": "{canonicalURL}#hvacbusiness"
+          },
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "{canonicalURL}/search?q={{search_term_string}}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          ]
+        }
+      ]
     }
     </script>
     
@@ -140,12 +312,105 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.clarity.ms" />
     
-    <!-- Optimized font loading -->
+    <!-- DNS Prefetch for additional performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    
+    <!-- Resource Hints -->
+    <link rel="modulepreload" href="/WebsiteTest/scripts/websiteController.js" />
+    <link rel="modulepreload" href="/WebsiteTest/scripts/errorHandler.js" />
+    <link rel="modulepreload" href="/WebsiteTest/scripts/analytics.js" />
+    
+    <!-- Optimized font loading with font-display swap -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      /* Font loading optimization - prevent FOUT */
+      @font-face {
+        font-family: 'Inter-fallback';
+        src: local('Arial'), local('Helvetica'), local('sans-serif');
+        ascent-override: 90.20%;
+        descent-override: 22.48%;
+        line-gap-override: 0.00%;
+        size-adjust: 107.40%;
+      }
+      
+      /* Critical CSS - Above the fold styles */
+      body { 
+        margin: 0; 
+        font-family: 'Inter', 'Inter-fallback', system-ui, -apple-system, sans-serif; 
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Skip to main content for accessibility */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: #3b82f6;
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+        z-index: 1000;
+      }
+      
+      .skip-link:focus {
+        top: 6px;
+      }
+      
+      /* Loading optimization */
+      .page-loading {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      
+      .page-loaded {
+        opacity: 1;
+      }
+      
+      /* Prevent layout shift */
+      .hero-image {
+        aspect-ratio: 16/9;
+        background-color: #f3f4f6;
+      }
+      
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
-  <body class="antialiased">
+  <body class="antialiased page-loading">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <slot />
+    
+    <!-- Page loading optimization script -->
+    <script is:inline>
+      // Remove loading class when page is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.remove('page-loading');
+        document.body.classList.add('page-loaded');
+      });
+      
+      // Fallback for older browsers
+      window.addEventListener('load', function() {
+        document.body.classList.remove('page-loading');
+        document.body.classList.add('page-loaded');
+      });
+    </script>
   </body>
 </html>
