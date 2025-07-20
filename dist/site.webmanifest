@@ -1,22 +1,25 @@
 {
-  "name": "Midwest Climate Solutions",
+  "name": "Midwest Climate Solutions - Professional HVAC Services",
   "short_name": "Midwest HVAC",
-  "description": "Leading commercial HVAC solutions for businesses across the Great Lakes region. Expert installation, maintenance, and energy-efficient climate control systems.",
+  "description": "Leading commercial HVAC solutions for businesses across the Great Lakes region. Expert installation, maintenance, emergency service, and energy-efficient climate control systems.",
   "icons": [
     {
       "src": "/WebsiteTest/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/WebsiteTest/android-chrome-512x512.png", 
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/WebsiteTest/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/WebsiteTest/favicon-32x32.png",
@@ -36,7 +39,8 @@
   "orientation": "portrait",
   "scope": "/WebsiteTest/",
   "lang": "en-US",
-  "categories": ["business", "utilities", "productivity"],
+  "dir": "ltr",
+  "categories": ["business", "utilities", "productivity", "services"],
   "screenshots": [
     {
       "src": "/WebsiteTest/screenshot-wide.png",

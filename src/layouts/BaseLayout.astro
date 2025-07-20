@@ -11,74 +11,43 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/WebsiteTest/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Basic SEO Meta Tags -->
+    <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="commercial HVAC, HVAC installation, HVAC repair, HVAC maintenance, energy efficiency, Chicago HVAC, Illinois commercial HVAC, emergency HVAC service" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="author" content="Midwest Climate Solutions" />
     <link rel="canonical" href={canonicalURL} />
     
-    <!-- Favicon and App Icons -->
-    <link rel="icon" type="image/svg+xml" href="/WebsiteTest/favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="/WebsiteTest/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/WebsiteTest/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/WebsiteTest/apple-touch-icon.png">
-    <link rel="manifest" href="/WebsiteTest/site.webmanifest">
-    <meta name="theme-color" content="#3b82f6">
+    <!-- Business Meta Tags -->
+    <meta name="business.hours" content="Mo-Fr 07:00-18:00, Sa 08:00-16:00" />
+    <meta name="business.phone" content="(555) 123-4567" />
+    <meta name="business.area" content="Illinois, Great Lakes Region" />
+    <meta name="geo.region" content="US-IL" />
+    <meta name="geo.placename" content="Metroville" />
+    <meta name="geo.position" content="41.8781;-87.6298" />
     
-    <!-- Geo and Business Info -->
-    <meta name="geo.region" content="IL">
-    <meta name="geo.placename" content="Metroville">  
-    <meta name="geo.position" content="41.8781;-87.6298">
-    
-    <!-- Additional SEO Meta Tags -->
-    <meta name="author" content="Midwest Climate Solutions">
-    <meta name="rating" content="General">
-    <meta name="revisit-after" content="7 days">
-    <meta name="distribution" content="global">
-    <meta name="language" content="EN">
-    <meta name="category" content="Business">
-    <meta name="coverage" content="Worldwide">
-    <meta name="target" content="business owners, facility managers, property managers">
-    
-    <!-- Business Specific Meta -->
-    <meta name="business.hours" content="Mo-Fr 07:00-18:00, Sa 08:00-16:00">
-    <meta name="business.phone" content="(555) 123-4567">
-    <meta name="business.address" content="456 Climate Drive, Metroville, IL 60601">
-    <meta name="business.services" content="HVAC Installation, Repair, Maintenance, Commercial Systems">
-    
-    <!-- Local SEO -->
-    <meta name="geo.icbm" content="41.8781, -87.6298">
-    <meta name="ICBM" content="41.8781, -87.6298">
-    <meta name="DC.title" content={title}>
-    
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Midwest Climate Solutions - Professional HVAC Services" />
     <meta property="og:site_name" content="Midwest Climate Solutions" />
     <meta property="og:locale" content="en_US" />
-    <meta property="business:contact_data:street_address" content="456 Climate Drive" />
-    <meta property="business:contact_data:locality" content="Metroville" />
-    <meta property="business:contact_data:region" content="IL" />
-    <meta property="business:contact_data:postal_code" content="60601" />
-    <meta property="business:contact_data:country_name" content="United States" />
-    <meta property="business:contact_data:phone_number" content="(555) 123-4567" />
-    <meta property="business:contact_data:email" content="info@midwestclimatesolutions.com" />
     
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
-    
-    <title>{title}</title>
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
     
     <!-- Structured Data - Enhanced Local Business Schema -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -92,9 +61,7 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
           "url": canonicalURL.toString(),
           "logo": {
             "@type": "ImageObject",
-            "url": `${Astro.site}WebsiteTest/logo.png`,
-            "width": 300,
-            "height": 100
+            "url": `${Astro.site}WebsiteTest/logo.png`
           },
           "description": description,
           "foundingDate": "2010",
@@ -114,7 +81,6 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
           },
           "telephone": "(555) 123-4567",
           "email": "info@midwestclimatesolutions.com",
-          "faxNumber": "(555) 123-4568",
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
@@ -129,109 +95,57 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
               "closes": "16:00"
             }
           ],
-          "serviceArea": [
-            {
-              "@type": "State",
-              "name": "Illinois"
-            },
-            {
-              "@type": "City",
-              "name": "Chicago"
-            },
-            {
-              "@type": "City", 
-              "name": "Metroville"
-            },
-            {
-              "@type": "City",
-              "name": "Oak Park"
-            },
-            {
-              "@type": "City",
-              "name": "Evanston"
-            }
-          ],
-          "areaServed": {
+          "serviceArea": {
             "@type": "GeoCircle",
             "geoMidpoint": {
               "@type": "GeoCoordinates",
               "latitude": 41.8781,
               "longitude": -87.6298
             },
-            "geoRadius": "100 mi"
+            "geoRadius": "160934"
           },
-          "priceRange": "$$-$$$",
-          "paymentAccepted": ["Cash", "Credit Card", "Check", "Invoice"],
+          "priceRange": "$$",
+          "paymentAccepted": ["Cash", "Credit Card", "Check"],
           "currenciesAccepted": "USD",
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "NATE Certification"
+            }
+          ],
+          "areaServed": {
+            "@type": "State",
+            "name": "Illinois"
+          },
+          "makesOffer": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Emergency HVAC Service"
+              },
+              "price": "150.00",
+              "priceCurrency": "USD"
+            }
+          ],
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
-            "reviewCount": "127",
-            "bestRating": "5",
-            "worstRating": "1"
+            "reviewCount": "127"
           },
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "HVAC Services",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "HVAC Installation",
-                  "description": "Professional heating, ventilation, and air conditioning installation services"
-                }
-              },
-              {
-                "@type": "Offer", 
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "HVAC Repair",
-                  "description": "Emergency and scheduled HVAC repair services"
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "HVAC Maintenance",
-                  "description": "Preventive maintenance and service contracts"
-                }
-              }
-            ]
-          },
-          "knowsAbout": [
-            "HVAC Systems",
-            "Commercial Air Conditioning", 
-            "Industrial Heating",
-            "Energy Efficiency",
-            "Building Automation",
-            "Refrigeration Systems"
-          ],
-          "sameAs": [
-            "https://www.facebook.com/midwestclimatesolutions",
-            "https://www.linkedin.com/company/midwest-climate-solutions",
-            "https://www.bbb.org/midwest-climate-solutions"
-          ],
-          "contactPoint": [
+          "review": [
             {
-              "@type": "ContactPoint",
-              "telephone": "(555) 123-4567",
-              "contactType": "customer service",
-              "availableLanguage": ["English", "Spanish"],
-              "hoursAvailable": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "07:00",
-                "closes": "18:00"
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Sarah L."
+              },
+              "datePublished": "2024-03-15",
+              "reviewBody": "Outstanding HVAC installation for our office building. Professional team, on time and under budget.",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5"
               }
-            },
-            {
-              "@type": "ContactPoint",
-              "telephone": "(555) 123-HELP",
-              "contactType": "emergency",
-              "availableLanguage": "English",
-              "hoursAvailable": "24/7"
             }
           ]
         },
@@ -240,62 +154,46 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
           "@id": `${canonicalURL}#website`,
           "url": canonicalURL.toString(),
           "name": "Midwest Climate Solutions",
-          "description": description,
           "publisher": {
             "@id": `${canonicalURL}#hvacbusiness`
-          },
-          "potentialAction": [
-            {
-              "@type": "SearchAction",
-              "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": `${canonicalURL}/search?q={search_term_string}`
-              },
-              "query-input": "required name=search_term_string"
-            }
-          ]
+          }
         }
       ]
-    })}></script>
+    })} />
     
-    <!-- Google Analytics 4 -->
+    <!-- Enhanced Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.clarity.ms;" />
+    
+    <!-- Enhanced PWA and Mobile Meta Tags -->
+    <link rel="manifest" href="/WebsiteTest/site.webmanifest" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Midwest HVAC" />
+    <meta name="msapplication-TileColor" content="#3b82f6" />
+    <meta name="msapplication-config" content="/WebsiteTest/browserconfig.xml" />
+    
+    <!-- Enhanced Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'GA_MEASUREMENT_ID', {
+        send_page_view: true,
         page_title: document.title,
-        page_location: window.location.href,
-        send_page_view: true
+        content_group1: 'HVAC Services',
+        business_type: 'HVAC_Commercial',
+        cookie_flags: 'SameSite=Strict;Secure'
       });
-      
-      // Track form submissions
-      window.trackFormSubmission = function(formName, success = true) {
-        gtag('event', success ? 'form_submit' : 'form_error', {
-          event_category: 'engagement',
-          event_label: formName,
-          value: success ? 1 : 0
-        });
-      };
-      
-      // Track phone clicks
-      window.trackPhoneClick = function() {
-        gtag('event', 'phone_click', {
-          event_category: 'engagement',
-          event_label: 'header_phone'
-        });
-      };
-      
-      // Track email clicks
-      window.trackEmailClick = function() {
-        gtag('event', 'email_click', {
-          event_category: 'engagement',
-          event_label: 'contact_email'
-        });
-      };
     </script>
-    
+
     <!-- Microsoft Clarity -->
     <script is:inline>
       (function(c,l,a,r,i,t,y){
@@ -304,111 +202,21 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
     </script>
-    
-    <!-- Preconnect to external domains -->
+
+    <!-- Performance Preconnections -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-    <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://www.clarity.ms" />
     
-    <!-- DNS Prefetch for additional performance -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-    <link rel="dns-prefetch" href="https://images.unsplash.com" />
-    
-    <!-- Resource Hints -->
-    <link rel="modulepreload" href="/WebsiteTest/scripts/websiteController.js" />
-    <link rel="modulepreload" href="/WebsiteTest/scripts/errorHandler.js" />
-    <link rel="modulepreload" href="/WebsiteTest/scripts/analytics.js" />
-    
-    <!-- Optimized font loading with font-display swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <style>
-      /* Font loading optimization - prevent FOUT */
-      @font-face {
-        font-family: 'Inter-fallback';
-        src: local('Arial'), local('Helvetica'), local('sans-serif');
-        ascent-override: 90.20%;
-        descent-override: 22.48%;
-        line-gap-override: 0.00%;
-        size-adjust: 107.40%;
-      }
-      
-      /* Critical CSS - Above the fold styles */
-      body { 
-        margin: 0; 
-        font-family: 'Inter', 'Inter-fallback', system-ui, -apple-system, sans-serif; 
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      
-      /* Skip to main content for accessibility */
-      .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 6px;
-        background: #3b82f6;
-        color: white;
-        padding: 8px;
-        text-decoration: none;
-        border-radius: 4px;
-        z-index: 1000;
-      }
-      
-      .skip-link:focus {
-        top: 6px;
-      }
-      
-      /* Loading optimization */
-      .page-loading {
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-      }
-      
-      .page-loaded {
-        opacity: 1;
-      }
-      
-      /* Prevent layout shift */
-      .hero-image {
-        aspect-ratio: 16/9;
-        background-color: #f3f4f6;
-      }
-      
-      /* Reduce motion for accessibility */
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-        }
-      }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  </head>
-  <body class="antialiased page-loading">
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    
-    <slot />
-    
-    <!-- Page loading optimization script -->
+    <!-- Service Worker Registration -->
     <script is:inline>
-      // Remove loading class when page is ready
-      document.addEventListener('DOMContentLoaded', function() {
-        document.body.classList.remove('page-loading');
-        document.body.classList.add('page-loaded');
-      });
-      
-      // Fallback for older browsers
-      window.addEventListener('load', function() {
-        document.body.classList.remove('page-loading');
-        document.body.classList.add('page-loaded');
-      });
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/WebsiteTest/sw.js');
+      }
     </script>
-  </body>
+</head>
+<body>
+    <slot />
+</body>
 </html>

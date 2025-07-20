@@ -1,0 +1,669 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+}
+
+const { title, description = "Leading commercial HVAC solutions for businesses across the Great Lakes region", canonical } = Astro.props;
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/WebsiteTest/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/WebsiteTest/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/WebsiteTest/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/WebsiteTest/apple-touch-icon.png">
+    <link rel="manifest" href="/WebsiteTest/site.webmanifest">
+    <meta name="theme-color" content="#3b82f6">
+    
+    <!-- Geo and Business Info -->
+    <meta name="geo.region" content="IL">
+    <meta name="geo.placename" content="Metroville">  
+    <meta name="geo.position" content="41.8781;-87.6298">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="author" content="Midwest Climate Solutions">
+    <meta name="rating" content="General">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="language" content="EN">
+    <meta name="category" content="Business">
+    <meta name="coverage" content="Worldwide">
+    <meta name="target" content="business owners, facility managers, property managers">
+    
+    <!-- Business Specific Meta -->
+    <meta name="business.hours" content="Mo-Fr 07:00-18:00, Sa 08:00-16:00">
+    <meta name="business.phone" content="(555) 123-4567">
+    <meta name="business.address" content="456 Climate Drive, Metroville, IL 60601">
+    <meta name="business.services" content="HVAC Installation, Repair, Maintenance, Commercial Systems">
+    
+    <!-- Local SEO -->
+    <meta name="geo.icbm" content="41.8781, -87.6298">
+    <meta name="ICBM" content="41.8781, -87.6298">
+    <meta name="DC.title" content={title}>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Midwest Climate Solutions - Professional HVAC Services" />
+    <meta property="og:site_name" content="Midwest Climate Solutions" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="business:contact_data:street_address" content="456 Climate Drive" />
+    <meta property="business:contact_data:locality" content="Metroville" />
+    <meta property="business:contact_data:region" content="IL" />
+    <meta property="business:contact_data:postal_code" content="60601" />
+    <meta property="business:contact_data:country_name" content="United States" />
+    <meta property="business:contact_data:phone_number" content="(555) 123-4567" />
+    <meta property="business:contact_data:email" content="info@midwestclimatesolutions.com" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
+    
+    <title>{title}</title>
+    
+    <!-- Structured Data - Enhanced Local Business Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "HVACBusiness",
+          "@id": `${canonicalURL}#hvacbusiness`,
+          "name": "Midwest Climate Solutions",
+          "alternateName": "Midwest HVAC",
+          "url": canonicalURL.toString(),
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${Astro.site}WebsiteTest/logo.png`,
+            "width": 300,
+            "height": 100
+          },
+          "description": description,
+          "foundingDate": "2010",
+          "slogan": "Your Comfort, Our Priority",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "456 Climate Drive",
+            "addressLocality": "Metroville",
+            "addressRegion": "IL",
+            "postalCode": "60601",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.8781,
+            "longitude": -87.6298
+          },
+          "telephone": "(555) 123-4567",
+          "email": "info@midwestclimatesolutions.com",
+          "faxNumber": "(555) 123-4568",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "07:00",
+              "closes": "18:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Saturday",
+              "opens": "08:00",
+              "closes": "16:00"
+            }
+          ],
+          "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": 41.8781,
+              "longitude": -87.6298
+            },
+            "geoRadius": "160934"
+          },
+          "priceRange": "$$",
+          "paymentAccepted": ["Cash", "Credit Card", "Check", "Invoice"],
+          "currenciesAccepted": "USD",
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "NATE Certification",
+              "name": "North American Technician Excellence"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "EPA 608",
+              "name": "EPA Section 608 Technician Certification"
+            }
+          ],
+          "areaServed": {
+            "@type": "State",
+            "name": "Illinois"
+          },
+          "knowsAbout": [
+            "HVAC Installation",
+            "HVAC Repair", 
+            "HVAC Maintenance",
+            "Commercial HVAC Systems",
+            "Energy Efficiency",
+            "Indoor Air Quality",
+            "Building Automation"
+          ],
+          "makesOffer": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Emergency HVAC Service",
+                "description": "24/7 emergency HVAC repair services"
+              },
+              "price": "150.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "HVAC Maintenance Plan",
+                "description": "Bi-annual preventative maintenance service"
+              },
+              "price": "99.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Free Energy Audit",
+                "description": "Comprehensive energy efficiency assessment"
+              },
+              "price": "0.00",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock"
+            }
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "127",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "review": [
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Sarah L."
+              },
+              "datePublished": "2024-03-15",
+              "reviewBody": "Outstanding HVAC installation for our new office building. Professional team, on time and under budget. Energy costs dropped 40%.",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              }
+            },
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person", 
+                "name": "John D."
+              },
+              "datePublished": "2024-01-22",
+              "reviewBody": "Their preventative maintenance program has been a game-changer. Reduced energy costs by 35% and no system failures in 18 months.",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              }
+            }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/MidwestClimateSolutions",
+            "https://www.linkedin.com/company/midwest-climate-solutions",
+            "https://www.bbb.org/midwest-climate-solutions"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${canonicalURL}#website`,
+          "url": canonicalURL.toString(),
+          "name": "Midwest Climate Solutions",
+          "publisher": {
+            "@id": `${canonicalURL}#hvacbusiness`
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": `${canonicalURL}search?q={search_term_string}`,
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    })/>
+    
+    <!-- Critical Performance & Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+    
+    <!-- Enhanced Mobile Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Midwest HVAC" />
+    <meta name="msapplication-TileColor" content="#3b82f6" />
+    <meta name="msapplication-config" content="/WebsiteTest/browserconfig.xml" />
+    
+    <!-- Improved SEO Meta Tags -->
+    <meta name="keywords" content="commercial HVAC, HVAC installation, HVAC repair, HVAC maintenance, energy efficiency, building automation, Chicago HVAC, Illinois commercial HVAC, emergency HVAC service" />
+    <meta name="subject" content="Commercial HVAC Services" />
+    <meta name="copyright" content="© 2025 Midwest Climate Solutions" />
+    <meta name="abstract" content="Professional commercial HVAC solutions serving businesses across Illinois with installation, repair, and maintenance services." />
+    <meta name="topic" content="HVAC Services" />
+    <meta name="summary" content="Leading provider of commercial HVAC solutions with 24/7 emergency service, preventative maintenance, and energy-efficient installations." />
+    <meta name="classification" content="Business Services" />
+    <meta name="designer" content="Midwest Climate Solutions" />
+    <meta name="reply-to" content="info@midwestclimatesolutions.com" />
+    <meta name="owner" content="Midwest Climate Solutions" />
+    <meta name="url" content={canonicalURL} />
+    <meta name="identifier-URL" content={canonicalURL} />
+    <meta name="directory" content="submission" />
+    <meta name="pagename" content={title} />
+    <meta name="category" content="HVAC Services" />
+    <meta name="coverage" content="Illinois, Great Lakes Region" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="Safe For Kids" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+    <!-- Enhanced Google Analytics 4 with Improved Configuration -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID', {
+        send_page_view: true,
+        page_title: document.title,
+        page_location: window.location.href,
+        content_group1: 'HVAC Services',
+        custom_map: {'custom_parameter_1': 'business_type'},
+        business_type: 'HVAC_Commercial',
+        cookie_flags: 'SameSite=Strict;Secure',
+        anonymize_ip: false,
+        allow_google_signals: true,
+        allow_ad_personalization_signals: true,
+        linker: {
+          domains: ['midwestclimatesolutions.com']
+        }
+      });
+      
+      // Enhanced event tracking
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        content_group: 'HVAC_Website'
+      });
+      
+      // Track user engagement
+      let engagementStartTime = Date.now();
+      window.addEventListener('beforeunload', function() {
+        const engagementTime = Date.now() - engagementStartTime;
+        gtag('event', 'user_engagement', {
+          engagement_time_msec: engagementTime
+        });
+      });
+    </script>
+    
+    <!-- Microsoft Clarity with Enhanced Configuration -->
+    <script is:inline>
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+      
+      // Enhanced clarity tracking
+      clarity('set', 'page_type', 'hvac_landing');
+      clarity('set', 'business_category', 'commercial_services');
+    </script>
+    
+    <!-- Hotjar Tracking Code (Optional but Recommended) -->
+    <script is:inline>
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3500000,hjsv:6}; // Replace with actual Hotjar ID
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    
+    <!-- Enhanced Performance Preconnections -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.clarity.ms" />
+    <link rel="preconnect" href="https://static.hotjar.com" />
+    <link rel="preconnect" href="https://api.netlify.com" />
+    
+    <!-- DNS Prefetch for additional performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://www.recaptcha.net" />
+    <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+    
+    <!-- Resource Hints for Critical Assets -->
+    <link rel="modulepreload" href="/WebsiteTest/scripts/websiteController.js" />
+    <link rel="modulepreload" href="/WebsiteTest/scripts/errorHandler.js" />
+    <link rel="modulepreload" href="/WebsiteTest/scripts/analytics.js" />
+    <link rel="prefetch" href="/WebsiteTest/og-image.jpg" />
+    <link rel="prefetch" href="/WebsiteTest/apple-touch-icon.png" />
+    
+    <!-- Critical CSS Inlined for Performance -->
+    <style>
+      /* Font loading optimization - prevent FOUT/FOIT */
+      @font-face {
+        font-family: 'Inter-fallback';
+        src: local('Arial'), local('Helvetica'), local('system-ui'), local('sans-serif');
+        font-display: swap;
+        ascent-override: 90.20%;
+        descent-override: 22.48%;
+        line-gap-override: 0.00%;
+        size-adjust: 107.40%;
+      }
+      
+      /* Critical CSS - Above the fold optimizations */
+      * {
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+      
+      body { 
+        margin: 0; 
+        padding: 0;
+        font-family: 'Inter', 'Inter-fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+        line-height: 1.6;
+        color: #1f2937;
+        background-color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        font-feature-settings: "kern" 1, "liga" 1;
+        overflow-x: hidden;
+      }
+      
+      /* Enhanced accessibility - Skip to main content */
+      .skip-link {
+        position: absolute;
+        top: -50px;
+        left: 8px;
+        background: #3b82f6;
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        border-radius: 6px;
+        z-index: 9999;
+        font-weight: 600;
+        font-size: 14px;
+        border: 2px solid transparent;
+        transition: all 0.2s ease;
+      }
+      
+      .skip-link:focus {
+        top: 8px;
+        outline: none;
+        border-color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      /* Loading state optimization */
+      .page-loading {
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+      }
+      
+      .page-loaded {
+        opacity: 1;
+      }
+      
+      /* Critical header styles for immediate render */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        backdrop-filter: blur(8px);
+        transition: all 0.3s ease;
+      }
+      
+      /* Critical hero section styles */
+      #home {
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      
+      /* Emergency banner critical styles */
+      #emergency-banner {
+        position: relative;
+        z-index: 1001;
+      }
+      
+      /* Critical button styles */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+        min-height: 44px;
+        font-size: 16px;
+      }
+      
+      .btn-primary {
+        background-color: #3b82f6;
+        color: white;
+      }
+      
+      .btn-primary:hover {
+        background-color: #2563eb;
+        transform: translateY(-1px);
+      }
+      
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        .btn-primary {
+          border: 2px solid;
+        }
+      }
+    </style>
+    
+    <!-- Optimized External Font Loading -->
+      <!-- Optimized External Font Loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome with Integrity Check -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer" />
+  </head>
+  <body class="antialiased page-loading">
+    <!-- Enhanced Skip Links for Better Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#navigation" class="skip-link">Skip to navigation</a>
+    <a href="#contact" class="skip-link">Skip to contact</a>
+    
+    <slot />
+    
+    <!-- Enhanced Page Loading and Performance Optimization -->
+    <script is:inline>
+      // Immediate page loading optimization
+      document.documentElement.classList.remove('page-loading');
+      document.documentElement.classList.add('page-loaded');
+      
+      // Enhanced Web Vitals tracking
+      function trackWebVitals() {
+        if ('web-vital' in window) {
+          import('https://unpkg.com/web-vitals@3').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+            getCLS(sendToGA4);
+            getFID(sendToGA4);
+            getFCP(sendToGA4);
+            getLCP(sendToGA4);
+            getTTFB(sendToGA4);
+          });
+        }
+      }
+      
+      function sendToGA4(metric) {
+        if (window.gtag) {
+          gtag('event', metric.name, {
+            event_category: 'Web Vitals',
+            value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+            event_label: metric.id,
+            non_interaction: true,
+          });
+        }
+      }
+      
+      // Improved error tracking
+      window.addEventListener('error', function(e) {
+        if (window.gtag) {
+          gtag('event', 'javascript_error', {
+            event_category: 'Error',
+            event_label: e.message,
+            value: 1
+          });
+        }
+      });
+      
+      // Track Core Web Vitals when page loads
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', trackWebVitals);
+      } else {
+        trackWebVitals();
+      }
+      
+      // Enhanced service worker registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/WebsiteTest/sw.js')
+            .then(function(registration) {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(function(error) {
+              console.log('ServiceWorker registration failed');
+            });
+        });
+      }
+      
+      // Improved lazy loading implementation
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+              observer.unobserve(img);
+            }
+          });
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+          });
+        });
+      }
+    </script>
+      
+      /* Prevent layout shift */
+      .hero-image {
+        aspect-ratio: 16/9;
+        background-color: #f3f4f6;
+      }
+      
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body class="antialiased page-loading">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <slot />
+    
+    <!-- Page loading optimization script -->
+    <script is:inline>
+      // Remove loading class when page is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.remove('page-loading');
+        document.body.classList.add('page-loaded');
+      });
+      
+      // Fallback for older browsers
+      window.addEventListener('load', function() {
+        document.body.classList.remove('page-loading');
+        document.body.classList.add('page-loaded');
+      });
+    </script>
+  </body>
+</html>

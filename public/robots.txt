@@ -1,28 +1,98 @@
+# Enhanced Robots.txt for Midwest Climate Solutions HVAC Website
+# Updated: July 19, 2025 - Optimized for commercial HVAC SEO
+
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://tariqdude.github.io/WebsiteTest/sitemap.xml
+# Priority pages for search engine crawling
+Allow: /WebsiteTest/
+Allow: /WebsiteTest/index.html
+Allow: /WebsiteTest/assets/
+Allow: /WebsiteTest/images/
 
-# Disallow common admin/system directories (if they exist)
-Disallow: /admin/
-Disallow: /api/
-Disallow: /_astro/
-Disallow: /node_modules/
+# Block non-essential assets to optimize crawl budget
+Disallow: /WebsiteTest/admin/
+Disallow: /WebsiteTest/api/
+Disallow: /WebsiteTest/_astro/
+Disallow: /WebsiteTest/node_modules/
+Disallow: /WebsiteTest/*.json$
+Disallow: /WebsiteTest/sw.js
+Disallow: /WebsiteTest/workbox-*.js
+Disallow: /WebsiteTest/test/
+Disallow: /WebsiteTest/temp/
 
-# Allow specific assets and important files
-Allow: /assets/
-Allow: /images/
-Allow: /css/
-Allow: /js/
-Allow: /favicon.ico
-Allow: /site.webmanifest
+# Allow critical business files
+Allow: /WebsiteTest/sitemap.xml
+Allow: /WebsiteTest/robots.txt
+Allow: /WebsiteTest/favicon.ico
+Allow: /WebsiteTest/manifest.json
+Allow: /WebsiteTest/site.webmanifest
+Allow: /WebsiteTest/browserconfig.xml
 
 # Commercial HVAC specific directives
-# Encourage indexing of business-critical pages
-Allow: /services/
-Allow: /contact/
-Allow: /about/
+# Encourage indexing of business-critical content
+Allow: /WebsiteTest/services/
+Allow: /WebsiteTest/contact/
+Allow: /WebsiteTest/about/
+Allow: /WebsiteTest/pricing/
+Allow: /WebsiteTest/emergency/
 
-# Crawl delay for respectful crawling
+# Sitemap location for enhanced discovery
+Sitemap: https://tariqdude.github.io/WebsiteTest/sitemap.xml
+
+# Optimized crawl delays for different bots
+User-agent: Googlebot
+Crawl-delay: 0.2
+Allow: /WebsiteTest/
+
+User-agent: Bingbot
+Crawl-delay: 0.5
+Allow: /WebsiteTest/
+
+User-agent: Slurp
+Crawl-delay: 1
+Allow: /WebsiteTest/
+
+User-agent: DuckDuckBot
+Crawl-delay: 0.5
+Allow: /WebsiteTest/
+
+# Block AI content scrapers while preserving SEO
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+# Allow social media crawlers for better sharing
+User-agent: facebookexternalhit
+Allow: /WebsiteTest/
+Crawl-delay: 1
+
+User-agent: Twitterbot
+Allow: /WebsiteTest/
+Crawl-delay: 1
+
+User-agent: LinkedInBot
+Allow: /WebsiteTest/
+Crawl-delay: 1
+
+# Allow business directory crawlers
+User-agent: YandexBot
+Allow: /WebsiteTest/
+Crawl-delay: 2
+
+# Default crawl delay for respectful crawling
 Crawl-delay: 1
