@@ -15,6 +15,8 @@ export default defineConfig({
     format: 'preserve'
   },
   compressHTML: true,
+  trailingSlash: 'always',
+  prefetch: true,
   vite: {
     build: {
       minify: 'terser',

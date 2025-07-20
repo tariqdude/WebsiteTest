@@ -640,7 +640,8 @@ const {
       localStorage.setItem('bgManagerPrefs', JSON.stringify(preferences));
     }
 
-    loadPreferences() {
+    
+  loadPreferences() {
       try {
         const saved = localStorage.getItem('bgManagerPrefs');
         if (saved) {
