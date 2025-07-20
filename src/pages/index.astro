@@ -4,8 +4,8 @@ import BackgroundManager from '../components/BackgroundManager.astro';
 ---
 
 <BaseLayout 
-  title="Digital Solutions Agency - Modern Web Development & Design"
-  description="Transform your business with cutting-edge web solutions. Expert web development, design, and digital marketing services for modern businesses."
+  title="Midwest Construction & HVAC Solutions - Professional Contracting Services"
+  description="Leading HVAC, construction, and general contracting services throughout the Great Lakes region. Commercial and residential projects with 20+ years of excellence."
 >
   <!-- Dynamic Background Manager -->
   <BackgroundManager 
@@ -29,58 +29,62 @@ import BackgroundManager from '../components/BackgroundManager.astro';
   <header class="bg-transparent backdrop-blur-sm fixed top-0 w-full z-50 transition-all duration-300" id="main-nav">
     <nav class="container mx-auto flex justify-between items-center h-16 sm:h-20 px-4 sm:px-6" role="navigation" aria-label="Main navigation">
       <div class="flex items-center">
-        <i class="fas fa-rocket text-accent-500 text-2xl sm:text-3xl mr-2 sm:mr-3 animate-bounce-gentle" aria-hidden="true"></i>
+        <i class="fas fa-hard-hat text-orange-500 text-2xl sm:text-3xl mr-2 sm:mr-3 animate-bounce-gentle" aria-hidden="true"></i>
         <span class="font-bold text-white text-lg sm:text-2xl lg:text-3xl tracking-wide">
-          <span class="hidden sm:inline">Digital Solutions</span>
-          <span class="sm:hidden">DigiSol</span>
+          <span class="hidden sm:inline">Midwest Construction & HVAC</span>
+          <span class="sm:hidden">Midwest</span>
         </span>
       </div>
       
       <!-- Desktop Navigation -->
       <ul class="hidden lg:flex space-x-8 xl:space-x-12">
-        <li><a href="#home" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+        <li><a href="#home" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
           Home
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
         
         <!-- Services Dropdown -->
         <li class="relative group">
-          <button class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative min-h-touch flex items-center">
+          <button class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative min-h-touch flex items-center">
             Services
             <i class="fas fa-chevron-down ml-2 text-sm transition-transform group-hover:rotate-180"></i>
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
           </button>
           
           <!-- Dropdown Menu -->
           <div class="absolute top-full left-0 mt-2 w-64 glass backdrop-blur-lg rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
             <div class="py-4">
-              <a href="#services" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
-                <i class="fas fa-code mr-3"></i>
-                Web Development
+              <a href="#services" class="block px-6 py-3 text-white hover:text-orange-400 hover:bg-white/10 transition-colors">
+                <i class="fas fa-snowflake mr-3"></i>
+                HVAC Services
               </a>
-              <a href="/pricing" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
+              <a href="#services" class="block px-6 py-3 text-white hover:text-orange-400 hover:bg-white/10 transition-colors">
+                <i class="fas fa-hammer mr-3"></i>
+                Construction
+              </a>
+              <a href="#services" class="block px-6 py-3 text-white hover:text-orange-400 hover:bg-white/10 transition-colors">
+                <i class="fas fa-tools mr-3"></i>
+                General Contracting
+              </a>
+              <a href="/pricing" class="block px-6 py-3 text-white hover:text-orange-400 hover:bg-white/10 transition-colors">
                 <i class="fas fa-dollar-sign mr-3"></i>
-                Pricing & Plans
-              </a>
-              <a href="#portfolio" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
-                <i class="fas fa-eye mr-3"></i>
-                Portfolio
+                Pricing & Quotes
               </a>
             </div>
           </div>
         </li>
         
-        <li><a href="#portfolio" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
-          Portfolio
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+        <li><a href="#portfolio" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+          Projects
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
-        <li><a href="#about" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+        <li><a href="#about" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
           About
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
-        <li><a href="#contact" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+        <li><a href="#contact" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
           Contact
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
       </ul>
       
@@ -107,15 +111,15 @@ import BackgroundManager from '../components/BackgroundManager.astro';
         <li><a href="#home" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Home</a></li>
         <li><a href="#services" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Services</a></li>
         <li><a href="/pricing" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Pricing</a></li>
-        <li><a href="#projects" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Portfolio</a></li>
+        <li><a href="#projects" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Projects</a></li>
         <li><a href="#about" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">About</a></li>
         <li><a href="#contact" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Contact</a></li>
       </ul>
       <!-- Call to Action Button in Mobile Menu -->
       <div class="px-6 sm:px-8 pb-6 sm:pb-8">
         <a href="#contact" class="btn btn-primary w-full text-center text-lg min-h-touch flex items-center justify-center shadow-mobile-button">
-          <i class="fas fa-rocket mr-2" aria-hidden="true"></i>
-          Get Started Today
+          <i class="fas fa-phone mr-2" aria-hidden="true"></i>
+          Get Free Estimate
         </a>
       </div>
     </div>
@@ -129,35 +133,35 @@ import BackgroundManager from '../components/BackgroundManager.astro';
       aria-label="Hero section"
     >
       <!-- Content overlay for readability -->
-      <div class="absolute inset-0 bg-black/10 z-10"></div>
+      <div class="absolute inset-0 bg-black/20 z-10"></div>
       
       <div class="container mx-auto px-4 sm:px-6 relative z-20">
         <div class="max-w-5xl animate-fadeInUp text-center">
-          <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-accent-200 to-secondary-200 bg-clip-text text-transparent drop-shadow-2xl animate-fade-in-up mb-6 sm:mb-8">
-            Elevate Your Digital Presence
+          <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-orange-200 to-blue-200 bg-clip-text text-transparent drop-shadow-2xl animate-fade-in-up mb-6 sm:mb-8">
+            Building Excellence Since 2003
           </h1>
           <p class="text-lg sm:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-300 mb-8 sm:mb-10">
-            Transform your business with cutting-edge web solutions that combine stunning design with powerful functionality
+            Professional HVAC, construction, and general contracting services throughout the Great Lakes region
           </p>
           <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-12 animate-fadeInUp animation-delay-600 justify-center">
             <a 
               href="#contact" 
-              class="btn-hover-lift bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-glow-accent hover:shadow-glow-accent-lg transition-all duration-300 min-h-touch flex-center group"
+              class="btn-hover-lift bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-glow-primary hover:shadow-glow-primary-lg transition-all duration-300 min-h-touch flex-center group"
               onclick="window.analytics?.trackEvent('cta_click', {location: 'hero', type: 'quote'})"
             >
-              <i class="fas fa-rocket mr-3 group-hover:animate-wiggle text-lg" aria-hidden="true"></i>
-              <span class="font-bold">Get Started</span>
-              <span class="ml-3 bg-white/20 px-3 py-1 rounded-full text-sm hidden sm:inline">Free Consultation</span>
+              <i class="fas fa-hard-hat mr-3 group-hover:animate-wiggle text-lg" aria-hidden="true"></i>
+              <span class="font-bold">Free Estimate</span>
+              <span class="ml-3 bg-white/20 px-3 py-1 rounded-full text-sm hidden sm:inline">24/7 Emergency</span>
             </a>
             <a 
               href="#portfolio" 
               class="btn-hover-glow glass border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg min-h-touch flex-center group"
               onclick="window.analytics?.trackEvent('cta_click', {location: 'hero', type: 'portfolio'})"
             >
-              <i class="fas fa-eye mr-3 group-hover:animate-shake text-lg" aria-hidden="true"></i>
+              <i class="fas fa-images mr-3 group-hover:animate-shake text-lg" aria-hidden="true"></i>
               <span class="font-bold">
-                <span class="hidden sm:inline">View Our Work</span>
-                <span class="sm:hidden">Portfolio</span>
+                <span class="hidden sm:inline">View Projects</span>
+                <span class="sm:hidden">Projects</span>
               </span>
             </a>
           </div>
@@ -165,20 +169,20 @@ import BackgroundManager from '../components/BackgroundManager.astro';
           <!-- Trust Indicators -->
           <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 animate-fadeInUp animation-delay-900">
             <div class="flex items-center glass px-4 py-2 rounded-full">
-              <i class="fas fa-award mr-2 text-success-400 text-lg animate-pulse" aria-hidden="true"></i>
-              <span class="text-primary-100 font-medium">Award Winning</span>
+              <i class="fas fa-award mr-2 text-yellow-400 text-lg animate-pulse" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">Licensed & Insured</span>
             </div>
             <div class="flex items-center glass px-4 py-2 rounded-full">
-              <i class="fas fa-clock mr-2 text-warning-400 text-lg" aria-hidden="true"></i>
-              <span class="text-primary-100 font-medium">Fast Delivery</span>
+              <i class="fas fa-clock mr-2 text-orange-400 text-lg" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">20+ Years Experience</span>
             </div>
             <div class="flex items-center glass px-4 py-2 rounded-full">
-              <i class="fas fa-star mr-2 text-accent-400 text-lg animate-glow" aria-hidden="true"></i>
-              <span class="text-primary-100 font-medium">5-Star Reviews</span>
+              <i class="fas fa-star mr-2 text-yellow-400 text-lg animate-glow" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">5-Star Rated</span>
             </div>
             <div class="flex items-center glass px-4 py-2 rounded-full">
-              <i class="fas fa-code mr-2 text-secondary-400 text-lg" aria-hidden="true"></i>
-              <span class="text-primary-100 font-medium">Modern Tech</span>
+              <i class="fas fa-shield-alt mr-2 text-blue-400 text-lg" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">Warranty Guaranteed</span>
             </div>
           </div>
         </div>
@@ -197,103 +201,103 @@ import BackgroundManager from '../components/BackgroundManager.astro';
       <div class="container mx-auto px-6">
         <div class="text-center max-w-4xl mx-auto mb-16 animate-fadeInUp">
           <h2 id="services-heading" class="text-display-2xs sm:text-display-xs font-display font-black text-neutral-900 mb-6">
-            Our Digital <span class="text-gradient-primary">Services</span>
+            Our Professional <span class="text-gradient-primary">Services</span>
           </h2>
           <p class="text-xl text-neutral-600 leading-relaxed max-w-3xl mx-auto">
-            From cutting-edge web development to stunning design, we deliver comprehensive digital solutions that drive your business forward.
+            From commercial HVAC systems to complete construction projects, we deliver comprehensive solutions that build your success.
           </p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" role="list">
           <article class="card card-hover group animate-fadeInUp" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-code text-primary-600 text-3xl group-hover:animate-pulse"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-snowflake text-blue-600 text-3xl group-hover:animate-pulse"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-primary transition-all duration-300">
-              Web Development
+              Commercial HVAC
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Custom web applications and websites built with modern technologies. Fast, responsive, and optimized for performance and SEO.
+              Complete HVAC system design, installation, and maintenance for commercial properties. Energy-efficient solutions that reduce operating costs.
             </p>
-            <div class="flex items-center text-primary-600 font-semibold group-hover:text-primary-700">
+            <div class="flex items-center text-blue-600 font-semibold group-hover:text-blue-700">
               <span>Learn More</span>
               <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
             </div>
           </article>
           
           <article class="card card-hover group animate-fadeInUp animation-delay-200" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-palette text-secondary-600 text-3xl group-hover:animate-wiggle"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-hammer text-orange-600 text-3xl group-hover:animate-wiggle"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-secondary transition-all duration-300">
-              UI/UX Design
+              General Construction
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Beautiful, intuitive designs that convert visitors into customers. User-centered approach with modern aesthetics and seamless experiences.
+              Full-service construction and renovation projects. From ground-up construction to building improvements and tenant buildouts.
             </p>
-            <div class="flex items-center text-secondary-600 font-semibold group-hover:text-secondary-700">
+            <div class="flex items-center text-orange-600 font-semibold group-hover:text-orange-700">
               <span>Learn More</span>
               <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
             </div>
           </article>
           
           <article class="card card-hover group animate-fadeInUp animation-delay-400" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-accent-100 to-accent-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-rocket text-accent-600 text-3xl group-hover:animate-bounce"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-tools text-red-600 text-3xl group-hover:animate-bounce"></i>
             </div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-accent-600 transition-all duration-300">
-              Digital Marketing
+            <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-red-600 transition-all duration-300">
+              Emergency Repairs
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Strategic digital marketing campaigns that boost your online presence. SEO, social media, and content marketing that delivers results.
+              24/7 emergency HVAC and facility repair services. Fast response times to minimize downtime and restore comfort quickly.
             </p>
-            <div class="flex items-center text-accent-600 font-semibold group-hover:text-accent-700">
+            <div class="flex items-center text-red-600 font-semibold group-hover:text-red-700">
               <span>Learn More</span>
               <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
             </div>
           </article>
           
           <article class="card card-hover group animate-fadeInUp animation-delay-600" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-success-100 to-success-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-mobile-alt text-success-600 text-3xl group-hover:animate-bounce"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-wrench text-green-600 text-3xl group-hover:animate-bounce"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-accent transition-all duration-300">
-              Mobile Development
+              Preventive Maintenance
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Native and cross-platform mobile apps that engage users and drive business growth. iOS, Android, and progressive web apps.
+              Comprehensive maintenance programs to keep your systems running efficiently. Scheduled inspections and proactive repairs.
             </p>
-            <div class="flex items-center text-success-600 font-semibold group-hover:text-success-700">
+            <div class="flex items-center text-green-600 font-semibold group-hover:text-green-700">
               <span>Learn More</span>
               <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
             </div>
           </article>
           
           <article class="card card-hover group animate-fadeInUp animation-delay-800" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-warning-100 to-warning-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-cloud text-warning-600 text-3xl group-hover:animate-float"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-bolt text-purple-600 text-3xl group-hover:animate-float"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-accent transition-all duration-300">
-              Cloud Solutions
+              Electrical & Plumbing
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Scalable cloud infrastructure and hosting solutions. Secure, reliable, and optimized for performance and growth.
+              Licensed electrical and plumbing services for construction and maintenance projects. Complete building system solutions.
             </p>
-            <div class="flex items-center text-warning-600 font-semibold group-hover:text-warning-700">
+            <div class="flex items-center text-purple-600 font-semibold group-hover:text-purple-700">
               <span>Learn More</span>
               <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
             </div>
           </article>
           
           <article class="card card-hover group animate-fadeInUp animation-delay-1000" role="listitem">
-            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-error-100 to-error-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
-              <i class="fas fa-chart-line text-error-600 text-3xl group-hover:animate-pulse"></i>
+            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-2xl flex-center group-hover:scale-110 transition-transform duration-300" aria-hidden="true">
+              <i class="fas fa-chart-line text-indigo-600 text-3xl group-hover:animate-pulse"></i>
             </div>
             <h3 class="text-2xl font-bold text-neutral-900 mb-4 group-hover:text-gradient-secondary transition-all duration-300">
-              Analytics & Optimization
+              Energy Audits & Efficiency
             </h3>
             <p class="text-neutral-600 leading-relaxed mb-6">
-              Data-driven insights and performance optimization. Track metrics, understand users, and continuously improve results.
+              Professional energy assessments and efficiency improvements. Reduce operating costs and environmental impact with smart solutions.
             </p>
             <div class="flex items-center text-error-600 font-semibold group-hover:text-error-700">
               <span>Learn More</span>

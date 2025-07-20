@@ -5,7 +5,7 @@ interface Props {
   canonical?: string;
 }
 
-const { title, description = "Professional digital solutions and web development services for modern businesses", canonical } = Astro.props;
+const { title, description = "Professional HVAC, construction, and general contracting services for commercial and residential projects", canonical } = Astro.props;
 const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
 ---
 
@@ -20,34 +20,34 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <!-- Basic SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="web development, digital solutions, web design, e-commerce, digital marketing, responsive design, custom websites, business solutions" />
+    <meta name="keywords" content="HVAC services, construction, general contracting, commercial HVAC, heating, cooling, air conditioning, construction projects, building contractors, renovation, plumbing, electrical, roofing" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="author" content="Digital Solutions" />
+    <meta name="author" content="Midwest Construction & HVAC Solutions" />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Business Meta Tags -->
-    <meta name="business.hours" content="Mo-Fr 09:00-18:00" />
+    <meta name="business.hours" content="Mo-Fr 07:00-18:00, Sa 08:00-16:00" />
     <meta name="business.phone" content="(555) 123-4567" />
-    <meta name="business.area" content="Nationwide Digital Services" />
-    <meta name="geo.region" content="US" />
-    <meta name="geo.placename" content="Digital Agency" />
+    <meta name="business.area" content="Great Lakes Region HVAC & Construction" />
+    <meta name="geo.region" content="US-IL, US-IN, US-MI, US-WI, US-OH" />
+    <meta name="geo.placename" content="Midwest Construction & HVAC" />
     
     <!-- Enhanced SEO Meta Tags -->
-    <meta name="subject" content="Digital Solutions & Web Development" />
-    <meta name="copyright" content="© 2025 Digital Solutions" />
-    <meta name="abstract" content="Professional digital solutions and web development services for modern businesses seeking online growth." />
-    <meta name="topic" content="Web Development & Digital Services" />
-    <meta name="summary" content="Leading provider of custom web development, digital marketing, and e-commerce solutions for businesses." />
-    <meta name="classification" content="Technology Services" />
-    <meta name="designer" content="Digital Solutions" />
-    <meta name="reply-to" content="info@digitalsolutions.com" />
-    <meta name="owner" content="Digital Solutions" />
+    <meta name="subject" content="HVAC Construction & General Contracting" />
+    <meta name="copyright" content="© 2025 Midwest Construction & HVAC Solutions" />
+    <meta name="abstract" content="Professional HVAC installation, construction, and general contracting services for commercial and residential projects." />
+    <meta name="topic" content="HVAC Services & Construction" />
+    <meta name="summary" content="Leading provider of commercial HVAC systems, construction services, and general contracting throughout the Great Lakes region." />
+    <meta name="classification" content="Construction & HVAC Services" />
+    <meta name="designer" content="Midwest Construction & HVAC Solutions" />
+    <meta name="reply-to" content="info@midwestconstructionhvac.com" />
+    <meta name="owner" content="Midwest Construction & HVAC Solutions" />
     <meta name="url" content={canonicalURL} />
     <meta name="identifier-URL" content={canonicalURL} />
     <meta name="directory" content="submission" />
-    <meta name="category" content="Digital Services" />
-    <meta name="coverage" content="Worldwide" />
-    <meta name="distribution" content="Global" />
+    <meta name="category" content="HVAC & Construction Services" />
+    <meta name="coverage" content="Great Lakes Region" />
+    <meta name="distribution" content="Regional" />
     <meta name="rating" content="Safe For Kids" />
     
     <!-- Open Graph Meta Tags -->
@@ -56,7 +56,7 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
-    <meta property="og:site_name" content="Midwest Climate Solutions" />
+    <meta property="og:site_name" content="Midwest Construction & HVAC Solutions" />
     <meta property="og:locale" content="en_US" />
     
     <!-- Twitter Card Meta Tags -->
@@ -71,72 +71,124 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "ProfessionalService",
-          "@id": `${canonicalURL}#digitalagency`,
-          "name": "Digital Solutions",
-          "alternateName": "Digital Agency",
+          "@type": ["GeneralContractor", "HVACBusiness"],
+          "@id": `${canonicalURL}#hvaccontractor`,
+          "name": "Midwest Construction & HVAC Solutions",
+          "alternateName": "Midwest HVAC & Construction",
           "url": canonicalURL.toString(),
           "logo": {
             "@type": "ImageObject",
             "url": `${Astro.site}WebsiteTest/logo.png`
           },
           "description": description,
-          "foundingDate": "2020",
-          "slogan": "Digital Growth, Delivered",
+          "foundingDate": "2003",
+          "slogan": "Building Excellence, Delivering Comfort",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "123 Tech Avenue",
-            "addressLocality": "Digital City",
-            "addressRegion": "CA",
-            "postalCode": "90210",
+            "streetAddress": "456 Industrial Drive",
+            "addressLocality": "Metroville",
+            "addressRegion": "IL",
+            "postalCode": "60601",
             "addressCountry": "US"
           },
           "telephone": "(555) 123-4567",
-          "email": "info@digitalsolutions.com",
+          "email": "info@midwestconstructionhvac.com",
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
               "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              "opens": "09:00",
+              "opens": "07:00",
               "closes": "18:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Saturday"],
+              "opens": "08:00",
+              "closes": "16:00"
             }
           ],
-          "serviceArea": {
-            "@type": "Country",
-            "name": "United States"
-          },
-          "priceRange": "$$$",
-          "paymentAccepted": ["Credit Card", "PayPal", "Bank Transfer"],
+          "serviceArea": [
+            {
+              "@type": "State",
+              "name": "Illinois"
+            },
+            {
+              "@type": "State", 
+              "name": "Indiana"
+            },
+            {
+              "@type": "State",
+              "name": "Michigan" 
+            },
+            {
+              "@type": "State",
+              "name": "Wisconsin"
+            },
+            {
+              "@type": "State",
+              "name": "Ohio"
+            }
+          ],
+          "priceRange": "$$-$$$",
+          "paymentAccepted": ["Credit Card", "Check", "Financing", "Cash"],
           "currenciesAccepted": "USD",
           "areaServed": {
-            "@type": "Country",
-            "name": "United States"
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": "41.8781",
+              "longitude": "-87.6298"
+            },
+            "geoRadius": "160934"
           },
-          "makesOffer": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Web Development Services"
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "HVAC & Construction Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Commercial HVAC Installation"
+                }
               },
-              "price": "2999.00",
-              "priceCurrency": "USD"
-            }
-          ],
+              {
+                "@type": "Offer", 
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "General Construction"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service", 
+                  "name": "Emergency HVAC Repair"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Building Renovation"
+                }
+              }
+            ]
+          },
           "aggregateRating": {
             "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "89"
+            "ratingValue": "4.8",
+            "reviewCount": "156"
           },
           "review": [
             {
               "@type": "Review",
               "author": {
                 "@type": "Person",
-                "name": "Michael R."
+                "name": "Sarah L."
               },
-              "datePublished": "2024-03-15",
-              "reviewBody": "Outstanding web development service. Professional team delivered exactly what we needed on time and within budget.",
+              "datePublished": "2024-11-10",
+              "reviewBody": "Outstanding HVAC installation for our new office building. Professional team completed the project on time and under budget. Our energy costs dropped 40%!",
               "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5"
