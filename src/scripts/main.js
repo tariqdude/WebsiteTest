@@ -1,7 +1,7 @@
 // Main application entry point
 import { WebsiteController } from './websiteController.js';
 import { ErrorHandler } from './errorHandler.js';
-import { Analytics } from './analytics.js';
+import { AnalyticsTracker } from './analytics.js';
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', async () => {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const errorHandler = new ErrorHandler();
     
     // Initialize analytics
-    const analytics = new Analytics();
+    const analytics = new AnalyticsTracker();
     
     // Initialize main website controller
     const websiteController = new WebsiteController();
@@ -38,4 +38,4 @@ window.addEventListener('unhandledrejection', (event) => {
 });
 
 // Export for potential external use
-export { WebsiteController, ErrorHandler, Analytics };
+export { WebsiteController, ErrorHandler, AnalyticsTracker };
