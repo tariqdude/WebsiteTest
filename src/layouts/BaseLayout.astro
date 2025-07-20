@@ -33,6 +33,24 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <meta name="geo.placename" content="Metroville" />
     <meta name="geo.position" content="41.8781;-87.6298" />
     
+    <!-- Enhanced SEO Meta Tags -->
+    <meta name="subject" content="Commercial HVAC Services" />
+    <meta name="copyright" content="© 2025 Midwest Climate Solutions" />
+    <meta name="abstract" content="Professional commercial HVAC solutions serving businesses across Illinois with installation, repair, and maintenance services." />
+    <meta name="topic" content="HVAC Services" />
+    <meta name="summary" content="Leading provider of commercial HVAC solutions with 24/7 emergency service, preventative maintenance, and energy-efficient installations." />
+    <meta name="classification" content="Business Services" />
+    <meta name="designer" content="Midwest Climate Solutions" />
+    <meta name="reply-to" content="info@midwestclimatesolutions.com" />
+    <meta name="owner" content="Midwest Climate Solutions" />
+    <meta name="url" content={canonicalURL} />
+    <meta name="identifier-URL" content={canonicalURL} />
+    <meta name="directory" content="submission" />
+    <meta name="category" content="HVAC Services" />
+    <meta name="coverage" content="Illinois, Great Lakes Region" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="Safe For Kids" />
+    
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
@@ -190,30 +208,230 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
         page_title: document.title,
         content_group1: 'HVAC Services',
         business_type: 'HVAC_Commercial',
-        cookie_flags: 'SameSite=Strict;Secure'
+        cookie_flags: 'SameSite=Strict;Secure',
+        anonymize_ip: false,
+        allow_google_signals: true,
+        custom_map: {'custom_parameter_1': 'business_type'}
+      });
+      
+      // Enhanced event tracking for Core Web Vitals
+      gtag('event', 'page_view', {
+        page_title: document.title,
+        page_location: window.location.href,
+        content_group: 'HVAC_Website'
+      });
+      
+      // Track user engagement time
+      let engagementStartTime = Date.now();
+      window.addEventListener('beforeunload', function() {
+        const engagementTime = Date.now() - engagementStartTime;
+        gtag('event', 'user_engagement', {
+          engagement_time_msec: engagementTime
+        });
       });
     </script>
 
-    <!-- Microsoft Clarity -->
+    <!-- Microsoft Clarity with Enhanced Configuration -->
     <script is:inline>
       (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+      
+      // Enhanced clarity tracking
+      if (typeof clarity !== 'undefined') {
+        clarity('set', 'page_type', 'hvac_landing');
+        clarity('set', 'business_category', 'commercial_services');
+      }
+    </script>
+    
+    <!-- Hotjar Tracking Code -->
+    <script is:inline>
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3500000,hjsv:6}; // Replace with actual Hotjar ID
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
 
     <!-- Performance Preconnections -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.clarity.ms" />
+    <link rel="preconnect" href="https://static.hotjar.com" />
+    
+    <!-- DNS Prefetch for additional performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://www.recaptcha.net" />
+    <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+    
+    <!-- Enhanced Font Loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Critical CSS for Performance -->
+    <style>
+      /* Font loading optimization - prevent FOUT/FOIT */
+      @font-face {
+        font-family: 'Inter-fallback';
+        src: local('Arial'), local('Helvetica'), local('system-ui'), local('sans-serif');
+        font-display: swap;
+        ascent-override: 90.20%;
+        descent-override: 22.48%;
+        line-gap-override: 0.00%;
+        size-adjust: 107.40%;
+      }
+      
+      /* Critical layout styles */
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+      
+      /* Mobile hamburger animation */
+      .hamburger-line {
+        transition: all 0.3s ease;
+        transform-origin: center;
+      }
+      
+      .hamburger.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .hamburger.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Form validation styles */
+      .form-error {
+        border-color: #ef4444 !important;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+      }
+      
+      .form-success {
+        border-color: #22c55e !important;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1) !important;
+      }
+      
+      /* Loading states */
+      .loading {
+        pointer-events: none;
+        opacity: 0.7;
+      }
+      
+      /* Accessibility improvements */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        .btn-primary {
+          border: 2px solid;
+        }
+      }
+      
+      /* Focus management */
+      .focus-trap {
+        outline: none;
+      }
+      
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .mobile-optimized {
+          touch-action: manipulation;
+        }
+      }
+      
+      /* Emergency banner pulse animation */
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+      }
+      
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+      
+      /* Testimonial slider indicators */
+      .slider-indicator {
+        transition: all 0.3s ease;
+      }
+      
+      .slider-indicator.active {
+        background-color: #3b82f6;
+        transform: scale(1.2);
+      }
+    </style>
     
     <!-- Service Worker Registration -->
     <script is:inline>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/WebsiteTest/sw.js');
       }
+    </script>
+    
+    <!-- Analytics and Error Tracking -->
+    <script is:inline>
+      // Global analytics object for tracking
+      window.analytics = {
+        trackEvent: function(category, action, label) {
+          if (typeof gtag !== 'undefined') {
+            gtag('event', action, {
+              event_category: category,
+              event_label: label
+            });
+          }
+        },
+        trackPhoneCall: function(source) {
+          this.trackEvent('Contact', 'phone_call', source);
+        },
+        trackFormSubmit: function(formType) {
+          this.trackEvent('Form', 'submit', formType);
+        },
+        trackError: function(error, context) {
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'exception', {
+              description: error,
+              fatal: false,
+              custom_map: { context: context }
+            });
+          }
+        }
+      };
+      
+      // Global error handling
+      window.addEventListener('error', function(e) {
+        window.analytics?.trackError(e.message, e.filename + ':' + e.lineno);
+      });
+      
+      window.addEventListener('unhandledrejection', function(e) {
+        window.analytics?.trackError('Unhandled Promise Rejection: ' + e.reason, 'promise');
+      });
     </script>
 </head>
 <body>
