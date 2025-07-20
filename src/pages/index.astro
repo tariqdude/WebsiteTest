@@ -16,44 +16,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </a>
   </div>
   
-  <!-- Emergency Service Banner -->
-  <div id="emergency-banner" class="bg-gradient-to-r from-red-600 to-red-700 text-white py-2 sm:py-3 shadow-lg relative overflow-hidden z-50">
-    <div class="absolute inset-0 bg-white opacity-10 transform skew-y-1"></div>
-    <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 relative z-10">
-      <div class="flex items-center justify-between flex-wrap gap-2">
-        <div class="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
-          <div class="flex-shrink-0">
-            <div class="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-full flex items-center justify-center animate-bounce-gentle">
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-              </svg>
-            </div>
-          </div>
-          <div class="min-w-0">
-            <p class="font-bold text-sm sm:text-lg truncate">Emergency HVAC Service</p>
-            <p class="text-red-100 text-xs sm:text-sm hidden sm:block">24/7 Available - Response within 2 hours</p>
-            <p class="text-red-100 text-xs sm:hidden">24/7 Available</p>
-          </div>
-        </div>
-        <div class="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
-          <a href="tel:+15551234567" 
-             class="btn-emergency bg-white text-red-600 px-3 py-1.5 sm:px-6 sm:py-2 rounded-full font-bold text-xs sm:text-base hover:bg-red-50 transition-colors min-h-touch min-w-touch flex items-center justify-center whitespace-nowrap shadow-mobile-button"
-             onclick="window.analytics?.trackPhoneCall('emergency_banner')">
-            <i class="fas fa-phone mr-1 sm:mr-2 text-xs sm:text-base" aria-hidden="true"></i>
-            <span class="hidden sm:inline">Call Now: (555) 123-4567</span>
-            <span class="sm:hidden">Call</span>
-          </a>
-          <button 
-            class="text-white hover:text-red-200 transition-colors min-h-touch min-w-touch flex items-center justify-center" 
-            onclick="document.getElementById('emergency-banner').style.display='none'"
-            aria-label="Close emergency banner">
-            <i class="fas fa-times text-sm sm:text-base"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
   <!-- Navigation Header -->
   <header class="bg-transparent backdrop-blur-sm fixed top-0 w-full z-50 transition-all duration-300" id="main-nav">
     <nav class="container mx-auto flex justify-between items-center h-16 sm:h-20 px-4 sm:px-6" role="navigation" aria-label="Main navigation">
@@ -67,25 +29,49 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       
       <!-- Desktop Navigation -->
       <ul class="hidden lg:flex space-x-8 xl:space-x-12">
-        <li><a href="#home" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+        <li><a href="#home" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
           Home
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
-        <li><a href="#services" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
-          Services
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
-        </a></li>
-        <li><a href="#projects" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+        
+        <!-- Services Dropdown -->
+        <li class="relative group">
+          <button class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative min-h-touch flex items-center">
+            Services
+            <i class="fas fa-chevron-down ml-2 text-sm transition-transform group-hover:rotate-180"></i>
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+          </button>
+          
+          <!-- Dropdown Menu -->
+          <div class="absolute top-full left-0 mt-2 w-64 glass backdrop-blur-lg rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+            <div class="py-4">
+              <a href="#services" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
+                <i class="fas fa-cogs mr-3"></i>
+                All Services
+              </a>
+              <a href="/pricing" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
+                <i class="fas fa-dollar-sign mr-3"></i>
+                Pricing & Plans
+              </a>
+              <a href="#emergency" class="block px-6 py-3 text-white hover:text-accent-400 hover:bg-white/10 transition-colors">
+                <i class="fas fa-phone mr-3"></i>
+                Emergency Service
+              </a>
+            </div>
+          </div>
+        </li>
+        
+        <li><a href="#projects" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
           Projects
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
-        <li><a href="#about" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+        <li><a href="#about" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
           About
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
-        <li><a href="#contact" class="nav-link text-white hover:text-orange-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
+        <li><a href="#contact" class="nav-link text-white hover:text-accent-400 font-medium text-lg transition-colors duration-300 relative group min-h-touch flex items-center">
           Contact
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 transition-all duration-300 group-hover:w-full" aria-hidden="true"></span>
         </a></li>
       </ul>
       
@@ -109,11 +95,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       role="menu"
     >
       <ul class="flex flex-col items-center py-6 sm:py-8 space-y-4 sm:space-y-6">
-        <li><a href="#home" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Home</a></li>
-        <li><a href="#services" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Services</a></li>
-        <li><a href="#projects" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Projects</a></li>
-        <li><a href="#about" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">About</a></li>
-        <li><a href="#contact" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Contact</a></li>
+        <li><a href="#home" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Home</a></li>
+        <li><a href="#services" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Services</a></li>
+        <li><a href="/pricing" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Pricing</a></li>
+        <li><a href="#projects" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Projects</a></li>
+        <li><a href="#about" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">About</a></li>
+        <li><a href="#contact" class="block w-full text-center text-gray-800 hover:text-primary-600 hover:bg-primary-50 font-medium text-lg sm:text-xl py-3 px-8 rounded-lg transition-all duration-300 min-h-touch flex items-center justify-center" role="menuitem">Contact</a></li>
       </ul>
       <!-- Call to Action Button in Mobile Menu -->
       <div class="px-6 sm:px-8 pb-6 sm:pb-8">
@@ -192,6 +179,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="flex items-center glass px-4 py-2 rounded-full">
               <i class="fas fa-tools mr-2 text-secondary-400 text-lg" aria-hidden="true"></i>
               <span class="text-primary-100 font-medium">20+ Years</span>
+            </div>
+          </div>
+
+          <!-- Emergency Notice -->
+          <div class="mt-12 animate-fadeInUp animation-delay-1500">
+            <div class="glass border-2 border-error-400/50 bg-error-900/20 p-6 rounded-xl">
+              <div class="flex items-center justify-center sm:justify-start gap-4">
+                <div class="w-12 h-12 bg-error-600 rounded-full flex-center animate-pulse">
+                  <i class="fas fa-exclamation-triangle text-white text-xl"></i>
+                </div>
+                <div class="text-center sm:text-left">
+                  <div class="text-white font-bold text-lg">Emergency HVAC Service Available</div>
+                  <div class="text-error-200 text-sm">24/7 Response • Within 2 Hours • No Trip Charges</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
