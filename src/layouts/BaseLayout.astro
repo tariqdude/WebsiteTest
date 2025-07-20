@@ -18,19 +18,75 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
     
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/WebsiteTest/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/WebsiteTest/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/WebsiteTest/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/WebsiteTest/apple-touch-icon.png">
+    <link rel="manifest" href="/WebsiteTest/site.webmanifest">
+    <meta name="theme-color" content="#3b82f6">
+    
+    <!-- Geo and Business Info -->
+    <meta name="geo.region" content="IL">
+    <meta name="geo.placename" content="Metroville">  
+    <meta name="geo.position" content="41.8781;-87.6298">
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${Astro.site}WebsiteTest/og-image.jpg`} />
     
     <title>{title}</title>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HVACBusiness",
+      "name": "Midwest Climate Solutions",
+      "url": "{canonicalURL}",
+      "logo": "{Astro.site}WebsiteTest/logo.png",
+      "description": "{description}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "456 Climate Drive",
+        "addressLocality": "Metroville",
+        "addressRegion": "IL",
+        "postalCode": "60601",
+        "addressCountry": "US"
+      },
+      "telephone": "(555) 123-4567",
+      "email": "info@midwestclimatesolutions.com",
+      "openingHours": [
+        "Mo-Fr 07:00-18:00",
+        "Sa 08:00-16:00"
+      ],
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.8781,
+          "longitude": -87.6298
+        },
+        "geoRadius": 100
+      },
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127"
+      }
+    }
+    </script>
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

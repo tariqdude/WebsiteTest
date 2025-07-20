@@ -3,11 +3,25 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://tariqdude.github.io', // Replace 'boss' with your actual GitHub username
-  base: '/WebsiteTest/', // Match your actual repository name (case-sensitive)
+  site: 'https://tariqdude.github.io',
+  base: '/WebsiteTest/',
   output: 'static',
   integrations: [tailwind()],
   build: {
-    assets: 'assets'
+    assets: 'assets',
+    inlineStylesheets: 'auto',
+    splitEntryChunks: true
+  },
+  vite: {
+    build: {
+      minify: 'terser',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['astro']
+          }
+        }
+      }
+    }
   }
 });

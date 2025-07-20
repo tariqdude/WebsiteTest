@@ -42,30 +42,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       
       <!-- Mobile Menu Toggle -->
       <button 
-        class="lg:hidden flex flex-col space-y-1.5 cursor-pointer p-2" 
+        class="lg:hidden flex flex-col justify-center items-center w-12 h-12 cursor-pointer p-3 rounded-lg hover:bg-white/10 transition-colors duration-300" 
         id="hamburger"
         aria-expanded="false"
         aria-label="Toggle mobile menu"
       >
-        <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
-        <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
-        <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+        <span class="block w-7 h-0.5 bg-white transition-all duration-300 transform origin-center"></span>
+        <span class="block w-7 h-0.5 bg-white transition-all duration-300 transform origin-center my-1.5"></span>
+        <span class="block w-7 h-0.5 bg-white transition-all duration-300 transform origin-center"></span>
       </button>
     </nav>
     
     <!-- Mobile Navigation Menu -->
     <div 
       id="mobile-menu" 
-      class="lg:hidden bg-white shadow-xl fixed top-20 left-0 w-full transform -translate-x-full transition-transform duration-300 ease-out"
+      class="lg:hidden bg-white shadow-2xl fixed top-20 left-0 w-full transform -translate-x-full transition-all duration-500 ease-out z-40"
       role="menu"
     >
-      <ul class="flex flex-col items-center py-6 space-y-4">
-        <li><a href="#home" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">Home</a></li>
-        <li><a href="#services" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">Services</a></li>
-        <li><a href="#projects" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">Projects</a></li>
-        <li><a href="#about" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">About</a></li>
-        <li><a href="#contact" class="text-gray-800 hover:text-blue-600 font-medium text-lg transition-colors duration-300" role="menuitem">Contact</a></li>
+      <ul class="flex flex-col items-center py-8 space-y-6">
+        <li><a href="#home" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-xl py-3 px-8 rounded-lg transition-all duration-300" role="menuitem">Home</a></li>
+        <li><a href="#services" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-xl py-3 px-8 rounded-lg transition-all duration-300" role="menuitem">Services</a></li>
+        <li><a href="#projects" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-xl py-3 px-8 rounded-lg transition-all duration-300" role="menuitem">Projects</a></li>
+        <li><a href="#about" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-xl py-3 px-8 rounded-lg transition-all duration-300" role="menuitem">About</a></li>
+        <li><a href="#contact" class="block w-full text-center text-gray-800 hover:text-blue-600 hover:bg-blue-50 font-medium text-xl py-3 px-8 rounded-lg transition-all duration-300" role="menuitem">Contact</a></li>
       </ul>
+      <!-- Call to Action Button in Mobile Menu -->
+      <div class="px-8 pb-8">
+        <a href="tel:+15551234567" class="btn btn-primary w-full text-center text-lg">
+          <i class="fas fa-phone mr-2" aria-hidden="true"></i>
+          Call Now: (555) 123-4567
+        </a>
+      </div>
     </div>
   </header>
 
@@ -428,7 +435,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <!-- Contact Form -->
           <div class="bg-white p-8 lg:p-10 rounded-xl shadow-2xl">
             <h3 class="text-2xl font-semibold text-gray-900 mb-6">Request a Free Quote</h3>
-            <form class="space-y-6" novalidate>
+            <form 
+              class="space-y-6" 
+              name="hvac-contact" 
+              method="POST" 
+              data-netlify="true"
+              data-netlify-recaptcha="true"
+              netlify-honeypot="bot-field"
+              novalidate
+            >
+              <!-- Hidden field for Netlify -->
+              <input type="hidden" name="form-name" value="hvac-contact" />
+              
+              <!-- Honeypot field -->
+              <div class="hidden">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+              </div>
+              
+              <!-- Form Status Messages -->
+              <div id="form-messages" class="hidden">
+                <div id="success-message" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4">
+                  <i class="fas fa-check-circle mr-2"></i>
+                  <strong>Success!</strong> Thank you for your message. We'll get back to you within 24 hours.
+                </div>
+                <div id="error-message" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
+                  <i class="fas fa-exclamation-triangle mr-2"></i>
+                  <strong>Error:</strong> Please check your information and try again.
+                </div>
+              </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
@@ -497,25 +531,71 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 </select>
               </div>
               
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="building-size" class="block text-sm font-medium text-gray-700 mb-2">Building Size</label>
+                  <select 
+                    id="building-size" 
+                    name="building-size"
+                    class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50"
+                  >
+                    <option value="">Select building size</option>
+                    <option value="under-1000">Under 1,000 sq ft</option>
+                    <option value="1000-5000">1,000 - 5,000 sq ft</option>
+                    <option value="5000-15000">5,000 - 15,000 sq ft</option>
+                    <option value="15000-50000">15,000 - 50,000 sq ft</option>
+                    <option value="over-50000">Over 50,000 sq ft</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label for="timeline" class="block text-sm font-medium text-gray-700 mb-2">Timeline</label>
+                  <select 
+                    id="timeline" 
+                    name="timeline"
+                    class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50"
+                  >
+                    <option value="">When do you need service?</option>
+                    <option value="emergency">Emergency/ASAP</option>
+                    <option value="within-week">Within a week</option>
+                    <option value="within-month">Within a month</option>
+                    <option value="within-quarter">Within 3 months</option>
+                    <option value="planning">Planning for future</option>
+                  </select>
+                </div>
+              </div>
+              
               <div>
-                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Project Details *</label>
                 <textarea 
                   id="message" 
                   name="message"
                   rows="6" 
                   required 
                   class="w-full p-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 text-gray-800 bg-gray-50 resize-y"
-                  placeholder="Tell us about your HVAC needs, building size, current system, or any specific requirements..."
+                  placeholder="Please describe your HVAC needs, current system issues, energy efficiency goals, or any specific requirements. Include building type (office, retail, industrial, etc.) and any relevant details..."
                 ></textarea>
               </div>
               
-              <button type="submit" class="btn btn-primary w-full text-lg">
-                <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>
-                Send Message
+              <!-- reCAPTCHA -->
+              <div class="flex justify-center">
+                <div data-netlify-recaptcha="true"></div>
+              </div>
+              
+              <button type="submit" class="btn btn-primary w-full text-lg" id="submit-btn">
+                <span class="submit-text">
+                  <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>
+                  Send Message
+                </span>
+                <span class="loading-text hidden">
+                  <i class="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i>
+                  Sending...
+                </span>
               </button>
               
               <p class="text-sm text-gray-600 text-center">
-                * Required fields. We respect your privacy and never share your information.
+                * Required fields. We respond to all inquiries within 24 hours.<br>
+                For emergency service, please call <a href="tel:+15551234567" class="text-blue-600 hover:text-blue-800 font-semibold">(555) 123-4567</a>
               </p>
             </form>
           </div>
@@ -632,10 +712,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
 
       setupContactForm() {
-        const form = document.querySelector('#contact form');
+        const form = document.querySelector('form[name="hvac-contact"]');
         if (!form) return;
 
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
           e.preventDefault();
           
           const formData = new FormData(form);
@@ -643,9 +723,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           const email = formData.get('email')?.toString().trim() || '';
           const message = formData.get('message')?.toString().trim() || '';
           
+          // Clear previous messages
+          this.clearFormMessages();
+          
           if (this.validateForm({ name, email, message })) {
-            this.submitForm(form);
+            await this.submitForm(form, formData);
           }
+        });
+        
+        // Real-time validation
+        const inputs = form.querySelectorAll('input[required], textarea[required]');
+        inputs.forEach(input => {
+          input.addEventListener('blur', () => this.validateField(input));
         });
       }
 
@@ -659,41 +748,116 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         });
         
         if (!name) {
-          document.getElementById('name').classList.add('border-red-500');
+          this.showFieldError('name', 'Name is required');
           isValid = false;
         }
         
-        if (!email || !emailRegex.test(email)) {
-          document.getElementById('email').classList.add('border-red-500');
+        if (!email) {
+          this.showFieldError('email', 'Email is required');
+          isValid = false;
+        } else if (!emailRegex.test(email)) {
+          this.showFieldError('email', 'Please enter a valid email address');
           isValid = false;
         }
         
         if (!message) {
-          document.getElementById('message').classList.add('border-red-500');
+          this.showFieldError('message', 'Message is required');
           isValid = false;
-        }
-        
-        if (!isValid) {
-          this.showAlert('Please fill in all required fields correctly.', 'error');
         }
         
         return isValid;
       }
 
-      submitForm(form) {
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
+      validateField(field) {
+        const value = field.value.trim();
+        const isEmail = field.type === 'email';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         
-        submitBtn.textContent = 'Sending...';
+        field.classList.remove('border-red-500', 'border-green-500');
+        
+        if (field.required && !value) {
+          this.showFieldError(field.id, `${field.labels[0]?.textContent || 'Field'} is required`);
+        } else if (isEmail && value && !emailRegex.test(value)) {
+          this.showFieldError(field.id, 'Please enter a valid email address');
+        } else if (value) {
+          field.classList.add('border-green-500');
+        }
+      }
+
+      showFieldError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        if (field) {
+          field.classList.add('border-red-500');
+          // You could add a tooltip or error message here
+        }
+      }
+
+      clearFormMessages() {
+        const messageContainer = document.getElementById('form-messages');
+        if (messageContainer) {
+          messageContainer.classList.add('hidden');
+        }
+      }
+
+      showFormMessage(type, message) {
+        const messageContainer = document.getElementById('form-messages');
+        const successMsg = document.getElementById('success-message');
+        const errorMsg = document.getElementById('error-message');
+        
+        if (!messageContainer || !successMsg || !errorMsg) return;
+        
+        messageContainer.classList.remove('hidden');
+        
+        if (type === 'success') {
+          successMsg.classList.remove('hidden');
+          errorMsg.classList.add('hidden');
+        } else {
+          errorMsg.classList.remove('hidden');
+          successMsg.classList.add('hidden');
+          errorMsg.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i><strong>Error:</strong> ${message}`;
+        }
+        
+        // Scroll to message
+        messageContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      async submitForm(form, formData) {
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = submitBtn.querySelector('.submit-text');
+        const loadingText = submitBtn.querySelector('.loading-text');
+        
+        // Show loading state
+        submitText.classList.add('hidden');
+        loadingText.classList.remove('hidden');
         submitBtn.disabled = true;
         
-        // Simulate form submission
-        setTimeout(() => {
-          this.showAlert('Thank you for your message! We\'ll get back to you soon.', 'success');
-          form.reset();
-          submitBtn.textContent = originalText;
+        try {
+          // Submit to Netlify
+          const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
+          });
+          
+          if (response.ok) {
+            this.showFormMessage('success', 'Thank you for your message! We\'ll get back to you within 24 hours.');
+            form.reset();
+            // Reset field borders
+            form.querySelectorAll('input, textarea, select').forEach(field => {
+              field.classList.remove('border-red-500', 'border-green-500');
+            });
+          } else {
+            throw new Error('Form submission failed');
+          }
+        } catch (error) {
+          console.error('Form submission error:', error);
+          this.showFormMessage('error', 'There was a problem submitting your message. Please try again or call us directly.');
+        } finally {
+          // Reset button state
+          submitText.classList.remove('hidden');
+          loadingText.classList.add('hidden');
           submitBtn.disabled = false;
-        }, 1500);
+        }
       }
 
       showAlert(message, type = 'info') {
@@ -869,15 +1033,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     /* Mobile navigation animation */
     #hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      transform: rotate(45deg) translate(6px, 6px);
+      background-color: #3b82f6;
     }
     
     #hamburger.active span:nth-child(2) {
       opacity: 0;
+      transform: scaleX(0);
     }
     
     #hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
+      transform: rotate(-45deg) translate(6px, -6px);
+      background-color: #3b82f6;
+    }
+    
+    /* Mobile menu animations */
+    #mobile-menu.show {
+      transform: translateX(0);
+      visibility: visible;
+    }
+    
+    #mobile-menu a {
+      transform: translateX(-20px);
+      opacity: 0;
+      animation: slideInFromLeft 0.3s ease forwards;
+    }
+    
+    #mobile-menu a:nth-child(1) { animation-delay: 0.1s; }
+    #mobile-menu a:nth-child(2) { animation-delay: 0.2s; }
+    #mobile-menu a:nth-child(3) { animation-delay: 0.3s; }
+    #mobile-menu a:nth-child(4) { animation-delay: 0.4s; }
+    #mobile-menu a:nth-child(5) { animation-delay: 0.5s; }
+    
+    @keyframes slideInFromLeft {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
     
     /* Form validation styles */
