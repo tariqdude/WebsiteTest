@@ -1,11 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BackgroundManager from '../components/BackgroundManager.astro';
 ---
 
 <BaseLayout 
   title="Midwest Climate Solutions - Commercial HVAC Experts"
   description="Leading commercial HVAC solutions for businesses across the Great Lakes region. Expert installation, maintenance, and energy-efficient climate control systems."
 >
+  <!-- Dynamic Background Manager -->
+  <BackgroundManager 
+    defaultType="youtube"
+    youtubeId="jfKfPfyJRdk"
+    images={[]}
+    enableControls={true}
+  />
+
   <!-- Skip Links for Accessibility -->
   <div class="sr-only focus-within:not-sr-only">
     <a href="#main-content" class="skip-link absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 rounded-lg z-50 transition-all focus:translate-y-0 -translate-y-16">
@@ -116,84 +125,60 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Hero Section -->
     <section 
       id="home" 
-      class="relative bg-gradient-radial from-primary-900 via-primary-800 to-primary-900 text-white py-20 min-h-screen flex items-center overflow-hidden"
+      class="relative text-white py-20 min-h-screen flex items-center overflow-hidden"
       aria-label="Hero section"
     >
-      <!-- Enhanced Background -->
-      <div class="absolute inset-0" aria-hidden="true">
-        <div class="absolute inset-0 bg-gradient-conic opacity-20"></div>
-        <div class="absolute inset-0 bg-grid opacity-5"></div>
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-secondary-500/10 rounded-full blur-2xl animate-float-delayed"></div>
-      </div>
+      <!-- Content overlay for readability -->
+      <div class="absolute inset-0 bg-black/10 z-10"></div>
       
-      <!-- Glassmorphism overlay -->
-      <div class="absolute inset-0 glass-dark opacity-30"></div>
-      
-      <div class="container mx-auto px-4 sm:px-6 relative z-10">
-        <div class="max-w-5xl animate-fadeInUp">
-          <h1 class="text-display-2xs sm:text-display-xs md:text-display-sm lg:text-display-md font-display font-black mb-6 sm:mb-8 leading-display tracking-tight" tabindex="-1">
-            <span class="block animate-slideInLeft">Leading Commercial</span> 
-            <span class="text-gradient-accent block animate-slideInRight animation-delay-300">HVAC Solutions</span>
+      <div class="container mx-auto px-4 sm:px-6 relative z-20">
+        <div class="max-w-5xl animate-fadeInUp text-center">
+          <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-accent-200 to-secondary-200 bg-clip-text text-transparent drop-shadow-2xl animate-fade-in-up mb-6 sm:mb-8">
+            Elevate Your Digital Presence
           </h1>
-          <p class="text-lg sm:text-xl md:text-2xl text-primary-100 mb-8 sm:mb-10 max-w-3xl leading-relaxed animate-fadeInUp animation-delay-600">
-            Optimizing indoor environments for businesses across the Great Lakes region with advanced HVAC systems, energy-efficient solutions, and unparalleled service excellence.
+          <p class="text-lg sm:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-300 mb-8 sm:mb-10">
+            Transform your business with cutting-edge web solutions that combine stunning design with powerful functionality
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-12 animate-fadeInUp animation-delay-900">
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-8 sm:mb-12 animate-fadeInUp animation-delay-600 justify-center">
             <a 
               href="#contact" 
               class="btn-hover-lift bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-glow-accent hover:shadow-glow-accent-lg transition-all duration-300 min-h-touch flex-center group"
               onclick="window.analytics?.trackEvent('cta_click', {location: 'hero', type: 'quote'})"
             >
-              <i class="fas fa-calculator mr-3 group-hover:animate-wiggle text-lg" aria-hidden="true"></i>
-              <span class="font-bold">Get Free Quote</span>
-              <span class="ml-3 bg-white/20 px-3 py-1 rounded-full text-sm hidden sm:inline">24h Response</span>
+              <i class="fas fa-rocket mr-3 group-hover:animate-wiggle text-lg" aria-hidden="true"></i>
+              <span class="font-bold">Get Started</span>
+              <span class="ml-3 bg-white/20 px-3 py-1 rounded-full text-sm hidden sm:inline">Free Consultation</span>
             </a>
             <a 
-              href="tel:+15551234567" 
+              href="#portfolio" 
               class="btn-hover-glow glass border border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg min-h-touch flex-center group"
-              onclick="window.analytics?.trackPhoneCall('hero_cta')"
+              onclick="window.analytics?.trackEvent('cta_click', {location: 'hero', type: 'portfolio'})"
             >
-              <i class="fas fa-phone mr-3 group-hover:animate-shake text-lg" aria-hidden="true"></i>
+              <i class="fas fa-eye mr-3 group-hover:animate-shake text-lg" aria-hidden="true"></i>
               <span class="font-bold">
-                <span class="hidden sm:inline">Call Emergency: (555) 123-4567</span>
-                <span class="sm:hidden">Emergency Call</span>
+                <span class="hidden sm:inline">View Our Work</span>
+                <span class="sm:hidden">Portfolio</span>
               </span>
             </a>
           </div>
           
           <!-- Trust Indicators -->
-          <div class="flex flex-wrap items-center justify-center sm:justify-start gap-6 sm:gap-8 animate-fadeInUp animation-delay-1200">
+          <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 animate-fadeInUp animation-delay-900">
             <div class="flex items-center glass px-4 py-2 rounded-full">
-              <i class="fas fa-shield-check mr-2 text-success-400 text-lg animate-pulse" aria-hidden="true"></i>
-              <span class="text-primary-100 font-medium">Licensed & Insured</span>
+              <i class="fas fa-award mr-2 text-success-400 text-lg animate-pulse" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">Award Winning</span>
             </div>
             <div class="flex items-center glass px-4 py-2 rounded-full">
               <i class="fas fa-clock mr-2 text-warning-400 text-lg" aria-hidden="true"></i>
-              <span class="text-primary-100 font-medium">24/7 Emergency</span>
+              <span class="text-primary-100 font-medium">Fast Delivery</span>
             </div>
             <div class="flex items-center glass px-4 py-2 rounded-full">
               <i class="fas fa-star mr-2 text-accent-400 text-lg animate-glow" aria-hidden="true"></i>
-              <span class="text-primary-100 font-medium">4.9/5 Rating</span>
+              <span class="text-primary-100 font-medium">5-Star Reviews</span>
             </div>
             <div class="flex items-center glass px-4 py-2 rounded-full">
-              <i class="fas fa-tools mr-2 text-secondary-400 text-lg" aria-hidden="true"></i>
-              <span class="text-primary-100 font-medium">20+ Years</span>
-            </div>
-          </div>
-
-          <!-- Emergency Notice -->
-          <div class="mt-12 animate-fadeInUp animation-delay-1500">
-            <div class="glass border-2 border-error-400/50 bg-error-900/20 p-6 rounded-xl">
-              <div class="flex items-center justify-center sm:justify-start gap-4">
-                <div class="w-12 h-12 bg-error-600 rounded-full flex-center animate-pulse">
-                  <i class="fas fa-exclamation-triangle text-white text-xl"></i>
-                </div>
-                <div class="text-center sm:text-left">
-                  <div class="text-white font-bold text-lg">Emergency HVAC Service Available</div>
-                  <div class="text-error-200 text-sm">24/7 Response • Within 2 Hours • No Trip Charges</div>
-                </div>
-              </div>
+              <i class="fas fa-code mr-2 text-secondary-400 text-lg" aria-hidden="true"></i>
+              <span class="text-primary-100 font-medium">Modern Tech</span>
             </div>
           </div>
         </div>

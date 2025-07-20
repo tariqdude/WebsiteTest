@@ -1,0 +1,562 @@
+---
+// src/components/BackgroundManager.astro
+export interface Props {
+  defaultType?: 'youtube' | 'gallery' | 'video' | 'gradient';
+  youtubeId?: string;
+  videoSrc?: string;
+  images?: string[];
+  enableControls?: boolean;
+}
+
+const { 
+  defaultType = 'gradient',
+  youtubeId = 'dQw4w9WgXcQ', // Default video ID
+  videoSrc = '',
+  images = [],
+  enableControls = true 
+} = Astro.props;
+---
+
+<div id="background-manager" class="fixed inset-0 w-full h-full overflow-hidden -z-10">
+  <!-- YouTube Background -->
+  <div id="youtube-bg" class="absolute inset-0 w-full h-full hidden">
+    <div id="youtube-player" class="w-full h-full"></div>
+    <div class="absolute inset-0 bg-black/30 pointer-events-none"></div>
+  </div>
+
+  <!-- Video Background (MP4, WebM, etc.) -->
+  <div id="video-bg" class="absolute inset-0 w-full h-full hidden">
+    <video
+      id="bg-video"
+      class="w-full h-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    >
+      <source id="video-source" src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
+  </div>
+
+  <!-- Gallery Background -->
+  <div id="gallery-bg" class="absolute inset-0 w-full h-full hidden">
+    <div class="gallery-container relative w-full h-full">
+      <div class="gallery-slides absolute inset-0">
+        <!-- Images will be dynamically inserted here -->
+      </div>
+    </div>
+    <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
+  </div>
+
+  <!-- Gradient Background (Fallback) -->
+  <div id="gradient-bg" class="absolute inset-0 w-full h-full bg-gradient-radial from-primary-900 via-primary-800 to-primary-900">
+    <div class="absolute inset-0 bg-gradient-conic opacity-20"></div>
+    <div class="absolute inset-0 bg-grid opacity-5"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-secondary-500/10 rounded-full blur-2xl animate-float-delayed"></div>
+  </div>
+</div>
+
+<!-- Background Controls -->
+{enableControls && (
+  <div id="bg-controls" class="fixed top-20 right-4 z-50 bg-black/80 backdrop-blur-md rounded-xl p-4 space-y-3 transform translate-x-full transition-transform duration-300">
+    <button id="toggle-controls" class="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-black/80 text-white p-2 rounded-l-lg hover:bg-black transition-colors">
+      <i class="fas fa-cog text-sm"></i>
+    </button>
+    
+    <div class="text-white text-sm font-medium mb-3">Background Settings</div>
+    
+    <div class="space-y-2">
+      <label class="flex items-center text-white text-sm">
+        <input type="radio" name="bg-type" value="gradient" class="mr-2" checked>
+        Gradient
+      </label>
+      <label class="flex items-center text-white text-sm">
+        <input type="radio" name="bg-type" value="youtube" class="mr-2">
+        YouTube Video
+      </label>
+      <label class="flex items-center text-white text-sm">
+        <input type="radio" name="bg-type" value="video" class="mr-2">
+        Custom Video
+      </label>
+      <label class="flex items-center text-white text-sm">
+        <input type="radio" name="bg-type" value="gallery" class="mr-2">
+        Image Gallery
+      </label>
+    </div>
+
+    <!-- YouTube Controls -->
+    <div id="youtube-controls" class="space-y-2 hidden">
+      <input 
+        type="text" 
+        id="youtube-id-input" 
+        placeholder="YouTube Video ID" 
+        class="w-full px-3 py-2 bg-white/10 text-white placeholder-white/60 border border-white/20 rounded-lg text-sm"
+        value={youtubeId}
+      >
+      <button id="load-youtube" class="w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm transition-colors">
+        Load Video
+      </button>
+    </div>
+
+    <!-- Video Upload Controls -->
+    <div id="video-controls" class="space-y-2 hidden">
+      <input 
+        type="file" 
+        id="video-upload" 
+        accept="video/*" 
+        class="w-full text-white text-sm file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-white/20 file:text-white"
+      >
+      <input 
+        type="url" 
+        id="video-url-input" 
+        placeholder="Or enter video URL" 
+        class="w-full px-3 py-2 bg-white/10 text-white placeholder-white/60 border border-white/20 rounded-lg text-sm"
+      >
+      <button id="load-video" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm transition-colors">
+        Load Video
+      </button>
+    </div>
+
+    <!-- Gallery Controls -->
+    <div id="gallery-controls" class="space-y-2 hidden">
+      <input 
+        type="file" 
+        id="gallery-upload" 
+        accept="image/*" 
+        multiple 
+        class="w-full text-white text-sm file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-white/20 file:text-white"
+      >
+      <div class="text-xs text-white/60">Upload multiple images for slideshow</div>
+      <label class="flex items-center text-white text-sm">
+        <input type="checkbox" id="gallery-autoplay" class="mr-2" checked>
+        Auto-play slideshow
+      </label>
+    </div>
+
+    <!-- Overlay Controls -->
+    <div class="border-t border-white/20 pt-3 space-y-2">
+      <div class="text-white text-xs mb-2">Overlay Opacity</div>
+      <input 
+        type="range" 
+        id="overlay-opacity" 
+        min="0" 
+        max="50" 
+        value="20" 
+        class="w-full"
+      >
+      <label class="flex items-center text-white text-sm">
+        <input type="checkbox" id="mute-video" class="mr-2" checked>
+        Mute videos
+      </label>
+    </div>
+  </div>
+)}
+
+<script define:vars={{ defaultType, youtubeId, videoSrc, images, enableControls }}>
+  class BackgroundManager {
+    constructor() {
+      this.currentType = defaultType;
+      this.youtubePlayer = null;
+      this.galleryInterval = null;
+      this.currentSlide = 0;
+      this.galleryImages = images || [];
+      
+      this.init();
+    }
+
+    init() {
+      this.bindControls();
+      this.loadYouTubeAPI();
+      this.setBackground(this.currentType);
+      
+      // Load saved preferences
+      this.loadPreferences();
+      
+      // Responsive handling
+      window.addEventListener('resize', () => this.handleResize());
+    }
+
+    bindControls() {
+      if (!enableControls) return;
+
+      const toggleBtn = document.getElementById('toggle-controls');
+      const controls = document.getElementById('bg-controls');
+      
+      toggleBtn?.addEventListener('click', () => {
+        controls.classList.toggle('translate-x-full');
+      });
+
+      // Background type selection
+      document.querySelectorAll('input[name="bg-type"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          this.setBackground(e.target.value);
+          this.showControlPanel(e.target.value);
+        });
+      });
+
+      // YouTube controls
+      document.getElementById('load-youtube')?.addEventListener('click', () => {
+        const videoId = document.getElementById('youtube-id-input').value;
+        if (videoId) {
+          this.loadYouTubeVideo(videoId);
+        }
+      });
+
+      // Video controls
+      document.getElementById('video-upload')?.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          this.loadVideoFile(file);
+        }
+      });
+
+      document.getElementById('load-video')?.addEventListener('click', () => {
+        const url = document.getElementById('video-url-input').value;
+        if (url) {
+          this.loadVideoURL(url);
+        }
+      });
+
+      // Gallery controls
+      document.getElementById('gallery-upload')?.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        this.loadGalleryImages(files);
+      });
+
+      // Overlay opacity
+      document.getElementById('overlay-opacity')?.addEventListener('input', (e) => {
+        this.setOverlayOpacity(e.target.value);
+      });
+
+      // Mute control
+      document.getElementById('mute-video')?.addEventListener('change', (e) => {
+        this.setVideoMute(e.target.checked);
+      });
+    }
+
+    loadYouTubeAPI() {
+      if (window.YT) return;
+      
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      
+      window.onYouTubeIframeAPIReady = () => {
+        this.createYouTubePlayer();
+      };
+    }
+
+    createYouTubePlayer() {
+      this.youtubePlayer = new YT.Player('youtube-player', {
+        videoId: youtubeId,
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          loop: 1,
+          playlist: youtubeId,
+          controls: 0,
+          showinfo: 0,
+          rel: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          playsinline: 1
+        },
+        events: {
+          onReady: (event) => {
+            this.handleResize();
+          }
+        }
+      });
+    }
+
+    setBackground(type) {
+      // Hide all backgrounds
+      document.querySelectorAll('#background-manager > div').forEach(bg => {
+        bg.classList.add('hidden');
+      });
+
+      // Show selected background
+      const targetBg = document.getElementById(`${type}-bg`);
+      if (targetBg) {
+        targetBg.classList.remove('hidden');
+      }
+
+      this.currentType = type;
+      this.savePreferences();
+      
+      // Handle specific background logic
+      switch (type) {
+        case 'youtube':
+          this.handleYouTubeBackground();
+          break;
+        case 'gallery':
+          this.startGallerySlideshow();
+          break;
+        case 'video':
+          this.handleVideoBackground();
+          break;
+      }
+    }
+
+    showControlPanel(type) {
+      // Hide all control panels
+      document.querySelectorAll('[id$="-controls"]').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+
+      // Show relevant control panel
+      const panel = document.getElementById(`${type}-controls`);
+      if (panel) {
+        panel.classList.remove('hidden');
+      }
+    }
+
+    loadYouTubeVideo(videoId) {
+      if (this.youtubePlayer) {
+        this.youtubePlayer.loadVideoById(videoId);
+        this.handleResize();
+      }
+    }
+
+    loadVideoFile(file) {
+      const url = URL.createObjectURL(file);
+      this.loadVideoURL(url);
+    }
+
+    loadVideoURL(url) {
+      const video = document.getElementById('bg-video');
+      const source = document.getElementById('video-source');
+      
+      if (video && source) {
+        source.src = url;
+        
+        // Detect video type
+        const extension = url.split('.').pop().toLowerCase();
+        const mimeTypes = {
+          'mp4': 'video/mp4',
+          'webm': 'video/webm',
+          'ogg': 'video/ogg',
+          'mov': 'video/quicktime',
+          'avi': 'video/x-msvideo'
+        };
+        
+        source.type = mimeTypes[extension] || 'video/mp4';
+        video.load();
+      }
+    }
+
+    loadGalleryImages(files) {
+      const container = document.querySelector('.gallery-slides');
+      if (!container) return;
+
+      container.innerHTML = '';
+      this.galleryImages = [];
+
+      files.forEach((file, index) => {
+        const url = URL.createObjectURL(file);
+        this.galleryImages.push(url);
+        
+        const slide = document.createElement('div');
+        slide.className = `gallery-slide absolute inset-0 w-full h-full transition-opacity duration-1000 ${index === 0 ? 'opacity-100' : 'opacity-0'}`;
+        slide.innerHTML = `
+          <img 
+            src="${url}" 
+            alt="Background ${index + 1}"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          >
+        `;
+        container.appendChild(slide);
+      });
+
+      this.currentSlide = 0;
+      this.startGallerySlideshow();
+    }
+
+    startGallerySlideshow() {
+      const autoplay = document.getElementById('gallery-autoplay')?.checked !== false;
+      
+      if (this.galleryInterval) {
+        clearInterval(this.galleryInterval);
+      }
+
+      if (autoplay && this.galleryImages.length > 1) {
+        this.galleryInterval = setInterval(() => {
+          this.nextSlide();
+        }, 5000);
+      }
+    }
+
+    nextSlide() {
+      const slides = document.querySelectorAll('.gallery-slide');
+      if (slides.length <= 1) return;
+
+      slides[this.currentSlide].classList.remove('opacity-100');
+      slides[this.currentSlide].classList.add('opacity-0');
+      
+      this.currentSlide = (this.currentSlide + 1) % slides.length;
+      
+      slides[this.currentSlide].classList.remove('opacity-0');
+      slides[this.currentSlide].classList.add('opacity-100');
+    }
+
+    handleYouTubeBackground() {
+      setTimeout(() => this.handleResize(), 100);
+    }
+
+    handleVideoBackground() {
+      const video = document.getElementById('bg-video');
+      if (video) {
+        video.play().catch(console.error);
+      }
+    }
+
+    handleResize() {
+      if (this.youtubePlayer && this.currentType === 'youtube') {
+        const container = document.getElementById('youtube-bg');
+        if (container) {
+          const containerWidth = container.offsetWidth;
+          const containerHeight = container.offsetHeight;
+          const aspectRatio = 16 / 9;
+          
+          let playerWidth, playerHeight;
+          
+          if (containerWidth / containerHeight > aspectRatio) {
+            playerWidth = containerWidth;
+            playerHeight = containerWidth / aspectRatio;
+          } else {
+            playerWidth = containerHeight * aspectRatio;
+            playerHeight = containerHeight;
+          }
+          
+          const playerElement = document.getElementById('youtube-player');
+          if (playerElement) {
+            playerElement.style.width = `${playerWidth}px`;
+            playerElement.style.height = `${playerHeight}px`;
+            playerElement.style.position = 'absolute';
+            playerElement.style.top = '50%';
+            playerElement.style.left = '50%';
+            playerElement.style.transform = 'translate(-50%, -50%)';
+          }
+        }
+      }
+    }
+
+    setOverlayOpacity(value) {
+      const overlays = document.querySelectorAll('#background-manager .pointer-events-none');
+      overlays.forEach(overlay => {
+        overlay.style.backgroundColor = `rgba(0, 0, 0, ${value / 100})`;
+      });
+    }
+
+    setVideoMute(muted) {
+      const video = document.getElementById('bg-video');
+      if (video) {
+        video.muted = muted;
+      }
+      
+      if (this.youtubePlayer) {
+        if (muted) {
+          this.youtubePlayer.mute();
+        } else {
+          this.youtubePlayer.unMute();
+        }
+      }
+    }
+
+    savePreferences() {
+      const preferences = {
+        backgroundType: this.currentType,
+        overlayOpacity: document.getElementById('overlay-opacity')?.value || 20,
+        muteVideo: document.getElementById('mute-video')?.checked !== false
+      };
+      
+      localStorage.setItem('bgManagerPrefs', JSON.stringify(preferences));
+    }
+
+    loadPreferences() {
+      try {
+        const saved = localStorage.getItem('bgManagerPrefs');
+        if (saved) {
+          const prefs = JSON.parse(saved);
+          
+          // Set background type
+          const radio = document.querySelector(`input[name="bg-type"][value="${prefs.backgroundType}"]`);
+          if (radio) {
+            radio.checked = true;
+            this.setBackground(prefs.backgroundType);
+            this.showControlPanel(prefs.backgroundType);
+          }
+          
+          // Set overlay opacity
+          const opacitySlider = document.getElementById('overlay-opacity');
+          if (opacitySlider) {
+            opacitySlider.value = prefs.overlayOpacity;
+            this.setOverlayOpacity(prefs.overlayOpacity);
+          }
+          
+          // Set mute preference
+          const muteCheckbox = document.getElementById('mute-video');
+          if (muteCheckbox) {
+            muteCheckbox.checked = prefs.muteVideo;
+            this.setVideoMute(prefs.muteVideo);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading preferences:', error);
+      }
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new BackgroundManager();
+    });
+  } else {
+    new BackgroundManager();
+  }
+</script>
+
+<style>
+  .gallery-slide img {
+    transition: transform 20s ease-in-out;
+  }
+  
+  .gallery-slide.opacity-100 img {
+    transform: scale(1.05);
+  }
+  
+  #bg-controls input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    outline: none;
+  }
+  
+  #bg-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  #bg-controls input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+  }
+</style>
