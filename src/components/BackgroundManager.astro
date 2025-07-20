@@ -9,8 +9,8 @@ export interface Props {
 }
 
 const { 
-  defaultType = 'gradient',
-  youtubeId = 'dQw4w9WgXcQ', // Default video ID
+  defaultType = 'youtube',
+  youtubeId = 'LXb3EKWsInQ', // 4K Nature Video - Costa Rica
   videoSrc = '',
   images = [],
   enableControls = true 
@@ -62,96 +62,200 @@ const {
 
 <!-- Background Controls -->
 {enableControls && (
-  <div id="bg-controls" class="fixed top-20 right-4 z-50 bg-black/80 backdrop-blur-md rounded-xl p-4 space-y-3 transform translate-x-full transition-transform duration-300">
-    <button id="toggle-controls" class="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-black/80 text-white p-2 rounded-l-lg hover:bg-black transition-colors">
-      <i class="fas fa-cog text-sm"></i>
+  <div id="bg-controls" class="fixed top-20 right-4 z-50 bg-black/90 backdrop-blur-lg rounded-2xl shadow-2xl transform translate-x-full transition-all duration-500 ease-in-out">
+    <button id="toggle-controls" class="absolute -left-14 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-600 to-blue-600 text-white p-3 rounded-l-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg">
+      <i class="fas fa-sliders-h text-lg"></i>
     </button>
     
-    <div class="text-white text-sm font-medium mb-3">Background Settings</div>
-    
-    <div class="space-y-2">
-      <label class="flex items-center text-white text-sm">
-        <input type="radio" name="bg-type" value="gradient" class="mr-2" checked>
-        Gradient
-      </label>
-      <label class="flex items-center text-white text-sm">
-        <input type="radio" name="bg-type" value="youtube" class="mr-2">
-        YouTube Video
-      </label>
-      <label class="flex items-center text-white text-sm">
-        <input type="radio" name="bg-type" value="video" class="mr-2">
-        Custom Video
-      </label>
-      <label class="flex items-center text-white text-sm">
-        <input type="radio" name="bg-type" value="gallery" class="mr-2">
-        Image Gallery
-      </label>
-    </div>
+    <div class="p-6 w-80">
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-white text-lg font-bold">Background Settings</h3>
+        <i class="fas fa-palette text-purple-400"></i>
+      </div>
+      
+      <!-- Background Type Selection -->
+      <div class="space-y-3 mb-6">
+        <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wide">Background Type</h4>
+        <div class="grid grid-cols-2 gap-2">
+          <label class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-3 cursor-pointer transition-all duration-200 group">
+            <input type="radio" name="bg-type" value="youtube" class="sr-only" checked>
+            <div class="flex flex-col items-center space-y-2">
+              <i class="fab fa-youtube text-red-500 text-xl group-hover:scale-110 transition-transform"></i>
+              <span class="text-white text-xs font-medium">YouTube</span>
+            </div>
+          </label>
+          <label class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-3 cursor-pointer transition-all duration-200 group">
+            <input type="radio" name="bg-type" value="video" class="sr-only">
+            <div class="flex flex-col items-center space-y-2">
+              <i class="fas fa-video text-blue-500 text-xl group-hover:scale-110 transition-transform"></i>
+              <span class="text-white text-xs font-medium">Video</span>
+            </div>
+          </label>
+          <label class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-3 cursor-pointer transition-all duration-200 group">
+            <input type="radio" name="bg-type" value="gallery" class="sr-only">
+            <div class="flex flex-col items-center space-y-2">
+              <i class="fas fa-images text-green-500 text-xl group-hover:scale-110 transition-transform"></i>
+              <span class="text-white text-xs font-medium">Gallery</span>
+            </div>
+          </label>
+          <label class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-3 cursor-pointer transition-all duration-200 group">
+            <input type="radio" name="bg-type" value="gradient" class="sr-only">
+            <div class="flex flex-col items-center space-y-2">
+              <i class="fas fa-palette text-purple-500 text-xl group-hover:scale-110 transition-transform"></i>
+              <span class="text-white text-xs font-medium">Gradient</span>
+            </div>
+          </label>
+        </div>
+      </div>
 
     <!-- YouTube Controls -->
-    <div id="youtube-controls" class="space-y-2 hidden">
-      <input 
-        type="text" 
-        id="youtube-id-input" 
-        placeholder="YouTube Video ID" 
-        class="w-full px-3 py-2 bg-white/10 text-white placeholder-white/60 border border-white/20 rounded-lg text-sm"
-        value={youtubeId}
-      >
-      <button id="load-youtube" class="w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm transition-colors">
+    <div id="youtube-controls" class="space-y-4">
+      <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wide">YouTube Settings</h4>
+      
+      <!-- Preset Videos -->
+      <div class="space-y-2">
+        <label class="text-gray-400 text-xs font-medium">Quick Select (4K Videos)</label>
+        <div class="grid grid-cols-1 gap-2">
+          <button class="youtube-preset bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200 transform hover:scale-105" data-id="LXb3EKWsInQ">
+            🌿 Nature - Costa Rica 4K
+          </button>
+          <button class="youtube-preset bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200 transform hover:scale-105" data-id="1Ne1hqaNkv4">
+            🌊 Ocean Waves 4K
+          </button>
+          <button class="youtube-preset bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200 transform hover:scale-105" data-id="2MsN8gpT6jY">
+            🏔️ Mountain Time-lapse 4K
+          </button>
+          <button class="youtube-preset bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200 transform hover:scale-105" data-id="tnfOy94wQZg">
+            🌌 Space & Stars 4K
+          </button>
+        </div>
+      </div>
+      
+      <!-- Custom YouTube ID -->
+      <div class="space-y-2">
+        <label class="text-gray-400 text-xs font-medium">Custom YouTube Video ID</label>
+        <div class="flex space-x-2">
+          <input 
+            type="text" 
+            id="youtube-id-input" 
+            placeholder="e.g., LXb3EKWsInQ" 
+            class="flex-1 px-3 py-2 bg-white/10 text-white placeholder-white/50 border border-white/20 rounded-lg text-sm focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+            value={youtubeId}
+          >
+          <button id="load-youtube" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1">
+            <i class="fab fa-youtube"></i>
+            <span>Load</span>
+          </button>
+        </div>
+      </div>
+    </div>
         Load Video
       </button>
     </div>
 
     <!-- Video Upload Controls -->
-    <div id="video-controls" class="space-y-2 hidden">
-      <input 
-        type="file" 
-        id="video-upload" 
-        accept="video/*" 
-        class="w-full text-white text-sm file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-white/20 file:text-white"
-      >
-      <input 
-        type="url" 
-        id="video-url-input" 
-        placeholder="Or enter video URL" 
-        class="w-full px-3 py-2 bg-white/10 text-white placeholder-white/60 border border-white/20 rounded-lg text-sm"
-      >
-      <button id="load-video" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm transition-colors">
-        Load Video
-      </button>
+    <div id="video-controls" class="space-y-4 hidden">
+      <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wide">Video Settings</h4>
+      
+      <div class="space-y-3">
+        <div class="space-y-2">
+          <label class="text-gray-400 text-xs font-medium">Upload Video File</label>
+          <input 
+            type="file" 
+            id="video-upload" 
+            accept="video/mp4,video/webm,video/ogg,.gif" 
+            class="w-full text-white text-sm file:mr-2 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gradient-to-r file:from-blue-600 file:to-blue-700 file:text-white file:font-semibold file:cursor-pointer hover:file:from-blue-700 hover:file:to-blue-800 file:transition-all"
+          >
+        </div>
+        
+        <div class="text-center text-gray-400 text-xs">OR</div>
+        
+        <div class="space-y-2">
+          <label class="text-gray-400 text-xs font-medium">Video URL</label>
+          <div class="flex space-x-2">
+            <input 
+              type="url" 
+              id="video-url-input" 
+              placeholder="https://example.com/video.mp4" 
+              class="flex-1 px-3 py-2 bg-white/10 text-white placeholder-white/50 border border-white/20 rounded-lg text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+            >
+            <button id="load-video" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200 flex items-center space-x-1">
+              <i class="fas fa-play"></i>
+              <span>Load</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Gallery Controls -->
-    <div id="gallery-controls" class="space-y-2 hidden">
-      <input 
-        type="file" 
-        id="gallery-upload" 
-        accept="image/*" 
-        multiple 
-        class="w-full text-white text-sm file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-white/20 file:text-white"
-      >
-      <div class="text-xs text-white/60">Upload multiple images for slideshow</div>
-      <label class="flex items-center text-white text-sm">
-        <input type="checkbox" id="gallery-autoplay" class="mr-2" checked>
-        Auto-play slideshow
-      </label>
+    <div id="gallery-controls" class="space-y-4 hidden">
+      <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wide">Gallery Settings</h4>
+      
+      <div class="space-y-3">
+        <div class="space-y-2">
+          <label class="text-gray-400 text-xs font-medium">Upload Images</label>
+          <input 
+            type="file" 
+            id="gallery-upload" 
+            accept="image/*" 
+            multiple 
+            class="w-full text-white text-sm file:mr-2 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gradient-to-r file:from-green-600 file:to-green-700 file:text-white file:font-semibold file:cursor-pointer hover:file:from-green-700 hover:file:to-green-800 file:transition-all"
+          >
+          <div class="text-xs text-gray-400">Select multiple images for slideshow</div>
+        </div>
+        
+        <div class="space-y-2">
+          <label class="flex items-center text-white text-sm group cursor-pointer">
+            <input type="checkbox" id="gallery-autoplay" class="sr-only" checked>
+            <div class="w-5 h-5 border-2 border-white/30 rounded bg-white/10 mr-3 flex items-center justify-center group-hover:border-green-500 transition-colors">
+              <i class="fas fa-check text-green-500 text-xs opacity-100"></i>
+            </div>
+            <span class="text-sm">Auto-play slideshow</span>
+          </label>
+        </div>
+      </div>
     </div>
 
-    <!-- Overlay Controls -->
-    <div class="border-t border-white/20 pt-3 space-y-2">
-      <div class="text-white text-xs mb-2">Overlay Opacity</div>
-      <input 
-        type="range" 
-        id="overlay-opacity" 
-        min="0" 
-        max="50" 
-        value="20" 
-        class="w-full"
-      >
-      <label class="flex items-center text-white text-sm">
-        <input type="checkbox" id="mute-video" class="mr-2" checked>
-        Mute videos
-      </label>
+    <!-- Global Controls -->
+    <div class="border-t border-white/20 pt-4 space-y-4">
+      <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wide">Global Settings</h4>
+      
+      <div class="space-y-3">
+        <!-- Overlay Opacity -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label class="text-gray-400 text-xs font-medium">Overlay Opacity</label>
+            <span id="opacity-value" class="text-white text-xs">20%</span>
+          </div>
+          <input 
+            type="range" 
+            id="overlay-opacity" 
+            min="0" 
+            max="70" 
+            value="20" 
+            class="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
+          >
+        </div>
+        
+        <!-- Mute Control -->
+        <div class="space-y-2">
+          <label class="flex items-center text-white text-sm group cursor-pointer">
+            <input type="checkbox" id="mute-video" class="sr-only" checked>
+            <div class="w-5 h-5 border-2 border-white/30 rounded bg-white/10 mr-3 flex items-center justify-center group-hover:border-purple-500 transition-colors">
+              <i class="fas fa-check text-purple-500 text-xs opacity-100"></i>
+            </div>
+            <span class="text-sm">Mute videos</span>
+          </label>
+        </div>
+        
+        <!-- Reset Button -->
+        <button id="reset-background" class="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200 flex items-center justify-center space-x-2">
+          <i class="fas fa-undo"></i>
+          <span>Reset to Default</span>
+        </button>
+      </div>
     </div>
   </div>
 )}
@@ -190,11 +294,28 @@ const {
         controls.classList.toggle('translate-x-full');
       });
 
-      // Background type selection
+      // Background type selection with visual feedback
       document.querySelectorAll('input[name="bg-type"]').forEach(radio => {
         radio.addEventListener('change', (e) => {
           this.setBackground(e.target.value);
           this.showControlPanel(e.target.value);
+          this.updateRadioButtons(e.target.value);
+        });
+      });
+
+      // YouTube preset buttons
+      document.querySelectorAll('.youtube-preset').forEach(button => {
+        button.addEventListener('click', (e) => {
+          const videoId = e.target.dataset.id;
+          if (videoId) {
+            document.getElementById('youtube-id-input').value = videoId;
+            this.loadYouTubeVideo(videoId);
+            // Select YouTube radio if not already selected
+            document.querySelector('input[name="bg-type"][value="youtube"]').checked = true;
+            this.updateRadioButtons('youtube');
+            this.setBackground('youtube');
+            this.showControlPanel('youtube');
+          }
         });
       });
 
@@ -227,15 +348,60 @@ const {
         this.loadGalleryImages(files);
       });
 
-      // Overlay opacity
-      document.getElementById('overlay-opacity')?.addEventListener('input', (e) => {
-        this.setOverlayOpacity(e.target.value);
+      // Overlay opacity with live preview
+      const opacitySlider = document.getElementById('overlay-opacity');
+      const opacityValue = document.getElementById('opacity-value');
+      opacitySlider?.addEventListener('input', (e) => {
+        const value = e.target.value;
+        this.setOverlayOpacity(value);
+        if (opacityValue) {
+          opacityValue.textContent = `${value}%`;
+        }
       });
 
       // Mute control
       document.getElementById('mute-video')?.addEventListener('change', (e) => {
         this.setVideoMute(e.target.checked);
       });
+
+      // Reset button
+      document.getElementById('reset-background')?.addEventListener('click', () => {
+        this.resetToDefault();
+      });
+    }
+
+    updateRadioButtons(selectedType) {
+      // Update visual state of radio buttons
+      document.querySelectorAll('input[name="bg-type"]').forEach(radio => {
+        const label = radio.closest('label');
+        if (radio.value === selectedType) {
+          label.classList.add('bg-white/20', 'border-white/40');
+          label.classList.remove('bg-white/5');
+        } else {
+          label.classList.remove('bg-white/20', 'border-white/40');
+          label.classList.add('bg-white/5');
+        }
+      });
+    }
+
+    resetToDefault() {
+      // Reset to default YouTube video
+      this.setBackground('youtube');
+      document.querySelector('input[name="bg-type"][value="youtube"]').checked = true;
+      this.updateRadioButtons('youtube');
+      this.showControlPanel('youtube');
+      document.getElementById('youtube-id-input').value = youtubeId;
+      this.loadYouTubeVideo(youtubeId);
+      
+      // Reset overlay opacity
+      document.getElementById('overlay-opacity').value = 20;
+      document.getElementById('opacity-value').textContent = '20%';
+      this.setOverlayOpacity(20);
+      
+      // Reset mute
+      document.getElementById('mute-video').checked = true;
+      this.setVideoMute(true);
+    }
     }
 
     loadYouTubeAPI() {
@@ -524,6 +690,26 @@ const {
 </script>
 
 <style>
+  .gallery-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .gallery-slides img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .gallery-slides img.active {
+    opacity: 1;
+  }
+  
   .gallery-slide img {
     transition: transform 20s ease-in-out;
   }
@@ -532,6 +718,115 @@ const {
     transform: scale(1.05);
   }
   
+  /* Custom Range Slider Styling */
+  .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(139, 92, 246, 0.5);
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #8b5cf6, #a855f7);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(139, 92, 246, 0.5);
+  }
+  
+  /* Custom Checkbox Styling */
+  input[type="checkbox"]:checked + div i {
+    opacity: 1;
+  }
+  
+  input[type="checkbox"]:not(:checked) + div i {
+    opacity: 0;
+  }
+  
+  /* Radio button styling */
+  input[name="bg-type"]:checked + div {
+    transform: scale(1.05);
+  }
+  
+  input[name="bg-type"]:checked + div i {
+    color: #fff;
+  }
+  
+  /* Scrollbar for controls panel */
+  #bg-controls {
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+  
+  #bg-controls::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  #bg-controls::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  #bg-controls::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+  
+  #bg-controls::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  /* Preset button hover effects */
+  .youtube-preset {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .youtube-preset::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .youtube-preset:hover::before {
+    left: 100%;
+  }
+  
+  /* Legacy range styles for fallback */
   #bg-controls input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
