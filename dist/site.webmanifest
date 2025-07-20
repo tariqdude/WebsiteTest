@@ -1,0 +1,91 @@
+{
+  "name": "Midwest Climate Solutions - Professional HVAC Services",
+  "short_name": "Midwest HVAC",
+  "description": "Leading commercial HVAC solutions for businesses across the Great Lakes region. Expert installation, maintenance, emergency service, and energy-efficient climate control systems.",
+  "icons": [
+    {
+      "src": "/WebsiteTest/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/WebsiteTest/android-chrome-512x512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/WebsiteTest/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/WebsiteTest/favicon-32x32.png",
+      "sizes": "32x32", 
+      "type": "image/png"
+    },
+    {
+      "src": "/WebsiteTest/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/WebsiteTest/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait",
+  "scope": "/WebsiteTest/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["business", "utilities", "productivity", "services"],
+  "screenshots": [
+    {
+      "src": "/WebsiteTest/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/WebsiteTest/screenshot-mobile.png", 
+      "sizes": "390x844",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Emergency Service",
+      "url": "/WebsiteTest/#emergency",
+      "description": "Access 24/7 emergency HVAC services",
+      "icons": [
+        {
+          "src": "/WebsiteTest/emergency-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Contact Us",
+      "url": "/WebsiteTest/#contact", 
+      "description": "Get in touch for service or consultation",
+      "icons": [
+        {
+          "src": "/WebsiteTest/contact-icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "url": "/WebsiteTest/#services",
+      "description": "View our HVAC services and solutions",
+      "icons": [
+        {
+          "src": "/WebsiteTest/services-icon-192.png", 
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
