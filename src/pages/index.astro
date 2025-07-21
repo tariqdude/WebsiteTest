@@ -331,26 +331,26 @@ import FloatingActionButton from '../components/ui/FloatingActionButton.astro';
       
       <!-- Contact Form -->
       <Card variant="elevated" class="p-8">
-        <form class="space-y-6" action="#" method="POST">
+        <form id="contact-form" class="space-y-6" action="#" method="POST">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label for="first-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name</label>
-              <input type="text" id="first-name" name="first-name" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+              <label for="first-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name *</label>
+              <input type="text" id="first-name" name="first-name" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="Enter your first name">
             </div>
             <div>
-              <label for="last-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name</label>
-              <input type="text" id="last-name" name="last-name" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+              <label for="last-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name *</label>
+              <input type="text" id="last-name" name="last-name" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="Enter your last name">
             </div>
           </div>
           
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
-            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address *</label>
+            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="your@email.com">
           </div>
           
           <div>
             <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
-            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="(555) 123-4567">
           </div>
           
           <div>
@@ -368,12 +368,14 @@ import FloatingActionButton from '../components/ui/FloatingActionButton.astro';
           
           <div>
             <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Project Description</label>
-            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white"></textarea>
+            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-colors duration-200 resize-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white" placeholder="Tell us about your project..."></textarea>
           </div>
           
-          <Button variant="primary" size="lg" class="w-full">
-            <i class="fas fa-paper-plane mr-2"></i>
-            Send Message
+          <Button type="submit" variant="primary" size="lg" class="w-full">
+            <span class="button-text">
+              <i class="fas fa-paper-plane mr-2"></i>
+              Send Message
+            </span>
           </Button>
         </form>
       </Card>
@@ -390,3 +392,19 @@ import FloatingActionButton from '../components/ui/FloatingActionButton.astro';
     animate={true}
   />
 </Layout>
+
+<script is:inline>
+  // Simple inline script to avoid module loading issues during build
+  console.log('ProBuild Construction website loaded successfully');
+  
+  // Simple form enhancement
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        // Basic form validation could be added here
+        console.log('Form submitted');
+      });
+    }
+  });
+</script>

@@ -1,0 +1,122 @@
+{
+  "name": "ProBuild Construction",
+  "short_name": "ProBuild",
+  "description": "Professional construction and HVAC services",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1e40af",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["business", "construction", "services"],
+  "icons": [
+    {
+      "src": "images/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-96.png", 
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-128.png",
+      "sizes": "128x128", 
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png", 
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Get Quote",
+      "short_name": "Quote",
+      "description": "Get a free project quote",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "images/shortcut-quote.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "View Services", 
+      "short_name": "Services",
+      "description": "Browse our services",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "images/shortcut-services.png",
+          "sizes": "192x192", 
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Call Now",
+      "short_name": "Call",
+      "description": "Call for immediate assistance",
+      "url": "tel:+15551234567",
+      "icons": [
+        {
+          "src": "images/shortcut-call.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop view of ProBuild Construction website"
+    },
+    {
+      "src": "images/screenshot-mobile.png", 
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of ProBuild Construction website"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
