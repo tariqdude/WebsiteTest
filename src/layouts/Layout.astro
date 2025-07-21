@@ -49,7 +49,7 @@ const { title, description = "ProBuild Construction - Professional construction,
     <meta property="twitter:description" content={description}>
     
     <!-- Schema.org markup -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" is:inline>
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
@@ -78,6 +78,12 @@ const { title, description = "ProBuild Construction - Professional construction,
     <script>
       // Enhanced mobile menu functionality
       class MobileMenu {
+        menu: HTMLElement | null;
+        overlay: HTMLElement | null;
+        menuButton: HTMLElement | null;
+        closeButton: HTMLElement | null;
+        isOpen: boolean;
+
         constructor() {
           this.menu = document.getElementById('mobile-menu');
           this.overlay = document.getElementById('mobile-overlay');
@@ -87,7 +93,7 @@ const { title, description = "ProBuild Construction - Professional construction,
           this.init();
         }
 
-        init() {
+        init(): void {
           this.menuButton?.addEventListener('click', () => this.toggle());
           this.closeButton?.addEventListener('click', () => this.close());
           this.overlay?.addEventListener('click', () => this.close());
@@ -107,18 +113,18 @@ const { title, description = "ProBuild Construction - Professional construction,
           });
         }
 
-        toggle() {
+        toggle(): void {
           this.isOpen ? this.close() : this.open();
         }
 
-        open() {
+        open(): void {
           this.menu?.classList.remove('translate-x-full');
           this.overlay?.classList.remove('hidden');
           document.body.classList.add('overflow-hidden');
           this.isOpen = true;
         }
 
-        close() {
+        close(): void {
           this.menu?.classList.add('translate-x-full');
           this.overlay?.classList.add('hidden');
           document.body.classList.remove('overflow-hidden');
@@ -132,24 +138,27 @@ const { title, description = "ProBuild Construction - Professional construction,
           this.init();
         }
 
-        init() {
+        init(): void {
           document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
               e.preventDefault();
-              const targetId = anchor.getAttribute('href').substring(1);
-              const targetElement = document.getElementById(targetId);
-              
-              if (targetElement) {
-                const offsetTop = targetElement.offsetTop - 80; // Account for fixed header
+              const href = anchor.getAttribute('href');
+              if (href) {
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
                 
-                window.scrollTo({
-                  top: offsetTop,
-                  behavior: 'smooth'
-                });
+                if (targetElement) {
+                  const offsetTop = targetElement.offsetTop - 80; // Account for fixed header
+                  
+                  window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                  });
 
-                // Close mobile menu if open
-                if (window.mobileMenu && window.mobileMenu.isOpen) {
-                  window.mobileMenu.close();
+                  // Close mobile menu if open
+                  if ((window as any).mobileMenu && (window as any).mobileMenu.isOpen) {
+                    (window as any).mobileMenu.close();
+                  }
                 }
               }
             });
@@ -159,6 +168,8 @@ const { title, description = "ProBuild Construction - Professional construction,
 
       // Intersection Observer for animations
       class AnimationObserver {
+        observer: IntersectionObserver;
+
         constructor() {
           this.observer = new IntersectionObserver(
             (entries) => {
@@ -173,7 +184,7 @@ const { title, description = "ProBuild Construction - Professional construction,
           this.init();
         }
 
-        init() {
+        init(): void {
           document.querySelectorAll('[data-animate]').forEach(el => {
             this.observer.observe(el);
           });
@@ -181,10 +192,10 @@ const { title, description = "ProBuild Construction - Professional construction,
       }
 
       // Google Maps with error handling
-      function initMap() {
+      function initMap(): void {
         try {
           const mapElement = document.getElementById('map');
-          if (!mapElement || typeof google === 'undefined') return;
+          if (!mapElement || typeof (window as any).google === 'undefined') return;
 
           const mapOptions = {
             zoom: 15,
@@ -207,9 +218,9 @@ const { title, description = "ProBuild Construction - Professional construction,
             fullscreenControl: true,
           };
 
-          const map = new google.maps.Map(mapElement, mapOptions);
+          const map = new (window as any).google.maps.Map(mapElement, mapOptions);
           
-          const marker = new google.maps.Marker({
+          const marker = new (window as any).google.maps.Marker({
             position: { lat: 40.7128, lng: -74.0060 },
             map: map,
             title: 'ProBuild Construction Services',
@@ -223,7 +234,7 @@ const { title, description = "ProBuild Construction - Professional construction,
             }
           });
 
-          const infoWindow = new google.maps.InfoWindow({
+          const infoWindow = new (window as any).google.maps.InfoWindow({
             content: `
               <div style="padding: 12px; font-family: Inter, sans-serif;">
                 <h3 style="margin: 0 0 8px 0; color: #1e40af; font-weight: 600;">ProBuild Construction</h3>
@@ -255,22 +266,22 @@ const { title, description = "ProBuild Construction - Professional construction,
 
       // Initialize everything when DOM is loaded
       document.addEventListener('DOMContentLoaded', () => {
-        window.mobileMenu = new MobileMenu();
+        (window as any).mobileMenu = new MobileMenu();
         new SmoothScroll();
         new AnimationObserver();
         
         // Load Google Maps
-        if (typeof google !== 'undefined' && google.maps) {
+        if (typeof (window as any).google !== 'undefined' && (window as any).google.maps) {
           initMap();
         }
       });
 
       // Handle Google Maps API load
-      window.initMap = initMap;
+      (window as any).initMap = initMap;
     </script>
     
     <!-- Google Maps API with callback -->
-    <script async defer 
+    <script async defer is:inline
       src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=places&loading=async">
     </script>
   </body>

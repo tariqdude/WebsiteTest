@@ -1,10 +1,13 @@
 ---
 // Enhanced Media Section Component
-export interface Props {
-  mediaType?: 'gallery' | 'video' | 'testimonials';
-}
+import type { MediaSectionProps } from '../types/index.js';
+
+export interface Props extends MediaSectionProps {}
 
 const { mediaType = 'gallery' } = Astro.props;
+
+// Use mediaType in component logic
+console.log(`MediaSection initialized with type: ${mediaType}`);
 ---
 
 <section id="gallery" class="py-16 lg:py-24 bg-gradient-to-b from-gray-50 to-white">
@@ -309,12 +312,12 @@ const { mediaType = 'gallery' } = Astro.props;
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const tabButtons = document.querySelectorAll('.media-tab-btn');
-    const contents = document.querySelectorAll('.media-content');
+    const tabButtons = document.querySelectorAll('.media-tab-btn') as NodeListOf<HTMLElement>;
+    const contents = document.querySelectorAll('.media-content') as NodeListOf<HTMLElement>;
     
-    function switchTab(targetContent) {
+    function switchTab(targetContent: string): void {
       // Update button states
-      tabButtons.forEach(btn => {
+      tabButtons.forEach((btn: HTMLElement) => {
         if (btn.dataset.content === targetContent) {
           btn.classList.add('active');
         } else {
@@ -323,7 +326,7 @@ const { mediaType = 'gallery' } = Astro.props;
       });
       
       // Show/hide content with animation
-      contents.forEach(content => {
+      contents.forEach((content: HTMLElement) => {
         if (content.id === `${targetContent}-content`) {
           content.classList.remove('hidden');
           content.classList.add('block');
@@ -344,10 +347,12 @@ const { mediaType = 'gallery' } = Astro.props;
     }
     
     // Add event listeners to tab buttons
-    tabButtons.forEach(btn => {
+    tabButtons.forEach((btn: HTMLElement) => {
       btn.addEventListener('click', () => {
         const targetContent = btn.dataset.content;
-        switchTab(targetContent);
+        if (targetContent) {
+          switchTab(targetContent);
+        }
       });
     });
   });
