@@ -1,0 +1,180 @@
+---
+export interface Props {
+  position?: 'fixed' | 'static';
+  placement?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+  className?: string;
+}
+
+const { 
+  position = 'fixed', 
+  placement = 'top-right',
+  className = '' 
+} = Astro.props;
+
+const positionClasses = {
+  'top-right': 'top-4 right-4',
+  'top-left': 'top-4 left-4', 
+  'bottom-right': 'bottom-4 right-4',
+  'bottom-left': 'bottom-4 left-4'
+};
+---
+
+<div 
+  class={`theme-toggle ${position} ${position === 'fixed' ? positionClasses[placement] : ''} z-40 ${className}`}
+>
+  <button 
+    id="theme-toggle-btn"
+    class="
+      w-12 h-12 rounded-full bg-white/90 dark:bg-gray-800/90 
+      backdrop-blur-sm border border-gray-200 dark:border-gray-700 
+      shadow-lg hover:shadow-xl transition-all duration-300
+      flex items-center justify-center
+      hover:scale-105 active:scale-95
+      group
+    "
+    aria-label="Toggle dark mode"
+    title="Toggle Theme"
+  >
+    <!-- Sun Icon (Light Mode) -->
+    <svg 
+      class="
+        w-6 h-6 text-yellow-500 dark:text-gray-400
+        transition-all duration-300 rotate-0 dark:rotate-180
+        scale-100 dark:scale-0
+        absolute
+      " 
+      fill="none" 
+      stroke="currentColor" 
+      viewBox="0 0 24 24"
+    >
+      <path 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        stroke-width="2" 
+        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+      />
+    </svg>
+    
+    <!-- Moon Icon (Dark Mode) -->
+    <svg 
+      class="
+        w-6 h-6 text-gray-400 dark:text-blue-300
+        transition-all duration-300 rotate-180 dark:rotate-0
+        scale-0 dark:scale-100
+        absolute
+      " 
+      fill="none" 
+      stroke="currentColor" 
+      viewBox="0 0 24 24"
+    >
+      <path 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        stroke-width="2" 
+        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+      />
+    </svg>
+  </button>
+</div>
+
+<style>
+  .theme-toggle {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .theme-toggle button:hover {
+    transform: scale(1.05);
+  }
+  
+  .theme-toggle button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Animation for theme transition */
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+</style>
+
+<script>
+  class ThemeToggle {
+    private button: HTMLButtonElement | null;
+    private currentTheme: 'light' | 'dark';
+
+    constructor() {
+      this.button = document.getElementById('theme-toggle-btn') as HTMLButtonElement;
+      this.currentTheme = this.getInitialTheme();
+      this.init();
+    }
+
+    private getInitialTheme(): 'light' | 'dark' {
+      // Check localStorage first
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') {
+        return stored;
+      }
+      
+      // Check system preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      
+      return 'light';
+    }
+
+    private init(): void {
+      // Apply initial theme
+      this.applyTheme(this.currentTheme);
+      
+      // Add click listener
+      this.button?.addEventListener('click', () => this.toggle());
+      
+      // Listen for system theme changes
+      if (window.matchMedia) {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) {
+            this.currentTheme = e.matches ? 'dark' : 'light';
+            this.applyTheme(this.currentTheme);
+          }
+        });
+      }
+    }
+
+    private toggle(): void {
+      this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+      this.applyTheme(this.currentTheme);
+      localStorage.setItem('theme', this.currentTheme);
+      
+      // Dispatch custom event for other components
+      window.dispatchEvent(new CustomEvent('themeChanged', {
+        detail: { theme: this.currentTheme }
+      }));
+    }
+
+    private applyTheme(theme: 'light' | 'dark'): void {
+      const root = document.documentElement;
+      
+      if (theme === 'dark') {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+      
+      // Update meta theme-color for mobile browsers
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme === 'dark' ? '#1a1a2e' : '#ffffff');
+      }
+    }
+
+    public getCurrentTheme(): 'light' | 'dark' {
+      return this.currentTheme;
+    }
+  }
+
+  // Initialize theme toggle when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    (window as any).themeToggle = new ThemeToggle();
+  });
+</script>

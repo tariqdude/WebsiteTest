@@ -1,0 +1,355 @@
+---
+export interface Props {
+  id?: string;
+  position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center';
+  class?: string;
+}
+
+const {
+  id = 'toast-container',
+  position = 'top-right',
+  class: additionalClasses = '',
+  ...props
+} = Astro.props;
+
+const positionClasses = {
+  'top-right': 'top-4 right-4',
+  'top-left': 'top-4 left-4',
+  'bottom-right': 'bottom-4 right-4',
+  'bottom-left': 'bottom-4 left-4',
+  'top-center': 'top-4 left-1/2 transform -translate-x-1/2',
+  'bottom-center': 'bottom-4 left-1/2 transform -translate-x-1/2'
+};
+
+const containerClasses = [
+  'fixed z-50 flex flex-col space-y-4 w-80 max-w-sm',
+  positionClasses[position],
+  additionalClasses
+].filter(Boolean).join(' ');
+---
+
+<!-- Toast Container -->
+<div 
+  id={id}
+  class={containerClasses}
+  data-toast-container
+  {...props}
+>
+  <!-- Toast notifications will be dynamically inserted here -->
+</div>
+
+<style>
+  /* Toast animations */
+  @keyframes toast-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes toast-out {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes toast-in-left {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes toast-out-left {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes toast-in-center {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes toast-out-center {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+
+  .toast {
+    animation: toast-in 0.3s ease-out forwards;
+  }
+  
+  .toast.removing {
+    animation: toast-out 0.3s ease-in forwards;
+  }
+  
+  .toast-left {
+    animation: toast-in-left 0.3s ease-out forwards;
+  }
+  
+  .toast-left.removing {
+    animation: toast-out-left 0.3s ease-in forwards;
+  }
+  
+  .toast-center {
+    animation: toast-in-center 0.3s ease-out forwards;
+  }
+  
+  .toast-center.removing {
+    animation: toast-out-center 0.3s ease-in forwards;
+  }
+
+  /* Progress bar animation */
+  @keyframes progress {
+    from {
+      width: 100%;
+    }
+    to {
+      width: 0%;
+    }
+  }
+  
+  .toast-progress {
+    animation: progress linear forwards;
+  }
+</style>
+
+<script>
+  // Toast notification system
+  class ToastManager {
+    constructor(containerId = 'toast-container') {
+      this.container = document.getElementById(containerId);
+      this.toasts = new Map();
+      this.position = this.container?.dataset.position || 'top-right';
+    }
+
+    show(options) {
+      if (!this.container) {
+        console.warn('Toast container not found');
+        return null;
+      }
+
+      const {
+        message,
+        type = 'info', // success, error, warning, info
+        duration = 5000,
+        closable = true,
+        icon = null,
+        action = null
+      } = options;
+
+      const toastId = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      
+      // Create toast element
+      const toast = document.createElement('div');
+      toast.id = toastId;
+      toast.className = this.getToastClasses(type);
+      
+      // Toast content
+      toast.innerHTML = `
+        <div class="flex items-start space-x-3 p-4">
+          ${this.getIcon(type, icon)}
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium text-gray-900">
+              ${message}
+            </div>
+            ${action ? `
+              <div class="mt-2">
+                <button class="text-xs font-medium text-brand-primary-600 hover:text-brand-primary-500 transition-colors duration-200" data-toast-action>
+                  ${action.text}
+                </button>
+              </div>
+            ` : ''}
+          </div>
+          ${closable ? `
+            <button class="flex-shrink-0 ml-4 text-gray-400 hover:text-gray-600 transition-colors duration-200" data-toast-close>
+              <i class="fas fa-times text-sm"></i>
+            </button>
+          ` : ''}
+        </div>
+        ${duration > 0 ? `
+          <div class="h-1 bg-gray-200">
+            <div class="h-full toast-progress ${this.getProgressColor(type)}" style="animation-duration: ${duration}ms;"></div>
+          </div>
+        ` : ''}
+      `;
+
+      // Add event listeners
+      if (closable) {
+        const closeBtn = toast.querySelector('[data-toast-close]');
+        closeBtn.addEventListener('click', () => this.hide(toastId));
+      }
+
+      if (action) {
+        const actionBtn = toast.querySelector('[data-toast-action]');
+        actionBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (typeof action.onClick === 'function') {
+            action.onClick();
+          }
+          if (action.closeOnClick !== false) {
+            this.hide(toastId);
+          }
+        });
+      }
+
+      // Add to container
+      this.container.appendChild(toast);
+      this.toasts.set(toastId, { element: toast, timer: null });
+
+      // Auto-remove after duration
+      if (duration > 0) {
+        const timer = setTimeout(() => {
+          this.hide(toastId);
+        }, duration);
+        
+        this.toasts.get(toastId).timer = timer;
+      }
+
+      // Dispatch event
+      toast.dispatchEvent(new CustomEvent('toast:shown', {
+        detail: { id: toastId, type, message }
+      }));
+
+      return toastId;
+    }
+
+    hide(toastId) {
+      const toastData = this.toasts.get(toastId);
+      if (!toastData) return;
+
+      const { element, timer } = toastData;
+      
+      // Clear timer
+      if (timer) {
+        clearTimeout(timer);
+      }
+
+      // Add removing class for animation
+      element.classList.add('removing');
+
+      // Remove after animation
+      setTimeout(() => {
+        if (element.parentNode) {
+          element.parentNode.removeChild(element);
+        }
+        this.toasts.delete(toastId);
+        
+        // Dispatch event
+        element.dispatchEvent(new CustomEvent('toast:hidden', {
+          detail: { id: toastId }
+        }));
+      }, 300);
+    }
+
+    hideAll() {
+      this.toasts.forEach((_, toastId) => {
+        this.hide(toastId);
+      });
+    }
+
+    getToastClasses(type) {
+      const baseClasses = 'toast bg-white border rounded-lg shadow-lg border-l-4 overflow-hidden';
+      const animationClass = this.getAnimationClass();
+      
+      const typeClasses = {
+        success: 'border-l-green-500',
+        error: 'border-l-red-500',
+        warning: 'border-l-yellow-500',
+        info: 'border-l-blue-500'
+      };
+
+      return `${baseClasses} ${animationClass} ${typeClasses[type] || typeClasses.info}`;
+    }
+
+    getAnimationClass() {
+      if (this.position.includes('left')) return 'toast-left';
+      if (this.position.includes('center')) return 'toast-center';
+      return 'toast';
+    }
+
+    getIcon(type, customIcon) {
+      if (customIcon) {
+        return `<i class="${customIcon} text-lg ${this.getIconColor(type)}"></i>`;
+      }
+
+      const icons = {
+        success: 'fas fa-check-circle text-green-500',
+        error: 'fas fa-exclamation-circle text-red-500',
+        warning: 'fas fa-exclamation-triangle text-yellow-500',
+        info: 'fas fa-info-circle text-blue-500'
+      };
+
+      return `<i class="${icons[type] || icons.info} text-lg"></i>`;
+    }
+
+    getIconColor(type) {
+      const colors = {
+        success: 'text-green-500',
+        error: 'text-red-500',
+        warning: 'text-yellow-500',
+        info: 'text-blue-500'
+      };
+      
+      return colors[type] || colors.info;
+    }
+
+    getProgressColor(type) {
+      const colors = {
+        success: 'bg-green-500',
+        error: 'bg-red-500',
+        warning: 'bg-yellow-500',
+        info: 'bg-blue-500'
+      };
+      
+      return colors[type] || colors.info;
+    }
+  }
+
+  // Initialize toast manager when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    window.toastManager = new ToastManager();
+    
+    // Global toast functions
+    window.toast = {
+      success: (message, options = {}) => window.toastManager.show({ ...options, message, type: 'success' }),
+      error: (message, options = {}) => window.toastManager.show({ ...options, message, type: 'error' }),
+      warning: (message, options = {}) => window.toastManager.show({ ...options, message, type: 'warning' }),
+      info: (message, options = {}) => window.toastManager.show({ ...options, message, type: 'info' }),
+      show: (options) => window.toastManager.show(options),
+      hide: (id) => window.toastManager.hide(id),
+      hideAll: () => window.toastManager.hideAll()
+    };
+  });
+</script>

@@ -1,0 +1,1361 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import MediaSection from '../components/MediaSection.astro';
+import Section from '../components/ui/Section.astro';
+import Typography from '../components/ui/Typography.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import SocialProofCounter from '../components/ui/SocialProofCounter.astro';
+import FloatingActionButton from '../components/ui/FloatingActionButton.astro';
+---
+
+<Layout title="ProBuild Construction - Professional Construction & HVAC Services" description="Leading construction and HVAC contractor serving residential and commercial clients. Licensed, insured, and trusted for quality craftsmanship.">
+  <Navigation />
+  
+  <!-- Hero Section -->
+  <Section id="home" background="gradient" padding="xl" class="min-h-screen flex items-center relative overflow-hidden">
+    <!-- Background Pattern Overlay -->
+    <div class="absolute inset-0 opacity-10">
+      <svg width="100" height="100" viewBox="0 0 100 100" class="w-full h-full">
+        <defs>
+          <pattern id="hero-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="2" fill="currentColor" opacity="0.3"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hero-dots)"/>
+      </svg>
+    </div>
+    
+    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Hero Content -->
+      <div class="space-y-8 text-center lg:text-left" data-animate>
+        <!-- Badge -->
+        <div class="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+          <i class="fas fa-star text-yellow-400 mr-2"></i>
+          <span class="text-sm font-medium text-white">Rated #1 Construction Service</span>
+        </div>
+        
+        <!-- Main Heading -->
+        <Typography variant="h1" color="white" class="font-black">
+          Build Your
+          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 animate-pulse-soft">
+            Dream Space
+          </span>
+        </Typography>
+        
+        <!-- Subtitle -->
+        <Typography variant="subtitle" color="white" class="max-w-2xl mx-auto lg:mx-0">
+          Professional construction, HVAC, and home improvement services. 
+          <span class="font-semibold">Licensed, insured, and trusted</span> by hundreds of satisfied customers.
+        </Typography>
+        
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <Button variant="secondary" size="lg" glow={true} class="group">
+            <i class="fas fa-phone mr-2 group-hover:animate-bounce"></i>
+            Get Free Quote
+          </Button>
+          <Button variant="outline" size="lg" class="text-white border-white hover:bg-white hover:text-brand-primary-600">
+            <i class="fas fa-play mr-2"></i>
+            Watch Our Work
+          </Button>
+        </div>
+        
+        <!-- Trust Indicators -->
+        <div class="grid grid-cols-3 gap-6 pt-8">
+          <div class="text-center">
+            <Typography variant="h3" color="white" class="font-bold">25+</Typography>
+            <Typography variant="caption" color="white" class="opacity-80">Years Experience</Typography>
+          </div>
+          <div class="text-center">
+            <Typography variant="h3" color="white" class="font-bold">500+</Typography>
+            <Typography variant="caption" color="white" class="opacity-80">Happy Clients</Typography>
+          </div>
+          <div class="text-center">
+            <Typography variant="h3" color="white" class="font-bold">100%</Typography>
+            <Typography variant="caption" color="white" class="opacity-80">Satisfaction</Typography>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Hero Visual -->
+      <div class="relative" data-animate>
+        <div class="relative z-10 bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
+          <img 
+            src="/api/placeholder/600/400" 
+            alt="Professional Construction Work" 
+            class="w-full h-auto rounded-2xl shadow-lg"
+            loading="eager"
+          />
+          <!-- Floating Stats -->
+          <div class="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-xl animate-float">
+            <div class="flex items-center space-x-2">
+              <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <span class="text-sm font-medium text-brand-neutral-700">Licensed & Insured</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Social Proof Section -->
+  <Section background="white" padding="lg">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <SocialProofCounter 
+        value={25} 
+        label="Years Experience" 
+        suffix="+" 
+        icon="fas fa-calendar-check"
+        variant="outlined"
+        animate={true}
+      />
+      <SocialProofCounter 
+        value={500} 
+        label="Projects Completed" 
+        suffix="+" 
+        icon="fas fa-hammer"
+        variant="filled"
+        animate={true}
+        delay={200}
+      />
+      <SocialProofCounter 
+        value={100} 
+        label="Satisfaction Rate" 
+        suffix="%" 
+        icon="fas fa-thumbs-up"
+        variant="gradient"
+        animate={true}
+        delay={400}
+      />
+      <SocialProofCounter 
+        value={24} 
+        label="Hour Support" 
+        suffix="/7" 
+        icon="fas fa-phone-volume"
+        variant="outlined"
+        animate={true}
+        delay={600}
+      />
+    </div>
+  </Section>
+
+  <!-- About Section -->
+  <Section id="about" background="light" padding="xl">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <Typography variant="overline" color="primary" class="tracking-wider">About ProBuild</Typography>
+        <Typography variant="h2" color="neutral">
+          Building Excellence Since 1998
+        </Typography>
+        <Typography variant="body" color="muted" class="text-lg leading-relaxed">
+          With over 25 years of experience in the construction industry, ProBuild Construction has established itself as the premier choice for residential and commercial projects. Our team of skilled professionals combines traditional craftsmanship with modern techniques to deliver exceptional results.
+        </Typography>
+        
+        <!-- Feature List -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { icon: "fas fa-shield-alt", text: "Fully Licensed & Insured" },
+            { icon: "fas fa-award", text: "Award-Winning Service" },
+            { icon: "fas fa-clock", text: "On-Time Completion" },
+            { icon: "fas fa-dollar-sign", text: "Competitive Pricing" }
+          ].map((feature) => (
+            <div class="flex items-center space-x-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-brand-primary-100 rounded-full flex items-center justify-center">
+                <i class={`${feature.icon} text-brand-primary-600 text-sm`}></i>
+              </div>
+              <Typography variant="body" color="neutral" class="font-medium">
+                {feature.text}
+              </Typography>
+            </div>
+          ))}
+        </div>
+        
+        <div class="pt-4">
+          <Button variant="primary" size="lg">
+            <i class="fas fa-info-circle mr-2"></i>
+            Learn More About Us
+          </Button>
+        </div>
+      </div>
+      
+      <div class="relative">
+        <Card variant="elevated" class="p-0 overflow-hidden">
+          <img 
+            src="/api/placeholder/600/400" 
+            alt="Our Professional Team" 
+            class="w-full h-auto"
+          />
+          <div class="p-6">
+            <Typography variant="h4" color="neutral" class="mb-2">Meet Our Expert Team</Typography>
+            <Typography variant="body" color="muted">
+              Dedicated professionals committed to excellence in every project.
+            </Typography>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Services Section -->
+  <Section id="services" background="white" padding="xl">
+    <div class="text-center mb-16">
+      <Typography variant="overline" color="primary" class="tracking-wider mb-4">Our Services</Typography>
+      <Typography variant="h2" color="neutral" class="mb-6">
+        Complete Construction Solutions
+      </Typography>
+      <Typography variant="body" color="muted" class="text-lg max-w-3xl mx-auto">
+        From residential renovations to commercial construction, we offer comprehensive services to meet all your building needs.
+      </Typography>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {[
+        {
+          icon: "fas fa-home",
+          title: "Residential Construction",
+          description: "Custom homes, additions, and renovations built with precision and care.",
+          features: ["Custom Design", "Quality Materials", "Licensed Contractors"]
+        },
+        {
+          icon: "fas fa-building",
+          title: "Commercial Construction",
+          description: "Professional commercial spaces designed for business success.",
+          features: ["Project Management", "Timeline Delivery", "Budget Control"]
+        },
+        {
+          icon: "fas fa-snowflake",
+          title: "HVAC Systems",
+          description: "Complete heating, ventilation, and air conditioning services.",
+          features: ["Installation", "Maintenance", "Emergency Repairs"]
+        },
+        {
+          icon: "fas fa-tools",
+          title: "Home Renovation",
+          description: "Transform your existing space with our renovation expertise.",
+          features: ["Kitchen Remodels", "Bathroom Updates", "Full Renovations"]
+        },
+        {
+          icon: "fas fa-bolt",
+          title: "Electrical Services",
+          description: "Safe and reliable electrical work for homes and businesses.",
+          features: ["Wiring Installation", "Panel Upgrades", "Code Compliance"]
+        },
+        {
+          icon: "fas fa-wrench",
+          title: "Plumbing Services",
+          description: "Complete plumbing solutions from repairs to new installations.",
+          features: ["Pipe Installation", "Fixture Replacement", "Leak Repairs"]
+        }
+      ].map((service) => (
+        <Card variant="elevated" hoverable={true} class="h-full group cursor-pointer transform hover:scale-105 transition-all duration-300">
+          <div class="text-center p-6 h-full flex flex-col">
+            <div class="w-16 h-16 bg-brand-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-primary-600 transition-colors duration-300">
+              <i class={`${service.icon} text-2xl text-brand-primary-600 group-hover:text-white transition-colors duration-300`}></i>
+            </div>
+            <Typography variant="h4" color="neutral" class="mb-3">{service.title}</Typography>
+            <Typography variant="body" color="muted" class="mb-4 flex-grow">{service.description}</Typography>
+            
+            <div class="space-y-2">
+              {service.features.map((feature) => (
+                <div class="flex items-center justify-center text-sm text-brand-neutral-600">
+                  <i class="fas fa-check text-green-500 mr-2"></i>
+                  {feature}
+                </div>
+              ))}
+            </div>
+            
+            <div class="mt-6">
+              <Button variant="outline" size="sm" class="w-full group-hover:bg-brand-primary-600 group-hover:text-white group-hover:border-brand-primary-600">
+                Learn More
+              </Button>
+            </div>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </Section>
+
+  <!-- Media Section (Existing) -->
+  <MediaSection />
+
+  <!-- Contact Section -->
+  <Section id="contact" background="dark" padding="xl">
+    <div class="text-center mb-16">
+      <Typography variant="overline" color="white" class="tracking-wider mb-4 opacity-80">Get In Touch</Typography>
+      <Typography variant="h2" color="white" class="mb-6">
+        Ready to Start Your Project?
+      </Typography>
+      <Typography variant="body" color="white" class="text-lg max-w-3xl mx-auto opacity-90">
+        Contact us today for a free consultation and quote. We're here to help bring your construction dreams to reality.
+      </Typography>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Contact Info -->
+      <div class="space-y-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {[
+            { icon: "fas fa-phone", title: "Call Us", info: "(555) 123-4567", link: "tel:+15551234567" },
+            { icon: "fas fa-envelope", title: "Email Us", info: "info@probuild.com", link: "mailto:info@probuild.com" },
+            { icon: "fas fa-map-marker-alt", title: "Visit Us", info: "123 Main St, City", link: "#" },
+            { icon: "fas fa-clock", title: "Hours", info: "Mon-Fri 8AM-6PM", link: "#" }
+          ].map((contact) => (
+            <Card variant="glass" class="p-6 text-center hover:bg-white/20 transition-colors duration-300">
+              <div class="w-12 h-12 bg-brand-secondary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class={`${contact.icon} text-white`}></i>
+              </div>
+              <Typography variant="h6" color="white" class="mb-2">{contact.title}</Typography>
+              {contact.link.startsWith('#') ? (
+                <Typography variant="body" color="white" class="opacity-90">{contact.info}</Typography>
+              ) : (
+                <a href={contact.link} class="text-brand-secondary-300 hover:text-brand-secondary-200 transition-colors duration-200">
+                  {contact.info}
+                </a>
+              )}
+            </Card>
+          ))}
+        </div>
+        
+        <!-- Google Maps Placeholder -->
+        <Card variant="elevated" class="h-64 overflow-hidden">
+          <div id="map" class="w-full h-full bg-brand-neutral-200 flex items-center justify-center">
+            <div class="text-center">
+              <i class="fas fa-map-marked-alt text-4xl text-brand-neutral-400 mb-4"></i>
+              <Typography variant="body" color="muted">Interactive Map Loading...</Typography>
+            </div>
+          </div>
+        </Card>
+      </div>
+      
+      <!-- Contact Form -->
+      <Card variant="elevated" class="p-8">
+        <form class="space-y-6" action="#" method="POST">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="first-name" class="block text-sm font-medium text-brand-neutral-700 mb-2">First Name</label>
+              <input type="text" id="first-name" name="first-name" required class="w-full px-4 py-3 border border-brand-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent transition-colors duration-200">
+            </div>
+            <div>
+              <label for="last-name" class="block text-sm font-medium text-brand-neutral-700 mb-2">Last Name</label>
+              <input type="text" id="last-name" name="last-name" required class="w-full px-4 py-3 border border-brand-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent transition-colors duration-200">
+            </div>
+          </div>
+          
+          <div>
+            <label for="email" class="block text-sm font-medium text-brand-neutral-700 mb-2">Email Address</label>
+            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-brand-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent transition-colors duration-200">
+          </div>
+          
+          <div>
+            <label for="phone" class="block text-sm font-medium text-brand-neutral-700 mb-2">Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-brand-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent transition-colors duration-200">
+          </div>
+          
+          <div>
+            <label for="service" class="block text-sm font-medium text-brand-neutral-700 mb-2">Service Needed</label>
+            <select id="service" name="service" class="w-full px-4 py-3 border border-brand-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent transition-colors duration-200">
+              <option value="">Select a service</option>
+              <option value="residential">Residential Construction</option>
+              <option value="commercial">Commercial Construction</option>
+              <option value="hvac">HVAC Services</option>
+              <option value="renovation">Home Renovation</option>
+              <option value="electrical">Electrical Services</option>
+              <option value="plumbing">Plumbing Services</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="message" class="block text-sm font-medium text-brand-neutral-700 mb-2">Project Description</label>
+            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-brand-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary-500 focus:border-transparent transition-colors duration-200 resize-none"></textarea>
+          </div>
+          
+          <Button variant="primary" size="lg" class="w-full">
+            <i class="fas fa-paper-plane mr-2"></i>
+            Send Message
+          </Button>
+        </form>
+      </Card>
+    </div>
+  </Section>
+
+  <!-- Floating Action Button -->
+  <FloatingActionButton 
+    icon="fas fa-phone" 
+    variant="primary" 
+    position="bottom-right"
+    tooltip="Call Now for Free Quote"
+    onClick="window.open('tel:+15551234567', '_self')"
+    animate={true}
+  />
+</Layout>
+            <a href="#contact" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-brand-secondary to-orange-600 rounded-2xl shadow-strong hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
+              <span class="relative z-10 flex items-center">
+                <i class="fas fa-phone mr-3"></i>
+                Get Free Quote
+              </span>
+              <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-brand-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            
+            <a href="#services" class="group inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white border-2 border-white/30 rounded-2xl hover:bg-white/10 hover:border-white transition-all duration-300 backdrop-blur-sm">
+              <i class="fas fa-tools mr-3 group-hover:animate-bounce"></i>
+              View Services
+            </a>
+          </div>
+          
+          <!-- Trust Indicators -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-8">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-white">15+</div>
+              <div class="text-sm text-gray-300">Years Experience</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-white">500+</div>
+              <div class="text-sm text-gray-300">Projects Done</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-white">24/7</div>
+              <div class="text-sm text-gray-300">Emergency Service</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-white">100%</div>
+              <div class="text-sm text-gray-300">Satisfaction</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Enhanced Hero Visual -->
+        <div class="relative lg:pl-8" data-animate>
+          <div class="grid grid-cols-2 gap-4 sm:gap-6">
+            <!-- Feature Cards with Enhanced Design -->
+            <div class="space-y-4 sm:space-y-6">
+              <div class="feature-card bg-white/95 backdrop-blur-sm rounded-3xl p-6 lg:p-8 shadow-strong hover:shadow-xl transform hover:scale-105 transition-all duration-500 animate-float">
+                <div class="w-12 h-12 bg-gradient-to-br from-brand-secondary to-orange-600 rounded-2xl flex items-center justify-center mb-4">
+                  <i class="fas fa-hard-hat text-white text-xl"></i>
+                </div>
+                <h3 class="text-lg font-heading font-bold text-brand-dark mb-2">Licensed & Insured</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Fully licensed contractors with comprehensive coverage</p>
+              </div>
+              
+              <div class="feature-card bg-white/95 backdrop-blur-sm rounded-3xl p-6 lg:p-8 shadow-strong hover:shadow-xl transform hover:scale-105 transition-all duration-500 animate-float" style="animation-delay: 0.5s">
+                <div class="w-12 h-12 bg-gradient-to-br from-brand-accent to-green-600 rounded-2xl flex items-center justify-center mb-4">
+                  <i class="fas fa-clock text-white text-xl"></i>
+                </div>
+                <h3 class="text-lg font-heading font-bold text-brand-dark mb-2">24/7 Emergency</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Round-the-clock emergency services available</p>
+              </div>
+            </div>
+            
+            <div class="space-y-4 sm:space-y-6 pt-8 sm:pt-12">
+              <div class="feature-card bg-white/95 backdrop-blur-sm rounded-3xl p-6 lg:p-8 shadow-strong hover:shadow-xl transform hover:scale-105 transition-all duration-500 animate-float" style="animation-delay: 1s">
+                <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mb-4">
+                  <i class="fas fa-star text-white text-xl"></i>
+                </div>
+                <h3 class="text-lg font-heading font-bold text-brand-dark mb-2">5-Star Rated</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Consistently rated 5 stars by satisfied clients</p>
+              </div>
+              
+              <div class="feature-card bg-white/95 backdrop-blur-sm rounded-3xl p-6 lg:p-8 shadow-strong hover:shadow-xl transform hover:scale-105 transition-all duration-500 animate-float" style="animation-delay: 1.5s">
+                <div class="w-12 h-12 bg-gradient-to-br from-brand-primary to-blue-600 rounded-2xl flex items-center justify-center mb-4">
+                  <i class="fas fa-certificate text-white text-xl"></i>
+                </div>
+                <h3 class="text-lg font-heading font-bold text-brand-dark mb-2">Quality Guaranteed</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">All work backed by comprehensive warranty</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-gentle">
+      <a href="#about" class="flex flex-col items-center text-white hover:text-brand-secondary transition-colors duration-300">
+        <span class="text-sm font-medium mb-2">Scroll Down</span>
+        <i class="fas fa-chevron-down text-xl"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Enhanced About Section -->
+  <section id="about" class="py-16 lg:py-24 bg-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full">
+        <defs>
+          <pattern id="about-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+            <g fill="none" fill-rule="evenodd">
+              <g fill="#1e40af" fill-opacity="0.4">
+                <path d="M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z"/>
+              </g>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#about-pattern)"/>
+      </svg>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16 items-center">
+        <!-- About Content -->
+        <div class="space-y-8" data-animate>
+          <div class="space-y-6">
+            <div class="inline-flex items-center bg-brand-secondary/10 text-brand-secondary px-4 py-2 rounded-full text-sm font-semibold">
+              <i class="fas fa-award mr-2"></i>
+              About ProBuild Construction
+            </div>
+            
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-brand-dark leading-tight">
+              Building Excellence Since
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-orange-600">2009</span>
+            </h2>
+            
+            <p class="text-lg lg:text-xl text-gray-600 leading-relaxed">
+              With over 15 years of experience in construction and HVAC services, ProBuild Construction has earned a reputation for 
+              <span class="font-semibold text-brand-dark">exceptional quality and customer satisfaction</span>. We combine traditional 
+              craftsmanship with modern techniques to deliver outstanding results.
+            </p>
+          </div>
+          
+          <!-- Achievement Grid -->
+          <div class="grid grid-cols-2 gap-6">
+            <div class="achievement-item p-6 bg-gradient-to-br from-brand-primary/5 to-brand-primary/10 rounded-2xl border border-brand-primary/20">
+              <div class="flex items-center space-x-3 mb-3">
+                <div class="w-10 h-10 bg-brand-primary/20 rounded-xl flex items-center justify-center">
+                  <i class="fas fa-check text-brand-primary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-brand-dark">15+ Years</h4>
+                  <p class="text-sm text-gray-600">Industry Experience</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="achievement-item p-6 bg-gradient-to-br from-brand-secondary/5 to-brand-secondary/10 rounded-2xl border border-brand-secondary/20">
+              <div class="flex items-center space-x-3 mb-3">
+                <div class="w-10 h-10 bg-brand-secondary/20 rounded-xl flex items-center justify-center">
+                  <i class="fas fa-check text-brand-secondary"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-brand-dark">500+</h4>
+                  <p class="text-sm text-gray-600">Completed Projects</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="achievement-item p-6 bg-gradient-to-br from-brand-accent/5 to-brand-accent/10 rounded-2xl border border-brand-accent/20">
+              <div class="flex items-center space-x-3 mb-3">
+                <div class="w-10 h-10 bg-brand-accent/20 rounded-xl flex items-center justify-center">
+                  <i class="fas fa-check text-brand-accent"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-brand-dark">Licensed</h4>
+                  <p class="text-sm text-gray-600">& Fully Bonded</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="achievement-item p-6 bg-gradient-to-br from-yellow-500/5 to-yellow-500/10 rounded-2xl border border-yellow-500/20">
+              <div class="flex items-center space-x-3 mb-3">
+                <div class="w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center">
+                  <i class="fas fa-check text-yellow-600"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-brand-dark">100%</h4>
+                  <p class="text-sm text-gray-600">Quality Guarantee</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Service Tags -->
+          <div class="flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-brand-primary/10 text-brand-primary rounded-full text-sm font-medium">Residential Construction</span>
+            <span class="px-4 py-2 bg-brand-secondary/10 text-brand-secondary rounded-full text-sm font-medium">Commercial HVAC</span>
+            <span class="px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-sm font-medium">Emergency Services</span>
+          </div>
+        </div>
+        
+        <!-- About Visual -->
+        <div class="relative" data-animate>
+          <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-6">
+              <div class="aspect-square bg-gradient-to-br from-brand-primary to-blue-600 rounded-3xl flex items-center justify-center shadow-strong">
+                <div class="text-center text-white">
+                  <i class="fas fa-users text-4xl mb-4 opacity-90"></i>
+                  <p class="font-bold text-lg">Expert Team</p>
+                  <p class="text-sm opacity-80">Professional Craftsmen</p>
+                </div>
+              </div>
+              
+              <div class="aspect-[4/5] bg-gradient-to-br from-brand-secondary to-orange-600 rounded-3xl flex items-center justify-center shadow-strong">
+                <div class="text-center text-white p-6">
+                  <i class="fas fa-tools text-5xl mb-4 opacity-90"></i>
+                  <p class="font-bold text-xl">Modern Equipment</p>
+                  <p class="text-sm opacity-80 mt-2">State-of-the-art tools for precision work</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-6 pt-12">
+              <div class="aspect-[4/5] bg-gradient-to-br from-brand-accent to-green-600 rounded-3xl flex items-center justify-center shadow-strong">
+                <div class="text-center text-white p-6">
+                  <i class="fas fa-award text-5xl mb-4 opacity-90"></i>
+                  <p class="font-bold text-xl">Award Winning</p>
+                  <p class="text-sm opacity-80 mt-2">Recognized for excellence in construction</p>
+                </div>
+              </div>
+              
+              <div class="aspect-square bg-gradient-to-br from-purple-500 to-purple-700 rounded-3xl flex items-center justify-center shadow-strong">
+                <div class="text-center text-white">
+                  <i class="fas fa-handshake text-4xl mb-4 opacity-90"></i>
+                  <p class="font-bold text-lg">Trusted Service</p>
+                  <p class="text-sm opacity-80">Customer Focused</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Services Section -->
+  <section id="services" class="py-16 lg:py-24 bg-gray-50 relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-primary/5 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-brand-secondary/5 to-transparent"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16" data-animate>
+        <div class="inline-flex items-center bg-brand-primary/10 text-brand-primary px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          <i class="fas fa-tools mr-2"></i>
+          Professional Services
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-brand-dark mb-6 leading-tight">
+          Comprehensive
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-orange-600">Construction</span>
+          Solutions
+        </h2>
+        
+        <p class="text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          From residential renovations to commercial HVAC installations, we deliver exceptional quality 
+          with unmatched attention to detail and professional craftsmanship.
+        </p>
+      </div>
+      
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-animate>
+        <!-- Construction Services -->
+        <div class="service-card group bg-white rounded-3xl p-8 shadow-strong hover:shadow-xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-gray-100 hover:border-brand-primary/20">
+          <div class="relative mb-6">
+            <div class="w-20 h-20 bg-gradient-to-br from-brand-primary to-blue-600 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <i class="fas fa-hammer text-white text-2xl"></i>
+            </div>
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-brand-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          
+          <h3 class="text-xl lg:text-2xl font-heading font-bold text-brand-dark mb-4 group-hover:text-brand-primary transition-colors duration-300">
+            Construction Services
+          </h3>
+          
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            Complete construction solutions from foundation to finish with expert craftsmanship.
+          </p>
+          
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-brand-secondary/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-brand-secondary text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">New Construction & Build-outs</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-brand-secondary/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-brand-secondary text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Home Additions & Extensions</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-brand-secondary/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-brand-secondary text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Kitchen & Bathroom Remodels</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-brand-secondary/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-brand-secondary text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Commercial Renovations</span>
+            </li>
+          </ul>
+          
+          <button class="group-hover-btn w-full bg-gradient-to-r from-brand-primary to-blue-600 text-white font-bold py-3 px-6 rounded-2xl transform group-hover:scale-105 transition-all duration-300 hover:shadow-lg">
+            <span class="flex items-center justify-center">
+              Learn More
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+            </span>
+          </button>
+        </div>
+
+        <!-- HVAC Services -->
+        <div class="service-card group bg-white rounded-3xl p-8 shadow-strong hover:shadow-xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-gray-100 hover:border-brand-secondary/20">
+          <div class="relative mb-6">
+            <div class="w-20 h-20 bg-gradient-to-br from-brand-secondary to-orange-600 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <i class="fas fa-fan text-white text-2xl"></i>
+            </div>
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-brand-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          
+          <h3 class="text-xl lg:text-2xl font-heading font-bold text-brand-dark mb-4 group-hover:text-brand-secondary transition-colors duration-300">
+            HVAC Services
+          </h3>
+          
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            Professional heating, ventilation, and air conditioning for optimal comfort.
+          </p>
+          
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-brand-primary/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-brand-primary text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">System Installation & Replacement</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-brand-primary/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-brand-primary text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Repair & Maintenance Services</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-brand-primary/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-brand-primary text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Ductwork Design & Installation</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-brand-primary/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-brand-primary text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Energy Efficiency Upgrades</span>
+            </li>
+          </ul>
+          
+          <button class="group-hover-btn w-full bg-gradient-to-r from-brand-secondary to-orange-600 text-white font-bold py-3 px-6 rounded-2xl transform group-hover:scale-105 transition-all duration-300 hover:shadow-lg">
+            <span class="flex items-center justify-center">
+              Learn More
+              <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+            </span>
+          </button>
+        </div>
+
+        <!-- Emergency Services -->
+        <div class="service-card group bg-white rounded-3xl p-8 shadow-strong hover:shadow-xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-gray-100 hover:border-red-500/20">
+          <div class="relative mb-6">
+            <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <i class="fas fa-exclamation-triangle text-white text-2xl"></i>
+            </div>
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+          </div>
+          
+          <h3 class="text-xl lg:text-2xl font-heading font-bold text-brand-dark mb-4 group-hover:text-red-600 transition-colors duration-300">
+            Emergency Services
+          </h3>
+          
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            24/7 emergency response for urgent construction and HVAC issues.
+          </p>
+          
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-red-500/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-red-500 text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">24/7 Emergency Availability</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-red-500/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-red-500 text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Rapid Response Time</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-red-500/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-red-500 text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Storm & Water Damage Repair</span>
+            </li>
+            <li class="flex items-center text-gray-700">
+              <div class="w-5 h-5 bg-red-500/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="fas fa-check text-red-500 text-xs"></i>
+              </div>
+              <span class="text-sm font-medium">Critical HVAC Failures</span>
+            </li>
+          </ul>
+          
+          <button class="group-hover-btn w-full bg-gradient-to-r from-red-500 to-red-700 text-white font-bold py-3 px-6 rounded-2xl transform group-hover:scale-105 transition-all duration-300 hover:shadow-lg">
+            <span class="flex items-center justify-center">
+              Call Now
+              <i class="fas fa-phone ml-2 group-hover:animate-pulse"></i>
+            </span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- CTA Section -->
+      <div class="text-center mt-16" data-animate>
+        <div class="bg-gradient-to-r from-brand-primary to-brand-dark rounded-3xl p-8 lg:p-12 shadow-strong">
+          <h3 class="text-2xl lg:text-3xl font-heading font-bold text-white mb-4">
+            Ready to Get Started?
+          </h3>
+          <p class="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
+            Get a free consultation and estimate for your next construction or HVAC project.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#contact" class="bg-brand-secondary hover:bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
+              <i class="fas fa-phone mr-2"></i>
+              Get Free Quote
+            </a>
+            <a href="tel:+1234567890" class="bg-white/10 border-2 border-white text-white hover:bg-white hover:text-brand-dark px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm">
+              <i class="fas fa-phone-alt mr-2"></i>
+              Call Emergency Line
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media Section -->
+  <MediaSection />
+
+  <!-- Enhanced Contact Section -->
+  <section id="contact" class="py-16 lg:py-24 bg-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full">
+        <defs>
+          <pattern id="contact-pattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+            <g fill="none" fill-rule="evenodd">
+              <g fill="#f97316" fill-opacity="0.3">
+                <path d="M15 15c0-4.14-3.36-7.5-7.5-7.5S0 10.86 0 15s3.36 7.5 7.5 7.5S15 19.14 15 15zm15 0c0-4.14-3.36-7.5-7.5-7.5S15 10.86 15 15s3.36 7.5 7.5 7.5S30 19.14 30 15z"/>
+              </g>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#contact-pattern)"/>
+      </svg>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16" data-animate>
+        <div class="inline-flex items-center bg-brand-secondary/10 text-brand-secondary px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          <i class="fas fa-phone mr-2"></i>
+          Get In Touch
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-black text-brand-dark mb-6 leading-tight">
+          Ready to Start Your
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-orange-600">Dream Project?</span>
+        </h2>
+        
+        <p class="text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+          Contact us today for a free consultation and estimate. Our team of experts is ready to bring your vision to life 
+          with professional quality and exceptional service.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16">
+        <!-- Enhanced Contact Form -->
+        <div class="relative" data-animate>
+          <div class="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 lg:p-12 shadow-strong border border-gray-100">
+            <div class="flex items-center mb-8">
+              <div class="w-12 h-12 bg-gradient-to-br from-brand-secondary to-orange-600 rounded-2xl flex items-center justify-center mr-4">
+                <i class="fas fa-paper-plane text-white text-xl"></i>
+              </div>
+              <div>
+                <h3 class="text-xl lg:text-2xl font-heading font-bold text-brand-dark">Send Us a Message</h3>
+                <p class="text-gray-600">We'll respond within 2 hours</p>
+              </div>
+            </div>
+            
+            <form class="space-y-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="form-group">
+                  <label for="firstName" class="block text-sm font-semibold text-brand-dark mb-3">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" required 
+                         class="w-full px-5 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-brand-secondary/20 focus:border-brand-secondary transition-all duration-300 text-brand-dark placeholder-gray-400" 
+                         placeholder="Enter your first name">
+                </div>
+                <div class="form-group">
+                  <label for="lastName" class="block text-sm font-semibold text-brand-dark mb-3">Last Name *</label>
+                  <input type="text" id="lastName" name="lastName" required 
+                         class="w-full px-5 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-brand-secondary/20 focus:border-brand-secondary transition-all duration-300 text-brand-dark placeholder-gray-400" 
+                         placeholder="Enter your last name">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="email" class="block text-sm font-semibold text-brand-dark mb-3">Email Address *</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-gray-400"></i>
+                  </div>
+                  <input type="email" id="email" name="email" required 
+                         class="w-full pl-12 pr-5 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-brand-secondary/20 focus:border-brand-secondary transition-all duration-300 text-brand-dark placeholder-gray-400" 
+                         placeholder="your@email.com">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="phone" class="block text-sm font-semibold text-brand-dark mb-3">Phone Number *</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-phone text-gray-400"></i>
+                  </div>
+                  <input type="tel" id="phone" name="phone" required 
+                         class="w-full pl-12 pr-5 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-brand-secondary/20 focus:border-brand-secondary transition-all duration-300 text-brand-dark placeholder-gray-400" 
+                         placeholder="(555) 123-4567">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="service" class="block text-sm font-semibold text-brand-dark mb-3">Service Needed</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i class="fas fa-tools text-gray-400"></i>
+                  </div>
+                  <select id="service" name="service" 
+                          class="w-full pl-12 pr-5 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-brand-secondary/20 focus:border-brand-secondary transition-all duration-300 text-brand-dark appearance-none">
+                    <option value="">Select a service</option>
+                    <option value="construction">Construction Services</option>
+                    <option value="hvac">HVAC Services</option>
+                    <option value="emergency">Emergency Service</option>
+                    <option value="renovation">Home Renovation</option>
+                    <option value="commercial">Commercial Project</option>
+                    <option value="maintenance">Maintenance & Repair</option>
+                    <option value="consultation">Free Consultation</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="message" class="block text-sm font-semibold text-brand-dark mb-3">Project Description</label>
+                <textarea id="message" name="message" rows="4" 
+                          class="w-full px-5 py-4 bg-white border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-brand-secondary/20 focus:border-brand-secondary transition-all duration-300 text-brand-dark placeholder-gray-400 resize-none" 
+                          placeholder="Tell us about your project, timeline, budget, or any specific requirements..."></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label class="flex items-start space-x-3 cursor-pointer">
+                  <input type="checkbox" class="mt-1 w-5 h-5 text-brand-secondary bg-white border-2 border-gray-300 rounded focus:ring-brand-secondary/20">
+                  <span class="text-sm text-gray-600 leading-relaxed">
+                    I agree to receive communications from ProBuild Construction regarding my inquiry. 
+                    You can unsubscribe at any time. <a href="#" class="text-brand-secondary hover:underline">Privacy Policy</a>
+                  </span>
+                </label>
+              </div>
+              
+              <button type="submit" 
+                      class="w-full bg-gradient-to-r from-brand-secondary to-orange-600 hover:from-orange-600 hover:to-brand-secondary text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] shadow-strong hover:shadow-xl">
+                <span class="flex items-center justify-center">
+                  <i class="fas fa-paper-plane mr-3"></i>
+                  Send Message & Get Free Quote
+                </span>
+              </button>
+              
+              <p class="text-center text-sm text-gray-500 mt-4">
+                <i class="fas fa-shield-alt mr-1"></i>
+                Your information is secure and will never be shared
+              </p>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Enhanced Contact Info & Map -->
+        <div class="space-y-8" data-animate>
+          <!-- Contact Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+            <!-- Phone Card -->
+            <div class="bg-gradient-to-br from-brand-primary to-blue-600 rounded-3xl p-8 text-white shadow-strong hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <div class="flex items-center mb-6">
+                <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4 backdrop-blur-sm">
+                  <i class="fas fa-phone text-2xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-heading font-bold">Call Us Now</h4>
+                  <p class="text-sm opacity-80">24/7 Emergency Line</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <a href="tel:+15551234567" class="block text-xl font-bold hover:text-yellow-300 transition-colors duration-300">
+                  (555) 123-4567
+                </a>
+                <div class="flex items-center text-sm opacity-90">
+                  <i class="fas fa-clock mr-2"></i>
+                  <span>Average response: 15 minutes</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Card -->
+            <div class="bg-gradient-to-br from-brand-secondary to-orange-600 rounded-3xl p-8 text-white shadow-strong hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <div class="flex items-center mb-6">
+                <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4 backdrop-blur-sm">
+                  <i class="fas fa-envelope text-2xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-heading font-bold">Email Us</h4>
+                  <p class="text-sm opacity-80">Quick Response Guaranteed</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <a href="mailto:info@probuildconstruction.com" class="block text-lg font-bold hover:text-yellow-300 transition-colors duration-300 break-words">
+                  info@probuildconstruction.com
+                </a>
+                <div class="flex items-center text-sm opacity-90">
+                  <i class="fas fa-reply mr-2"></i>
+                  <span>We respond within 2 hours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location & Hours -->
+          <div class="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-strong border border-gray-100">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- Location -->
+              <div>
+                <div class="flex items-center mb-6">
+                  <div class="w-12 h-12 bg-brand-accent/20 rounded-2xl flex items-center justify-center mr-4">
+                    <i class="fas fa-map-marker-alt text-brand-accent text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-heading font-bold text-brand-dark">Our Location</h4>
+                    <p class="text-gray-600">Serving the Greater Metro Area</p>
+                  </div>
+                </div>
+                <div class="space-y-3 text-gray-700">
+                  <p class="font-medium">123 Construction Avenue</p>
+                  <p>Builder City, BC 12345</p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="bg-brand-primary/10 text-brand-primary px-3 py-1 rounded-full text-sm font-medium">Licensed in BC</span>
+                    <span class="bg-brand-secondary/10 text-brand-secondary px-3 py-1 rounded-full text-sm font-medium">Bonded</span>
+                    <span class="bg-brand-accent/10 text-brand-accent px-3 py-1 rounded-full text-sm font-medium">Insured</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hours -->
+              <div>
+                <div class="flex items-center mb-6">
+                  <div class="w-12 h-12 bg-purple-500/20 rounded-2xl flex items-center justify-center mr-4">
+                    <i class="fas fa-clock text-purple-600 text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-heading font-bold text-brand-dark">Business Hours</h4>
+                    <p class="text-gray-600">We're here when you need us</p>
+                  </div>
+                </div>
+                <div class="space-y-3 text-gray-700">
+                  <div class="flex justify-between">
+                    <span class="font-medium">Mon - Fri:</span>
+                    <span>7:00 AM - 7:00 PM</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-medium">Saturday:</span>
+                    <span>8:00 AM - 5:00 PM</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-medium">Sunday:</span>
+                    <span>Emergency Only</span>
+                  </div>
+                  <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-3 mt-4">
+                    <div class="flex items-center text-red-600">
+                      <i class="fas fa-exclamation-circle mr-2"></i>
+                      <span class="font-bold text-sm">24/7 Emergency Service Available</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Enhanced Google Map -->
+          <div class="bg-white rounded-3xl shadow-strong overflow-hidden border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-green-500/20 rounded-2xl flex items-center justify-center mr-4">
+                  <i class="fas fa-map text-green-600 text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-heading font-bold text-brand-dark">Find Us</h4>
+                  <p class="text-gray-600">Easy to locate, plenty of parking</p>
+                </div>
+              </div>
+            </div>
+            <div id="map" class="w-full h-80 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative">
+              <div class="text-center text-gray-500">
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <i class="fas fa-map-marker-alt text-brand-secondary text-2xl"></i>
+                </div>
+                <h5 class="font-bold text-brand-dark mb-2">Interactive Map Loading...</h5>
+                <p class="text-sm">123 Construction Avenue, Builder City</p>
+                <button class="mt-4 bg-brand-secondary text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-600 transition-colors duration-300">
+                  <i class="fas fa-directions mr-2"></i>Get Directions
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Trust Indicators -->
+      <div class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6" data-animate>
+        <div class="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-3xl border border-green-200">
+          <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-shield-check text-white text-2xl"></i>
+          </div>
+          <h5 class="font-bold text-brand-dark mb-1">Licensed</h5>
+          <p class="text-sm text-gray-600">Fully Licensed Contractor</p>
+        </div>
+        
+        <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl border border-blue-200">
+          <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-certificate text-white text-2xl"></i>
+          </div>
+          <h5 class="font-bold text-brand-dark mb-1">Bonded</h5>
+          <p class="text-sm text-gray-600">Bonded for Your Protection</p>
+        </div>
+        
+        <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl border border-purple-200">
+          <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-umbrella text-white text-2xl"></i>
+          </div>
+          <h5 class="font-bold text-brand-dark mb-1">Insured</h5>
+          <p class="text-sm text-gray-600">Comprehensive Coverage</p>
+        </div>
+        
+        <div class="text-center p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-3xl border border-yellow-200">
+          <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-handshake text-white text-2xl"></i>
+          </div>
+          <h5 class="font-bold text-brand-dark mb-1">Guaranteed</h5>
+          <p class="text-sm text-gray-600">100% Satisfaction Promise</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Footer -->
+  <footer class="bg-gradient-to-br from-brand-dark via-gray-900 to-brand-dark text-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full">
+        <defs>
+          <pattern id="footer-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <g fill="none" fill-rule="evenodd">
+              <g fill="#f97316" fill-opacity="0.4">
+                <path d="M10 0v20L0 10z"/>
+              </g>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#footer-pattern)"/>
+      </svg>
+    </div>
+    
+    <div class="relative py-16 lg:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <!-- Company Info -->
+          <div class="lg:col-span-2">
+            <div class="flex items-center space-x-3 mb-6">
+              <div class="w-12 h-12 bg-gradient-to-r from-brand-secondary to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <i class="fas fa-hard-hat text-white text-xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-heading font-black">ProBuild Construction</h3>
+                <p class="text-brand-secondary font-medium">Building Dreams Since 2009</p>
+              </div>
+            </div>
+            
+            <p class="text-gray-300 text-lg leading-relaxed mb-6 max-w-md">
+              Professional construction and HVAC services with over 15 years of experience. 
+              <span class="text-white font-semibold">Licensed, insured, and trusted</span> by hundreds of satisfied customers throughout the region.
+            </p>
+            
+            <!-- Certifications -->
+            <div class="flex flex-wrap gap-3 mb-8">
+              <div class="bg-green-500/20 border border-green-500/30 text-green-400 px-3 py-1 rounded-full text-sm font-medium">
+                <i class="fas fa-certificate mr-1"></i>Licensed
+              </div>
+              <div class="bg-blue-500/20 border border-blue-500/30 text-blue-400 px-3 py-1 rounded-full text-sm font-medium">
+                <i class="fas fa-shield-alt mr-1"></i>Bonded
+              </div>
+              <div class="bg-purple-500/20 border border-purple-500/30 text-purple-400 px-3 py-1 rounded-full text-sm font-medium">
+                <i class="fas fa-umbrella mr-1"></i>Insured
+              </div>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex space-x-4">
+              <a href="#" class="group w-12 h-12 bg-white/10 hover:bg-brand-secondary rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <i class="fab fa-facebook text-lg group-hover:text-white"></i>
+              </a>
+              <a href="#" class="group w-12 h-12 bg-white/10 hover:bg-brand-secondary rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <i class="fab fa-twitter text-lg group-hover:text-white"></i>
+              </a>
+              <a href="#" class="group w-12 h-12 bg-white/10 hover:bg-brand-secondary rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <i class="fab fa-linkedin text-lg group-hover:text-white"></i>
+              </a>
+              <a href="#" class="group w-12 h-12 bg-white/10 hover:bg-brand-secondary rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <i class="fab fa-instagram text-lg group-hover:text-white"></i>
+              </a>
+              <a href="#" class="group w-12 h-12 bg-white/10 hover:bg-brand-secondary rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <i class="fab fa-youtube text-lg group-hover:text-white"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Services -->
+          <div>
+            <h4 class="text-lg font-heading font-bold mb-6 text-white">Our Services</h4>
+            <ul class="space-y-3">
+              <li><a href="#services" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 flex items-center group">
+                <i class="fas fa-hammer mr-2 text-sm group-hover:text-brand-secondary"></i>Construction Services</a></li>
+              <li><a href="#services" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 flex items-center group">
+                <i class="fas fa-fan mr-2 text-sm group-hover:text-brand-secondary"></i>HVAC Services</a></li>
+              <li><a href="#services" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 flex items-center group">
+                <i class="fas fa-home mr-2 text-sm group-hover:text-brand-secondary"></i>Home Improvement</a></li>
+              <li><a href="#services" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 flex items-center group">
+                <i class="fas fa-building mr-2 text-sm group-hover:text-brand-secondary"></i>Commercial Projects</a></li>
+              <li><a href="#services" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 flex items-center group">
+                <i class="fas fa-exclamation-triangle mr-2 text-sm group-hover:text-brand-secondary"></i>Emergency Service</a></li>
+              <li><a href="#services" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 flex items-center group">
+                <i class="fas fa-wrench mr-2 text-sm group-hover:text-brand-secondary"></i>Maintenance & Repair</a></li>
+            </ul>
+          </div>
+          
+          <!-- Quick Links & Contact -->
+          <div>
+            <h4 class="text-lg font-heading font-bold mb-6 text-white">Quick Contact</h4>
+            <div class="space-y-4">
+              <div class="flex items-start space-x-3">
+                <div class="w-10 h-10 bg-brand-secondary/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-phone text-brand-secondary"></i>
+                </div>
+                <div>
+                  <p class="text-gray-400 text-sm">24/7 Emergency Line</p>
+                  <a href="tel:+15551234567" class="text-white font-bold text-lg hover:text-brand-secondary transition-colors duration-300">
+                    (555) 123-4567
+                  </a>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <div class="w-10 h-10 bg-brand-primary/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-envelope text-brand-primary"></i>
+                </div>
+                <div>
+                  <p class="text-gray-400 text-sm">Quick Response</p>
+                  <a href="mailto:info@probuildconstruction.com" class="text-white font-medium hover:text-brand-secondary transition-colors duration-300 break-words">
+                    info@probuildconstruction.com
+                  </a>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <div class="w-10 h-10 bg-brand-accent/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-map-marker-alt text-brand-accent"></i>
+                </div>
+                <div>
+                  <p class="text-gray-400 text-sm">Service Area</p>
+                  <p class="text-white font-medium">
+                    123 Construction Avenue<br>
+                    Builder City, BC 12345
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="mt-8">
+              <h5 class="text-white font-semibold mb-4">Quick Links</h5>
+              <div class="grid grid-cols-2 gap-2">
+                <a href="#home" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 text-sm">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 text-sm">About</a>
+                <a href="#services" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 text-sm">Services</a>
+                <a href="#media" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 text-sm">Gallery</a>
+                <a href="#contact" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 text-sm">Contact</a>
+                <a href="#" class="text-gray-300 hover:text-brand-secondary transition-colors duration-300 text-sm">Privacy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Emergency Banner -->
+        <div class="mt-12 bg-gradient-to-r from-red-500/20 to-red-700/20 border border-red-500/30 rounded-3xl p-6 lg:p-8">
+          <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div class="flex items-center text-center lg:text-left">
+              <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mr-6 animate-pulse">
+                <i class="fas fa-phone text-white text-2xl"></i>
+              </div>
+              <div>
+                <h4 class="text-xl font-heading font-bold text-white mb-2">24/7 Emergency Service</h4>
+                <p class="text-red-100">Construction emergencies, HVAC failures, storm damage – we're here when you need us most.</p>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="tel:+15551234567" class="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg text-center">
+                <i class="fas fa-phone mr-2"></i>Call Now
+              </a>
+              <a href="#contact" class="bg-white/10 border-2 border-white text-white hover:bg-white hover:text-red-500 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm text-center">
+                <i class="fas fa-envelope mr-2"></i>Get Quote
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Copyright Section -->
+    <div class="border-t border-white/10 py-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+          <div class="flex items-center space-x-6 text-center lg:text-left">
+            <p class="text-gray-300">
+              &copy; 2025 ProBuild Construction Services. All rights reserved.
+            </p>
+            <div class="hidden lg:flex items-center space-x-4 text-sm text-gray-400">
+              <span class="flex items-center">
+                <i class="fas fa-shield-check mr-1 text-green-400"></i>
+                Licensed & Bonded
+              </span>
+              <span class="flex items-center">
+                <i class="fas fa-star mr-1 text-yellow-400"></i>
+                5-Star Rated
+              </span>
+            </div>
+          </div>
+          
+          <div class="flex items-center space-x-6 text-sm text-gray-300">
+            <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+            <a href="#" class="hover:text-white transition-colors duration-300">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</Layout>

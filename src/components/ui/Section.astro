@@ -1,0 +1,84 @@
+---
+export interface Props {
+  id?: string;
+  background?: 'white' | 'light' | 'dark' | 'gradient' | 'pattern';
+  padding?: 'sm' | 'md' | 'lg' | 'xl' | 'none';
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl' | '7xl' | 'full';
+  centered?: boolean;
+  animate?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  background = 'white',
+  padding = 'lg',
+  maxWidth = '7xl',
+  centered = false,
+  animate = true,
+  class: additionalClasses = '',
+  ...props
+} = Astro.props;
+
+const backgroundClasses = {
+  white: 'bg-white',
+  light: 'bg-brand-light',
+  dark: 'bg-brand-neutral-900 text-white',
+  gradient: 'bg-gradient-to-br from-brand-primary-50 to-brand-secondary-50',
+  pattern: 'bg-white relative overflow-hidden'
+};
+
+const paddingClasses = {
+  none: '',
+  sm: 'py-8 lg:py-12',
+  md: 'py-12 lg:py-16',
+  lg: 'py-16 lg:py-24',
+  xl: 'py-24 lg:py-32'
+};
+
+const maxWidthClasses = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  '2xl': 'max-w-2xl',
+  '4xl': 'max-w-4xl',
+  '7xl': 'max-w-7xl',
+  full: 'max-w-full'
+};
+
+const centeredClass = centered ? 'text-center' : '';
+const animateClass = animate ? 'transition-all duration-300' : '';
+
+const sectionClasses = `${backgroundClasses[background]} ${paddingClasses[padding]} ${animateClass} ${additionalClasses}`.trim();
+const containerClasses = `${maxWidthClasses[maxWidth]} mx-auto px-4 sm:px-6 lg:px-8 ${centeredClass}`.trim();
+---
+
+<section 
+  id={id}
+  class={sectionClasses}
+  {...props}
+  data-animate={animate ? '' : undefined}
+>
+  {background === 'pattern' && (
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full">
+        <defs>
+          <pattern id={`section-pattern-${id || 'default'}`} x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+            <g fill="none" fill-rule="evenodd">
+              <g fill="#1e40af" fill-opacity="0.4">
+                <path d="m30 30c0-8.28-6.72-15-15-15s-15 6.72-15 15 6.72 15 15 15 15-6.72 15-15zm30 0c0-8.28-6.72-15-15-15s-15 6.72-15 15 6.72 15 15 15 15-6.72 15-15z"/>
+              </g>
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill={`url(#section-pattern-${id || 'default'})`}/>
+      </svg>
+    </div>
+  )}
+  
+  <div class={`relative ${containerClasses}`}>
+    <slot />
+  </div>
+</section>

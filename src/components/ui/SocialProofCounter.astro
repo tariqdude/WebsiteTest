@@ -1,0 +1,147 @@
+---
+export interface Props {
+  value: number;
+  label: string;
+  suffix?: string;
+  prefix?: string;
+  icon?: string;
+  variant?: 'default' | 'outlined' | 'filled' | 'gradient';
+  size?: 'sm' | 'md' | 'lg';
+  animate?: boolean;
+  duration?: number;
+  delay?: number;
+  class?: string;
+}
+
+const {
+  value,
+  label,
+  suffix = '',
+  prefix = '',
+  icon,
+  variant = 'default',
+  size = 'md',
+  animate = true,
+  duration = 2000,
+  delay = 0,
+  class: additionalClasses = '',
+  ...props
+} = Astro.props;
+
+const variantClasses = {
+  default: 'bg-white border-2 border-brand-neutral-200 text-brand-neutral-900',
+  outlined: 'bg-transparent border-2 border-brand-primary-600 text-brand-primary-600',
+  filled: 'bg-brand-primary-600 text-white border-2 border-brand-primary-600',
+  gradient: 'bg-gradient-to-br from-brand-primary-600 to-brand-secondary-600 text-white border-0'
+};
+
+const sizeClasses = {
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8'
+};
+
+const textSizeClasses = {
+  sm: {
+    value: 'text-2xl font-bold',
+    label: 'text-sm font-medium'
+  },
+  md: {
+    value: 'text-3xl font-bold',
+    label: 'text-base font-medium'
+  },
+  lg: {
+    value: 'text-4xl font-bold',
+    label: 'text-lg font-medium'
+  }
+};
+
+const counterClasses = [
+  'rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center',
+  'transform hover:scale-105',
+  variantClasses[variant],
+  sizeClasses[size],
+  additionalClasses
+].filter(Boolean).join(' ');
+
+const counterId = `counter-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={counterClasses} {...props}>
+  {icon && (
+    <div class="flex justify-center mb-2">
+      <i class={`${icon} text-2xl opacity-80`}></i>
+    </div>
+  )}
+  
+  <div class={textSizeClasses[size].value}>
+    <span id={counterId} data-target={value} data-prefix={prefix} data-suffix={suffix}>
+      {prefix}0{suffix}
+    </span>
+  </div>
+  
+  <div class={`${textSizeClasses[size].label} opacity-80 mt-1`}>
+    {label}
+  </div>
+</div>
+
+{animate && (
+  <script define:vars={{ counterId, value, prefix, suffix, duration, delay }}>
+    // Counter Animation Logic
+    function animateCounter(elementId, targetValue, prefixText, suffixText, animationDuration, animationDelay) {
+      const element = document.getElementById(elementId);
+      if (!element) return;
+
+      // Intersection Observer for triggering animation when in view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              let startValue = 0;
+              const increment = targetValue / (animationDuration / 16); // ~60fps
+              
+              const timer = setInterval(() => {
+                startValue += increment;
+                
+                if (startValue >= targetValue) {
+                  element.textContent = `${prefixText}${Math.floor(targetValue).toLocaleString()}${suffixText}`;
+                  clearInterval(timer);
+                  
+                  // Add completion effect
+                  element.style.transform = 'scale(1.1)';
+                  element.style.textShadow = '0 0 20px currentColor';
+                  setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                    element.style.textShadow = 'none';
+                  }, 300);
+                } else {
+                  element.textContent = `${prefixText}${Math.floor(startValue).toLocaleString()}${suffixText}`;
+                }
+              }, 16);
+            }, animationDelay);
+            
+            // Stop observing after animation starts
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+
+      observer.observe(element.closest('.rounded-xl'));
+    }
+
+    // Initialize counter animation on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      animateCounter(counterId, value, prefix, suffix, duration, delay);
+    });
+  </script>
+)}
+
+<style>
+  [id^="counter-"] {
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    font-feature-settings: 'tnum';
+    font-variant-numeric: tabular-nums;
+  }
+</style>

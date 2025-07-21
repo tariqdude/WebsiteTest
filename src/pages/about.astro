@@ -1,0 +1,269 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Section from '../components/ui/Section.astro';
+import Typography from '../components/ui/Typography.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import FloatingActionButton from '../components/ui/FloatingActionButton.astro';
+---
+
+<Layout 
+  title="About Us - ProBuild Construction"
+  description="Learn about ProBuild Construction's 20+ years of experience in professional construction, HVAC, and general contracting services."
+>
+  <Header />
+  
+  <!-- Hero Section -->
+  <Section 
+    background="gradient-primary" 
+    padding="2xl" 
+    containerSize="large"
+    animated={true}
+    className="min-h-[60vh] flex items-center"
+  >
+    <div class="text-center text-white">
+      <Typography variant="h1" className="mb-6 animate-fade-in-up">
+        About ProBuild Construction
+      </Typography>
+      <Typography variant="lead" className="mb-8 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
+        With over 20 years of experience, we've built our reputation on quality craftsmanship, 
+        reliable service, and customer satisfaction. From residential renovations to commercial projects, 
+        we deliver excellence in every build.
+      </Typography>
+      <div class="animate-fade-in-up animation-delay-400">
+        <Button href="#story" variant="secondary" size="large">
+          Our Story
+        </Button>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Company Story Section -->
+  <Section 
+    id="story"
+    background="white" 
+    padding="2xl" 
+    containerSize="large"
+    animated={true}
+  >
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="animate-fade-in-left">
+        <Typography variant="h2" className="mb-6 text-brand-dark">
+          Our Journey
+        </Typography>
+        <Typography variant="body" className="mb-6 text-gray-600 leading-relaxed">
+          Founded in 2003 by master craftsman John Martinez, ProBuild Construction began as a 
+          small family business with a simple mission: to provide honest, quality construction 
+          services to our local community.
+        </Typography>
+        <Typography variant="body" className="mb-6 text-gray-600 leading-relaxed">
+          Over two decades, we've grown from a one-man operation to a full-service construction 
+          company, but we've never lost sight of our core values: integrity, craftsmanship, 
+          and customer satisfaction.
+        </Typography>
+        <Typography variant="body" className="mb-8 text-gray-600 leading-relaxed">
+          Today, we're proud to have completed over 500 successful projects, earned dozens of 
+          industry certifications, and built lasting relationships with homeowners and businesses 
+          throughout the region.
+        </Typography>
+        <Button href="/contact" variant="primary" size="medium">
+          Work With Us
+        </Button>
+      </div>
+      <div class="animate-fade-in-right">
+        <img 
+          src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+          alt="Construction team at work" 
+          class="rounded-xl shadow-2xl hover:shadow-3xl transition-shadow duration-500"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </Section>
+
+  <!-- Values Section -->
+  <Section 
+    background="brand-light" 
+    padding="2xl" 
+    containerSize="large"
+    animated={true}
+  >
+    <div class="text-center mb-16">
+      <Typography variant="h2" className="mb-4 text-brand-dark">
+        Our Values
+      </Typography>
+      <Typography variant="lead" className="text-gray-600 max-w-2xl mx-auto">
+        These principles guide everything we do, from our first conversation 
+        to the final walkthrough.
+      </Typography>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      <Card variant="elevated" className="animate-fade-in-up">
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-brand-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <Typography variant="h4" className="mb-3 text-brand-dark">
+            Quality First
+          </Typography>
+          <Typography variant="body" className="text-gray-600">
+            We never compromise on materials or workmanship. Every project is built to last 
+            and exceed industry standards.
+          </Typography>
+        </div>
+      </Card>
+      
+      <Card variant="elevated" className="animate-fade-in-up animation-delay-200">
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-brand-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <Typography variant="h4" className="mb-3 text-brand-dark">
+            On Time, Every Time
+          </Typography>
+          <Typography variant="body" className="text-gray-600">
+            Your time is valuable. We stick to schedules, communicate clearly, and deliver 
+            projects when promised.
+          </Typography>
+        </div>
+      </Card>
+      
+      <Card variant="elevated" className="animate-fade-in-up animation-delay-400">
+        <div class="text-center p-6">
+          <div class="w-16 h-16 bg-brand-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <Typography variant="h4" className="mb-3 text-brand-dark">
+            Customer Focus
+          </Typography>
+          <Typography variant="body" className="text-gray-600">
+            Your vision becomes our mission. We listen, collaborate, and ensure you're 
+            thrilled with the final result.
+          </Typography>
+        </div>
+      </Card>
+    </div>
+  </Section>
+
+  <!-- Team Section -->
+  <Section 
+    background="white" 
+    padding="2xl" 
+    containerSize="large"
+    animated={true}
+  >
+    <div class="text-center mb-16">
+      <Typography variant="h2" className="mb-4 text-brand-dark">
+        Meet Our Team
+      </Typography>
+      <Typography variant="lead" className="text-gray-600 max-w-2xl mx-auto">
+        Experienced professionals dedicated to bringing your construction dreams to life.
+      </Typography>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <Card variant="outlined" className="text-center animate-fade-in-up">
+        <div class="p-6">
+          <img 
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            alt="John Martinez" 
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-brand-primary/20"
+            loading="lazy"
+          >
+          <Typography variant="h4" className="mb-2 text-brand-dark">
+            John Martinez
+          </Typography>
+          <Typography variant="small" className="text-brand-primary font-medium mb-3">
+            Founder & Master Craftsman
+          </Typography>
+          <Typography variant="body" className="text-gray-600 text-sm">
+            20+ years experience, licensed contractor, specializes in custom builds and renovations.
+          </Typography>
+        </div>
+      </Card>
+      
+      <Card variant="outlined" className="text-center animate-fade-in-up animation-delay-200">
+        <div class="p-6">
+          <img 
+            src="https://images.unsplash.com/photo-1494790108755-2616c04167ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            alt="Sarah Chen" 
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-brand-primary/20"
+            loading="lazy"
+          >
+          <Typography variant="h4" className="mb-2 text-brand-dark">
+            Sarah Chen
+          </Typography>
+          <Typography variant="small" className="text-brand-primary font-medium mb-3">
+            Project Manager
+          </Typography>
+          <Typography variant="body" className="text-gray-600 text-sm">
+            Ensures every project runs smoothly from planning to completion. Your main point of contact.
+          </Typography>
+        </div>
+      </Card>
+      
+      <Card variant="outlined" className="text-center animate-fade-in-up animation-delay-400">
+        <div class="p-6">
+          <img 
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+            alt="Mike Rodriguez" 
+            class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-brand-primary/20"
+            loading="lazy"
+          >
+          <Typography variant="h4" className="mb-2 text-brand-dark">
+            Mike Rodriguez
+          </Typography>
+          <Typography variant="small" className="text-brand-primary font-medium mb-3">
+            HVAC Specialist
+          </Typography>
+          <Typography variant="body" className="text-gray-600 text-sm">
+            Certified HVAC technician with expertise in energy-efficient heating and cooling solutions.
+          </Typography>
+        </div>
+      </Card>
+    </div>
+  </Section>
+
+  <!-- CTA Section -->
+  <Section 
+    background="brand-dark" 
+    padding="2xl" 
+    containerSize="large"
+    animated={true}
+  >
+    <div class="text-center text-white">
+      <Typography variant="h2" className="mb-6 animate-fade-in-up">
+        Ready to Build Something Amazing?
+      </Typography>
+      <Typography variant="lead" className="mb-8 max-w-2xl mx-auto animate-fade-in-up animation-delay-200">
+        Let's discuss your next project. Get a free consultation and quote from our experienced team.
+      </Typography>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-400">
+        <Button href="/contact" variant="accent" size="large">
+          Get Free Quote
+        </Button>
+        <Button href="tel:+1-555-123-4567" variant="secondary" size="large">
+          Call Now: (555) 123-4567
+        </Button>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Floating Action Button -->
+  <FloatingActionButton 
+    href="/contact"
+    icon="chat"
+    position="bottom-right"
+    color="primary"
+    size="large"
+    className="animate-bounce-subtle"
+  />
+</Layout>

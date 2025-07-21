@@ -1,0 +1,66 @@
+---
+import { getCardClasses } from '../utils/design-system.js';
+
+export interface Props {
+  variant?: 'default' | 'elevated' | 'glass' | 'gradient';
+  padding?: 'sm' | 'md' | 'lg' | 'xl';
+  hoverable?: boolean;
+  clickable?: boolean;
+  href?: string;
+  animate?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  padding = 'md',
+  hoverable = false,
+  clickable = false,
+  href,
+  animate = true,
+  class: additionalClasses = '',
+  ...props
+} = Astro.props;
+
+const cardClasses = getCardClasses(variant);
+
+const paddingClasses = {
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+  xl: 'p-12'
+};
+
+const hoverableClass = hoverable ? 'hover:scale-105 hover:shadow-xl cursor-pointer' : '';
+const clickableClass = clickable ? 'cursor-pointer' : '';
+const animateClass = animate ? 'transition-all duration-300' : '';
+
+const finalClasses = `${cardClasses} ${paddingClasses[padding]} ${hoverableClass} ${clickableClass} ${animateClass} ${additionalClasses}`.trim();
+
+const Element = href ? 'a' : 'div';
+const elementProps = href ? { href } : {};
+---
+
+<Element 
+  class={finalClasses} 
+  {...elementProps} 
+  {...props}
+  data-animate={animate ? '' : undefined}
+>
+  <slot />
+</Element>
+
+<style>
+  /* Glass morphism effect */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Gradient card effect */
+  .gradient-card {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+</style>
