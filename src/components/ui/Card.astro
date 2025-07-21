@@ -1,8 +1,6 @@
 ---
-import { getCardClasses } from '../utils/design-system.js';
-
 export interface Props {
-  variant?: 'default' | 'elevated' | 'glass' | 'gradient';
+  variant?: 'default' | 'elevated' | 'outlined' | 'glass' | 'gradient';
   padding?: 'sm' | 'md' | 'lg' | 'xl';
   hoverable?: boolean;
   clickable?: boolean;
@@ -18,11 +16,25 @@ const {
   clickable = false,
   href,
   animate = true,
-  class: additionalClasses = '',
-  ...props
+  class: className = '',
+  ...rest
 } = Astro.props;
 
-const cardClasses = getCardClasses(variant);
+// Define card styles inline
+const baseClasses = `
+  rounded-lg border transition-all duration-300
+  ${animate ? 'transition-all duration-300' : ''}
+  ${hoverable ? 'hover:scale-105 hover:shadow-xl cursor-pointer' : ''}
+  ${clickable ? 'cursor-pointer' : ''}
+`;
+
+const variantClasses = {
+  default: 'bg-white border-gray-200 shadow-sm',
+  elevated: 'bg-white border-gray-100 shadow-lg hover:shadow-xl',
+  outlined: 'bg-white border-gray-300 shadow-none hover:shadow-md',
+  glass: 'bg-white/20 backdrop-blur-sm border-white/30 shadow-lg',
+  gradient: 'bg-gradient-to-br from-white to-gray-50 border-gray-200 shadow-md'
+};
 
 const paddingClasses = {
   sm: 'p-4',
@@ -31,32 +43,20 @@ const paddingClasses = {
   xl: 'p-12'
 };
 
-const hoverableClass = hoverable ? 'hover:scale-105 hover:shadow-xl cursor-pointer' : '';
-const clickableClass = clickable ? 'cursor-pointer' : '';
-const animateClass = animate ? 'transition-all duration-300' : '';
-
-const finalClasses = `${cardClasses} ${paddingClasses[padding]} ${hoverableClass} ${clickableClass} ${animateClass} ${additionalClasses}`.trim();
+const cardClasses = `${baseClasses} ${variantClasses[variant]} ${paddingClasses[padding]} ${className}`.trim();
 
 const Element = href ? 'a' : 'div';
 const elementProps = href ? { href } : {};
 ---
 
 <Element 
-  class={finalClasses} 
+  class={cardClasses} 
   {...elementProps} 
-  {...props}
+  {...rest}
   data-animate={animate ? '' : undefined}
 >
   <slot />
 </Element>
-
-<style>
-  /* Glass morphism effect */
-  .glass-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
   
   /* Gradient card effect */
   .gradient-card {
