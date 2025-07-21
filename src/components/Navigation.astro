@@ -1,0 +1,182 @@
+---
+// Enhanced Navigation Component with better mobile UX
+---
+
+<nav class="bg-white/95 backdrop-blur-md shadow-soft fixed w-full top-0 z-50 transition-all duration-300" id="main-nav">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16 lg:h-18">
+      <!-- Enhanced Logo -->
+      <div class="flex-shrink-0">
+        <a href="#home" class="flex items-center space-x-3 group">
+          <div class="relative">
+            <div class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-brand-secondary via-brand-secondary to-brand-primary rounded-xl flex items-center justify-center shadow-medium group-hover:shadow-strong transition-all duration-300 group-hover:scale-105">
+              <i class="fas fa-hard-hat text-white text-lg lg:text-xl"></i>
+            </div>
+            <div class="absolute -inset-1 bg-gradient-to-br from-brand-secondary/20 to-brand-primary/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+          </div>
+          <div class="hidden xs:block">
+            <h1 class="text-xl lg:text-2xl font-heading font-bold text-brand-dark group-hover:text-brand-primary transition-colors duration-300">ProBuild</h1>
+            <p class="text-xs text-gray-500 -mt-1 group-hover:text-brand-secondary transition-colors duration-300">Construction Services</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:block">
+        <div class="flex items-center space-x-1">
+          <a href="#home" class="nav-link px-4 py-2 text-sm lg:text-base font-medium text-brand-dark hover:text-brand-secondary relative group transition-colors duration-200">
+            Home
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-secondary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="#about" class="nav-link px-4 py-2 text-sm lg:text-base font-medium text-brand-dark hover:text-brand-secondary relative group transition-colors duration-200">
+            About
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-secondary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="#services" class="nav-link px-4 py-2 text-sm lg:text-base font-medium text-brand-dark hover:text-brand-secondary relative group transition-colors duration-200">
+            Services
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-secondary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="#gallery" class="nav-link px-4 py-2 text-sm lg:text-base font-medium text-brand-dark hover:text-brand-secondary relative group transition-colors duration-200">
+            Gallery
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-secondary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="#contact" class="nav-link px-4 py-2 text-sm lg:text-base font-medium text-brand-dark hover:text-brand-secondary relative group transition-colors duration-200">
+            Contact
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-secondary group-hover:w-full transition-all duration-300"></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Enhanced CTA Button -->
+      <div class="hidden md:block">
+        <a href="#contact" class="relative inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-brand-secondary to-orange-600 text-white text-sm lg:text-base font-semibold rounded-lg shadow-medium hover:shadow-strong transform hover:scale-105 transition-all duration-300 group overflow-hidden">
+          <span class="relative z-10 flex items-center">
+            <i class="fas fa-phone mr-2 text-sm"></i>
+            Get Quote
+          </span>
+          <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-brand-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </a>
+      </div>
+
+      <!-- Enhanced Mobile menu button -->
+      <div class="md:hidden">
+        <button 
+          data-mobile-menu-toggle
+          class="p-2 rounded-lg text-brand-dark hover:text-brand-secondary hover:bg-brand-secondary/10 focus:outline-none focus:ring-2 focus:ring-brand-secondary/20 transition-all duration-200"
+          aria-label="Toggle mobile menu"
+        >
+          <svg class="w-6 h-6 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Mobile menu overlay -->
+  <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
+
+  <!-- Enhanced Mobile menu -->
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-strong z-50 transform translate-x-full transition-transform duration-300 ease-out">
+    <!-- Mobile menu header -->
+    <div class="flex items-center justify-between p-6 border-b border-gray-100">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-gradient-to-br from-brand-secondary to-brand-primary rounded-lg flex items-center justify-center">
+          <i class="fas fa-hard-hat text-white text-sm"></i>
+        </div>
+        <div>
+          <h2 class="text-lg font-heading font-bold text-brand-dark">ProBuild</h2>
+          <p class="text-xs text-gray-500 -mt-1">Menu</p>
+        </div>
+      </div>
+      <button 
+        data-mobile-menu-close
+        class="p-2 rounded-lg text-gray-400 hover:text-brand-secondary hover:bg-gray-50 transition-colors duration-200"
+        aria-label="Close mobile menu"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile menu items -->
+    <div class="py-2">
+      <a href="#home" class="mobile-nav-link flex items-center px-6 py-4 text-brand-dark hover:bg-brand-secondary/5 hover:text-brand-secondary hover:border-r-2 hover:border-brand-secondary transition-all duration-200">
+        <i class="fas fa-home w-5 mr-4 text-brand-secondary"></i>
+        <span class="font-medium">Home</span>
+      </a>
+      <a href="#about" class="mobile-nav-link flex items-center px-6 py-4 text-brand-dark hover:bg-brand-secondary/5 hover:text-brand-secondary hover:border-r-2 hover:border-brand-secondary transition-all duration-200">
+        <i class="fas fa-info-circle w-5 mr-4 text-brand-secondary"></i>
+        <span class="font-medium">About Us</span>
+      </a>
+      <a href="#services" class="mobile-nav-link flex items-center px-6 py-4 text-brand-dark hover:bg-brand-secondary/5 hover:text-brand-secondary hover:border-r-2 hover:border-brand-secondary transition-all duration-200">
+        <i class="fas fa-tools w-5 mr-4 text-brand-secondary"></i>
+        <span class="font-medium">Services</span>
+      </a>
+      <a href="#gallery" class="mobile-nav-link flex items-center px-6 py-4 text-brand-dark hover:bg-brand-secondary/5 hover:text-brand-secondary hover:border-r-2 hover:border-brand-secondary transition-all duration-200">
+        <i class="fas fa-images w-5 mr-4 text-brand-secondary"></i>
+        <span class="font-medium">Gallery</span>
+      </a>
+      <a href="#contact" class="mobile-nav-link flex items-center px-6 py-4 text-brand-dark hover:bg-brand-secondary/5 hover:text-brand-secondary hover:border-r-2 hover:border-brand-secondary transition-all duration-200">
+        <i class="fas fa-phone w-5 mr-4 text-brand-secondary"></i>
+        <span class="font-medium">Contact</span>
+      </a>
+    </div>
+    
+    <!-- Mobile CTA -->
+    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white to-transparent">
+      <a href="#contact" class="block w-full text-center bg-gradient-to-r from-brand-secondary to-orange-600 text-white px-6 py-4 rounded-xl font-semibold shadow-medium hover:shadow-strong transform hover:scale-[1.02] transition-all duration-300">
+        <i class="fas fa-phone mr-2"></i>Get Free Quote
+      </a>
+      
+      <!-- Contact info in mobile menu -->
+      <div class="mt-4 text-center text-sm text-gray-500">
+        <p class="flex items-center justify-center">
+          <i class="fas fa-phone mr-2 text-brand-secondary"></i>
+          <a href="tel:+15551234567" class="hover:text-brand-secondary transition-colors duration-200">(555) 123-4567</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* Enhanced navigation animations */
+  .nav-link {
+    position: relative;
+  }
+  
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(30, 64, 175, 0.05) 100%);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    border-radius: 0.5rem;
+  }
+  
+  .nav-link:hover::before {
+    width: 100%;
+  }
+  
+  /* Mobile menu animations */
+  #mobile-menu.show {
+    transform: translateX(0);
+  }
+  
+  /* Smooth scroll offset for fixed nav */
+  html {
+    scroll-padding-top: 5rem;
+  }
+  
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: 5.5rem;
+    }
+  }
+</style>
