@@ -1,17 +1,51 @@
 ---
-// Basic Astro page
+import Layout from '../layouts/Layout.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Astro Test</title>
-</head>
-<body>
-    <h1>Hello from Astro!</h1>
-    <p>This is the most basic Astro page possible.</p>
-    <p>If you can see this, Astro is working!</p>
-</body>
-</html>
+<Layout title="Welcome to Astro">
+  <div style="text-align: center; color: white; padding: 2rem;">
+    <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: bold;">
+      🚀 Welcome to <span style="color: #ff6b35;">Astro</span>
+    </h1>
+    <p style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">
+      Build faster websites with Astro's next-gen island architecture.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a 
+        href="https://docs.astro.build" 
+        target="_blank"
+        style="
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          padding: 0.75rem 1.5rem;
+          text-decoration: none;
+          border-radius: 0.5rem;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        "
+        onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'"
+        onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'"
+      >
+        📚 Documentation
+      </a>
+      <a 
+        href="https://astro.build/themes" 
+        target="_blank"
+        style="
+          background: rgba(255, 107, 53, 0.8);
+          color: white;
+          padding: 0.75rem 1.5rem;
+          text-decoration: none;
+          border-radius: 0.5rem;
+          border: 2px solid rgba(255, 107, 53, 0.3);
+          transition: all 0.3s ease;
+        "
+        onmouseover="this.style.background='rgba(255, 107, 53, 1)'"
+        onmouseout="this.style.background='rgba(255, 107, 53, 0.8)'"
+      >
+        🎨 Themes
+      </a>
+    </div>
+  </div>
+</Layout>
