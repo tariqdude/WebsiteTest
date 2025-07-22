@@ -4,6 +4,10 @@ import { getCollection } from 'astro:content';
 import { formatDate } from '../utils';
 import InteractiveCounter from '../components/InteractiveCounter.jsx';
 import ColorPalette from '../components/ColorPalette.vue';
+import AnimatedBackground from '../components/AnimatedBackground.jsx';
+import CodeBlock from '../components/CodeBlock.jsx';
+import PerformanceMetrics from '../components/PerformanceMetrics.jsx';
+import InteractiveTerminal from '../components/InteractiveTerminal.jsx';
 import { ChevronRight, Rocket, Zap, Globe, Code, Layers, Sparkles } from 'lucide-react';
 
 // Fetch content collections
@@ -81,13 +85,14 @@ const stats = [
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20">
+    <AnimatedBackground client:load />
     <div class="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-20"></div>
     <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
       <div class="text-center">
         <!-- Main Heading -->
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 animate-fade-in-up">
           <span class="block">The Future of</span>
-          <span class="gradient-text block">Web Development</span>
+          <span class="gradient-text block animate-gradient-x bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600">Web Development</span>
         </h1>
         
         <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
@@ -113,16 +118,27 @@ const stats = [
         </div>
 
         <!-- Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto animate-fade-in-up animation-delay-600">
-          {stats.map(({ label, value, unit }) => (
-            <div key={label} class="text-center">
-              <div class="text-3xl md:text-4xl font-bold text-primary-600 dark:text-primary-400">
-                {value}<span class="text-lg text-gray-500 dark:text-gray-400">{unit}</span>
-              </div>
-              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{label}</div>
-            </div>
-          ))}
+        <div class="animate-fade-in-up animation-delay-600">
+          <PerformanceMetrics client:load />
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Performance Monitoring -->
+  <section class="py-20 bg-gray-50 dark:bg-gray-800/50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          Real-Time Performance
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          Monitor your application's performance metrics in real-time. 
+          See how Astro's optimizations deliver exceptional user experiences.
+        </p>
+      </div>
+      <div class="max-w-6xl mx-auto">
+        <PerformanceMetrics client:visible />
       </div>
     </div>
   </section>
@@ -205,24 +221,39 @@ const stats = [
       
       <!-- Code Example -->
       <div class="mt-16 max-w-4xl mx-auto">
-        <div class="bg-gray-900 rounded-2xl p-6 overflow-x-auto">
-          <div class="flex items-center space-x-2 mb-4">
-            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-            <span class="text-gray-400 ml-4 text-sm">index.astro</span>
-          </div>
-          <pre class="text-sm"><code class="language-astro text-gray-300">
-<!-- React component loads immediately -->
+        <CodeBlock 
+          client:load
+          code={`<!-- React component loads immediately -->
 <InteractiveCounter client:load />
 
 <!-- Vue component loads when visible -->
 <ColorPalette client:visible />
 
-<!-- Svelte component loads on hover (example) -->
-<DataViz client:media="(min-width: 768px)" />
-          </code></pre>
-        </div>
+<!-- Advanced components with conditional loading -->
+<PerformanceMetrics client:visible />
+<AnimatedBackground client:load />
+<InteractiveTerminal client:idle />`}
+          language="astro"
+          title="index.astro"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Terminal Demo -->
+  <section class="py-20 bg-gray-50 dark:bg-gray-800/50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          Interactive Developer Tools
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          Experience advanced interactive components that showcase the power of islands architecture.
+          Try the terminal below to explore project information and commands.
+        </p>
+      </div>
+      <div class="max-w-4xl mx-auto">
+        <InteractiveTerminal client:visible />
       </div>
     </div>
   </section>
