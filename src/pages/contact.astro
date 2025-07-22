@@ -5,7 +5,7 @@ import Section from '../components/ui/Section.astro';
 import Typography from '../components/ui/Typography.astro';
 import Card from '../components/ui/Card.astro';
 import Button from '../components/ui/Button.astro';
-import ContactForm from '../components/ContactForm.astro';
+import EnhancedContactForm from '../components/ui/EnhancedContactForm.astro';
 import FloatingActionButton from '../components/ui/FloatingActionButton.astro';
 ---
 
@@ -143,7 +143,10 @@ import FloatingActionButton from '../components/ui/FloatingActionButton.astro';
           <Typography variant="body" className="mb-8 text-gray-600">
             Tell us about your project and we'll provide a detailed estimate within 24 hours.
           </Typography>
-          <ContactForm />
+                    <EnhancedContactForm 
+            showDebugInfo={import.meta.env.DEV}
+            class="enhanced-contact-page"
+          />
         </Card>
       </div>
     </div>

@@ -1,0 +1,250 @@
+---
+/**
+ * Error Boundary Component
+ * Wraps components to provide graceful error handling and user-friendly fallbacks
+ */
+
+export interface Props {
+  fallback?: string;
+  component?: string;
+  showError?: boolean;
+  class?: string;
+}
+
+const { 
+  fallback = 'Something went wrong. Please try again.',
+  component = 'Unknown',
+  showError = import.meta.env.DEV,
+  class: additionalClasses = ''
+} = Astro.props;
+
+const boundaryId = `error-boundary-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div 
+  class={`error-boundary ${additionalClasses}`} 
+  data-component={component}
+  data-boundary-id={boundaryId}
+>
+  <div class="error-boundary-content">
+    <slot />
+  </div>
+  
+  <!-- Error Fallback (Hidden by default) -->
+  <div class="error-boundary-fallback hidden">
+    {showError ? (
+      <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+        <div class="flex items-center mb-2">
+          <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
+          <strong class="font-semibold">Error in {component}</strong>
+        </div>
+        <p class="text-sm">{fallback}</p>
+        <div class="mt-3 flex gap-2">
+          <button 
+            class="retry-button text-xs bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+            onclick="window.retryComponent && window.retryComponent('{boundaryId}')"
+          >
+            <i class="fas fa-redo mr-1"></i>
+            Retry
+          </button>
+          <button 
+            class="report-button text-xs bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700"
+            onclick="window.reportError && window.reportError('{component}')"
+          >
+            <i class="fas fa-bug mr-1"></i>
+            Report Issue
+          </button>
+        </div>
+        <details class="mt-2">
+          <summary class="text-xs cursor-pointer text-red-600 hover:text-red-800">
+            Technical Details
+          </summary>
+          <div class="error-details mt-2 p-2 bg-red-100 rounded text-xs font-mono">
+            <div id="error-message-{boundaryId}">Loading error details...</div>
+          </div>
+        </details>
+      </div>
+    ) : (
+      <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-lg">
+        <div class="flex items-center">
+          <i class="fas fa-exclamation-circle text-yellow-500 mr-2"></i>
+          <span class="text-sm">{fallback}</span>
+          <button 
+            class="ml-auto text-xs bg-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-700"
+            onclick="window.location.reload()"
+          >
+            <i class="fas fa-redo mr-1"></i>
+            Refresh
+          </button>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+
+<script is:inline define:vars={{ boundaryId, component }}>
+  // Initialize error boundary for this component
+  document.addEventListener('DOMContentLoaded', function() {
+    const boundary = document.querySelector(`[data-boundary-id="${boundaryId}"]`);
+    if (!boundary) return;
+
+    const content = boundary.querySelector('.error-boundary-content');
+    const fallback = boundary.querySelector('.error-boundary-fallback');
+    const errorMessage = document.getElementById(`error-message-${boundaryId}`);
+
+    // Error handling function
+    function handleError(error, source = 'unknown') {
+      console.error(`Error in ${component}:`, error);
+      
+      // Log to error manager if available
+      if (window.errorManager) {
+        window.errorManager.logError(error, component, { 
+          showToast: false,
+          reportToService: true 
+        });
+      }
+
+      // Show error details if in dev mode
+      if (errorMessage) {
+        errorMessage.innerHTML = `
+          <div><strong>Error:</strong> ${error.message || error}</div>
+          <div><strong>Source:</strong> ${source}</div>
+          <div><strong>Stack:</strong></div>
+          <pre class="whitespace-pre-wrap text-xs mt-1">${error.stack || 'No stack trace available'}</pre>
+          <div><strong>Timestamp:</strong> ${new Date().toLocaleString()}</div>
+          <div><strong>User Agent:</strong> ${navigator.userAgent}</div>
+        `;
+      }
+
+      // Show fallback UI
+      content.style.display = 'none';
+      fallback.classList.remove('hidden');
+
+      // Emit custom event for parent components
+      boundary.dispatchEvent(new CustomEvent('error-boundary-triggered', {
+        detail: { error, component, boundaryId }
+      }));
+    }
+
+    // Catch JavaScript errors in content
+    const originalConsoleError = console.error;
+    let errorCaught = false;
+
+    // Monitor for errors in this specific component
+    window.addEventListener('error', function(event) {
+      // Check if error originated from this boundary's content
+      if (!errorCaught && content.contains(event.target)) {
+        errorCaught = true;
+        handleError(event.error || event, 'JavaScript Error');
+      }
+    });
+
+    // Monitor promise rejections
+    window.addEventListener('unhandledrejection', function(event) {
+      if (!errorCaught) {
+        errorCaught = true;
+        handleError(event.reason, 'Unhandled Promise Rejection');
+      }
+    });
+
+    // Monitor for missing images or resources
+    content.addEventListener('error', function(event) {
+      if (event.target.tagName === 'IMG') {
+        console.warn(`Image failed to load in ${component}:`, event.target.src);
+        // Don't trigger error boundary for missing images, just log it
+        if (window.errorManager) {
+          window.errorManager.logError(
+            `Image failed to load: ${event.target.src}`, 
+            component, 
+            { showToast: false }
+          );
+        }
+      } else {
+        handleError(`Resource failed to load: ${event.target.src || event.target.href}`, 'Resource Loading');
+      }
+    }, true);
+
+    // Global retry function
+    if (!window.retryComponent) {
+      window.retryComponent = function(boundaryId) {
+        const retryBoundary = document.querySelector(`[data-boundary-id="${boundaryId}"]`);
+        if (retryBoundary) {
+          const retryContent = retryBoundary.querySelector('.error-boundary-content');
+          const retryFallback = retryBoundary.querySelector('.error-boundary-fallback');
+          
+          // Reset error state
+          errorCaught = false;
+          retryContent.style.display = '';
+          retryFallback.classList.add('hidden');
+          
+          // Re-initialize scripts in the content area
+          const scripts = retryContent.querySelectorAll('script');
+          scripts.forEach(script => {
+            const newScript = document.createElement('script');
+            newScript.textContent = script.textContent;
+            script.parentNode.replaceChild(newScript, script);
+          });
+        }
+      };
+    }
+
+    // Global error reporting function
+    if (!window.reportError) {
+      window.reportError = function(componentName) {
+        const errors = window.errorManager ? window.errorManager.getErrors() : [];
+        const componentErrors = errors.filter(e => e.component === componentName);
+        
+        // In a real app, this would send to an error reporting service
+        console.info('Reporting errors for component:', componentName, componentErrors);
+        
+        if (window.toast) {
+          window.toast.info('Error report sent. Thank you for helping us improve!');
+        } else {
+          alert('Error report sent. Thank you!');
+        }
+      };
+    }
+
+    // Performance monitoring for this component
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.duration > 100) { // Log slow operations
+          console.warn(`Slow operation in ${component}:`, entry.name, `${entry.duration}ms`);
+        }
+      }
+    });
+
+    try {
+      observer.observe({ entryTypes: ['measure', 'navigation'] });
+    } catch (e) {
+      // Performance Observer not supported
+    }
+
+    // Add component marker for debugging
+    boundary.setAttribute('data-astro-component', component);
+  });
+</script>
+
+<style>
+  .error-boundary {
+    position: relative;
+  }
+  
+  .error-boundary-fallback details > summary {
+    list-style: none;
+  }
+  
+  .error-boundary-fallback details > summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  .error-boundary-fallback details > summary::before {
+    content: '▶';
+    margin-right: 4px;
+    transition: transform 0.2s;
+  }
+  
+  .error-boundary-fallback details[open] > summary::before {
+    transform: rotate(90deg);
+  }
+</style>

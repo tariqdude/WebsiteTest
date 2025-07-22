@@ -3,6 +3,7 @@ import ScrollProgress from '../components/ui/ScrollProgress.astro';
 import SimpleToast from '../components/ui/SimpleToast.astro';
 import ThemeToggle from '../components/ui/ThemeToggle.astro';
 import SEO from '../components/SEO.astro';
+import DebugPanel from '../components/dev/DebugPanel.astro';
 
 export interface Props {
   title: string;
@@ -107,6 +108,9 @@ const { title, description, image, noindex = false } = Astro.props;
     <div id="app">
       <slot />
     </div>
+    
+    <!-- Development Tools -->
+    <DebugPanel />
     
     <!-- Optimized JavaScript -->
     <script>
@@ -324,6 +328,11 @@ const { title, description, image, noindex = false } = Astro.props;
       // Handle Google Maps API load
       (window as any).initMap = initMap;
     </script>
+    
+    <!-- Error Testing and Repair Script (Development Only) -->
+    {import.meta.env.DEV && (
+      <script is:inline src="/src/scripts/error-test-repair.js"></script>
+    )}
     
     <!-- Google Maps API with callback -->
     <script async defer is:inline
