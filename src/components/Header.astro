@@ -1,0 +1,103 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import MobileMenu from './MobileMenu.jsx';
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 glass border-b border-white/10 dark:border-gray-700/20">
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a
+          href="/"
+          class="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          aria-label="Go to homepage"
+        >
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-8 h-8"
+          >
+            <defs>
+              <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#3b82f6" />
+                <stop offset="100%" style="stop-color:#8b5cf6" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M16 2L30 9v14L16 30 2 23V9l14-7z"
+              fill="url(#logo-gradient)"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="gradient-text">Astro Showcase</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        {navItems.map(({ label, href }) => (
+          <a
+            href={href}
+            class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+              currentPath === href
+                ? 'text-primary-600 dark:text-primary-400'
+                : 'text-gray-700 dark:text-gray-300'
+            }`}
+            aria-current={currentPath === href ? 'page' : undefined}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center space-x-4">
+        <ThemeToggle />
+        
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+          <MobileMenu navItems={navItems} currentPath={currentPath} client:load />
+        </div>
+
+        <!-- CTA Button (Desktop) -->
+        <div class="hidden md:block">
+          <a
+            href="/contact"
+            class="btn-primary text-sm"
+          >
+            Get Started
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* Enhance glass effect on scroll */
+  @media (prefers-reduced-motion: no-preference) {
+    header {
+      transition: backdrop-filter 0.3s ease;
+    }
+    
+    header:hover {
+      backdrop-filter: blur(20px);
+    }
+  }
+</style>

@@ -1,1 +1,439 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hello Astro</title></head><body><h1>Hello World!</h1><p>This is a basic Astro page.</p></body></html>
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate } from '../utils';
+import InteractiveCounter from '../components/InteractiveCounter.jsx';
+import ColorPalette from '../components/ColorPalette.vue';
+import { ChevronRight, Rocket, Zap, Globe, Code, Layers, Sparkles } from 'lucide-react';
+
+// Fetch content collections
+const allBlogPosts = await getCollection('blog');
+const featuredPosts = allBlogPosts
+  .filter(post => post.data.featured)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects
+  .filter(project => project.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const teamMembers = await getCollection('team');
+
+// Hero features
+const features = [
+  {
+    icon: Rocket,
+    title: 'Lightning Fast',
+    description: 'Zero JavaScript by default. Only ship what you need.',
+    color: 'text-blue-600 dark:text-blue-400',
+    bg: 'bg-blue-50 dark:bg-blue-900/20'
+  },
+  {
+    icon: Layers,
+    title: 'Islands Architecture',
+    description: 'Interactive components load independently.',
+    color: 'text-purple-600 dark:text-purple-400',
+    bg: 'bg-purple-50 dark:bg-purple-900/20'
+  },
+  {
+    icon: Globe,
+    title: 'Framework Agnostic',
+    description: 'Use React, Vue, Svelte, or any framework you love.',
+    color: 'text-green-600 dark:text-green-400',
+    bg: 'bg-green-50 dark:bg-green-900/20'
+  },
+  {
+    icon: Code,
+    title: 'Developer Experience',
+    description: 'Built-in TypeScript, Tailwind CSS, and hot reloading.',
+    color: 'text-orange-600 dark:text-orange-400',
+    bg: 'bg-orange-50 dark:bg-orange-900/20'
+  },
+  {
+    icon: Zap,
+    title: 'Build Optimized',
+    description: 'Automatic optimizations for images, CSS, and JavaScript.',
+    color: 'text-yellow-600 dark:text-yellow-400',
+    bg: 'bg-yellow-50 dark:bg-yellow-900/20'
+  },
+  {
+    icon: Sparkles,
+    title: 'Content Collections',
+    description: 'Type-safe content management with full TypeScript support.',
+    color: 'text-pink-600 dark:text-pink-400',
+    bg: 'bg-pink-50 dark:bg-pink-900/20'
+  }
+];
+
+const stats = [
+  { label: 'Performance Score', value: '100', unit: '/100' },
+  { label: 'Build Time', value: '2.3', unit: 's' },
+  { label: 'Bundle Size', value: '0', unit: 'KB JS' },
+  { label: 'Lighthouse Score', value: '100', unit: '%' }
+];
+---
+
+<Layout 
+  title="Astro Showcase - Modern Web Development" 
+  description="Experience the power of Astro's islands architecture with this comprehensive showcase featuring React, Vue, TypeScript, and modern web development best practices."
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20">
+    <div class="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-20"></div>
+    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+      <div class="text-center">
+        <!-- Main Heading -->
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 animate-fade-in-up">
+          <span class="block">The Future of</span>
+          <span class="gradient-text block">Web Development</span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
+          Experience Astro's islands architecture with zero JavaScript by default, 
+          framework-agnostic components, and lightning-fast performance.
+        </p>
+        
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in-up animation-delay-400">
+          <a
+            href="/projects"
+            class="btn-primary text-lg px-8 py-4 group"
+          >
+            Explore Projects
+            <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a
+            href="/blog"
+            class="btn-secondary text-lg px-8 py-4"
+          >
+            Read the Blog
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto animate-fade-in-up animation-delay-600">
+          {stats.map(({ label, value, unit }) => (
+            <div key={label} class="text-center">
+              <div class="text-3xl md:text-4xl font-bold text-primary-600 dark:text-primary-400">
+                {value}<span class="text-lg text-gray-500 dark:text-gray-400">{unit}</span>
+              </div>
+              <div class="text-sm text-gray-600 dark:text-gray-400 mt-1">{label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          Why Choose Astro?
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Astro delivers the best developer experience with industry-leading performance
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {features.map(({ icon: Icon, title, description, color, bg }, index) => (
+          <div 
+            key={title}
+            class={`p-6 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 hover:shadow-lg animate-fade-in-up`}
+            style={`animation-delay: ${index * 100}ms`}
+          >
+            <div class={`inline-flex p-3 rounded-xl ${bg} mb-4`}>
+              <Icon className={`w-6 h-6 ${color}`} />
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+              {title}
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              {description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Islands Demo -->
+  <section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          Islands Architecture Demo
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Interactive components from different frameworks working together seamlessly
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <!-- React Component -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              React Island
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400 bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded">
+              client:load
+            </span>
+          </div>
+          <InteractiveCounter client:load />
+        </div>
+        
+        <!-- Vue Component -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Vue Island
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400 bg-green-100 dark:bg-green-900 px-2 py-1 rounded">
+              client:visible
+            </span>
+          </div>
+          <ColorPalette client:visible />
+        </div>
+      </div>
+      
+      <!-- Code Example -->
+      <div class="mt-16 max-w-4xl mx-auto">
+        <div class="bg-gray-900 rounded-2xl p-6 overflow-x-auto">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+            <span class="text-gray-400 ml-4 text-sm">index.astro</span>
+          </div>
+          <pre class="text-sm"><code class="language-astro text-gray-300">
+<!-- React component loads immediately -->
+<InteractiveCounter client:load />
+
+<!-- Vue component loads when visible -->
+<ColorPalette client:visible />
+
+<!-- Svelte component loads on hover -->
+<DataViz client:media="(min-width: 768px)" />
+          </code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  {featuredProjects.length > 0 && (
+    <section class="py-20 bg-white dark:bg-gray-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-16">
+          <div>
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Featured Projects
+            </h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300">
+              Showcasing real-world applications built with modern technologies
+            </p>
+          </div>
+          <a
+            href="/projects"
+            class="hidden md:flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium group"
+          >
+            View All Projects
+            <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProjects.map((project) => (
+            <article key={project.slug} class="card group hover:shadow-xl transition-all duration-300">
+              <div class="aspect-video bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg mb-4 overflow-hidden">
+                <img 
+                  src={project.data.image} 
+                  alt={project.data.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                {project.data.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                {project.data.description}
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.data.tech.slice(0, 3).map((tech) => (
+                  <span key={tech} class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded">
+                    {tech}
+                  </span>
+                ))}
+                {project.data.tech.length > 3 && (
+                  <span class="text-xs text-gray-500 dark:text-gray-400 px-2 py-1">
+                    +{project.data.tech.length - 3} more
+                  </span>
+                )}
+              </div>
+              <div class="flex space-x-4">
+                {project.data.demo && (
+                  <a
+                    href={project.data.demo}
+                    class="text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Live Demo →
+                  </a>
+                )}
+                {project.data.github && (
+                  <a
+                    href={project.data.github}
+                    class="text-sm text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 font-medium"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub →
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+        
+        <div class="text-center mt-12 md:hidden">
+          <a href="/projects" class="btn-primary">
+            View All Projects
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Featured Blog Posts -->
+  {featuredPosts.length > 0 && (
+    <section class="py-20 bg-gray-50 dark:bg-gray-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-16">
+          <div>
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              Latest Insights
+            </h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300">
+              Thoughts on modern web development and best practices
+            </p>
+          </div>
+          <a
+            href="/blog"
+            class="hidden md:flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium group"
+          >
+            View All Posts
+            <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {featuredPosts.map((post, index) => (
+            <article key={post.slug} class={`card group hover:shadow-xl transition-all duration-300 ${index === 0 ? 'lg:row-span-2' : ''}`}>
+              <div class="flex items-center space-x-3 mb-4">
+                <img
+                  src={`/images/avatars/${post.data.author.toLowerCase().replace(' ', '-')}.jpg`}
+                  alt={post.data.author}
+                  class="w-10 h-10 rounded-full"
+                  loading="lazy"
+                />
+                <div>
+                  <p class="text-sm font-medium text-gray-900 dark:text-white">
+                    {post.data.author}
+                  </p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                    {formatDate(post.data.pubDate)}
+                  </p>
+                </div>
+              </div>
+              
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                <a href={`/blog/${post.slug}`}>
+                  {post.data.title}
+                </a>
+              </h3>
+              
+              <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                {post.data.description}
+              </p>
+              
+              <div class="flex flex-wrap gap-2 mb-4">
+                {post.data.tags.slice(0, 3).map((tag) => (
+                  <span key={tag} class="text-xs bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 px-2 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              
+              <a
+                href={`/blog/${post.slug}`}
+                class="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium group"
+              >
+                Read Article
+                <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </article>
+          ))}
+        </div>
+        
+        <div class="text-center mt-12 md:hidden">
+          <a href="/blog" class="btn-primary">
+            View All Posts
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Call to Action -->
+  <section class="py-20 bg-gradient-to-r from-primary-600 to-purple-600 text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+        Ready to Build Something Amazing?
+      </h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        Join thousands of developers who are building faster, better websites with Astro
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
+        >
+          Get Started Today
+        </a>
+        <a
+          href="https://github.com/tariqdude/WebsiteTest"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 rounded-lg font-semibold transition-all inline-flex items-center justify-center"
+        >
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .bg-grid-gray-100 {
+    background-image: url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23f3f4f6' fill-opacity='0.4' fill-rule='evenodd'%3e%3cpath d='m0 40l40-40h-40v40zm40 0v-40h-40l40 40z'/%3e%3c/g%3e%3c/svg%3e");
+  }
+  
+  .dark .bg-grid-gray-800 {
+    background-image: url("data:image/svg+xml,%3csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%231f2937' fill-opacity='0.4' fill-rule='evenodd'%3e%3cpath d='m0 40l40-40h-40v40zm40 0v-40h-40l40 40z'/%3e%3c/g%3e%3c/svg%3e");
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

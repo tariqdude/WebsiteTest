@@ -1,0 +1,11 @@
+{
+  "name": "Sarah Johnson",
+  "role": "Lead Developer",
+  "bio": "Full-stack developer with 8+ years of experience building scalable web applications. Passionate about performance optimization and modern web technologies.",
+  "avatar": "/images/team/sarah.jpg",
+  "social": {
+    "github": "https://github.com/sarahj",
+    "twitter": "https://twitter.com/sarahj_dev",
+    "linkedin": "https://linkedin.com/in/sarah-johnson-dev"
+  }
+}
