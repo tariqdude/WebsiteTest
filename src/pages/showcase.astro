@@ -1,0 +1,260 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Advanced3DScene from '../components/Advanced3DScene.jsx';
+import DataVisualizationDashboard from '../components/DataVisualizationDashboard.jsx';
+import SvelteSkillsDashboard from '../components/SvelteSkillsDashboard.svelte';
+import SolidStateDemo from '../components/SolidStateDemo.jsx';
+import AdvancedForm from '../components/AdvancedForm.tsx';
+import CodeEditorShowcase from '../components/CodeEditorShowcase.jsx';
+import GSAPAnimationShowcase from '../components/GSAPAnimationShowcase.jsx';
+import PreactMiniDashboard from '../components/PreactMiniDashboard.jsx';
+import InteractiveCounter from '../components/InteractiveCounter.jsx';
+import ColorPalette from '../components/ColorPalette.vue';
+import InteractiveTerminal from '../components/InteractiveTerminal.jsx';
+import PerformanceMetrics from '../components/PerformanceMetrics.jsx';
+import AnimatedBackground from '../components/AnimatedBackground.jsx';
+---
+
+<Layout 
+  title="Ultimate Showcase - All Features Demo" 
+  description="Experience every single advanced component and feature in action - the ultimate demonstration of modern web development capabilities."
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20 py-20">
+    <AnimatedBackground client:load />
+    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+        <span class="block">Ultimate</span>
+        <span class="gradient-text block animate-gradient-x bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600">Component Showcase</span>
+      </h1>
+      
+      <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+        Every single advanced feature and component demonstrated in one comprehensive showcase
+      </p>
+
+      <div class="mb-12">
+        <PerformanceMetrics client:load />
+      </div>
+    </div>
+  </section>
+
+  <!-- Basic Interactive Components -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+        🎯 Core Interactive Components
+      </h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- React Component -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              React Interactive Counter
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400 bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded">
+              Framer Motion + State Management
+            </span>
+          </div>
+          <InteractiveCounter client:load />
+        </div>
+        
+        <!-- Vue Component -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              Vue Color Palette
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400 bg-green-100 dark:bg-green-900 px-2 py-1 rounded">
+              Reactive Color Generation
+            </span>
+          </div>
+          <ColorPalette client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D Graphics Section -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        🎮 3D WebGL Graphics
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        Real-time Three.js scene with lighting, shadows, and interactive controls
+      </p>
+      <Advanced3DScene client:visible />
+    </div>
+  </section>
+
+  <!-- Data Visualization Section -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        📊 Advanced Data Visualization
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        D3.js + Chart.js integration with real-time updates and interactive elements
+      </p>
+      <DataVisualizationDashboard client:visible />
+    </div>
+  </section>
+
+  <!-- Multi-Framework Grid -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        🚀 Multi-Framework Excellence  
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        Different JavaScript frameworks working together seamlessly
+      </p>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Svelte Component -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-4 h-4 bg-orange-500 rounded-full"></div>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              Svelte Skills Dashboard
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400 bg-orange-100 dark:bg-orange-900 px-2 py-1 rounded">
+              Built-in Motion + Reactivity
+            </span>
+          </div>
+          <SvelteSkillsDashboard client:visible />
+        </div>
+
+        <!-- Solid.js Component -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              Solid.js State Demo
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400 bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded">
+              Fine-grained Reactivity
+            </span>
+          </div>
+          <SolidStateDemo client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Forms -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        📝 Professional Form System
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        React Hook Form + Zod validation + TypeScript for bulletproof forms
+      </p>
+      <AdvancedForm client:visible />
+    </div>
+  </section>
+
+  <!-- Code Editor -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        💻 Monaco Code Editor
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        Full VS Code editor experience with syntax highlighting and IntelliSense
+      </p>
+      <CodeEditorShowcase client:visible />
+    </div>
+  </section>
+
+  <!-- Animation Studio -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        🎬 GSAP Animation Studio
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        Professional animations with GreenSock's industry-standard library
+      </p>
+      <GSAPAnimationShowcase client:visible />
+    </div>
+  </section>
+
+  <!-- Preact Performance -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        ⚡ Preact Lightweight Demo
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        Same React API but only 3KB - perfect for performance-critical apps
+      </p>
+      <PreactMiniDashboard client:visible />
+    </div>
+  </section>
+
+  <!-- Interactive Terminal -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        🖥️ Interactive Terminal
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        Fully functional terminal with command history and file system simulation
+      </p>
+      <InteractiveTerminal client:visible />
+    </div>
+  </section>
+
+  <!-- Final Stats -->
+  <section class="py-20 bg-gradient-to-br from-purple-600 to-blue-600 text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+        🏆 Showcase Complete!
+      </h2>
+      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+        You've experienced the full power of modern web development in action
+      </p>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+        <div class="text-center">
+          <div class="text-4xl font-bold mb-2">50+</div>
+          <div class="text-lg opacity-80">Features</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold mb-2">6</div>
+          <div class="text-lg opacity-80">Frameworks</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold mb-2">15+</div>
+          <div class="text-lg opacity-80">Components</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold mb-2">25+</div>
+          <div class="text-lg opacity-80">Libraries</div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/WebsiteTest/"
+          class="bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
+        >
+          ← Back to Home
+        </a>
+        <a
+          href="https://github.com/tariqdude/WebsiteTest"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
+        >
+          View Source Code
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

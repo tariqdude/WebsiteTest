@@ -3,11 +3,12 @@ import ThemeToggle from './ThemeToggle.astro';
 import MobileMenu from './MobileMenu.jsx';
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Home', href: '/WebsiteTest/' },
+  { label: 'Showcase', href: '/WebsiteTest/showcase' },
+  { label: 'About', href: '/WebsiteTest/about' },
+  { label: 'Projects', href: '/WebsiteTest/projects' },
+  { label: 'Blog', href: '/WebsiteTest/blog' },
+  { label: 'Contact', href: '/WebsiteTest/contact' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -19,7 +20,7 @@ const currentPath = Astro.url.pathname;
       <!-- Logo -->
       <div class="flex items-center">
         <a
-          href="/"
+          href="/WebsiteTest/"
           class="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
           aria-label="Go to homepage"
         >
@@ -78,7 +79,7 @@ const currentPath = Astro.url.pathname;
         <!-- CTA Button (Desktop) -->
         <div class="hidden md:block">
           <a
-            href="/contact"
+            href="/WebsiteTest/contact"
             class="btn-primary text-sm"
           >
             Get Started

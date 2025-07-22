@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+// import { ViewTransitions } from 'astro:transitions';  // Temporarily disabled for compatibility
 import '../styles/global.css';
 
 export interface Props {
@@ -57,7 +57,9 @@ const imageURL = new URL(image, Astro.site);
     <link rel="preload" href="/WebsiteTest/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
     
     <!-- View Transitions -->
-    <ViewTransitions />
+    
+    <!-- View Transitions API support -->
+    <!-- <ViewTransitions /> -->
     
     <!-- Theme Script (inline to prevent FOUC) -->
     <script is:inline>
