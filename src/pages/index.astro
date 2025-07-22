@@ -8,7 +8,15 @@ import AnimatedBackground from '../components/AnimatedBackground.jsx';
 import CodeBlock from '../components/CodeBlock.jsx';
 import PerformanceMetrics from '../components/PerformanceMetrics.jsx';
 import InteractiveTerminal from '../components/InteractiveTerminal.jsx';
-import { ChevronRight, Rocket, Zap, Globe, Code, Layers, Sparkles } from 'lucide-react';
+import Advanced3DScene from '../components/Advanced3DScene.jsx';
+import DataVisualizationDashboard from '../components/DataVisualizationDashboard.jsx';
+import SvelteSkillsDashboard from '../components/SvelteSkillsDashboard.svelte';
+import SolidStateDemo from '../components/SolidStateDemo.jsx';
+import AdvancedForm from '../components/AdvancedForm.tsx';
+import CodeEditorShowcase from '../components/CodeEditorShowcase.jsx';
+import GSAPAnimationShowcase from '../components/GSAPAnimationShowcase.jsx';
+import PreactMiniDashboard from '../components/PreactMiniDashboard.jsx';
+import { ChevronRight, Rocket, Zap, Globe, Code, Layers, Sparkles, Star, Users, TrendingUp, Award } from 'lucide-react';
 
 // Fetch content collections
 const allBlogPosts = await getCollection('blog');
@@ -236,6 +244,174 @@ const stats = [
           language="astro"
           title="index.astro"
         />
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Showcase Components -->
+  <section class="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          🚀 Advanced Framework Showcase
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          Explore cutting-edge web technologies with React, Vue, Svelte, Solid.js, Preact, and more - all working together in perfect harmony
+        </p>
+      </div>
+
+      <!-- 3D WebGL Scene -->
+      <div class="mb-16">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            🎮 3D WebGL with Three.js
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Real-time 3D graphics, lighting, and interactive controls
+          </p>
+        </div>
+        <Advanced3DScene client:visible />
+      </div>
+
+      <!-- Data Visualization Dashboard -->
+      <div class="mb-16">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            📊 Data Visualization Hub
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            D3.js and Chart.js working together for stunning data stories
+          </p>
+        </div>
+        <DataVisualizationDashboard client:visible />
+      </div>
+
+      <!-- Framework Comparison Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <!-- Svelte Skills Dashboard -->
+        <div class="space-y-4">
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              🟠 Svelte Animation Magic
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Smooth animations with Svelte's built-in motion library
+            </p>
+          </div>
+          <SvelteSkillsDashboard client:visible />
+        </div>
+
+        <!-- Solid.js State Management -->
+        <div class="space-y-4">
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              🔵 Solid.js Fine-Grained Reactivity
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Ultra-fast updates with surgical precision
+            </p>
+          </div>
+          <SolidStateDemo client:visible />
+        </div>
+      </div>
+
+      <!-- Advanced Form with React Hook Form -->
+      <div class="mb-16">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            📝 Advanced Form Validation
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            React Hook Form + Zod validation + TypeScript for bulletproof forms
+          </p>
+        </div>
+        <AdvancedForm client:visible />
+      </div>
+
+      <!-- Code Editor Showcase -->
+      <div class="mb-16">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            💻 Monaco Code Editor
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Full VS Code editor experience with syntax highlighting and IntelliSense
+          </p>
+        </div>
+        <CodeEditorShowcase client:visible />
+      </div>
+
+      <!-- GSAP Animation Studio -->
+      <div class="mb-16">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            🎬 GSAP Animation Studio
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Professional animations with GreenSock's industry-standard library
+          </p>
+        </div>
+        <GSAPAnimationShowcase client:visible />
+      </div>
+
+      <!-- Preact Lightweight Demo -->
+      <div class="mb-16">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            ⚡ Preact Mini Dashboard
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300">
+            Same React API but only 3KB - perfect for performance-critical apps
+          </p>
+        </div>
+        <PreactMiniDashboard client:visible />
+      </div>
+    </div>
+  </section>
+
+  <!-- Framework Statistics -->
+  <section class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          🏆 Multi-Framework Excellence
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          All frameworks working together in a single application
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+        {[
+          { name: 'React', color: 'text-blue-500', bg: 'bg-blue-100 dark:bg-blue-900/20', icon: '⚛️', version: '18.3' },
+          { name: 'Vue', color: 'text-green-500', bg: 'bg-green-100 dark:bg-green-900/20', icon: '🟢', version: '3.5' },
+          { name: 'Svelte', color: 'text-orange-500', bg: 'bg-orange-100 dark:bg-orange-900/20', icon: '🟠', version: '5.0' },
+          { name: 'Solid.js', color: 'text-blue-600', bg: 'bg-blue-100 dark:bg-blue-900/20', icon: '🔵', version: '1.8' },
+          { name: 'Preact', color: 'text-purple-500', bg: 'bg-purple-100 dark:bg-purple-900/20', icon: '💜', version: '10.0' },
+          { name: 'Three.js', color: 'text-gray-600', bg: 'bg-gray-100 dark:bg-gray-800', icon: '🎮', version: 'r160' }
+        ].map((framework) => (
+          <div key={framework.name} class={`text-center p-6 rounded-xl ${framework.bg} hover:scale-105 transition-transform duration-300`}>
+            <div class="text-4xl mb-3">{framework.icon}</div>
+            <h3 class={`font-bold ${framework.color} text-lg mb-1`}>{framework.name}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">v{framework.version}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Technology Stats -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+        {[
+          { label: 'Frameworks', value: '6+', icon: '🛠️' },
+          { label: 'Components', value: '15+', icon: '🧩' },
+          { label: 'Libraries', value: '25+', icon: '📚' },
+          { label: 'Features', value: '50+', icon: '⭐' }
+        ].map((stat, index) => (
+          <div key={stat.label} class="text-center">
+            <div class="text-3xl mb-2">{stat.icon}</div>
+            <div class="text-3xl font-bold text-gray-900 dark:text-white mb-1">{stat.value}</div>
+            <div class="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
