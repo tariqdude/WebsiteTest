@@ -1,6 +1,6 @@
 ---
 import ScrollProgress from '../components/ui/ScrollProgress.astro';
-import Toast from '../components/ui/Toast.astro';
+import SimpleToast from '../components/ui/SimpleToast.astro';
 import ThemeToggle from '../components/ui/ThemeToggle.astro';
 import SEO from '../components/SEO.astro';
 
@@ -99,7 +99,7 @@ const { title, description, image, noindex = false } = Astro.props;
     <ScrollProgress position="top" height="medium" color="gradient" animated={true} />
     
     <!-- Toast Notifications -->
-    <Toast />
+    <SimpleToast />
     
     <!-- Theme Toggle -->
     <ThemeToggle position="fixed" placement="top-right" />

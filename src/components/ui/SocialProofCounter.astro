@@ -64,7 +64,7 @@ const counterClasses = [
   additionalClasses
 ].filter(Boolean).join(' ');
 
-const counterId = `counter-${Math.random().toString(36).substr(2, 9)}`;
+const counterId = `counter-${Math.random().toString(36).substring(2, 11)}`;
 ---
 
 <div class={counterClasses} {...props}>
@@ -86,7 +86,7 @@ const counterId = `counter-${Math.random().toString(36).substr(2, 9)}`;
 </div>
 
 {animate && (
-  <script define:vars={{ counterId, value, prefix, suffix, duration, delay }}>
+  <script is:inline define:vars={{ counterId, value, prefix, suffix, duration, delay }}>
     // Counter Animation Logic
     function animateCounter(elementId, targetValue, prefixText, suffixText, animationDuration, animationDelay) {
       const element = document.getElementById(elementId);

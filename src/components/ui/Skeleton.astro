@@ -83,7 +83,6 @@ const customStyle = (width || height) ? {
   <div class="space-y-2" {...props}>
     {Array.from({ length: lines }, (_, index) => (
       <div 
-        key={index}
         class={skeletonClasses}
         style={{
           width: index === lines - 1 ? '75%' : '100%',

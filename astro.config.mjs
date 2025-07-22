@@ -7,28 +7,15 @@ export default defineConfig({
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
   output: 'static',
+  adapter: undefined, // Explicitly disable any adapter for static builds
   
   integrations: [tailwind()],
   
+  build: {
+    format: 'directory'
+  },
+  
   server: {
     port: 4321
-  },
-  
-  // Build configuration for GitHub Pages
-  build: {
-    assets: '_astro'
-  },
-  
-  // Ensure all JavaScript works on GitHub Pages
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          entryFileNames: '_astro/[name].[hash].js',
-          chunkFileNames: '_astro/[name].[hash].js',
-          assetFileNames: '_astro/[name].[hash].[ext]'
-        }
-      }
-    }
   }
 });

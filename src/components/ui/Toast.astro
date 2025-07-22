@@ -169,7 +169,7 @@ const containerClasses = [
         action = null
       } = options;
 
-      const toastId = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const toastId = `toast-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
       
       // Create toast element
       const toast = document.createElement('div');

@@ -38,7 +38,7 @@ const {
   ...props
 } = Astro.props;
 
-const inputId = id || name || `input-${Math.random().toString(36).substr(2, 9)}`;
+const inputId = id || name || `input-${Math.random().toString(36).substring(2, 11)}`;
 
 const variantClasses = {
   default: `border-2 border-brand-neutral-200 rounded-lg bg-white focus:border-brand-primary-500 focus:ring-2 focus:ring-brand-primary-100 ${error ? 'border-red-500' : ''}`,
