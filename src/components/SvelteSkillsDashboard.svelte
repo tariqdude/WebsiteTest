@@ -10,21 +10,13 @@
   });
   
   let skills = [
-    { name: 'JavaScript', level: 95, color: '#F7DF1E' },
-    { name: 'TypeScript', level: 90, color: '#3178C6' },
-    { name: 'React', level: 92, color: '#61DAFB' },
-    { name: 'Vue.js', level: 88, color: '#4FC08D' },
-    { name: 'Svelte', level: 85, color: '#FF3E00' },
-    { name: 'Node.js', level: 87, color: '#339933' }
+    { name: 'JavaScript', level: 95, color: '#F7DF1E', currentLevel: 0 },
+    { name: 'TypeScript', level: 90, color: '#3178C6', currentLevel: 0 },
+    { name: 'React', level: 92, color: '#61DAFB', currentLevel: 0 },
+    { name: 'Vue.js', level: 88, color: '#4FC08D', currentLevel: 0 },
+    { name: 'Svelte', level: 85, color: '#FF3E00', currentLevel: 0 },
+    { name: 'Node.js', level: 87, color: '#339933', currentLevel: 0 }
   ];
-  
-  let animatedSkills = skills.map(skill => ({
-    ...skill,
-    currentLevel: tweened(0, {
-      duration: 1500,
-      easing: cubicOut
-    })
-  }));
   
   let isVisible = false;
   let container;
@@ -55,18 +47,38 @@
   
   function startAnimations() {
     progress.set(100);
-    animatedSkills.forEach((skill, index) => {
+    skills.forEach((skill, index) => {
       setTimeout(() => {
-        skill.currentLevel.set(skill.level);
+        // Simple animation using setInterval
+        let start = 0;
+        const target = skill.level;
+        const duration = 1500;
+        const startTime = Date.now();
+        
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3); // cubic ease out
+          
+          skill.currentLevel = start + (target - start) * eased;
+          skills = skills; // trigger reactivity
+          
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          }
+        };
+        
+        animate();
       }, index * 200);
     });
   }
   
   function resetAnimation() {
     progress.set(0);
-    animatedSkills.forEach(skill => {
-      skill.currentLevel.set(0);
+    skills.forEach(skill => {
+      skill.currentLevel = 0;
     });
+    skills = skills; // trigger reactivity
     setTimeout(startAnimations, 100);
   }
 </script>
@@ -128,12 +140,12 @@
   
   <!-- Skills List -->
   <div class="space-y-4">
-    {#each animatedSkills as skill, index}
+    {#each skills as skill, index}
       <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300">
         <div class="flex justify-between items-center mb-2">
           <span class="font-semibold text-gray-800 dark:text-white">{skill.name}</span>
           <span class="text-sm font-medium text-gray-600 dark:text-gray-400">
-            {Math.round($skill.currentLevel)}%
+            {Math.round(skill.currentLevel)}%
           </span>
         </div>
         
@@ -141,7 +153,7 @@
         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
           <div
             class="h-full rounded-full transition-all duration-1000 ease-out"
-            style="width: {$skill.currentLevel}%; background-color: {skill.color}; box-shadow: 0 0 10px {skill.color}40;"
+            style="width: {skill.currentLevel}%; background-color: {skill.color}; box-shadow: 0 0 10px {skill.color}40;"
           ></div>
         </div>
         

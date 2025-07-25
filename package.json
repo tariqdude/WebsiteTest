@@ -12,13 +12,13 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.1",
     "@astrojs/preact": "^4.1.0",
-    "@astrojs/react": "^3.6.2",
+    "@astrojs/react": "^4.3.0",
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
     "@astrojs/solid-js": "^5.1.0",
     "@astrojs/svelte": "^7.1.0",
     "@astrojs/tailwind": "^5.1.2",
-    "@astrojs/vue": "^4.5.1",
+    "@astrojs/vue": "^5.1.0",
     "@hookform/resolvers": "^5.1.1",
     "@types/three": "^0.178.1",
     "astro": "5.12.1",
@@ -38,7 +38,7 @@
     "tailwindcss": "^3.4.15",
     "three": "^0.178.0",
     "vue": "^3.5.13",
-    "zod": "^4.0.5"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/react": "^18.3.12",

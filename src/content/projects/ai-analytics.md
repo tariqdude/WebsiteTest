@@ -4,7 +4,7 @@ description: "An intelligent analytics dashboard that uses machine learning to p
 tech: ["Vue.js", "Python", "TensorFlow", "D3.js", "PostgreSQL"]
 github: "https://github.com/example/ai-analytics"
 demo: "https://analytics.example.com"
-image: "/images/projects/ai-dashboard.jpg"
+image: "/images/projects/ai-dashboard.svg"
 featured: true
 order: 2
 ---

@@ -4,7 +4,7 @@ description: "A full-featured e-commerce platform built with modern technologies
 tech: ["React", "Node.js", "PostgreSQL", "Stripe", "Redis"]
 github: "https://github.com/example/ecommerce"
 demo: "https://demo-ecommerce.example.com"
-image: "/images/projects/ecommerce.jpg"
+image: "/images/projects/ecommerce.svg"
 featured: true
 order: 1
 ---
