@@ -383,5 +383,5 @@ export type ChartTypes = {
 // =============================================================================
 
 // Re-export specialized types for convenience
-export type * from './forms';
-export type * from './performance';
+export * from './forms';
+export * from './performance';

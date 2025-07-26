@@ -366,9 +366,10 @@ const createViteConfig = () => {
     css: {
       devSourcemap: true,
       preprocessorOptions: {
-        scss: {
-          additionalData: `@import "@/styles/variables.scss";`
-        }
+        // SCSS configuration disabled - no SCSS files in project
+        // scss: {
+        //   additionalData: `@import "@/styles/variables.scss";`
+        // }
       }
     },
 
