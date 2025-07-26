@@ -110,7 +110,7 @@ const stats = [
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {values.map(({ icon: Icon, title, description }) => (
-          <div key={title} class="flex space-x-4 p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm">
+          <div  class="flex space-x-4 p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm">
             <div class="flex-shrink-0">
               <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
                 <Icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
@@ -144,7 +144,7 @@ const stats = [
       
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         {stats.map(({ number, label }) => (
-          <div key={label} class="text-center">
+          <div  class="text-center">
             <div class="text-4xl md:text-6xl font-bold mb-2">
               {number}
             </div>
@@ -172,7 +172,7 @@ const stats = [
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {teamMembers.map((member) => (
-            <div key={member.id} class="text-center">
+            <div  class="text-center">
               <img
                 src={member.data.avatar}
                 alt={member.data.name}

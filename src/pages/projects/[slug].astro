@@ -74,7 +74,7 @@ const relatedProjects = allProjects
               </h3>
               <div class="flex flex-wrap gap-2">
                 {project.data.tech.map((tech) => (
-                  <span key={tech} class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 text-sm font-medium rounded-full">
+                  <span  class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 text-sm font-medium rounded-full">
                     {tech}
                   </span>
                 ))}
@@ -169,7 +169,7 @@ const relatedProjects = allProjects
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {relatedProjects.map((relatedProject) => (
-              <article key={relatedProject.slug} class="card group hover:shadow-xl transition-all duration-300">
+              <article  class="card group hover:shadow-xl transition-all duration-300">
                 <div class="aspect-video bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg mb-4 overflow-hidden">
                   <img 
                     src={relatedProject.data.image} 
@@ -188,7 +188,7 @@ const relatedProjects = allProjects
                 </p>
                 <div class="flex flex-wrap gap-1">
                   {relatedProject.data.tech.slice(0, 3).map((tech) => (
-                    <span key={tech} class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded">
+                    <span  class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded">
                       {tech}
                     </span>
                   ))}

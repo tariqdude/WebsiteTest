@@ -51,7 +51,7 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
           </button>
           {allTechnologies.map((tech) => (
             <button
-              key={tech}
+              
               class="px-3 py-1 text-sm rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 transition-colors"
               data-filter={tech.toLowerCase()}
             >
@@ -69,7 +69,7 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
       <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
           <article 
-            key={project.slug}
+            
             class="project-card card group hover:shadow-xl transition-all duration-300"
             data-technologies={project.data.tech.map(t => t.toLowerCase()).join(' ')}
           >
@@ -99,7 +99,7 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
               <div class="flex flex-wrap gap-2 mb-6">
                 {project.data.tech.map((tech) => (
                   <span 
-                    key={tech}
+                    
                     class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded font-medium"
                   >
                     {tech}
@@ -200,13 +200,13 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
         let visibleCount = 0;
         projectCards.forEach(card => {
           const technologies = card.getAttribute('data-technologies');
-          const isVisible = filter === 'all' || technologies.includes(filter);
+          const isVisible = filter === 'all' || (technologies && technologies.includes(filter || ''));
           
           if (isVisible) {
-            card.style.display = 'block';
+            (card as HTMLElement).style.display = 'block';
             visibleCount++;
           } else {
-            card.style.display = 'none';
+            (card as HTMLElement).style.display = 'none';
           }
         });
         

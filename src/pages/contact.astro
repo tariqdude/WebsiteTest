@@ -59,7 +59,7 @@ const contactInfo = [
 
           <div class="space-y-6 mb-8">
             {contactInfo.map(({ icon: Icon, title, detail, link }) => (
-              <div key={title} class="flex items-center space-x-4">
+              <div  class="flex items-center space-x-4">
                 <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
                   <Icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                 </div>
@@ -283,20 +283,24 @@ const contactInfo = [
       
       // Get form data
       const formData = new FormData(form);
-      const data = Object.fromEntries(formData);
+      // const data = Object.fromEntries(formData);
       
       // Simulate form submission
-      const button = form.querySelector('button[type="submit"]');
-      const originalText = button.innerHTML;
+      const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = button?.innerHTML || 'Send Message';
       
-      button.disabled = true;
-      button.innerHTML = 'Sending...';
+      if (button) {
+        button.disabled = true;
+        button.innerHTML = 'Sending...';
+      }
       
       setTimeout(() => {
         alert('Thank you for your message! We\'ll get back to you soon.');
         form.reset();
-        button.disabled = false;
-        button.innerHTML = originalText;
+        if (button) {
+          button.disabled = false;
+          button.innerHTML = originalText;
+        }
       }, 1000);
     });
   }

@@ -61,10 +61,10 @@ const AdvancedForm = () => {
       const result = {
         ...data,
         submittedAt: new Date().toISOString(),
-        id: Math.random().toString(36).substr(2, 9)
+        id: Math.random().toString(36).substring(2, 11)
       };
       
-      setSubmissionResult(result);
+      setSubmissionResult(result as any);
       toast.success('Form submitted successfully! 🎉');
       reset();
     } catch (error) {

@@ -213,47 +213,84 @@ npm run astro check  # Type checking and validation
 npm run astro sync   # Sync content collections
 ```
 
-## 📁 Project Architecture
+## 📁 Project Architecture (Modular Structure)
 
 ```
 src/
-├── components/                    # 15+ Advanced Components
-│   ├── Advanced3DScene.jsx           # Three.js WebGL graphics
-│   ├── DataVisualizationDashboard.jsx # D3.js + Chart.js
-│   ├── SvelteSkillsDashboard.svelte  # Svelte animations  
-│   ├── SolidStateDemo.jsx            # Solid.js reactivity
-│   ├── AdvancedForm.tsx              # React Hook Form + Zod
-│   ├── CodeEditorShowcase.jsx        # Monaco Editor
-│   ├── GSAPAnimationShowcase.jsx     # Professional animations
-│   ├── PreactMiniDashboard.jsx       # Lightweight Preact
-│   ├── InteractiveCounter.jsx        # React state management
-│   ├── ColorPalette.vue              # Vue reactive components
-│   ├── AnimatedBackground.jsx        # Canvas particle system
-│   ├── InteractiveTerminal.jsx       # Full terminal emulator
-│   ├── PerformanceMetrics.jsx        # Real-time monitoring
-│   ├── CodeBlock.jsx                 # Syntax highlighting
-│   └── MDXShowcase.mdx               # Interactive documentation
-├── content/                       # Type-Safe Content
-│   ├── config.ts                     # Content collection schemas
-│   ├── blog/                         # Markdown blog posts
-│   ├── projects/                     # Project showcases
-│   └── team/                         # JSON team profiles
-├── layouts/                       # Page Templates
-│   ├── BaseLayout.astro              # Base HTML structure
-│   └── Layout.astro                  # Main page layout
-├── pages/                         # File-Based Routing
-│   ├── index.astro                   # Homepage showcase
-│   ├── about.astro                   # Company information
-│   ├── contact.astro                 # Contact form
-│   ├── blog/                         # Blog section
-│   │   └── [slug].astro              # Dynamic blog posts
-│   └── projects/                     # Project portfolio
-│       ├── index.astro               # Projects listing
-│       └── [slug].astro              # Dynamic project pages
-├── styles/                        # Global Styling
-│   └── global.css                    # Tailwind base + custom styles
-└── utils/                         # Utility Functions
-    └── index.ts                      # Helper functions
+├── components/                    # Modular Component System
+│   ├── frameworks/                   # Framework-specific components
+│   │   ├── react/                       # React components
+│   │   │   ├── AdvancedForm.tsx             # Complex form with validation
+│   │   │   ├── DataVisualizationDashboard.jsx # D3.js + Chart.js
+│   │   │   ├── InteractiveCounter.jsx        # State management demo
+│   │   │   └── index.ts                     # React exports
+│   │   ├── vue/                         # Vue components
+│   │   │   ├── ColorPalette.vue             # Reactive color picker
+│   │   │   └── index.ts                     # Vue exports
+│   │   ├── svelte/                      # Svelte components
+│   │   │   ├── SvelteSkillsDashboard.svelte # Animations & motion
+│   │   │   └── index.ts                     # Svelte exports
+│   │   ├── solid/                       # Solid.js components
+│   │   │   ├── SolidStateDemo.jsx           # Fine-grained reactivity
+│   │   │   └── index.ts                     # Solid exports
+│   │   └── preact/                      # Preact components
+│   │       ├── PreactMiniDashboard.jsx      # Lightweight alternative
+│   │       └── index.ts                     # Preact exports
+│   ├── showcases/                    # Advanced feature showcases
+│   │   ├── Advanced3DScene.jsx          # Three.js WebGL graphics
+│   │   ├── CodeEditorShowcase.jsx       # Monaco editor integration
+│   │   ├── GSAPAnimationShowcase.jsx    # Professional animations
+│   │   ├── InteractiveTerminal.jsx      # Full terminal emulator
+│   │   ├── PerformanceMetrics.jsx       # Real-time monitoring
+│   │   ├── MDXShowcase.mdx              # Interactive documentation
+│   │   └── index.ts                     # Showcase exports
+│   ├── layout/                       # Layout & navigation
+│   │   ├── Header.astro                 # Main navigation
+│   │   ├── Footer.astro                 # Site footer
+│   │   ├── MobileMenu.jsx               # Mobile navigation
+│   │   └── index.ts                     # Layout exports
+│   ├── ui/                           # Reusable UI components
+│   │   ├── ThemeToggle.astro            # Dark/light mode
+│   │   ├── CodeBlock.jsx                # Syntax highlighting
+│   │   ├── AnimatedBackground.jsx       # Canvas particle system
+│   │   └── index.ts                     # UI exports
+│   └── index.ts                      # Main component exports
+├── lib/                              # Core Libraries & Utilities
+│   ├── types/                           # TypeScript definitions
+│   │   └── index.ts                     # All type exports
+│   ├── constants/                       # App constants
+│   │   └── index.ts                     # Configuration constants
+│   ├── validations/                     # Zod schemas
+│   │   └── index.ts                     # Form validation schemas
+│   ├── hooks/                           # React custom hooks
+│   │   └── index.ts                     # Reusable hooks
+│   ├── utils/                           # Utility functions
+│   │   └── index.ts                     # Helper functions
+│   └── index.ts                         # Main lib exports
+├── content/                          # Content Collections
+│   ├── config.ts                        # Content schemas
+│   ├── blog/                            # Blog posts (Markdown)
+│   ├── projects/                        # Project showcases
+│   └── team/                            # Team member data (JSON)
+├── layouts/                          # Page Templates
+│   ├── BaseLayout.astro                 # Base HTML structure
+│   └── Layout.astro                     # Main page layout
+├── pages/                            # File-Based Routing
+│   ├── index.astro                      # Homepage
+│   ├── about.astro                      # About page
+│   ├── contact.astro                    # Contact form
+│   ├── showcase.astro                   # Full feature demo
+│   ├── blog/                            # Blog section
+│   │   ├── index.astro                  # Blog listing
+│   │   └── [slug].astro                 # Dynamic blog posts
+│   └── projects/                        # Project portfolio
+│       ├── index.astro                  # Projects listing
+│       └── [slug].astro                 # Dynamic project pages
+├── styles/                           # Global Styling
+│   └── global.css                       # Tailwind + custom styles
+├── utils/                            # Legacy utilities (compatibility)
+│   └── index.ts                         # Re-exports from lib/
+└── config.ts                         # App configuration
 ```
 
 ## 🎨 Component Deep Dive
