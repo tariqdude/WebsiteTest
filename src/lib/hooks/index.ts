@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { ThemePreference } from '../validations';
+import type { ExtendedPerformance } from '../types';
 
 // Theme hook
 export function useTheme() {
@@ -110,7 +111,7 @@ export function usePerformanceMetrics() {
           fcp: Math.round(fcp),
           ttfb: Math.round(ttfb),
           domLoad: Math.round(domLoad),
-          memory: (performance as any).memory?.usedJSHeapSize || 0,
+          memory: (performance as ExtendedPerformance).memory?.usedJSHeapSize || 0,
         });
       }
     };

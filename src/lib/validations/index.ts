@@ -24,7 +24,7 @@ export const advancedFormSchema = z.object({
   remote: z.boolean(),
   website: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
   newsletter: z.boolean().optional(),
-  file: z.any().optional(),
+  file: z.instanceof(File).optional(),
 });
 
 // Newsletter subscription schema

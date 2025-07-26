@@ -42,7 +42,7 @@ export const getReadingTime = (content: string): number => {
   return Math.ceil(words / wordsPerMinute);
 };
 
-export const debounce = <T extends (...args: any[]) => any>(
+export const debounce = <T extends (...args: never[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void => {
@@ -53,7 +53,7 @@ export const debounce = <T extends (...args: any[]) => any>(
   };
 };
 
-export const throttle = <T extends (...args: any[]) => any>(
+export const throttle = <T extends (...args: never[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void => {
@@ -129,7 +129,7 @@ export const groupBy = <T>(array: T[], keyFn: (item: T) => string): Record<strin
   }, {} as Record<string, T[]>);
 };
 
-export const sortBy = <T>(array: T[], keyFn: (item: T) => any, order: 'asc' | 'desc' = 'asc'): T[] => {
+export const sortBy = <T>(array: T[], keyFn: (item: T) => string | number, order: 'asc' | 'desc' = 'asc'): T[] => {
   return [...array].sort((a, b) => {
     const aVal = keyFn(a);
     const bVal = keyFn(b);

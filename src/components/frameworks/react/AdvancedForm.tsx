@@ -22,6 +22,12 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+interface SubmissionResult {
+  id: string;
+  timestamp: string;
+  data: FormData;
+}
+
 const skillOptions = [
   'JavaScript', 'TypeScript', 'React', 'Vue', 'Angular', 'Node.js', 
   'Python', 'Java', 'C#', 'PHP', 'Go', 'Rust'
@@ -29,7 +35,7 @@ const skillOptions = [
 
 const AdvancedForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionResult, setSubmissionResult] = useState(null);
+  const [submissionResult, setSubmissionResult] = useState<SubmissionResult | null>(null);
 
   const {
     register,
@@ -58,13 +64,13 @@ const AdvancedForm = () => {
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const result = {
-        ...data,
-        submittedAt: new Date().toISOString(),
-        id: Math.random().toString(36).substring(2, 11)
+      const result: SubmissionResult = {
+        id: Math.random().toString(36).substring(2, 11),
+        timestamp: new Date().toISOString(),
+        data
       };
       
-      setSubmissionResult(result as any);
+      setSubmissionResult(result);
       toast.success('Form submitted successfully! 🎉');
       reset();
     } catch (error) {
