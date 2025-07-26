@@ -19,8 +19,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const SITE_CONFIG = {
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
-  output: 'static',
-  adapter: undefined // Force static output
+  output: 'static'
 };
 
 // Performance-optimized dependencies for Vite
@@ -41,10 +40,9 @@ const DEPS = {
 };
 
 export default defineConfig({
-  // EXPLICIT STATIC CONFIGURATION
-  output: 'static',
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
+  output: 'static',
   
   // =============================================================================
   // FRAMEWORK INTEGRATIONS
@@ -52,14 +50,13 @@ export default defineConfig({
   integrations: [
     // React - Primary framework for complex components
     react({
-      include: ['**/react/**', '**/showcases/**', '**/AdvancedForm.tsx', 
-                '**/DataVisualizationDashboard.jsx', '**/InteractiveCounter.jsx']
+      include: ['**/react/**', '**/showcases/**', '**/ui/**']
     }),
     
     // Vue, Svelte, Solid.js, Preact - Framework-specific folders
     vue({ 
       include: ['**/vue/**'],
-      exclude: ['**/node_modules/**', '**/dist/**', '**/server.js']
+      exclude: ['**/node_modules/**', '**/dist/**']
     }),
     svelte({ include: ['**/svelte/**'] }),
     solidJs({ include: ['**/solid/**'] }),
@@ -76,10 +73,7 @@ export default defineConfig({
     }),
     
     // SEO
-    sitemap({
-      canonicalURL: SITE_CONFIG.site,
-      i18n: { defaultLocale: 'en', locales: { en: 'en-US' } }
-    }),
+    sitemap(),
   ],
   
   // =============================================================================
@@ -97,13 +91,6 @@ export default defineConfig({
     // Build optimizations
     build: {
       rollupOptions: {
-        external: (id) => {
-          // Exclude problematic server files from Vue processing
-          if (id.includes('server.js') || id.includes('/dist/server.js')) {
-            return true;
-          }
-          return false;
-        },
         output: {
           manualChunks(id) {
             // Framework chunks
@@ -147,6 +134,10 @@ export default defineConfig({
 
     // Additional Vue-specific configuration
     plugins: [],
+    ssr: {
+      // Fix for ESM loader issues with Astro 5.x
+      noExternal: ['@astrojs/markdown-remark']
+    },
     
     // Resolve configuration for better module handling
     resolve: {
