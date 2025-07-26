@@ -4,10 +4,18 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "dev:verbose": "VERBOSE_LOGS=true astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:verbose": "VERBOSE_LOGS=true astro build",
+    "build:analyze": "npm run diagnostics && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "diagnostics": "node run-diagnostics.mjs",
+    "check": "astro check",
+    "check:types": "npx tsc --noEmit",
+    "clean": "rm -rf dist .astro node_modules/.vite",
+    "clean:logs": "rm -rf .logs",
     "deploy:prep": "bash deploy-prep.sh",
     "deploy:pages": "npm run build -- --site https://tariqdude.github.io --base /WebsiteTest"
   },

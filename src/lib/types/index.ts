@@ -1,40 +1,33 @@
 /**
- * Core type definitions for the Astro Showcase application
+ * Optimized Core Type Definitions for Astro Showcase
  * 
- * This file is organized into logical sections:
- * - Base Utility Types: Fundamental types used throughout the app
- * - Content Collection Types: Types for blog posts, projects, team members
- * - UI Component Types: Types for interactive components and styling
- * - Performance & Monitoring: Types for performance tracking
- * - Data Visualization: Types for charts and graphs
- * - Form & Input Types: Comprehensive form handling types
- * - Animation & Interaction: Types for animations and user interactions
- * - API & Network Types: Types for API responses and network operations
- * - Event Handler Types: Typed event handlers for better type safety
- * - Generic Callback Types: Reusable callback type definitions
- * - Advanced Utility Types: Complex utility types for type manipulation
- * - Branded Types: Types with additional type safety through branding
- * - State Management: Types for application state management
+ * Organized by actual usage and importance:
+ * 1. Essential Base Types - Core primitive types used throughout
+ * 2. Content & Collections - Blog posts, projects, team members  
+ * 3. UI & Components - Component props and styling
+ * 4. Forms & Validation - Form handling and validation
+ * 5. Performance & Monitoring - Performance tracking and metrics
+ * 6. Data Visualization - Charts and graphs (Chart.js/D3.js)
+ * 7. Utility & Helper Types - Advanced TypeScript utilities
+ * 8. Framework Integration - Multi-framework support types
  * 
- * @author Astro Showcase Team
- * @version 2.0.0
+ * @author Astro Showcase Team  
+ * @version 3.0.0 - Optimized & Cleaned
  */
 
 // =============================================================================
-// BASE UTILITY TYPES
+// 1. ESSENTIAL BASE TYPES
 // =============================================================================
 
 export type ID = string | number;
 export type Timestamp = Date | string | number;
 export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
 export type ThemeMode = 'light' | 'dark' | 'system';
-
-// Component styling types
 export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type ComponentVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
 
 // =============================================================================
-// CONTENT COLLECTION TYPES
+// 2. CONTENT & COLLECTIONS (Used by Astro content collections)
 // =============================================================================
 
 export interface BlogPost {
@@ -90,7 +83,7 @@ export interface TeamMember {
 }
 
 // =============================================================================
-// UI COMPONENT TYPES
+// 3. UI & COMPONENTS (Used by framework components)
 // =============================================================================
 
 export interface Framework {
@@ -108,14 +101,6 @@ export interface Skill {
   description?: string;
 }
 
-export interface ContactInfo {
-  title: string;
-  description: string;
-  icon: string;
-  link?: string;
-  type?: 'email' | 'phone' | 'address' | 'social';
-}
-
 export interface NavigationItem {
   name: string;
   href: string;
@@ -124,8 +109,56 @@ export interface NavigationItem {
   children?: NavigationItem[];
 }
 
+export interface ContactInfo {
+  title: string;
+  description: string;
+  icon: string;
+  link?: string;
+  type?: 'email' | 'phone' | 'address' | 'social';
+}
+
 // =============================================================================
-// PERFORMANCE & MONITORING TYPES
+// 4. FORMS & VALIDATION (Used by React Hook Form components)
+// =============================================================================
+
+export type FormFieldType = 
+  | 'text' | 'email' | 'number' | 'textarea' | 'select' 
+  | 'checkbox' | 'radio' | 'file' | 'password' | 'tel' 
+  | 'url' | 'date' | 'time' | 'datetime-local';
+
+export interface FormFieldValidation {
+  required?: boolean;
+  min?: number;
+  max?: number;
+  minLength?: number;
+  maxLength?: number;
+  pattern?: string;
+  message?: string;
+  custom?: (value: unknown) => boolean | string;
+}
+
+export interface FormFieldOption {
+  label: string;
+  value: string | number;
+  disabled?: boolean;
+}
+
+export interface FormField {
+  name: string;
+  label: string;
+  type: FormFieldType;
+  required?: boolean;
+  placeholder?: string;
+  options?: FormFieldOption[];
+  validation?: FormFieldValidation;
+  disabled?: boolean;
+  defaultValue?: string | number | boolean;
+  description?: string;
+  autoComplete?: string;
+}
+
+// =============================================================================
+// 5. PERFORMANCE & MONITORING (Used by performance hooks & components)
 // =============================================================================
 
 export interface PerformanceMetric {
@@ -164,7 +197,7 @@ export interface PerformanceStats {
 }
 
 // =============================================================================
-// DATA VISUALIZATION TYPES
+// 6. DATA VISUALIZATION (Used by Chart.js & D3.js components)
 // =============================================================================
 
 export interface ChartDataset {
@@ -192,60 +225,55 @@ export interface ChartOptions {
 }
 
 // =============================================================================
-// FORM & INPUT TYPES
+// 7. UTILITY & HELPER TYPES (TypeScript utilities)
 // =============================================================================
 
-export type FormFieldType = 
-  | 'text' 
-  | 'email' 
-  | 'number' 
-  | 'textarea' 
-  | 'select' 
-  | 'checkbox' 
-  | 'radio'
-  | 'file' 
-  | 'password' 
-  | 'tel' 
-  | 'url'
-  | 'date'
-  | 'time'
-  | 'datetime-local';
+// Enhanced utility types for better type safety
+export type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;
+export type OptionalKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+export type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
+};
 
-export interface FormFieldValidation {
-  required?: boolean;
-  min?: number;
-  max?: number;
-  minLength?: number;
-  maxLength?: number;
-  pattern?: string;
-  message?: string;
-  custom?: (value: unknown) => boolean | string;
-}
+// Conditional types
+export type NonNullable<T> = T extends null | undefined ? never : T;
+export type Flatten<T> = T extends (infer U)[] ? U : T;
+export type KeysOfType<T, U> = {
+  [K in keyof T]: T[K] extends U ? K : never;
+}[keyof T];
 
-export interface FormFieldOption {
-  label: string;
-  value: string | number;
-  disabled?: boolean;
-}
+// Branded types for enhanced type safety
+declare const __brand: unique symbol;
+export type Brand<T, B> = T & { [__brand]: B };
 
-export interface FormField {
-  name: string;
-  label: string;
-  type: FormFieldType;
-  required?: boolean;
-  placeholder?: string;
-  options?: FormFieldOption[];
-  validation?: FormFieldValidation;
-  disabled?: boolean;
-  defaultValue?: string | number | boolean;
-  description?: string;
-  autoComplete?: string;
-}
+export type EmailAddress = Brand<string, 'EmailAddress'>;
+export type URL = Brand<string, 'URL'>;
+export type PhoneNumber = Brand<string, 'PhoneNumber'>;
+export type SafeHTML = Brand<string, 'SafeHTML'>;
 
 // =============================================================================
-// ANIMATION & INTERACTION TYPES
+// 8. FRAMEWORK INTEGRATION (Multi-framework support)
 // =============================================================================
 
+// Event handlers for React, Preact, Solid.js
+export type EventHandler<T = Event> = (event: T) => void;
+export type ClickHandler = EventHandler<MouseEvent>;
+export type ChangeHandler<T = HTMLInputElement> = (event: Event & { target: T }) => void;
+export type SubmitHandler<T = HTMLFormElement> = (event: Event & { target: T }) => void;
+export type KeyboardHandler = EventHandler<KeyboardEvent>;
+export type FocusHandler = EventHandler<FocusEvent>;
+
+// Callback types
+export type Callback<T = void> = () => T;
+export type AsyncCallback<T = void> = () => Promise<T>;
+export type CallbackWithParams<P extends readonly unknown[], T = void> = (...params: P) => T;
+export type ErrorCallback = (error: Error) => void;
+export type SuccessCallback<T = unknown> = (data: T) => void;
+
+// Animation support (GSAP, Framer Motion)
 export interface AnimationConfig {
   duration: number;
   delay?: number;
@@ -258,10 +286,7 @@ export interface AnimationConfig {
 export type AnimationDirection = 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
 export type AnimationFillMode = 'none' | 'forwards' | 'backwards' | 'both';
 
-// =============================================================================
-// API & NETWORK TYPES
-// =============================================================================
-
+// API & Network types (for future API integration)
 export interface ApiResponse<T = unknown> {
   data: T;
   message: string;
@@ -290,63 +315,7 @@ export interface PaginationParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-// =============================================================================
-// EVENT HANDLER TYPES
-// =============================================================================
-
-export type EventHandler<T = Event> = (event: T) => void;
-export type ClickHandler = EventHandler<MouseEvent>;
-export type ChangeHandler<T = HTMLInputElement> = (event: Event & { target: T }) => void;
-export type SubmitHandler<T = HTMLFormElement> = (event: Event & { target: T }) => void;
-export type KeyboardHandler = EventHandler<KeyboardEvent>;
-export type FocusHandler = EventHandler<FocusEvent>;
-
-// =============================================================================
-// GENERIC CALLBACK TYPES
-// =============================================================================
-
-export type Callback<T = void> = () => T;
-export type AsyncCallback<T = void> = () => Promise<T>;
-export type CallbackWithParams<P extends readonly unknown[], T = void> = (...params: P) => T;
-export type ErrorCallback = (error: Error) => void;
-export type SuccessCallback<T = unknown> = (data: T) => void;
-
-// =============================================================================
-// ADVANCED UTILITY TYPES
-// =============================================================================
-
-export type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;
-export type OptionalKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
-export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
-};
-export type DeepReadonly<T> = {
-  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
-};
-
-// Conditional types
-export type NonNullable<T> = T extends null | undefined ? never : T;
-export type Flatten<T> = T extends (infer U)[] ? U : T;
-export type KeysOfType<T, U> = {
-  [K in keyof T]: T[K] extends U ? K : never;
-}[keyof T];
-
-// =============================================================================
-// BRANDED TYPES FOR TYPE SAFETY
-// =============================================================================
-
-declare const __brand: unique symbol;
-export type Brand<T, B> = T & { [__brand]: B };
-
-export type EmailAddress = Brand<string, 'EmailAddress'>;
-export type URL = Brand<string, 'URL'>;
-export type PhoneNumber = Brand<string, 'PhoneNumber'>;
-export type SafeHTML = Brand<string, 'SafeHTML'>;
-
-// =============================================================================
-// STATE MANAGEMENT TYPES
-// =============================================================================
-
+// State management for React-like frameworks
 export interface AsyncState<T> {
   data: T | null;
   loading: boolean;
@@ -359,3 +328,60 @@ export type AsyncAction<T> =
   | { type: 'SUCCESS'; payload: T }
   | { type: 'ERROR'; payload: string }
   | { type: 'RESET' };
+
+// =============================================================================
+// EXPORTED TYPE GROUPS (For easier importing)
+// =============================================================================
+
+// Core types bundle
+export type CoreTypes = {
+  ID: ID;
+  Timestamp: Timestamp;
+  LoadingState: LoadingState;
+  ThemeMode: ThemeMode;
+};
+
+// Content types bundle  
+export type ContentTypes = {
+  BlogPost: BlogPost;
+  Project: Project;
+  TeamMember: TeamMember;
+};
+
+// UI types bundle
+export type UITypes = {
+  Framework: Framework;
+  Skill: Skill;
+  NavigationItem: NavigationItem;
+  ContactInfo: ContactInfo;
+};
+
+// Form types bundle
+export type FormTypes = {
+  FormField: FormField;
+  FormFieldType: FormFieldType;
+  FormFieldValidation: FormFieldValidation;
+  FormFieldOption: FormFieldOption;
+};
+
+// Performance types bundle
+export type PerformanceTypes = {
+  PerformanceMetric: PerformanceMetric;
+  PerformanceStats: PerformanceStats;
+  ExtendedPerformance: ExtendedPerformance;
+};
+
+// Chart types bundle
+export type ChartTypes = {
+  ChartData: ChartData;
+  ChartDataset: ChartDataset;
+  ChartOptions: ChartOptions;
+};
+
+// =============================================================================
+// SPECIALIZED TYPE MODULES
+// =============================================================================
+
+// Re-export specialized types for convenience
+export type * from './forms';
+export type * from './performance';
