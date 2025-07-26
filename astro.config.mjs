@@ -19,7 +19,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 const SITE_CONFIG = {
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
-  output: 'static'
+  output: 'static',
+  adapter: undefined // Force static output
 };
 
 // Performance-optimized dependencies for Vite
