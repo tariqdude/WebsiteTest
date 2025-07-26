@@ -1,6 +1,5 @@
 // Real-time Code Editor with Monaco (VS Code editor)
 import { useEffect, useRef, useState } from 'react';
-import * as monaco from 'monaco-editor';
 
 const CodeEditorShowcase = () => {
   const editorRef = useRef(null);
@@ -9,6 +8,7 @@ const CodeEditorShowcase = () => {
   const [theme, setTheme] = useState('vs-dark');
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const initialCode = {
     javascript: `// Interactive JavaScript Playground
@@ -130,46 +130,62 @@ print(f"Even squares: {squares}")`,
   };
 
   useEffect(() => {
-    if (editorRef.current) {
-      // Configure Monaco Editor
-      monaco.editor.defineTheme('custom-dark', {
-        base: 'vs-dark',
-        inherit: true,
-        rules: [],
-        colors: {
-          'editor.background': '#1e1e1e',
-          'editor.foreground': '#d4d4d4'
+    const initMonaco = async () => {
+      if (editorRef.current && !monacoRef.current) {
+        try {
+          setIsLoading(true);
+          // Dynamic import for better code splitting
+          const monaco = await import('monaco-editor');
+          
+          // Configure Monaco Editor
+          monaco.editor.defineTheme('custom-dark', {
+            base: 'vs-dark',
+            inherit: true,
+            rules: [],
+            colors: {
+              'editor.background': '#1e1e1e',
+              'editor.foreground': '#d4d4d4'
+            }
+          });
+
+          const editor = monaco.editor.create(editorRef.current, {
+            value: initialCode[language],
+            language: language,
+            theme: theme,
+            automaticLayout: true,
+            minimap: { enabled: true },
+            wordWrap: 'on',
+            fontSize: 14,
+            lineNumbers: 'on',
+            scrollBeyondLastLine: false,
+            renderWhitespace: 'selection',
+            contextmenu: true,
+            selectOnLineNumbers: true,
+            roundedSelection: false,
+            readOnly: false,
+            cursorStyle: 'line',
+            folding: true,
+            lineDecorationsWidth: 60,
+            lineNumbersMinChars: 3,
+            glyphMargin: true
+          });
+
+          monacoRef.current = editor;
+          setIsLoading(false);
+        } catch (error) {
+          console.error('Failed to load Monaco Editor:', error);
+          setIsLoading(false);
         }
-      });
+      }
+    };
 
-      const editor = monaco.editor.create(editorRef.current, {
-        value: initialCode[language],
-        language: language,
-        theme: theme,
-        automaticLayout: true,
-        minimap: { enabled: true },
-        wordWrap: 'on',
-        fontSize: 14,
-        lineNumbers: 'on',
-        scrollBeyondLastLine: false,
-        renderWhitespace: 'selection',
-        contextmenu: true,
-        selectOnLineNumbers: true,
-        roundedSelection: false,
-        readOnly: false,
-        cursorStyle: 'line',
-        folding: true,
-        lineDecorationsWidth: 60,
-        lineNumbersMinChars: 3,
-        glyphMargin: true
-      });
+    initMonaco();
 
-      monacoRef.current = editor;
-
-      return () => {
-        editor.dispose();
-      };
-    }
+    return () => {
+      if (monacoRef.current) {
+        monacoRef.current.dispose();
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -243,6 +259,15 @@ print(f"Even squares: {squares}")`,
       </div>
 
       <div className="p-6">
+        {isLoading && (
+          <div className="flex items-center justify-center h-64 bg-gray-100 dark:bg-gray-800 rounded-lg mb-6">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-2"></div>
+              <p className="text-gray-600 dark:text-gray-400">Loading Monaco Editor...</p>
+            </div>
+          </div>
+        )}
+        
         {/* Controls */}
         <div className="flex flex-wrap gap-4 mb-6">
           <div>
@@ -252,6 +277,7 @@ print(f"Even squares: {squares}")`,
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
+              disabled={isLoading}
               className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
             >
               {languages.map(lang => (
@@ -267,6 +293,7 @@ print(f"Even squares: {squares}")`,
             <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
+              disabled={isLoading}
               className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
             >
               {themes.map(t => (
@@ -278,7 +305,7 @@ print(f"Even squares: {squares}")`,
           <div className="flex items-end">
             <button
               onClick={runCode}
-              disabled={isRunning}
+              disabled={isRunning || isLoading}
               className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isRunning ? 'Running...' : 'Run Code'}

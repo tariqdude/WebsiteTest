@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Activity, Zap, Globe, Clock } from 'lucide-react';
 
 const PerformanceMetrics = () => {

@@ -109,17 +109,27 @@ export default defineConfig({
             if (id.includes('solid')) return 'solid-vendor';
             if (id.includes('preact')) return 'preact-vendor';
             
-            // Feature chunks
-            if (id.includes('chart.js') || id.includes('d3')) return 'visualization';
+            // Feature chunks - more granular splitting
+            if (id.includes('monaco-editor')) {
+              // Split Monaco Editor into smaller chunks
+              if (id.includes('monaco-editor/esm/vs/editor/editor.api')) return 'monaco-core';
+              if (id.includes('monaco-editor/esm/vs/language')) return 'monaco-languages';
+              if (id.includes('monaco-editor/esm/vs/basic-languages')) return 'monaco-basic-lang';
+              return 'monaco-editor';
+            }
+            if (id.includes('chart.js')) return 'chartjs';
+            if (id.includes('d3')) return 'd3-charts';
             if (id.includes('three')) return 'threejs';
-            if (id.includes('gsap') || id.includes('framer-motion')) return 'animation';
-            if (id.includes('monaco-editor')) return 'editor';
+            if (id.includes('gsap')) return 'gsap-animations';
+            if (id.includes('framer-motion')) return 'framer-motion';
             if (id.includes('lucide-react')) return 'icons';
+            
+            // Vendor chunks
             if (id.includes('node_modules')) return 'vendor';
           }
         }
       },
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 2000, // Increased to account for Monaco Editor
       minify: isProduction ? 'esbuild' : false,
       sourcemap: isDev
     },
