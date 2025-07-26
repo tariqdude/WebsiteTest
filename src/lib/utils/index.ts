@@ -86,7 +86,7 @@ export const camelToKebab = (str: string): string => {
 };
 
 export const kebabToCamel = (str: string): string => {
-  return str.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+  return str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 };
 
 export const extractInitials = (name: string): string => {

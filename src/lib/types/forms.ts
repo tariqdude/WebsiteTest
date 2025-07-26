@@ -213,10 +213,10 @@ export interface VueFormProps<T = Record<string, unknown>> {
 
 // Svelte form props
 export interface SvelteFormProps<T = Record<string, unknown>> {
-  bind:values?: T;
+  values?: T;
   fields: EnhancedFormField[];
   onSubmit?: (data: T) => void | Promise<void>;
-  let:form?: FormState<T>;
+  form?: FormState<T>;
 }
 
 // =============================================================================

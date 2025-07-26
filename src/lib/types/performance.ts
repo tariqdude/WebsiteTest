@@ -8,9 +8,7 @@
  */
 
 import type { 
-  PerformanceMetric, 
   PerformanceStats, 
-  ExtendedPerformance,
   MemoryInfo,
   ConnectionInfo 
 } from './index';
