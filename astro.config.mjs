@@ -130,26 +130,12 @@ export default defineConfig({
       __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
       __DEV__: JSON.stringify(isDev),
       __PROD__: JSON.stringify(isProduction)
-    },
-
-    // Additional Vue-specific configuration
-    plugins: [],
-    ssr: {
-      // Fix for ESM loader issues with Astro 5.x
-      noExternal: ['@astrojs/markdown-remark']
-    },
-    
-    // Resolve configuration for better module handling
-    resolve: {
-      conditions: ['import', 'module', 'browser', 'default']
     }
   },
   
   // =============================================================================
-  // CONFIGURATION
+  // IMAGE & SECURITY CONFIGURATION
   // =============================================================================
-  typescript: { config: './tsconfig.json', strict: true },
-
   image: {
     domains: ['images.unsplash.com', 'via.placeholder.com'],
     remotePatterns: [
@@ -159,10 +145,5 @@ export default defineConfig({
   },
 
   security: { checkOrigin: true },
-  devToolbar: { enabled: isDev },
-  
-  markdown: {
-    syntaxHighlight: 'shiki',
-    shikiConfig: { theme: 'github-dark-dimmed', wrap: true }
-  }
+  devToolbar: { enabled: isDev }
 });
