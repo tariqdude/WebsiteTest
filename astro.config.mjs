@@ -12,25 +12,25 @@ import sitemap from '@astrojs/sitemap';
 const SITE_CONFIG = {
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
-  output: 'static' as const,
-} as const;
+  output: 'static',
+};
 
 const INTEGRATIONS = [
   // Framework integrations with specific configurations
   react({
-    include: '**/react/**',
+    include: ['**/react/**/*'],
   }),
   vue({
-    include: '**/vue/**',
+    include: ['**/vue/**/*'],
   }),
   svelte({
-    include: '**/svelte/**',
+    include: ['**/svelte/**/*'],
   }),
   solidJs({
-    include: '**/solid/**',
+    include: ['**/solid/**/*'],
   }),
   preact({
-    include: '**/preact/**',
+    include: ['**/preact/**/*'],
   }),
   // Styling and content
   tailwind({
@@ -38,7 +38,7 @@ const INTEGRATIONS = [
   }),
   mdx(),
   sitemap(),
-] as const;
+];
 
 const VITE_CONFIG = {
   optimizeDeps: {
@@ -82,7 +82,7 @@ const VITE_CONFIG = {
       '@/styles': '/src/styles',
     },
   },
-} as const;
+};
 
 // https://astro.build/config
 export default defineConfig({
