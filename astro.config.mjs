@@ -41,7 +41,10 @@ const DEPS = {
 };
 
 export default defineConfig({
-  ...SITE_CONFIG,
+  // EXPLICIT STATIC CONFIGURATION
+  output: 'static',
+  site: 'https://tariqdude.github.io',
+  base: '/WebsiteTest',
   
   // =============================================================================
   // FRAMEWORK INTEGRATIONS
@@ -144,11 +147,6 @@ export default defineConfig({
 
     // Additional Vue-specific configuration
     plugins: [],
-    ssr: {
-      external: ['@astrojs/vue/dist/server.js'],
-      // Fix for ESM loader issues with Astro 5.x
-      noExternal: ['@astrojs/markdown-remark']
-    },
     
     // Resolve configuration for better module handling
     resolve: {
