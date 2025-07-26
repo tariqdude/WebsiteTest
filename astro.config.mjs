@@ -15,12 +15,22 @@ export default defineConfig({
   output: 'static',
   
   integrations: [
-    // Framework integrations
-    react(),
-    vue(),
-    svelte(),
-    solidJs(),
-    preact(),
+    // Framework integrations with specific file patterns to avoid conflicts
+    react({
+      include: ['**/react/**', '**/showcases/**', '**/AdvancedForm.tsx', '**/DataVisualizationDashboard.jsx', '**/InteractiveCounter.jsx']
+    }),
+    vue({
+      include: ['**/vue/**']
+    }),
+    svelte({
+      include: ['**/svelte/**']
+    }),
+    solidJs({
+      include: ['**/solid/**']
+    }),
+    preact({
+      include: ['**/preact/**']
+    }),
     
     // Content and styling
     mdx(),
