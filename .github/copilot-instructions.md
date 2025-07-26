@@ -73,6 +73,34 @@ const DEPS = {
   features: ['chart.js', 'd3', 'three', 'gsap'],      // Feature libraries
   dev: isDev ? ['monaco-editor'] : []                 // Development only
 };
+
+// Optimized chunk splitting for large dependencies
+manualChunks(id) {
+  // Monaco Editor split into multiple chunks
+  if (id.includes('monaco-editor')) {
+    if (id.includes('monaco-editor/esm/vs/editor/editor.api')) return 'monaco-core';
+    if (id.includes('monaco-editor/esm/vs/language')) return 'monaco-languages';
+    if (id.includes('monaco-editor/esm/vs/basic-languages')) return 'monaco-basic-lang';
+    return 'monaco-editor';
+  }
+  // Separate Chart.js and D3 for better caching
+  if (id.includes('chart.js')) return 'chartjs';
+  if (id.includes('d3')) return 'd3-charts';
+}
+```
+
+### React Import Optimization
+- **Never import default React**: Use `import { useState, useEffect } from 'react'`
+- **Avoid**: `import React, { useState } from 'react'` (causes build warnings)
+- **Pattern**: Only import specific hooks/functions needed
+
+### Dynamic Import Strategy
+```javascript
+// Monaco Editor - use dynamic imports for code splitting
+const initMonaco = async () => {
+  const monaco = await import('monaco-editor');
+  // Initialize editor
+};
 ```
 
 ### Vue Integration Fix
