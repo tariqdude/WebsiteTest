@@ -306,7 +306,9 @@ export const createCache = <K, V>(maxSize: number = 100) => {
     set: (key: K, value: V): void => {
       if (cache.size >= maxSize) {
         const firstKey = cache.keys().next().value;
-        cache.delete(firstKey);
+        if (firstKey !== undefined) {
+          cache.delete(firstKey);
+        }
       }
       cache.set(key, value);
     },

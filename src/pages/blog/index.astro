@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { formatDate } from '../../lib/utils';
-import { Calendar, User, Clock, Tag } from 'lucide-react';
+import { Calendar, User, Tag } from 'lucide-react';
 
 const allBlogPosts = await getCollection('blog');
 const posts = allBlogPosts

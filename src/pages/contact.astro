@@ -281,10 +281,6 @@ const contactInfo = [
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       
-      // Get form data
-      const formData = new FormData(form);
-      // const data = Object.fromEntries(formData);
-      
       // Simulate form submission
       const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       const originalText = button?.innerHTML || 'Send Message';

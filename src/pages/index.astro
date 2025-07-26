@@ -31,8 +31,6 @@ const featuredProjects = allProjects
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
-const teamMembers = await getCollection('team');
-
 // Hero features
 const features = [
   {
@@ -77,14 +75,6 @@ const features = [
     color: 'text-pink-600 dark:text-pink-400',
     bg: 'bg-pink-50 dark:bg-pink-900/20'
   }
-];
-
-// Performance stats for display
-const performanceStats = [
-  { label: 'Performance Score', value: '100', unit: '/100' },
-  { label: 'Build Time', value: '2.3', unit: 's' },
-  { label: 'Bundle Size', value: '0', unit: 'KB JS' },
-  { label: 'Lighthouse Score', value: '100', unit: '%' }
 ];
 ---
 
