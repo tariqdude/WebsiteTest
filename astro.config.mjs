@@ -23,136 +23,77 @@ const SITE_CONFIG = {
 };
 
 // Performance-optimized dependencies for Vite
-const CRITICAL_DEPS = [
-  // UI Framework cores (high priority)
-  'react',
-  'react-dom',
-  'vue', 
-  'svelte',
-  'solid-js',
-  'preact',
-];
-
-const FEATURE_DEPS = [
-  // Visualization libraries
-  'chart.js',
-  'd3',
-  'three',
+const DEPS = {
+  // Critical framework cores (highest priority)
+  critical: ['react', 'react-dom', 'vue', 'svelte', 'solid-js', 'preact'],
   
-  // Animation libraries
-  'gsap',
-  'framer-motion',
+  // Feature libraries (loaded on demand)
+  features: [
+    'chart.js', 'd3', 'three',                    // Visualization
+    'gsap', 'framer-motion',                      // Animation
+    'react-hook-form', '@hookform/resolvers/zod', 'zod', // Forms
+    'lucide-react', 'react-hot-toast'            // UI
+  ],
   
-  // Form handling
-  'react-hook-form',
-  '@hookform/resolvers/zod',
-  'zod',
-  
-  // UI components
-  'lucide-react',
-  'react-hot-toast',
-  
-  // Development tools (only in dev)
-  ...(isDev ? ['monaco-editor'] : [])
-];
+  // Development-only dependencies
+  dev: isDev ? ['monaco-editor'] : []
+};
 
 export default defineConfig({
   ...SITE_CONFIG,
   
   // =============================================================================
-  // FRAMEWORK INTEGRATIONS - Optimized for multi-framework showcase
+  // FRAMEWORK INTEGRATIONS
   // =============================================================================
   integrations: [
     // React - Primary framework for complex components
     react({
-      include: [
-        '**/react/**',           // React-specific folder
-        '**/showcases/**',       // Showcase components (mostly React)
-        '**/AdvancedForm.tsx',   // TypeScript React components
-        '**/DataVisualizationDashboard.jsx',
-        '**/InteractiveCounter.jsx'
-      ]
+      include: ['**/react/**', '**/showcases/**', '**/AdvancedForm.tsx', 
+                '**/DataVisualizationDashboard.jsx', '**/InteractiveCounter.jsx']
     }),
     
-    // Vue - For reactive demonstrations
-    vue({
-      include: ['**/vue/**']
-    }),
+    // Vue, Svelte, Solid.js, Preact - Framework-specific folders
+    vue({ include: ['**/vue/**'] }),
+    svelte({ include: ['**/svelte/**'] }),
+    solidJs({ include: ['**/solid/**'] }),
+    preact({ include: ['**/preact/**'] }),
     
-    // Svelte - For built-in animation showcases
-    svelte({
-      include: ['**/svelte/**']
-    }),
-    
-    // Solid.js - For fine-grained reactivity demos
-    solidJs({
-      include: ['**/solid/**']
-    }),
-    
-    // Preact - For lightweight React-like components
-    preact({
-      include: ['**/preact/**']
-    }),
-    
-    // Content and styling integrations
+    // Content and styling
     mdx({
       syntaxHighlight: 'shiki',
-      shikiConfig: {
-        theme: 'github-dark-dimmed',
-        wrap: true
-      }
+      shikiConfig: { theme: 'github-dark-dimmed', wrap: true }
     }),
-    
     tailwind({
-      applyBaseStyles: false, // We have custom global styles
-      config: {
-        path: './tailwind.config.mjs'
-      }
+      applyBaseStyles: false,
+      config: { path: './tailwind.config.mjs' }
     }),
     
-    // SEO optimization
+    // SEO
     sitemap({
       canonicalURL: SITE_CONFIG.site,
-      i18n: {
-        defaultLocale: 'en',
-        locales: {
-          en: 'en-US'
-        }
-      }
+      i18n: { defaultLocale: 'en', locales: { en: 'en-US' } }
     }),
   ],
   
   // =============================================================================
-  // VITE CONFIGURATION - Performance optimized
+  // VITE CONFIGURATION
   // =============================================================================
   vite: {
-    // Development server configuration
-    server: {
-      port: 4321,
-      host: true,
-      open: false,
-      hmr: {
-        overlay: true
-      }
-    },
+    server: { port: 4321, host: true, open: false, hmr: { overlay: true } },
 
     // Dependency pre-bundling optimization
     optimizeDeps: {
-      include: [...CRITICAL_DEPS, ...FEATURE_DEPS],
-      exclude: [
-        // Exclude large packages that should be loaded on demand
-        ...(isProduction ? ['monaco-editor'] : [])
-      ]
+      include: [...DEPS.critical, ...DEPS.features, ...DEPS.dev],
+      exclude: isProduction ? ['monaco-editor'] : []
     },
 
     // Build optimizations
     build: {
       rollupOptions: {
         output: {
-          // Intelligent code splitting
           manualChunks(id) {
             // Framework chunks
-            if (id.includes('react') || id.includes('react-dom')) return 'react-vendor';
+            if (id.includes('react')) return 'react-vendor';
             if (id.includes('vue')) return 'vue-vendor';
             if (id.includes('svelte')) return 'svelte-vendor';
             if (id.includes('solid')) return 'solid-vendor';
@@ -164,25 +105,16 @@ export default defineConfig({
             if (id.includes('gsap') || id.includes('framer-motion')) return 'animation';
             if (id.includes('monaco-editor')) return 'editor';
             if (id.includes('lucide-react')) return 'icons';
-            
-            // Utility chunks
             if (id.includes('node_modules')) return 'vendor';
           }
         }
       },
-      // Performance settings
       chunkSizeWarningLimit: 1000,
       minify: isProduction ? 'esbuild' : false,
       sourcemap: isDev
     },
 
-    // CSS optimization
-    css: {
-      devSourcemap: isDev,
-      minify: isProduction
-    },
-
-    // Environment variables
+    css: { devSourcemap: isDev, minify: isProduction },
     define: {
       __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
       __DEV__: JSON.stringify(isDev),
@@ -191,53 +123,23 @@ export default defineConfig({
   },
   
   // =============================================================================
-  // TYPESCRIPT CONFIGURATION - Enhanced type checking
+  // CONFIGURATION
   // =============================================================================
-  typescript: {
-    config: './tsconfig.json',
-    strict: true
-  },
+  typescript: { config: './tsconfig.json', strict: true },
 
-  // =============================================================================
-  // IMAGE OPTIMIZATION - Astro 5.x compatible
-  // =============================================================================
   image: {
-    domains: [
-      'images.unsplash.com', 
-      'via.placeholder.com'
-    ],
+    domains: ['images.unsplash.com', 'via.placeholder.com'],
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.githubusercontent.com'
-      },
-      {
-        protocol: 'https', 
-        hostname: '**.unsplash.com'
-      }
+      { protocol: 'https', hostname: '**.githubusercontent.com' },
+      { protocol: 'https', hostname: '**.unsplash.com' }
     ]
   },
 
-  // =============================================================================
-  // SECURITY & PERFORMANCE
-  // =============================================================================
-  security: {
-    checkOrigin: true
-  },
-
-  // Development toolbar (only in development)
-  devToolbar: {
-    enabled: isDev
-  },
-
-  // =============================================================================
-  // MARKDOWN & CONTENT CONFIGURATION
-  // =============================================================================
+  security: { checkOrigin: true },
+  devToolbar: { enabled: isDev },
+  
   markdown: {
     syntaxHighlight: 'shiki',
-    shikiConfig: {
-      theme: 'github-dark-dimmed',
-      wrap: true
-    }
+    shikiConfig: { theme: 'github-dark-dimmed', wrap: true }
   }
 });
