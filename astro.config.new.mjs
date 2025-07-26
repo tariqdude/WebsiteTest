@@ -21,8 +21,10 @@ const INTEGRATIONS = [
     include: ['**/components/frameworks/react/**/*'],
   }),
   vue({
-    include: ['**/components/frameworks/vue/**/*.vue'],
-    exclude: ['**/node_modules/**', '**/dist/**', '**/*.js', '**/*.ts', '**/*.mjs'],
+    // Only process .vue files in our components directory
+    include: [/src\/components\/.*\.vue$/],
+    // Explicitly exclude node_modules and any .js/.ts files
+    exclude: [/node_modules/, /\.js$/, /\.ts$/, /\.mjs$/]
   }),
   svelte({
     include: ['**/components/frameworks/svelte/**/*.svelte'],
