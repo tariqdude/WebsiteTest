@@ -129,7 +129,7 @@ export default defineConfig({
           }
         }
       },
-      chunkSizeWarningLimit: 2000, // Increased to account for Monaco Editor
+      chunkSizeWarningLimit: 4000, // Increased for Monaco Editor main chunk
       minify: isProduction ? 'esbuild' : false,
       sourcemap: isDev
     },
@@ -144,7 +144,14 @@ export default defineConfig({
     // Additional Vue-specific configuration
     plugins: [],
     ssr: {
-      external: ['@astrojs/vue/dist/server.js']
+      external: ['@astrojs/vue/dist/server.js'],
+      // Fix for ESM loader issues with Astro 5.x
+      noExternal: ['@astrojs/markdown-remark']
+    },
+    
+    // Resolve configuration for better module handling
+    resolve: {
+      conditions: ['import', 'module', 'browser', 'default']
     }
   },
   
