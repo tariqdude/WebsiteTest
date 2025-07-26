@@ -16,12 +16,7 @@ export default defineConfig({
     react({
       include: ['**/components/frameworks/react/**/*'],
     }),
-    vue({
-      // Only process .vue files in our components directory
-      include: [/src\/components\/.*\.vue$/],
-      // Explicitly exclude node_modules and any .js/.ts files
-      exclude: [/node_modules/, /\.js$/, /\.ts$/, /\.mjs$/]
-    }),
+    vue(),
     svelte({
       include: ['**/components/frameworks/svelte/**/*.svelte'],
     }),
@@ -38,23 +33,6 @@ export default defineConfig({
     sitemap(),
   ],
   vite: {
-    // Additional Vite configuration to prevent Vue from processing JS files
-    plugins: [
-      {
-        name: 'vue-file-filter',
-        configResolved(config) {
-          // Ensure Vue only processes .vue files
-          const vuePlugin = config.plugins.find(p => p.name === 'vite:vue');
-          if (vuePlugin && vuePlugin.load) {
-            const originalLoad = vuePlugin.load;
-            vuePlugin.load = function(id) {
-              if (!id.endsWith('.vue')) return null;
-              return originalLoad.call(this, id);
-            };
-          }
-        }
-      }
-    ],
     optimizeDeps: {
       include: [
         'three',
