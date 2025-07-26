@@ -104,7 +104,7 @@ export function usePerformanceMetrics() {
 
         const fcp = paint.find(entry => entry.name === 'first-contentful-paint')?.startTime || 0;
         const ttfb = navigation.responseStart - navigation.requestStart;
-        const domLoad = navigation.domContentLoadedEventEnd - navigation.navigationStart;
+        const domLoad = navigation.domContentLoadedEventEnd - navigation.fetchStart;
 
         setMetrics({
           fcp: Math.round(fcp),

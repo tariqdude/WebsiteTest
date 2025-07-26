@@ -1,2 +1,6 @@
 // Svelte Components
-export { default as SvelteSkillsDashboard } from './SvelteSkillsDashboard.svelte';
+import SvelteSkillsDashboard from './SvelteSkillsDashboard.svelte';
+
+export {
+  SvelteSkillsDashboard,
+};

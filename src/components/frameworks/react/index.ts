@@ -1,5 +1,12 @@
 // React Components
-export { default as AdvancedForm } from './AdvancedForm.tsx';
-export { default as AdvancedFormJSX } from './AdvancedForm.jsx';
-export { default as InteractiveCounter } from './InteractiveCounter.jsx';
-export { default as DataVisualizationDashboard } from './DataVisualizationDashboard.jsx';
+import AdvancedForm from './AdvancedForm.tsx';
+import AdvancedFormJSX from './AdvancedForm.jsx';
+import InteractiveCounter from './InteractiveCounter.jsx';
+import DataVisualizationDashboard from './DataVisualizationDashboard.jsx';
+
+export {
+  AdvancedForm,
+  AdvancedFormJSX,
+  InteractiveCounter,
+  DataVisualizationDashboard,
+};

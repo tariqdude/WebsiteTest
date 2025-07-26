@@ -1,2 +1,6 @@
 // Vue Components
-export { default as ColorPalette } from './ColorPalette.vue';
+import ColorPalette from './ColorPalette.vue';
+
+export {
+  ColorPalette,
+};
