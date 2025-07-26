@@ -1,22 +1,21 @@
-// Advanced 3D Scene with Three.js
-import { useEffect, useRef, useState } from 'react';
+// Advanced 3D Scene with Three.js - Optimized and Refactored
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const Advanced3DScene = () => {
   const mountRef = useRef(null);
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
+  const isRotatingRef = useRef(true);
   const cubeRef = useRef(null);
-  const [isRotating, setIsRotating] = useState(true);
-  const [wireframe, setWireframe] = useState(false);
 
   useEffect(() => {
     const mount = mountRef.current;
-    
+    if (!mount) return;
+
     // Scene setup
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f0f23);
-    
+    scene.background = new THREE.Color(0x1a1a2e); // Dark blue space color
+
     // Camera
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -25,80 +24,99 @@ const Advanced3DScene = () => {
       1000
     );
     camera.position.z = 5;
-    
+
     // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(mount.clientWidth, mount.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     mount.appendChild(renderer.domElement);
-    
+
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.screenSpacePanning = false;
+    controls.minDistance = 3;
+    controls.maxDistance = 10;
+
     // Geometry and materials
     const geometry = new THREE.BoxGeometry(2, 2, 2);
-    const material = new THREE.MeshPhongMaterial({
+    const material = new THREE.MeshStandardMaterial({
       color: 0x00d4ff,
-      shininess: 100,
+      metalness: 0.5,
+      roughness: 0.3,
       wireframe: false
     });
     
     const cube = new THREE.Mesh(geometry, material);
     cube.castShadow = true;
     scene.add(cube);
-    
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
-    scene.add(ambientLight);
-    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(-1, 1, 1);
-    directionalLight.castShadow = true;
-    scene.add(directionalLight);
-    
-    const pointLight = new THREE.PointLight(0xff4444, 1, 100);
-    pointLight.position.set(10, 10, 10);
-    scene.add(pointLight);
-    
-    // Store references
-    sceneRef.current = scene;
-    rendererRef.current = renderer;
     cubeRef.current = cube;
-    
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.mapSize.width = 1024;
+    directionalLight.shadow.mapSize.height = 1024;
+    scene.add(directionalLight);
+
+    const pointLight = new THREE.PointLight(0xff4444, 0.8, 100);
+    pointLight.position.set(-5, -5, -5);
+    scene.add(pointLight);
+
     // Animation loop
+    let animationFrameId;
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
       
-      if (isRotating && cubeRef.current) {
-        cubeRef.current.rotation.x += 0.01;
-        cubeRef.current.rotation.y += 0.01;
+      if (isRotatingRef.current && cube) {
+        cube.rotation.x += 0.005;
+        cube.rotation.y += 0.005;
       }
       
+      controls.update();
       renderer.render(scene, camera);
     };
     animate();
-    
+
     // Handle resize
     const handleResize = () => {
       camera.aspect = mount.clientWidth / mount.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(mount.clientWidth, mount.clientHeight);
     };
-    
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
       window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
       if (mount && renderer.domElement) {
         mount.removeChild(renderer.domElement);
       }
       renderer.dispose();
+      geometry.dispose();
+      material.dispose();
     };
   }, []);
-  
-  useEffect(() => {
+
+  const toggleRotation = () => {
+    isRotatingRef.current = !isRotatingRef.current;
+    // Force re-render to update button text
+    mountRef.current.dispatchEvent(new Event('toggle-rotation'));
+  };
+
+  const toggleWireframe = () => {
     if (cubeRef.current) {
-      cubeRef.current.material.wireframe = wireframe;
+      cubeRef.current.material.wireframe = !cubeRef.current.material.wireframe;
+      mountRef.current.dispatchEvent(new Event('toggle-wireframe'));
     }
-  }, [wireframe]);
+  };
 
   const resetRotation = () => {
     if (cubeRef.current) {
@@ -113,31 +131,44 @@ const Advanced3DScene = () => {
       cubeRef.current.material.color.setHex(randomColor);
     }
   };
+  
+  // Dummy state to trigger re-render for button text
+  const [, setDummyState] = React.useState(0);
+  useEffect(() => {
+    const forceUpdate = () => setDummyState(s => s + 1);
+    const mount = mountRef.current;
+    mount.addEventListener('toggle-rotation', forceUpdate);
+    mount.addEventListener('toggle-wireframe', forceUpdate);
+    return () => {
+      mount.removeEventListener('toggle-rotation', forceUpdate);
+      mount.removeEventListener('toggle-wireframe', forceUpdate);
+    }
+  }, []);
 
   return (
     <div className="w-full bg-gray-900 rounded-lg overflow-hidden shadow-2xl">
       <div className="p-4 bg-gray-800 border-b border-gray-700">
-        <h3 className="text-xl font-semibold text-white mb-3">3D WebGL Scene</h3>
+        <h3 className="text-xl font-semibold text-white mb-3">Interactive 3D Scene</h3>
         <div className="flex flex-wrap gap-2">
           <button
-            onClick={() => setIsRotating(!isRotating)}
+            onClick={toggleRotation}
             className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
-              isRotating
+              isRotatingRef.current
                 ? 'bg-green-600 text-white'
                 : 'bg-gray-600 text-gray-200'
             }`}
           >
-            {isRotating ? 'Stop' : 'Start'} Rotation
+            {isRotatingRef.current ? 'Stop' : 'Start'} Rotation
           </button>
           <button
-            onClick={() => setWireframe(!wireframe)}
+            onClick={toggleWireframe}
             className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
-              wireframe
+              cubeRef.current?.material.wireframe
                 ? 'bg-purple-600 text-white'
                 : 'bg-gray-600 text-gray-200'
             }`}
           >
-            {wireframe ? 'Solid' : 'Wireframe'}
+            {cubeRef.current?.material.wireframe ? 'Solid' : 'Wireframe'}
           </button>
           <button
             onClick={resetRotation}
@@ -155,11 +186,11 @@ const Advanced3DScene = () => {
       </div>
       <div 
         ref={mountRef} 
-        className="w-full h-96" 
+        className="w-full h-96 cursor-grab active:cursor-grabbing" 
         style={{ minHeight: '400px' }}
       />
       <div className="p-3 bg-gray-800 text-xs text-gray-300">
-        <p>WebGL-powered 3D scene with Three.js • Real-time lighting • Shadow mapping</p>
+        <p>WebGL-powered 3D scene with Three.js • Orbit controls • Real-time lighting</p>
       </div>
     </div>
   );
