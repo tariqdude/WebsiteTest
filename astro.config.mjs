@@ -53,7 +53,10 @@ export default defineConfig({
     }),
     
     // Vue, Svelte, Solid.js, Preact - Framework-specific folders
-    vue({ include: ['**/vue/**'] }),
+    vue({ 
+      include: ['**/vue/**'],
+      exclude: ['**/node_modules/**', '**/dist/**', '**/server.js']
+    }),
     svelte({ include: ['**/svelte/**'] }),
     solidJs({ include: ['**/solid/**'] }),
     preact({ include: ['**/preact/**'] }),
@@ -90,6 +93,13 @@ export default defineConfig({
     // Build optimizations
     build: {
       rollupOptions: {
+        external: (id) => {
+          // Exclude problematic server files from Vue processing
+          if (id.includes('server.js') || id.includes('/dist/server.js')) {
+            return true;
+          }
+          return false;
+        },
         output: {
           manualChunks(id) {
             // Framework chunks
@@ -119,6 +129,12 @@ export default defineConfig({
       __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
       __DEV__: JSON.stringify(isDev),
       __PROD__: JSON.stringify(isProduction)
+    },
+
+    // Additional Vue-specific configuration
+    plugins: [],
+    ssr: {
+      external: ['@astrojs/vue/dist/server.js']
     }
   },
   

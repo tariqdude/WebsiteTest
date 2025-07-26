@@ -11,6 +11,7 @@
     "build:verbose": "VERBOSE_LOGS=true astro build",
     "build:analyze": "npm run diagnostics && astro build",
     "build:production": "NODE_ENV=production astro build",
+    "build:gh-pages": "NODE_ENV=production astro build --site https://tariqdude.github.io --base /WebsiteTest",
     "preview": "astro preview",
     "preview:host": "astro preview --host",
     "astro": "astro",
