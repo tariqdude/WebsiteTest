@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { ExternalLink, Github, ArrowLeft, Calendar, User } from 'lucide-react';
+import { ExternalLink, GitBranch, ArrowLeft, Calendar, User } from 'lucide-react';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -101,7 +101,7 @@ const relatedProjects = allProjects
                   rel="noopener noreferrer"
                   class="btn-secondary inline-flex items-center justify-center space-x-2"
                 >
-                  <Github className="w-5 h-5" />
+                  <GitBranch className="w-5 h-5" />
                   <span>View Source Code</span>
                 </a>
               )}

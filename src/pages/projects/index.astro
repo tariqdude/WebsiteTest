@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { ExternalLink, Github, Filter } from 'lucide-react';
+import { ExternalLink, GitBranch, Filter } from 'lucide-react';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
@@ -133,7 +133,7 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
                     rel="noopener noreferrer"
                     class="inline-flex items-center space-x-1 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 text-sm transition-colors"
                   >
-                    <Github className="w-4 h-4" />
+                    <GitBranch className="w-4 h-4" />
                     <span>Code</span>
                   </a>
                 )}
