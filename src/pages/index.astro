@@ -16,6 +16,8 @@ import AdvancedForm from '../components/frameworks/react/AdvancedForm.tsx';
 import CodeEditorShowcase from '../components/showcases/CodeEditorShowcase.jsx';
 import GSAPAnimationShowcase from '../components/showcases/GSAPAnimationShowcase.jsx';
 import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashboard.jsx';
+import SimpleDemo from '../components/ui/SimpleDemo.jsx';
+import SimpleVueDemo from '../components/ui/SimpleVueDemo.vue';
 import { ChevronRight, Rocket, Zap, Globe, Code, Layers, Sparkles } from 'lucide-react';
 import { technologyStats } from '../data/stats.js';
 
@@ -85,7 +87,7 @@ const features = [
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20">
-    <AnimatedBackground client:only="react" />
+    <AnimatedBackground client:load />
     <div class="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-800 opacity-20"></div>
     <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
       <div class="text-center">
@@ -119,7 +121,7 @@ const features = [
 
         <!-- Stats -->
         <div class="animate-fade-in-up animation-delay-600">
-          <PerformanceMetrics client:only="react" />
+          <PerformanceMetrics client:load />
         </div>
       </div>
     </div>
@@ -138,7 +140,7 @@ const features = [
         </p>
       </div>
       <div class="max-w-6xl mx-auto">
-        <PerformanceMetrics client:only="react" />
+        <PerformanceMetrics client:visible />
       </div>
     </div>
   </section>
@@ -200,7 +202,14 @@ const features = [
               client:load
             </span>
           </div>
-          <InteractiveCounter client:only="react" />
+          
+          <!-- Reliable demo first -->
+          <SimpleDemo client:load title="React Counter" type="counter" />
+          
+          <!-- Advanced component below -->
+          <div class="mt-4">
+            <InteractiveCounter client:load />
+          </div>
         </div>
         
         <!-- Vue Component -->
@@ -214,7 +223,14 @@ const features = [
               client:visible
             </span>
           </div>
-          <ColorPalette client:only="vue" />
+          
+          <!-- Reliable Vue demo first -->
+          <SimpleVueDemo client:load />
+          
+          <!-- Advanced component below -->
+          <div class="mt-4">
+            <ColorPalette client:visible />
+          </div>
         </div>
       </div>
       

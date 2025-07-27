@@ -13,6 +13,9 @@ import ColorPalette from '../components/frameworks/vue/ColorPalette.vue';
 import InteractiveTerminal from '../components/showcases/InteractiveTerminal.jsx';
 import PerformanceMetrics from '../components/showcases/PerformanceMetrics.jsx';
 import AnimatedBackground from '../components/ui/AnimatedBackground.jsx';
+import SimpleDemo from '../components/ui/SimpleDemo.jsx';
+import SimpleVueDemo from '../components/ui/SimpleVueDemo.vue';
+import SimpleFallback from '../components/ui/SimpleFallback.astro';
 import { technologyStats } from '../data/stats.js';
 ---
 
@@ -22,7 +25,7 @@ import { technologyStats } from '../data/stats.js';
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20 py-20">
-    <AnimatedBackground client:only="react" />
+    <AnimatedBackground client:load />
     <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
         <span class="block">Ultimate</span>
@@ -34,7 +37,41 @@ import { technologyStats } from '../data/stats.js';
       </p>
 
       <div class="mb-12">
-        <PerformanceMetrics client:only="react" />
+        <PerformanceMetrics client:load />
+      </div>
+    </div>
+  </section>
+
+  <!-- Reliable Demo Section - Always Working -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+        🚀 Interactive Demos
+      </h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+        Simple, reliable components to demonstrate multi-framework integration
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Simple React Demo -->
+        <div class="space-y-4">
+          <SimpleDemo client:load title="React Counter" type="counter" />
+        </div>
+        
+        <!-- Simple Vue Demo -->
+        <div class="space-y-4">
+          <SimpleVueDemo client:load />
+        </div>
+        
+        <!-- Fallback Demo -->
+        <div class="space-y-4">
+          <SimpleFallback 
+            title="Advanced Features"
+            description="Complex components loading below"
+            type="dashboard"
+            framework="Multi-Framework"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -58,7 +95,14 @@ import { technologyStats } from '../data/stats.js';
               Framer Motion + State Management
             </span>
           </div>
-          <InteractiveCounter client:only="react" />
+          
+          <!-- Reliable fallback first, then advanced component -->
+          <div class="space-y-4">
+            <SimpleDemo client:load title="React Demo" type="message" />
+            <div class="border-t pt-4">
+              <InteractiveCounter client:load />
+            </div>
+          </div>
         </div>
         
         <!-- Vue Component -->
@@ -72,7 +116,14 @@ import { technologyStats } from '../data/stats.js';
               Reactive Color Generation
             </span>
           </div>
-          <ColorPalette client:only="vue" />
+          
+          <!-- Reliable Vue demo first, then advanced component -->
+          <div class="space-y-4">
+            <SimpleVueDemo client:load />
+            <div class="border-t pt-4">
+              <ColorPalette client:visible />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -87,7 +138,19 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Real-time Three.js scene with lighting, shadows, and interactive controls
       </p>
-      <Advanced3DScene client:only="react" />
+      
+      <!-- Fallback first -->
+      <div class="mb-8">
+        <SimpleFallback 
+          title="3D Scene Loading"
+          description="Three.js WebGL renderer with interactive controls"
+          type="animation"
+          framework="React + Three.js"
+        />
+      </div>
+      
+      <!-- Advanced component -->
+      <Advanced3DScene client:visible />
     </div>
   </section>
 
@@ -100,7 +163,19 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         D3.js + Chart.js integration with real-time updates and interactive elements
       </p>
-      <DataVisualizationDashboard client:only="react" />
+      
+      <!-- Fallback first -->
+      <div class="mb-8">
+        <SimpleFallback 
+          title="Data Dashboard Loading"
+          description="Interactive charts with D3.js and Chart.js"
+          type="chart"
+          framework="React + D3"
+        />
+      </div>
+      
+      <!-- Advanced component -->
+      <DataVisualizationDashboard client:visible />
     </div>
   </section>
 
@@ -126,7 +201,7 @@ import { technologyStats } from '../data/stats.js';
               Built-in Motion + Reactivity
             </span>
           </div>
-          <SvelteSkillsDashboard client:only="svelte" />
+          <SvelteSkillsDashboard client:visible />
         </div>
 
         <!-- Solid.js Component -->
@@ -140,7 +215,7 @@ import { technologyStats } from '../data/stats.js';
               Fine-grained Reactivity
             </span>
           </div>
-          <SolidStateDemo client:only="solid" />
+          <SolidStateDemo client:visible />
         </div>
       </div>
     </div>
@@ -155,7 +230,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         React Hook Form + Zod validation + TypeScript for bulletproof forms
       </p>
-      <AdvancedForm client:only="react" />
+      <AdvancedForm client:visible />
     </div>
   </section>
 
@@ -168,7 +243,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Full VS Code editor experience with syntax highlighting and IntelliSense
       </p>
-      <CodeEditorShowcase client:only="react" />
+      <CodeEditorShowcase client:idle />
     </div>
   </section>
 
@@ -181,7 +256,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Professional animations with GreenSock's industry-standard library
       </p>
-      <GSAPAnimationShowcase client:only="react" />
+      <GSAPAnimationShowcase client:visible />
     </div>
   </section>
 
@@ -194,7 +269,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Same React API but only 3KB - perfect for performance-critical apps
       </p>
-      <PreactMiniDashboard client:only="preact" />
+      <PreactMiniDashboard client:visible />
     </div>
   </section>
 
@@ -207,7 +282,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Fully functional terminal with command history and file system simulation
       </p>
-      <InteractiveTerminal client:only="react" />
+      <InteractiveTerminal client:idle />
     </div>
   </section>
 
