@@ -1,5 +1,5 @@
 ---
-import ThemeToggle from '../ui/ThemeToggle.astro';
+import ThemeToggle from '../ui/ThemeToggle.jsx';
 import MobileMenu from './MobileMenu.jsx';
 
 const navItems = [
@@ -69,7 +69,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- Right Side Actions -->
       <div class="flex items-center space-x-4">
-        <ThemeToggle />
+        <ThemeToggle client:load />
         
         <!-- Mobile Menu Button -->
         <div class="md:hidden">

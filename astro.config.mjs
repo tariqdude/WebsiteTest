@@ -16,7 +16,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Site configuration
-const SITE_CONFIG = {
+export const SITE_CONFIG = {
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
   output: 'static'

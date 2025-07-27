@@ -16,21 +16,4 @@ else
     npm install
 fi
 
-# Run build
-echo "🔨 Building project..."
-npm run build
 
-# Check if build was successful
-if [ $? -eq 0 ]; then
-    echo "✅ Build successful!"
-    echo "📁 Build output is in ./dist/"
-    
-    # Check dist folder size
-    DIST_SIZE=$(du -sh dist 2>/dev/null | cut -f1)
-    echo "📊 Build size: $DIST_SIZE"
-    
-    echo "🎉 Ready for GitHub Pages deployment!"
-else
-    echo "❌ Build failed!"
-    exit 1
-fi
