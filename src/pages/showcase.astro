@@ -14,7 +14,7 @@ import InteractiveTerminal from '../components/showcases/InteractiveTerminal.jsx
 import PerformanceMetrics from '../components/showcases/PerformanceMetrics.jsx';
 import AnimatedBackground from '../components/ui/AnimatedBackground.jsx';
 import SimpleDemo from '../components/ui/SimpleDemo.jsx';
-import SimpleVueDemo from '../components/ui/SimpleVueDemo.vue';
+import SimpleColorDemo from '../components/ui/SimpleColorDemo.jsx';
 import SimpleFallback from '../components/ui/SimpleFallback.astro';
 import { technologyStats } from '../data/stats.js';
 ---
@@ -58,9 +58,9 @@ import { technologyStats } from '../data/stats.js';
           <SimpleDemo client:load title="React Counter" type="counter" />
         </div>
         
-        <!-- Simple Vue Demo -->
+        <!-- Simple Color Demo -->
         <div class="space-y-4">
-          <SimpleVueDemo client:load />
+          <SimpleColorDemo client:load title="React Color Picker" />
         </div>
         
         <!-- Fallback Demo -->
@@ -119,7 +119,7 @@ import { technologyStats } from '../data/stats.js';
           
           <!-- Reliable Vue demo first, then advanced component -->
           <div class="space-y-4">
-            <SimpleVueDemo client:load />
+            <SimpleColorDemo client:load title="Vue Alternative (React)" />
             <div class="border-t pt-4">
               <ColorPalette client:visible />
             </div>
