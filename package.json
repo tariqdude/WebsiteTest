@@ -18,6 +18,7 @@
     "diagnostics": "node enhanced-diagnostics.mjs",
     "diagnostics:basic": "node run-diagnostics.mjs",
     "health-check": "node health-check.mjs",
+    "deploy-check": "node deploy-check.mjs",
     "check": "astro check",
     "check:types": "tsc --noEmit",
     "lint": "astro check && tsc --noEmit",

@@ -117,11 +117,6 @@ import { technologyStats } from '../data/stats.js';
       <FrameworkDemo client:load framework="React + Three.js" title="3D WebGL Scene">
         <Advanced3DScene client:load />
       </FrameworkDemo>
-        />
-      </div>
-      
-      <!-- Advanced component -->
-      <Advanced3DScene client:visible />
     </div>
   </section>
 
@@ -135,18 +130,10 @@ import { technologyStats } from '../data/stats.js';
         D3.js + Chart.js integration with real-time updates and interactive elements
       </p>
       
-      <!-- Fallback first -->
-      <div class="mb-8">
-        <SimpleFallback 
-          title="Data Dashboard Loading"
-          description="Interactive charts with D3.js and Chart.js"
-          type="chart"
-          framework="React + D3"
-        />
-      </div>
-      
-      <!-- Advanced component -->
-      <DataVisualizationDashboard client:visible />
+      <!-- Advanced Data Visualization with Error Boundary -->
+      <FrameworkDemo client:load framework="React + D3.js" title="Data Visualization Dashboard">
+        <DataVisualizationDashboard client:visible />
+      </FrameworkDemo>
     </div>
   </section>
 
@@ -171,17 +158,6 @@ import { technologyStats } from '../data/stats.js';
           <SolidStateDemo client:visible />
         </FrameworkDemo>
       </div>
-            <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Solid.js State Demo
-            </h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400 bg-blue-100 dark:bg-blue-900 px-2 py-1 rounded">
-              Fine-grained Reactivity
-            </span>
-          </div>
-          <SolidStateDemo client:visible />
-        </div>
-      </div>
     </div>
   </section>
 
@@ -194,7 +170,9 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         React Hook Form + Zod validation + TypeScript for bulletproof forms
       </p>
-      <AdvancedForm client:visible />
+      <FrameworkDemo client:load framework="React + TypeScript" title="Advanced Form System">
+        <AdvancedForm client:visible />
+      </FrameworkDemo>
     </div>
   </section>
 
@@ -207,7 +185,9 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Full VS Code editor experience with syntax highlighting and IntelliSense
       </p>
-      <CodeEditorShowcase client:idle />
+      <FrameworkDemo client:load framework="React + Monaco" title="Code Editor">
+        <CodeEditorShowcase client:idle />
+      </FrameworkDemo>
     </div>
   </section>
 
@@ -220,7 +200,9 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Professional animations with GreenSock's industry-standard library
       </p>
-      <GSAPAnimationShowcase client:visible />
+      <FrameworkDemo client:load framework="React + GSAP" title="Animation Studio">
+        <GSAPAnimationShowcase client:visible />
+      </FrameworkDemo>
     </div>
   </section>
 
@@ -233,7 +215,9 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Same React API but only 3KB - perfect for performance-critical apps
       </p>
-      <PreactMiniDashboard client:visible />
+      <FrameworkDemo client:load framework="Preact" title="Lightweight Dashboard">
+        <PreactMiniDashboard client:visible />
+      </FrameworkDemo>
     </div>
   </section>
 
@@ -246,7 +230,9 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Fully functional terminal with command history and file system simulation
       </p>
-      <InteractiveTerminal client:idle />
+      <FrameworkDemo client:load framework="React + Terminal" title="Interactive Terminal">
+        <InteractiveTerminal client:idle />
+      </FrameworkDemo>
     </div>
   </section>
 
