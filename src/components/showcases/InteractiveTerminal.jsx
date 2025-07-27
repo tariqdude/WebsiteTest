@@ -1,13 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Terminal as TerminalIcon } from 'lucide-react';
 
-const InteractiveTerminal = () => {
-  const [input, setInput] = useState('');
+// Custom hook for managing terminal state and logic
+const useTerminal = () => {
   const [history, setHistory] = useState([]);
   const [currentPath, setCurrentPath] = useState('~/astro-showcase');
-  const inputRef = useRef(null);
-  const terminalRef = useRef(null);
-
+  
   const commands = {
     help: {
       description: 'Show available commands',
@@ -58,9 +56,9 @@ const InteractiveTerminal = () => {
       description: 'Show Astro project information',
       execute: () => [
         '🚀 Astro Project Info:',
-        '  Version: 4.16.18',
+        '  Version: 5.x',
         '  Mode: Static Site Generation',
-        '  Islands: React + Vue',
+        '  Islands: React, Vue, Svelte, Solid, Preact',
         '  Features: Content Collections, View Transitions',
         '  Build: Ready for GitHub Pages'
       ]
@@ -69,15 +67,15 @@ const InteractiveTerminal = () => {
       description: 'Show package information',
       execute: () => [
         '📦 Package Info:',
-        '  Name: astro-showcase',
+        '  Name: astro-multi-framework-showcase',
         '  Version: 1.0.0',
-        '  Dependencies: astro, react, vue, tailwindcss',
-        '  Scripts: dev, build, preview'
+        '  Dependencies: astro, react, vue, svelte, solid-js, preact, tailwindcss',
+        '  Scripts: dev, build, preview, lint, check'
       ]
     }
   };
 
-  const executeCommand = (cmd) => {
+  const executeCommand = useCallback((cmd) => {
     const trimmedCmd = cmd.trim().toLowerCase();
     const newEntry = {
       type: 'command',
@@ -100,19 +98,34 @@ const InteractiveTerminal = () => {
         content: [`Command not found: ${cmd}`, 'Type "help" for available commands'] 
       }]);
     }
-  };
+  }, [currentPath, commands]);
+
+  useEffect(() => {
+    // Welcome message
+    setHistory([{
+      type: 'output',
+      content: [
+        'Welcome to the Astro Multi-Framework Showcase Terminal!',
+        'This is a simulated terminal experience.',
+        'Type "help" to see available commands.',
+        ''
+      ]
+    }]);
+  }, []);
+
+  return { history, currentPath, executeCommand };
+};
+
+const InteractiveTerminal = () => {
+  const [input, setInput] = useState('');
+  const { history, currentPath, executeCommand } = useTerminal();
+  const inputRef = useRef(null);
+  const terminalRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     executeCommand(input);
     setInput('');
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      // Could implement command history navigation here
-    }
   };
 
   useEffect(() => {
@@ -121,20 +134,8 @@ const InteractiveTerminal = () => {
     }
   }, [history]);
 
-  useEffect(() => {
-    // Welcome message
-    setHistory([{
-      type: 'output',
-      content: [
-        'Welcome to Astro Showcase Terminal!',
-        'Type "help" to see available commands.',
-        ''
-      ]
-    }]);
-  }, []);
-
   return (
-    <div className="bg-gray-900 rounded-lg border border-gray-700 overflow-hidden">
+    <div className="bg-gray-900 rounded-lg border border-gray-700 overflow-hidden shadow-lg">
       <div className="flex items-center space-x-2 px-4 py-2 bg-gray-800 border-b border-gray-700">
         <div className="flex space-x-2">
           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -186,10 +187,10 @@ const InteractiveTerminal = () => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
             className="flex-1 bg-transparent text-white outline-none font-mono"
             placeholder="Enter command..."
             autoComplete="off"
+            autoFocus
           />
         </form>
       </div>
