@@ -22,7 +22,7 @@ import { technologyStats } from '../data/stats.js';
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20 py-20">
-    <AnimatedBackground client:load />
+    <AnimatedBackground client:only="react" />
     <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
         <span class="block">Ultimate</span>
@@ -34,7 +34,7 @@ import { technologyStats } from '../data/stats.js';
       </p>
 
       <div class="mb-12">
-        <PerformanceMetrics client:load />
+        <PerformanceMetrics client:only="react" />
       </div>
     </div>
   </section>
@@ -58,7 +58,7 @@ import { technologyStats } from '../data/stats.js';
               Framer Motion + State Management
             </span>
           </div>
-          <InteractiveCounter client:load />
+          <InteractiveCounter client:only="react" />
         </div>
         
         <!-- Vue Component -->
@@ -72,7 +72,7 @@ import { technologyStats } from '../data/stats.js';
               Reactive Color Generation
             </span>
           </div>
-          <ColorPalette client:visible />
+          <ColorPalette client:only="vue" />
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         D3.js + Chart.js integration with real-time updates and interactive elements
       </p>
-      <DataVisualizationDashboard client:visible />
+      <DataVisualizationDashboard client:only="react" />
     </div>
   </section>
 
@@ -126,7 +126,7 @@ import { technologyStats } from '../data/stats.js';
               Built-in Motion + Reactivity
             </span>
           </div>
-          <SvelteSkillsDashboard client:visible />
+          <SvelteSkillsDashboard client:only="svelte" />
         </div>
 
         <!-- Solid.js Component -->
@@ -140,7 +140,7 @@ import { technologyStats } from '../data/stats.js';
               Fine-grained Reactivity
             </span>
           </div>
-          <SolidStateDemo client:visible />
+          <SolidStateDemo client:only="solid" />
         </div>
       </div>
     </div>
@@ -155,7 +155,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         React Hook Form + Zod validation + TypeScript for bulletproof forms
       </p>
-      <AdvancedForm client:visible />
+      <AdvancedForm client:only="react" />
     </div>
   </section>
 
@@ -168,7 +168,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Full VS Code editor experience with syntax highlighting and IntelliSense
       </p>
-      <CodeEditorShowcase client:visible />
+      <CodeEditorShowcase client:only="react" />
     </div>
   </section>
 
@@ -181,7 +181,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Professional animations with GreenSock's industry-standard library
       </p>
-      <GSAPAnimationShowcase client:visible />
+      <GSAPAnimationShowcase client:only="react" />
     </div>
   </section>
 
@@ -194,7 +194,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Same React API but only 3KB - perfect for performance-critical apps
       </p>
-      <PreactMiniDashboard client:visible />
+      <PreactMiniDashboard client:only="preact" />
     </div>
   </section>
 
@@ -207,7 +207,7 @@ import { technologyStats } from '../data/stats.js';
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
         Fully functional terminal with command history and file system simulation
       </p>
-      <InteractiveTerminal client:visible />
+      <InteractiveTerminal client:only="react" />
     </div>
   </section>
 

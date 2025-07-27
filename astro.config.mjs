@@ -56,7 +56,12 @@ export default defineConfig({
     // Vue, Svelte, Solid.js, Preact - Framework-specific folders
     vue({ 
       include: ['**/vue/**'],
-      exclude: ['**/node_modules/**', '**/dist/**']
+      exclude: ['**/node_modules/**', '**/dist/**'],
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.includes('-')
+        }
+      }
     }),
     svelte({ include: ['**/svelte/**'] }),
     solidJs({ include: ['**/solid/**'] }),
