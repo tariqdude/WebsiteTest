@@ -30,7 +30,8 @@
     "deploy:pages": "npm run build:production -- --site https://tariqdude.github.io --base /WebsiteTest",
     "deploy:pages:preview": "npm run deploy:pages && npm run preview",
     "monitor": "node build-monitor.mjs",
-    "build:monitor": "npm run build:production && npm run monitor"
+    "build:monitor": "npm run build:production && npm run monitor",
+    "build:fast": "astro build --site https://tariqdude.github.io --base /WebsiteTest"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

@@ -1,3 +1,4 @@
+import React from 'react';
 // Data Visualization Dashboard with D3.js and Chart.js
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
