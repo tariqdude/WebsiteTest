@@ -19,6 +19,7 @@
     "diagnostics:basic": "node run-diagnostics.mjs",
     "health-check": "node health-check.mjs",
     "deploy-check": "node deploy-check.mjs",
+    "deploy-robust": "bash deploy-robust.sh",
     "check": "astro check",
     "check:types": "tsc --noEmit",
     "lint": "astro check && tsc --noEmit",
