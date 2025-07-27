@@ -22,6 +22,7 @@
     "deploy-check": "node deploy-check.mjs",
     "deploy-test": "node test-build.mjs",
     "deploy-fix": "node project-fixer.mjs",
+    "deploy-fixer": "node deployment-fixer.mjs",
     "deploy-robust": "bash deploy-robust.sh",
     "check": "astro check",
     "check:types": "tsc --noEmit",
@@ -74,8 +75,6 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "astro-seo": "^0.8.4",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.2",
     "typescript": "^5.8.3"
   }
 }
