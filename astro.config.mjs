@@ -151,13 +151,15 @@ export default defineConfig({
   // IMAGE & SECURITY CONFIGURATION
   // =============================================================================
   image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
     domains: ['images.unsplash.com', 'via.placeholder.com'],
     remotePatterns: [
       { protocol: 'https', hostname: '**.githubusercontent.com' },
       { protocol: 'https', hostname: '**.unsplash.com' },
     ],
   },
-
   security: { checkOrigin: true },
   devToolbar: { enabled: isDev },
 });
