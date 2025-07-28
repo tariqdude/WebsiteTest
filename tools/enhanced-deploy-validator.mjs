@@ -26,15 +26,15 @@ class DeploymentValidator {
       success: '\x1b[32m',
       warning: '\x1b[33m',
       error: '\x1b[31m',
-      reset: '\x1b[0m'
+      reset: '\x1b[0m',
     };
-    
+
     console.log(`${colors[type]}[${timestamp}] ${message}${colors.reset}`);
   }
 
   async validatePackageJson() {
     this.log('🔍 Validating package.json...', 'info');
-    
+
     const pkgPath = path.join(projectRoot, 'package.json');
     if (!fs.existsSync(pkgPath)) {
       this.errors.push('package.json not found');
@@ -42,7 +42,7 @@ class DeploymentValidator {
     }
 
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-    
+
     // Check required scripts
     const requiredScripts = [
       'build',
@@ -51,7 +51,7 @@ class DeploymentValidator {
       'test:ssr',
       'deploy:validate',
       'check',
-      'check:types'
+      'check:types',
     ];
 
     for (const script of requiredScripts) {
@@ -81,7 +81,7 @@ class DeploymentValidator {
 
   async validateAstroConfig() {
     this.log('🔍 Validating Astro configuration...', 'info');
-    
+
     const configPath = path.join(projectRoot, 'astro.config.mjs');
     if (!fs.existsSync(configPath)) {
       this.errors.push('astro.config.mjs not found');
@@ -89,16 +89,16 @@ class DeploymentValidator {
     }
 
     const config = fs.readFileSync(configPath, 'utf8');
-    
+
     // Check for required configurations
     if (!config.includes('site:')) {
       this.errors.push('Missing site configuration in astro.config.mjs');
     }
-    
+
     if (!config.includes('base:')) {
       this.errors.push('Missing base path configuration in astro.config.mjs');
     }
-    
+
     if (!config.includes("output: 'static'")) {
       this.errors.push('Output should be set to static for GitHub Pages');
     }
@@ -117,7 +117,7 @@ class DeploymentValidator {
 
   async validatePublicAssets() {
     this.log('🔍 Validating public assets...', 'info');
-    
+
     const publicDir = path.join(projectRoot, 'public');
     if (!fs.existsSync(publicDir)) {
       this.errors.push('Public directory not found');
@@ -130,7 +130,7 @@ class DeploymentValidator {
       'robots.txt',
       'pwa-192x192.png',
       'pwa-512x512.png',
-      'apple-touch-icon.png'
+      'apple-touch-icon.png',
     ];
 
     for (const asset of requiredAssets) {
@@ -145,11 +145,11 @@ class DeploymentValidator {
 
   async validateTypeScript() {
     this.log('🔍 Validating TypeScript configuration...', 'info');
-    
+
     try {
-      execSync('npm run check:types', { 
-        cwd: projectRoot, 
-        stdio: 'pipe' 
+      execSync('npm run check:types', {
+        cwd: projectRoot,
+        stdio: 'pipe',
       });
       this.log('✅ TypeScript validation passed', 'success');
     } catch (error) {
@@ -160,11 +160,11 @@ class DeploymentValidator {
 
   async validateAstroCheck() {
     this.log('🔍 Running Astro checks...', 'info');
-    
+
     try {
-      execSync('npm run check', { 
-        cwd: projectRoot, 
-        stdio: 'pipe' 
+      execSync('npm run check', {
+        cwd: projectRoot,
+        stdio: 'pipe',
       });
       this.log('✅ Astro checks passed', 'success');
     } catch (error) {
@@ -175,7 +175,7 @@ class DeploymentValidator {
 
   async validateTests() {
     this.log('🔍 Validating test configuration...', 'info');
-    
+
     // Check if vitest.config.ts exists and is valid
     const vitestConfig = path.join(projectRoot, 'vitest.config.ts');
     if (!fs.existsSync(vitestConfig)) {
@@ -184,10 +184,10 @@ class DeploymentValidator {
     }
 
     try {
-      execSync('npm run test -- --run', { 
-        cwd: projectRoot, 
+      execSync('npm run test -- --run', {
+        cwd: projectRoot,
         stdio: 'pipe',
-        timeout: 30000
+        timeout: 30000,
       });
       this.log('✅ Tests validation passed', 'success');
     } catch (error) {
@@ -198,17 +198,17 @@ class DeploymentValidator {
 
   async validateBuild() {
     this.log('🔍 Validating build process...', 'info');
-    
+
     try {
       // Clean previous build
       if (fs.existsSync(path.join(projectRoot, 'dist'))) {
         fs.rmSync(path.join(projectRoot, 'dist'), { recursive: true });
       }
 
-      execSync('npm run build:gh-pages', { 
-        cwd: projectRoot, 
+      execSync('npm run build:gh-pages', {
+        cwd: projectRoot,
         stdio: 'pipe',
-        timeout: 120000
+        timeout: 120000,
       });
 
       // Verify build output
@@ -227,7 +227,9 @@ class DeploymentValidator {
       // Check if assets are properly referenced
       const indexContent = fs.readFileSync(indexPath, 'utf8');
       if (!indexContent.includes('/WebsiteTest/')) {
-        this.warnings.push('Base path may not be correctly applied in build output');
+        this.warnings.push(
+          'Base path may not be correctly applied in build output'
+        );
       }
 
       this.log('✅ Build validation passed', 'success');
@@ -240,36 +242,44 @@ class DeploymentValidator {
   async generateReport() {
     this.log('\n📋 DEPLOYMENT VALIDATION REPORT', 'info');
     this.log('================================', 'info');
-    
+
     if (this.errors.length === 0) {
       this.log('✅ All critical validations passed!', 'success');
     } else {
       this.log(`❌ Found ${this.errors.length} critical errors:`, 'error');
-      this.errors.forEach(error => this.log(`  • ${error}`, 'error'));
+      this.errors.forEach((error) => this.log(`  • ${error}`, 'error'));
     }
 
     if (this.warnings.length > 0) {
       this.log(`⚠️ Found ${this.warnings.length} warnings:`, 'warning');
-      this.warnings.forEach(warning => this.log(`  • ${warning}`, 'warning'));
+      this.warnings.forEach((warning) => this.log(`  • ${warning}`, 'warning'));
     }
 
     if (this.fixes.length > 0) {
       this.log(`🔧 Applied ${this.fixes.length} fixes:`, 'info');
-      this.fixes.forEach(fix => this.log(`  • ${fix}`, 'info'));
+      this.fixes.forEach((fix) => this.log(`  • ${fix}`, 'info'));
     }
 
     this.log('\n📊 VALIDATION SUMMARY:', 'info');
-    this.log(`  Errors: ${this.errors.length}`, this.errors.length > 0 ? 'error' : 'success');
-    this.log(`  Warnings: ${this.warnings.length}`, this.warnings.length > 0 ? 'warning' : 'info');
-    this.log(`  Status: ${this.errors.length === 0 ? 'READY TO DEPLOY' : 'NEEDS FIXES'}`, 
-             this.errors.length === 0 ? 'success' : 'error');
+    this.log(
+      `  Errors: ${this.errors.length}`,
+      this.errors.length > 0 ? 'error' : 'success'
+    );
+    this.log(
+      `  Warnings: ${this.warnings.length}`,
+      this.warnings.length > 0 ? 'warning' : 'info'
+    );
+    this.log(
+      `  Status: ${this.errors.length === 0 ? 'READY TO DEPLOY' : 'NEEDS FIXES'}`,
+      this.errors.length === 0 ? 'success' : 'error'
+    );
 
     return this.errors.length === 0;
   }
 
   async run() {
     this.log('🚀 Starting Enhanced Deployment Validation...', 'info');
-    
+
     await this.validatePackageJson();
     await this.validateAstroConfig();
     await this.validatePublicAssets();
@@ -277,20 +287,20 @@ class DeploymentValidator {
     await this.validateAstroCheck();
     await this.validateTests();
     await this.validateBuild();
-    
+
     const success = await this.generateReport();
-    
+
     if (!success) {
       process.exit(1);
     }
-    
+
     this.log('\n🎉 Deployment validation completed successfully!', 'success');
   }
 }
 
 // Run validation
 const validator = new DeploymentValidator();
-validator.run().catch(error => {
+validator.run().catch((error) => {
   console.error('❌ Validation failed:', error);
   process.exit(1);
 });

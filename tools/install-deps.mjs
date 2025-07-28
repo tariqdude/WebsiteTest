@@ -20,24 +20,24 @@ const requiredDependencies = {
     '@astrojs/svelte': '^6.0.1',
     '@astrojs/tailwind': '^6.0.0',
     '@astrojs/vue': '^5.1.0',
-    'astro': '^5.1.1',
-    'vite-plugin-pwa': '^0.21.1'
+    astro: '^5.1.1',
+    'vite-plugin-pwa': '^0.21.1',
   },
   devDependencies: {
-    'vitest': '^2.1.6',
+    vitest: '^2.1.6',
     '@vitest/ui': '^2.1.6',
     '@testing-library/react': '^16.1.0',
     '@testing-library/jest-dom': '^6.6.3',
-    'jsdom': '^25.0.1',
-    'eslint': '^9.17.0',
+    jsdom: '^25.0.1',
+    eslint: '^9.17.0',
     '@typescript-eslint/eslint-plugin': '^8.18.2',
     '@typescript-eslint/parser': '^8.18.2',
     'eslint-plugin-astro': '^1.3.2',
     'eslint-plugin-react': '^7.37.2',
     'eslint-plugin-react-hooks': '^5.1.0',
-    'prettier': '^3.4.2',
-    'typescript': '^5.7.2'
-  }
+    prettier: '^3.4.2',
+    typescript: '^5.7.2',
+  },
 };
 
 function log(message, type = 'info') {
@@ -46,14 +46,14 @@ function log(message, type = 'info') {
     success: '\x1b[32m',
     warning: '\x1b[33m',
     error: '\x1b[31m',
-    reset: '\x1b[0m'
+    reset: '\x1b[0m',
   };
   console.log(`${colors[type]}${message}${colors.reset}`);
 }
 
 function installMissingDependencies() {
   log('🔍 Checking and installing missing dependencies...', 'info');
-  
+
   try {
     // Check if package.json exists
     if (!fs.existsSync('package.json')) {
@@ -66,14 +66,18 @@ function installMissingDependencies() {
     const missingDevDeps = [];
 
     // Check regular dependencies
-    for (const [dep, version] of Object.entries(requiredDependencies.dependencies)) {
+    for (const [dep, version] of Object.entries(
+      requiredDependencies.dependencies
+    )) {
       if (!pkg.dependencies || !pkg.dependencies[dep]) {
         missingDeps.push(`${dep}@${version}`);
       }
     }
 
     // Check dev dependencies
-    for (const [dep, version] of Object.entries(requiredDependencies.devDependencies)) {
+    for (const [dep, version] of Object.entries(
+      requiredDependencies.devDependencies
+    )) {
       if (!pkg.devDependencies || !pkg.devDependencies[dep]) {
         missingDevDeps.push(`${dep}@${version}`);
       }
@@ -81,14 +85,22 @@ function installMissingDependencies() {
 
     // Install missing dependencies
     if (missingDeps.length > 0) {
-      log(`📦 Installing ${missingDeps.length} missing dependencies...`, 'info');
+      log(
+        `📦 Installing ${missingDeps.length} missing dependencies...`,
+        'info'
+      );
       execSync(`npm install ${missingDeps.join(' ')}`, { stdio: 'inherit' });
       log('✅ Dependencies installed successfully', 'success');
     }
 
     if (missingDevDeps.length > 0) {
-      log(`🛠️ Installing ${missingDevDeps.length} missing dev dependencies...`, 'info');
-      execSync(`npm install --save-dev ${missingDevDeps.join(' ')}`, { stdio: 'inherit' });
+      log(
+        `🛠️ Installing ${missingDevDeps.length} missing dev dependencies...`,
+        'info'
+      );
+      execSync(`npm install --save-dev ${missingDevDeps.join(' ')}`, {
+        stdio: 'inherit',
+      });
       log('✅ Dev dependencies installed successfully', 'success');
     }
 
@@ -102,12 +114,11 @@ function installMissingDependencies() {
 
     log('🔄 Verifying installation...', 'info');
     execSync('npm ls --depth=0', { stdio: 'pipe' });
-    
-    log('✅ Dependency check completed successfully!', 'success');
 
+    log('✅ Dependency check completed successfully!', 'success');
   } catch (error) {
     log(`❌ Failed to install dependencies: ${error.message}`, 'error');
-    
+
     // Try alternative installation method
     log('🔄 Trying alternative installation method...', 'warning');
     try {
@@ -115,7 +126,10 @@ function installMissingDependencies() {
       execSync('npm install', { stdio: 'inherit' });
       log('✅ Alternative installation succeeded', 'success');
     } catch (altError) {
-      log(`❌ Alternative installation also failed: ${altError.message}`, 'error');
+      log(
+        `❌ Alternative installation also failed: ${altError.message}`,
+        'error'
+      );
       process.exit(1);
     }
   }

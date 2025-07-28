@@ -27,6 +27,8 @@
     "deploy:install-deps": "node tools/install-deps.mjs",
     "deploy:fix": "node tools/deployment-manager.mjs fix",
     "deploy:build-test": "node tools/deployment-manager.mjs build-test",
+    "deploy:status": "node tools/status-dashboard.mjs",
+    "deploy:verify": "node tools/verify-deployment.mjs",
     "deploy:prep": "npm run deploy:install-deps && npm run deploy:fix && npm run build:gh-pages",
     "deploy:full": "npm run deploy:prep && npm run deploy:validate",
     "test:ssr": "node tools/ssr-test.mjs",
