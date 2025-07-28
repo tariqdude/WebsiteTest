@@ -1,6 +1,5 @@
-// GSAP Animation Showcase - Refined for Performance and Stability
+// GSAP Animation Showcase - SSR Safe and Performance Optimized
 import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
 
 const GSAPAnimationShowcase = () => {
   const containerRef = useRef(null);
@@ -8,6 +7,8 @@ const GSAPAnimationShowcase = () => {
   const titleRef = useRef(null);
   const [currentAnimation, setCurrentAnimation] = useState('none');
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [gsap, setGsap] = useState(null);
 
   const colors = [
     '#3B82F6',
@@ -18,8 +19,31 @@ const GSAPAnimationShowcase = () => {
     '#EC4899',
   ];
 
+  // SSR-safe mounting
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Dynamic GSAP import for SSR safety
+  useEffect(() => {
+    if (!isMounted) return;
+
+    const loadGSAP = async () => {
+      try {
+        const gsapModule = await import('gsap');
+        setGsap(gsapModule.gsap);
+      } catch (error) {
+        console.error('Failed to load GSAP:', error);
+      }
+    };
+
+    loadGSAP();
+  }, [isMounted]);
+
   // Use GSAP context for safe and automatic cleanup
   useEffect(() => {
+    if (!gsap || !isMounted) return;
+
     const ctx = gsap.context(() => {
       // Set initial states for all elements
       gsap.set(boxesRef.current, {
@@ -32,20 +56,24 @@ const GSAPAnimationShowcase = () => {
       });
       // Set initial background colors using a function
       boxesRef.current.forEach((box, index) => {
-        gsap.set(box, { backgroundColor: colors[index % colors.length] });
+        if (box) {
+          gsap.set(box, { backgroundColor: colors[index % colors.length] });
+        }
       });
-      gsap.set(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        rotationX: 0,
-        rotationY: 0,
-        color: '#374151',
-      });
+      if (titleRef.current) {
+        gsap.set(titleRef.current, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotationX: 0,
+          rotationY: 0,
+          color: '#374151',
+        });
+      }
     }, containerRef);
 
     return () => ctx.revert(); // Cleanup GSAP animations on component unmount
-  }, []);
+  }, [gsap, isMounted]);
 
   const onAnimationComplete = () => {
     setIsAnimating(false);

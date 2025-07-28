@@ -25,6 +25,8 @@
     "deploy:fix": "node tools/deployment-manager.mjs fix",
     "deploy:build-test": "node tools/deployment-manager.mjs build-test",
     "deploy:prep": "npm run deploy:fix && npm run build:gh-pages",
+    "test:ssr": "node tools/ssr-test.mjs",
+    "test:deploy": "npm run test:ssr && npm run deploy:validate",
     "diagnostics": "npm run deploy:health --verbose",
     "astro": "astro"
   },

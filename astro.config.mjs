@@ -20,6 +20,7 @@ export const SITE_CONFIG = {
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
   output: 'static',
+  trailingSlash: 'ignore',
 };
 
 // Performance-optimized dependencies for Vite

@@ -15,11 +15,11 @@ import SvelteSkillsDashboard from '../components/frameworks/svelte/SvelteSkillsD
 import SolidStateDemo from '../components/frameworks/solid/SolidStateDemo.jsx';
 import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashboard.jsx';
 
-// Showcase Components - Advanced Features
-import Advanced3DScene from '../components/showcases/Advanced3DScene.jsx';
+// Showcase Components - SSR Safe Versions
+import Advanced3DScene from '../components/showcases/Advanced3DSceneSSR.jsx';
 import InteractiveTerminal from '../components/showcases/InteractiveTerminal.jsx';
 import PerformanceMetrics from '../components/showcases/PerformanceMetrics.jsx';
-import CodeEditorShowcase from '../components/showcases/CodeEditorShowcase.jsx';
+import CodeEditorShowcase from '../components/showcases/CodeEditorShowcaseSSR.jsx';
 import GSAPAnimationShowcase from '../components/showcases/GSAPAnimationShowcase.jsx';
 
 // UI Components
@@ -61,7 +61,7 @@ import { technologyStats } from '../lib/constants';
       </p>
 
       <div class='mb-12'>
-        <PerformanceMetrics client:load />
+        <PerformanceMetrics client:only="react" />
       </div>
     </div>
   </section>
@@ -278,7 +278,7 @@ import { technologyStats } from '../lib/constants';
         framework='React + GSAP'
         title='Animation Studio'
       >
-        <GSAPAnimationShowcase client:visible />
+        <GSAPAnimationShowcase client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
@@ -321,7 +321,7 @@ import { technologyStats } from '../lib/constants';
         framework='React + Terminal'
         title='Interactive Terminal'
       >
-        <InteractiveTerminal client:visible />
+        <InteractiveTerminal client:only="react" />
       </FrameworkDemo>
     </div>
   </section>

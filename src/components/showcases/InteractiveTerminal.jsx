@@ -5,6 +5,11 @@ import { Terminal as TerminalIcon } from 'lucide-react';
 const useTerminal = () => {
   const [history, setHistory] = useState([]);
   const [currentPath, setCurrentPath] = useState('~/astro-showcase');
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const commands = {
     help: {
@@ -43,7 +48,7 @@ const useTerminal = () => {
     },
     date: {
       description: 'Show current date and time',
-      execute: () => [new Date().toString()],
+      execute: () => [isMounted ? new Date().toString() : 'Loading...'],
     },
     clear: {
       description: 'Clear terminal',

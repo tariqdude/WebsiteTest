@@ -9,52 +9,92 @@ const PerformanceMetrics = () => {
     connectionType: 'unknown',
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const calculateMetrics = () => {
-      // Performance metrics
-      const navigation = performance.getEntriesByType('navigation')[0];
-      const loadTime = navigation
-        ? Math.round(navigation.loadEventEnd - navigation.loadEventStart)
-        : 0;
-
-      // DOM nodes count
-      const domNodes = document.getElementsByTagName('*').length;
-
-      // Memory usage (if available)
-      const memoryUsage = performance.memory
-        ? Math.round(performance.memory.usedJSHeapSize / 1048576)
-        : 0;
-
-      // Connection info
-      const connection =
-        navigator.connection ||
-        navigator.mozConnection ||
-        navigator.webkitConnection;
-      const connectionType = connection
-        ? connection.effectiveType || 'unknown'
-        : 'unknown';
-
-      setMetrics({
-        loadTime,
-        domNodes,
-        memoryUsage,
-        connectionType,
-      });
-      setIsLoading(false);
-    };
-
-    // Wait for page load
-    if (document.readyState === 'complete') {
-      calculateMetrics();
-    } else {
-      window.addEventListener('load', calculateMetrics);
-    }
-
-    return () => {
-      window.removeEventListener('load', calculateMetrics);
-    };
+    setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
+    const calculateMetrics = () => {
+      try {
+        // SSR-safe performance metrics
+        const navigation =
+          typeof performance !== 'undefined'
+            ? performance.getEntriesByType('navigation')[0]
+            : null;
+        const loadTime = navigation
+          ? Math.round(navigation.loadEventEnd - navigation.loadEventStart)
+          : 0;
+
+        // SSR-safe DOM nodes count
+        const domNodes =
+          typeof document !== 'undefined'
+            ? document.getElementsByTagName('*').length
+            : 0;
+
+        // SSR-safe memory usage
+        const memoryUsage =
+          typeof performance !== 'undefined' && performance.memory
+            ? Math.round(performance.memory.usedJSHeapSize / 1048576)
+            : 0;
+
+        // SSR-safe connection info
+        const connection =
+          typeof navigator !== 'undefined'
+            ? navigator.connection ||
+              navigator.mozConnection ||
+              navigator.webkitConnection
+            : null;
+        const connectionType = connection
+          ? connection.effectiveType || 'unknown'
+          : 'unknown';
+
+        setMetrics({
+          loadTime,
+          domNodes,
+          memoryUsage,
+          connectionType,
+        });
+        setIsLoading(false);
+      } catch (error) {
+        console.warn('Error calculating performance metrics:', error);
+        setIsLoading(false);
+      }
+    };
+
+    // SSR-safe event listeners
+    if (typeof document !== 'undefined') {
+      if (document.readyState === 'complete') {
+        calculateMetrics();
+      } else {
+        const handleLoad = () => {
+          calculateMetrics();
+        };
+        window.addEventListener('load', handleLoad);
+        return () => window.removeEventListener('load', handleLoad);
+      }
+    } else {
+      // Fallback for SSR
+      setIsLoading(false);
+    }
+  }, [isMounted]);
+
+  // Don't render during SSR
+  if (!isMounted) {
+    return (
+      <div className='flex min-h-[200px] items-center justify-center rounded-lg bg-white p-6 shadow-md dark:bg-gray-800'>
+        <div className='text-center'>
+          <div className='mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-b-2 border-blue-600'></div>
+          <p className='text-gray-600 dark:text-gray-400'>
+            Loading Performance Metrics...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const metricsData = [
     {
