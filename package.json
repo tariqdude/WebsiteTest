@@ -18,6 +18,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro && astro check && tsc --noEmit && npm run format:check",
+    "optimize": "node tools/project-optimizer.mjs",
+    "supercharge": "npm run optimize && npm run test && npm run build:gh-pages",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix && npm run format",
     "clean": "rm -rf dist .astro node_modules/.vite",
     "clean:all": "npm run clean && rm -rf node_modules package-lock.json",

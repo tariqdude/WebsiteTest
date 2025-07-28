@@ -1,7 +1,5 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus, RotateCcw, TrendingUp, History, Zap, Target } from 'lucide-react';
-import { useSSRSafeSimple } from '../../../lib/hooks/useSSRSafeSimple.js';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Plus, Minus, RotateCcw, Zap } from 'lucide-react';
 
 const InteractiveCounter = () => {
   const [count, setCount] = useState(0);
