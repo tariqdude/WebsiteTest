@@ -1,5 +1,25 @@
-// Real-time Code Editor with Monaco (VS Code editor)
-import { useEffect, useRef, useState } from 'react';
+// Advanced Monaco Code Editor with Maximum Features
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Play,
+  Square,
+  Save,
+  Download,
+  Upload,
+  Settings,
+  Eye,
+  Code2,
+  FileText,
+  Monitor,
+  Cpu,
+  CheckCircle,
+  AlertCircle,
+  Clock,
+  Layers,
+  Zap,
+} from 'lucide-react';
+import { useSSRSafeSimple } from '../../lib/hooks/useSSRSafeSimple.js';
 
 const CodeEditorShowcase = () => {
   const editorRef = useRef(null);
