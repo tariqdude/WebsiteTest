@@ -11,6 +11,8 @@
   },
   "include": [
     "astro.config.*",
-    "vite.config.*"
+    "vite.config.*",
+    "deployment-manager.mjs",
+    "tools/*"
   ]
 }

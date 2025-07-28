@@ -8,6 +8,8 @@ export function useTheme() {
   const [theme, setTheme] = useState<ThemePreference>('system');
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const stored = localStorage.getItem('theme') as ThemePreference;
     if (stored) {
       setTheme(stored);
@@ -15,6 +17,8 @@ export function useTheme() {
   }, []);
 
   const updateTheme = useCallback((newTheme: ThemePreference) => {
+    if (typeof window === 'undefined') return;
+    
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     
@@ -31,6 +35,8 @@ export function useTheme() {
 // Local storage hook
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
+    if (typeof window === 'undefined') return initialValue;
+    
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -41,6 +47,8 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   });
 
   const setValue = useCallback((value: T | ((val: T) => T)) => {
+    if (typeof window === 'undefined') return;
+    
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
@@ -98,6 +106,8 @@ export function usePerformanceMetrics() {
   const [metrics, setMetrics] = useState<Record<string, number>>({});
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     // Web Vitals measurement
     const measurePerformance = () => {
       if ('performance' in window && 'getEntriesByType' in performance) {

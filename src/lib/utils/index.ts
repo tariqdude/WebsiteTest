@@ -214,6 +214,8 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
 };
 
 export const downloadFile = (content: string, filename: string, mimeType: string = 'text/plain'): void => {
+  if (typeof window === 'undefined') return;
+  
   const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -244,6 +246,8 @@ export const isValidUrl = (url: string): boolean => {
 };
 
 export const detectDevice = (): 'mobile' | 'tablet' | 'desktop' => {
+  if (typeof window === 'undefined') return 'desktop';
+  
   const width = window.innerWidth;
   if (width < 768) return 'mobile';
   if (width < 1024) return 'tablet';
@@ -251,6 +255,8 @@ export const detectDevice = (): 'mobile' | 'tablet' | 'desktop' => {
 };
 
 export const getScrollPosition = (): { x: number; y: number } => {
+  if (typeof window === 'undefined') return { x: 0, y: 0 };
+  
   return {
     x: window.pageXOffset || document.documentElement.scrollLeft,
     y: window.pageYOffset || document.documentElement.scrollTop,
