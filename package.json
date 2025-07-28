@@ -17,7 +17,7 @@
     "check:types": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "astro check && tsc --noEmit && npm run format:check",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro && astro check && tsc --noEmit && npm run format:check",
     "clean": "rm -rf dist .astro node_modules/.vite",
     "clean:all": "npm run clean && rm -rf node_modules package-lock.json",
     "deploy:health": "node tools/deployment-manager.mjs health",
@@ -28,6 +28,8 @@
     "test:ssr": "node tools/ssr-test.mjs",
     "test:deploy": "npm run test:ssr && npm run deploy:validate",
     "diagnostics": "npm run deploy:health --verbose",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
     "astro": "astro"
   },
   "dependencies": {

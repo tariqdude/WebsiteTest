@@ -7,6 +7,7 @@ import solidJs from '@astrojs/solid-js';
 import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // =============================================================================
 // ENHANCED ASTRO 5.x CONFIGURATION
@@ -92,6 +93,37 @@ export default defineConfig({
   // VITE CONFIGURATION
   // =============================================================================
   vite: {
+    plugins: [
+      VitePWA({
+        registerType: 'autoUpdate',
+        includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
+        manifest: {
+          name: 'Astro Showcase',
+          short_name: 'AstroShowcase',
+          description: 'A showcase of Astro with multiple frameworks.',
+          theme_color: '#ffffff',
+          icons: [
+            {
+              src: 'pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+            {
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+          ],
+        },
+      }),
+    ],
+
     server: { port: 4321, host: true, open: false, hmr: { overlay: true } },
 
     // Dependency pre-bundling optimization

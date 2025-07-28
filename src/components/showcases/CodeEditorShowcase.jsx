@@ -1,4 +1,60 @@
 // Advanced Monaco Code Editor with Maximum Features
+import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import {
+  Play,
+  Save,
+  Settings,
+  FileText,
+  Loader,
+  AlertCircle,
+  CheckCircle,
+  Zap,
+} from 'lucide-react';
+import { useSSRSafeSimple } from '../../lib/hooks/useSSRSafeSimple.js';
+
+const CodeEditorShowcase = () => {
+  const { isSSRSafe } = useSSRSafeSimple();
+  const [language, setLanguage] = useState('javascript');
+  const [theme, setTheme] = useState('vs-dark');
+  const [output, setOutput] = useState('');
+  const [isRunning, setIsRunning] = useState(false);
+  const [monaco, setMonaco] = useState(null);
+  const [editor, setEditor] = useState(null);
+  const editorRef = useRef(null);
+
+  const initialCode = {
+    javascript: `// Interactive JavaScript Playground
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Calculate and display results
+for (let i = 0; i <= 10; i++) {
+  console.log(\`fibonacci(\${i}) = \${fibonacci(i)}\`);
+}
+
+// Try modifying this code and run it!`,
+    typescript: `// TypeScript with type safety
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+function displayUser(user: User) {
+  console.log(\`ID: \${user.id}, Name: \${user.name}\`);
+}
+
+displayUser({ id: 1, name: 'Jane Doe', email: 'jane@example.com' });`,
+    python: `# Python execution is simulated
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("World"))`,
+    html: `<!-- Live HTML Preview -->
+<div class=
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {

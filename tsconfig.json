@@ -27,7 +27,7 @@
       "@/styles/*": ["./src/styles/*"],
       "@/types/*": ["./src/lib/types/*"]
     },
-    "types": ["astro/client", "vite/client", "node"]
+    "types": ["astro/client", "vite/client", "node", "vitest/globals"]
   },
   "include": ["src/**/*", "astro.config.mjs", "tailwind.config.mjs"],
   "exclude": ["node_modules", "dist", ".astro"],
