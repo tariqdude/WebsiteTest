@@ -30,7 +30,7 @@ import SimpleFallback from '../components/ui/SimpleFallback.astro';
 import FrameworkDemo from '../components/ui/FrameworkDemo.tsx';
 
 // Data
-import { technologyStats } from '../data/stats.js';
+import { technologyStats } from '../lib/constants';
 ---
 
 <Layout
@@ -338,7 +338,7 @@ import { technologyStats } from '../data/stats.js';
 
       <div class='mb-12 grid grid-cols-2 gap-8 md:grid-cols-4'>
         {
-          technologyStats.map((stat) => (
+          technologyStats.map((stat: { label: string; value: string; icon: string }) => (
             <div class='text-center'>
               <div class='mb-2 text-4xl font-bold'>{stat.value}</div>
               <div class='text-lg opacity-80'>{stat.label}</div>

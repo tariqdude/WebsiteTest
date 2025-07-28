@@ -62,10 +62,18 @@
 
 <script>
   // Populate technical details
-  document.getElementById('error-timestamp').textContent =
-    new Date().toISOString();
-  document.getElementById('user-agent').textContent = navigator.userAgent;
-  document.getElementById('current-url').textContent = window.location.href;
+  const timestampEl = document.getElementById('error-timestamp');
+  if (timestampEl) {
+    timestampEl.textContent = new Date().toISOString();
+  }
+  const userAgentEl = document.getElementById('user-agent');
+  if (userAgentEl) {
+    userAgentEl.textContent = navigator.userAgent;
+  }
+  const currentUrlEl = document.getElementById('current-url');
+  if (currentUrlEl) {
+    currentUrlEl.textContent = window.location.href;
+  }
 </script>
 
 <style>
