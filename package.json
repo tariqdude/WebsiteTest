@@ -7,22 +7,30 @@
     "dev:verbose": "VERBOSE_LOGS=true astro dev",
     "dev:host": "astro dev --host",
     "start": "astro dev",
+    
     "build": "astro check && astro build",
     "build:production": "NODE_ENV=production astro build",
     "build:gh-pages": "NODE_ENV=production astro build --site https://tariqdude.github.io --base /WebsiteTest",
+    "build:analyze": "npm run deploy:health && npm run build:gh-pages",
+    
     "preview": "astro preview",
     "preview:host": "astro preview --host",
-    "astro": "astro",
+    
     "check": "astro check",
     "check:types": "tsc --noEmit",
     "lint": "astro check && tsc --noEmit",
+    
     "clean": "rm -rf dist .astro node_modules/.vite",
     "clean:all": "npm run clean && rm -rf node_modules package-lock.json",
-    "deploy:validate": "node tools/deployment-manager.mjs --validate",
-    "deploy:fix": "node tools/deployment-manager.mjs --fix",
-    "deploy:test": "node tools/quick-test.mjs",
-    "deploy:status": "node tools/status-dashboard.mjs",
-    "deploy:full": "node tools/deployment-manager.mjs"
+    
+    "deploy:health": "node deployment-manager.mjs health",
+    "deploy:validate": "node deployment-manager.mjs validate",
+    "deploy:fix": "node deployment-manager.mjs fix",
+    "deploy:build-test": "node deployment-manager.mjs build-test",
+    "deploy:prep": "npm run deploy:fix && npm run build:gh-pages",
+    
+    "diagnostics": "npm run deploy:health --verbose",
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
