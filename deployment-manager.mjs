@@ -269,8 +269,8 @@ class UnifiedDeploymentManager {
       
       // Check workflow configuration
       const checks = [
-        { pattern: /node-version:\s*['"]20['"]/, name: 'Node.js 20 configuration' },
-        { pattern: /npm install/, name: 'npm install command' },
+        { pattern: /node-version:\s*['"]2[0-9]['"]/, name: 'Node.js modern version configuration' },
+        { pattern: /npm (install|ci)/, name: 'npm install command' },
         { pattern: /build:gh-pages/, name: 'GitHub Pages build script' },
         { pattern: /upload-pages-artifact/, name: 'Pages artifact upload' }
       ];
