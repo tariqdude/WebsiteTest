@@ -1,28 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Showcase components with error boundaries
-import Advanced3DScene from '../components/showcases/Advanced3DScene.jsx';
-import InteractiveTerminal from '../components/showcases/InteractiveTerminal.jsx';
-import PerformanceMetrics from '../components/showcases/PerformanceMetrics.jsx';
-
-// React components
+// React Components - Core Features
 import DataVisualizationDashboard from '../components/frameworks/react/DataVisualizationDashboard.jsx';
 import AdvancedForm from '../components/frameworks/react/AdvancedForm.tsx';
 import InteractiveCounter from '../components/frameworks/react/InteractiveCounter.jsx';
 
-// Framework components
-import SvelteSkillsDashboard from '../components/frameworks/svelte/SvelteSkillsDashboard.svelte';
-import SolidStateDemo from '../components/frameworks/solid/SolidStateDemo.jsx';
-import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashboard.jsx';
+// Vue Components
 import ColorPalette from '../components/frameworks/vue/ColorPalette.vue';
 import VueSimpleColorDemo from '../components/frameworks/vue/SimpleColorDemo.vue';
 
-// Resource-intensive components (loaded with client:idle for better performance)
+// Other Framework Components
+import SvelteSkillsDashboard from '../components/frameworks/svelte/SvelteSkillsDashboard.svelte';
+import SolidStateDemo from '../components/frameworks/solid/SolidStateDemo.jsx';
+import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashboard.jsx';
+
+// Showcase Components - Advanced Features
+import Advanced3DScene from '../components/showcases/Advanced3DScene.jsx';
+import InteractiveTerminal from '../components/showcases/InteractiveTerminal.jsx';
+import PerformanceMetrics from '../components/showcases/PerformanceMetrics.jsx';
 import CodeEditorShowcase from '../components/showcases/CodeEditorShowcase.jsx';
 import GSAPAnimationShowcase from '../components/showcases/GSAPAnimationShowcase.jsx';
 
-// UI components
+// UI Components
 import AnimatedBackground from '../components/ui/AnimatedBackground.jsx';
 import SimpleDemo from '../components/ui/SimpleDemo.jsx';
 import SimpleColorDemo from '../components/ui/SimpleColorDemo.jsx';
@@ -39,7 +39,7 @@ import { technologyStats } from '../data/stats.js';
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20 py-20">
-    <AnimatedBackground client:load />
+    <AnimatedBackground client:visible />
     <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
         <span class="block">Ultimate</span>
@@ -51,7 +51,7 @@ import { technologyStats } from '../data/stats.js';
       </p>
 
       <div class="mb-12">
-        <PerformanceMetrics client:only="react" />
+        <PerformanceMetrics client:load />
       </div>
     </div>
   </section>
@@ -101,20 +101,20 @@ import { technologyStats } from '../data/stats.js';
         <!-- React Component -->
         <div class="space-y-4">
           <FrameworkDemo client:load framework="React" title="Interactive Counter">
-            <InteractiveCounter client:only="react" />
+            <InteractiveCounter client:load />
           </FrameworkDemo>
         </div>
         
         <!-- Vue Component -->
         <div class="space-y-4">
           <FrameworkDemo client:load framework="Vue" title="Color Palette">
-            <ColorPalette client:only="vue" />
+            <ColorPalette client:visible />
           </FrameworkDemo>
           
           <!-- Additional Vue Demo -->
           <div class="mt-4">
             <FrameworkDemo client:load framework="Vue" title="Simple Color Demo">
-              <VueSimpleColorDemo client:only="vue" />
+              <VueSimpleColorDemo client:visible />
             </FrameworkDemo>
           </div>
         </div>
@@ -134,7 +134,7 @@ import { technologyStats } from '../data/stats.js';
       
       <!-- Advanced 3D Scene with Error Boundary -->
       <FrameworkDemo client:load framework="React + Three.js" title="3D WebGL Scene">
-        <Advanced3DScene client:only="react" />
+        <Advanced3DScene client:visible />
       </FrameworkDemo>
     </div>
   </section>
@@ -151,7 +151,7 @@ import { technologyStats } from '../data/stats.js';
       
       <!-- Advanced Data Visualization with Error Boundary -->
       <FrameworkDemo client:load framework="React + D3.js" title="Data Visualization Dashboard">
-        <DataVisualizationDashboard client:only="react" />
+        <DataVisualizationDashboard client:visible />
       </FrameworkDemo>
     </div>
   </section>
@@ -169,12 +169,12 @@ import { technologyStats } from '../data/stats.js';
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Svelte Component -->
         <FrameworkDemo client:load framework="Svelte" title="Skills Dashboard">
-          <SvelteSkillsDashboard client:only="svelte" />
+          <SvelteSkillsDashboard client:visible />
         </FrameworkDemo>
 
         <!-- Solid.js Component -->
         <FrameworkDemo client:load framework="Solid.js" title="State Management Demo">
-          <SolidStateDemo client:only="solid-js" />
+          <SolidStateDemo client:visible />
         </FrameworkDemo>
       </div>
     </div>
@@ -190,7 +190,7 @@ import { technologyStats } from '../data/stats.js';
         React Hook Form + Zod validation + TypeScript for bulletproof forms
       </p>
       <FrameworkDemo client:load framework="React + TypeScript" title="Advanced Form System">
-        <AdvancedForm client:only="react" />
+        <AdvancedForm client:visible />
       </FrameworkDemo>
     </div>
   </section>
@@ -205,7 +205,7 @@ import { technologyStats } from '../data/stats.js';
         Full VS Code editor experience with syntax highlighting and IntelliSense
       </p>
       <FrameworkDemo client:load framework="React + Monaco" title="Code Editor">
-        <CodeEditorShowcase client:only="react" />
+        <CodeEditorShowcase client:idle />
       </FrameworkDemo>
     </div>
   </section>
@@ -220,7 +220,7 @@ import { technologyStats } from '../data/stats.js';
         Professional animations with GreenSock's industry-standard library
       </p>
       <FrameworkDemo client:load framework="React + GSAP" title="Animation Studio">
-        <GSAPAnimationShowcase client:only="react" />
+        <GSAPAnimationShowcase client:visible />
       </FrameworkDemo>
     </div>
   </section>
@@ -235,7 +235,7 @@ import { technologyStats } from '../data/stats.js';
         Same React API but only 3KB - perfect for performance-critical apps
       </p>
       <FrameworkDemo client:load framework="Preact" title="Lightweight Dashboard">
-        <PreactMiniDashboard client:only="preact" />
+        <PreactMiniDashboard client:visible />
       </FrameworkDemo>
     </div>
   </section>
@@ -250,7 +250,7 @@ import { technologyStats } from '../data/stats.js';
         Fully functional terminal with command history and file system simulation
       </p>
       <FrameworkDemo client:load framework="React + Terminal" title="Interactive Terminal">
-        <InteractiveTerminal client:only="react" />
+        <InteractiveTerminal client:visible />
       </FrameworkDemo>
     </div>
   </section>

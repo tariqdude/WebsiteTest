@@ -2,22 +2,34 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { formatDate } from '../lib/utils';
+
+// React Components - Critical Features
 import InteractiveCounter from '../components/frameworks/react/InteractiveCounter.jsx';
+import DataVisualizationDashboard from '../components/frameworks/react/DataVisualizationDashboard.jsx';
+import AdvancedForm from '../components/frameworks/react/AdvancedForm.tsx';
+
+// Vue Components
 import ColorPalette from '../components/frameworks/vue/ColorPalette.vue';
+
+// Other Framework Components
+import SvelteSkillsDashboard from '../components/frameworks/svelte/SvelteSkillsDashboard.svelte';
+import SolidStateDemo from '../components/frameworks/solid/SolidStateDemo.jsx';
+import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashboard.jsx';
+
+// UI Components
 import AnimatedBackground from '../components/ui/AnimatedBackground.jsx';
 import CodeBlock from '../components/ui/CodeBlock.jsx';
+import SimpleDemo from '../components/ui/SimpleDemo.jsx';
+import SimpleColorDemo from '../components/ui/SimpleColorDemo.jsx';
+
+// Showcase Components - Advanced Features
 import PerformanceMetrics from '../components/showcases/PerformanceMetrics.jsx';
 import InteractiveTerminal from '../components/showcases/InteractiveTerminal.jsx';
 import Advanced3DScene from '../components/showcases/Advanced3DScene.jsx';
-import DataVisualizationDashboard from '../components/frameworks/react/DataVisualizationDashboard.jsx';
-import SvelteSkillsDashboard from '../components/frameworks/svelte/SvelteSkillsDashboard.svelte';
-import SolidStateDemo from '../components/frameworks/solid/SolidStateDemo.jsx';
-import AdvancedForm from '../components/frameworks/react/AdvancedForm.tsx';
 import CodeEditorShowcase from '../components/showcases/CodeEditorShowcase.jsx';
 import GSAPAnimationShowcase from '../components/showcases/GSAPAnimationShowcase.jsx';
-import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashboard.jsx';
-import SimpleDemo from '../components/ui/SimpleDemo.jsx';
-import SimpleColorDemo from '../components/ui/SimpleColorDemo.jsx';
+
+// Icons and Data
 import { ChevronRight, Rocket, Zap, Globe, Code, Layers, Sparkles } from 'lucide-react';
 import { technologyStats } from '../data/stats.js';
 
@@ -140,7 +152,7 @@ const features = [
         </p>
       </div>
       <div class="max-w-6xl mx-auto">
-        <PerformanceMetrics client:only="react" />
+        <PerformanceMetrics client:load />
       </div>
     </div>
   </section>
@@ -208,7 +220,7 @@ const features = [
           
           <!-- Advanced component below -->
           <div class="mt-4">
-            <InteractiveCounter client:only="react" />
+            <InteractiveCounter client:load />
           </div>
         </div>
         
@@ -225,11 +237,11 @@ const features = [
           </div>
           
           <!-- Reliable Vue demo first -->
-          <SimpleColorDemo client:only="react" title="Color Demo" />
+          <SimpleColorDemo client:load title="Color Demo" />
           
           <!-- Advanced component below -->
           <div class="mt-4">
-            <ColorPalette client:only="vue" />
+            <ColorPalette client:visible />
           </div>
         </div>
       </div>
@@ -237,17 +249,17 @@ const features = [
       <!-- Code Example -->
       <div class="mt-16 max-w-4xl mx-auto">
         <CodeBlock 
-          client:only="react"
+          client:visible
           code={`<!-- React component loads immediately -->
-<InteractiveCounter client:only="react" />
+<InteractiveCounter client:load />
 
 <!-- Vue component loads when visible -->
-<ColorPalette client:only="vue" />
+<ColorPalette client:visible />
 
 <!-- Advanced components with conditional loading -->
-<PerformanceMetrics client:only="react" />
-<AnimatedBackground client:only="react" />
-<InteractiveTerminal client:only="react" />`}
+<PerformanceMetrics client:load />
+<AnimatedBackground client:visible />
+<InteractiveTerminal client:visible />`}
           language="astro"
           title="index.astro"
         />
@@ -277,7 +289,7 @@ const features = [
             Real-time 3D graphics, lighting, and interactive controls
           </p>
         </div>
-        <Advanced3DScene client:only="react" />
+        <Advanced3DScene client:visible />
       </div>
 
       <!-- Data Visualization Dashboard -->
@@ -290,7 +302,7 @@ const features = [
             D3.js and Chart.js working together for stunning data stories
           </p>
         </div>
-        <DataVisualizationDashboard client:only="react" />
+        <DataVisualizationDashboard client:visible />
       </div>
 
       <!-- Framework Comparison Grid -->
@@ -305,7 +317,7 @@ const features = [
               Smooth animations with Svelte's built-in motion library
             </p>
           </div>
-          <SvelteSkillsDashboard client:only="svelte" />
+          <SvelteSkillsDashboard client:visible />
         </div>
 
         <!-- Solid.js State Management -->
@@ -318,7 +330,7 @@ const features = [
               Ultra-fast updates with surgical precision
             </p>
           </div>
-          <SolidStateDemo client:only="solid-js" />
+          <SolidStateDemo client:visible />
         </div>
       </div>
 
@@ -332,7 +344,7 @@ const features = [
             React Hook Form + Zod validation + TypeScript for bulletproof forms
           </p>
         </div>
-        <AdvancedForm client:only="react" />
+        <AdvancedForm client:visible />
       </div>
 
       <!-- Code Editor Showcase -->
@@ -345,7 +357,7 @@ const features = [
             Full VS Code editor experience with syntax highlighting and IntelliSense
           </p>
         </div>
-        <CodeEditorShowcase client:only="react" />
+        <CodeEditorShowcase client:idle />
       </div>
 
       <!-- GSAP Animation Studio -->
@@ -358,7 +370,7 @@ const features = [
             Professional animations with GreenSock's industry-standard library
           </p>
         </div>
-        <GSAPAnimationShowcase client:only="react" />
+        <GSAPAnimationShowcase client:visible />
       </div>
 
       <!-- Preact Lightweight Demo -->
@@ -371,7 +383,7 @@ const features = [
             Same React API but only 3KB - perfect for performance-critical apps
           </p>
         </div>
-        <PreactMiniDashboard client:only="preact" />
+        <PreactMiniDashboard client:visible />
       </div>
     </div>
   </section>
@@ -431,7 +443,7 @@ const features = [
         </p>
       </div>
       <div class="max-w-4xl mx-auto">
-        <InteractiveTerminal client:only="react" />
+        <InteractiveTerminal client:visible />
       </div>
     </div>
   </section>
