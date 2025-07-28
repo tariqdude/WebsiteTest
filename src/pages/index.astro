@@ -121,7 +121,7 @@ const features = [
 
         <!-- Stats -->
         <div class="animate-fade-in-up animation-delay-600">
-          <PerformanceMetrics client:load />
+          <PerformanceMetrics client:only="react" />
         </div>
       </div>
     </div>
@@ -140,7 +140,7 @@ const features = [
         </p>
       </div>
       <div class="max-w-6xl mx-auto">
-        <PerformanceMetrics client:visible />
+        <PerformanceMetrics client:only="react" />
       </div>
     </div>
   </section>
@@ -208,7 +208,7 @@ const features = [
           
           <!-- Advanced component below -->
           <div class="mt-4">
-            <InteractiveCounter client:load />
+            <InteractiveCounter client:only="react" />
           </div>
         </div>
         
@@ -225,11 +225,11 @@ const features = [
           </div>
           
           <!-- Reliable Vue demo first -->
-          <SimpleColorDemo client:load title="Color Demo" />
+          <SimpleColorDemo client:only="react" title="Color Demo" />
           
           <!-- Advanced component below -->
           <div class="mt-4">
-            <ColorPalette client:visible />
+            <ColorPalette client:only="vue" />
           </div>
         </div>
       </div>
@@ -290,7 +290,7 @@ const features = [
             D3.js and Chart.js working together for stunning data stories
           </p>
         </div>
-        <DataVisualizationDashboard client:visible />
+        <DataVisualizationDashboard client:only="react" />
       </div>
 
       <!-- Framework Comparison Grid -->
@@ -305,7 +305,7 @@ const features = [
               Smooth animations with Svelte's built-in motion library
             </p>
           </div>
-          <SvelteSkillsDashboard client:visible />
+          <SvelteSkillsDashboard client:only="svelte" />
         </div>
 
         <!-- Solid.js State Management -->
@@ -318,7 +318,7 @@ const features = [
               Ultra-fast updates with surgical precision
             </p>
           </div>
-          <SolidStateDemo client:visible />
+          <SolidStateDemo client:only="solid-js" />
         </div>
       </div>
 
@@ -332,7 +332,7 @@ const features = [
             React Hook Form + Zod validation + TypeScript for bulletproof forms
           </p>
         </div>
-        <AdvancedForm client:visible />
+        <AdvancedForm client:only="react" />
       </div>
 
       <!-- Code Editor Showcase -->
@@ -345,7 +345,7 @@ const features = [
             Full VS Code editor experience with syntax highlighting and IntelliSense
           </p>
         </div>
-        <CodeEditorShowcase client:visible />
+        <CodeEditorShowcase client:only="react" />
       </div>
 
       <!-- GSAP Animation Studio -->
@@ -358,7 +358,7 @@ const features = [
             Professional animations with GreenSock's industry-standard library
           </p>
         </div>
-        <GSAPAnimationShowcase client:visible />
+        <GSAPAnimationShowcase client:only="react" />
       </div>
 
       <!-- Preact Lightweight Demo -->
@@ -371,7 +371,7 @@ const features = [
             Same React API but only 3KB - perfect for performance-critical apps
           </p>
         </div>
-        <PreactMiniDashboard client:visible />
+        <PreactMiniDashboard client:only="preact" />
       </div>
     </div>
   </section>
@@ -431,7 +431,7 @@ const features = [
         </p>
       </div>
       <div class="max-w-4xl mx-auto">
-        <InteractiveTerminal client:visible />
+        <InteractiveTerminal client:only="react" />
       </div>
     </div>
   </section>

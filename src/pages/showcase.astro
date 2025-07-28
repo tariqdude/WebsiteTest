@@ -16,6 +16,7 @@ import SvelteSkillsDashboard from '../components/frameworks/svelte/SvelteSkillsD
 import SolidStateDemo from '../components/frameworks/solid/SolidStateDemo.jsx';
 import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashboard.jsx';
 import ColorPalette from '../components/frameworks/vue/ColorPalette.vue';
+import { VueSimpleColorDemo } from '../components/frameworks/vue/index.ts';
 
 // Resource-intensive components (loaded with client:idle for better performance)
 import CodeEditorShowcase from '../components/showcases/CodeEditorShowcase.jsx';
@@ -50,7 +51,7 @@ import { technologyStats } from '../data/stats.js';
       </p>
 
       <div class="mb-12">
-        <PerformanceMetrics client:load />
+        <PerformanceMetrics client:only="react" />
       </div>
     </div>
   </section>
@@ -100,15 +101,22 @@ import { technologyStats } from '../data/stats.js';
         <!-- React Component -->
         <div class="space-y-4">
           <FrameworkDemo client:load framework="React" title="Interactive Counter">
-            <InteractiveCounter client:load />
+            <InteractiveCounter client:only="react" />
           </FrameworkDemo>
         </div>
         
         <!-- Vue Component -->
         <div class="space-y-4">
           <FrameworkDemo client:load framework="Vue" title="Color Palette">
-            <ColorPalette client:visible />
+            <ColorPalette client:only="vue" />
           </FrameworkDemo>
+          
+          <!-- Additional Vue Demo -->
+          <div class="mt-4">
+            <FrameworkDemo client:load framework="Vue" title="Simple Color Demo">
+              <VueSimpleColorDemo client:only="vue" />
+            </FrameworkDemo>
+          </div>
         </div>
       </div>
     </div>
@@ -143,7 +151,7 @@ import { technologyStats } from '../data/stats.js';
       
       <!-- Advanced Data Visualization with Error Boundary -->
       <FrameworkDemo client:load framework="React + D3.js" title="Data Visualization Dashboard">
-        <DataVisualizationDashboard client:idle />
+        <DataVisualizationDashboard client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
@@ -161,12 +169,12 @@ import { technologyStats } from '../data/stats.js';
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Svelte Component -->
         <FrameworkDemo client:load framework="Svelte" title="Skills Dashboard">
-          <SvelteSkillsDashboard client:idle />
+          <SvelteSkillsDashboard client:only="svelte" />
         </FrameworkDemo>
 
         <!-- Solid.js Component -->
         <FrameworkDemo client:load framework="Solid.js" title="State Management Demo">
-          <SolidStateDemo client:idle />
+          <SolidStateDemo client:only="solid-js" />
         </FrameworkDemo>
       </div>
     </div>
@@ -182,7 +190,7 @@ import { technologyStats } from '../data/stats.js';
         React Hook Form + Zod validation + TypeScript for bulletproof forms
       </p>
       <FrameworkDemo client:load framework="React + TypeScript" title="Advanced Form System">
-        <AdvancedForm client:idle />
+        <AdvancedForm client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
@@ -197,7 +205,7 @@ import { technologyStats } from '../data/stats.js';
         Full VS Code editor experience with syntax highlighting and IntelliSense
       </p>
       <FrameworkDemo client:load framework="React + Monaco" title="Code Editor">
-        <CodeEditorShowcase client:idle />
+        <CodeEditorShowcase client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
@@ -212,7 +220,7 @@ import { technologyStats } from '../data/stats.js';
         Professional animations with GreenSock's industry-standard library
       </p>
       <FrameworkDemo client:load framework="React + GSAP" title="Animation Studio">
-        <GSAPAnimationShowcase client:idle />
+        <GSAPAnimationShowcase client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
@@ -227,7 +235,7 @@ import { technologyStats } from '../data/stats.js';
         Same React API but only 3KB - perfect for performance-critical apps
       </p>
       <FrameworkDemo client:load framework="Preact" title="Lightweight Dashboard">
-        <PreactMiniDashboard client:idle />
+        <PreactMiniDashboard client:only="preact" />
       </FrameworkDemo>
     </div>
   </section>
@@ -242,7 +250,7 @@ import { technologyStats } from '../data/stats.js';
         Fully functional terminal with command history and file system simulation
       </p>
       <FrameworkDemo client:load framework="React + Terminal" title="Interactive Terminal">
-        <InteractiveTerminal client:idle />
+        <InteractiveTerminal client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
