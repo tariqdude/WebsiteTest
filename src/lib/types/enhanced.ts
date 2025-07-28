@@ -3,7 +3,13 @@
  */
 
 // Framework Detection
-export type SupportedFramework = 'react' | 'vue' | 'svelte' | 'solid' | 'preact' | 'astro';
+export type SupportedFramework =
+  | 'react'
+  | 'vue'
+  | 'svelte'
+  | 'solid'
+  | 'preact'
+  | 'astro';
 
 export interface FrameworkConfig {
   name: SupportedFramework;
@@ -179,7 +185,8 @@ export type DeepPartial<T> = {
 
 export type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;
 
-export type OptionalKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+export type OptionalKeys<T, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>;
 
 export type RecursiveReadonly<T> = {
   readonly [P in keyof T]: T[P] extends object ? RecursiveReadonly<T[P]> : T[P];

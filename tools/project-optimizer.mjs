@@ -35,7 +35,7 @@ const logError = (message, error) => {
 // Clean up temporary and backup files
 async function cleanupTempFiles() {
   console.log('🧹 Cleaning up temporary files...');
-  
+
   const patterns = [
     '**/*.tmp',
     '**/*.bak',
@@ -45,7 +45,7 @@ async function cleanupTempFiles() {
     '**/*.log',
     '**/npm-debug.log*',
     '**/yarn-debug.log*',
-    '**/yarn-error.log*'
+    '**/yarn-error.log*',
   ];
 
   try {
@@ -65,14 +65,17 @@ async function cleanupTempFiles() {
     }
   } catch (error) {
     // find command might not be available on all systems
-    logError('Cleanup using find command failed, using alternative method', error);
+    logError(
+      'Cleanup using find command failed, using alternative method',
+      error
+    );
   }
 }
 
 // Optimize package.json dependencies
 async function optimizeDependencies() {
   console.log('\n📦 Optimizing dependencies...');
-  
+
   try {
     // Remove unused packages (if any)
     await execAsync('npm prune');
@@ -98,10 +101,10 @@ async function optimizeDependencies() {
 // Validate project structure
 async function validateProjectStructure() {
   console.log('\n🏗️ Validating project structure...');
-  
+
   const requiredDirs = [
     'src/components/frameworks/react',
-    'src/components/frameworks/vue', 
+    'src/components/frameworks/vue',
     'src/components/frameworks/svelte',
     'src/components/frameworks/solid',
     'src/components/frameworks/preact',
@@ -112,7 +115,7 @@ async function validateProjectStructure() {
     'src/lib/utils',
     'src/content',
     'src/pages',
-    'public/images'
+    'public/images',
   ];
 
   const requiredFiles = [
@@ -121,7 +124,7 @@ async function validateProjectStructure() {
     'tsconfig.json',
     'tailwind.config.mjs',
     'vitest.config.ts',
-    '.eslintrc.cjs'
+    '.eslintrc.cjs',
   ];
 
   for (const dir of requiredDirs) {
@@ -150,30 +153,30 @@ async function validateProjectStructure() {
 // Run comprehensive tests
 async function runTests() {
   console.log('\n🧪 Running comprehensive tests...');
-  
+
   const testCommands = [
     { name: 'TypeScript Check', cmd: 'npm run check' },
     { name: 'ESLint', cmd: 'npm run lint' },
-    { name: 'Build Test', cmd: 'npm run build:gh-pages' }
+    { name: 'Build Test', cmd: 'npm run build:gh-pages' },
   ];
 
   for (const test of testCommands) {
     try {
       console.log(`\n🔍 Running ${test.name}...`);
       const { stdout, stderr } = await execAsync(test.cmd);
-      
+
       if (stderr && !stderr.includes('warning')) {
         console.log(`⚠️ ${test.name} warnings:`, stderr);
       }
-      
+
       logOperation(`${test.name} passed`);
     } catch (error) {
       logError(`${test.name} failed`, error);
-      
+
       // Don't fail the entire script for build errors
       if (test.name === 'Build Test') {
         console.log('🔧 Attempting to fix build issues...');
-        
+
         try {
           // Clear any cache and retry
           await execAsync('rm -rf dist .astro node_modules/.cache');
@@ -191,7 +194,7 @@ async function runTests() {
 // Optimize build configuration
 async function optimizeBuildConfig() {
   console.log('\n⚙️ Optimizing build configuration...');
-  
+
   try {
     // Ensure proper TypeScript configuration
     const tsCheck = await execAsync('npx tsc --noEmit --skipLibCheck');
@@ -212,28 +215,34 @@ async function optimizeBuildConfig() {
 // Generate performance report
 async function generatePerformanceReport() {
   console.log('\n📊 Generating performance report...');
-  
+
   const endTime = Date.now();
   const duration = endTime - startTime;
-  
+
   console.log('\n🎉 Optimization Complete!');
   console.log('═'.repeat(50));
   console.log(`📈 Total operations: ${operations}`);
   console.log(`⏱️ Duration: ${(duration / 1000).toFixed(2)} seconds`);
-  console.log(`🚀 Average: ${(operations / (duration / 1000)).toFixed(2)} ops/sec`);
-  
+  console.log(
+    `🚀 Average: ${(operations / (duration / 1000)).toFixed(2)} ops/sec`
+  );
+
   // Project statistics
   try {
-    const { stdout: fileCount } = await execAsync('find . -type f -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.astro" -o -name "*.vue" -o -name "*.svelte" | wc -l');
-    const { stdout: lineCount } = await execAsync('find . -type f -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.astro" -o -name "*.vue" -o -name "*.svelte" | xargs wc -l | tail -1');
-    
+    const { stdout: fileCount } = await execAsync(
+      'find . -type f -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.astro" -o -name "*.vue" -o -name "*.svelte" | wc -l'
+    );
+    const { stdout: lineCount } = await execAsync(
+      'find . -type f -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.astro" -o -name "*.vue" -o -name "*.svelte" | xargs wc -l | tail -1'
+    );
+
     console.log('\n📋 Project Statistics:');
     console.log(`📄 Source files: ${fileCount.trim()}`);
     console.log(`📝 Lines of code: ${lineCount.trim().split(' ')[0]}`);
   } catch (error) {
     console.log('📊 Statistics generation skipped (commands not available)');
   }
-  
+
   console.log('\n🎯 Next Steps:');
   console.log('1. Deploy to GitHub Pages: npm run deploy:prep');
   console.log('2. Run diagnostics: npm run diagnostics');
