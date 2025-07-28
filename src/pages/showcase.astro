@@ -165,7 +165,7 @@ import { technologyStats } from '../lib/constants';
         framework='React + Three.js'
         title='3D WebGL Scene'
       >
-        <Advanced3DScene client:visible />
+        <Advanced3DScene client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
@@ -257,7 +257,7 @@ import { technologyStats } from '../lib/constants';
         Full VS Code editor experience with syntax highlighting and IntelliSense
       </p>
       <FrameworkDemo client:load framework='React + Monaco' title='Code Editor'>
-        <CodeEditorShowcase client:idle />
+        <CodeEditorShowcase client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
