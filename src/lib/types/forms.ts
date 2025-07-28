@@ -1,17 +1,17 @@
 /**
  * Enhanced Form Types for Advanced Form Components
- * 
+ *
  * Specialized types for React Hook Form, Zod validation,
  * and multi-framework form support.
- * 
+ *
  * @version 1.0.0
  */
 
-import type { 
-  FormFieldType, 
-  FormFieldValidation, 
-  FormFieldOption, 
-  FormField 
+import type {
+  FormFieldType,
+  FormFieldValidation,
+  FormFieldOption,
+  FormField,
 } from './index';
 
 // =============================================================================
@@ -72,7 +72,12 @@ export interface AdvancedFormField extends Omit<FormField, 'validation'> {
   conditional?: {
     field: string;
     value: unknown;
-    operator?: 'equals' | 'not-equals' | 'contains' | 'greater-than' | 'less-than';
+    operator?:
+      | 'equals'
+      | 'not-equals'
+      | 'contains'
+      | 'greater-than'
+      | 'less-than';
   };
   formatting?: {
     mask?: string;
@@ -102,7 +107,10 @@ export interface SelectField extends AdvancedFormField {
 }
 
 // Form field union type
-export type EnhancedFormField = AdvancedFormField | FileUploadField | SelectField;
+export type EnhancedFormField =
+  | AdvancedFormField
+  | FileUploadField
+  | SelectField;
 
 // Form state for complex forms
 export interface FormState<T = Record<string, unknown>> {
@@ -143,14 +151,20 @@ export interface UseFormReturn<T = Record<string, unknown>> {
     onBlur: (event: Event) => void;
     value: unknown;
   };
-  setValue: (field: string, value: unknown, options?: { shouldValidate?: boolean; shouldTouch?: boolean }) => void;
+  setValue: (
+    field: string,
+    value: unknown,
+    options?: { shouldValidate?: boolean; shouldTouch?: boolean }
+  ) => void;
   getValue: (field: string) => unknown;
   getValues: () => T;
   clearErrors: (fields?: string | string[]) => void;
   setError: (field: string, error: string) => void;
   validate: (field?: string) => Promise<boolean>;
   reset: (values?: T) => void;
-  handleSubmit: (onSubmit: (data: T) => void | Promise<void>) => (event: Event) => void;
+  handleSubmit: (
+    onSubmit: (data: T) => void | Promise<void>
+  ) => (event: Event) => void;
 }
 
 // =============================================================================

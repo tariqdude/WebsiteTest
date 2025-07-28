@@ -9,7 +9,7 @@ export function useTheme() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const stored = localStorage.getItem('theme') as ThemePreference;
     if (stored) {
       setTheme(stored);
@@ -18,11 +18,15 @@ export function useTheme() {
 
   const updateTheme = useCallback((newTheme: ThemePreference) => {
     if (typeof window === 'undefined') return;
-    
+
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-    
-    if (newTheme === 'dark' || (newTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+
+    if (
+      newTheme === 'dark' ||
+      (newTheme === 'system' &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
@@ -36,7 +40,7 @@ export function useTheme() {
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') return initialValue;
-    
+
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -46,17 +50,21 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     }
   });
 
-  const setValue = useCallback((value: T | ((val: T) => T)) => {
-    if (typeof window === 'undefined') return;
-    
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.error('Error setting localStorage:', error);
-    }
-  }, [key, storedValue]);
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)) => {
+      if (typeof window === 'undefined') return;
+
+      try {
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      } catch (error) {
+        console.error('Error setting localStorage:', error);
+      }
+    },
+    [key, storedValue]
+  );
 
   return [storedValue, setValue] as const;
 }
@@ -107,28 +115,34 @@ export function usePerformanceMetrics() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     // Web Vitals measurement
     const measurePerformance = () => {
       if ('performance' in window && 'getEntriesByType' in performance) {
-        const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+        const navigation = performance.getEntriesByType(
+          'navigation'
+        )[0] as PerformanceNavigationTiming;
         const paint = performance.getEntriesByType('paint');
 
-        const fcp = paint.find(entry => entry.name === 'first-contentful-paint')?.startTime || 0;
+        const fcp =
+          paint.find((entry) => entry.name === 'first-contentful-paint')
+            ?.startTime || 0;
         const ttfb = navigation.responseStart - navigation.requestStart;
-        const domLoad = navigation.domContentLoadedEventEnd - navigation.fetchStart;
+        const domLoad =
+          navigation.domContentLoadedEventEnd - navigation.fetchStart;
 
         setMetrics({
           fcp: Math.round(fcp),
           ttfb: Math.round(ttfb),
           domLoad: Math.round(domLoad),
-          memory: (performance as ExtendedPerformance).memory?.usedJSHeapSize || 0,
+          memory:
+            (performance as ExtendedPerformance).memory?.usedJSHeapSize || 0,
         });
       }
     };
 
     measurePerformance();
-    
+
     // Measure again after page load
     if (document.readyState === 'loading') {
       window.addEventListener('load', measurePerformance);

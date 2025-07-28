@@ -56,7 +56,7 @@ const AnimatedBackground = ({ className = '' }) => {
         ctx.fill();
 
         // Draw connections
-        particles.slice(i + 1).forEach(otherParticle => {
+        particles.slice(i + 1).forEach((otherParticle) => {
           const dx = particle.x - otherParticle.x;
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
@@ -88,7 +88,7 @@ const AnimatedBackground = ({ className = '' }) => {
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 w-full h-full pointer-events-none ${className}`}
+      className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
       style={{ zIndex: -1 }}
     />
   );

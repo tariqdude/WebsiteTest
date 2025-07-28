@@ -27,7 +27,10 @@ const Advanced3DScene = () => {
       camera.position.z = 5;
 
       // Renderer
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
       renderer.setSize(mount.clientWidth, mount.clientHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.shadowMap.enabled = true;
@@ -48,9 +51,9 @@ const Advanced3DScene = () => {
         color: 0x00d4ff,
         metalness: 0.5,
         roughness: 0.3,
-        wireframe: false
+        wireframe: false,
       });
-      
+
       const cube = new THREE.Mesh(geometry, material);
       cube.castShadow = true;
       scene.add(cube);
@@ -75,12 +78,12 @@ const Advanced3DScene = () => {
       let animationFrameId;
       const animate = () => {
         animationFrameId = requestAnimationFrame(animate);
-        
+
         if (isRotatingRef.current && cube) {
           cube.rotation.x += 0.005;
           cube.rotation.y += 0.005;
         }
-        
+
         controls.update();
         renderer.render(scene, camera);
       };
@@ -135,28 +138,30 @@ const Advanced3DScene = () => {
       cubeRef.current.material.color.setHex(randomColor);
     }
   };
-  
+
   // Dummy state to trigger re-render for button text
   const [, setDummyState] = useState(0);
   useEffect(() => {
-    const forceUpdate = () => setDummyState(s => s + 1);
+    const forceUpdate = () => setDummyState((s) => s + 1);
     const mount = mountRef.current;
     mount.addEventListener('toggle-rotation', forceUpdate);
     mount.addEventListener('toggle-wireframe', forceUpdate);
     return () => {
       mount.removeEventListener('toggle-rotation', forceUpdate);
       mount.removeEventListener('toggle-wireframe', forceUpdate);
-    }
+    };
   }, []);
 
   return (
-    <div className="w-full bg-gray-900 rounded-lg overflow-hidden shadow-2xl">
-      <div className="p-4 bg-gray-800 border-b border-gray-700">
-        <h3 className="text-xl font-semibold text-white mb-3">Interactive 3D Scene</h3>
-        <div className="flex flex-wrap gap-2">
+    <div className='w-full overflow-hidden rounded-lg bg-gray-900 shadow-2xl'>
+      <div className='border-b border-gray-700 bg-gray-800 p-4'>
+        <h3 className='mb-3 text-xl font-semibold text-white'>
+          Interactive 3D Scene
+        </h3>
+        <div className='flex flex-wrap gap-2'>
           <button
             onClick={toggleRotation}
-            className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+            className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
               isRotatingRef.current
                 ? 'bg-green-600 text-white'
                 : 'bg-gray-600 text-gray-200'
@@ -166,7 +171,7 @@ const Advanced3DScene = () => {
           </button>
           <button
             onClick={toggleWireframe}
-            className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
+            className={`rounded px-3 py-1 text-sm font-medium transition-colors ${
               cubeRef.current?.material.wireframe
                 ? 'bg-purple-600 text-white'
                 : 'bg-gray-600 text-gray-200'
@@ -176,25 +181,28 @@ const Advanced3DScene = () => {
           </button>
           <button
             onClick={resetRotation}
-            className="px-3 py-1 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700 transition-colors"
+            className='rounded bg-blue-600 px-3 py-1 text-sm font-medium text-white transition-colors hover:bg-blue-700'
           >
             Reset Rotation
           </button>
           <button
             onClick={changeColor}
-            className="px-3 py-1 bg-orange-600 text-white rounded text-sm font-medium hover:bg-orange-700 transition-colors"
+            className='rounded bg-orange-600 px-3 py-1 text-sm font-medium text-white transition-colors hover:bg-orange-700'
           >
             Random Color
           </button>
         </div>
       </div>
-      <div 
-        ref={mountRef} 
-        className="w-full h-96 cursor-grab active:cursor-grabbing" 
+      <div
+        ref={mountRef}
+        className='h-96 w-full cursor-grab active:cursor-grabbing'
         style={{ minHeight: '400px' }}
       />
-      <div className="p-3 bg-gray-800 text-xs text-gray-300">
-        <p>WebGL-powered 3D scene with Three.js • Orbit controls • Real-time lighting</p>
+      <div className='bg-gray-800 p-3 text-xs text-gray-300'>
+        <p>
+          WebGL-powered 3D scene with Three.js • Orbit controls • Real-time
+          lighting
+        </p>
       </div>
     </div>
   );

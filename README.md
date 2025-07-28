@@ -1,54 +1,81 @@
 # 🚀 Astro Ultimate Showcase
 
-The most comprehensive demonstration of modern web development capabilities featuring **15+ frameworks**, **50+ advanced features**, and **cutting-edge technologies** - all working together in perfect harmony.
+The most comprehensive demonstration of modern web development capabilities
+featuring **15+ frameworks**, **50+ advanced features**, and **cutting-edge
+technologies** - all working together in perfect harmony.
 
 ## 🏗️ **ENHANCED & OPTIMIZED** - Latest Updates
 
 ### ⚡ Performance Enhancements
+
 - **Smart Code Splitting**: Intelligent chunking for optimal loading
-- **Framework Isolation**: Proper JSX renderer separation to prevent conflicts  
-- **Dependency Optimization**: Conditional loading based on development/production
+- **Framework Isolation**: Proper JSX renderer separation to prevent conflicts
+- **Dependency Optimization**: Conditional loading based on
+  development/production
 - **Build Performance**: Enhanced Vite configuration with optimized bundling
 
 ### 🔧 Development Experience
+
 - **Enhanced TypeScript**: Strict type checking with comprehensive path mapping
 - **Improved Scripts**: New commands for lint, production builds, and monitoring
 - **Build Monitoring**: Performance analysis and optimization recommendations
-- **Environment Configuration**: Flexible setup for different deployment scenarios
+- **Environment Configuration**: Flexible setup for different deployment
+  scenarios
 
 ## ✨ Framework Arsenal
 
 ### 🏝️ Islands Architecture Excellence
-- **React Components**: Interactive state management, forms, animations, and real-time data
-- **Vue Components**: Reactive color palettes and smooth transitions  
-- **Svelte Components**: Built-in animations with motion library and intersection observers
-- **Solid.js Components**: Fine-grained reactivity with surgical precision updates
+
+- **React Components**: Interactive state management, forms, animations, and
+  real-time data
+- **Vue Components**: Reactive color palettes and smooth transitions
+- **Svelte Components**: Built-in animations with motion library and
+  intersection observers
+- **Solid.js Components**: Fine-grained reactivity with surgical precision
+  updates
 - **Preact Components**: 3KB alternative with full React API compatibility
 - **TypeScript**: Full type safety across all components and frameworks
 
 ### 🎨 Advanced UI/UX Components
-- **3D WebGL Scene**: Real-time Three.js graphics with lighting, shadows, and interactive controls
-- **Data Visualization Hub**: D3.js + Chart.js integration with interactive charts and real-time updates
-- **Monaco Code Editor**: Full VS Code editor with syntax highlighting, IntelliSense, and multi-language support
-- **GSAP Animation Studio**: Professional-grade animations with timeline control and advanced easing
-- **Advanced Form System**: React Hook Form + Zod validation + TypeScript for bulletproof forms
-- **Interactive Terminal**: Fully functional terminal with command history and file system simulation
+
+- **3D WebGL Scene**: Real-time Three.js graphics with lighting, shadows, and
+  interactive controls
+- **Data Visualization Hub**: D3.js + Chart.js integration with interactive
+  charts and real-time updates
+- **Monaco Code Editor**: Full VS Code editor with syntax highlighting,
+  IntelliSense, and multi-language support
+- **GSAP Animation Studio**: Professional-grade animations with timeline control
+  and advanced easing
+- **Advanced Form System**: React Hook Form + Zod validation + TypeScript for
+  bulletproof forms
+- **Interactive Terminal**: Fully functional terminal with command history and
+  file system simulation
 - **Animated Background**: Canvas-based particle system with dynamic connections
-- **Performance Metrics**: Real-time monitoring with Web Vitals and system information
+- **Performance Metrics**: Real-time monitoring with Web Vitals and system
+  information
 
 ### 🛠️ Technical Excellence
+
 - **Multi-Framework Integration**: 6+ frameworks working seamlessly together
-- **Advanced Animations**: GSAP, Framer Motion, Svelte Motion, and CSS animations
-- **TypeScript Everywhere**: Type-safe development with complete IntelliSense support
-- **Content Collections**: Type-safe content management for blogs, projects, and team data
-- **View Transitions API**: Smooth page transitions with native browser support  
-- **Dark Mode System**: Intelligent theme switching with system preference detection
-- **SEO Optimized**: Complete meta tags, structured data, and accessibility compliance
+- **Advanced Animations**: GSAP, Framer Motion, Svelte Motion, and CSS
+  animations
+- **TypeScript Everywhere**: Type-safe development with complete IntelliSense
+  support
+- **Content Collections**: Type-safe content management for blogs, projects, and
+  team data
+- **View Transitions API**: Smooth page transitions with native browser support
+- **Dark Mode System**: Intelligent theme switching with system preference
+  detection
+- **SEO Optimized**: Complete meta tags, structured data, and accessibility
+  compliance
 - **PWA Ready**: Service worker integration and offline capabilities
 
 ### 🎯 Performance & Optimization
-- **Lighthouse Score**: Perfect 100/100 across all metrics (Performance, Accessibility, Best Practices, SEO)
-- **Zero Runtime JS**: Static generation with selective hydration only where needed
+
+- **Lighthouse Score**: Perfect 100/100 across all metrics (Performance,
+  Accessibility, Best Practices, SEO)
+- **Zero Runtime JS**: Static generation with selective hydration only where
+  needed
 - **Bundle Optimization**: Automatic code splitting and tree shaking
 - **Image Optimization**: Next-gen formats with responsive loading
 - **CSS Optimization**: Purged unused styles and critical CSS inlining
@@ -57,6 +84,7 @@ The most comprehensive demonstration of modern web development capabilities feat
 ## 🏗️ Advanced Architecture
 
 ### Multi-Framework Integration
+
 ```astro
 <!-- React: State management and complex interactions -->
 <InteractiveCounter client:load />
@@ -82,6 +110,7 @@ The most comprehensive demonstration of modern web development capabilities feat
 ```
 
 ### Component Showcase
+
 ```javascript
 // 3D Graphics with Three.js
 const scene = new THREE.Scene();
@@ -93,20 +122,21 @@ gsap.to(elements, {
   y: -30,
   duration: 0.6,
   stagger: 0.1,
-  ease: "back.out(1.7)"
+  ease: 'back.out(1.7)',
 });
 
 // Advanced form validation
 const schema = z.object({
   email: z.string().email(),
   age: z.number().min(18).max(120),
-  skills: z.array(z.string()).min(1)
+  skills: z.array(z.string()).min(1),
 });
 ```
 
 ### Performance Metrics in Action
+
 - **First Contentful Paint**: < 0.8s
-- **Largest Contentful Paint**: < 1.2s  
+- **Largest Contentful Paint**: < 1.2s
 - **Total Blocking Time**: < 50ms
 - **Cumulative Layout Shift**: < 0.1
 - **Time to Interactive**: < 1.5s
@@ -115,19 +145,22 @@ const schema = z.object({
 ## 🎮 Interactive Features
 
 ### 🎬 Animation Systems
+
 - **GSAP Timeline Control**: Professional animation sequences
 - **Three.js WebGL**: Real-time 3D graphics and physics
 - **Framer Motion**: React component animations
 - **Svelte Motion**: Built-in smooth transitions
 - **CSS Animations**: Hardware-accelerated transforms
 
-### 📊 Data Visualization  
+### 📊 Data Visualization
+
 - **D3.js Integration**: Custom SVG visualizations
 - **Chart.js Dashboards**: Responsive data charts
 - **Real-time Updates**: Live data streaming
 - **Interactive Elements**: Hover states and click handlers
 
 ### 💻 Developer Tools
+
 - **Monaco Editor**: Full VS Code experience
 - **Syntax Highlighting**: 20+ programming languages
 - **IntelliSense**: Autocomplete and error detection
@@ -135,6 +168,7 @@ const schema = z.object({
 - **Code Execution**: Safe JavaScript evaluation
 
 ### 📝 Advanced Forms
+
 - **Real-time Validation**: Instant feedback with Zod schemas
 - **Multi-step Wizards**: Progressive form completion
 - **File Upload**: Drag & drop with preview
@@ -144,6 +178,7 @@ const schema = z.object({
 ## 🌐 Technology Stack
 
 ### Core Technologies
+
 ```json
 {
   "astro": "^5.0.0",
@@ -152,7 +187,8 @@ const schema = z.object({
 }
 ```
 
-### Framework Integrations  
+### Framework Integrations
+
 ```json
 {
   "react": "^18.3.0",
@@ -164,10 +200,11 @@ const schema = z.object({
 ```
 
 ### Advanced Libraries
+
 ```json
 {
   "three": "^0.160.0",
-  "d3": "^7.9.0", 
+  "d3": "^7.9.0",
   "chart.js": "^4.4.0",
   "gsap": "^3.12.0",
   "monaco-editor": "^0.45.0",
@@ -179,12 +216,14 @@ const schema = z.object({
 ## 📱 Responsive Design Excellence
 
 ### Mobile-First Approach
+
 - **Breakpoint Strategy**: `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
 - **Touch Interactions**: Optimized for mobile gestures
 - **Performance**: Reduced bundle sizes for mobile
 - **Accessibility**: Screen reader compatible
 
 ### Cross-Browser Support
+
 - **Modern Browsers**: Chrome, Firefox, Safari, Edge
 - **Feature Detection**: Graceful degradation
 - **Polyfills**: Essential compatibility layers
@@ -193,11 +232,13 @@ const schema = z.object({
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - **Node.js**: 18+ (with npm or yarn)
 - **Modern Browser**: Chrome, Firefox, Safari, or Edge
 - **Terminal**: Command line access
 
 ### Installation & Setup
+
 ```bash
 # Clone this comprehensive showcase
 git clone https://github.com/tariqdude/WebsiteTest.git
@@ -213,6 +254,7 @@ npm run dev
 ```
 
 ### Available Scripts
+
 ```bash
 # Development & Building
 npm run dev          # Development server with hot module replacement
@@ -310,16 +352,18 @@ src/
 ## 🎨 Component Deep Dive
 
 ### 🎮 Advanced3DScene (Three.js)
+
 ```javascript
 Features:
 • Real-time 3D rendering with WebGL
-• Dynamic lighting and shadow mapping  
+• Dynamic lighting and shadow mapping
 • Interactive controls (rotation, color, wireframe)
 • Performance optimized for 60fps
 • Responsive canvas sizing
 ```
 
 ### 📊 DataVisualizationDashboard (D3.js + Chart.js)
+
 ```javascript
 Features:
 • Multiple chart types (bar, line, pie)
@@ -330,6 +374,7 @@ Features:
 ```
 
 ### 🟠 SvelteSkillsDashboard (Svelte)
+
 ```javascript
 Features:
 • Smooth SVG animations
@@ -339,7 +384,8 @@ Features:
 • Motion library integration
 ```
 
-### 🔵 SolidStateDemo (Solid.js)  
+### 🔵 SolidStateDemo (Solid.js)
+
 ```javascript
 Features:
 • Fine-grained reactivity
@@ -350,6 +396,7 @@ Features:
 ```
 
 ### 📝 AdvancedForm (React Hook Form + Zod)
+
 ```typescript
 Features:
 • Real-time validation with Zod schemas
@@ -361,6 +408,7 @@ Features:
 ```
 
 ### 💻 CodeEditorShowcase (Monaco)
+
 ```javascript
 Features:
 • Full VS Code editor experience
@@ -374,14 +422,16 @@ Features:
 ## 📊 Performance Benchmarks
 
 ### Lighthouse Scores (Perfect 100s!)
+
 ```
 🎯 Performance:     100/100   (Lightning fast loading)
-♿ Accessibility:   100/100   (WCAG 2.1 AA compliant) 
+♿ Accessibility:   100/100   (WCAG 2.1 AA compliant)
 ✅ Best Practices:  100/100   (Industry standards)
 🔍 SEO:            100/100   (Search optimized)
 ```
 
 ### Real Performance Metrics
+
 - **Time to Interactive**: < 1.2 seconds
 - **First Contentful Paint**: < 0.6 seconds
 - **Largest Contentful Paint**: < 1.0 seconds
@@ -392,6 +442,7 @@ Features:
 ## 🤝 Contributing & Development
 
 ### Development Workflow
+
 ```bash
 # Fork and clone the repository
 git clone https://github.com/tariqdude/WebsiteTest.git
@@ -410,14 +461,16 @@ git push origin feature/amazing-new-component
 ```
 
 ### Adding New Frameworks
+
 This showcase supports adding additional frameworks easily:
 
 1. Install the Astro integration: `npm install @astrojs/[framework]`
-2. Add to `astro.config.mjs`: `integrations: [..., framework()]`  
+2. Add to `astro.config.mjs`: `integrations: [..., framework()]`
 3. Create your component in `src/components/`
 4. Add to the main showcase page with appropriate loading strategy
 
 ### Component Architecture
+
 ```typescript
 // Each component should be self-contained
 interface ComponentProps {
@@ -437,6 +490,7 @@ export default AdvancedComponent;
 ## 🌐 Deployment Options
 
 ### GitHub Pages (Automatic)
+
 The repository includes GitHub Actions for automatic deployment:
 
 ```yaml
@@ -444,18 +498,19 @@ The repository includes GitHub Actions for automatic deployment:
 name: Deploy to GitHub Pages
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4  
+      - uses: actions/setup-node@v4
       - run: npm install && npm run build
       - uses: actions/deploy-pages@v3
 ```
 
 ### Other Platforms
+
 - **Vercel**: Zero-config deployment
 - **Netlify**: Automatic builds and CDN
 - **Cloudflare Pages**: Edge optimization
@@ -465,6 +520,7 @@ jobs:
 ## 🔧 Configuration Deep Dive
 
 ### Astro Configuration
+
 ```javascript
 // astro.config.mjs - Full feature config
 export default defineConfig({
@@ -472,24 +528,25 @@ export default defineConfig({
   base: '/WebsiteTest',
   output: 'static',
   integrations: [
-    react(),              // React 18.3+
-    vue(),               // Vue 3.5+  
-    svelte(),            // Svelte 5.0+
-    solidJs(),           // Solid.js 1.8+
-    preact(),            // Preact 10.24+
-    tailwind(),          // Tailwind CSS
-    mdx(),               // MDX support
-    sitemap()            // SEO sitemap
+    react(), // React 18.3+
+    vue(), // Vue 3.5+
+    svelte(), // Svelte 5.0+
+    solidJs(), // Solid.js 1.8+
+    preact(), // Preact 10.24+
+    tailwind(), // Tailwind CSS
+    mdx(), // MDX support
+    sitemap(), // SEO sitemap
   ],
   vite: {
     optimizeDeps: {
-      include: ['three', 'd3', 'chart.js', 'gsap']
-    }
-  }
+      include: ['three', 'd3', 'chart.js', 'gsap'],
+    },
+  },
 });
 ```
 
 ### TypeScript Configuration
+
 ```json
 {
   "extends": "astro/tsconfigs/strict",
@@ -506,9 +563,10 @@ export default defineConfig({
 ## 🏆 Awards & Recognition
 
 This project showcases:
+
 - ✨ **Modern Web Standards**: Latest HTML5, CSS3, ES2022+
 - 🚀 **Performance Excellence**: Sub-second load times
-- ♿ **Accessibility Champion**: Full WCAG 2.1 compliance  
+- ♿ **Accessibility Champion**: Full WCAG 2.1 compliance
 - 🔒 **Security Best Practices**: CSP headers and HTTPS
 - 🌍 **International Ready**: i18n support framework
 - 📱 **Mobile Optimized**: Perfect mobile experience
@@ -516,6 +574,7 @@ This project showcases:
 ## 📄 License & Usage
 
 This project is open source under the **MIT License**. Feel free to:
+
 - ✅ Use in personal and commercial projects
 - ✅ Modify and adapt the components
 - ✅ Learn from the implementation
@@ -523,17 +582,23 @@ This project is open source under the **MIT License**. Feel free to:
 
 ## 🔗 Links & Resources
 
-- **🌟 Live Demo**: [https://tariqdude.github.io/WebsiteTest](https://tariqdude.github.io/WebsiteTest)
+- **🌟 Live Demo**:
+  [https://tariqdude.github.io/WebsiteTest](https://tariqdude.github.io/WebsiteTest)
 - **📚 Documentation**: [Astro Documentation](https://docs.astro.build)
 - **💬 Discord**: [Astro Community](https://astro.build/chat)
-- **🐛 Issues**: [GitHub Issues](https://github.com/tariqdude/WebsiteTest/issues)
-- **🤝 Discussions**: [GitHub Discussions](https://github.com/tariqdude/WebsiteTest/discussions)
+- **🐛 Issues**:
+  [GitHub Issues](https://github.com/tariqdude/WebsiteTest/issues)
+- **🤝 Discussions**:
+  [GitHub Discussions](https://github.com/tariqdude/WebsiteTest/discussions)
 
 ## 🙏 Acknowledgments
 
 Built with incredible open-source technologies:
-- **[Astro](https://astro.build)** - The web framework for content-driven websites
-- **[React](https://react.dev)** - A JavaScript library for building user interfaces  
+
+- **[Astro](https://astro.build)** - The web framework for content-driven
+  websites
+- **[React](https://react.dev)** - A JavaScript library for building user
+  interfaces
 - **[Vue.js](https://vuejs.org)** - The Progressive JavaScript Framework
 - **[Svelte](https://svelte.dev)** - Cybernetically enhanced web apps
 - **[Solid.js](https://solidjs.com)** - Simple and performant reactivity
@@ -545,9 +610,9 @@ Built with incredible open-source technologies:
 
 <div align="center">
 
-**Built with ❤️ and excessive amounts of coffee ☕**  
+**Built with ❤️ and excessive amounts of coffee ☕**
 
-*Pushing the boundaries of what's possible on the modern web*
+_Pushing the boundaries of what's possible on the modern web_
 
 [![GitHub Stars](https://img.shields.io/github/stars/tariqdude/WebsiteTest?style=social)](https://github.com/tariqdude/WebsiteTest)
 [![GitHub Forks](https://img.shields.io/github/forks/tariqdude/WebsiteTest?style=social)](https://github.com/tariqdude/WebsiteTest/fork)

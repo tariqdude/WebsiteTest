@@ -3,7 +3,7 @@
 // Layout Components
 export * from './layout';
 
-// UI Components  
+// UI Components
 export * from './ui';
 
 // Showcase Components

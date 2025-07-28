@@ -19,68 +19,74 @@ const isProduction = process.env.NODE_ENV === 'production';
 export const SITE_CONFIG = {
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
-  output: 'static'
+  output: 'static',
 };
 
 // Performance-optimized dependencies for Vite
 const DEPS = {
   // Critical framework cores (highest priority)
   critical: ['react', 'react-dom', 'vue', 'svelte', 'solid-js', 'preact'],
-  
+
   // Feature libraries (loaded on demand)
   features: [
-    'chart.js', 'd3', 'three',                    // Visualization
-    'gsap', 'framer-motion',                      // Animation
-    'react-hook-form', '@hookform/resolvers/zod', 'zod', // Forms
-    'lucide-react', 'react-hot-toast'            // UI
+    'chart.js',
+    'd3',
+    'three', // Visualization
+    'gsap',
+    'framer-motion', // Animation
+    'react-hook-form',
+    '@hookform/resolvers/zod',
+    'zod', // Forms
+    'lucide-react',
+    'react-hot-toast', // UI
   ],
-  
+
   // Development-only dependencies
-  dev: isDev ? ['monaco-editor'] : []
+  dev: isDev ? ['monaco-editor'] : [],
 };
 
 export default defineConfig({
   site: 'https://tariqdude.github.io',
   base: '/WebsiteTest',
   output: 'static',
-  
+
   // =============================================================================
   // FRAMEWORK INTEGRATIONS
   // =============================================================================
   integrations: [
     // React - Primary framework for complex components
     react({
-      include: ['**/react/**', '**/showcases/**', '**/ui/**']
+      include: ['**/react/**', '**/showcases/**', '**/ui/**'],
     }),
-    
+
     // Vue, Svelte, Solid.js, Preact - Framework-specific folders
-    vue({ 
+    vue({
       include: ['**/vue/**/*.vue'],
       exclude: ['**/node_modules/**', '**/dist/**', '**/*.ts', '**/*.js'],
       template: {
         compilerOptions: {
-          isCustomElement: (tag) => tag.includes('-')
-        }
-      }
+          isCustomElement: (tag) => tag.includes('-'),
+        },
+      },
     }),
     svelte({ include: ['**/svelte/**'] }),
     solidJs({ include: ['**/solid/**'] }),
     preact({ include: ['**/preact/**'] }),
-    
+
     // Content and styling
     mdx({
       syntaxHighlight: 'shiki',
-      shikiConfig: { theme: 'github-dark-dimmed', wrap: true }
+      shikiConfig: { theme: 'github-dark-dimmed', wrap: true },
     }),
     tailwind({
       applyBaseStyles: false,
-      config: { path: './tailwind.config.mjs' }
+      config: { path: './tailwind.config.mjs' },
     }),
-    
+
     // SEO
     sitemap(),
   ],
-  
+
   // =============================================================================
   // VITE CONFIGURATION
   // =============================================================================
@@ -90,7 +96,7 @@ export default defineConfig({
     // Dependency pre-bundling optimization
     optimizeDeps: {
       include: [...DEPS.critical, ...DEPS.features, ...DEPS.dev],
-      exclude: isProduction ? ['monaco-editor'] : []
+      exclude: isProduction ? ['monaco-editor'] : [],
     },
 
     // Build optimizations
@@ -104,13 +110,16 @@ export default defineConfig({
             if (id.includes('svelte')) return 'svelte-vendor';
             if (id.includes('solid')) return 'solid-vendor';
             if (id.includes('preact')) return 'preact-vendor';
-            
+
             // Feature chunks - more granular splitting
             if (id.includes('monaco-editor')) {
               // Split Monaco Editor into smaller chunks
-              if (id.includes('monaco-editor/esm/vs/editor/editor.api')) return 'monaco-core';
-              if (id.includes('monaco-editor/esm/vs/language')) return 'monaco-languages';
-              if (id.includes('monaco-editor/esm/vs/basic-languages')) return 'monaco-basic-lang';
+              if (id.includes('monaco-editor/esm/vs/editor/editor.api'))
+                return 'monaco-core';
+              if (id.includes('monaco-editor/esm/vs/language'))
+                return 'monaco-languages';
+              if (id.includes('monaco-editor/esm/vs/basic-languages'))
+                return 'monaco-basic-lang';
               return 'monaco-editor';
             }
             if (id.includes('chart.js')) return 'chartjs';
@@ -119,25 +128,25 @@ export default defineConfig({
             if (id.includes('gsap')) return 'gsap-animations';
             if (id.includes('framer-motion')) return 'framer-motion';
             if (id.includes('lucide-react')) return 'icons';
-            
+
             // Vendor chunks
             if (id.includes('node_modules')) return 'vendor';
-          }
-        }
+          },
+        },
       },
       chunkSizeWarningLimit: 4000, // Increased for Monaco Editor main chunk
       minify: isProduction ? 'esbuild' : false,
-      sourcemap: isDev
+      sourcemap: isDev,
     },
 
     css: { devSourcemap: isDev, minify: isProduction },
     define: {
       __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
       __DEV__: JSON.stringify(isDev),
-      __PROD__: JSON.stringify(isProduction)
-    }
+      __PROD__: JSON.stringify(isProduction),
+    },
   },
-  
+
   // =============================================================================
   // IMAGE & SECURITY CONFIGURATION
   // =============================================================================
@@ -145,10 +154,10 @@ export default defineConfig({
     domains: ['images.unsplash.com', 'via.placeholder.com'],
     remotePatterns: [
       { protocol: 'https', hostname: '**.githubusercontent.com' },
-      { protocol: 'https', hostname: '**.unsplash.com' }
-    ]
+      { protocol: 'https', hostname: '**.unsplash.com' },
+    ],
   },
 
   security: { checkOrigin: true },
-  devToolbar: { enabled: isDev }
+  devToolbar: { enabled: isDev },
 });

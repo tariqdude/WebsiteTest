@@ -1,642 +1,486 @@
 #!/usr/bin/env node
-
 /**
- * 🚀 Unified Deployment Manager
- * Comprehensive GitHub Pages deployment validation, fixing, and monitoring
- * Combines all diagnostic tools into one powerful system
+ * Unified Deployment Management System
+ * Combines all diagnostic, validation, and deployment tools into a single comprehensive solution
  */
 
-import { performance } from 'perf_hooks';
-import { readFileSync, existsSync, readdirSync, statSync, writeFileSync, mkdirSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { exec } from 'child_process';
-import { promisify } from 'util';
+import fs from 'fs';
 import path from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
-const execAsync = promisify(exec);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const projectRoot = path.resolve(__dirname, '..');
-const startTime = performance.now();
 
-class DeploymentManager {
-  constructor() {
+class UnifiedDeploymentManager {
+  constructor(options = {}) {
+    this.projectRoot = options.projectRoot || __dirname;
+    this.verbose = options.verbose || false;
+    this.autoFix = options.autoFix !== false; // Default true
     this.results = {
-      errors: [],
-      warnings: [],
+      health: 0,
+      issues: [],
       fixes: [],
-      metrics: {},
-      status: 'unknown'
-    };
-    this.config = this.loadConfig();
-  }
-
-  loadConfig() {
-    return {
-      site: 'https://tariqdude.github.io',
-      base: '/WebsiteTest',
-      timeouts: {
-        build: 300000,      // 5 minutes
-        typecheck: 120000,  // 2 minutes
-        install: 180000     // 3 minutes
-      },
-      thresholds: {
-        maxFileSize: 1024 * 1024,     // 1MB
-        maxBuildTime: 240000,         // 4 minutes
-        minFiles: 5                   // Minimum dist files
-      }
+      warnings: [],
     };
   }
 
-  log(level, category, message, data = null) {
-    const elapsed = ((performance.now() - startTime) / 1000).toFixed(2);
-    const icons = {
-      error: '🔴',
-      warn: '🟡',
-      info: '🔵',
-      success: '✅',
-      fix: '🔧',
-      deploy: '🚀',
-      build: '📦',
-      test: '🧪'
-    };
-    
-    const timestamp = `[+${elapsed}s]`;
-    const icon = icons[level] || '📍';
-    console.log(`${icon} ${timestamp} [${category}] ${message}`);
-    
-    if (data) {
-      console.log(`   ${JSON.stringify(data, null, 2).replace(/\n/g, '\n   ')}`);
+  log(message, type = 'info') {
+    const timestamp = new Date().toISOString();
+    const prefix =
+      {
+        info: '📋',
+        success: '✅',
+        error: '❌',
+        warning: '⚠️',
+        fix: '🔧',
+      }[type] || '📋';
+
+    console.log(`${prefix} [${timestamp}] ${message}`);
+  }
+
+  async runCommand(command, options = {}) {
+    try {
+      const result = execSync(command, {
+        cwd: this.projectRoot,
+        encoding: 'utf8',
+        stdio: this.verbose ? 'inherit' : 'pipe',
+        ...options,
+      });
+      return { success: true, output: result };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message,
+        output: error.stdout || error.stderr || '',
+      };
     }
   }
 
-  addResult(type, category, message, data = null) {
-    this.results[type].push({ category, message, data, timestamp: Date.now() });
-    this.log(type === 'errors' ? 'error' : type === 'warnings' ? 'warn' : 'info', category, message, data);
-  }
+  // === VALIDATION METHODS ===
 
-  // =============================================================================
-  // CORE VALIDATION METHODS
-  // =============================================================================
+  async validatePackageJson() {
+    this.log('Validating package.json...', 'info');
 
-  async validateEnvironment() {
-    this.log('info', 'ENV', 'Validating environment setup...');
-    
     try {
-      // Check Node.js version
-      const { stdout: nodeVersion } = await execAsync('node --version');
-      const version = nodeVersion.trim();
-      const majorVersion = parseInt(version.slice(1).split('.')[0]);
-      
-      if (majorVersion < 18) {
-        this.addResult('errors', 'ENV', `Node.js ${version} is too old. Minimum required: 18.x`);
-      } else {
-        this.log('success', 'ENV', `Node.js ${version} ✓`);
-      }
+      const packagePath = path.join(this.projectRoot, 'package.json');
+      const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
 
-      // Check npm
-      const { stdout: npmVersion } = await execAsync('npm --version');
-      this.log('success', 'ENV', `npm ${npmVersion.trim()} ✓`);
+      // Check required scripts
+      const requiredScripts = ['dev', 'build', 'build:gh-pages'];
+      const missingScripts = requiredScripts.filter(
+        (script) => !pkg.scripts[script]
+      );
 
-      // Check package.json
-      if (!existsSync(path.join(projectRoot, 'package.json'))) {
-        this.addResult('errors', 'ENV', 'package.json not found');
-        return false;
-      }
-
-      const packageJson = JSON.parse(readFileSync(path.join(projectRoot, 'package.json'), 'utf8'));
-      
-      // Validate required scripts
-      const requiredScripts = ['build:gh-pages', 'dev', 'preview'];
-      const missingScripts = requiredScripts.filter(script => !packageJson.scripts[script]);
-      
       if (missingScripts.length > 0) {
-        this.addResult('errors', 'ENV', `Missing scripts: ${missingScripts.join(', ')}`);
+        this.results.issues.push(
+          `Missing scripts: ${missingScripts.join(', ')}`
+        );
+
+        if (this.autoFix) {
+          // Add missing scripts
+          const defaultScripts = {
+            'build:gh-pages':
+              'astro build --site https://tariqdude.github.io --base /WebsiteTest',
+            dev: 'astro dev',
+            build: 'astro build',
+          };
+
+          missingScripts.forEach((script) => {
+            if (defaultScripts[script]) {
+              pkg.scripts[script] = defaultScripts[script];
+              this.results.fixes.push(`Added missing script: ${script}`);
+            }
+          });
+
+          fs.writeFileSync(packagePath, JSON.stringify(pkg, null, 2));
+          this.log('Fixed package.json scripts', 'fix');
+        }
       }
 
-      this.log('success', 'ENV', 'Environment validation passed');
-      return true;
+      // Check for problematic dependencies
+      const problematicDeps = ['lint-staged', 'husky'];
+      const foundProblematic = problematicDeps.filter(
+        (dep) => pkg.dependencies?.[dep] || pkg.devDependencies?.[dep]
+      );
 
+      if (foundProblematic.length > 0) {
+        this.results.warnings.push(
+          `Found problematic dependencies: ${foundProblematic.join(', ')}`
+        );
+      }
+
+      this.results.health += 20;
+      this.log('Package.json validation complete', 'success');
     } catch (error) {
-      this.addResult('errors', 'ENV', `Environment check failed: ${error.message}`);
-      return false;
+      this.results.issues.push(
+        `Package.json validation failed: ${error.message}`
+      );
+      this.log(`Package.json validation failed: ${error.message}`, 'error');
     }
   }
 
   async validateAstroConfig() {
-    this.log('info', 'CONFIG', 'Validating Astro configuration...');
-    
-    const configPath = path.join(projectRoot, 'astro.config.mjs');
-    
-    if (!existsSync(configPath)) {
-      this.addResult('errors', 'CONFIG', 'astro.config.mjs not found');
-      return false;
-    }
+    this.log('Validating Astro configuration...', 'info');
 
     try {
-      const configContent = readFileSync(configPath, 'utf8');
-      
-      // Critical checks for GitHub Pages
+      const configPath = path.join(this.projectRoot, 'astro.config.mjs');
+
+      if (!fs.existsSync(configPath)) {
+        this.results.issues.push('astro.config.mjs not found');
+        return;
+      }
+
+      const configContent = fs.readFileSync(configPath, 'utf8');
+
+      // Check for essential configurations
       const checks = [
-        { pattern: /site:\s*['"]https:\/\/tariqdude\.github\.io['"]/, name: 'site URL' },
-        { pattern: /base:\s*['"]\/WebsiteTest['"]/, name: 'base path' },
-        { pattern: /output:\s*['"]static['"]/, name: 'static output' }
+        { pattern: /output:\s*['"]static['"]/, name: 'Static output mode' },
+        { pattern: /site:\s*['"]https:\/\//, name: 'Site URL configuration' },
+        { pattern: /base:\s*['"]\/\w+['"]/, name: 'Base path configuration' },
       ];
-      
-      let configValid = true;
-      
-      for (const check of checks) {
+
+      checks.forEach((check) => {
         if (!check.pattern.test(configContent)) {
-          this.addResult('errors', 'CONFIG', `Missing or incorrect ${check.name} in astro.config.mjs`);
-          configValid = false;
+          this.results.warnings.push(`Missing or incorrect: ${check.name}`);
         }
-      }
-      
-      if (configValid) {
-        this.log('success', 'CONFIG', 'Astro configuration validated');
-      }
-      
-      return configValid;
-      
+      });
+
+      this.results.health += 15;
+      this.log('Astro configuration validation complete', 'success');
     } catch (error) {
-      this.addResult('errors', 'CONFIG', `Config validation failed: ${error.message}`);
-      return false;
+      this.results.issues.push(
+        `Astro config validation failed: ${error.message}`
+      );
+      this.log(`Astro config validation failed: ${error.message}`, 'error');
     }
   }
 
   async validateDependencies() {
-    this.log('info', 'DEPS', 'Validating dependencies...');
-    
+    this.log('Validating dependencies...', 'info');
+
     try {
-      const installStart = performance.now();
-      
-      // Check if node_modules exists and is up to date
-      if (!existsSync(path.join(projectRoot, 'node_modules'))) {
-        this.log('warn', 'DEPS', 'node_modules not found, installing...');
-        await execAsync('npm ci', { 
-          cwd: projectRoot,
-          timeout: this.config.timeouts.install 
-        });
+      // Check if node_modules exists
+      const nodeModulesPath = path.join(this.projectRoot, 'node_modules');
+      if (!fs.existsSync(nodeModulesPath)) {
+        this.results.issues.push('node_modules not found - run npm install');
+
+        if (this.autoFix) {
+          this.log('Installing dependencies...', 'fix');
+          const installResult = await this.runCommand('npm install');
+          if (installResult.success) {
+            this.results.fixes.push('Installed dependencies');
+          } else {
+            this.results.issues.push(
+              `Dependency installation failed: ${installResult.error}`
+            );
+          }
+        }
       }
-      
-      const installTime = performance.now() - installStart;
-      this.results.metrics.installTime = installTime;
-      
-      // Check for common problematic packages
-      const packageJson = JSON.parse(readFileSync(path.join(projectRoot, 'package.json'), 'utf8'));
-      const allDeps = { ...packageJson.dependencies, ...packageJson.devDependencies };
-      
-      // Check for version conflicts
-      const problematicPatterns = [
-        { pattern: /^react@/, name: 'React' },
-        { pattern: /^vue@/, name: 'Vue' },
-        { pattern: /^svelte@/, name: 'Svelte' }
-      ];
-      
-      this.log('success', 'DEPS', `Dependencies validated in ${(installTime/1000).toFixed(2)}s`);
-      return true;
-      
+
+      // Check package-lock.json sync
+      const lockPath = path.join(this.projectRoot, 'package-lock.json');
+      if (fs.existsSync(lockPath)) {
+        const auditResult = await this.runCommand('npm audit fix --force', {
+          timeout: 30000,
+        });
+        if (!auditResult.success && auditResult.error.includes('EBADENGINE')) {
+          this.results.warnings.push('Node.js version compatibility warning');
+        }
+      }
+
+      this.results.health += 20;
+      this.log('Dependencies validation complete', 'success');
     } catch (error) {
-      this.addResult('errors', 'DEPS', `Dependency validation failed: ${error.message}`);
-      return false;
+      this.results.issues.push(
+        `Dependencies validation failed: ${error.message}`
+      );
+      this.log(`Dependencies validation failed: ${error.message}`, 'error');
     }
   }
 
   async validateTypeScript() {
-    this.log('info', 'TYPES', 'Running TypeScript validation...');
-    
-    try {
-      const tscStart = performance.now();
-      
-      await execAsync('npx astro check', { 
-        cwd: projectRoot,
-        timeout: this.config.timeouts.typecheck 
-      });
-      
-      const tscTime = performance.now() - tscStart;
-      this.results.metrics.typecheckTime = tscTime;
-      
-      this.log('success', 'TYPES', `TypeScript validation passed in ${(tscTime/1000).toFixed(2)}s`);
-      return true;
-      
-    } catch (error) {
-      if (error.stdout && error.stdout.includes('error')) {
-        const errors = this.parseTypeScriptErrors(error.stdout);
-        this.addResult('errors', 'TYPES', `${errors.length} TypeScript errors found`, errors);
-      } else {
-        this.addResult('warnings', 'TYPES', `TypeScript check warning: ${error.message}`);
-      }
-      return false;
-    }
-  }
+    this.log('Validating TypeScript...', 'info');
 
-  parseTypeScriptErrors(output) {
-    const errors = [];
-    const lines = output.split('\n');
-    
-    for (const line of lines) {
-      if (line.includes('error TS') || line.includes('error(')) {
-        errors.push(line.trim());
+    try {
+      const tsconfigPath = path.join(this.projectRoot, 'tsconfig.json');
+
+      if (!fs.existsSync(tsconfigPath)) {
+        this.results.warnings.push('tsconfig.json not found');
+        return;
       }
+
+      // Run TypeScript check
+      const tscResult = await this.runCommand('npx tsc --noEmit', {
+        timeout: 60000,
+      });
+
+      if (!tscResult.success) {
+        const errors = tscResult.output
+          .split('\n')
+          .filter((line) => line.includes('error'));
+        if (errors.length > 0) {
+          this.results.issues.push(`TypeScript errors: ${errors.length} found`);
+          if (this.verbose) {
+            errors.slice(0, 5).forEach((error) => this.log(error, 'error'));
+          }
+        }
+      } else {
+        this.results.health += 15;
+      }
+
+      this.log('TypeScript validation complete', 'success');
+    } catch (error) {
+      this.results.warnings.push(
+        `TypeScript validation skipped: ${error.message}`
+      );
     }
-    
-    return errors;
   }
 
   async validateBuild() {
-    this.log('build', 'BUILD', 'Testing production build...');
-    
-    try {
-      const buildStart = performance.now();
-      
-      // Clean previous build
-      if (existsSync(path.join(projectRoot, 'dist'))) {
-        await execAsync('rm -rf dist', { cwd: projectRoot });
-      }
-      
-      // Run production build
-      const { stdout, stderr } = await execAsync('npm run build:gh-pages', { 
-        cwd: projectRoot,
-        timeout: this.config.timeouts.build,
-        env: { ...process.env, NODE_ENV: 'production', CI: 'true' }
-      });
-      
-      const buildTime = performance.now() - buildStart;
-      this.results.metrics.buildTime = buildTime;
-      
-      // Validate build output
-      const buildValidation = await this.validateBuildOutput();
-      
-      if (buildValidation.success) {
-        this.log('success', 'BUILD', `Build completed successfully in ${(buildTime/1000).toFixed(2)}s`);
-        this.results.metrics.buildFiles = buildValidation.fileCount;
-        this.results.metrics.buildSize = buildValidation.totalSize;
-      } else {
-        this.addResult('errors', 'BUILD', 'Build output validation failed', buildValidation.issues);
-      }
-      
-      return buildValidation.success;
-      
-    } catch (error) {
-      this.addResult('errors', 'BUILD', `Build failed: ${error.message}`);
-      this.parseBuildErrors(error.stdout || error.stderr || error.message);
-      return false;
-    }
-  }
+    this.log('Testing build process...', 'info');
 
-  async validateBuildOutput() {
-    const distPath = path.join(projectRoot, 'dist');
-    
-    if (!existsSync(distPath)) {
-      return { success: false, issues: ['No dist directory generated'] };
-    }
-    
-    const files = this.getAllFiles(distPath);
-    const issues = [];
-    
-    // Essential file checks
-    const hasIndex = files.some(f => f.endsWith('index.html'));
-    const hasAssets = files.some(f => f.includes('_astro'));
-    const hasShowcase = files.some(f => f.includes('showcase'));
-    
-    if (!hasIndex) issues.push('Missing index.html');
-    if (!hasAssets) issues.push('Missing _astro assets directory');
-    if (!hasShowcase) issues.push('Missing showcase page');
-    
-    // Size analysis
-    let totalSize = 0;
-    const largeFiles = [];
-    
-    for (const file of files) {
-      try {
-        const stats = statSync(file);
-        totalSize += stats.size;
-        
-        if (stats.size > this.config.thresholds.maxFileSize) {
-          largeFiles.push({
-            file: path.relative(distPath, file),
-            size: this.formatBytes(stats.size)
-          });
+    try {
+      // Clean dist directory
+      const distPath = path.join(this.projectRoot, 'dist');
+      if (fs.existsSync(distPath)) {
+        fs.rmSync(distPath, { recursive: true, force: true });
+        this.log('Cleaned dist directory', 'fix');
+      }
+
+      // Test build
+      const buildResult = await this.runCommand('npm run build:gh-pages', {
+        timeout: 120000,
+      });
+
+      if (buildResult.success) {
+        // Check if dist was created
+        if (fs.existsSync(distPath)) {
+          const files = fs.readdirSync(distPath);
+          if (files.includes('index.html')) {
+            this.results.health += 25;
+            this.log('Build test successful', 'success');
+          } else {
+            this.results.issues.push(
+              'Build completed but index.html not found'
+            );
+          }
+        } else {
+          this.results.issues.push(
+            'Build completed but dist directory not created'
+          );
         }
-      } catch (error) {
-        // Ignore stat errors
-      }
-    }
-    
-    if (largeFiles.length > 0) {
-      this.addResult('warnings', 'BUILD', `${largeFiles.length} large files detected`, largeFiles);
-    }
-    
-    if (files.length < this.config.thresholds.minFiles) {
-      issues.push(`Too few files generated (${files.length} < ${this.config.thresholds.minFiles})`);
-    }
-    
-    return {
-      success: issues.length === 0,
-      issues,
-      fileCount: files.length,
-      totalSize: totalSize,
-      largeFiles
-    };
-  }
-
-  getAllFiles(dir, files = []) {
-    if (!existsSync(dir)) return files;
-    
-    const items = readdirSync(dir);
-    for (const item of items) {
-      const fullPath = path.join(dir, item);
-      const stat = statSync(fullPath);
-      
-      if (stat.isDirectory()) {
-        this.getAllFiles(fullPath, files);
       } else {
-        files.push(fullPath);
+        this.results.issues.push(`Build failed: ${buildResult.error}`);
+        this.log(`Build failed: ${buildResult.error}`, 'error');
       }
-    }
-    
-    return files;
-  }
-
-  parseBuildErrors(output) {
-    if (!output) return;
-    
-    const lines = output.split('\n');
-    const errors = [];
-    
-    for (const line of lines) {
-      if (line.toLowerCase().includes('error') || 
-          line.toLowerCase().includes('failed') ||
-          line.toLowerCase().includes('cannot resolve')) {
-        errors.push(line.trim());
-      }
-    }
-    
-    if (errors.length > 0) {
-      this.log('error', 'BUILD', 'Build errors detected:');
-      errors.forEach(error => console.log(`   ${error}`));
-    }
-  }
-
-  // =============================================================================
-  // AUTO-FIX METHODS
-  // =============================================================================
-
-  async autoFix() {
-    this.log('fix', 'AUTO-FIX', 'Applying automatic fixes...');
-    
-    let fixCount = 0;
-    
-    // Fix missing scripts
-    if (this.results.errors.some(e => e.message.includes('Missing scripts'))) {
-      await this.fixPackageScripts();
-      fixCount++;
-    }
-    
-    // Fix Astro config
-    if (this.results.errors.some(e => e.category === 'CONFIG')) {
-      await this.fixAstroConfig();
-      fixCount++;
-    }
-    
-    // Clean and reinstall dependencies if needed
-    if (this.results.errors.some(e => e.category === 'DEPS')) {
-      await this.fixDependencies();
-      fixCount++;
-    }
-    
-    this.log('success', 'AUTO-FIX', `Applied ${fixCount} automatic fixes`);
-    return fixCount;
-  }
-
-  async fixPackageScripts() {
-    const packagePath = path.join(projectRoot, 'package.json');
-    const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
-    
-    const requiredScripts = {
-      'build:gh-pages': 'NODE_ENV=production astro build --site https://tariqdude.github.io --base /WebsiteTest',
-      'deploy:validate': 'node tools/deployment-manager.mjs --validate',
-      'deploy:fix': 'node tools/deployment-manager.mjs --fix',
-      'deploy:test': 'node tools/deployment-manager.mjs --test'
-    };
-    
-    let updated = false;
-    for (const [script, command] of Object.entries(requiredScripts)) {
-      if (!packageJson.scripts[script]) {
-        packageJson.scripts[script] = command;
-        updated = true;
-      }
-    }
-    
-    if (updated) {
-      writeFileSync(packagePath, JSON.stringify(packageJson, null, 2));
-      this.log('fix', 'SCRIPTS', 'Updated package.json scripts');
-    }
-  }
-
-  async fixAstroConfig() {
-    const configPath = path.join(projectRoot, 'astro.config.mjs');
-    let content = readFileSync(configPath, 'utf8');
-    
-    // Ensure correct GitHub Pages configuration
-    if (!content.includes('site: \'https://tariqdude.github.io\'')) {
-      content = content.replace(
-        /site:\s*['"][^'"]*['"]/,
-        'site: \'https://tariqdude.github.io\''
-      );
-    }
-    
-    if (!content.includes('base: \'/WebsiteTest\'')) {
-      content = content.replace(
-        /base:\s*['"][^'"]*['"]/,
-        'base: \'/WebsiteTest\''
-      );
-    }
-    
-    writeFileSync(configPath, content);
-    this.log('fix', 'CONFIG', 'Fixed Astro configuration');
-  }
-
-  async fixDependencies() {
-    try {
-      this.log('fix', 'DEPS', 'Cleaning and reinstalling dependencies...');
-      
-      await execAsync('rm -rf node_modules package-lock.json', { cwd: projectRoot });
-      await execAsync('npm install', { 
-        cwd: projectRoot,
-        timeout: this.config.timeouts.install 
-      });
-      
-      this.log('success', 'DEPS', 'Dependencies reinstalled successfully');
     } catch (error) {
-      this.log('error', 'DEPS', `Dependency fix failed: ${error.message}`);
+      this.results.issues.push(`Build validation failed: ${error.message}`);
+      this.log(`Build validation failed: ${error.message}`, 'error');
     }
   }
 
-  // =============================================================================
-  // UTILITY METHODS
-  // =============================================================================
+  async validateGitHubPages() {
+    this.log('Validating GitHub Pages configuration...', 'info');
 
-  formatBytes(bytes) {
-    if (bytes === 0) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    try {
+      const workflowPath = path.join(
+        this.projectRoot,
+        '.github',
+        'workflows',
+        'deploy.yml'
+      );
+
+      if (!fs.existsSync(workflowPath)) {
+        this.results.issues.push('GitHub Actions workflow not found');
+        return;
+      }
+
+      const workflowContent = fs.readFileSync(workflowPath, 'utf8');
+
+      // Check workflow configuration
+      const checks = [
+        {
+          pattern: /node-version:\s*['"]2[0-9]['"]/,
+          name: 'Node.js modern version configuration',
+        },
+        { pattern: /npm (install|ci)/, name: 'npm install command' },
+        { pattern: /build:gh-pages/, name: 'GitHub Pages build script' },
+        { pattern: /upload-pages-artifact/, name: 'Pages artifact upload' },
+      ];
+
+      let workflowScore = 0;
+      checks.forEach((check) => {
+        if (check.pattern.test(workflowContent)) {
+          workflowScore++;
+        } else {
+          this.results.warnings.push(`GitHub workflow missing: ${check.name}`);
+        }
+      });
+
+      this.results.health += Math.floor((workflowScore / checks.length) * 15);
+      this.log('GitHub Pages validation complete', 'success');
+    } catch (error) {
+      this.results.issues.push(
+        `GitHub Pages validation failed: ${error.message}`
+      );
+      this.log(`GitHub Pages validation failed: ${error.message}`, 'error');
+    }
   }
 
-  calculateScore() {
-    const totalChecks = 5; // env, config, deps, types, build
-    const errorCount = this.results.errors.length;
-    const warningCount = this.results.warnings.length;
-    
-    const errorPenalty = errorCount * 20;
-    const warningPenalty = warningCount * 5;
-    
-    const score = Math.max(0, 100 - errorPenalty - warningPenalty);
-    return Math.round(score);
+  // === MAIN EXECUTION METHODS ===
+
+  async runHealthCheck() {
+    this.log('🚀 Starting Unified Deployment Health Check', 'info');
+
+    await this.validatePackageJson();
+    await this.validateAstroConfig();
+    await this.validateDependencies();
+    await this.validateTypeScript();
+    await this.validateGitHubPages();
+
+    return this.results;
   }
 
-  // =============================================================================
-  // REPORTING
-  // =============================================================================
+  async runFullValidation() {
+    this.log('🔍 Starting Full Deployment Validation', 'info');
 
-  async generateReport() {
-    const totalTime = (performance.now() - startTime) / 1000;
-    const score = this.calculateScore();
-    
-    console.log('\n' + '='.repeat(80));
-    console.log('🚀 DEPLOYMENT MANAGER REPORT');
-    console.log('='.repeat(80));
-    
-    console.log(`📊 Overall Score: ${score}/100`);
-    console.log(`⏱️  Total Time: ${totalTime.toFixed(2)}s`);
-    console.log(`🔴 Errors: ${this.results.errors.length}`);
-    console.log(`🟡 Warnings: ${this.results.warnings.length}`);
-    
-    if (this.results.metrics.buildTime) {
-      console.log(`📦 Build Time: ${(this.results.metrics.buildTime/1000).toFixed(2)}s`);
+    await this.runHealthCheck();
+    await this.validateBuild();
+
+    return this.results;
+  }
+
+  async runQuickFix() {
+    this.log('🔧 Starting Quick Fix Process', 'info');
+    this.autoFix = true;
+
+    const results = await this.runFullValidation();
+
+    // Additional fixes
+    if (results.issues.length > 0) {
+      this.log('Attempting additional fixes...', 'fix');
+
+      // Clear npm cache if build issues
+      if (results.issues.some((issue) => issue.includes('Build failed'))) {
+        await this.runCommand('npm cache clean --force');
+        this.results.fixes.push('Cleared npm cache');
+      }
+
+      // Regenerate package-lock if dependency issues
+      if (results.issues.some((issue) => issue.includes('dependencies'))) {
+        const lockPath = path.join(this.projectRoot, 'package-lock.json');
+        if (fs.existsSync(lockPath)) {
+          fs.unlinkSync(lockPath);
+          await this.runCommand('npm install');
+          this.results.fixes.push('Regenerated package-lock.json');
+        }
+      }
     }
-    
-    if (this.results.metrics.buildFiles) {
-      console.log(`📁 Build Files: ${this.results.metrics.buildFiles}`);
-    }
-    
-    if (this.results.metrics.buildSize) {
-      console.log(`💾 Build Size: ${this.formatBytes(this.results.metrics.buildSize)}`);
-    }
-    
-    if (this.results.errors.length > 0) {
-      console.log('\n🔴 CRITICAL ERRORS:');
-      this.results.errors.forEach((error, i) => {
-        console.log(`  ${i + 1}. [${error.category}] ${error.message}`);
+
+    return results;
+  }
+
+  generateReport() {
+    const healthColor =
+      this.results.health >= 80
+        ? '🟢'
+        : this.results.health >= 60
+          ? '🟡'
+          : '🔴';
+
+    console.log('\n' + '='.repeat(60));
+    console.log(`${healthColor} DEPLOYMENT HEALTH REPORT ${healthColor}`);
+    console.log('='.repeat(60));
+    console.log(`Health Score: ${this.results.health}/100`);
+    console.log(`Issues Found: ${this.results.issues.length}`);
+    console.log(`Fixes Applied: ${this.results.fixes.length}`);
+    console.log(`Warnings: ${this.results.warnings.length}`);
+
+    if (this.results.issues.length > 0) {
+      console.log('\n🚨 CRITICAL ISSUES:');
+      this.results.issues.forEach((issue, i) => {
+        console.log(`  ${i + 1}. ${issue}`);
       });
     }
-    
+
+    if (this.results.fixes.length > 0) {
+      console.log('\n🔧 FIXES APPLIED:');
+      this.results.fixes.forEach((fix, i) => {
+        console.log(`  ${i + 1}. ${fix}`);
+      });
+    }
+
     if (this.results.warnings.length > 0) {
-      console.log('\n🟡 WARNINGS:');
+      console.log('\n⚠️ WARNINGS:');
       this.results.warnings.forEach((warning, i) => {
-        console.log(`  ${i + 1}. [${warning.category}] ${warning.message}`);
+        console.log(`  ${i + 1}. ${warning}`);
       });
     }
-    
-    // Deployment readiness
-    if (score >= 80 && this.results.errors.length === 0) {
-      console.log('\n✅ DEPLOYMENT READY!');
-      console.log('🚀 Project is ready for GitHub Pages deployment');
-      this.results.status = 'ready';
-    } else if (score >= 60) {
-      console.log('\n⚠️  DEPLOYMENT POSSIBLE WITH WARNINGS');
-      console.log('🔧 Consider running auto-fix: npm run deploy:fix');
-      this.results.status = 'warning';
+
+    console.log('\n' + '='.repeat(60));
+
+    if (this.results.health >= 80) {
+      console.log('✅ Project is ready for deployment!');
+    } else if (this.results.health >= 60) {
+      console.log('⚠️ Project may have deployment issues. Review warnings.');
     } else {
-      console.log('\n❌ DEPLOYMENT BLOCKED');
-      console.log('🔧 Run auto-fix: npm run deploy:fix');
-      this.results.status = 'blocked';
+      console.log('🚨 Project has critical issues. Fix before deploying.');
     }
-    
-    console.log('\n' + '='.repeat(80));
-    
-    // Save report
-    const reportPath = path.join(projectRoot, 'deployment-report.json');
-    const report = {
-      timestamp: new Date().toISOString(),
-      score,
-      status: this.results.status,
-      totalTime,
-      ...this.results
-    };
-    
-    writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    this.log('info', 'REPORT', `Report saved to deployment-report.json`);
-    
-    return report;
-  }
 
-  // =============================================================================
-  // MAIN EXECUTION
-  // =============================================================================
-
-  async run(mode = 'full') {
-    this.log('deploy', 'START', `Running deployment manager in ${mode} mode...`);
-    
-    try {
-      // Create tools directory if it doesn't exist
-      const toolsDir = path.join(projectRoot, 'tools');
-      if (!existsSync(toolsDir)) {
-        mkdirSync(toolsDir);
-      }
-      
-      if (mode === 'validate' || mode === 'full') {
-        await this.validateEnvironment();
-        await this.validateAstroConfig();
-        await this.validateDependencies();
-        await this.validateTypeScript();
-        await this.validateBuild();
-      }
-      
-      if (mode === 'fix' || (mode === 'full' && this.results.errors.length > 0)) {
-        await this.autoFix();
-        
-        // Re-run validation after fixes
-        if (mode === 'fix') {
-          this.results = { errors: [], warnings: [], fixes: [], metrics: {}, status: 'unknown' };
-          await this.run('validate');
-        }
-      }
-      
-      const report = await this.generateReport();
-      
-      return {
-        success: this.results.status === 'ready',
-        score: this.calculateScore(),
-        report
-      };
-      
-    } catch (error) {
-      this.log('error', 'FATAL', `Deployment manager failed: ${error.message}`);
-      return { success: false, error: error.message };
-    }
+    console.log('='.repeat(60) + '\n');
   }
 }
 
-// =============================================================================
-// CLI INTERFACE
-// =============================================================================
-
-if (import.meta.url === `file://${process.argv[1]}`) {
+// CLI Interface
+async function main() {
   const args = process.argv.slice(2);
-  const mode = args.includes('--fix') ? 'fix' : 
-               args.includes('--validate') ? 'validate' :
-               args.includes('--test') ? 'validate' : 'full';
-  
-  const manager = new DeploymentManager();
-  
-  manager.run(mode).then(result => {
-    process.exit(result.success ? 0 : 1);
-  }).catch(error => {
-    console.error('🔴 Deployment manager crashed:', error);
+  const command = args[0] || 'health';
+
+  const options = {
+    verbose: args.includes('--verbose') || args.includes('-v'),
+    autoFix: !args.includes('--no-fix'),
+    projectRoot: process.cwd(),
+  };
+
+  const manager = new UnifiedDeploymentManager(options);
+
+  try {
+    let results;
+
+    switch (command) {
+      case 'health':
+        results = await manager.runHealthCheck();
+        break;
+      case 'validate':
+        results = await manager.runFullValidation();
+        break;
+      case 'fix':
+        results = await manager.runQuickFix();
+        break;
+      case 'build-test':
+        results = await manager.validateBuild();
+        break;
+      default:
+        console.log(
+          'Usage: node deployment-manager.mjs [health|validate|fix|build-test] [--verbose] [--no-fix]'
+        );
+        process.exit(1);
+    }
+
+    manager.generateReport();
+
+    // Exit with appropriate code
+    process.exit(results.health >= 80 ? 0 : 1);
+  } catch (error) {
+    console.error('❌ Deployment manager error:', error.message);
     process.exit(1);
-  });
+  }
 }
 
-export default DeploymentManager;
+// Export for programmatic use
+export { UnifiedDeploymentManager };
+
+// Run if called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main();
+}

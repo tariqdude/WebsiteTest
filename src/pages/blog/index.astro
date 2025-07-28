@@ -6,31 +6,40 @@ import { Calendar, User, Tag } from 'lucide-react';
 
 const allBlogPosts = await getCollection('blog');
 const posts = allBlogPosts
-  .filter(post => !post.data.draft)
+  .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const featuredPost = posts.find(post => post.data.featured);
-const regularPosts = posts.filter(post => !post.data.featured);
+const featuredPost = posts.find((post) => post.data.featured);
+const regularPosts = posts.filter((post) => !post.data.featured);
 
 // Get all unique tags
-const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 ---
 
-<Layout 
-  title="Blog - Astro Showcase" 
-  description="Read our latest insights on modern web development, Astro framework, and industry best practices."
+<Layout
+  title='Blog - Astro Showcase'
+  description='Read our latest insights on modern web development, Astro framework, and industry best practices.'
 >
   <!-- Hero Section -->
-  <section class="py-20 bg-gradient-to-br from-primary-50 to-purple-50 dark:from-gray-900 dark:to-purple-900/20">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+  <section
+    class='bg-gradient-to-br from-primary-50 to-purple-50 py-20 dark:from-gray-900 dark:to-purple-900/20'
+  >
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center'>
+        <h1
+          class='mb-6 text-4xl font-bold text-gray-900 dark:text-white md:text-6xl'
+        >
           Our Blog
         </h1>
-        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-          Insights, tutorials, and thoughts on modern web development and the evolving landscape of technology
+        <p
+          class='mx-auto mb-8 max-w-3xl text-xl text-gray-600 dark:text-gray-300 md:text-2xl'
+        >
+          Insights, tutorials, and thoughts on modern web development and the
+          evolving landscape of technology
         </p>
-        <div class="flex items-center justify-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+        <div
+          class='flex items-center justify-center space-x-2 text-sm text-gray-600 dark:text-gray-400'
+        >
           <span>{posts.length} Articles</span>
           <span>•</span>
           <span>{allTags.length} Topics</span>
@@ -40,170 +49,185 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
   </section>
 
   <!-- Featured Post -->
-  {featuredPost && (
-    <section class="py-16 bg-white dark:bg-gray-900">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center space-x-2 mb-8">
-          <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-          </svg>
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Featured Article</h2>
-        </div>
-
-        <article class="card lg:flex lg:space-x-8 hover:shadow-xl transition-all duration-300">
-          <div class="lg:w-1/2 mb-6 lg:mb-0">
-            <img
-              src={featuredPost.data.image || '/images/blog/default.jpg'}
-              alt={featuredPost.data.title}
-              class="w-full h-64 lg:h-full object-cover rounded-lg"
-              loading="lazy"
-            />
-          </div>
-          <div class="lg:w-1/2 flex flex-col">
-            <div class="flex items-center space-x-4 mb-4">
-              <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                <User className="w-4 h-4" />
-                <span>{featuredPost.data.author}</span>
-              </div>
-              <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                <Calendar className="w-4 h-4" />
-                <time datetime={featuredPost.data.pubDate.toISOString()}>
-                  {formatDate(featuredPost.data.pubDate)}
-                </time>
-              </div>
-            </div>
-
-            <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-              <a href={`/blog/${featuredPost.slug}`}>
-                {featuredPost.data.title}
-              </a>
-            </h3>
-
-            <p class="text-gray-600 dark:text-gray-300 mb-6 flex-1">
-              {featuredPost.data.description}
-            </p>
-
-            <div class="flex flex-wrap gap-2 mb-6">
-              {featuredPost.data.tags.slice(0, 4).map((tag) => (
-                <span  class="inline-flex items-center space-x-1 px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 text-sm rounded-full">
-                  <Tag className="w-3 h-3" />
-                  <span>{tag}</span>
-                </span>
-              ))}
-            </div>
-
-            <a
-              href={`/blog/${featuredPost.slug}`}
-              class="btn-primary self-start"
+  {
+    featuredPost && (
+      <section class='bg-white py-16 dark:bg-gray-900'>
+        <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+          <div class='mb-8 flex items-center space-x-2'>
+            <svg
+              class='h-5 w-5 text-primary-600 dark:text-primary-400'
+              fill='currentColor'
+              viewBox='0 0 20 20'
             >
-              Read Article
-            </a>
+              <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' />
+            </svg>
+            <h2 class='text-2xl font-bold text-gray-900 dark:text-white'>
+              Featured Article
+            </h2>
           </div>
-        </article>
-      </div>
-    </section>
-  )}
+
+          <article class='card transition-all duration-300 hover:shadow-xl lg:flex lg:space-x-8'>
+            <div class='mb-6 lg:mb-0 lg:w-1/2'>
+              <img
+                src={featuredPost.data.image || '/images/blog/default.jpg'}
+                alt={featuredPost.data.title}
+                class='h-64 w-full rounded-lg object-cover lg:h-full'
+                loading='lazy'
+              />
+            </div>
+            <div class='flex flex-col lg:w-1/2'>
+              <div class='mb-4 flex items-center space-x-4'>
+                <div class='flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400'>
+                  <User className='w-4 h-4' />
+                  <span>{featuredPost.data.author}</span>
+                </div>
+                <div class='flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400'>
+                  <Calendar className='w-4 h-4' />
+                  <time datetime={featuredPost.data.pubDate.toISOString()}>
+                    {formatDate(featuredPost.data.pubDate)}
+                  </time>
+                </div>
+              </div>
+
+              <h3 class='mb-4 text-2xl font-bold text-gray-900 transition-colors hover:text-primary-600 dark:text-white dark:hover:text-primary-400 lg:text-3xl'>
+                <a href={`/blog/${featuredPost.slug}`}>
+                  {featuredPost.data.title}
+                </a>
+              </h3>
+
+              <p class='mb-6 flex-1 text-gray-600 dark:text-gray-300'>
+                {featuredPost.data.description}
+              </p>
+
+              <div class='mb-6 flex flex-wrap gap-2'>
+                {featuredPost.data.tags.slice(0, 4).map((tag) => (
+                  <span class='inline-flex items-center space-x-1 rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-700 dark:bg-primary-900 dark:text-primary-300'>
+                    <Tag className='w-3 h-3' />
+                    <span>{tag}</span>
+                  </span>
+                ))}
+              </div>
+
+              <a
+                href={`/blog/${featuredPost.slug}`}
+                class='btn-primary self-start'
+              >
+                Read Article
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+    )
+  }
 
   <!-- Tag Filter -->
-  <section class="py-8 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-        <div class="flex items-center space-x-2 mb-4 lg:mb-0">
-          <Tag className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by topic:</span>
+  <section
+    class='border-b border-gray-200 bg-gray-50 py-8 dark:border-gray-700 dark:bg-gray-800'
+  >
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
+        <div class='mb-4 flex items-center space-x-2 lg:mb-0'>
+          <Tag className='h-5 w-5 text-gray-500 dark:text-gray-400' />
+          <span class='text-sm font-medium text-gray-700 dark:text-gray-300'
+            >Filter by topic:</span
+          >
         </div>
-        <div class="flex flex-wrap gap-2">
+        <div class='flex flex-wrap gap-2'>
           <button
-            id="filter-all"
-            class="px-3 py-1 text-sm rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300 font-medium"
-            data-filter="all"
+            id='filter-all'
+            class='rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-700 dark:bg-primary-900 dark:text-primary-300'
+            data-filter='all'
           >
             All Posts
           </button>
-          {allTags.map((tag) => (
-            <button
-              
-              class="px-3 py-1 text-sm rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-300 transition-colors"
-              data-filter={tag.toLowerCase()}
-            >
-              {tag}
-            </button>
-          ))}
+          {
+            allTags.map((tag) => (
+              <button
+                class='rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                data-filter={tag.toLowerCase()}
+              >
+                {tag}
+              </button>
+            ))
+          }
         </div>
       </div>
     </div>
   </section>
 
   <!-- Blog Posts Grid -->
-  <section class="py-20 bg-white dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {regularPosts.map((post) => (
-          <article 
-            
-            class="post-card card group hover:shadow-xl transition-all duration-300"
-            data-tags={post.data.tags.map(t => t.toLowerCase()).join(' ')}
-          >
-            <div class="aspect-video bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg mb-4 overflow-hidden">
-              <img
-                src={post.data.image || '/images/blog/default.jpg'}
-                alt={post.data.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-              />
-            </div>
-
-            <div class="flex items-center space-x-4 mb-3">
-              <div class="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
-                <User className="w-3 h-3" />
-                <span>{post.data.author}</span>
-              </div>
-              <div class="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
-                <Calendar className="w-3 h-3" />
-                <time datetime={post.data.pubDate.toISOString()}>
-                  {formatDate(post.data.pubDate)}
-                </time>
-              </div>
-            </div>
-
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
-              <a href={`/blog/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </h3>
-
-            <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-              {post.data.description}
-            </p>
-
-            <div class="flex flex-wrap gap-1 mb-4">
-              {post.data.tags.slice(0, 3).map((tag) => (
-                <span  class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded">
-                  {tag}
-                </span>
-              ))}
-              {post.data.tags.length > 3 && (
-                <span class="text-xs text-gray-500 dark:text-gray-400 px-2 py-1">
-                  +{post.data.tags.length - 3} more
-                </span>
-              )}
-            </div>
-
-            <a
-              href={`/blog/${post.slug}`}
-              class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium text-sm transition-colors"
+  <section class='bg-white py-20 dark:bg-gray-900'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div
+        id='posts-grid'
+        class='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'
+      >
+        {
+          regularPosts.map((post) => (
+            <article
+              class='post-card card group transition-all duration-300 hover:shadow-xl'
+              data-tags={post.data.tags.map((t) => t.toLowerCase()).join(' ')}
             >
-              Read More →
-            </a>
-          </article>
-        ))}
+              <div class='mb-4 aspect-video overflow-hidden rounded-lg bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900'>
+                <img
+                  src={post.data.image || '/images/blog/default.jpg'}
+                  alt={post.data.title}
+                  class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                  loading='lazy'
+                />
+              </div>
+
+              <div class='mb-3 flex items-center space-x-4'>
+                <div class='flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400'>
+                  <User className='w-3 h-3' />
+                  <span>{post.data.author}</span>
+                </div>
+                <div class='flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400'>
+                  <Calendar className='w-3 h-3' />
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {formatDate(post.data.pubDate)}
+                  </time>
+                </div>
+              </div>
+
+              <h3 class='mb-3 line-clamp-2 text-xl font-semibold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              </h3>
+
+              <p class='mb-4 line-clamp-3 text-gray-600 dark:text-gray-300'>
+                {post.data.description}
+              </p>
+
+              <div class='mb-4 flex flex-wrap gap-1'>
+                {post.data.tags.slice(0, 3).map((tag) => (
+                  <span class='rounded bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-300'>
+                    {tag}
+                  </span>
+                ))}
+                {post.data.tags.length > 3 && (
+                  <span class='px-2 py-1 text-xs text-gray-500 dark:text-gray-400'>
+                    +{post.data.tags.length - 3} more
+                  </span>
+                )}
+              </div>
+
+              <a
+                href={`/blog/${post.slug}`}
+                class='text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300'
+              >
+                Read More →
+              </a>
+            </article>
+          ))
+        }
       </div>
 
       <!-- No Results Message -->
-      <div id="no-results" class="hidden text-center py-16">
-        <div class="text-gray-500 dark:text-gray-400">
-          <Tag className="w-16 h-16 mx-auto mb-4 opacity-50" />
-          <h3 class="text-xl font-semibold mb-2">No posts found</h3>
+      <div id='no-results' class='hidden py-16 text-center'>
+        <div class='text-gray-500 dark:text-gray-400'>
+          <Tag className='mx-auto mb-4 h-16 w-16 opacity-50' />
+          <h3 class='mb-2 text-xl font-semibold'>No posts found</h3>
           <p>Try adjusting your filter to see more articles.</p>
         </div>
       </div>
@@ -211,24 +235,22 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
   </section>
 
   <!-- Newsletter Signup -->
-  <section class="py-20 bg-primary-600 text-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-4">
-        Stay Updated
-      </h2>
-      <p class="text-xl mb-8 opacity-90">
+  <section class='bg-primary-600 py-20 text-white'>
+    <div class='container mx-auto px-4 text-center sm:px-6 lg:px-8'>
+      <h2 class='mb-4 text-3xl font-bold'>Stay Updated</h2>
+      <p class='mb-8 text-xl opacity-90'>
         Get the latest articles and insights delivered to your inbox
       </p>
-      <form class="max-w-md mx-auto flex gap-4">
+      <form class='mx-auto flex max-w-md gap-4'>
         <input
-          type="email"
-          placeholder="Enter your email"
-          class="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600"
+          type='email'
+          placeholder='Enter your email'
+          class='flex-1 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600'
           required
         />
         <button
-          type="submit"
-          class="bg-white text-primary-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-colors whitespace-nowrap"
+          type='submit'
+          class='whitespace-nowrap rounded-lg bg-white px-6 py-3 font-semibold text-primary-600 transition-colors hover:bg-gray-100'
         >
           Subscribe
         </button>
@@ -245,25 +267,50 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
 
     if (!filterButtons.length || !postCards.length) return;
 
-    filterButtons.forEach(button => {
+    filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
         const filter = button.getAttribute('data-filter');
-        
+
         // Update active button
-        filterButtons.forEach(btn => {
-          btn.classList.remove('bg-primary-100', 'text-primary-700', 'dark:bg-primary-900', 'dark:text-primary-300');
-          btn.classList.add('bg-gray-100', 'hover:bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'dark:text-gray-300');
+        filterButtons.forEach((btn) => {
+          btn.classList.remove(
+            'bg-primary-100',
+            'text-primary-700',
+            'dark:bg-primary-900',
+            'dark:text-primary-300'
+          );
+          btn.classList.add(
+            'bg-gray-100',
+            'hover:bg-gray-200',
+            'text-gray-700',
+            'dark:bg-gray-700',
+            'dark:hover:bg-gray-600',
+            'dark:text-gray-300'
+          );
         });
-        
-        button.classList.remove('bg-gray-100', 'hover:bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'dark:text-gray-300');
-        button.classList.add('bg-primary-100', 'text-primary-700', 'dark:bg-primary-900', 'dark:text-primary-300');
-        
+
+        button.classList.remove(
+          'bg-gray-100',
+          'hover:bg-gray-200',
+          'text-gray-700',
+          'dark:bg-gray-700',
+          'dark:hover:bg-gray-600',
+          'dark:text-gray-300'
+        );
+        button.classList.add(
+          'bg-primary-100',
+          'text-primary-700',
+          'dark:bg-primary-900',
+          'dark:text-primary-300'
+        );
+
         // Filter posts
         let visibleCount = 0;
-        postCards.forEach(card => {
+        postCards.forEach((card) => {
           const tags = card.getAttribute('data-tags');
-          const isVisible = filter === 'all' || (tags && tags.includes(filter || ''));
-          
+          const isVisible =
+            filter === 'all' || (tags && tags.includes(filter || ''));
+
           if (isVisible) {
             (card as HTMLElement).style.display = 'block';
             visibleCount++;
@@ -271,7 +318,7 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
             (card as HTMLElement).style.display = 'none';
           }
         });
-        
+
         // Show/hide no results message
         if (visibleCount === 0) {
           noResults?.classList.remove('hidden');
@@ -284,7 +331,7 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
 
   // Initialize on page load
   initBlogFilter();
-  
+
   // Re-initialize after view transitions
   document.addEventListener('astro:after-swap', initBlogFilter);
 </script>
@@ -296,7 +343,7 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -307,10 +354,12 @@ const allTags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
   .post-card {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
-  
-  .post-card[style*="display: none"] {
+
+  .post-card[style*='display: none'] {
     opacity: 0;
     transform: translateY(10px);
   }

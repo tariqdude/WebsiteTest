@@ -4,9 +4,7 @@
 
 import MobileMenu from './MobileMenu.jsx';
 
-export {
-  MobileMenu,
-};
+export { MobileMenu };
 
 // For reference, these components exist but must be imported directly:
 // - Header.astro

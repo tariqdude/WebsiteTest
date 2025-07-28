@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<Props, State> {
       hasError: false,
       error: null,
       errorInfo: null,
-      retryCount: 0
+      retryCount: 0,
     };
   }
 
@@ -34,7 +34,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({ errorInfo });
-    
+
     // Log error to console in development
     if (process.env.NODE_ENV === 'development') {
       console.error('🔴 React Error Boundary caught an error:', error);
@@ -47,11 +47,11 @@ export class ErrorBoundary extends Component<Props, State> {
 
   handleRetry = () => {
     if (this.state.retryCount < this.maxRetries) {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         hasError: false,
         error: null,
         errorInfo: null,
-        retryCount: prevState.retryCount + 1
+        retryCount: prevState.retryCount + 1,
       }));
     }
   };
@@ -68,50 +68,52 @@ export class ErrorBoundary extends Component<Props, State> {
       const isDev = process.env.NODE_ENV === 'development';
 
       return (
-        <div className="error-boundary p-6 m-4 border-2 border-red-200 rounded-lg bg-red-50 dark:bg-red-900/20 dark:border-red-800">
-          <div className="flex items-center mb-4">
-            <div className="text-red-500 text-2xl mr-3">⚠️</div>
-            <h2 className="text-lg font-bold text-red-800 dark:text-red-200">
+        <div className='error-boundary m-4 rounded-lg border-2 border-red-200 bg-red-50 p-6 dark:border-red-800 dark:bg-red-900/20'>
+          <div className='mb-4 flex items-center'>
+            <div className='mr-3 text-2xl text-red-500'>⚠️</div>
+            <h2 className='text-lg font-bold text-red-800 dark:text-red-200'>
               Component Error
             </h2>
           </div>
-          
-          <p className="text-red-700 dark:text-red-300 mb-4">
-            Something went wrong with this component. {canRetry && 'You can try again.'}
+
+          <p className='mb-4 text-red-700 dark:text-red-300'>
+            Something went wrong with this component.{' '}
+            {canRetry && 'You can try again.'}
           </p>
 
-          <div className="flex gap-3 mb-4">
+          <div className='mb-4 flex gap-3'>
             {canRetry && (
               <button
                 onClick={this.handleRetry}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className='rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
               >
                 Retry ({this.maxRetries - this.state.retryCount} attempts left)
               </button>
             )}
-            
+
             <button
               onClick={() => window.location.reload()}
-              className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              className='rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2'
             >
               Reload Page
             </button>
           </div>
 
           {(isDev || this.props.showDetails) && this.state.error && (
-            <details className="mt-4">
-              <summary className="cursor-pointer text-red-800 dark:text-red-200 font-medium">
+            <details className='mt-4'>
+              <summary className='cursor-pointer font-medium text-red-800 dark:text-red-200'>
                 Error Details (Development)
               </summary>
-              <div className="mt-2 p-3 bg-red-100 dark:bg-red-900/40 rounded border-l-4 border-red-500">
-                <pre className="text-sm text-red-900 dark:text-red-100 whitespace-pre-wrap">
+              <div className='mt-2 rounded border-l-4 border-red-500 bg-red-100 p-3 dark:bg-red-900/40'>
+                <pre className='whitespace-pre-wrap text-sm text-red-900 dark:text-red-100'>
                   <strong>Error:</strong> {this.state.error.message}
                   {'\n\n'}
                   <strong>Stack:</strong> {this.state.error.stack}
                   {this.state.errorInfo && (
                     <>
                       {'\n\n'}
-                      <strong>Component Stack:</strong> {this.state.errorInfo.componentStack}
+                      <strong>Component Stack:</strong>{' '}
+                      {this.state.errorInfo.componentStack}
                     </>
                   )}
                 </pre>

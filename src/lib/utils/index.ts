@@ -1,14 +1,14 @@
 /**
  * Optimized Utility Functions for Astro Showcase
- * 
+ *
  * Organized by category and actual usage:
  * 1. Date & Time Utilities
- * 2. String Manipulation 
+ * 2. String Manipulation
  * 3. Number & Math Utilities
  * 4. Object & Array Utilities
  * 5. Browser & DOM Utilities
  * 6. Performance Utilities
- * 
+ *
  * @version 2.0.0 - Optimized & Enhanced
  */
 
@@ -31,17 +31,21 @@ export const formatRelativeTime = (date: Date | string): string => {
   const diffInSeconds = Math.floor((now.getTime() - d.getTime()) / 1000);
 
   if (diffInSeconds < 60) return 'just now';
-  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-  if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
-  
+  if (diffInSeconds < 3600)
+    return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+  if (diffInSeconds < 86400)
+    return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+  if (diffInSeconds < 2592000)
+    return `${Math.floor(diffInSeconds / 86400)} days ago`;
+
   return formatDate(d);
 };
 
 export const formatDuration = (milliseconds: number): string => {
   if (milliseconds < 1000) return `${Math.round(milliseconds)}ms`;
   if (milliseconds < 60000) return `${(milliseconds / 1000).toFixed(1)}s`;
-  if (milliseconds < 3600000) return `${Math.floor(milliseconds / 60000)}m ${Math.floor((milliseconds % 60000) / 1000)}s`;
+  if (milliseconds < 3600000)
+    return `${Math.floor(milliseconds / 60000)}m ${Math.floor((milliseconds % 60000) / 1000)}s`;
   return `${Math.floor(milliseconds / 3600000)}h ${Math.floor((milliseconds % 3600000) / 60000)}m`;
 };
 
@@ -67,7 +71,11 @@ export const slugify = (text: string): string => {
     .replace(/-+$/, '');
 };
 
-export const truncate = (text: string, length: number, suffix: string = '...'): string => {
+export const truncate = (
+  text: string,
+  length: number,
+  suffix: string = '...'
+): string => {
   if (text.length <= length) return text;
   return text.substring(0, length - suffix.length) + suffix;
 };
@@ -82,7 +90,7 @@ export const capitalizeFirst = (str: string): string => {
 };
 
 export const camelToKebab = (str: string): string => {
-  return str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+  return str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 };
 
 export const kebabToCamel = (str: string): string => {
@@ -92,7 +100,7 @@ export const kebabToCamel = (str: string): string => {
 export const extractInitials = (name: string): string => {
   return name
     .split(' ')
-    .map(n => n[0])
+    .map((n) => n[0])
     .join('')
     .toUpperCase()
     .slice(0, 2);
@@ -120,17 +128,21 @@ export const roundTo = (num: number, decimals: number): number => {
 
 export const formatBytes = (bytes: number, decimals: number = 2): string => {
   if (bytes === 0) return '0 Bytes';
-  
+
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-  
+
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
+
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 };
 
-export const formatPercentage = (value: number, total: number, decimals: number = 1): string => {
+export const formatPercentage = (
+  value: number,
+  total: number,
+  decimals: number = 1
+): string => {
   return ((value / total) * 100).toFixed(decimals) + '%';
 };
 
@@ -138,30 +150,43 @@ export const formatPercentage = (value: number, total: number, decimals: number 
 // 4. OBJECT & ARRAY UTILITIES (Used by data processing)
 // =============================================================================
 
-export const groupBy = <T>(array: T[], keyFn: (item: T) => string): Record<string, T[]> => {
-  return array.reduce((groups, item) => {
-    const key = keyFn(item);
-    return {
-      ...groups,
-      [key]: [...(groups[key] || []), item],
-    };
-  }, {} as Record<string, T[]>);
+export const groupBy = <T>(
+  array: T[],
+  keyFn: (item: T) => string
+): Record<string, T[]> => {
+  return array.reduce(
+    (groups, item) => {
+      const key = keyFn(item);
+      return {
+        ...groups,
+        [key]: [...(groups[key] || []), item],
+      };
+    },
+    {} as Record<string, T[]>
+  );
 };
 
-export const sortBy = <T>(array: T[], keyFn: (item: T) => string | number, order: 'asc' | 'desc' = 'asc'): T[] => {
+export const sortBy = <T>(
+  array: T[],
+  keyFn: (item: T) => string | number,
+  order: 'asc' | 'desc' = 'asc'
+): T[] => {
   return [...array].sort((a, b) => {
     const aVal = keyFn(a);
     const bVal = keyFn(b);
-    
+
     if (aVal < bVal) return order === 'asc' ? -1 : 1;
     if (aVal > bVal) return order === 'asc' ? 1 : -1;
     return 0;
   });
 };
 
-export const uniqueBy = <T>(array: T[], keyFn: (item: T) => string | number): T[] => {
+export const uniqueBy = <T>(
+  array: T[],
+  keyFn: (item: T) => string | number
+): T[] => {
   const seen = new Set();
-  return array.filter(item => {
+  return array.filter((item) => {
     const key = keyFn(item);
     if (seen.has(key)) return false;
     seen.add(key);
@@ -184,10 +209,11 @@ export const chunk = <T>(array: T[], size: number): T[][] => {
 export const deepClone = <T>(obj: T): T => {
   if (obj === null || typeof obj !== 'object') return obj;
   if (obj instanceof Date) return new Date(obj.getTime()) as unknown as T;
-  if (obj instanceof Array) return obj.map(item => deepClone(item)) as unknown as T;
+  if (obj instanceof Array)
+    return obj.map((item) => deepClone(item)) as unknown as T;
   if (typeof obj === 'object') {
     const cloned = {} as T;
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj).forEach((key) => {
       (cloned as any)[key] = deepClone((obj as any)[key]);
     });
     return cloned;
@@ -200,7 +226,9 @@ export const deepClone = <T>(obj: T): T => {
 // =============================================================================
 
 export const generateId = (length: number = 8): string => {
-  return Math.random().toString(36).substring(2, length + 2);
+  return Math.random()
+    .toString(36)
+    .substring(2, length + 2);
 };
 
 export const copyToClipboard = async (text: string): Promise<boolean> => {
@@ -213,9 +241,13 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
   }
 };
 
-export const downloadFile = (content: string, filename: string, mimeType: string = 'text/plain'): void => {
+export const downloadFile = (
+  content: string,
+  filename: string,
+  mimeType: string = 'text/plain'
+): void => {
   if (typeof window === 'undefined') return;
-  
+
   const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -227,7 +259,11 @@ export const downloadFile = (content: string, filename: string, mimeType: string
   URL.revokeObjectURL(url);
 };
 
-export const getImagePlaceholder = (width: number, height: number, color: string = '#cccccc'): string => {
+export const getImagePlaceholder = (
+  width: number,
+  height: number,
+  color: string = '#cccccc'
+): string => {
   return `data:image/svg+xml,%3Csvg width='${width}' height='${height}' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='${encodeURIComponent(color)}'/%3E%3C/svg%3E`;
 };
 
@@ -247,7 +283,7 @@ export const isValidUrl = (url: string): boolean => {
 
 export const detectDevice = (): 'mobile' | 'tablet' | 'desktop' => {
   if (typeof window === 'undefined') return 'desktop';
-  
+
   const width = window.innerWidth;
   if (width < 768) return 'mobile';
   if (width < 1024) return 'tablet';
@@ -256,7 +292,7 @@ export const detectDevice = (): 'mobile' | 'tablet' | 'desktop' => {
 
 export const getScrollPosition = (): { x: number; y: number } => {
   if (typeof window === 'undefined') return { x: 0, y: 0 };
-  
+
   return {
     x: window.pageXOffset || document.documentElement.scrollLeft,
     y: window.pageYOffset || document.documentElement.scrollTop,
@@ -270,7 +306,7 @@ export const getScrollPosition = (): { x: number; y: number } => {
 export const debounce = <T extends (...args: never[]) => unknown>(
   func: T,
   wait: number
-): (...args: Parameters<T>) => void => {
+): ((...args: Parameters<T>) => void) => {
   let timeout: NodeJS.Timeout;
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
@@ -281,7 +317,7 @@ export const debounce = <T extends (...args: never[]) => unknown>(
 export const throttle = <T extends (...args: never[]) => unknown>(
   func: T,
   limit: number
-): (...args: Parameters<T>) => void => {
+): ((...args: Parameters<T>) => void) => {
   let inThrottle: boolean;
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
@@ -292,21 +328,24 @@ export const throttle = <T extends (...args: never[]) => unknown>(
   };
 };
 
-export const measurePerformance = <T>(fn: () => T, label?: string): { result: T; duration: number } => {
+export const measurePerformance = <T>(
+  fn: () => T,
+  label?: string
+): { result: T; duration: number } => {
   const start = performance.now();
   const result = fn();
   const duration = performance.now() - start;
-  
+
   if (label) {
     console.log(`${label}: ${duration.toFixed(2)}ms`);
   }
-  
+
   return { result, duration };
 };
 
 export const createCache = <K, V>(maxSize: number = 100) => {
   const cache = new Map<K, V>();
-  
+
   return {
     get: (key: K): V | undefined => cache.get(key),
     set: (key: K, value: V): void => {
@@ -329,10 +368,16 @@ export const createCache = <K, V>(maxSize: number = 100) => {
 // UTILITY TYPE HELPERS
 // =============================================================================
 
-export const isString = (value: unknown): value is string => typeof value === 'string';
-export const isNumber = (value: unknown): value is number => typeof value === 'number' && !isNaN(value);
-export const isBoolean = (value: unknown): value is boolean => typeof value === 'boolean';
-export const isObject = (value: unknown): value is object => value !== null && typeof value === 'object';
+export const isString = (value: unknown): value is string =>
+  typeof value === 'string';
+export const isNumber = (value: unknown): value is number =>
+  typeof value === 'number' && !isNaN(value);
+export const isBoolean = (value: unknown): value is boolean =>
+  typeof value === 'boolean';
+export const isObject = (value: unknown): value is object =>
+  value !== null && typeof value === 'object';
 export const isArray = Array.isArray;
-export const isFunction = (value: unknown): value is Function => typeof value === 'function';
-export const isDefined = <T>(value: T | undefined | null): value is T => value !== undefined && value !== null;
+export const isFunction = (value: unknown): value is Function =>
+  typeof value === 'function';
+export const isDefined = <T>(value: T | undefined | null): value is T =>
+  value !== undefined && value !== null;

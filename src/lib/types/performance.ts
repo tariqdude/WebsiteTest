@@ -1,17 +1,13 @@
 /**
  * Enhanced Performance & Monitoring Types
- * 
+ *
  * Comprehensive types for performance monitoring, web vitals,
  * and diagnostic capabilities across all frameworks.
- * 
+ *
  * @version 1.0.0
  */
 
-import type { 
-  PerformanceStats, 
-  MemoryInfo,
-  ConnectionInfo 
-} from './index';
+import type { PerformanceStats, MemoryInfo, ConnectionInfo } from './index';
 
 // =============================================================================
 // WEB VITALS & CORE METRICS
@@ -21,7 +17,7 @@ import type {
 export interface CoreWebVitals {
   // First Contentful Paint
   fcp: number;
-  // Largest Contentful Paint  
+  // Largest Contentful Paint
   lcp: number;
   // First Input Delay
   fid: number;

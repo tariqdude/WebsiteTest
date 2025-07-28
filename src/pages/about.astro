@@ -6,22 +6,26 @@ const values = [
   {
     icon: Target,
     title: 'Performance First',
-    description: 'We prioritize speed and efficiency in everything we build, ensuring optimal user experiences.',
+    description:
+      'We prioritize speed and efficiency in everything we build, ensuring optimal user experiences.',
   },
   {
     icon: Users,
     title: 'Developer Experience',
-    description: 'Creating tools and frameworks that make developers more productive and happy.',
+    description:
+      'Creating tools and frameworks that make developers more productive and happy.',
   },
   {
     icon: Award,
     title: 'Quality Focused',
-    description: 'Maintaining high standards in code quality, testing, and accessibility.',
+    description:
+      'Maintaining high standards in code quality, testing, and accessibility.',
   },
   {
     icon: TrendingUp,
     title: 'Continuous Innovation',
-    description: 'Staying ahead of the curve with cutting-edge technologies and methodologies.',
+    description:
+      'Staying ahead of the curve with cutting-edge technologies and methodologies.',
   },
 ];
 
@@ -33,60 +37,87 @@ const stats = [
 ];
 ---
 
-<Layout 
-  title="About Us - Astro Showcase" 
-  description="Learn about our mission to showcase the power of modern web development with Astro, and meet the team behind this innovative project."
+<Layout
+  title='About Us - Astro Showcase'
+  description='Learn about our mission to showcase the power of modern web development with Astro, and meet the team behind this innovative project.'
 >
   <!-- Hero Section -->
-  <section class="py-20 bg-gradient-to-br from-primary-50 to-purple-50 dark:from-gray-900 dark:to-purple-900/20">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+  <section
+    class='bg-gradient-to-br from-primary-50 to-purple-50 py-20 dark:from-gray-900 dark:to-purple-900/20'
+  >
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center'>
+        <h1
+          class='mb-6 text-4xl font-bold text-gray-900 dark:text-white md:text-6xl'
+        >
           About Our Mission
         </h1>
-        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          We're passionate about showcasing the incredible capabilities of modern web development 
-          and helping developers build better, faster websites.
+        <p
+          class='mx-auto max-w-3xl text-xl text-gray-600 dark:text-gray-300 md:text-2xl'
+        >
+          We're passionate about showcasing the incredible capabilities of
+          modern web development and helping developers build better, faster
+          websites.
         </p>
       </div>
     </div>
   </section>
 
   <!-- Mission Statement -->
-  <section class="py-20 bg-white dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+  <section class='bg-white py-20 dark:bg-gray-900'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='mx-auto max-w-4xl'>
+        <div class='mb-16 text-center'>
+          <h2
+            class='mb-6 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl'
+          >
             Our Story
           </h2>
         </div>
-        
-        <div class="prose prose-lg prose-gray dark:prose-invert max-w-none">
-          <p class="text-xl leading-relaxed mb-6">
-            This Astro Showcase was born from a simple idea: to demonstrate the incredible power 
-            and versatility of modern web development tools in a real, production-ready application.
+
+        <div class='prose prose-lg prose-gray dark:prose-invert max-w-none'>
+          <p class='mb-6 text-xl leading-relaxed'>
+            This Astro Showcase was born from a simple idea: to demonstrate the
+            incredible power and versatility of modern web development tools in
+            a real, production-ready application.
           </p>
-          
-          <p class="text-lg leading-relaxed mb-6">
-            Astro represents a fundamental shift in how we think about building websites. By embracing 
-            the islands architecture, we can create sites that are both incredibly fast and highly 
-            interactive. This showcase demonstrates real-world implementations of:
+
+          <p class='mb-6 text-lg leading-relaxed'>
+            Astro represents a fundamental shift in how we think about building
+            websites. By embracing the islands architecture, we can create sites
+            that are both incredibly fast and highly interactive. This showcase
+            demonstrates real-world implementations of:
           </p>
-          
-          <ul class="text-lg space-y-2 mb-6">
-            <li>🏝️ <strong>Islands Architecture</strong> - Interactive components that load independently</li>
-            <li>⚡ <strong>Zero JavaScript by Default</strong> - Ship only what you need</li>
-            <li>🔧 <strong>Framework Agnostic</strong> - Use React, Vue, Svelte, or any framework</li>
-            <li>📝 <strong>Content Collections</strong> - Type-safe content management</li>
-            <li>🎨 <strong>Modern Styling</strong> - Tailwind CSS with dark mode support</li>
-            <li>🚀 <strong>Optimal Performance</strong> - Built-in optimizations and best practices</li>
+
+          <ul class='mb-6 space-y-2 text-lg'>
+            <li>
+              🏝️ <strong>Islands Architecture</strong> - Interactive components that
+              load independently
+            </li>
+            <li>
+              ⚡ <strong>Zero JavaScript by Default</strong> - Ship only what you
+              need
+            </li>
+            <li>
+              🔧 <strong>Framework Agnostic</strong> - Use React, Vue, Svelte, or
+              any framework
+            </li>
+            <li>
+              📝 <strong>Content Collections</strong> - Type-safe content management
+            </li>
+            <li>
+              🎨 <strong>Modern Styling</strong> - Tailwind CSS with dark mode support
+            </li>
+            <li>
+              🚀 <strong>Optimal Performance</strong> - Built-in optimizations and
+              best practices
+            </li>
           </ul>
-          
-          <p class="text-lg leading-relaxed">
-            Every component, page, and feature in this showcase serves as both a demonstration 
-            and a learning resource for developers looking to harness the full potential of 
-            modern web technologies.
+
+          <p class='text-lg leading-relaxed'>
+            Every component, page, and feature in this showcase serves as both a
+            demonstration and a learning resource for developers looking to
+            harness the full potential of modern web technologies.
           </p>
         </div>
       </div>
@@ -94,82 +125,81 @@ const stats = [
   </section>
 
   <!-- Values Section -->
-  <section class="py-20 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+  <section class='bg-gray-50 py-20 dark:bg-gray-800'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='mb-16 text-center'>
+        <h2
+          class='mb-6 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl'
+        >
           Our Values
         </h2>
-        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p class='mx-auto max-w-2xl text-xl text-gray-600 dark:text-gray-300'>
           The principles that guide our approach to modern web development
         </p>
       </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {values.map(({ icon: Icon, title, description }) => (
-          <div  class="flex space-x-4 p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm">
-            <div class="flex-shrink-0">
-              <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                <Icon className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+
+      <div class='grid grid-cols-1 gap-8 md:grid-cols-2'>
+        {
+          values.map(({ icon: Icon, title, description }) => (
+            <div class='flex space-x-4 rounded-xl bg-white p-6 shadow-sm dark:bg-gray-900'>
+              <div class='flex-shrink-0'>
+                <div class='flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100 dark:bg-primary-900'>
+                  <Icon className='w-6 h-6 text-primary-600 dark:text-primary-400' />
+                </div>
+              </div>
+              <div>
+                <h3 class='mb-2 text-xl font-semibold text-gray-900 dark:text-white'>
+                  {title}
+                </h3>
+                <p class='text-gray-600 dark:text-gray-300'>{description}</p>
               </div>
             </div>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                {title}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {description}
-              </p>
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- Stats Section -->
-  <section class="py-20 bg-primary-600 text-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-5xl font-bold mb-6">
-          By the Numbers
-        </h2>
-        <p class="text-xl opacity-90">
+  <section class='bg-primary-600 py-20 text-white'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='mb-16 text-center'>
+        <h2 class='mb-6 text-3xl font-bold md:text-5xl'>By the Numbers</h2>
+        <p class='text-xl opacity-90'>
           Our commitment to excellence reflected in our achievements
         </p>
       </div>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        {stats.map(({ number, label }) => (
-          <div  class="text-center">
-            <div class="text-4xl md:text-6xl font-bold mb-2">
-              {number}
+
+      <div class='grid grid-cols-2 gap-8 md:grid-cols-4'>
+        {
+          stats.map(({ number, label }) => (
+            <div class='text-center'>
+              <div class='mb-2 text-4xl font-bold md:text-6xl'>{number}</div>
+              <div class='text-lg opacity-90'>{label}</div>
             </div>
-            <div class="text-lg opacity-90">
-              {label}
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- Call to Action -->
-  <section class="py-20 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+  <section class='bg-gray-50 py-20 dark:bg-gray-800'>
+    <div class='container mx-auto px-4 text-center sm:px-6 lg:px-8'>
+      <h2
+        class='mb-6 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl'
+      >
         Ready to Get Started?
       </h2>
-      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-        Explore our projects, read our insights, or get in touch to discuss your next project
+      <p
+        class='mx-auto mb-8 max-w-2xl text-xl text-gray-600 dark:text-gray-300'
+      >
+        Explore our projects, read our insights, or get in touch to discuss your
+        next project
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/projects" class="btn-primary">
-          View Our Work
-        </a>
-        <a href="/contact" class="btn-secondary">
-          Get in Touch
-        </a>
+      <div class='flex flex-col justify-center gap-4 sm:flex-row'>
+        <a href='/projects' class='btn-primary'> View Our Work </a>
+        <a href='/contact' class='btn-secondary'> Get in Touch </a>
       </div>
     </div>
   </section>

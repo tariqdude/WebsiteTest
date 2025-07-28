@@ -10,13 +10,13 @@ const InteractiveCounter = () => {
   const increment = () => {
     const newCount = count + 1;
     setCount(newCount);
-    setHistory(prev => [...prev, newCount].slice(-10)); // Keep last 10
+    setHistory((prev) => [...prev, newCount].slice(-10)); // Keep last 10
   };
 
   const decrement = () => {
     const newCount = count - 1;
     setCount(newCount);
-    setHistory(prev => [...prev, newCount].slice(-10));
+    setHistory((prev) => [...prev, newCount].slice(-10));
   };
 
   const reset = () => {
@@ -28,7 +28,7 @@ const InteractiveCounter = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.target.tagName === 'INPUT') return;
-      
+
       switch (e.key) {
         case 'ArrowUp':
         case '+':
@@ -55,11 +55,11 @@ const InteractiveCounter = () => {
   }, [count]);
 
   return (
-    <div className="card max-w-md mx-auto">
-      <div className="text-center">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+    <div className='card mx-auto max-w-md'>
+      <div className='text-center'>
+        <h3 className='mb-4 text-lg font-semibold text-gray-900 dark:text-white'>
           Interactive Counter
-          <span className="block text-sm text-gray-500 dark:text-gray-400 font-normal mt-1">
+          <span className='mt-1 block text-sm font-normal text-gray-500 dark:text-gray-400'>
             React Island Component
           </span>
         </h3>
@@ -70,53 +70,59 @@ const InteractiveCounter = () => {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.8, opacity: 0 }}
-          className="mb-6"
+          className='mb-6'
         >
-          <div className={`text-6xl font-bold mb-2 ${
-            count > 0 ? 'text-green-500' : count < 0 ? 'text-red-500' : 'text-gray-600 dark:text-gray-300'
-          }`}>
+          <div
+            className={`mb-2 text-6xl font-bold ${
+              count > 0
+                ? 'text-green-500'
+                : count < 0
+                  ? 'text-red-500'
+                  : 'text-gray-600 dark:text-gray-300'
+            }`}
+          >
             {count}
           </div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">
+          <div className='text-sm text-gray-500 dark:text-gray-400'>
             {count === 0 ? 'Neutral' : count > 0 ? 'Positive' : 'Negative'}
           </div>
         </motion.div>
 
         {/* Controls */}
-        <div className="flex items-center justify-center space-x-4 mb-6">
+        <div className='mb-6 flex items-center justify-center space-x-4'>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={decrement}
-            className="btn-secondary p-3 rounded-full"
-            aria-label="Decrement counter"
+            className='btn-secondary rounded-full p-3'
+            aria-label='Decrement counter'
           >
-            <Minus className="w-5 h-5" />
+            <Minus className='h-5 w-5' />
           </motion.button>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={reset}
-            className="btn-ghost p-3 rounded-full"
-            aria-label="Reset counter"
+            className='btn-ghost rounded-full p-3'
+            aria-label='Reset counter'
           >
-            <RotateCcw className="w-5 h-5" />
+            <RotateCcw className='h-5 w-5' />
           </motion.button>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={increment}
-            className="btn-primary p-3 rounded-full"
-            aria-label="Increment counter"
+            className='btn-primary rounded-full p-3'
+            aria-label='Increment counter'
           >
-            <Plus className="w-5 h-5" />
+            <Plus className='h-5 w-5' />
           </motion.button>
         </div>
 
         {/* Keyboard Shortcuts */}
-        <div className="text-xs text-gray-500 dark:text-gray-400 mb-4 space-y-1">
+        <div className='mb-4 space-y-1 text-xs text-gray-500 dark:text-gray-400'>
           <div>Keyboard shortcuts:</div>
           <div>↑/+ to increment, ↓/- to decrement, Ctrl+R to reset</div>
         </div>
@@ -124,7 +130,7 @@ const InteractiveCounter = () => {
         {/* History Toggle */}
         <button
           onClick={() => setShowHistory(!showHistory)}
-          className="text-sm text-primary-600 dark:text-primary-400 hover:underline mb-4"
+          className='mb-4 text-sm text-primary-600 hover:underline dark:text-primary-400'
         >
           {showHistory ? 'Hide' : 'Show'} History ({history.length})
         </button>
@@ -136,23 +142,23 @@ const InteractiveCounter = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="border-t border-gray-200 dark:border-gray-700 pt-4 overflow-hidden"
+              className='overflow-hidden border-t border-gray-200 pt-4 dark:border-gray-700'
             >
-              <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              <div className='mb-2 text-sm text-gray-600 dark:text-gray-400'>
                 Recent values:
               </div>
-              <div className="flex flex-wrap gap-2 justify-center">
+              <div className='flex flex-wrap justify-center gap-2'>
                 {history.slice(-8).map((value, index) => (
                   <motion.span
                     key={index}
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className={`px-2 py-1 rounded text-xs ${
-                      value > 0 
+                    className={`rounded px-2 py-1 text-xs ${
+                      value > 0
                         ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
-                        : value < 0 
-                        ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
-                        : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
+                        : value < 0
+                          ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
+                          : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
                     }`}
                   >
                     {value}

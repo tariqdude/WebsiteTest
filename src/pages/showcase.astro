@@ -33,57 +33,71 @@ import FrameworkDemo from '../components/ui/FrameworkDemo.tsx';
 import { technologyStats } from '../data/stats.js';
 ---
 
-<Layout 
-  title="Ultimate Showcase - All Features Demo" 
-  description="Experience every single advanced component and feature in action - the ultimate demonstration of modern web development capabilities."
+<Layout
+  title='Ultimate Showcase - All Features Demo'
+  description='Experience every single advanced component and feature in action - the ultimate demonstration of modern web development capabilities.'
 >
   <!-- Hero Section -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20 py-20">
+  <section
+    class='relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 py-20 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20'
+  >
     <AnimatedBackground client:visible />
-    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-        <span class="block">Ultimate</span>
-        <span class="gradient-text block animate-gradient-x bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600">Component Showcase</span>
+    <div class='container relative mx-auto px-4 text-center sm:px-6 lg:px-8'>
+      <h1
+        class='mb-6 text-4xl font-bold text-gray-900 dark:text-white md:text-6xl'
+      >
+        <span class='block'>Ultimate</span>
+        <span
+          class='gradient-text animate-gradient-x block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600'
+          >Component Showcase</span
+        >
       </h1>
-      
-      <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-        Every single advanced feature and component demonstrated in one comprehensive showcase
+
+      <p
+        class='mx-auto mb-8 max-w-3xl text-xl text-gray-600 dark:text-gray-300 md:text-2xl'
+      >
+        Every single advanced feature and component demonstrated in one
+        comprehensive showcase
       </p>
 
-      <div class="mb-12">
+      <div class='mb-12'>
         <PerformanceMetrics client:load />
       </div>
     </div>
   </section>
 
   <!-- Reliable Demo Section - Always Working -->
-  <section class="py-16 bg-white dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+  <section class='bg-white py-16 dark:bg-gray-900'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         🚀 Interactive Demos
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
         Simple, reliable components to demonstrate multi-framework integration
       </p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+      <div
+        class='mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'
+      >
         <!-- Simple React Demo -->
-        <div class="space-y-4">
-          <SimpleDemo client:load title="React Counter" type="counter" />
+        <div class='space-y-4'>
+          <SimpleDemo client:load title='React Counter' type='counter' />
         </div>
-        
+
         <!-- Simple Color Demo -->
-        <div class="space-y-4">
-          <SimpleColorDemo client:load title="React Color Picker" />
+        <div class='space-y-4'>
+          <SimpleColorDemo client:load title='React Color Picker' />
         </div>
-        
+
         <!-- Fallback Demo -->
-        <div class="space-y-4">
-          <SimpleFallback 
-            title="Advanced Features"
-            description="Complex components loading below"
-            type="dashboard"
-            framework="Multi-Framework"
+        <div class='space-y-4'>
+          <SimpleFallback
+            title='Advanced Features'
+            description='Complex components loading below'
+            type='dashboard'
+            framework='Multi-Framework'
           />
         </div>
       </div>
@@ -91,29 +105,39 @@ import { technologyStats } from '../data/stats.js';
   </section>
 
   <!-- Basic Interactive Components -->
-  <section class="py-16 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+  <section class='bg-gray-50 py-16 dark:bg-gray-800'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-12 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         🎯 Core Interactive Components
       </h2>
-      
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+      <div class='grid grid-cols-1 gap-12 lg:grid-cols-2'>
         <!-- React Component -->
-        <div class="space-y-4">
-          <FrameworkDemo client:load framework="React" title="Interactive Counter">
+        <div class='space-y-4'>
+          <FrameworkDemo
+            client:load
+            framework='React'
+            title='Interactive Counter'
+          >
             <InteractiveCounter client:load />
           </FrameworkDemo>
         </div>
-        
+
         <!-- Vue Component -->
-        <div class="space-y-4">
-          <FrameworkDemo client:load framework="Vue" title="Color Palette">
+        <div class='space-y-4'>
+          <FrameworkDemo client:load framework='Vue' title='Color Palette'>
             <ColorPalette client:visible />
           </FrameworkDemo>
-          
+
           <!-- Additional Vue Demo -->
-          <div class="mt-4">
-            <FrameworkDemo client:load framework="Vue" title="Simple Color Demo">
+          <div class='mt-4'>
+            <FrameworkDemo
+              client:load
+              framework='Vue'
+              title='Simple Color Demo'
+            >
               <VueSimpleColorDemo client:visible />
             </FrameworkDemo>
           </div>
@@ -123,57 +147,77 @@ import { technologyStats } from '../data/stats.js';
   </section>
 
   <!-- 3D Graphics Section -->
-  <section class="py-16 bg-white dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+  <section class='bg-white py-16 dark:bg-gray-900'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         🎮 3D WebGL Graphics
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
-        Real-time Three.js scene with lighting, shadows, and interactive controls
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
+        Real-time Three.js scene with lighting, shadows, and interactive
+        controls
       </p>
-      
+
       <!-- Advanced 3D Scene with Error Boundary -->
-      <FrameworkDemo client:load framework="React + Three.js" title="3D WebGL Scene">
+      <FrameworkDemo
+        client:load
+        framework='React + Three.js'
+        title='3D WebGL Scene'
+      >
         <Advanced3DScene client:visible />
       </FrameworkDemo>
     </div>
   </section>
 
   <!-- Data Visualization Section -->
-  <section class="py-16 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+  <section class='bg-gray-50 py-16 dark:bg-gray-800'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         📊 Advanced Data Visualization
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
-        D3.js + Chart.js integration with real-time updates and interactive elements
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
+        D3.js + Chart.js integration with real-time updates and interactive
+        elements
       </p>
-      
+
       <!-- Advanced Data Visualization with Error Boundary -->
-      <FrameworkDemo client:load framework="React + D3.js" title="Data Visualization Dashboard">
+      <FrameworkDemo
+        client:load
+        framework='React + D3.js'
+        title='Data Visualization Dashboard'
+      >
         <DataVisualizationDashboard client:visible />
       </FrameworkDemo>
     </div>
   </section>
 
   <!-- Multi-Framework Grid -->
-  <section class="py-16 bg-white dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
-        🚀 Multi-Framework Excellence  
+  <section class='bg-white py-16 dark:bg-gray-900'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
+        🚀 Multi-Framework Excellence
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
         Different JavaScript frameworks working together seamlessly
       </p>
-      
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <div class='grid grid-cols-1 gap-8 lg:grid-cols-2'>
         <!-- Svelte Component -->
-        <FrameworkDemo client:load framework="Svelte" title="Skills Dashboard">
+        <FrameworkDemo client:load framework='Svelte' title='Skills Dashboard'>
           <SvelteSkillsDashboard client:visible />
         </FrameworkDemo>
 
         <!-- Solid.js Component -->
-        <FrameworkDemo client:load framework="Solid.js" title="State Management Demo">
+        <FrameworkDemo
+          client:load
+          framework='Solid.js'
+          title='State Management Demo'
+        >
           <SolidStateDemo client:visible />
         </FrameworkDemo>
       </div>
@@ -181,111 +225,140 @@ import { technologyStats } from '../data/stats.js';
   </section>
 
   <!-- Advanced Forms -->
-  <section class="py-16 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+  <section class='bg-gray-50 py-16 dark:bg-gray-800'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         📝 Professional Form System
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
         React Hook Form + Zod validation + TypeScript for bulletproof forms
       </p>
-      <FrameworkDemo client:load framework="React + TypeScript" title="Advanced Form System">
+      <FrameworkDemo
+        client:load
+        framework='React + TypeScript'
+        title='Advanced Form System'
+      >
         <AdvancedForm client:visible />
       </FrameworkDemo>
     </div>
   </section>
 
   <!-- Code Editor -->
-  <section class="py-16 bg-white dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+  <section class='bg-white py-16 dark:bg-gray-900'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         💻 Monaco Code Editor
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
         Full VS Code editor experience with syntax highlighting and IntelliSense
       </p>
-      <FrameworkDemo client:load framework="React + Monaco" title="Code Editor">
+      <FrameworkDemo client:load framework='React + Monaco' title='Code Editor'>
         <CodeEditorShowcase client:idle />
       </FrameworkDemo>
     </div>
   </section>
 
   <!-- Animation Studio -->
-  <section class="py-16 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+  <section class='bg-gray-50 py-16 dark:bg-gray-800'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         🎬 GSAP Animation Studio
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
         Professional animations with GreenSock's industry-standard library
       </p>
-      <FrameworkDemo client:load framework="React + GSAP" title="Animation Studio">
+      <FrameworkDemo
+        client:load
+        framework='React + GSAP'
+        title='Animation Studio'
+      >
         <GSAPAnimationShowcase client:visible />
       </FrameworkDemo>
     </div>
   </section>
 
   <!-- Preact Performance -->
-  <section class="py-16 bg-white dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+  <section class='bg-white py-16 dark:bg-gray-900'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         ⚡ Preact Lightweight Demo
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
         Same React API but only 3KB - perfect for performance-critical apps
       </p>
-      <FrameworkDemo client:load framework="Preact" title="Lightweight Dashboard">
+      <FrameworkDemo
+        client:load
+        framework='Preact'
+        title='Lightweight Dashboard'
+      >
         <PreactMiniDashboard client:visible />
       </FrameworkDemo>
     </div>
   </section>
 
   <!-- Interactive Terminal -->
-  <section class="py-16 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
+  <section class='bg-gray-50 py-16 dark:bg-gray-800'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h2
+        class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
+      >
         🖥️ Interactive Terminal
       </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-12">
-        Fully functional terminal with command history and file system simulation
+      <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
+        Fully functional terminal with command history and file system
+        simulation
       </p>
-      <FrameworkDemo client:load framework="React + Terminal" title="Interactive Terminal">
+      <FrameworkDemo
+        client:load
+        framework='React + Terminal'
+        title='Interactive Terminal'
+      >
         <InteractiveTerminal client:visible />
       </FrameworkDemo>
     </div>
   </section>
 
   <!-- Final Stats -->
-  <section class="py-20 bg-gradient-to-br from-purple-600 to-blue-600 text-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6">
-        🏆 Showcase Complete!
-      </h2>
-      <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+  <section
+    class='bg-gradient-to-br from-purple-600 to-blue-600 py-20 text-white'
+  >
+    <div class='container mx-auto px-4 text-center sm:px-6 lg:px-8'>
+      <h2 class='mb-6 text-3xl font-bold md:text-5xl'>🏆 Showcase Complete!</h2>
+      <p class='mx-auto mb-8 max-w-2xl text-xl opacity-90'>
         You've experienced the full power of modern web development in action
       </p>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-        {technologyStats.map((stat) => (
-          <div class="text-center">
-            <div class="text-4xl font-bold mb-2">{stat.value}</div>
-            <div class="text-lg opacity-80">{stat.label}</div>
-          </div>
-        ))}
+
+      <div class='mb-12 grid grid-cols-2 gap-8 md:grid-cols-4'>
+        {
+          technologyStats.map((stat) => (
+            <div class='text-center'>
+              <div class='mb-2 text-4xl font-bold'>{stat.value}</div>
+              <div class='text-lg opacity-80'>{stat.label}</div>
+            </div>
+          ))
+        }
       </div>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+
+      <div class='flex flex-col justify-center gap-4 sm:flex-row'>
         <a
-          href="/WebsiteTest/"
-          class="bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
+          href='/WebsiteTest/'
+          class='inline-flex items-center justify-center rounded-lg bg-white px-8 py-4 font-semibold text-purple-600 transition-colors hover:bg-gray-100'
         >
           ← Back to Home
         </a>
         <a
-          href="https://github.com/tariqdude/WebsiteTest"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="border border-white/30 text-white hover:bg-white/10 px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center justify-center"
+          href='https://github.com/tariqdude/WebsiteTest'
+          target='_blank'
+          rel='noopener noreferrer'
+          class='inline-flex items-center justify-center rounded-lg border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10'
         >
           View Source Code
         </a>

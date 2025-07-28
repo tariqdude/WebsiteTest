@@ -15,13 +15,15 @@
     "preview:host": "astro preview --host",
     "check": "astro check",
     "check:types": "tsc --noEmit",
-    "lint": "astro check && tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "astro check && tsc --noEmit && npm run format:check",
     "clean": "rm -rf dist .astro node_modules/.vite",
     "clean:all": "npm run clean && rm -rf node_modules package-lock.json",
-    "deploy:health": "node deployment-manager.mjs health",
-    "deploy:validate": "node deployment-manager.mjs validate",
-    "deploy:fix": "node deployment-manager.mjs fix",
-    "deploy:build-test": "node deployment-manager.mjs build-test",
+    "deploy:health": "node tools/deployment-manager.mjs health",
+    "deploy:validate": "node tools/deployment-manager.mjs validate",
+    "deploy:fix": "node tools/deployment-manager.mjs fix",
+    "deploy:build-test": "node tools/deployment-manager.mjs build-test",
     "deploy:prep": "npm run deploy:fix && npm run build:gh-pages",
     "diagnostics": "npm run deploy:health --verbose",
     "astro": "astro"
@@ -65,6 +67,9 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "astro-seo": "^0.8.4",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "typescript": "^5.8.3"
   }
 }

@@ -1,13 +1,13 @@
 /**
  * Optimized Constants for Astro Showcase
- * 
+ *
  * Organized by usage and importance:
  * 1. Core Application Constants
  * 2. Framework Configuration
  * 3. UI & Theme Constants
  * 4. Performance Thresholds
  * 5. Navigation & Routing
- * 
+ *
  * @version 2.0.0 - Optimized & Enhanced
  */
 
@@ -17,7 +17,8 @@
 
 export const SITE_CONFIG = {
   title: 'Astro Ultimate Showcase',
-  description: 'The most comprehensive demonstration of modern web development capabilities',
+  description:
+    'The most comprehensive demonstration of modern web development capabilities',
   author: 'Astro Showcase Team',
   url: 'https://tariqdude.github.io/WebsiteTest',
   image: '/images/og-image.jpg',
@@ -31,7 +32,8 @@ export const SITE_CONFIG = {
 export const FRAMEWORKS = [
   {
     name: 'React',
-    description: 'Interactive state management, forms, animations, and real-time data',
+    description:
+      'Interactive state management, forms, animations, and real-time data',
     icon: '⚛️',
     bg: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
     color: '#61DAFB',
@@ -45,7 +47,8 @@ export const FRAMEWORKS = [
   },
   {
     name: 'Svelte',
-    description: 'Built-in animations with motion library and intersection observers',
+    description:
+      'Built-in animations with motion library and intersection observers',
     icon: '🧡',
     bg: 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800',
     color: '#FF3E00',
@@ -123,11 +126,11 @@ export const BREAKPOINTS = {
 
 export const PERFORMANCE_THRESHOLDS = {
   good: {
-    fcp: 1800,    // First Contentful Paint
-    lcp: 2500,    // Largest Contentful Paint
-    fid: 100,     // First Input Delay
-    cls: 0.1,     // Cumulative Layout Shift
-    ttfb: 800,    // Time to First Byte
+    fcp: 1800, // First Contentful Paint
+    lcp: 2500, // Largest Contentful Paint
+    fid: 100, // First Input Delay
+    cls: 0.1, // Cumulative Layout Shift
+    ttfb: 800, // Time to First Byte
   },
   needsImprovement: {
     fcp: 3000,
@@ -137,8 +140,8 @@ export const PERFORMANCE_THRESHOLDS = {
     ttfb: 1800,
   },
   memory: {
-    warning: 50 * 1024 * 1024,    // 50MB
-    critical: 100 * 1024 * 1024,  // 100MB
+    warning: 50 * 1024 * 1024, // 50MB
+    critical: 100 * 1024 * 1024, // 100MB
   },
 } as const;
 
@@ -223,3 +226,5 @@ export const UI_CONSTANTS = {
 export const PERFORMANCE_CONSTANTS = {
   PERFORMANCE_THRESHOLDS,
 } as const;
+
+export * from './stats';

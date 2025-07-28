@@ -74,37 +74,41 @@ class QuickTester {
 
     await this.test('Build Test', async () => {
       const buildStart = performance.now();
-      await execAsync('npm run build:gh-pages', { 
+      await execAsync('npm run build:gh-pages', {
         timeout: 120000,
-        env: { ...process.env, NODE_ENV: 'production' }
+        env: { ...process.env, NODE_ENV: 'production' },
       });
-      
+
       const buildTime = (performance.now() - buildStart) / 1000;
-      
+
       if (!existsSync('dist/index.html')) {
         throw new Error('No index.html generated');
       }
-      
+
       const files = this.countFiles('dist');
       if (files < 5) {
         return 'warn';
       }
-      
-      this.log('info', `Build completed in ${buildTime.toFixed(1)}s, ${files} files generated`);
+
+      this.log(
+        'info',
+        `Build completed in ${buildTime.toFixed(1)}s, ${files} files generated`
+      );
       return true;
     });
 
     // Results
-    const total = this.results.passed + this.results.failed + this.results.warnings;
+    const total =
+      this.results.passed + this.results.failed + this.results.warnings;
     const totalTime = (performance.now() - startTime) / 1000;
-    
+
     console.log('\n' + '='.repeat(50));
     console.log(`🧪 Quick Test Results (${totalTime.toFixed(1)}s)`);
     console.log('='.repeat(50));
     console.log(`✅ Passed: ${this.results.passed}/${total}`);
     console.log(`❌ Failed: ${this.results.failed}/${total}`);
     console.log(`⚠️  Warnings: ${this.results.warnings}/${total}`);
-    
+
     if (this.results.failed === 0) {
       console.log('\n🚀 Quick test PASSED - Ready for deployment!');
       process.exit(0);

@@ -23,7 +23,7 @@ for (let i = 0; i <= 10; i++) {
 }
 
 // Try modifying this code and run it!`,
-    
+
     typescript: `// TypeScript with type safety
 interface User {
   id: number;
@@ -126,7 +126,7 @@ print(f"Even squares: {squares}")`,
         }
     </script>
 </body>
-</html>`
+</html>`,
   };
 
   useEffect(() => {
@@ -136,7 +136,7 @@ print(f"Even squares: {squares}")`,
           setIsLoading(true);
           // Dynamic import for better code splitting
           const monaco = await import('monaco-editor');
-          
+
           // Configure Monaco Editor
           monaco.editor.defineTheme('custom-dark', {
             base: 'vs-dark',
@@ -144,8 +144,8 @@ print(f"Even squares: {squares}")`,
             rules: [],
             colors: {
               'editor.background': '#1e1e1e',
-              'editor.foreground': '#d4d4d4'
-            }
+              'editor.foreground': '#d4d4d4',
+            },
           });
 
           const editor = monaco.editor.create(editorRef.current, {
@@ -167,7 +167,7 @@ print(f"Even squares: {squares}")`,
             folding: true,
             lineDecorationsWidth: 60,
             lineNumbersMinChars: 3,
-            glyphMargin: true
+            glyphMargin: true,
           });
 
           monacoRef.current = editor;
@@ -204,12 +204,12 @@ print(f"Even squares: {squares}")`,
 
   const runCode = async () => {
     if (!monacoRef.current) return;
-    
+
     setIsRunning(true);
     setOutput('Running...');
-    
+
     const code = monacoRef.current.getValue();
-    
+
     try {
       // Simulate code execution
       if (language === 'javascript') {
@@ -218,16 +218,20 @@ print(f"Even squares: {squares}")`,
         const mockConsole = {
           log: (...args) => {
             consoleLogs.push(args.join(' '));
-          }
+          },
         };
-        
+
         // Execute code in isolated context
         const func = new Function('console', code);
         func(mockConsole);
-        
-        setOutput(consoleLogs.join('\n') || 'Code executed successfully (no output)');
+
+        setOutput(
+          consoleLogs.join('\n') || 'Code executed successfully (no output)'
+        );
       } else {
-        setOutput(`Code execution simulation for ${language}:\n\n${code.slice(0, 200)}${code.length > 200 ? '...' : ''}\n\n✅ Syntax appears valid!`);
+        setOutput(
+          `Code execution simulation for ${language}:\n\n${code.slice(0, 200)}${code.length > 200 ? '...' : ''}\n\n✅ Syntax appears valid!`
+        );
       }
     } catch (error) {
       setOutput(`Error: ${error.message}`);
@@ -242,71 +246,81 @@ print(f"Even squares: {squares}")`,
     { value: 'python', label: 'Python' },
     { value: 'html', label: 'HTML' },
     { value: 'css', label: 'CSS' },
-    { value: 'json', label: 'JSON' }
+    { value: 'json', label: 'JSON' },
   ];
 
   const themes = [
     { value: 'vs-dark', label: 'Dark' },
     { value: 'vs', label: 'Light' },
-    { value: 'hc-black', label: 'High Contrast' }
+    { value: 'hc-black', label: 'High Contrast' },
   ];
 
   return (
-    <div className="w-full bg-white dark:bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Monaco Code Editor</h3>
-        <p className="text-purple-100">Full VS Code editor experience in the browser</p>
+    <div className='w-full overflow-hidden rounded-xl bg-white shadow-2xl dark:bg-gray-900'>
+      <div className='bg-gradient-to-r from-purple-600 to-blue-600 p-6'>
+        <h3 className='mb-2 text-2xl font-bold text-white'>
+          Monaco Code Editor
+        </h3>
+        <p className='text-purple-100'>
+          Full VS Code editor experience in the browser
+        </p>
       </div>
 
-      <div className="p-6">
+      <div className='p-6'>
         {isLoading && (
-          <div className="flex items-center justify-center h-64 bg-gray-100 dark:bg-gray-800 rounded-lg mb-6">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-2"></div>
-              <p className="text-gray-600 dark:text-gray-400">Loading Monaco Editor...</p>
+          <div className='mb-6 flex h-64 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800'>
+            <div className='text-center'>
+              <div className='mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-b-2 border-purple-600'></div>
+              <p className='text-gray-600 dark:text-gray-400'>
+                Loading Monaco Editor...
+              </p>
             </div>
           </div>
         )}
-        
+
         {/* Controls */}
-        <div className="flex flex-wrap gap-4 mb-6">
+        <div className='mb-6 flex flex-wrap gap-4'>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className='mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300'>
               Language
             </label>
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
               disabled={isLoading}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              className='rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'
             >
-              {languages.map(lang => (
-                <option key={lang.value} value={lang.value}>{lang.label}</option>
+              {languages.map((lang) => (
+                <option key={lang.value} value={lang.value}>
+                  {lang.label}
+                </option>
               ))}
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className='mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300'>
               Theme
             </label>
             <select
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
               disabled={isLoading}
-              className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
+              className='rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'
             >
-              {themes.map(t => (
-                <option key={t.value} value={t.value}>{t.label}</option>
+              {themes.map((t) => (
+                <option key={t.value} value={t.value}>
+                  {t.label}
+                </option>
               ))}
             </select>
           </div>
 
-          <div className="flex items-end">
+          <div className='flex items-end'>
             <button
               onClick={runCode}
               disabled={isRunning || isLoading}
-              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className='rounded-lg bg-green-600 px-6 py-2 text-white transition-colors duration-200 hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50'
             >
               {isRunning ? 'Running...' : 'Run Code'}
             </button>
@@ -314,29 +328,29 @@ print(f"Even squares: {squares}")`,
         </div>
 
         {/* Editor */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
-            <div className="bg-gray-100 dark:bg-gray-700 px-4 py-2 border-b border-gray-300 dark:border-gray-600">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+          <div className='overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600'>
+            <div className='border-b border-gray-300 bg-gray-100 px-4 py-2 dark:border-gray-600 dark:bg-gray-700'>
+              <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
                 Editor
               </span>
             </div>
-            <div 
-              ref={editorRef} 
+            <div
+              ref={editorRef}
               style={{ height: '400px' }}
-              className="bg-white dark:bg-gray-800"
+              className='bg-white dark:bg-gray-800'
             />
           </div>
 
           {/* Output */}
-          <div className="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
-            <div className="bg-gray-100 dark:bg-gray-700 px-4 py-2 border-b border-gray-300 dark:border-gray-600">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <div className='overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600'>
+            <div className='border-b border-gray-300 bg-gray-100 px-4 py-2 dark:border-gray-600 dark:bg-gray-700'>
+              <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
                 Output
               </span>
             </div>
-            <div className="p-4 h-96 overflow-y-auto bg-black text-green-400 font-mono text-sm">
-              <pre className="whitespace-pre-wrap">
+            <div className='h-96 overflow-y-auto bg-black p-4 font-mono text-sm text-green-400'>
+              <pre className='whitespace-pre-wrap'>
                 {output || 'Click "Run Code" to see output...'}
               </pre>
             </div>
@@ -344,7 +358,7 @@ print(f"Even squares: {squares}")`,
         </div>
 
         {/* Features List */}
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className='mt-6 grid grid-cols-2 gap-4 md:grid-cols-4'>
           {[
             'IntelliSense',
             'Syntax Highlighting',
@@ -353,18 +367,22 @@ print(f"Even squares: {squares}")`,
             'Multi-language',
             'Themes',
             'Auto-complete',
-            'Error Detection'
+            'Error Detection',
           ].map((feature, index) => (
-            <div key={index} className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg text-center">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            <div
+              key={index}
+              className='rounded-lg bg-gray-50 p-3 text-center dark:bg-gray-800'
+            >
+              <span className='text-sm font-medium text-gray-700 dark:text-gray-300'>
                 ✓ {feature}
               </span>
             </div>
           ))}
         </div>
 
-        <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
-          Powered by Monaco Editor • Same engine as VS Code • Full editing experience
+        <div className='mt-4 text-center text-sm text-gray-500 dark:text-gray-400'>
+          Powered by Monaco Editor • Same engine as VS Code • Full editing
+          experience
         </div>
       </div>
     </div>

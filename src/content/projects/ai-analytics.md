@@ -1,17 +1,20 @@
 ---
-title: "AI-Powered Analytics Dashboard"
-description: "An intelligent analytics dashboard that uses machine learning to provide actionable insights from complex datasets."
-tech: ["Vue.js", "Python", "TensorFlow", "D3.js", "PostgreSQL"]
-github: "https://github.com/example/ai-analytics"
-demo: "https://analytics.example.com"
-image: "/images/projects/ai-dashboard.svg"
+title: 'AI-Powered Analytics Dashboard'
+description:
+  'An intelligent analytics dashboard that uses machine learning to provide
+  actionable insights from complex datasets.'
+tech: ['Vue.js', 'Python', 'TensorFlow', 'D3.js', 'PostgreSQL']
+github: 'https://github.com/example/ai-analytics'
+demo: 'https://analytics.example.com'
+image: '/images/projects/ai-dashboard.svg'
 featured: true
 order: 2
 ---
 
 # AI-Powered Analytics Dashboard
 
-Transform raw data into actionable insights with machine learning-powered analytics and beautiful visualizations.
+Transform raw data into actionable insights with machine learning-powered
+analytics and beautiful visualizations.
 
 ## Features
 

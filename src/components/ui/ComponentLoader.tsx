@@ -13,9 +13,9 @@ interface ComponentLoaderProps {
 }
 
 const LoadingSkeleton = ({ children }: { children?: ReactNode }) => (
-  <div className="animate-pulse">
-    <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-      <div className="text-gray-500 dark:text-gray-400">
+  <div className='animate-pulse'>
+    <div className='flex h-32 items-center justify-center rounded-lg bg-gray-200 dark:bg-gray-700'>
+      <div className='text-gray-500 dark:text-gray-400'>
         {children || 'Loading component...'}
       </div>
     </div>
@@ -23,17 +23,19 @@ const LoadingSkeleton = ({ children }: { children?: ReactNode }) => (
 );
 
 const TimeoutFallback = () => (
-  <div className="p-6 border-2 border-yellow-200 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 dark:border-yellow-800">
-    <div className="flex items-center mb-2">
-      <div className="text-yellow-500 text-xl mr-2">⏰</div>
-      <h3 className="font-bold text-yellow-800 dark:text-yellow-200">Component Timeout</h3>
+  <div className='rounded-lg border-2 border-yellow-200 bg-yellow-50 p-6 dark:border-yellow-800 dark:bg-yellow-900/20'>
+    <div className='mb-2 flex items-center'>
+      <div className='mr-2 text-xl text-yellow-500'>⏰</div>
+      <h3 className='font-bold text-yellow-800 dark:text-yellow-200'>
+        Component Timeout
+      </h3>
     </div>
-    <p className="text-yellow-700 dark:text-yellow-300">
+    <p className='text-yellow-700 dark:text-yellow-300'>
       This component is taking longer than expected to load.
     </p>
     <button
       onClick={() => window.location.reload()}
-      className="mt-3 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+      className='mt-3 rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500'
     >
       Reload Page
     </button>
@@ -47,7 +49,7 @@ export const ComponentLoader = ({
   errorFallback,
   timeout = 10000,
   onError,
-  onLoad
+  onLoad,
 }: ComponentLoaderProps) => {
   const [hasTimedOut, setHasTimedOut] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -87,7 +89,9 @@ export const ComponentLoader = ({
 };
 
 // Hook for dynamic component loading with error handling
-export const useDynamicComponent = (importFn: () => Promise<{ default: ComponentType<any> }>) => {
+export const useDynamicComponent = (
+  importFn: () => Promise<{ default: ComponentType<any> }>
+) => {
   const [Component, setComponent] = useState<ComponentType<any> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -118,10 +122,10 @@ export const useDynamicComponent = (importFn: () => Promise<{ default: Component
 };
 
 // Wrapper for lazy-loaded components
-export const LazyComponentWrapper = ({ 
-  importFn, 
-  fallback, 
-  ...props 
+export const LazyComponentWrapper = ({
+  importFn,
+  fallback,
+  ...props
 }: {
   importFn: () => Promise<{ default: ComponentType<any> }>;
   fallback?: ReactNode;
@@ -135,17 +139,19 @@ export const LazyComponentWrapper = ({
 
   if (error) {
     return (
-      <div className="p-6 border-2 border-red-200 rounded-lg bg-red-50 dark:bg-red-900/20 dark:border-red-800">
-        <div className="flex items-center mb-2">
-          <div className="text-red-500 text-xl mr-2">❌</div>
-          <h3 className="font-bold text-red-800 dark:text-red-200">Failed to Load Component</h3>
+      <div className='rounded-lg border-2 border-red-200 bg-red-50 p-6 dark:border-red-800 dark:bg-red-900/20'>
+        <div className='mb-2 flex items-center'>
+          <div className='mr-2 text-xl text-red-500'>❌</div>
+          <h3 className='font-bold text-red-800 dark:text-red-200'>
+            Failed to Load Component
+          </h3>
         </div>
-        <p className="text-red-700 dark:text-red-300 mb-3">
+        <p className='mb-3 text-red-700 dark:text-red-300'>
           Error: {error.message}
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+          className='rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500'
         >
           Reload Page
         </button>

@@ -9,10 +9,5 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": [
-    "astro.config.*",
-    "vite.config.*",
-    "deployment-manager.mjs",
-    "tools/*"
-  ]
+  "include": ["astro.config.*", "vite.config.*", "tools/*"]
 }

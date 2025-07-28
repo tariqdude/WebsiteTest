@@ -10,26 +10,38 @@ const GSAPAnimationShowcase = () => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const colors = [
-    '#3B82F6', '#10B981', '#8B5CF6', '#EF4444', '#F59E0B', '#EC4899'
+    '#3B82F6',
+    '#10B981',
+    '#8B5CF6',
+    '#EF4444',
+    '#F59E0B',
+    '#EC4899',
   ];
 
   // Use GSAP context for safe and automatic cleanup
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Set initial states for all elements
-      gsap.set(boxesRef.current, { 
+      gsap.set(boxesRef.current, {
         opacity: 1,
         x: 0,
-        y: 0, 
-        rotation: 0, 
+        y: 0,
+        rotation: 0,
         scale: 1,
-        borderRadius: "8px",
+        borderRadius: '8px',
       });
       // Set initial background colors using a function
       boxesRef.current.forEach((box, index) => {
         gsap.set(box, { backgroundColor: colors[index % colors.length] });
       });
-      gsap.set(titleRef.current, { opacity: 1, y: 0, scale: 1, rotationX: 0, rotationY: 0, color: "#374151" });
+      gsap.set(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotationX: 0,
+        rotationY: 0,
+        color: '#374151',
+      });
     }, containerRef);
 
     return () => ctx.revert(); // Cleanup GSAP animations on component unmount
@@ -55,24 +67,25 @@ const GSAPAnimationShowcase = () => {
         scale: 0.2,
         duration: 0.8,
         stagger: 0.08,
-        ease: "back.out(1.7)",
+        ease: 'back.out(1.7)',
       });
     },
     wave: () => {
       const tl = createMasterTimeline();
-      tl.fromTo(boxesRef.current, 
+      tl.fromTo(
+        boxesRef.current,
         { y: 0 },
         {
           y: -35,
           duration: 0.7,
           stagger: {
             each: 0.1,
-            from: "center",
-            grid: "auto"
+            from: 'center',
+            grid: 'auto',
           },
           yoyo: true,
           repeat: 1,
-          ease: "power2.inOut",
+          ease: 'power2.inOut',
         }
       );
     },
@@ -84,7 +97,7 @@ const GSAPAnimationShowcase = () => {
         x: (i) => Math.cos(i * 0.8) * 90,
         y: (i) => Math.sin(i * 0.8) * 90,
         duration: 2.5,
-        ease: "power2.inOut",
+        ease: 'power2.inOut',
         yoyo: true,
         repeat: 1,
       });
@@ -92,21 +105,21 @@ const GSAPAnimationShowcase = () => {
     morphing: () => {
       const tl = createMasterTimeline();
       tl.to(boxesRef.current, {
-          borderRadius: "50%",
-          backgroundColor: "#10B981",
-          scale: 1.2,
-          duration: 0.5,
-          stagger: 0.05
-        })
+        borderRadius: '50%',
+        backgroundColor: '#10B981',
+        scale: 1.2,
+        duration: 0.5,
+        stagger: 0.05,
+      })
         .to(boxesRef.current, {
-          borderRadius: "10px",
-          backgroundColor: "#8B5CF6",
+          borderRadius: '10px',
+          backgroundColor: '#8B5CF6',
           scale: 0.8,
           duration: 0.5,
-          stagger: 0.05
+          stagger: 0.05,
         })
         .to(boxesRef.current, {
-          borderRadius: "8px",
+          borderRadius: '8px',
           scale: 1,
           duration: 0.5,
           stagger: 0.05,
@@ -117,40 +130,48 @@ const GSAPAnimationShowcase = () => {
     physics: () => {
       const tl = createMasterTimeline();
       boxesRef.current.forEach((box) => {
-        tl.to(box, {
-          y: -250,
-          x: (Math.random() - 0.5) * 350,
-          rotation: Math.random() * 480,
-          duration: 1.2,
-          ease: "power2.out",
-        }, 0); // Start all at the same time
-        tl.to(box, {
-          y: 0,
-          x: 0,
-          rotation: 0,
-          duration: 1.2,
-          ease: "bounce.out",
-        }, ">-0.2"); // Stagger the return
+        tl.to(
+          box,
+          {
+            y: -250,
+            x: (Math.random() - 0.5) * 350,
+            rotation: Math.random() * 480,
+            duration: 1.2,
+            ease: 'power2.out',
+          },
+          0
+        ); // Start all at the same time
+        tl.to(
+          box,
+          {
+            y: 0,
+            x: 0,
+            rotation: 0,
+            duration: 1.2,
+            ease: 'bounce.out',
+          },
+          '>-0.2'
+        ); // Stagger the return
       });
     },
     text: () => {
       const tl = createMasterTimeline();
       tl.to(titleRef.current, {
-          scale: 1.25,
-          color: "#10B981",
-          duration: 0.4,
-          ease: "power2.out"
-        })
+        scale: 1.25,
+        color: '#10B981',
+        duration: 0.4,
+        ease: 'power2.out',
+      })
         .to(titleRef.current, {
           rotationX: 360,
           duration: 0.8,
-          ease: "power2.inOut"
+          ease: 'power2.inOut',
         })
         .to(titleRef.current, {
           scale: 1,
-          color: "#374151",
+          color: '#374151',
           duration: 0.4,
-          ease: "power2.inOut"
+          ease: 'power2.inOut',
         });
     },
   };
@@ -161,33 +182,41 @@ const GSAPAnimationShowcase = () => {
 
     const tl = gsap.timeline({ onComplete: onCompleteCallback });
 
-    tl.to(boxesRef.current, {
-      x: 0,
-      y: 0,
-      rotation: 0,
-      scale: 1,
-      opacity: 1,
-      borderRadius: "8px",
-      duration: 0.6,
-      ease: "power2.inOut",
-      stagger: 0.03,
-      // Ensure colors are reset correctly
-      backgroundColor: (i) => colors[i % colors.length],
-    }, 0);
-    
-    tl.to(titleRef.current, {
-      scale: 1,
-      rotationX: 0,
-      rotationY: 0,
-      color: "#374151",
-      duration: 0.6,
-      ease: "power2.inOut"
-    }, 0);
+    tl.to(
+      boxesRef.current,
+      {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        opacity: 1,
+        borderRadius: '8px',
+        duration: 0.6,
+        ease: 'power2.inOut',
+        stagger: 0.03,
+        // Ensure colors are reset correctly
+        backgroundColor: (i) => colors[i % colors.length],
+      },
+      0
+    );
+
+    tl.to(
+      titleRef.current,
+      {
+        scale: 1,
+        rotationX: 0,
+        rotationY: 0,
+        color: '#374151',
+        duration: 0.6,
+        ease: 'power2.inOut',
+      },
+      0
+    );
   };
 
   const runAnimation = (type) => {
     if (isAnimating) return;
-    
+
     setIsAnimating(true);
     setCurrentAnimation(type);
 
@@ -199,7 +228,7 @@ const GSAPAnimationShowcase = () => {
       }
     });
   };
-  
+
   const handleReset = () => {
     if (isAnimating) return;
     setIsAnimating(true);
@@ -217,72 +246,73 @@ const GSAPAnimationShowcase = () => {
   ];
 
   return (
-    <div ref={containerRef} className="w-full bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-xl shadow-2xl p-6">
-      <div className="text-center mb-8">
-        <h3 
+    <div
+      ref={containerRef}
+      className='w-full rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 p-6 shadow-2xl dark:from-gray-800 dark:to-gray-900'
+    >
+      <div className='mb-8 text-center'>
+        <h3
           ref={titleRef}
-          className="text-3xl font-bold text-gray-800 dark:text-white mb-2"
+          className='mb-2 text-3xl font-bold text-gray-800 dark:text-white'
         >
           GSAP Animation Studio
         </h3>
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className='text-gray-600 dark:text-gray-300'>
           Professional animations with GreenSock Animation Platform
         </p>
       </div>
 
       {/* Animation Controls */}
-      <div className="flex flex-wrap justify-center gap-3 mb-8">
+      <div className='mb-8 flex flex-wrap justify-center gap-3'>
         {animationButtons.map(({ key, label, color }) => (
           <button
             key={key}
             onClick={() => runAnimation(key)}
             disabled={isAnimating}
-            className={`px-4 py-2 ${color} text-white rounded-lg hover:opacity-90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium shadow-md hover:shadow-lg`}
+            className={`px-4 py-2 ${color} rounded-lg text-sm font-medium text-white shadow-md transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50`}
           >
             {label}
           </button>
         ))}
         <button
-          key="reset"
+          key='reset'
           onClick={handleReset}
           disabled={isAnimating}
-          className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:opacity-90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium shadow-md hover:shadow-lg"
+          className='rounded-lg bg-gray-500 px-4 py-2 text-sm font-medium text-white shadow-md transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50'
         >
           Reset
         </button>
       </div>
 
       {/* Animation Stage */}
-      <div 
-        className="relative h-96 bg-white dark:bg-gray-700 rounded-lg shadow-inner overflow-hidden mb-6"
-      >
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="grid grid-cols-6 gap-4">
+      <div className='relative mb-6 h-96 overflow-hidden rounded-lg bg-white shadow-inner dark:bg-gray-700'>
+        <div className='absolute inset-0 flex items-center justify-center'>
+          <div className='grid grid-cols-6 gap-4'>
             {Array.from({ length: 12 }).map((_, index) => (
               <div
                 key={index}
-                ref={el => boxesRef.current[index] = el}
-                className="w-12 h-12 rounded-lg shadow-lg"
-                style={{ 
-                  opacity: 0 // Initially hidden, revealed by useEffect
+                ref={(el) => (boxesRef.current[index] = el)}
+                className='h-12 w-12 rounded-lg shadow-lg'
+                style={{
+                  opacity: 0, // Initially hidden, revealed by useEffect
                 }}
               />
             ))}
           </div>
         </div>
-        
+
         {/* Stage indicators */}
-        <div className="absolute top-4 left-4">
-          <div className="bg-black bg-opacity-20 rounded-lg px-3 py-1 backdrop-blur-sm">
-            <span className="text-sm font-mono text-white">
+        <div className='absolute left-4 top-4'>
+          <div className='rounded-lg bg-black bg-opacity-20 px-3 py-1 backdrop-blur-sm'>
+            <span className='font-mono text-sm text-white'>
               Animation Stage
             </span>
           </div>
         </div>
-        
-        <div className="absolute bottom-4 right-4">
-          <div className="bg-black bg-opacity-20 rounded-lg px-3 py-1 backdrop-blur-sm">
-            <span className="text-sm font-mono text-white">
+
+        <div className='absolute bottom-4 right-4'>
+          <div className='rounded-lg bg-black bg-opacity-20 px-3 py-1 backdrop-blur-sm'>
+            <span className='font-mono text-sm text-white'>
               {isAnimating ? `Running: ${currentAnimation}` : 'Ready'}
             </span>
           </div>
@@ -290,19 +320,30 @@ const GSAPAnimationShowcase = () => {
       </div>
 
       {/* Features Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div className='mb-6 grid grid-cols-2 gap-4 md:grid-cols-4'>
         {[
           { icon: '⚡', title: 'High Performance', desc: '60fps animations' },
-          { icon: '🎬', title: 'Timeline Control', desc: 'Sequence animations' },
+          {
+            icon: '🎬',
+            title: 'Timeline Control',
+            desc: 'Sequence animations',
+          },
           { icon: '🔄', title: 'Advanced Easing', desc: 'Custom ease curves' },
-          { icon: '🎯', title: 'Precise Control', desc: 'Pixel-perfect timing' }
+          {
+            icon: '🎯',
+            title: 'Precise Control',
+            desc: 'Pixel-perfect timing',
+          },
         ].map((feature, index) => (
-          <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center shadow-md hover:shadow-lg transition-shadow">
-            <div className="text-2xl mb-2">{feature.icon}</div>
-            <h4 className="font-semibold text-gray-800 dark:text-white text-sm mb-1">
+          <div
+            key={index}
+            className='rounded-lg bg-white p-4 text-center shadow-md transition-shadow hover:shadow-lg dark:bg-gray-800'
+          >
+            <div className='mb-2 text-2xl'>{feature.icon}</div>
+            <h4 className='mb-1 text-sm font-semibold text-gray-800 dark:text-white'>
               {feature.title}
             </h4>
-            <p className="text-xs text-gray-600 dark:text-gray-400">
+            <p className='text-xs text-gray-600 dark:text-gray-400'>
               {feature.desc}
             </p>
           </div>
@@ -310,33 +351,34 @@ const GSAPAnimationShowcase = () => {
       </div>
 
       {/* Code Example */}
-      <div className="bg-gray-900 rounded-lg p-4">
-        <div className="text-green-400 font-mono text-sm">
-          <span className="text-gray-500">// GSAP Animation Example</span>
+      <div className='rounded-lg bg-gray-900 p-4'>
+        <div className='font-mono text-sm text-green-400'>
+          <span className='text-gray-500'>// GSAP Animation Example</span>
           <br />
-          <span className="text-blue-400">gsap</span>.
-          <span className="text-yellow-400">to</span>
-          <span className="text-white">(elements, {`{`}</span>
+          <span className='text-blue-400'>gsap</span>.
+          <span className='text-yellow-400'>to</span>
+          <span className='text-white'>(elements, {`{`}</span>
           <br />
-          <span className="ml-4 text-purple-400">y</span>
-          <span className="text-white">: -35,</span>
+          <span className='ml-4 text-purple-400'>y</span>
+          <span className='text-white'>: -35,</span>
           <br />
-          <span className="ml-4 text-purple-400">duration</span>
-          <span className="text-white">: 0.7,</span>
+          <span className='ml-4 text-purple-400'>duration</span>
+          <span className='text-white'>: 0.7,</span>
           <br />
-          <span className="ml-4 text-purple-400">stagger</span>
-          <span className="text-white">: 0.1,</span>
+          <span className='ml-4 text-purple-400'>stagger</span>
+          <span className='text-white'>: 0.1,</span>
           <br />
-          <span className="ml-4 text-purple-400">ease</span>
-          <span className="text-white">: </span>
-          <span className="text-green-300">"back.out(1.7)"</span>
+          <span className='ml-4 text-purple-400'>ease</span>
+          <span className='text-white'>: </span>
+          <span className='text-green-300'>"back.out(1.7)"</span>
           <br />
-          <span className="text-white">{`});`}</span>
+          <span className='text-white'>{`});`}</span>
         </div>
       </div>
 
-      <div className="text-center mt-4 text-sm text-gray-500 dark:text-gray-400">
-        Industry-standard animations • Used by major brands • Optimized performance
+      <div className='mt-4 text-center text-sm text-gray-500 dark:text-gray-400'>
+        Industry-standard animations • Used by major brands • Optimized
+        performance
       </div>
     </div>
   );

@@ -1,17 +1,17 @@
 /**
  * Optimized Core Type Definitions for Astro Showcase
- * 
+ *
  * Organized by actual usage and importance:
  * 1. Essential Base Types - Core primitive types used throughout
- * 2. Content & Collections - Blog posts, projects, team members  
+ * 2. Content & Collections - Blog posts, projects, team members
  * 3. UI & Components - Component props and styling
  * 4. Forms & Validation - Form handling and validation
  * 5. Performance & Monitoring - Performance tracking and metrics
  * 6. Data Visualization - Charts and graphs (Chart.js/D3.js)
  * 7. Utility & Helper Types - Advanced TypeScript utilities
  * 8. Framework Integration - Multi-framework support types
- * 
- * @author Astro Showcase Team  
+ *
+ * @author Astro Showcase Team
  * @version 3.0.0 - Optimized & Cleaned
  */
 
@@ -24,7 +24,13 @@ export type Timestamp = Date | string | number;
 export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type ComponentVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
+export type ComponentVariant =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info';
 
 // =============================================================================
 // 2. CONTENT & COLLECTIONS (Used by Astro content collections)
@@ -121,10 +127,21 @@ export interface ContactInfo {
 // 4. FORMS & VALIDATION (Used by React Hook Form components)
 // =============================================================================
 
-export type FormFieldType = 
-  | 'text' | 'email' | 'number' | 'textarea' | 'select' 
-  | 'checkbox' | 'radio' | 'file' | 'password' | 'tel' 
-  | 'url' | 'date' | 'time' | 'datetime-local';
+export type FormFieldType =
+  | 'text'
+  | 'email'
+  | 'number'
+  | 'textarea'
+  | 'select'
+  | 'checkbox'
+  | 'radio'
+  | 'file'
+  | 'password'
+  | 'tel'
+  | 'url'
+  | 'date'
+  | 'time'
+  | 'datetime-local';
 
 export interface FormFieldValidation {
   required?: boolean;
@@ -230,7 +247,8 @@ export interface ChartOptions {
 
 // Enhanced utility types for better type safety
 export type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;
-export type OptionalKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+export type OptionalKeys<T, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>;
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
@@ -261,15 +279,21 @@ export type SafeHTML = Brand<string, 'SafeHTML'>;
 // Event handlers for React, Preact, Solid.js
 export type EventHandler<T = Event> = (event: T) => void;
 export type ClickHandler = EventHandler<MouseEvent>;
-export type ChangeHandler<T = HTMLInputElement> = (event: Event & { target: T }) => void;
-export type SubmitHandler<T = HTMLFormElement> = (event: Event & { target: T }) => void;
+export type ChangeHandler<T = HTMLInputElement> = (
+  event: Event & { target: T }
+) => void;
+export type SubmitHandler<T = HTMLFormElement> = (
+  event: Event & { target: T }
+) => void;
 export type KeyboardHandler = EventHandler<KeyboardEvent>;
 export type FocusHandler = EventHandler<FocusEvent>;
 
 // Callback types
 export type Callback<T = void> = () => T;
 export type AsyncCallback<T = void> = () => Promise<T>;
-export type CallbackWithParams<P extends readonly unknown[], T = void> = (...params: P) => T;
+export type CallbackWithParams<P extends readonly unknown[], T = void> = (
+  ...params: P
+) => T;
 export type ErrorCallback = (error: Error) => void;
 export type SuccessCallback<T = unknown> = (data: T) => void;
 
@@ -283,7 +307,11 @@ export interface AnimationConfig {
   yoyo?: boolean;
 }
 
-export type AnimationDirection = 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
+export type AnimationDirection =
+  | 'normal'
+  | 'reverse'
+  | 'alternate'
+  | 'alternate-reverse';
 export type AnimationFillMode = 'none' | 'forwards' | 'backwards' | 'both';
 
 // API & Network types (for future API integration)
@@ -323,7 +351,7 @@ export interface AsyncState<T> {
   lastUpdated?: Date;
 }
 
-export type AsyncAction<T> = 
+export type AsyncAction<T> =
   | { type: 'LOADING' }
   | { type: 'SUCCESS'; payload: T }
   | { type: 'ERROR'; payload: string }
@@ -341,7 +369,7 @@ export type CoreTypes = {
   ThemeMode: ThemeMode;
 };
 
-// Content types bundle  
+// Content types bundle
 export type ContentTypes = {
   BlogPost: BlogPost;
   Project: Project;

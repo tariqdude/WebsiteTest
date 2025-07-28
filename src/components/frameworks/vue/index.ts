@@ -2,7 +2,4 @@
 import ColorPalette from './ColorPalette.vue';
 import SimpleColorDemo from './SimpleColorDemo.vue';
 
-export {
-  ColorPalette,
-  SimpleColorDemo as VueSimpleColorDemo,
-};
+export { ColorPalette, SimpleColorDemo as VueSimpleColorDemo };

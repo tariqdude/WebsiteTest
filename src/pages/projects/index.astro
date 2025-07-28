@@ -7,24 +7,35 @@ const allProjects = await getCollection('projects');
 const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
 
 // Get all unique technologies
-const allTechnologies = [...new Set(projects.flatMap(project => project.data.tech))].sort();
+const allTechnologies = [
+  ...new Set(projects.flatMap((project) => project.data.tech)),
+].sort();
 ---
 
-<Layout 
-  title="Projects - Astro Showcase" 
-  description="Explore our collection of projects showcasing modern web development with various frameworks and technologies."
+<Layout
+  title='Projects - Astro Showcase'
+  description='Explore our collection of projects showcasing modern web development with various frameworks and technologies.'
 >
   <!-- Hero Section -->
-  <section class="py-20 bg-gradient-to-br from-primary-50 to-purple-50 dark:from-gray-900 dark:to-purple-900/20">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+  <section
+    class='bg-gradient-to-br from-primary-50 to-purple-50 py-20 dark:from-gray-900 dark:to-purple-900/20'
+  >
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='text-center'>
+        <h1
+          class='mb-6 text-4xl font-bold text-gray-900 dark:text-white md:text-6xl'
+        >
           Our Projects
         </h1>
-        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-8">
-          A collection of projects demonstrating real-world applications of modern web technologies
+        <p
+          class='mx-auto mb-8 max-w-3xl text-xl text-gray-600 dark:text-gray-300 md:text-2xl'
+        >
+          A collection of projects demonstrating real-world applications of
+          modern web technologies
         </p>
-        <div class="flex items-center justify-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+        <div
+          class='flex items-center justify-center space-x-2 text-sm text-gray-600 dark:text-gray-400'
+        >
           <span>{projects.length} Projects</span>
           <span>•</span>
           <span>{allTechnologies.length} Technologies</span>
@@ -34,120 +45,126 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
   </section>
 
   <!-- Filter Bar -->
-  <section class="py-8 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-        <div class="flex items-center space-x-2 mb-4 lg:mb-0">
-          <Filter className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by technology:</span>
+  <section
+    class='border-b border-gray-200 bg-white py-8 dark:border-gray-700 dark:bg-gray-900'
+  >
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div class='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
+        <div class='mb-4 flex items-center space-x-2 lg:mb-0'>
+          <Filter className='h-5 w-5 text-gray-500 dark:text-gray-400' />
+          <span class='text-sm font-medium text-gray-700 dark:text-gray-300'
+            >Filter by technology:</span
+          >
         </div>
-        <div class="flex flex-wrap gap-2">
+        <div class='flex flex-wrap gap-2'>
           <button
-            id="filter-all"
-            class="px-3 py-1 text-sm rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300 font-medium"
-            data-filter="all"
+            id='filter-all'
+            class='rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-700 dark:bg-primary-900 dark:text-primary-300'
+            data-filter='all'
           >
             All
           </button>
-          {allTechnologies.map((tech) => (
-            <button
-              
-              class="px-3 py-1 text-sm rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 transition-colors"
-              data-filter={tech.toLowerCase()}
-            >
-              {tech}
-            </button>
-          ))}
+          {
+            allTechnologies.map((tech) => (
+              <button
+                class='rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+                data-filter={tech.toLowerCase()}
+              >
+                {tech}
+              </button>
+            ))
+          }
         </div>
       </div>
     </div>
   </section>
 
   <!-- Projects Grid -->
-  <section class="py-20 bg-gray-50 dark:bg-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project) => (
-          <article 
-            
-            class="project-card card group hover:shadow-xl transition-all duration-300"
-            data-technologies={project.data.tech.map(t => t.toLowerCase()).join(' ')}
-          >
-            {/* Project Image */}
-            <div class="aspect-video bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg mb-6 overflow-hidden">
-              <img 
-                src={project.data.image} 
-                alt={project.data.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-              />
-            </div>
+  <section class='bg-gray-50 py-20 dark:bg-gray-800'>
+    <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <div
+        id='projects-grid'
+        class='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'
+      >
+        {
+          projects.map((project) => (
+            <article
+              class='project-card card group transition-all duration-300 hover:shadow-xl'
+              data-technologies={project.data.tech
+                .map((t) => t.toLowerCase())
+                .join(' ')}
+            >
+              {/* Project Image */}
+              <div class='mb-6 aspect-video overflow-hidden rounded-lg bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900'>
+                <img
+                  src={project.data.image}
+                  alt={project.data.title}
+                  class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                  loading='lazy'
+                />
+              </div>
 
-            {/* Project Content */}
-            <div class="flex-1 flex flex-col">
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                <a href={`/projects/${project.slug}`}>
-                  {project.data.title}
-                </a>
-              </h3>
-              
-              <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                {project.data.description}
-              </p>
-              
-              {/* Technologies */}
-              <div class="flex flex-wrap gap-2 mb-6">
-                {project.data.tech.map((tech) => (
-                  <span 
-                    
-                    class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              
-              {/* Action Links */}
-              <div class="flex items-center space-x-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <a
-                  href={`/projects/${project.slug}`}
-                  class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium text-sm transition-colors"
-                >
-                  View Details
-                </a>
-                {project.data.demo && (
+              {/* Project Content */}
+              <div class='flex flex-1 flex-col'>
+                <h3 class='mb-3 text-xl font-semibold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>
+                  <a href={`/projects/${project.slug}`}>{project.data.title}</a>
+                </h3>
+
+                <p class='mb-4 flex-1 text-gray-600 dark:text-gray-300'>
+                  {project.data.description}
+                </p>
+
+                {/* Technologies */}
+                <div class='mb-6 flex flex-wrap gap-2'>
+                  {project.data.tech.map((tech) => (
+                    <span class='rounded bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-300'>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Links */}
+                <div class='flex items-center space-x-4 border-t border-gray-200 pt-4 dark:border-gray-700'>
                   <a
-                    href={project.data.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center space-x-1 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 text-sm transition-colors"
+                    href={`/projects/${project.slug}`}
+                    class='text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300'
                   >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Live Demo</span>
+                    View Details
                   </a>
-                )}
-                {project.data.github && (
-                  <a
-                    href={project.data.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center space-x-1 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 text-sm transition-colors"
-                  >
-                    <GitBranch className="w-4 h-4" />
-                    <span>Code</span>
-                  </a>
-                )}
+                  {project.data.demo && (
+                    <a
+                      href={project.data.demo}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      class='inline-flex items-center space-x-1 text-sm text-gray-600 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+                    >
+                      <ExternalLink className='w-4 h-4' />
+                      <span>Live Demo</span>
+                    </a>
+                  )}
+                  {project.data.github && (
+                    <a
+                      href={project.data.github}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      class='inline-flex items-center space-x-1 text-sm text-gray-600 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+                    >
+                      <GitBranch className='w-4 h-4' />
+                      <span>Code</span>
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        }
       </div>
 
       <!-- No Results Message -->
-      <div id="no-results" class="hidden text-center py-16">
-        <div class="text-gray-500 dark:text-gray-400">
-          <Filter className="w-16 h-16 mx-auto mb-4 opacity-50" />
-          <h3 class="text-xl font-semibold mb-2">No projects found</h3>
+      <div id='no-results' class='hidden py-16 text-center'>
+        <div class='text-gray-500 dark:text-gray-400'>
+          <Filter className='mx-auto mb-4 h-16 w-16 opacity-50' />
+          <h3 class='mb-2 text-xl font-semibold'>No projects found</h3>
           <p>Try adjusting your filter to see more projects.</p>
         </div>
       </div>
@@ -155,21 +172,22 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
   </section>
 
   <!-- Call to Action -->
-  <section class="py-20 bg-white dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+  <section class='bg-white py-20 dark:bg-gray-900'>
+    <div class='container mx-auto px-4 text-center sm:px-6 lg:px-8'>
+      <h2
+        class='mb-6 text-3xl font-bold text-gray-900 dark:text-white md:text-5xl'
+      >
         Have a Project in Mind?
       </h2>
-      <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-        Let's discuss how we can bring your ideas to life with modern web technologies
+      <p
+        class='mx-auto mb-8 max-w-2xl text-xl text-gray-600 dark:text-gray-300'
+      >
+        Let's discuss how we can bring your ideas to life with modern web
+        technologies
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="btn-primary">
-          Start a Conversation
-        </a>
-        <a href="/blog" class="btn-secondary">
-          Read Our Blog
-        </a>
+      <div class='flex flex-col justify-center gap-4 sm:flex-row'>
+        <a href='/contact' class='btn-primary'> Start a Conversation </a>
+        <a href='/blog' class='btn-secondary'> Read Our Blog </a>
       </div>
     </div>
   </section>
@@ -183,25 +201,51 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
 
     if (!filterButtons.length || !projectCards.length) return;
 
-    filterButtons.forEach(button => {
+    filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
         const filter = button.getAttribute('data-filter');
-        
+
         // Update active button
-        filterButtons.forEach(btn => {
-          btn.classList.remove('bg-primary-100', 'text-primary-700', 'dark:bg-primary-900', 'dark:text-primary-300');
-          btn.classList.add('bg-gray-100', 'hover:bg-gray-200', 'text-gray-700', 'dark:bg-gray-800', 'dark:hover:bg-gray-700', 'dark:text-gray-300');
+        filterButtons.forEach((btn) => {
+          btn.classList.remove(
+            'bg-primary-100',
+            'text-primary-700',
+            'dark:bg-primary-900',
+            'dark:text-primary-300'
+          );
+          btn.classList.add(
+            'bg-gray-100',
+            'hover:bg-gray-200',
+            'text-gray-700',
+            'dark:bg-gray-800',
+            'dark:hover:bg-gray-700',
+            'dark:text-gray-300'
+          );
         });
-        
-        button.classList.remove('bg-gray-100', 'hover:bg-gray-200', 'text-gray-700', 'dark:bg-gray-800', 'dark:hover:bg-gray-700', 'dark:text-gray-300');
-        button.classList.add('bg-primary-100', 'text-primary-700', 'dark:bg-primary-900', 'dark:text-primary-300');
-        
+
+        button.classList.remove(
+          'bg-gray-100',
+          'hover:bg-gray-200',
+          'text-gray-700',
+          'dark:bg-gray-800',
+          'dark:hover:bg-gray-700',
+          'dark:text-gray-300'
+        );
+        button.classList.add(
+          'bg-primary-100',
+          'text-primary-700',
+          'dark:bg-primary-900',
+          'dark:text-primary-300'
+        );
+
         // Filter projects
         let visibleCount = 0;
-        projectCards.forEach(card => {
+        projectCards.forEach((card) => {
           const technologies = card.getAttribute('data-technologies');
-          const isVisible = filter === 'all' || (technologies && technologies.includes(filter || ''));
-          
+          const isVisible =
+            filter === 'all' ||
+            (technologies && technologies.includes(filter || ''));
+
           if (isVisible) {
             (card as HTMLElement).style.display = 'block';
             visibleCount++;
@@ -209,7 +253,7 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
             (card as HTMLElement).style.display = 'none';
           }
         });
-        
+
         // Show/hide no results message
         if (visibleCount === 0) {
           noResults?.classList.remove('hidden');
@@ -222,7 +266,7 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
 
   // Initialize on page load
   initProjectFilter();
-  
+
   // Re-initialize after view transitions
   document.addEventListener('astro:after-swap', initProjectFilter);
 </script>
@@ -231,10 +275,12 @@ const allTechnologies = [...new Set(projects.flatMap(project => project.data.tec
   .project-card {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
-  
-  .project-card[style*="display: none"] {
+
+  .project-card[style*='display: none'] {
     opacity: 0;
     transform: translateY(10px);
   }

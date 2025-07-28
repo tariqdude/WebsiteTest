@@ -5,42 +5,42 @@ import Layout from '../layouts/Layout.astro';
 // Test React components
 import { InteractiveCounter } from '../components/frameworks/react';
 
-// Test Vue components  
+// Test Vue components
 import { ColorPalette } from '../components/frameworks/vue';
 
 // Test UI components
 import { ComponentLoader } from '../components/ui';
 ---
 
-<Layout title="Component Test Page">
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold mb-8 text-center">Component Test Page</h1>
-    
-    <div class="space-y-12">
+<Layout title='Component Test Page'>
+  <main class='container mx-auto px-4 py-8'>
+    <h1 class='mb-8 text-center text-4xl font-bold'>Component Test Page</h1>
+
+    <div class='space-y-12'>
       <!-- Test React Component -->
-      <section class="framework-demo" data-framework="react">
-        <h2 class="text-2xl font-semibold mb-4">React Component Test</h2>
-        <div class="card-enhanced">
+      <section class='framework-demo' data-framework='react'>
+        <h2 class='mb-4 text-2xl font-semibold'>React Component Test</h2>
+        <div class='card-enhanced'>
           <InteractiveCounter client:load />
         </div>
       </section>
 
       <!-- Test Vue Component -->
-      <section class="framework-demo" data-framework="vue">
-        <h2 class="text-2xl font-semibold mb-4">Vue Component Test</h2>
-        <div class="card-enhanced">
+      <section class='framework-demo' data-framework='vue'>
+        <h2 class='mb-4 text-2xl font-semibold'>Vue Component Test</h2>
+        <div class='card-enhanced'>
           <ColorPalette client:load />
         </div>
       </section>
 
       <!-- Test Component Loader -->
-      <section class="framework-demo">
-        <h2 class="text-2xl font-semibold mb-4">Component Loader Test</h2>
-        <div class="card-enhanced">
-          <ComponentLoader 
-            component="InteractiveCounter"
-            framework="react"
-            client:visible 
+      <section class='framework-demo'>
+        <h2 class='mb-4 text-2xl font-semibold'>Component Loader Test</h2>
+        <div class='card-enhanced'>
+          <ComponentLoader
+            component='InteractiveCounter'
+            framework='react'
+            client:visible
           />
         </div>
       </section>
@@ -50,10 +50,10 @@ import { ComponentLoader } from '../components/ui';
 
 <style>
   .framework-demo {
-    @apply border rounded-lg p-6 bg-white dark:bg-gray-900;
+    @apply rounded-lg border bg-white p-6 dark:bg-gray-900;
   }
-  
+
   .card-enhanced {
-    @apply p-4 border border-gray-200 dark:border-gray-700 rounded-lg;
+    @apply rounded-lg border border-gray-200 p-4 dark:border-gray-700;
   }
 </style>
