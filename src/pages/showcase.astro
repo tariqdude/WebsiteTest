@@ -2,6 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Advanced3DSceneSSRFixed from '../components/showcases/Advanced3DSceneSSRFixed.jsx';
 
+// Debug Component
+import DebugComponent from '../components/test/DebugComponent.jsx';
+import SimpleTestComponent from '../components/test/SimpleTestComponent.jsx';
+
 // React Components - Core Features
 import DataVisualizationDashboard from '../components/frameworks/react/DataVisualizationDashboard.jsx';
 import AdvancedForm from '../components/frameworks/react/AdvancedForm.tsx';
@@ -61,7 +65,13 @@ import { technologyStats } from '../lib/constants';
       </p>
 
       <div class='mb-12'>
-        <PerformanceMetrics client:only="react" />
+        <PerformanceMetrics client:load />
+      </div>
+
+      <!-- Debug Component -->
+      <div class='mb-12'>
+        <DebugComponent client:load />
+        <SimpleTestComponent client:load />
       </div>
     </div>
   </section>
@@ -165,7 +175,7 @@ import { technologyStats } from '../lib/constants';
         framework='React + Three.js'
         title='3D WebGL Scene'
       >
-                      <Advanced3DSceneSSRFixed client:only="react" />
+        <Advanced3DSceneSSRFixed client:only='react' />
       </FrameworkDemo>
     </div>
   </section>
@@ -257,7 +267,7 @@ import { technologyStats } from '../lib/constants';
         Full VS Code editor experience with syntax highlighting and IntelliSense
       </p>
       <FrameworkDemo client:load framework='React + Monaco' title='Code Editor'>
-        <CodeEditorShowcase client:only="react" />
+        <CodeEditorShowcase client:only='react' />
       </FrameworkDemo>
     </div>
   </section>
@@ -278,7 +288,7 @@ import { technologyStats } from '../lib/constants';
         framework='React + GSAP'
         title='Animation Studio'
       >
-        <GSAPAnimationShowcase client:only="react" />
+        <GSAPAnimationShowcase client:only='react' />
       </FrameworkDemo>
     </div>
   </section>
@@ -321,7 +331,7 @@ import { technologyStats } from '../lib/constants';
         framework='React + Terminal'
         title='Interactive Terminal'
       >
-        <InteractiveTerminal client:only="react" />
+        <InteractiveTerminal client:only='react' />
       </FrameworkDemo>
     </div>
   </section>
@@ -338,12 +348,14 @@ import { technologyStats } from '../lib/constants';
 
       <div class='mb-12 grid grid-cols-2 gap-8 md:grid-cols-4'>
         {
-          technologyStats.map((stat: { label: string; value: string; icon: string }) => (
-            <div class='text-center'>
-              <div class='mb-2 text-4xl font-bold'>{stat.value}</div>
-              <div class='text-lg opacity-80'>{stat.label}</div>
-            </div>
-          ))
+          technologyStats.map(
+            (stat: { label: string; value: string; icon: string }) => (
+              <div class='text-center'>
+                <div class='mb-2 text-4xl font-bold'>{stat.value}</div>
+                <div class='text-lg opacity-80'>{stat.label}</div>
+              </div>
+            )
+          )
         }
       </div>
 
