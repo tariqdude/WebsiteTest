@@ -17,8 +17,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 // Site configuration
 export const SITE_CONFIG = {
-  site: 'https://tariqdude.github.io',
-  base: '/WebsiteTest',
+  site: process.env.SITE_URL || 'https://tariqdude.github.io',
+  base: process.env.BASE_PATH || '/WebsiteTest',
   output: 'static',
   trailingSlash: 'ignore',
 };
