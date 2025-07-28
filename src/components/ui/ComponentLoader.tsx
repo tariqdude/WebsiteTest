@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import type { ComponentType, ReactNode } from 'react';
 import { ErrorBoundary } from './ErrorBoundary';
 
@@ -40,7 +40,7 @@ const TimeoutFallback = () => (
   </div>
 );
 
-export const ComponentLoader: React.FC<ComponentLoaderProps> = ({
+export const ComponentLoader = ({
   component: Component,
   componentProps = {},
   loadingFallback,
@@ -48,7 +48,7 @@ export const ComponentLoader: React.FC<ComponentLoaderProps> = ({
   timeout = 10000,
   onError,
   onLoad
-}) => {
+}: ComponentLoaderProps) => {
   const [hasTimedOut, setHasTimedOut] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 

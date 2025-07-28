@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import type { ErrorInfo, ReactNode } from 'react';
+import { Component } from 'react';
+import type { ErrorInfo, ReactNode, ComponentType } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -128,7 +128,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
 // Higher-order component for easy wrapping
 export function withErrorBoundary<P extends object>(
-  Component: React.ComponentType<P>,
+  Component: ComponentType<P>,
   fallback?: ReactNode,
   onError?: (error: Error, errorInfo: ErrorInfo) => void
 ) {

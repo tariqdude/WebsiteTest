@@ -137,7 +137,7 @@ const Advanced3DScene = () => {
   };
   
   // Dummy state to trigger re-render for button text
-  const [, setDummyState] = React.useState(0);
+  const [, setDummyState] = useState(0);
   useEffect(() => {
     const forceUpdate = () => setDummyState(s => s + 1);
     const mount = mountRef.current;

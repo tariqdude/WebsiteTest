@@ -1,10 +1,10 @@
-import React from 'react';
-import { ErrorBoundary } from '../ui/ErrorBoundary';
+import type { ReactNode } from 'react';
+import { ErrorBoundary } from './ErrorBoundary';
 
 interface FrameworkDemoProps {
   title: string;
   framework: string;
-  children: React.ReactNode;
+  children: ReactNode;
   fallbackMessage?: string;
 }
 
@@ -44,12 +44,12 @@ const FrameworkFallback = ({ framework, title, error }: {
   </div>
 );
 
-export const FrameworkDemo: React.FC<FrameworkDemoProps> = ({
+export const FrameworkDemo = ({
   title,
   framework,
   children,
   fallbackMessage
-}) => {
+}: FrameworkDemoProps) => {
   return (
     <div className="framework-demo-container mb-8">
       <ErrorBoundary

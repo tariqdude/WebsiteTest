@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import type { RefObject } from 'react';
 import type { ThemePreference } from '../validations';
 import type { ExtendedPerformance } from '../types';
 
@@ -54,7 +55,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
 // Intersection observer hook
 export function useIntersectionObserver(
-  elementRef: React.RefObject<Element>,
+  elementRef: RefObject<Element>,
   options: IntersectionObserverInit = {}
 ) {
   const [isVisible, setIsVisible] = useState(false);
