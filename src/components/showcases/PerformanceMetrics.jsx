@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Activity, Zap, Globe, Clock } from 'lucide-react';
+import { useSSRSafe } from '../../lib/hooks/useSSRSafe.js';
 
 const PerformanceMetrics = () => {
   const [metrics, setMetrics] = useState({
@@ -9,48 +10,63 @@ const PerformanceMetrics = () => {
     connectionType: 'unknown',
   });
   const [isLoading, setIsLoading] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
+
+  const {
+    isMounted,
+    isClient,
+    safePerformanceAccess,
+    safeDocumentAccess,
+    safeNavigatorAccess,
+    addEventListener,
+  } = useSSRSafe();
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isMounted) return;
+    if (!isClient) return;
 
     const calculateMetrics = () => {
       try {
-        // SSR-safe performance metrics
-        const navigation =
+        // SSR-safe timing metrics
+        const loadTime =
           typeof performance !== 'undefined'
-            ? performance.getEntriesByType('navigation')[0]
-            : null;
-        const loadTime = navigation
-          ? Math.round(navigation.loadEventEnd - navigation.loadEventStart)
-          : 0;
+            ? safePerformanceAccess((perf) => {
+                const navigation = perf.getEntriesByType('navigation')[0];
+                return navigation
+                  ? Math.round(
+                      navigation.loadEventEnd - navigation.loadEventStart
+                    )
+                  : 0;
+              }, 0)
+            : 0;
 
         // SSR-safe DOM nodes count
         const domNodes =
           typeof document !== 'undefined'
-            ? document.getElementsByTagName('*').length
+            ? safeDocumentAccess((doc) => {
+                return doc.getElementsByTagName('*').length;
+              }, 0)
             : 0;
 
         // SSR-safe memory usage
         const memoryUsage =
-          typeof performance !== 'undefined' && performance.memory
-            ? Math.round(performance.memory.usedJSHeapSize / 1048576)
+          typeof performance !== 'undefined'
+            ? safePerformanceAccess((perf) => {
+                return perf.memory
+                  ? Math.round(perf.memory.usedJSHeapSize / 1048576)
+                  : 0;
+              }, 0)
             : 0;
 
         // SSR-safe connection info
-        const connection =
+        const connectionType =
           typeof navigator !== 'undefined'
-            ? navigator.connection ||
-              navigator.mozConnection ||
-              navigator.webkitConnection
-            : null;
-        const connectionType = connection
-          ? connection.effectiveType || 'unknown'
-          : 'unknown';
+            ? safeNavigatorAccess((nav) => {
+                const connection =
+                  nav.connection || nav.mozConnection || nav.webkitConnection;
+                return connection
+                  ? connection.effectiveType || 'unknown'
+                  : 'unknown';
+              }, 'unknown')
+            : 'unknown';
 
         setMetrics({
           loadTime,
@@ -66,21 +82,18 @@ const PerformanceMetrics = () => {
     };
 
     // SSR-safe event listeners
-    if (typeof document !== 'undefined') {
-      if (document.readyState === 'complete') {
+    const setupMetrics = () => {
+      if (safeDocumentAccess((doc) => doc.readyState === 'complete', false)) {
         calculateMetrics();
       } else {
-        const handleLoad = () => {
-          calculateMetrics();
-        };
-        window.addEventListener('load', handleLoad);
-        return () => window.removeEventListener('load', handleLoad);
+        const cleanup = addEventListener('load', calculateMetrics);
+        return cleanup;
       }
-    } else {
-      // Fallback for SSR
-      setIsLoading(false);
-    }
-  }, [isMounted]);
+    };
+
+    const cleanup = setupMetrics();
+    return cleanup;
+  }, [isClient]);
 
   // Don't render during SSR
   if (!isMounted) {

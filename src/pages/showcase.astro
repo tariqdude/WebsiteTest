@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout import Advanced3DSceneSSRFixed from '../components/showcases/Advanced3DSceneSSRFixed.jsx';rom '../layouts/Layout.astro';
 
 // React Components - Core Features
 import DataVisualizationDashboard from '../components/frameworks/react/DataVisualizationDashboard.jsx';
@@ -165,7 +165,7 @@ import { technologyStats } from '../lib/constants';
         framework='React + Three.js'
         title='3D WebGL Scene'
       >
-        <Advanced3DScene client:only="react" />
+                      <Advanced3DSceneSSRFixed client:only="react" />
       </FrameworkDemo>
     </div>
   </section>
