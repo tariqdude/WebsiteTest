@@ -223,7 +223,7 @@ const PerformanceMetrics = () => {
       },
       {
         icon: HardDrive,
-        label: 'Memory',
+        label: 'Memory',`
         value: isLoading ? '...' : `${metrics.memoryUsage}MB`,
         color: 'text-purple-400',
         description: 'JavaScript heap usage',
@@ -246,7 +246,7 @@ const PerformanceMetrics = () => {
       },
       {
         icon: Zap,
-        label: 'Render Time',
+        label: 'Render Time',`
         value: isLoading ? '...' : `${metrics.renderTime}ms`,
         color: 'text-yellow-400',
         description: 'DOM content loaded time',
@@ -259,7 +259,7 @@ const PerformanceMetrics = () => {
       },
       {
         icon: Globe,
-        label: 'Bundle Size',
+        label: 'Bundle Size',`
         value: isLoading ? '...' : `${metrics.bundleSize}KB`,
         color: 'text-indigo-400',
         description: 'Total resource size',
@@ -272,7 +272,7 @@ const PerformanceMetrics = () => {
       },
       {
         icon: Monitor,
-        label: 'Cache Hit',
+        label: 'Cache Hit',`
         value: isLoading ? '...' : `${metrics.cacheEfficiency}%`,
         color: 'text-teal-400',
         description: 'Resource cache efficiency',
@@ -285,7 +285,7 @@ const PerformanceMetrics = () => {
       },
       {
         icon: Cpu,
-        label: 'Live FPS',
+        label: 'Live FPS',`
         value: liveMetrics.fps > 0 ? `${liveMetrics.fps}fps` : '...',
         color: 'text-red-400',
         description: 'Current frame rate',
@@ -335,7 +335,7 @@ const PerformanceMetrics = () => {
   const metricsData = [
     {
       icon: Clock,
-      label: 'Load Time',
+      label: 'Load Time',`
       value: isLoading ? '...' : `${metrics.loadTime}ms`,
       color: 'text-blue-400',
     },
@@ -347,7 +347,7 @@ const PerformanceMetrics = () => {
     },
     {
       icon: Zap,
-      label: 'Memory Usage',
+      label: 'Memory Usage',`
       value: isLoading ? '...' : `${metrics.memoryUsage}MB`,
       color: 'text-yellow-400',
     },
@@ -366,15 +366,15 @@ const PerformanceMetrics = () => {
         return (
           <div
             key={metric.label}
-            className='rounded-lg border border-gray-700/50 bg-gray-900/50 p-4 backdrop-blur-sm'
+            className='rounded-lg border border-gray-700/50 bg-gray-900/50 p-4 backdrop-blur-sm'`
             style={{ animationDelay: `${index * 100}ms` }}
           >
-            <div className='mb-2 flex items-center space-x-2'>
+            <div className='mb-2 flex items-center space-x-2'>`
               <IconComponent className={`h-5 w-5 ${metric.color}`} />
               <span className='text-sm font-medium text-gray-400'>
                 {metric.label}
               </span>
-            </div>
+            </div>`
             <div className={`text-2xl font-bold ${metric.color}`}>
               {isLoading ? (
                 <div className='h-8 w-16 animate-pulse rounded bg-gray-700'></div>
@@ -390,3 +390,4 @@ const PerformanceMetrics = () => {
 };
 
 export default PerformanceMetrics;
+`

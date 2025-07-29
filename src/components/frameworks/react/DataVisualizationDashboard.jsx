@@ -62,7 +62,7 @@ const DataVisualizationDashboard = () => {
       });
 
     // Add axes
-    g.append('g')
+    g.append('g')`
       .attr('transform', `translate(0,${height})`)
       .call(d3.axisBottom(xScale));
 
@@ -88,7 +88,7 @@ const DataVisualizationDashboard = () => {
 
     const chartInstance = new Chart(ctx, {
       type: 'line',
-      data: {
+      data: {`
         labels: Array.from({ length: 12 }, (_, i) => `Month ${i + 1}`),
         datasets: [
           {
@@ -213,7 +213,7 @@ const DataVisualizationDashboard = () => {
             color: 'purple',
           },
           {
-            label: 'Growth',
+            label: 'Growth',`
             value: `+${Math.round(Math.random() * 20)}%`,
             color: 'orange',
           },
@@ -243,3 +243,4 @@ const DataVisualizationDashboard = () => {
 };
 
 export default DataVisualizationDashboard;
+`

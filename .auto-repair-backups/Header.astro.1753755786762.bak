@@ -1,0 +1,117 @@
+---
+import ThemeToggle from '../ui/ThemeToggle.jsx';
+import MobileMenu from './MobileMenu.jsx';
+
+const navItems = [
+  { label: 'Home', href: '/WebsiteTest/' },
+  { label: 'Showcase', href: '/WebsiteTest/showcase' },
+  { label: 'About', href: '/WebsiteTest/about' },
+  { label: 'Projects', href: '/WebsiteTest/projects' },
+  { label: 'Blog', href: '/WebsiteTest/blog' },
+  { label: 'Contact', href: '/WebsiteTest/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class='glass sticky top-0 z-50 border-b border-white/10 dark:border-gray-700/20'
+>
+  <nav
+    class='container mx-auto px-4 sm:px-6 lg:px-8'
+    aria-label='Main navigation'
+  >
+    <div class='flex h-16 items-center justify-between'>
+      <!-- Logo -->
+      <div class='flex items-center'>
+        <a
+          href='/WebsiteTest/'
+          class='flex items-center space-x-2 text-xl font-bold text-gray-900 transition-colors hover:text-primary-600 dark:text-white dark:hover:text-primary-400'
+          aria-label='Go to homepage'
+        >
+          <svg
+            width='32'
+            height='32'
+            viewBox='0 0 32 32'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+            class='h-8 w-8'
+          >
+            <defs>
+              <linearGradient
+                id='logo-gradient'
+                x1='0%'
+                y1='0%'
+                x2='100%'
+                y2='100%'
+              >
+                <stop offset='0%' style='stop-color:#3b82f6'></stop>
+                <stop offset='100%' style='stop-color:#8b5cf6'></stop>
+              </linearGradient>
+            </defs>
+            <path
+              d='M16 2L30 9v14L16 30 2 23V9l14-7z'
+              fill='url(#logo-gradient)'
+              stroke='currentColor'
+              stroke-width='2'
+              stroke-linejoin='round'></path>
+          </svg>
+          <span class='gradient-text'>Astro Showcase</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class='hidden items-center space-x-8 md:flex'>
+        {
+          navItems.map(({ label, href }) => (
+            <a
+              href={href}
+              class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+                currentPath === href
+                  ? 'text-primary-600 dark:text-primary-400'
+                  : 'text-gray-700 dark:text-gray-300'
+              }`}
+              aria-current={currentPath === href ? 'page' : undefined}
+            >
+              {label}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Right Side Actions -->
+      <div class='flex items-center space-x-4'>
+        <ThemeToggle client:load />
+
+        <!-- Mobile Menu Button -->
+        <div class='md:hidden'>
+          <MobileMenu
+            navItems={navItems}
+            currentPath={currentPath}
+            client:load
+          />
+        </div>
+
+        <!-- CTA Button (Desktop) -->
+        <div class='hidden md:block'>
+          <a href='/WebsiteTest/contact' class='btn-primary text-sm'>
+            Get Started
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* Enhance glass effect on scroll */
+  @media (prefers-reduced-motion: no-preference) {
+    header {
+      transition: backdrop-filter 0.3s ease;
+    }
+
+    header:hover {
+      backdrop-filter: blur(20px);
+    }
+  }
+</style>

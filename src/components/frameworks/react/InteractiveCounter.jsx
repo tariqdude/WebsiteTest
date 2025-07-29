@@ -11,20 +11,15 @@ const InteractiveCounter = () => {
   const [clickCount, setClickCount] = useState(0);
   const [lastActionTime, setLastActionTime] = useState(Date.now());
 
-  const { 
-    isReady, 
-    deviceInfo, 
-    safeExecute, 
-    safeInterval,
-    safeTimeout
-  } = useSSRSafeSimple();
+  const { isReady, deviceInfo, safeExecute, safeInterval, safeTimeout } =
+    useSSRSafeSimple();
 
   // Enhanced increment with analytics
   const increment = useCallback(() => {
     const newCount = count + 1;
     setCount(newCount);
     setHistory((prev) => [...prev, newCount].slice(-20)); // Keep last 20
-    setClickCount(prev => prev + 1);
+    setClickCount((prev) => prev + 1);
     setLastActionTime(Date.now());
   }, [count]);
 
@@ -33,7 +28,7 @@ const InteractiveCounter = () => {
     const newCount = count - 1;
     setCount(newCount);
     setHistory((prev) => [...prev, newCount].slice(-20));
-    setClickCount(prev => prev + 1);
+    setClickCount((prev) => prev + 1);
     setLastActionTime(Date.now());
   }, [count]);
 
@@ -53,7 +48,7 @@ const InteractiveCounter = () => {
     if (!autoMode || !isReady) return;
 
     const timer = safeInterval(() => {
-      setCount(prev => {
+      setCount((prev) => {
         if (prev < targetValue) {
           const newCount = prev + 1;
           setHistory((hist) => [...hist, newCount].slice(-20));
@@ -100,12 +95,12 @@ const InteractiveCounter = () => {
         case 'h':
         case 'H':
           e.preventDefault();
-          setShowHistory(prev => !prev);
+          setShowHistory((prev) => !prev);
           break;
         case 'a':
         case 'A':
           e.preventDefault();
-          setAutoMode(prev => !prev);
+          setAutoMode((prev) => !prev);
           break;
         case ' ':
           e.preventDefault();
@@ -121,22 +116,28 @@ const InteractiveCounter = () => {
 
   // Advanced analytics
   const analytics = useMemo(() => {
-    const trend = history.length > 1 
-      ? history[history.length - 1] - history[history.length - 2]
-      : 0;
-    
+    const trend =
+      history.length > 1
+        ? history[history.length - 1] - history[history.length - 2]
+        : 0;
+
     const max = Math.max(...history);
     const min = Math.min(...history);
-    const avg = history.length > 0 
-      ? Math.round(history.reduce((a, b) => a + b, 0) / history.length)
-      : 0;
-    
-    const volatility = history.length > 2
-      ? Math.round(Math.sqrt(
-          history.map(val => Math.pow(val - avg, 2))
-                 .reduce((a, b) => a + b, 0) / history.length
-        ))
-      : 0;
+    const avg =
+      history.length > 0
+        ? Math.round(history.reduce((a, b) => a + b, 0) / history.length)
+        : 0;
+
+    const volatility =
+      history.length > 2
+        ? Math.round(
+            Math.sqrt(
+              history
+                .map((val) => Math.pow(val - avg, 2))
+                .reduce((a, b) => a + b, 0) / history.length
+            )
+          )
+        : 0;
 
     return { trend, max, min, avg, volatility };
   }, [history]);
@@ -150,67 +151,72 @@ const InteractiveCounter = () => {
   // Dynamic color based on value
   const getCountColor = () => {
     if (count === 0) return 'text-gray-500';
-    if (count > 0) return count >= targetValue ? 'text-green-500' : 'text-blue-500';
+    if (count > 0)
+      return count >= targetValue ? 'text-green-500' : 'text-blue-500';
     return 'text-red-500';
   };
 
   // Animation variants
   const countVariants = {
     hidden: { scale: 0.8, opacity: 0 },
-    visible: { 
-      scale: 1, 
+    visible: {
+      scale: 1,
       opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 20 }
+      transition: { type: 'spring', stiffness: 300, damping: 20 },
     },
-    exit: { scale: 1.2, opacity: 0, transition: { duration: 0.2 } }
+    exit: { scale: 1.2, opacity: 0, transition: { duration: 0.2 } },
   };
 
   const buttonVariants = {
     hover: { scale: 1.05, transition: { duration: 0.2 } },
-    tap: { scale: 0.95, transition: { duration: 0.1 } }
+    tap: { scale: 0.95, transition: { duration: 0.1 } },
   };
 
   return (
-    <div className='w-full max-w-2xl mx-auto p-6'>
-      <div className='rounded-2xl bg-gradient-to-br from-white to-gray-50 p-8 shadow-xl dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700'>
+    <div className='mx-auto w-full max-w-2xl p-6'>
+      <div className='rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-8 shadow-xl dark:border-gray-700 dark:from-gray-800 dark:to-gray-900'>
         {/* Header */}
         <div className='mb-8 text-center'>
           <h2 className='mb-2 text-3xl font-bold text-gray-900 dark:text-white'>
             🧮 Advanced Interactive Counter
           </h2>
           <p className='text-gray-600 dark:text-gray-400'>
-            Enhanced with analytics, auto-mode, and {deviceInfo.isTouchDevice ? 'touch' : 'keyboard'} controls
+            Enhanced with analytics, auto-mode, and{' '}
+            {deviceInfo.isTouchDevice ? 'touch' : 'keyboard'} controls
           </p>
         </div>
 
         {/* Main Counter Display */}
         <div className='mb-8 text-center'>
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode='wait'>
             <motion.div
               key={count}
               variants={countVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+              initial='hidden'
+              animate='visible'
+              exit='exit'`
               className={`text-8xl font-bold ${getCountColor()}`}
             >
               {count.toLocaleString()}
             </motion.div>
           </AnimatePresence>
-          
+
           {/* Progress to target */}
           <div className='mt-4'>
-            <div className='flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-2'>
+            <div className='mb-2 flex items-center justify-between text-sm text-gray-600 dark:text-gray-400'>
               <span>Progress to target ({targetValue})</span>
               <span>{Math.round(progressToTarget)}%</span>
             </div>
-            <div className='h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden'>
-              <motion.div
+            <div className='h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700'>
+              <motion.div`
                 className={`h-full ${
-                  count >= targetValue ? 'bg-green-500' : 
-                  count < 0 ? 'bg-red-500' : 'bg-blue-500'
+                  count >= targetValue
+                    ? 'bg-green-500'
+                    : count < 0
+                      ? 'bg-red-500'
+                      : 'bg-blue-500'`
                 }`}
-                initial={{ width: 0 }}
+                initial={{ width: 0 }}`
                 animate={{ width: `${progressToTarget}%` }}
                 transition={{ duration: 0.5 }}
               />
@@ -222,10 +228,10 @@ const InteractiveCounter = () => {
         <div className='mb-8 flex flex-wrap justify-center gap-4'>
           <motion.button
             variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
+            whileHover='hover'
+            whileTap='tap'
             onClick={decrement}
-            className='flex items-center gap-2 rounded-xl bg-red-500 px-6 py-3 font-bold text-white shadow-lg hover:bg-red-600 transition-colors'
+            className='flex items-center gap-2 rounded-xl bg-red-500 px-6 py-3 font-bold text-white shadow-lg transition-colors hover:bg-red-600'
           >
             <Minus className='h-5 w-5' />
             Decrease
@@ -233,10 +239,10 @@ const InteractiveCounter = () => {
 
           <motion.button
             variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
+            whileHover='hover'
+            whileTap='tap'
             onClick={reset}
-            className='flex items-center gap-2 rounded-xl bg-gray-500 px-6 py-3 font-bold text-white shadow-lg hover:bg-gray-600 transition-colors'
+            className='flex items-center gap-2 rounded-xl bg-gray-500 px-6 py-3 font-bold text-white shadow-lg transition-colors hover:bg-gray-600'
           >
             <RotateCcw className='h-5 w-5' />
             Reset
@@ -244,10 +250,10 @@ const InteractiveCounter = () => {
 
           <motion.button
             variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
+            whileHover='hover'
+            whileTap='tap'
             onClick={increment}
-            className='flex items-center gap-2 rounded-xl bg-green-500 px-6 py-3 font-bold text-white shadow-lg hover:bg-green-600 transition-colors'
+            className='flex items-center gap-2 rounded-xl bg-green-500 px-6 py-3 font-bold text-white shadow-lg transition-colors hover:bg-green-600'
           >
             <Plus className='h-5 w-5' />
             Increase
@@ -255,7 +261,7 @@ const InteractiveCounter = () => {
         </div>
 
         {/* Advanced Controls */}
-        <div className='mb-8 grid grid-cols-1 md:grid-cols-2 gap-6'>
+        <div className='mb-8 grid grid-cols-1 gap-6 md:grid-cols-2'>
           {/* Target Value */}
           <div className='space-y-2'>
             <label className='flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300'>
@@ -263,7 +269,7 @@ const InteractiveCounter = () => {
               Target Value
             </label>
             <input
-              type="number"
+              type='number'
               value={targetValue}
               onChange={(e) => setTargetValue(Number(e.target.value))}
               className='w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white'
@@ -277,15 +283,17 @@ const InteractiveCounter = () => {
               Auto Speed (ms)
             </label>
             <input
-              type="range"
-              min="100"
-              max="2000"
-              step="100"
+              type='range'
+              min='100'
+              max='2000'
+              step='100'
               value={speed}
               onChange={(e) => setSpeed(Number(e.target.value))}
               className='w-full'
             />
-            <div className='text-xs text-gray-500 dark:text-gray-400'>{speed}ms</div>
+            <div className='text-xs text-gray-500 dark:text-gray-400'>
+              {speed}ms
+            </div>
           </div>
         </div>
 
@@ -293,13 +301,13 @@ const InteractiveCounter = () => {
         <div className='mb-6 flex items-center justify-center'>
           <motion.button
             variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            onClick={() => setAutoMode(prev => !prev)}
+            whileHover='hover'
+            whileTap='tap'
+            onClick={() => setAutoMode((prev) => !prev)}`
             className={`flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white shadow-lg transition-colors ${
-              autoMode 
-                ? 'bg-orange-500 hover:bg-orange-600' 
-                : 'bg-blue-500 hover:bg-blue-600'
+              autoMode
+                ? 'bg-orange-500 hover:bg-orange-600'
+                : 'bg-blue-500 hover:bg-blue-600'`
             }`}
           >
             <Zap className='h-5 w-5' />
@@ -308,30 +316,35 @@ const InteractiveCounter = () => {
         </div>
 
         {/* Analytics */}
-        <div className='mb-6 grid grid-cols-2 md:grid-cols-4 gap-4'>
-          <div className='text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg'>
+        <div className='mb-6 grid grid-cols-2 gap-4 md:grid-cols-4'>
+          <div className='rounded-lg bg-blue-50 p-3 text-center dark:bg-blue-900/20'>
             <div className='text-lg font-bold text-blue-600 dark:text-blue-400'>
-              {analytics.trend > 0 ? '+' : ''}{analytics.trend}
+              {analytics.trend > 0 ? '+' : ''}
+              {analytics.trend}
             </div>
-            <div className='text-xs text-gray-600 dark:text-gray-400'>Trend</div>
+            <div className='text-xs text-gray-600 dark:text-gray-400'>
+              Trend
+            </div>
           </div>
-          <div className='text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg'>
+          <div className='rounded-lg bg-green-50 p-3 text-center dark:bg-green-900/20'>
             <div className='text-lg font-bold text-green-600 dark:text-green-400'>
               {analytics.max}
             </div>
             <div className='text-xs text-gray-600 dark:text-gray-400'>Max</div>
           </div>
-          <div className='text-center p-3 bg-red-50 dark:bg-red-900/20 rounded-lg'>
+          <div className='rounded-lg bg-red-50 p-3 text-center dark:bg-red-900/20'>
             <div className='text-lg font-bold text-red-600 dark:text-red-400'>
               {analytics.min}
             </div>
             <div className='text-xs text-gray-600 dark:text-gray-400'>Min</div>
           </div>
-          <div className='text-center p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg'>
+          <div className='rounded-lg bg-purple-50 p-3 text-center dark:bg-purple-900/20'>
             <div className='text-lg font-bold text-purple-600 dark:text-purple-400'>
               {analytics.avg}
             </div>
-            <div className='text-xs text-gray-600 dark:text-gray-400'>Average</div>
+            <div className='text-xs text-gray-600 dark:text-gray-400'>
+              Average
+            </div>
           </div>
         </div>
 
@@ -339,10 +352,10 @@ const InteractiveCounter = () => {
         <div className='space-y-4'>
           <motion.button
             variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            onClick={() => setShowHistory(prev => !prev)}
-            className='flex items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2 font-bold text-white shadow-lg hover:bg-indigo-600 transition-colors w-full justify-center'
+            whileHover='hover'
+            whileTap='tap'
+            onClick={() => setShowHistory((prev) => !prev)}
+            className='flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-500 px-4 py-2 font-bold text-white shadow-lg transition-colors hover:bg-indigo-600'
           >
             <History className='h-5 w-5' />
             {showHistory ? 'Hide' : 'Show'} History ({history.length} entries)
@@ -368,11 +381,13 @@ const InteractiveCounter = () => {
                         key={index}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        transition={{ delay: index * 0.05 }}
-                        className={`rounded text-center text-sm font-bold p-2 ${
-                          value > 0 ? 'bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200' :
-                          value < 0 ? 'bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200' :
-                          'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
+                        transition={{ delay: index * 0.05 }}`
+                        className={`rounded p-2 text-center text-sm font-bold ${
+                          value > 0
+                            ? 'bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200'
+                            : value < 0
+                              ? 'bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200'
+                              : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'`
                         }`}
                       >
                         {value}
@@ -380,7 +395,8 @@ const InteractiveCounter = () => {
                     ))}
                   </div>
                   <div className='mt-3 text-xs text-gray-600 dark:text-gray-400'>
-                    Total clicks: {clickCount} | Volatility: {analytics.volatility}
+                    Total clicks: {clickCount} | Volatility:{' '}
+                    {analytics.volatility}
                   </div>
                 </div>
               </motion.div>
@@ -393,7 +409,7 @@ const InteractiveCounter = () => {
           <h4 className='mb-2 font-bold text-yellow-800 dark:text-yellow-200'>
             ⌨️ Keyboard Shortcuts:
           </h4>
-          <div className='text-sm text-yellow-700 dark:text-yellow-300 grid grid-cols-2 gap-2'>
+          <div className='grid grid-cols-2 gap-2 text-sm text-yellow-700 dark:text-yellow-300'>
             <div>↑/+ : Increment</div>
             <div>↓/- : Decrement</div>
             <div>Ctrl+R : Reset</div>
@@ -408,129 +424,4 @@ const InteractiveCounter = () => {
 };
 
 export default InteractiveCounter;
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [count]);
-
-  return (
-    <div className='card mx-auto max-w-md'>
-      <div className='text-center'>
-        <h3 className='mb-4 text-lg font-semibold text-gray-900 dark:text-white'>
-          Interactive Counter
-          <span className='mt-1 block text-sm font-normal text-gray-500 dark:text-gray-400'>
-            React Island Component
-          </span>
-        </h3>
-
-        {/* Counter Display */}
-        <motion.div
-          key={count}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          className='mb-6'
-        >
-          <div
-            className={`mb-2 text-6xl font-bold ${
-              count > 0
-                ? 'text-green-500'
-                : count < 0
-                  ? 'text-red-500'
-                  : 'text-gray-600 dark:text-gray-300'
-            }`}
-          >
-            {count}
-          </div>
-          <div className='text-sm text-gray-500 dark:text-gray-400'>
-            {count === 0 ? 'Neutral' : count > 0 ? 'Positive' : 'Negative'}
-          </div>
-        </motion.div>
-
-        {/* Controls */}
-        <div className='mb-6 flex items-center justify-center space-x-4'>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={decrement}
-            className='btn-secondary rounded-full p-3'
-            aria-label='Decrement counter'
-          >
-            <Minus className='h-5 w-5' />
-          </motion.button>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={reset}
-            className='btn-ghost rounded-full p-3'
-            aria-label='Reset counter'
-          >
-            <RotateCcw className='h-5 w-5' />
-          </motion.button>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={increment}
-            className='btn-primary rounded-full p-3'
-            aria-label='Increment counter'
-          >
-            <Plus className='h-5 w-5' />
-          </motion.button>
-        </div>
-
-        {/* Keyboard Shortcuts */}
-        <div className='mb-4 space-y-1 text-xs text-gray-500 dark:text-gray-400'>
-          <div>Keyboard shortcuts:</div>
-          <div>↑/+ to increment, ↓/- to decrement, Ctrl+R to reset</div>
-        </div>
-
-        {/* History Toggle */}
-        <button
-          onClick={() => setShowHistory(!showHistory)}
-          className='mb-4 text-sm text-primary-600 hover:underline dark:text-primary-400'
-        >
-          {showHistory ? 'Hide' : 'Show'} History ({history.length})
-        </button>
-
-        {/* History */}
-        <AnimatePresence>
-          {showHistory && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className='overflow-hidden border-t border-gray-200 pt-4 dark:border-gray-700'
-            >
-              <div className='mb-2 text-sm text-gray-600 dark:text-gray-400'>
-                Recent values:
-              </div>
-              <div className='flex flex-wrap justify-center gap-2'>
-                {history.slice(-8).map((value, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className={`rounded px-2 py-1 text-xs ${
-                      value > 0
-                        ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
-                        : value < 0
-                          ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
-                          : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
-                    }`}
-                  >
-                    {value}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-};
-
-export default InteractiveCounter;
+`

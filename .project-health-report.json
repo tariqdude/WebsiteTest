@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-07-29T02:23:43.444Z",
+  "checks": {
+    "astro": false,
+    "typescript": false,
+    "eslint": false
+  },
+  "dependencies": {
+    "total": 51
+  },
+  "performance": {
+    "sourceFiles": 113
+  }
+}

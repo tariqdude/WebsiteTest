@@ -48,7 +48,7 @@ const SimpleColorDemo = ({ title = 'Color Picker Demo' }) => {
               key={color}
               onClick={() => setSelectedColor(color)}
               className='h-8 w-8 rounded-full border-2 border-white shadow-md transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500'
-              style={{ backgroundColor: color }}
+              style={{ backgroundColor: color }}`
               aria-label={`Select color ${color}`}
             />
           ))}
@@ -70,3 +70,4 @@ const SimpleColorDemo = ({ title = 'Color Picker Demo' }) => {
 };
 
 export default SimpleColorDemo;
+`

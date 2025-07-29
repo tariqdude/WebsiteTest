@@ -64,7 +64,7 @@ const AnimatedBackground = ({ className = '' }) => {
           if (distance < 100) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);`
             ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * (1 - distance / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
@@ -87,7 +87,7 @@ const AnimatedBackground = ({ className = '' }) => {
 
   return (
     <canvas
-      ref={canvasRef}
+      ref={canvasRef}`
       className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
       style={{ zIndex: -1 }}
     />
@@ -95,3 +95,4 @@ const AnimatedBackground = ({ className = '' }) => {
 };
 
 export default AnimatedBackground;
+`

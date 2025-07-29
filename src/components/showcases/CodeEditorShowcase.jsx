@@ -31,11 +31,11 @@ function fibonacci(n) {
 }
 
 // Calculate and display results
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i <= 10; i++) {`
   console.log(\`fibonacci(\${i}) = \${fibonacci(i)}\`);
 }
-
-// Try modifying this code and run it!`,
+`
+// Try modifying this code and run it!`,`
     typescript: `// TypeScript with type safety
 interface User {
   id: number;
@@ -43,16 +43,16 @@ interface User {
   email: string;
 }
 
-function displayUser(user: User) {
+function displayUser(user: User) {`
   console.log(\`ID: \${user.id}, Name: \${user.name}\`);
 }
-
-displayUser({ id: 1, name: 'Jane Doe', email: 'jane@example.com' });`,
+`
+displayUser({ id: 1, name: 'Jane Doe', email: 'jane@example.com' });`,`
     python: `# Python execution is simulated
 def greet(name):
     return f"Hello, {name}!"
-
-print(greet("World"))`,
+`
+print(greet("World"))`,`
     html: `<!-- Live HTML Preview -->
 <div class=
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
@@ -86,7 +86,7 @@ const CodeEditorShowcase = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const initialCode = {
+  const initialCode = {`
     javascript: `// Interactive JavaScript Playground
 function fibonacci(n) {
   if (n <= 1) return n;
@@ -94,12 +94,12 @@ function fibonacci(n) {
 }
 
 // Calculate and display results
-for (let i = 0; i <= 10; i++) {
+for (let i = 0; i <= 10; i++) {`
   console.log(\`fibonacci(\${i}) = \${fibonacci(i)}\`);
 }
-
+`
 // Try modifying this code and run it!`,
-
+`
     typescript: `// TypeScript with type safety
 interface User {
   id: number;
@@ -112,7 +112,7 @@ class UserManager {
   private users: User[] = [];
   
   addUser(user: User): void {
-    this.users.push(user);
+    this.users.push(user);`
     console.log(\`Added user: \${user.name}\`);
   }
   
@@ -128,9 +128,9 @@ manager.addUser({
   email: "john@example.com",
   active: true
 });
-
+`
 console.log('Active users:', manager.getActiveUsers());`,
-
+`
     python: `# Python code example
 def quicksort(arr):
     if len(arr) <= 1:
@@ -150,9 +150,9 @@ print(f"Original: {numbers}")
 print(f"Sorted: {sorted_numbers}")
 
 # List comprehension example
-squares = [x**2 for x in range(1, 11) if x % 2 == 0]
+squares = [x**2 for x in range(1, 11) if x % 2 == 0]`
 print(f"Even squares: {squares}")`,
-
+`
     html: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -197,11 +197,11 @@ print(f"Even squares: {squares}")`,
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'];
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
             document.querySelector('.container').style.background = randomColor;
-            document.getElementById('dynamic-content').innerHTML = 
+            document.getElementById('dynamic-content').innerHTML = `
                 \`<p style="color: \${randomColor}; font-weight: bold;">Color changed to \${randomColor}!</p>\`;
         }
     </script>
-</body>
+</body>`
 </html>`,
   };
 
@@ -305,11 +305,11 @@ print(f"Even squares: {squares}")`,
           consoleLogs.join('\n') || 'Code executed successfully (no output)'
         );
       } else {
-        setOutput(
+        setOutput(`
           `Code execution simulation for ${language}:\n\n${code.slice(0, 200)}${code.length > 200 ? '...' : ''}\n\n✅ Syntax appears valid!`
         );
       }
-    } catch (error) {
+    } catch (error) {`
       setOutput(`Error: ${error.message}`);
     } finally {
       setIsRunning(false);
@@ -466,3 +466,4 @@ print(f"Even squares: {squares}")`,
 };
 
 export default CodeEditorShowcase;
+`

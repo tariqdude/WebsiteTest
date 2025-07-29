@@ -28,7 +28,7 @@ const Advanced3DScene = () => {
       try {
         // Dynamic import for complete SSR safety
         THREE = await import('three');
-        
+
         // Scene setup
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0x1a1a2e);
@@ -176,12 +176,12 @@ const Advanced3DScene = () => {
       if (rendererRef.current && mountRef.current) {
         const width = mountRef.current.clientWidth;
         const height = mountRef.current.clientHeight;
-        
+
         rendererRef.current.setSize(width, height);
-        
+
         if (sceneRef.current && sceneRef.current.children.length > 0) {
           const camera = sceneRef.current.children.find(
-            child => child.type === 'PerspectiveCamera'
+            (child) => child.type === 'PerspectiveCamera'
           );
           if (camera) {
             camera.aspect = width / height;
@@ -192,11 +192,17 @@ const Advanced3DScene = () => {
     };
 
     // Only run on client side - no window access during SSR
-    if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.addEventListener === 'function'
+    ) {
       window.addEventListener('resize', handleResize);
-      
+
       return () => {
-        if (typeof window !== 'undefined' && typeof window.removeEventListener === 'function') {
+        if (
+          typeof window !== 'undefined' &&
+          typeof window.removeEventListener === 'function'
+        ) {
           window.removeEventListener('resize', handleResize);
         }
       };
@@ -206,11 +212,11 @@ const Advanced3DScene = () => {
   // SSR fallback - always rendered during server-side
   if (!isMounted) {
     return (
-      <div className="bg-gradient-to-br from-purple-900 to-blue-900 rounded-lg shadow-lg p-8 min-h-[400px] flex items-center justify-center">
-        <div className="text-center text-white">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <h3 className="text-2xl font-bold mb-2">3D Scene Loading</h3>
-          <p className="text-purple-200">Preparing Three.js environment...</p>
+      <div className='flex min-h-[400px] items-center justify-center rounded-lg bg-gradient-to-br from-purple-900 to-blue-900 p-8 shadow-lg'>
+        <div className='text-center text-white'>
+          <div className='mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-white'></div>
+          <h3 className='mb-2 text-2xl font-bold'>3D Scene Loading</h3>
+          <p className='text-purple-200'>Preparing Three.js environment...</p>
         </div>
       </div>
     );
@@ -219,42 +225,43 @@ const Advanced3DScene = () => {
   // Error state
   if (error) {
     return (
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-        <strong className="font-bold">3D Scene Error:</strong>
-        <span className="block sm:inline"> {error}</span>
+      <div className='rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700'>
+        <strong className='font-bold'>3D Scene Error:</strong>
+        <span className='block sm:inline'> {error}</span>
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+    <div className='overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800'>
+      <div className='border-b border-gray-200 p-6 dark:border-gray-700'>
+        <h3 className='mb-2 text-2xl font-bold text-gray-900 dark:text-white'>
           🎮 Advanced 3D Scene
         </h3>
-        <p className="text-gray-600 dark:text-gray-300">
+        <p className='text-gray-600 dark:text-gray-300'>
           Interactive Three.js scene with rotating geometric shapes
         </p>
       </div>
-      
-      <div className="relative">
+
+      <div className='relative'>
         {isLoading && (
-          <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-10">
-            <div className="text-center text-white">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
+          <div className='absolute inset-0 z-10 flex items-center justify-center bg-gray-900 bg-opacity-50'>
+            <div className='text-center text-white'>
+              <div className='mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-b-2 border-white'></div>
               <p>Loading 3D Scene...</p>
             </div>
           </div>
         )}
         <div
           ref={mountRef}
-          className="w-full h-96 bg-gradient-to-br from-purple-900 to-blue-900"
+          className='h-96 w-full bg-gradient-to-br from-purple-900 to-blue-900'
         />
       </div>
-      
-      <div className="p-4 bg-gray-50 dark:bg-gray-700">
-        <p className="text-sm text-gray-600 dark:text-gray-300">
-          <strong>Features:</strong> Three.js WebGL rendering, shadows, lighting, animations
+
+      <div className='bg-gray-50 p-4 dark:bg-gray-700'>
+        <p className='text-sm text-gray-600 dark:text-gray-300'>
+          <strong>Features:</strong> Three.js WebGL rendering, shadows,
+          lighting, animations
         </p>
       </div>
     </div>

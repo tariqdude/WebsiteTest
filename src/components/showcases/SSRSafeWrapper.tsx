@@ -51,3 +51,4 @@ export default function SSRSafeWrapper({
   // Only render children when fully client-side
   return <div className={className}>{children}</div>;
 }
+`

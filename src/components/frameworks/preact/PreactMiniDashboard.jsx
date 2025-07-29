@@ -95,13 +95,13 @@ const PreactMiniDashboard = () => {
           <div
             key={card.title}
             className={`${card.bgColor} rounded-lg p-4 shadow-md transition-all duration-300 hover:shadow-lg dark:bg-gray-700 ${
-              isAnimating ? 'animate-pulse' : ''
-            }`}
+              isAnimating ? 'animate-pulse' : ''`
+            }`}`
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             <div className='mb-3 flex items-center justify-between'>
               <div className='text-2xl'>{card.icon}</div>
-              <div
+              <div`
                 className={`h-3 w-3 rounded-full bg-gradient-to-r ${card.color} animate-pulse`}
               ></div>
             </div>
@@ -116,8 +116,8 @@ const PreactMiniDashboard = () => {
 
             {/* Mini progress bar */}
             <div className='mt-2 h-1.5 w-full rounded-full bg-gray-200 dark:bg-gray-600'>
-              <div
-                className={`h-1.5 rounded-full bg-gradient-to-r ${card.color} transition-all duration-1000`}
+              <div`
+                className={`h-1.5 rounded-full bg-gradient-to-r ${card.color} transition-all duration-1000`}`
                 style={{ width: `${Math.min(card.value % 100, 100)}%` }}
               ></div>
             </div>
@@ -192,3 +192,4 @@ const PreactMiniDashboard = () => {
 };
 
 export default PreactMiniDashboard;
+`
