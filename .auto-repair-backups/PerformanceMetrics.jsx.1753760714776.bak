@@ -222,8 +222,8 @@ const PerformanceMetrics = () => {
               : 'heavy',
       },
       {
-        icon: HardDrive,`
-        label: 'Memory',``
+        icon: HardDrive,
+        label: 'Memory',`
         value: isLoading ? '...' : `${metrics.memoryUsage}MB`,
         color: 'text-purple-400',
         description: 'JavaScript heap usage',
@@ -245,8 +245,8 @@ const PerformanceMetrics = () => {
           : 'standard',
       },
       {
-        icon: Zap,`
-        label: 'Render Time',``
+        icon: Zap,
+        label: 'Render Time',`
         value: isLoading ? '...' : `${metrics.renderTime}ms`,
         color: 'text-yellow-400',
         description: 'DOM content loaded time',
@@ -258,8 +258,8 @@ const PerformanceMetrics = () => {
               : 'slow',
       },
       {
-        icon: Globe,`
-        label: 'Bundle Size',``
+        icon: Globe,
+        label: 'Bundle Size',`
         value: isLoading ? '...' : `${metrics.bundleSize}KB`,
         color: 'text-indigo-400',
         description: 'Total resource size',
@@ -271,8 +271,8 @@ const PerformanceMetrics = () => {
               : 'large',
       },
       {
-        icon: Monitor,`
-        label: 'Cache Hit',``
+        icon: Monitor,
+        label: 'Cache Hit',`
         value: isLoading ? '...' : `${metrics.cacheEfficiency}%`,
         color: 'text-teal-400',
         description: 'Resource cache efficiency',
@@ -284,8 +284,8 @@ const PerformanceMetrics = () => {
               : 'poor',
       },
       {
-        icon: Cpu,`
-        label: 'Live FPS',``
+        icon: Cpu,
+        label: 'Live FPS',`
         value: liveMetrics.fps > 0 ? `${liveMetrics.fps}fps` : '...',
         color: 'text-red-400',
         description: 'Current frame rate',
@@ -334,8 +334,8 @@ const PerformanceMetrics = () => {
 
   const metricsData = [
     {
-      icon: Clock,`
-      label: 'Load Time',``
+      icon: Clock,
+      label: 'Load Time',`
       value: isLoading ? '...' : `${metrics.loadTime}ms`,
       color: 'text-blue-400',
     },
@@ -346,8 +346,8 @@ const PerformanceMetrics = () => {
       color: 'text-green-400',
     },
     {
-      icon: Zap,`
-      label: 'Memory Usage',``
+      icon: Zap,
+      label: 'Memory Usage',`
       value: isLoading ? '...' : `${metrics.memoryUsage}MB`,
       color: 'text-yellow-400',
     },
@@ -365,16 +365,16 @@ const PerformanceMetrics = () => {
         const IconComponent = metric.icon;
         return (
           <div
-            key={metric.label}`
-            className='rounded-lg border border-gray-700/50 bg-gray-900/50 p-4 backdrop-blur-sm'``
+            key={metric.label}
+            className='rounded-lg border border-gray-700/50 bg-gray-900/50 p-4 backdrop-blur-sm'`
             style={{ animationDelay: `${index * 100}ms` }}
-          >`
-            <div className='mb-2 flex items-center space-x-2'>``
+          >
+            <div className='mb-2 flex items-center space-x-2'>`
               <IconComponent className={`h-5 w-5 ${metric.color}`} />
               <span className='text-sm font-medium text-gray-400'>
                 {metric.label}
-              </span>`
-            </div>``
+              </span>
+            </div>`
             <div className={`text-2xl font-bold ${metric.color}`}>
               {isLoading ? (
                 <div className='h-8 w-16 animate-pulse rounded bg-gray-700'></div>
@@ -389,5 +389,5 @@ const PerformanceMetrics = () => {
   );
 };
 
-export default PerformanceMetrics;`
-``
+export default PerformanceMetrics;
+`

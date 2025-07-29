@@ -43,8 +43,8 @@ const CodeBlock = ({ code, language = 'javascript', title = '' }) => {
       if (keywords[lang]) {
         keywords[lang].forEach((keyword) => {
           const regex = new RegExp(`\\b${keyword}\\b`, 'g');
-          highlighted = highlighted.replace(`
-            regex,``
+          highlighted = highlighted.replace(
+            regex,`
             `<span class="text-purple-400 font-semibold">${keyword}</span>`
           );
         });
@@ -111,5 +111,5 @@ const CodeBlock = ({ code, language = 'javascript', title = '' }) => {
   );
 };
 
-export default CodeBlock;`
-``
+export default CodeBlock;
+`

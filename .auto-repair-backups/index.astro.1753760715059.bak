@@ -107,8 +107,8 @@ const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
                   </span>
                 ))}
               </div>
-`
-              <a``
+
+              <a`
                 href={`/blog/${featuredPost.slug}`}
                 class='btn-primary self-start'
               >
@@ -190,8 +190,8 @@ const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
                   </time>
                 </div>
               </div>
-`
-              <h3 class='mb-3 line-clamp-2 text-xl font-semibold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>``
+
+              <h3 class='mb-3 line-clamp-2 text-xl font-semibold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>`
                 <a href={`/blog/${post.slug}`}>{post.data.title}</a>
               </h3>
 
@@ -211,8 +211,8 @@ const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
                   </span>
                 )}
               </div>
-`
-              <a``
+
+              <a`
                 href={`/blog/${post.slug}`}
                 class='text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300'
               >
@@ -363,5 +363,5 @@ const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
     opacity: 0;
     transform: translateY(10px);
   }
-</style>`
-``
+</style>
+`

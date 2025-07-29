@@ -100,7 +100,7 @@ const AnimatedBackground = ({ className = '' }) => {
 
   return (
     <canvas
-      ref={canvasRef}`
+      ref={canvasRef}
       className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
       style={{ zIndex: -1 }}
     />
@@ -112,4 +112,3 @@ AnimatedBackground.propTypes = {
 };
 
 export default AnimatedBackground;
-`

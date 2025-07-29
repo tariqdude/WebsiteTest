@@ -53,11 +53,67 @@ async function runCommand(command, description) {
   log(`Running: ${description}...`, ICONS.gear);
   try {
     const { stdout, stderr } = await execAsync(command, { cwd: projectRoot });
+    if (stderr && !stderr.includes('WARN')) {
+      log(`${description} produced warnings:\n${stderr}`, ICONS.warn, 'warn');
+    }
     log(`${description} completed successfully`, ICONS.check, 'success');
     return { success: true, stdout, stderr };
   } catch (error) {
     log(`${description} failed: ${error.message}`, ICONS.cross, 'error');
     return { success: false, error };
+  }
+}
+
+async function checkDependencies() {
+  log('Checking for missing dependencies...', ICONS.shield);
+  try {
+    const packageJson = JSON.parse(
+      await readFile(join(projectRoot, 'package.json'), 'utf-8')
+    );
+    const dependencies = {
+      ...packageJson.dependencies,
+      ...packageJson.devDependencies,
+    };
+
+    const astroConfig = await readFile(
+      join(projectRoot, 'astro.config.mjs'),
+      'utf-8'
+    );
+
+    const importRegex = /import\s+.*\s+from\s+['"]([^'"]+)['"]/g;
+    let match;
+    const missing = new Set();
+
+    while ((match = importRegex.exec(astroConfig)) !== null) {
+      const moduleName = match[1];
+      if (
+        !moduleName.startsWith('.') &&
+        !moduleName.startsWith('/') &&
+        !dependencies[moduleName] &&
+        !moduleName.startsWith('astro:') &&
+        moduleName !== 'astro/config'
+      ) {
+        missing.add(moduleName);
+      }
+    }
+
+    if (missing.size > 0) {
+      log(
+        `Found ${missing.size} missing dependencies: ${[...missing].join(
+          ', '
+        )}`,
+        ICONS.warn,
+        'warn'
+      );
+      const installCommand = `npm install --save-dev ${[...missing].join(' ')}`;
+      await runCommand(installCommand, 'Installing missing dependencies');
+    } else {
+      log('All dependencies are correctly listed.', ICONS.check, 'success');
+    }
+    return true;
+  } catch (error) {
+    log(`Dependency check failed: ${error.message}`, ICONS.cross, 'error');
+    return false;
   }
 }
 
@@ -67,6 +123,9 @@ async function setupEnvironment() {
 
   // Install dependencies
   await runCommand('npm install', 'Installing dependencies');
+
+  // Check for missing dependencies
+  await checkDependencies();
 
   // Run health checks
   const checks = [
@@ -84,6 +143,12 @@ async function setupEnvironment() {
 
 async function validateDeployment() {
   log('Validating deployment readiness...', ICONS.shield);
+
+  // Check dependencies first
+  if (!(await checkDependencies())) {
+    log('Dependency check failed. Aborting validation.', ICONS.cross, 'error');
+    return false;
+  }
 
   // Build test
   const buildResult = await runCommand(

@@ -203,10 +203,10 @@ const features = [
           features.map(
             ({ icon: Icon, title, description, color, bg }, index) => (
               <div
-                class={`animate-fade-in-up rounded-2xl border border-gray-200 p-6 transition-all duration-300 hover:border-primary-300 hover:shadow-lg dark:border-gray-700 dark:hover:border-primary-600`}``
-                style={`animation-delay: ${index * 100}ms`}`
-              >``
-                <div class={`inline-flex rounded-xl p-3 ${bg} mb-4`}>``
+                class={`animate-fade-in-up rounded-2xl border border-gray-200 p-6 transition-all duration-300 hover:border-primary-300 hover:shadow-lg dark:border-gray-700 dark:hover:border-primary-600`}`
+                style={`animation-delay: ${index * 100}ms`}
+              >`
+                <div class={`inline-flex rounded-xl p-3 ${bg} mb-4`}>`
                   <Icon className={`h-6 w-6 ${color}`} />
                 </div>
                 <h3 class='mb-2 text-xl font-semibold text-gray-900 dark:text-white'>
@@ -286,8 +286,8 @@ const features = [
 
       <!-- Code Example -->
       <div class='mx-auto mt-16 max-w-4xl'>
-        <CodeBlock`
-          client:visible``
+        <CodeBlock
+          client:visible`
           code={`<!-- React component loads immediately -->
 <InteractiveCounter client:load />
 
@@ -295,8 +295,8 @@ const features = [
 <ColorPalette client:visible />
 
 <!-- Advanced components with conditional loading -->
-<PerformanceMetrics client:load />`
-<AnimatedBackground client:visible />``
+<PerformanceMetrics client:load />
+<AnimatedBackground client:visible />`
 <InteractiveTerminal client:visible />`}
           language='astro'
           title='index.astro'
@@ -491,11 +491,11 @@ const features = [
               icon: '🎮',
               version: 'r160',
             },
-          ].map((framework) => (`
-            <div``
+          ].map((framework) => (
+            <div`
               class={`rounded-xl p-6 text-center ${framework.bg} transition-transform duration-300 hover:scale-105`}
-            >`
-              <div class='mb-3 text-4xl'>{framework.icon}</div>``
+            >
+              <div class='mb-3 text-4xl'>{framework.icon}</div>`
               <h3 class={`font-bold ${framework.color} mb-1 text-lg`}>
                 {framework.name}
               </h3>
@@ -661,12 +661,12 @@ const features = [
           </div>
 
           <div class='grid grid-cols-1 gap-8 lg:grid-cols-2'>
-            {featuredPosts.map((post, index) => (`
-              <article``
+            {featuredPosts.map((post, index) => (
+              <article`
                 class={`card group transition-all duration-300 hover:shadow-xl ${index === 0 ? 'lg:row-span-2' : ''}`}
               >
-                <div class='mb-4 flex items-center space-x-3'>`
-                  <img``
+                <div class='mb-4 flex items-center space-x-3'>
+                  <img`
                     src={`/images/avatars/${post.data.author.toLowerCase().replace(' ', '-')}.jpg`}
                     alt={post.data.author}
                     class='h-10 w-10 rounded-full'
@@ -681,8 +681,8 @@ const features = [
                     </p>
                   </div>
                 </div>
-`
-                <h3 class='mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>``
+
+                <h3 class='mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>`
                   <a href={`/blog/${post.slug}`}>{post.data.title}</a>
                 </h3>
 
@@ -697,8 +697,8 @@ const features = [
                     </span>
                   ))}
                 </div>
-`
-                <a``
+
+                <a`
                   href={`/blog/${post.slug}`}
                   class='group inline-flex items-center font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300'
                 >
@@ -766,5 +766,5 @@ const features = [
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-</style>`
-``
+</style>
+`

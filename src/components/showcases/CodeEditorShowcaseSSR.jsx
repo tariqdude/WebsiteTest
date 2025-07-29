@@ -21,8 +21,7 @@ function ExampleComponent() {
     </div>
   );
 }
-
-`
-export default ExampleComponent;`);
-;
-`
+`
+``
+export default ExampleComponent;`);`
+``

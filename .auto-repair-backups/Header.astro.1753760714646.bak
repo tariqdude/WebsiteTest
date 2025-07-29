@@ -68,8 +68,8 @@ const currentPath = Astro.url.pathname;
               href={href}
               class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
                 currentPath === href
-                  ? 'text-primary-600 dark:text-primary-400'`
-                  : 'text-gray-700 dark:text-gray-300'``
+                  ? 'text-primary-600 dark:text-primary-400'
+                  : 'text-gray-700 dark:text-gray-300'`
               }`}
               aria-current={currentPath === href ? 'page' : undefined}
             >
@@ -114,5 +114,5 @@ const currentPath = Astro.url.pathname;
       backdrop-filter: blur(20px);
     }
   }
-</style>`
-``
+</style>
+`

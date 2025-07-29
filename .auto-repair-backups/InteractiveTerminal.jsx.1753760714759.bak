@@ -221,5 +221,5 @@ const InteractiveTerminal = () => {
   );
 };
 
-export default InteractiveTerminal;`
-``
+export default InteractiveTerminal;
+`

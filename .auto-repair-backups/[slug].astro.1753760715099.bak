@@ -212,8 +212,8 @@ const relatedProjects = allProjects
                       loading='lazy'
                     />
                   </div>
-                  <h3 class='mb-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>`
-                    ``
+                  <h3 class='mb-2 text-lg font-semibold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>
+                    `
                     <a href={`/projects/${relatedProject.slug}`}>
                       {relatedProject.data.title}
                     </a>
@@ -260,6 +260,5 @@ const relatedProjects = allProjects
       </div>
     </div>
   </section>
-</Layout>`
-`
+</Layout>
 `
