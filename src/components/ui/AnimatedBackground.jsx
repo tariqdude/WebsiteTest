@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 const AnimatedBackground = ({ className = '' }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || typeof window === 'undefined') return;
 
     const ctx = canvas.getContext('2d');
     const particles = [];
@@ -18,20 +19,19 @@ const AnimatedBackground = ({ className = '' }) => {
       canvas.height = canvas.offsetHeight;
     };
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Create particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
-      });
-    }
+    // Initialize particles
+    const initParticles = () => {
+      particles.length = 0;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          size: Math.random() * 2 + 1,
+        });
+      }
+    };
 
     // Animation loop
     const animate = () => {
@@ -51,8 +51,8 @@ const AnimatedBackground = ({ className = '' }) => {
 
         // Draw particle
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`;
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.6)';
         ctx.fill();
 
         // Draw connections
@@ -64,35 +64,51 @@ const AnimatedBackground = ({ className = '' }) => {
           if (distance < 100) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);`
-            ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * (1 - distance / 100)})`;
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            const opacity = 0.1 * (1 - distance / 100);
+            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         });
       });
 
-      animationId = requestAnimationFrame(animate);
+      animationId = window.requestAnimationFrame(animate);
     };
 
+    // Initialize
+    resizeCanvas();
+    initParticles();
     animate();
 
+    // Handle resize
+    const handleResize = () => {
+      resizeCanvas();
+      initParticles();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', handleResize);
       if (animationId) {
-        cancelAnimationFrame(animationId);
+        window.cancelAnimationFrame(animationId);
       }
     };
   }, []);
 
   return (
     <canvas
-      ref={canvasRef}`
+      ref={canvasRef}
       className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
       style={{ zIndex: -1 }}
     />
   );
 };
 
+AnimatedBackground.propTypes = {
+  className: PropTypes.string,
+};
+
 export default AnimatedBackground;
-`

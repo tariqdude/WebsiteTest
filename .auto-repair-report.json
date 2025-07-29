@@ -1,13 +1,13 @@
 {
   "summary": {
-    "totalDuration": "0.87s",
-    "operationsPerformed": 0,
-    "filesAnalyzed": 71,
-    "errorsFound": 30,
-    "errorsFixed": 30,
-    "filesHealed": 27,
-    "criticalErrors": 0,
-    "successRate": "100.0%"
+    "totalDuration": "152.40s",
+    "operationsPerformed": 3,
+    "filesAnalyzed": 0,
+    "errorsFound": 0,
+    "errorsFixed": 0,
+    "filesHealed": 0,
+    "criticalErrors": 5,
+    "successRate": "0.0%"
   },
-  "timestamp": "2025-07-29T02:23:07.359Z"
+  "timestamp": "2025-07-29T03:00:56.767Z"
 }

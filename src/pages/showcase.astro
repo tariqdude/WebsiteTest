@@ -2,10 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Advanced3DSceneSSRFixed from '../components/showcases/Advanced3DSceneSSRFixed.jsx';
 
-// Debug Component
-import DebugComponent from '../components/test/DebugComponent.jsx';
-import SimpleTestComponent from '../components/test/SimpleTestComponent.jsx';
-
 // React Components - Core Features
 import DataVisualizationDashboard from '../components/frameworks/react/DataVisualizationDashboard.jsx';
 import AdvancedForm from '../components/frameworks/react/AdvancedForm.tsx';
@@ -28,8 +24,7 @@ import GSAPAnimationShowcase from '../components/showcases/GSAPAnimationShowcase
 
 // UI Components
 import AnimatedBackground from '../components/ui/AnimatedBackground.jsx';
-import SimpleDemo from '../components/ui/SimpleDemo.jsx';
-import SimpleColorDemo from '../components/ui/SimpleColorDemo.jsx';
+import EnhancedDemo from '../components/ui/EnhancedDemo.tsx';
 import SimpleFallback from '../components/ui/SimpleFallback.astro';
 import FrameworkDemo from '../components/ui/FrameworkDemo.tsx';
 
@@ -67,38 +62,40 @@ import { technologyStats } from '../lib/constants';
       <div class='mb-12'>
         <PerformanceMetrics client:load />
       </div>
-
-      <!-- Debug Component -->
-      <div class='mb-12'>
-        <DebugComponent client:load />
-        <SimpleTestComponent client:load />
-      </div>
     </div>
   </section>
 
-  <!-- Reliable Demo Section - Always Working -->
+  <!-- Enhanced Demo Section -->
   <section class='bg-white py-16 dark:bg-gray-900'>
     <div class='container mx-auto px-4 sm:px-6 lg:px-8'>
       <h2
         class='mb-4 text-center text-3xl font-bold text-gray-900 dark:text-white'
       >
-        🚀 Interactive Demos
+        🚀 Enhanced Interactive Demo
       </h2>
       <p class='mb-12 text-center text-gray-600 dark:text-gray-300'>
-        Simple, reliable components to demonstrate multi-framework integration
+        Comprehensive component combining counter, color picker, and more
       </p>
 
+      <div class='mx-auto max-w-4xl'>
+        <EnhancedDemo
+          client:load
+          title='Enhanced React Component'
+          type='combined'
+        />
+      </div>
+
       <div
-        class='mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'
+        class='mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'
       >
-        <!-- Simple React Demo -->
+        <!-- Legacy Counter Demo -->
         <div class='space-y-4'>
-          <SimpleDemo client:load title='React Counter' type='counter' />
+          <EnhancedDemo client:load title='Counter Demo' type='counter' />
         </div>
 
-        <!-- Simple Color Demo -->
+        <!-- Legacy Color Demo -->
         <div class='space-y-4'>
-          <SimpleColorDemo client:load title='React Color Picker' />
+          <EnhancedDemo client:load title='Color Picker' type='color' />
         </div>
 
         <!-- Fallback Demo -->

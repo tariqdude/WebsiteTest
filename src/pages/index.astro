@@ -19,14 +19,13 @@ import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashb
 // UI Components
 import AnimatedBackground from '../components/ui/AnimatedBackground.jsx';
 import CodeBlock from '../components/ui/CodeBlock.jsx';
-import SimpleDemo from '../components/ui/SimpleDemo.jsx';
-import SimpleColorDemo from '../components/ui/SimpleColorDemo.jsx';
+import EnhancedDemo from '../components/ui/EnhancedDemo.tsx';
 
 // Showcase Components - Advanced Features
 import PerformanceMetrics from '../components/showcases/PerformanceMetrics.jsx';
 import InteractiveTerminal from '../components/showcases/InteractiveTerminal.jsx';
-import Advanced3DScene from '../components/showcases/Advanced3DScene.jsx';
-import CodeEditorShowcase from '../components/showcases/CodeEditorShowcase.jsx';
+import Advanced3DSceneSSRFixed from '../components/showcases/Advanced3DSceneSSRFixed.jsx';
+import CodeEditorShowcase from '../components/showcases/CodeEditorShowcaseSSR.jsx';
 import GSAPAnimationShowcase from '../components/showcases/GSAPAnimationShowcase.jsx';
 
 // Icons and Data
@@ -253,7 +252,7 @@ const features = [
           </div>
 
           <!-- Reliable demo first -->
-          <SimpleDemo client:load title='React Counter' type='counter' />
+          <EnhancedDemo client:load title='React Counter' type='counter' />
 
           <!-- Advanced component below -->
           <div class='mt-4'>
@@ -276,7 +275,7 @@ const features = [
           </div>
 
           <!-- Reliable Vue demo first -->
-          <SimpleColorDemo client:load title='Color Demo' />
+          <EnhancedDemo client:load title='Color Demo' type='color' />
 
           <!-- Advanced component below -->
           <div class='mt-4'>
