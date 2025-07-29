@@ -130,11 +130,7 @@ const AdvancedForm = () => {
               </label>
               <input
                 {...register('firstName')}
-                className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${
-                  errors.firstName
-                    ? 'border-red-500 focus:ring-red-500'`
-                    : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'``
-                }`}
+                className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${errors.firstName ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'}`}
                 placeholder='John'
               />
               {errors.firstName && (
@@ -147,14 +143,10 @@ const AdvancedForm = () => {
             <div>
               <label className='mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300'>
                 Last Name
-              </label>
-              <input`
-                {...register('lastName')}``
-                className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${
-                  errors.lastName
-                    ? 'border-red-500 focus:ring-red-500'`
-                    : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'``
-                }`}
+              </label>`
+              <input
+                {...register('lastName')}
+                className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${errors.lastName ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'}`}
                 placeholder='Doe'
               />
               {errors.lastName && (
@@ -172,13 +164,9 @@ const AdvancedForm = () => {
                 Email
               </label>
               <input
-                {...register('email')}`
-                type='email'``
-                className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${
-                  errors.email
-                    ? 'border-red-500 focus:ring-red-500'`
-                    : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'``
-                }`}
+                {...register('email')}
+                type='email'
+                className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'}`}
                 placeholder='john.doe@example.com'
               />
               {errors.email && (
@@ -193,13 +181,9 @@ const AdvancedForm = () => {
                 Age
               </label>
               <input
-                {...register('age', { valueAsNumber: true })}`
-                type='number'``
-                className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${
-                  errors.age
-                    ? 'border-red-500 focus:ring-red-500'`
-                    : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'``
-                }`}
+                {...register('age', { valueAsNumber: true })}
+                type='number'
+                className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${errors.age ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'}`}
                 placeholder='25'
               />
               {errors.age && (
@@ -216,13 +200,9 @@ const AdvancedForm = () => {
               Website (Optional)
             </label>
             <input
-              {...register('website')}`
-              type='url'``
-              className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${
-                errors.website
-                  ? 'border-red-500 focus:ring-red-500'`
-                  : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'``
-              }`}
+              {...register('website')}
+              type='url'
+              className={`w-full rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${errors.website ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'}`}
               placeholder='https://your-website.com'
             />
             {errors.website && (
@@ -238,13 +218,9 @@ const AdvancedForm = () => {
               Bio
             </label>
             <textarea
-              {...register('bio')}`
-              rows={4}``
-              className={`w-full resize-none rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${
-                errors.bio
-                  ? 'border-red-500 focus:ring-red-500'`
-                  : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'``
-              }`}
+              {...register('bio')}
+              rows={4}
+              className={`w-full resize-none rounded-lg border px-3 py-2 transition-colors focus:outline-none focus:ring-2 ${errors.bio ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white'}`}
               placeholder='Tell us about yourself...'
             />
             <div className='mt-1 flex items-center justify-between'>
@@ -266,13 +242,9 @@ const AdvancedForm = () => {
               {skillOptions.map((skill) => (
                 <button
                   key={skill}
-                  type='button'`
-                  onClick={() => handleSkillToggle(skill)}``
-                  className={`rounded-lg p-2 text-sm font-medium transition-colors ${
-                    watchedSkills.includes(skill)
-                      ? 'bg-indigo-500 text-white'`
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'``
-                  }`}
+                  type='button'
+                  onClick={() => handleSkillToggle(skill)}
+                  className={`rounded-lg p-2 text-sm font-medium transition-colors ${watchedSkills.includes(skill) ? 'bg-indigo-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'}`}
                 >
                   {skill}
                 </button>
@@ -381,6 +353,4 @@ const AdvancedForm = () => {
     </div>
   );
 };
-
-export default AdvancedForm;`
-``
+export default AdvancedForm;

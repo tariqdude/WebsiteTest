@@ -220,6 +220,6 @@ const InteractiveTerminal = () => {
     </div>
   );
 };
-
-export default InteractiveTerminal;`
-``
+`
+export default InteractiveTerminal;``
+```;

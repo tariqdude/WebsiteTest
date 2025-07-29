@@ -60,9 +60,8 @@ const DataVisualizationDashboard = () => {
       .on('mouseout', function (event, d) {
         d3.select(this).attr('fill', '#3B82F6');
       });
-
-    // Add axes`
-    g.append('g')``
+    // Add axes
+    g.append('g')
       .attr('transform', `translate(0,${height})`)
       .call(d3.axisBottom(xScale));
 
@@ -87,8 +86,8 @@ const DataVisualizationDashboard = () => {
     const ctx = chartJsRef.current.getContext('2d');
 
     const chartInstance = new Chart(ctx, {
-      type: 'line',`
-      data: {``
+      type: 'line',
+      data: {
         labels: Array.from({ length: 12 }, (_, i) => `Month ${i + 1}`),
         datasets: [
           {
@@ -212,8 +211,8 @@ const DataVisualizationDashboard = () => {
             value: Math.max(...data.sales),
             color: 'purple',
           },
-          {`
-            label: 'Growth',``
+          {
+            label: 'Growth',
             value: `+${Math.round(Math.random() * 20)}%`,
             color: 'orange',
           },
@@ -242,5 +241,4 @@ const DataVisualizationDashboard = () => {
   );
 };
 
-export default DataVisualizationDashboard;`
-``
+export default DataVisualizationDashboard;

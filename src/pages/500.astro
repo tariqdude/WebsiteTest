@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { AnimatedBackground } from '../components/ui/AnimatedBackground.jsx';
+import AnimatedBackground from '../components/ui/AnimatedBackground.jsx';
 ---
 
 <Layout title='500: Server Error'>
@@ -134,8 +134,11 @@ import { AnimatedBackground } from '../components/ui/AnimatedBackground.jsx';
   </div>
 
   <script>
-    // Set current time
-    document.getElementById('error-time').textContent =
-      new Date().toLocaleString();
+    document.addEventListener('DOMContentLoaded', () => {
+      const errorTimeElement = document.getElementById('error-time');
+      if (errorTimeElement) {
+        errorTimeElement.textContent = new Date().toLocaleString();
+      }
+    });
   </script>
 </Layout>

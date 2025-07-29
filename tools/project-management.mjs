@@ -129,9 +129,8 @@ async function setupEnvironment() {
 
   // Run health checks
   const checks = [
-    ['npx astro check', 'Astro configuration check'],
-    ['npx tsc --noEmit', 'TypeScript compilation check'],
-    ['npx eslint . --ext .js,.jsx,.ts,.tsx,.astro', 'ESLint check'],
+    ['npm run check', 'Astro and TypeScript check'],
+    ['npm run lint', 'ESLint check'],
   ];
 
   for (const [cmd, desc] of checks) {
@@ -188,7 +187,7 @@ async function optimizeProject() {
   // Clean and optimize
   await runCommand('npm prune', 'Removing unused dependencies');
   await runCommand('npm audit fix', 'Fixing security vulnerabilities');
-  await runCommand('npx prettier --write .', 'Formatting code');
+  await runCommand('npm run format', 'Formatting code');
 
   // Self-healing scan
   await runCommand(
@@ -205,7 +204,7 @@ async function runTests() {
   const testCommands = [
     ['npm run test:ssr', 'SSR compatibility test'],
     ['npm run build:gh-pages', 'Production build test'],
-    ['npx astro check', 'Astro validation test'],
+    ['npm run check', 'Astro and TypeScript validation test'],
   ];
 
   let allPassed = true;
@@ -237,9 +236,8 @@ async function generateHealthReport() {
 
   // Run health checks
   const checks = [
-    ['npx astro check', 'astro'],
-    ['npx tsc --noEmit', 'typescript'],
-    ['npx eslint . --ext .js,.jsx,.ts,.tsx,.astro', 'eslint'],
+    ['npm run check', 'astro_typescript'],
+    ['npm run lint', 'eslint'],
   ];
 
   for (const [cmd, key] of checks) {
@@ -360,17 +358,7 @@ async function main() {
 }
 
 // Execute if run directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch((err) => {
-    log(`Critical error: ${err.message}`, ICONS.cross, 'error');
-    process.exit(1);
-  });
-}
-
-export {
-  setupEnvironment,
-  validateDeployment,
-  optimizeProject,
-  runTests,
-  generateHealthReport,
-};
+main().catch((err) => {
+  log(`Critical error: ${err.message}`, ICONS.cross, 'error');
+  process.exit(1);
+});

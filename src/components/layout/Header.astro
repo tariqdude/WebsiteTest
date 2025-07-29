@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from '../ui/ThemeToggle.astro';
-import MobileMenu from './MobileMenu.jsx';
+import { MobileMenu } from './MobileMenu.jsx';
 
 const navItems = [
   { label: 'Home', href: '/WebsiteTest/' },
@@ -66,11 +66,7 @@ const currentPath = Astro.url.pathname;
           navItems.map(({ label, href }) => (
             <a
               href={href}
-              class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-                currentPath === href
-                  ? 'text-primary-600 dark:text-primary-400'`
-                  : 'text-gray-700 dark:text-gray-300'``
-              }`}
+              class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${currentPath === href ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'}`}
               aria-current={currentPath === href ? 'page' : undefined}
             >
               {label}
@@ -114,5 +110,4 @@ const currentPath = Astro.url.pathname;
       backdrop-filter: blur(20px);
     }
   }
-</style>`
-``
+</style>

@@ -339,8 +339,11 @@ const GSAPAnimationShowcase = () => {
         </div>
 
         <div className='absolute bottom-4 right-4'>
-          <div className='rounded-lg bg-black bg-opacity-20 px-3 py-1 backdrop-blur-sm'>`
-            <span className='font-mono text-sm text-white'>``
+          `
+          <div className='rounded-lg bg-black bg-opacity-20 px-3 py-1 backdrop-blur-sm'>
+            ``
+            <span className='font-mono text-sm text-white'>
+              ```
               {isAnimating ? `Running: ${currentAnimation}` : 'Ready'}
             </span>
           </div>
@@ -382,9 +385,8 @@ const GSAPAnimationShowcase = () => {
       <div className='rounded-lg bg-gray-900 p-4'>
         <div className='font-mono text-sm text-green-400'>
           <span className='text-gray-500'>// GSAP Animation Example</span>
-          <br />
-          <span className='text-blue-400'>gsap</span>.`
-          <span className='text-yellow-400'>to</span>``
+          <br />`<span className='text-blue-400'>gsap</span>.``
+          <span className='text-yellow-400'>to</span>```
           <span className='text-white'>(elements, {`{`}</span>
           <br />
           <span className='ml-4 text-purple-400'>y</span>
@@ -397,9 +399,10 @@ const GSAPAnimationShowcase = () => {
           <span className='text-white'>: 0.1,</span>
           <br />
           <span className='ml-4 text-purple-400'>ease</span>
-          <span className='text-white'>: </span>
-          <span className='text-green-300'>"back.out(1.7)"</span>`
-          <br />``
+          <span className='text-white'>: </span>`
+          <span className='text-green-300'>"back.out(1.7)"</span>``
+          <br />
+          ```
           <span className='text-white'>{`});`}</span>
         </div>
       </div>
@@ -411,6 +414,6 @@ const GSAPAnimationShowcase = () => {
     </div>
   );
 };
-
-export default GSAPAnimationShowcase;`
-``
+`
+export default GSAPAnimationShowcase;``
+```;

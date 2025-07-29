@@ -2,7 +2,7 @@
 // Note: Astro components (.astro) should be imported directly where needed
 // TypeScript cannot process .astro imports in .ts files
 
-import MobileMenu from './MobileMenu.jsx';
+import { MobileMenu } from './MobileMenu.jsx';
 
 export { MobileMenu };
 

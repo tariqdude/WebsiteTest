@@ -42,9 +42,9 @@ const CodeBlock = ({ code, language = 'javascript', title = '' }) => {
 
       if (keywords[lang]) {
         keywords[lang].forEach((keyword) => {
-          const regex = new RegExp(`\\b${keyword}\\b`, 'g');
-          highlighted = highlighted.replace(`
-            regex,``
+          const regex = new RegExp(`\b${keyword}\b`, 'g');
+          highlighted = highlighted.replace(
+            regex,
             `<span class="text-purple-400 font-semibold">${keyword}</span>`
           );
         });
@@ -65,16 +65,14 @@ const CodeBlock = ({ code, language = 'javascript', title = '' }) => {
       // Highlight numbers
       highlighted = highlighted.replace(
         /\b\d+\.?\d*\b/g,
-        '<span class="text-yellow-400">$&</span>'
+        '<span class="text-yellow-400">/\b\d+\.?\d*\b/g,
+        '<span class="text-yellow-400">/\b\d+\.?\d*\b/g,
+        '<span class="text-yellow-400">          );</span>'
+      );</span>'
+      );</span>'
       );
 
-      return highlighted;
-    };
-
-    setHighlightedCode(highlight(code, language));
-  }, [code, language]);
-
-  return (
+      return (
     <div className='group relative'>
       <div className='overflow-hidden rounded-lg border border-gray-700 bg-gray-900'>
         {title && (
@@ -111,5 +109,4 @@ const CodeBlock = ({ code, language = 'javascript', title = '' }) => {
   );
 };
 
-export default CodeBlock;`
-``
+export default CodeBlock;

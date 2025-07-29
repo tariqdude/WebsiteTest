@@ -222,8 +222,8 @@ const PerformanceMetrics = () => {
               : 'heavy',
       },
       {
-        icon: HardDrive,`
-        label: 'Memory',``
+        icon: HardDrive,
+        label: 'Memory',
         value: isLoading ? '...' : `${metrics.memoryUsage}MB`,
         color: 'text-purple-400',
         description: 'JavaScript heap usage',
@@ -245,8 +245,8 @@ const PerformanceMetrics = () => {
           : 'standard',
       },
       {
-        icon: Zap,`
-        label: 'Render Time',``
+        icon: Zap,
+        label: 'Render Time',
         value: isLoading ? '...' : `${metrics.renderTime}ms`,
         color: 'text-yellow-400',
         description: 'DOM content loaded time',
@@ -258,8 +258,8 @@ const PerformanceMetrics = () => {
               : 'slow',
       },
       {
-        icon: Globe,`
-        label: 'Bundle Size',``
+        icon: Globe,
+        label: 'Bundle Size',
         value: isLoading ? '...' : `${metrics.bundleSize}KB`,
         color: 'text-indigo-400',
         description: 'Total resource size',
@@ -271,8 +271,8 @@ const PerformanceMetrics = () => {
               : 'large',
       },
       {
-        icon: Monitor,`
-        label: 'Cache Hit',``
+        icon: Monitor,
+        label: 'Cache Hit',
         value: isLoading ? '...' : `${metrics.cacheEfficiency}%`,
         color: 'text-teal-400',
         description: 'Resource cache efficiency',
@@ -284,8 +284,8 @@ const PerformanceMetrics = () => {
               : 'poor',
       },
       {
-        icon: Cpu,`
-        label: 'Live FPS',``
+        icon: Cpu,
+        label: 'Live FPS',
         value: liveMetrics.fps > 0 ? `${liveMetrics.fps}fps` : '...',
         color: 'text-red-400',
         description: 'Current frame rate',
@@ -332,62 +332,158 @@ const PerformanceMetrics = () => {
     );
   }
 
-  const metricsData = [
-    {
-      icon: Clock,`
-      label: 'Load Time',``
-      value: isLoading ? '...' : `${metrics.loadTime}ms`,
-      color: 'text-blue-400',
-    },
-    {
-      icon: Activity,
-      label: 'DOM Nodes',
-      value: isLoading ? '...' : metrics.domNodes.toLocaleString(),
-      color: 'text-green-400',
-    },
-    {
-      icon: Zap,`
-      label: 'Memory Usage',``
-      value: isLoading ? '...' : `${metrics.memoryUsage}MB`,
-      color: 'text-yellow-400',
-    },
-    {
-      icon: Globe,
-      label: 'Connection',
-      value: isLoading ? '...' : metrics.connectionType.toUpperCase(),
-      color: 'text-purple-400',
-    },
-  ];
+  
 
   return (
-    <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
-      {metricsData.map((metric, index) => {
-        const IconComponent = metric.icon;
-        return (
+    <div className='mx-auto w-full max-w-6xl p-6'>
+      <div className='rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-8 shadow-xl dark:border-gray-700 dark:from-gray-800 dark:to-gray-900'>
+        {/* Header */}
+        <div className='mb-8 text-center'>
+          <h2 className='mb-2 text-3xl font-bold text-gray-900 dark:text-white'>
+            📊 Advanced Performance Analytics
+          </h2>
+          <p className='text-gray-600 dark:text-gray-400'>
+            Real-time monitoring with{' '}
+            {deviceInfo.isMobile ? 'mobile' : 'desktop'} optimization
+          </p>
+        </div>
+
+        {/* Overall Status */}
+        <div className='mb-8 text-center'>
           <div
-            key={metric.label}`
-            className='rounded-lg border border-gray-700/50 bg-gray-900/50 p-4 backdrop-blur-sm'``
-            style={{ animationDelay: `${index * 100}ms` }}
-          >`
-            <div className='mb-2 flex items-center space-x-2'>``
-              <IconComponent className={`h-5 w-5 ${metric.color}`} />
-              <span className='text-sm font-medium text-gray-400'>
-                {metric.label}
-              </span>`
-            </div>``
-            <div className={`text-2xl font-bold ${metric.color}`}>
-              {isLoading ? (
-                <div className='h-8 w-16 animate-pulse rounded bg-gray-700'></div>
-              ) : (
-                metric.value
-              )}
+            className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-lg font-bold ${
+              performanceStatus.overall === 'excellent'
+                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                : performanceStatus.overall === 'good'
+                  ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                  : performanceStatus.overall === 'fair'
+                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+            }`}
+          >
+            <Activity className='h-6 w-6' />
+            Performance: {performanceStatus.overall.toUpperCase()}
+          </div>
+        </div>
+
+        {/* Control Buttons */}
+        <div className='mb-8 flex justify-center gap-4'>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={analyzePerformance}
+            className='flex items-center gap-2 rounded-xl bg-blue-500 px-6 py-3 font-bold text-white shadow-lg transition-colors hover:bg-blue-600'
+          >
+            <Zap className='h-5 w-5' />
+            Analyze Now
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsMonitoring((prev) => !prev)}
+            className={`flex items-center gap-2 rounded-xl px-6 py-3 font-bold shadow-lg transition-colors ${
+              isMonitoring
+                ? 'bg-red-500 text-white hover:bg-red-600'
+                : 'bg-green-500 text-white hover:bg-green-600'
+            }`}
+          >
+            <Monitor className='h-5 w-5' />
+            {isMonitoring ? 'Stop' : 'Start'} Live Monitoring
+          </motion.button>
+        </div>
+
+        {/* Metrics Grid */}
+        <div className='mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
+          {metricsData.map((metric, index) => (
+            <MetricCard
+              key={metric.label}
+              icon={metric.icon}
+              title={metric.label}
+              value={metric.value}
+              unit={metric.unit}
+              status={metric.status}
+              trend={metric.trend}
+              description={metric.description}
+            />
+          ))}
+        </div>
+
+        {/* Performance History */}
+        {history.length > 0 && (
+          <div className='rounded-xl bg-gray-50 p-6 dark:bg-gray-800'>
+            <h3 className='mb-4 flex items-center gap-2 font-bold text-gray-900 dark:text-white'>
+              <TrendingUp className='h-5 w-5' />
+              Performance History ({history.length} measurements)
+            </h3>
+
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
+              <div className='rounded-lg bg-white p-3 dark:bg-gray-700'>
+                <div className='text-sm text-gray-600 dark:text-gray-400'>
+                  Avg Load Time
+                </div>
+                <div className='text-lg font-bold text-gray-900 dark:text-white'>
+                  {Math.round(
+                    history.reduce((sum, h) => sum + h.loadTime, 0) /
+                      history.length
+                  )}
+                  ms
+                </div>
+              </div>
+
+              <div className='rounded-lg bg-white p-3 dark:bg-gray-700'>
+                <div className='text-sm text-gray-600 dark:text-gray-400'>
+                  Avg FPS
+                </div>
+                <div className='text-lg font-bold text-gray-900 dark:text-white'>
+                  {Math.round(
+                    history.reduce((sum, h) => sum + h.fps, 0) / history.length
+                  )}
+                </div>
+              </div>
+
+              <div className='rounded-lg bg-white p-3 dark:bg-gray-700'>
+                <div className='text-sm text-gray-600 dark:text-gray-400'>
+                  Peak Memory
+                </div>
+                <div className='text-lg font-bold text-gray-900 dark:text-white'>
+                  {Math.max(...history.map((h) => h.memoryUsage.used))}MB
+                </div>
+              </div>
+
+              <div className='rounded-lg bg-white p-3 dark:bg-gray-700'>
+                <div className='text-sm text-gray-600 dark:text-gray-400'>
+                  Best Cache
+                </div>
+                <div className='text-lg font-bold text-gray-900 dark:text-white'>
+                  {Math.max(...history.map((h) => h.cacheEfficiency))}%
+                </div>
+              </div>
             </div>
           </div>
-        );
-      })}
+        )}
+
+        {/* Device Information */}
+        <div className='mt-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20'>
+          <h4 className='mb-2 font-bold text-blue-800 dark:text-blue-200'>
+            📱 Device Information
+          </h4>
+          <div className='grid grid-cols-2 gap-2 text-sm text-blue-700 dark:text-blue-300 md:grid-cols-4'>
+            <div>
+              Device:{' '}
+              {deviceInfo.isMobile
+                ? 'Mobile'
+                : deviceInfo.isTablet
+                  ? 'Tablet'
+                  : 'Desktop'}
+            </div>
+            <div>Touch: {deviceInfo.isTouchDevice ? 'Yes' : 'No'}</div>
+            <div>Pixel Ratio: {deviceInfo.pixelRatio}x</div>
+            <div>Theme: {deviceInfo.colorScheme}</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
-
-export default PerformanceMetrics;`
-``
+export default PerformanceMetrics;

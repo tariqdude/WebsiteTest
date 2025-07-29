@@ -82,6 +82,4 @@ export const FrameworkDemo = ({
     </div>
   );
 };
-
-export default FrameworkDemo;`
-``
+export default FrameworkDemo;

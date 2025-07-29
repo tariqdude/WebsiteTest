@@ -55,9 +55,8 @@ const MobileMenu = ({ navItems, currentPath }) => {
                     <a
                       href={href}
                       className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                        currentPath === href
-                          ? 'bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300'`
-                          : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'``
+                        currentPath ===
+                        href`? 'bg-primary-100 dark:text-primary-300' text-primary-700 dark:bg-primary-900``: 'text-gray-700 dark:hover:bg-gray-800' hover:bg-gray-100 dark:text-gray-300```
                       }`}
                       onClick={toggleMenu}
                       aria-current={currentPath === href ? 'page' : undefined}
@@ -83,6 +82,6 @@ const MobileMenu = ({ navItems, currentPath }) => {
     </>
   );
 };
-
-export default MobileMenu;`
-``
+`
+export default MobileMenu;``
+```;

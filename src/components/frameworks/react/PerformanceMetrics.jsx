@@ -303,10 +303,10 @@ const PerformanceMetrics = () => {
             )}
           </div>
         </div>
-`
-        <div className='mb-2'>``
-          <span className={`text-2xl font-bold ${getStatusColor(status)}`}>`
-            {typeof value === 'object'``
+
+        <div className='mb-2'>
+          <span className={`text-2xl font-bold ${getStatusColor(status)}`}>
+            {typeof value === 'object'
               ? `${value.used}/${value.total}`
               : value.toLocaleString()}
           </span>
@@ -341,16 +341,16 @@ const PerformanceMetrics = () => {
         </div>
 
         {/* Overall Status */}
-        <div className='mb-8 text-center'>`
-          <div``
+        <div className='mb-8 text-center'>
+          <div
             className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-lg font-bold ${
               performanceStatus.overall === 'excellent'
                 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
                 : performanceStatus.overall === 'good'
                   ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
                   : performanceStatus.overall === 'fair'
-                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'`
-                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'``
+                    ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                    : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
             }`}
           >
             <Activity className='h-6 w-6' />
@@ -372,12 +372,12 @@ const PerformanceMetrics = () => {
 
           <motion.button
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}`
-            onClick={() => setIsMonitoring((prev) => !prev)}``
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsMonitoring((prev) => !prev)}
             className={`flex items-center gap-2 rounded-xl px-6 py-3 font-bold shadow-lg transition-colors ${
               isMonitoring
-                ? 'bg-red-500 text-white hover:bg-red-600'`
-                : 'bg-green-500 text-white hover:bg-green-600'``
+                ? 'bg-red-500 text-white hover:bg-red-600'
+                : 'bg-green-500 text-white hover:bg-green-600'
             }`}
           >
             <Monitor className='h-5 w-5' />
@@ -539,6 +539,4 @@ const PerformanceMetrics = () => {
     </div>
   );
 };
-
-export default PerformanceMetrics;`
-``
+export default PerformanceMetrics;

@@ -193,8 +193,8 @@ const InteractiveCounter = () => {
               key={count}
               variants={countVariants}
               initial='hidden'
-              animate='visible'`
-              exit='exit'``
+              animate='visible'
+              exit='exit'
               className={`text-8xl font-bold ${getCountColor()}`}
             >
               {count.toLocaleString()}
@@ -206,17 +206,17 @@ const InteractiveCounter = () => {
             <div className='mb-2 flex items-center justify-between text-sm text-gray-600 dark:text-gray-400'>
               <span>Progress to target ({targetValue})</span>
               <span>{Math.round(progressToTarget)}%</span>
-            </div>
-            <div className='h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700'>`
-              <motion.div``
+            </div>`
+            <div className='h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700'>
+              <motion.div
                 className={`h-full ${
                   count >= targetValue
                     ? 'bg-green-500'
                     : count < 0
-                      ? 'bg-red-500'`
-                      : 'bg-blue-500'``
-                }`}`
-                initial={{ width: 0 }}``
+                      ? 'bg-red-500'
+                      : 'bg-blue-500'
+                }`}
+                initial={{ width: 0 }}
                 animate={{ width: `${progressToTarget}%` }}
                 transition={{ duration: 0.5 }}
               />
@@ -302,12 +302,12 @@ const InteractiveCounter = () => {
           <motion.button
             variants={buttonVariants}
             whileHover='hover'
-            whileTap='tap'`
-            onClick={() => setAutoMode((prev) => !prev)}``
+            whileTap='tap'
+            onClick={() => setAutoMode((prev) => !prev)}
             className={`flex items-center gap-2 rounded-xl px-6 py-3 font-bold text-white shadow-lg transition-colors ${
               autoMode
-                ? 'bg-orange-500 hover:bg-orange-600'`
-                : 'bg-blue-500 hover:bg-blue-600'``
+                ? 'bg-orange-500 hover:bg-orange-600'
+                : 'bg-blue-500 hover:bg-blue-600'
             }`}
           >
             <Zap className='h-5 w-5' />
@@ -380,14 +380,14 @@ const InteractiveCounter = () => {
                       <motion.div
                         key={index}
                         initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}`
-                        transition={{ delay: index * 0.05 }}``
+                        animate={{ scale: 1 }}
+                        transition={{ delay: index * 0.05 }}
                         className={`rounded p-2 text-center text-sm font-bold ${
                           value > 0
                             ? 'bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200'
                             : value < 0
-                              ? 'bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200'`
-                              : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'``
+                              ? 'bg-red-200 text-red-800 dark:bg-red-800 dark:text-red-200'
+                              : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
                         }`}
                       >
                         {value}
@@ -422,6 +422,4 @@ const InteractiveCounter = () => {
     </div>
   );
 };
-
-export default InteractiveCounter;`
-``
+export default InteractiveCounter;

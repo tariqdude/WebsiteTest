@@ -152,5 +152,4 @@ export function useErrorHandler() {
       console.error('Component stack:', errorInfo.componentStack);
     }
   };
-}`
-``
+}
