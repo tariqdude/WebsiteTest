@@ -134,6 +134,32 @@ async function optimizeProject() {
   log('Project optimization completed', ICONS.check, 'success');
 }
 
+async function runTests() {
+  log('Running project tests...', ICONS.gear);
+
+  const testCommands = [
+    ['npm run test:ssr', 'SSR compatibility test'],
+    ['npm run build:gh-pages', 'Production build test'],
+    ['npx astro check', 'Astro validation test'],
+  ];
+
+  let allPassed = true;
+  for (const [cmd, desc] of testCommands) {
+    const result = await runCommand(cmd, desc);
+    if (!result.success) {
+      allPassed = false;
+    }
+  }
+
+  if (allPassed) {
+    log('All tests passed successfully', ICONS.check, 'success');
+  } else {
+    log('Some tests failed', ICONS.cross, 'error');
+  }
+
+  return allPassed;
+}
+
 async function generateHealthReport() {
   log('Generating project health report...', ICONS.chart);
 
@@ -231,13 +257,19 @@ async function main() {
         await optimizeProject();
         break;
 
+      case 'test':
+        await runTests();
+        break;
+
       case 'health':
+      case 'report':
         await generateHealthReport();
         break;
 
       case 'full':
         await setupEnvironment();
         await optimizeProject();
+        await runTests();
         await validateDeployment();
         await generateHealthReport();
         break;
@@ -248,7 +280,9 @@ async function main() {
         log('  setup    - Set up development environment', ICONS.gear);
         log('  validate - Validate deployment readiness', ICONS.shield);
         log('  optimize - Optimize project performance', ICONS.rocket);
+        log('  test     - Run project tests', ICONS.gear);
         log('  health   - Generate health report', ICONS.chart);
+        log('  report   - Alias for health command', ICONS.chart);
         log('  full     - Run all tasks', ICONS.check);
         break;
     }
@@ -272,5 +306,6 @@ export {
   setupEnvironment,
   validateDeployment,
   optimizeProject,
+  runTests,
   generateHealthReport,
 };

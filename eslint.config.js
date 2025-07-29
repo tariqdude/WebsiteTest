@@ -2,9 +2,11 @@ import js from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 import astro from 'eslint-plugin-astro';
+import astroParser from 'astro-eslint-parser';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import globals from 'globals';
 
 export default [
   js.configs.recommended,
@@ -17,9 +19,9 @@ export default [
         sourceType: 'module',
       },
       globals: {
-        browser: true,
-        node: true,
-        es2021: true,
+        ...globals.browser,
+        ...globals.node,
+        ...globals.es2021,
       },
     },
     plugins: {
@@ -66,7 +68,7 @@ export default [
       astro,
     },
     languageOptions: {
-      parser: 'astro-eslint-parser',
+      parser: astroParser,
       parserOptions: {
         parser: tsparser,
         extraFileExtensions: ['.astro'],
