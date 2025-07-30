@@ -485,5 +485,5 @@ const PerformanceMetrics = () => {
       </div>
     </div>
   );
-};`
-export default PerformanceMetrics;``
+};
+export default PerformanceMetrics;

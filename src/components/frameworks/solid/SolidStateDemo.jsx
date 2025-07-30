@@ -201,5 +201,4 @@ const SolidStateDemo = () => {
     </div>
   );
 };
-`
-export default SolidStateDemo;``
+export default SolidStateDemo;

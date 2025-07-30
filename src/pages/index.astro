@@ -4,17 +4,17 @@ import { getCollection } from 'astro:content';
 import { formatDate } from '../lib/utils';
 
 // React Components - Critical Features
-import { InteractiveCounter } from '../components/frameworks/react/InteractiveCounter.jsx';
-import { DataVisualizationDashboard } from '../components/frameworks/react/DataVisualizationDashboard.jsx';
-import { AdvancedForm } from '../components/frameworks/react/AdvancedForm.tsx';
+import InteractiveCounter from '../components/frameworks/react/InteractiveCounter.jsx';
+import DataVisualizationDashboard from '../components/frameworks/react/DataVisualizationDashboard.jsx';
+import AdvancedForm from '../components/frameworks/react/AdvancedForm.tsx';
 
 // Vue Components
 import ColorPalette from '../components/frameworks/vue/ColorPalette.vue';
 
 // Other Framework Components
 import SvelteSkillsDashboard from '../components/frameworks/svelte/SvelteSkillsDashboard.svelte';
-import { SolidStateDemo } from '../components/frameworks/solid/SolidStateDemo.jsx';
-import { PreactMiniDashboard } from '../components/frameworks/preact/PreactMiniDashboard.jsx';
+import SolidStateDemo from '../components/frameworks/solid/SolidStateDemo.jsx';
+import PreactMiniDashboard from '../components/frameworks/preact/PreactMiniDashboard.jsx';
 
 // UI Components
 import AnimatedBackground from '../components/ui/AnimatedBackground.jsx';
@@ -22,11 +22,11 @@ import CodeBlock from '../components/ui/CodeBlock.jsx';
 import EnhancedDemo from '../components/ui/EnhancedDemo.tsx';
 
 // Showcase Components - Advanced Features
-import { PerformanceMetrics } from '../components/showcases/PerformanceMetrics.jsx';
-import { InteractiveTerminal } from '../components/showcases/InteractiveTerminal.jsx';
-import { Advanced3DSceneSSRFixed } from '../components/showcases/Advanced3DSceneSSRFixed.jsx';
-import { CodeEditorShowcase } from '../components/showcases/CodeEditorShowcaseSSR.jsx';
-import { GSAPAnimationShowcase } from '../components/showcases/GSAPAnimationShowcase.jsx';
+import PerformanceMetrics from '../components/showcases/PerformanceMetrics.jsx';
+import InteractiveTerminal from '../components/showcases/InteractiveTerminal.jsx';
+import Advanced3DSceneSSRFixed from '../components/showcases/Advanced3DSceneSSRFixed.jsx';
+import CodeEditorShowcase from '../components/showcases/CodeEditorShowcaseSSR.jsx';
+import GSAPAnimationShowcase from '../components/showcases/GSAPAnimationShowcase.jsx';
 
 // Icons and Data
 import {
@@ -199,24 +199,20 @@ const features = [
       </div>
 
       <div class='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
-        {
-          features.map(
-            ({ icon: Icon, title, description, color, bg }, index) => (
-              <div
-                class={`animate-fade-in-up rounded-2xl border border-gray-200 p-6 transition-all duration-300 hover:border-primary-300 hover:shadow-lg dark:border-gray-700 dark:hover:border-primary-600`}``
-                style={`animation-delay: ${index * 100}ms`}`
-              >``
-                <div class={`inline-flex rounded-xl p-3 ${bg} mb-4`}>``
-                  <Icon className={`h-6 w-6 ${color}`} />
-                </div>
-                <h3 class='mb-2 text-xl font-semibold text-gray-900 dark:text-white'>
-                  {title}
-                </h3>
-                <p class='text-gray-600 dark:text-gray-300'>{description}</p>
-              </div>
-            )
-          )
-        }
+        {features.map(({ icon: Icon, title, description, color, bg }, index) => (
+          <div
+            class={`animate-fade-in-up rounded-2xl border border-gray-200 p-6 transition-all duration-300 hover:border-primary-300 hover:shadow-lg dark:border-gray-700 dark:hover:border-primary-600`}
+            style={`animation-delay: ${index * 100}ms`}
+          >
+            <div class={`inline-flex rounded-xl p-3 ${bg} mb-4`}>
+              <Icon className={`h-6 w-6 ${color}`} />
+            </div>
+            <h3 class='mb-2 text-xl font-semibold text-gray-900 dark:text-white'>
+              {title}
+            </h3>
+            <p class='text-gray-600 dark:text-gray-300'>{description}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -447,64 +443,62 @@ const features = [
       </div>
 
       <div class='grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6'>
-        {
-          [
-            {
-              name: 'React',
-              color: 'text-blue-500',
-              bg: 'bg-blue-100 dark:bg-blue-900/20',
-              icon: '⚛️',
-              version: '18.3',
-            },
-            {
-              name: 'Vue',
-              color: 'text-green-500',
-              bg: 'bg-green-100 dark:bg-green-900/20',
-              icon: '🟢',
-              version: '3.5',
-            },
-            {
-              name: 'Svelte',
-              color: 'text-orange-500',
-              bg: 'bg-orange-100 dark:bg-orange-900/20',
-              icon: '🟠',
-              version: '5.0',
-            },
-            {
-              name: 'Solid.js',
-              color: 'text-blue-600',
-              bg: 'bg-blue-100 dark:bg-blue-900/20',
-              icon: '🔵',
-              version: '1.8',
-            },
-            {
-              name: 'Preact',
-              color: 'text-purple-500',
-              bg: 'bg-purple-100 dark:bg-purple-900/20',
-              icon: '💜',
-              version: '10.0',
-            },
-            {
-              name: 'Three.js',
-              color: 'text-gray-600',
-              bg: 'bg-gray-100 dark:bg-gray-800',
-              icon: '🎮',
-              version: 'r160',
-            },
-          ].map((framework) => (`
-            <div``
-              class={`rounded-xl p-6 text-center ${framework.bg} transition-transform duration-300 hover:scale-105`}
-            >`
-              <div class='mb-3 text-4xl'>{framework.icon}</div>``
-              <h3 class={`font-bold ${framework.color} mb-1 text-lg`}>
-                {framework.name}
-              </h3>
-              <p class='text-sm text-gray-600 dark:text-gray-400'>
-                v{framework.version}
-              </p>
-            </div>
-          ))
-        }
+        {[
+          {
+            name: 'React',
+            color: 'text-blue-500',
+            bg: 'bg-blue-100 dark:bg-blue-900/20',
+            icon: '⚛️',
+            version: '18.3',
+          },
+          {
+            name: 'Vue',
+            color: 'text-green-500',
+            bg: 'bg-green-100 dark:bg-green-900/20',
+            icon: '🟢',
+            version: '3.5',
+          },
+          {
+            name: 'Svelte',
+            color: 'text-orange-500',
+            bg: 'bg-orange-100 dark:bg-orange-900/20',
+            icon: '🟠',
+            version: '5.0',
+          },
+          {
+            name: 'Solid.js',
+            color: 'text-blue-600',
+            bg: 'bg-blue-100 dark:bg-blue-900/20',
+            icon: '🔵',
+            version: '1.8',
+          },
+          {
+            name: 'Preact',
+            color: 'text-purple-500',
+            bg: 'bg-purple-100 dark:bg-purple-900/20',
+            icon: '💜',
+            version: '10.0',
+          },
+          {
+            name: 'Three.js',
+            color: 'text-gray-600',
+            bg: 'bg-gray-100 dark:bg-gray-800',
+            icon: '🎮',
+            version: 'r160',
+          },
+        ].map((framework) => (
+          <div
+            class={`rounded-xl p-6 text-center ${framework.bg} transition-transform duration-300 hover:scale-105`}
+          >
+            <div class='mb-3 text-4xl'>{framework.icon}</div>
+            <h3 class={`font-bold ${framework.color} mb-1 text-lg`}>
+              {framework.name}
+            </h3>
+            <p class='text-sm text-gray-600 dark:text-gray-400'>
+              v{framework.version}
+            </p>
+          </div>
+        ))}
       </div>
 
       <!-- Technology Stats -->
@@ -573,54 +567,51 @@ const features = [
             </a>
           </div>
 
-          <div class='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {featuredProjects.map((project) => (
-              <article class='card group transition-all duration-300 hover:shadow-xl'>
-                <div class='mb-4 aspect-video overflow-hidden rounded-lg bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900'>
+          <div class='grid grid-cols-1 gap-8 lg:grid-cols-2'>
+            {featuredPosts.map((post, index) => (
+              <article
+                class={`card group transition-all duration-300 hover:shadow-xl ${index === 0 ? 'lg:row-span-2' : ''}`}
+                key={post.slug}
+              >
+                <div class='mb-4 flex items-center space-x-3'>
                   <img
-                    src={project.data.image}
-                    alt={project.data.title}
-                    class='h-full w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                    src={`/images/avatars/${post.data.author.toLowerCase().replace(' ', '-')}.jpg`}
+                    alt={post.data.author}
+                    class='h-10 w-10 rounded-full'
+                    loading='lazy'
                   />
+                  <div>
+                    <p class='text-sm font-medium text-gray-900 dark:text-white'>
+                      {post.data.author}
+                    </p>
+                    <p class='text-xs text-gray-500 dark:text-gray-400'>
+                      {formatDate(post.data.pubDate)}
+                    </p>
+                  </div>
                 </div>
-                <h3 class='mb-2 text-xl font-semibold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>
-                  {project.data.title}
+                <h3 class='mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400'>
+                  <a href={`/blog/${post.slug}`}>{post.data.title}</a>
                 </h3>
-                <p class='mb-4 text-gray-600 dark:text-gray-300'>
-                  {project.data.description}
+                <p class='mb-4 line-clamp-3 text-gray-600 dark:text-gray-300'>
+                  {post.data.description}
                 </p>
                 <div class='mb-4 flex flex-wrap gap-2'>
-                  {project.data.tech.slice(0, 3).map((tech) => (
-                    <span class='rounded bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-700 dark:text-gray-300'>
-                      {tech}
+                  {post.data.tags.slice(0, 3).map((tag) => (
+                    <span class='rounded bg-primary-100 px-2 py-1 text-xs text-primary-700 dark:bg-primary-900 dark:text-primary-300' key={tag}>
+                      {tag}
                     </span>
                   ))}
-                  {project.data.tech.length > 3 && (
-                    <span class='px-2 py-1 text-xs text-gray-500 dark:text-gray-400'>
-                      +{project.data.tech.length - 3} more
-                    </span>
-                  )}
                 </div>
-                <div class='flex space-x-4'>
-                  {project.data.demo && (
-                    <a
-                      href={project.data.demo}
-                      class='text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      Live Demo →
-                    </a>
-                  )}
-                  {project.data.github && (
-                    <a
-                      href={project.data.github}
-                      class='text-sm font-medium text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                    >
-                      GitHub →
-                    </a>
+                <a
+                  href={`/blog/${post.slug}`}
+                  class='group inline-flex items-center font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300'
+                >
+                  Read Article
+                  <ChevronRight className='ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform' />
+                </a>
+              </article>
+            ))}
+          </div>
                   )}
                 </div>
               </article>

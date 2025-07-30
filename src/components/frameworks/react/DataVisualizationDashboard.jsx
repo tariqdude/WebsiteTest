@@ -240,5 +240,4 @@ const DataVisualizationDashboard = () => {
     </div>
   );
 };
-`
-export default DataVisualizationDashboard;``
+export default DataVisualizationDashboard;

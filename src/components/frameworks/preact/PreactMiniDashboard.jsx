@@ -188,5 +188,4 @@ const PreactMiniDashboard = () => {
     </div>
   );
 };
-`
-export default PreactMiniDashboard;``
+export default PreactMiniDashboard;

@@ -1,11 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Terminal as TerminalIcon } from 'lucide-react';
-
-// Custom hook for managing terminal state and logic
-const useTerminal = () => {
-  const [history, setHistory] = useState([]);
-  const [currentPath, setCurrentPath] = useState('~/astro-showcase');
-  const [isMounted, setIsMounted] = useState(false);
+  );
+};
+export default InteractiveTerminal;
 
   useEffect(() => {
     setIsMounted(true);

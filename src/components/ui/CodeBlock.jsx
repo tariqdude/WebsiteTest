@@ -154,5 +154,6 @@ export default CodeBlock;</span>'
         </div>
       </div>
     </div>
-  );`
-};``
+  );
+};
+export default CodeBlock;

@@ -421,5 +421,5 @@ const InteractiveCounter = () => {
       </div>
     </div>
   );
-};`
-export default InteractiveCounter;``
+};
+export default InteractiveCounter;
