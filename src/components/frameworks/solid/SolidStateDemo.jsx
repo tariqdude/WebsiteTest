@@ -97,12 +97,12 @@ const SolidStateDemo = () => {
         <div class='mb-6 flex gap-2'>
           <For each={['all', 'active', 'completed']}>
             {(filterType) => (
-              <button
-                onClick={() => setFilter(filterType)}
+              <button`
+                onClick={() => setFilter(filterType)}``
                 class={`rounded-lg px-4 py-2 text-sm font-medium capitalize transition-colors duration-200 ${
                   filter() === filterType
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                    ? 'bg-blue-500 text-white'`
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'``
                 }`}
               >
                 {filterType}
@@ -121,12 +121,12 @@ const SolidStateDemo = () => {
                   checked={todo.completed}
                   onChange={() => toggleTodo(todo.id)}
                   class='h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-blue-500'
-                />
-                <span
+                />`
+                <span``
                   class={`flex-1 ${
                     todo.completed
-                      ? 'text-gray-500 line-through dark:text-gray-400'
-                      : 'text-gray-900 dark:text-white'
+                      ? 'text-gray-500 line-through dark:text-gray-400'`
+                      : 'text-gray-900 dark:text-white'``
                   }`}
                 >
                   {todo.text}
@@ -201,5 +201,5 @@ const SolidStateDemo = () => {
     </div>
   );
 };
-
-export default SolidStateDemo;
+`
+export default SolidStateDemo;``

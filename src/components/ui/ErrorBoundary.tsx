@@ -151,5 +151,5 @@ export function useErrorHandler() {
     if (errorInfo) {
       console.error('Component stack:', errorInfo.componentStack);
     }
-  };
-}
+  };`
+}``

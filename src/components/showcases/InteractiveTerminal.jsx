@@ -218,8 +218,9 @@ const InteractiveTerminal = () => {
         </form>
       </div>
     </div>
-  );
-};
-`
-export default InteractiveTerminal;``
-```;
+  );`
+};``
+```
+export default InteractiveTerminal;````
+```;`
+``
