@@ -2,7 +2,36 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Our Services - Company Name">
-	<h1 class="text-4xl font-bold mb-4">Our Services</h1>
-	<p class="text-lg">Discover the range of services we offer to help your business grow.</p>
+<BaseLayout title="Our Services">
+  <section class="py-20 text-center">
+    <div class="container mx-auto px-4">
+      <h1 class="text-5xl font-heading text-accent mb-8">Our Dyno Services</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700">
+          <h3 class="text-3xl font-heading text-secondary mb-4">Performance Tuning</h3>
+          <p class="text-lg text-gray-400">Maximize horsepower and torque with custom tuning sessions on our advanced dynamometer.</p>
+        </div>
+        <div class="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700">
+          <h3 class="text-3xl font-heading text-secondary mb-4">Diagnostic Testing</h3>
+          <p class="text-lg text-gray-400">Pinpoint engine issues and optimize fuel delivery and ignition timing for peak performance.</p>
+        </div>
+        <div class="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700">
+          <h3 class="text-3xl font-heading text-secondary mb-4">Custom Mapping</h3>
+          <p class="text-lg text-gray-400">Develop bespoke engine maps tailored to your vehicle's modifications and driving style.</p>
+        </div>
+        <div class="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700">
+          <h3 class="text-3xl font-heading text-secondary mb-4">Pre-Race Optimization</h3>
+          <p class="text-lg text-gray-400">Ensure your race car is perfectly dialed in before hitting the track with our comprehensive pre-race checks.</p>
+        </div>
+        <div class="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700">
+          <h3 class="text-3xl font-heading text-secondary mb-4">Data Logging & Analysis</h3>
+          <p class="text-lg text-gray-400">Receive detailed reports and expert analysis of your dyno runs to track progress and make informed decisions.</p>
+        </div>
+        <div class="bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-700">
+          <h3 class="text-3xl font-heading text-secondary mb-4">Engine Break-In</h3>
+          <p class="text-lg text-gray-400">Properly break in new or rebuilt engines under controlled conditions to ensure longevity and performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
