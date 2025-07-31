@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CallToAction from '../components/CallToAction.jsx';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+---
+
+<BaseLayout title="Home - Company Name">
+	<Hero />
+	<Features />
+	<h1 class="text-4xl font-bold mb-4">Welcome to Company Name</h1>
+	<p class="text-lg mb-8">We provide innovative solutions for your business needs.</p>
+	<CallToAction client:load />
+</BaseLayout>
