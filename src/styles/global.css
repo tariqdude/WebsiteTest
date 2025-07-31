@@ -5,14 +5,3 @@
 html {
   scroll-behavior: smooth;
 }
-
-body {
-  font-family: theme('fontFamily.body');
-  color: theme('colors.secondary');
-  background-color: theme('colors.primary');
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: theme('fontFamily.heading');
-  color: theme('colors.secondary');
-}
