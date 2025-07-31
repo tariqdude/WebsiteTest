@@ -9,7 +9,7 @@ const { href, text, primary = false } = Astro.props;
 
 const baseClasses = "px-6 py-3 rounded-md font-semibold transition duration-300 ease-in-out";
 const primaryClasses = "bg-[#3366FF] text-white hover:bg-[#2244CC]";
-const secondaryClasses = "bg-gray-200 text-[#333333] hover:bg-gray-300";
+const secondaryClasses = "bg-surface text-text hover:bg-gray-200";
 
 const classes = `${baseClasses} ${primary ? primaryClasses : secondaryClasses}`;
 ---

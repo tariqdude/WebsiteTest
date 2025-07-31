@@ -2,13 +2,13 @@
 import { NAV_LINKS } from '../../config/site';
 ---
 
-<nav class="bg-white shadow-md py-4">
+<nav class="bg-surface shadow-md py-4">
   <div class="container mx-auto flex justify-between items-center px-4">
-    <a href="/" class="text-2xl font-bold text-[#1A1A1A]">WebsiteTest</a>
+    <a href="/" class="text-2xl font-bold text-headings">WebsiteTest</a>
     <ul class="flex space-x-6">
       {NAV_LINKS.map((link) => (
         <li>
-          <a href={link.href} class="text-[#333333] hover:text-[#3366FF] font-semibold">
+          <a href={link.href} class="text-text hover:text-primary font-semibold">
             {link.title}
           </a>
         </li>
