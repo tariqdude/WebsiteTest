@@ -11,25 +11,99 @@ import Footer from '../components/layout/Footer.astro';
     <p class="text-lg leading-relaxed mb-4">
       Feel free to reach out to us with any questions or inquiries.
     </p>
-    <form class="bg-white p-8 rounded-lg shadow-md max-w-lg mx-auto">
+    <form id="contact-form" class="bg-surface p-8 rounded-lg shadow-md max-w-lg mx-auto">
       <div class="mb-4">
-        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
-        <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <label for="name" class="block text-text text-sm font-bold mb-2">Name:</label>
+        <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-text leading-tight focus:outline-none focus:shadow-outline">
+        <span id="name-error" class="text-red-500 text-xs italic hidden"></span>
       </div>
       <div class="mb-4">
-        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-        <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <label for="email" class="block text-text text-sm font-bold mb-2">Email:</label>
+        <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-text leading-tight focus:outline-none focus:shadow-outline">
+        <span id="email-error" class="text-red-500 text-xs italic hidden"></span>
       </div>
       <div class="mb-6">
-        <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message:</label>
-        <textarea id="message" name="message" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+        <label for="message" class="block text-text text-sm font-bold mb-2">Message:</label>
+        <textarea id="message" name="message" rows="5" required class="shadow appearance-none border rounded w-full py-2 px-3 text-text leading-tight focus:outline-none focus:shadow-outline"></textarea>
+        <span id="message-error" class="text-red-500 text-xs italic hidden"></span>
       </div>
       <div class="flex items-center justify-between">
-        <button type="submit" class="bg-[#3366FF] hover:bg-[#2244CC] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button type="submit" class="bg-primary hover:bg-[#2244CC] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
           Send Message
         </button>
       </div>
+      <div id="form-message" class="mt-4 text-center hidden"></div>
     </form>
   </main>
   <Footer />
 </BaseLayout>
+
+<script is:inline>
+  const form = document.getElementById('contact-form');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const messageInput = document.getElementById('message');
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const messageError = document.getElementById('message-error');
+  const formMessage = document.getElementById('form-message');
+
+  const validateField = (input, errorElement, errorMessage) => {
+    if (input.validity.valid) {
+      errorElement.textContent = '';
+      errorElement.classList.add('hidden');
+    } else {
+      errorElement.textContent = errorMessage;
+      errorElement.classList.remove('hidden');
+    }
+  };
+
+  nameInput.addEventListener('input', () => {
+    validateField(nameInput, nameError, 'Name is required.');
+  });
+
+  emailInput.addEventListener('input', () => {
+    if (emailInput.validity.typeMismatch) {
+      validateField(emailInput, emailError, 'Please enter a valid email address.');
+    } else {
+      validateField(emailInput, emailError, 'Email is required.');
+    }
+  });
+
+  messageInput.addEventListener('input', () => {
+    validateField(messageInput, messageError, 'Message is required.');
+  });
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Validate all fields on submit
+    validateField(nameInput, nameError, 'Name is required.');
+    if (emailInput.validity.typeMismatch) {
+      validateField(emailInput, emailError, 'Please enter a valid email address.');
+    } else {
+      validateField(emailInput, emailError, 'Email is required.');
+    }
+    validateField(messageInput, messageError, 'Message is required.');
+
+    if (form.checkValidity()) {
+      // Simulate form submission
+      formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+      formMessage.classList.remove('hidden');
+      formMessage.classList.remove('text-red-500');
+      formMessage.classList.add('text-green-500');
+      form.reset();
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        formMessage.classList.add('hidden');
+      }, 5000);
+
+    } else {
+      formMessage.textContent = 'Please correct the errors in the form.';
+      formMessage.classList.remove('hidden');
+      formMessage.classList.remove('text-green-500');
+      formMessage.classList.add('text-red-500');
+    }
+  });
+</script>

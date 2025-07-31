@@ -3,26 +3,26 @@ import Card from '../common/Card.astro';
 
 const features = [
   {
-    title: 'Modular Design',
-    description: 'Built with reusable components for easy maintenance and scalability.',
-    icon: '/icons/modular.svg',
+    title: 'Precision Tuning',
+    description: `Optimize your vehicle's performance with our state-of-the-art dyno tuning.`,
+    icon: '/icons/precision.svg',
   },
   {
-    title: 'High Performance',
-    description: 'Leveraging Astro\'s static site generation for lightning-fast loading.',
-    icon: '/icons/performance.svg',
+    title: 'Horsepower Gains',
+    description: 'Unlock maximum power and torque for an exhilarating driving experience.',
+    icon: '/icons/horsepower.svg',
   },
   {
-    title: 'Modern Stack',
-    description: 'Utilizing Astro, React, and Tailwind CSS for a cutting-edge development experience.',
-    icon: '/icons/modern.svg',
+    title: 'Race Preparation',
+    description: 'Get your vehicle race-ready with expert calibration and performance analysis.',
+    icon: '/icons/race.svg',
   },
 ];
 ---
 
 <section class="py-16 bg-background">
   <div class="container mx-auto px-4 text-center">
-    <h2 class="text-4xl font-bold text-headings mb-12">Key Features</h2>
+    <h2 class="text-4xl font-bold text-headings mb-12">Our Expertise</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {features.map((feature) => (
         <Card title={feature.title} description={feature.description} icon={feature.icon} />

@@ -56,8 +56,32 @@ jobs:
         with:
           path: ./dist
 
-  deploy:
+  lighthouse:
     needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install # Install dependencies for Lighthouse CI
+
+      - name: Install Serve
+        run: npm install -g serve
+
+      - name: Run Lighthouse CI
+        run: | 
+          npm install -g @lhci/cli@0.12.0 # Install LHCI CLI
+          lhci collect --config=./lighthouserc.json
+          lhci assert --config=./lighthouserc.json
+
+  deploy:
+    needs: [build, lighthouse]
     runs-on: ubuntu-latest
     environment:
       name: github-pages

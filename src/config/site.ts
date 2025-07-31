@@ -17,3 +17,21 @@ export const NAV_LINKS = [
 export const SOCIAL_LINKS = [
   { name: 'GitHub', href: 'https://github.com/tariqdude/WebsiteTest', icon: 'github' },
 ];
+
+export const TESTIMONIALS = [
+  {
+    quote: "WebsiteTest transformed our online presence. The design is stunning and the performance is incredible!",
+    author: "Jane Doe",
+    title: "CEO, Tech Solutions"
+  },
+  {
+    quote: "The modular approach made updates a breeze. Highly recommend their services!",
+    author: "John Smith",
+    title: "Founder, Creative Agency"
+  },
+  {
+    quote: "A truly professional and efficient team. Our new website exceeds all expectations.",
+    author: "Emily White",
+    title: "Marketing Director, Global Corp"
+  }
+];

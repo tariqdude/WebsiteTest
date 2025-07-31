@@ -2,17 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #1A1A1A; /* Deep Charcoal */
+  --color-secondary: #00FFFF; /* Electric Cyan */
+  --color-accent: #FF4500; /* Orange Red */
+  --color-text: #E0E0E0; /* Light Grey */
+  --color-headings: #FFFFFF; /* Pure White */
+  --color-background: #0D0D0D; /* Near Black */
+  --color-surface: #2C2C2C; /* Dark Grey */
+}
+
+.dark {
+  --color-primary: #1A1A1A; /* Deep Charcoal */
+  --color-secondary: #00FFFF; /* Electric Cyan */
+  --color-accent: #FF4500; /* Orange Red */
+  --color-text: #E0E0E0; /* Light Grey */
+  --color-headings: #FFFFFF; /* Pure White */
+  --color-background: #0D0D0D; /* Near Black */
+  --color-surface: #2C2C2C; /* Dark Grey */
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  color: #333333;
-  background-color: #F8F8F8;
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-background);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
-  color: #1A1A1A;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--color-headings);
 }
