@@ -1,83 +1,60 @@
-name: Deploy Astro to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout your repository
         uses: actions/checkout@v4
 
-      - name: Pre-check: Node.js and npm versions
+      - name: Detect package manager
+        id: detect-package-manager
         run: |
-          echo "Node version: $(node -v)"
-          echo "npm version: $(npm -v)"
-          if ! node -v | grep -qE '^v1[89]|^v20'; then
-            echo "Error: Node.js 18, 19, or 20 is required." >&2
-            exit 1
+          if [ -f "yarn.lock" ]; then
+            echo "manager=yarn" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=yarn" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "pnpm-lock.yaml" ]; then
+            echo "manager=pnpm" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=pnpm" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "package-lock.json" ]; then
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "::error::No lockfile found, defaulting to npm."
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
+            exit 0
           fi
 
-      - name: Pre-check: Astro config for GitHub Pages
-        run: |
-          if ! grep -q 'base:' astro.config.mjs; then
-            echo "Error: 'base' property missing in astro.config.mjs. Set base to your repo name for GitHub Pages." >&2
-            exit 1
-          fi
-          if ! grep -q 'integrations:' astro.config.mjs; then
-            echo "Error: 'integrations' property missing in astro.config.mjs. Ensure Astro integrations are configured." >&2
-            exit 1
-          fi
-
-      - name: Pre-check: TypeScript diagnostics
-        run: |
-          npx tsc --noEmit
-        continue-on-error: true
-
-      - name: Cache node modules
-        uses: actions/cache@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "20"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Install dependencies
-        run: npm ci
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
-      - name: Clean build output
-        run: rm -rf ./dist
-
-      - name: Build Astro project
+      - name: Build with Astro
         run: npm run build
-        env:
-          NODE_ENV: production
-
-      - name: Check build output
-        run: |
-          if [ ! -d "./dist" ] || [ -z "$(ls -A ./dist)" ]; then
-            echo "Build failed: ./dist directory is missing or empty." >&2
-            exit 1
-          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
-
-      - name: Build summary
-        if: always()
-        run: |
-          echo "==== Build Summary ===="
-          echo "Node version: $(node -v)"
-          echo "npm version: $(npm -v)"
-          echo "Astro version: $(npx astro --version || echo 'Astro not installed')"
-          echo "TypeScript diagnostics:"
-          npx tsc --noEmit || echo 'TypeScript errors detected (see above)'
-          echo "======================"
 
   deploy:
     needs: build
@@ -89,42 +66,6 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: ./dist
-
-      - name: Pre-check: Artifact exists
-        run: |
-          if [ ! -d "./dist" ] || [ -z "$(ls -A ./dist)" ]; then
-            echo "Error: Downloaded artifact ./dist is missing or empty. Deployment aborted." >&2
-            exit 1
-          fi
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      - name: Deployment status
-        if: always()
-        run: |
-          if [ "${{ job.status }}" == "success" ]; then
-            echo "Deployment succeeded!"
-          else
-            echo "Deployment failed. Check previous logs for details." >&2
-            exit 1
-          fi
-
-      - name: Deployment summary
-        if: always()
-        run: |
-          echo "==== Deployment Summary ===="
-          echo "Deployed to: ${{ steps.deployment.outputs.page_url || 'URL not available' }}"
-          echo "==========================="
-          if [ "${{ job.status }}" == "success" ]; then
-            echo "Deployment succeeded!"
-          else
-            echo "Deployment failed. Check previous logs for details." >&2
-            exit 1
-          fi

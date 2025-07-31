@@ -35,6 +35,16 @@ const { title = defaultTitle, description = defaultDescription } = Astro.props;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={SITE.defaultImage} />
 
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{SITE.title}",
+        "url": "{SITE.site}",
+        "description": "{SITE.description}"
+      }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">

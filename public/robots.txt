@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tariqdude.github.io/WebsiteTest/sitemap-index.xml
