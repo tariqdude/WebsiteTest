@@ -1,17 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 ---
 
-<BaseLayout title="About Us">
-  <section class="py-20 text-center">
-    <div class="container mx-auto px-4">
-      <h1 class="text-5xl font-heading text-accent mb-8">About Precision Dyno</h1>
-      <p class="text-xl text-secondary mb-6">
-        We are passionate about performance. Precision Dyno is dedicated to providing state-of-the-art dyno testing and tuning services for race cars and high-performance vehicles.
-      </p>
-      <p class="text-lg text-gray-400">
-        Our experienced technicians use the latest technology to help you unlock your vehicle's true potential, ensuring optimal power, efficiency, and reliability on the track or street.
-      </p>
-    </div>
-  </section>
+<BaseLayout title="About Us" description="Learn more about WebsiteTest.">
+  <Header />
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6">About WebsiteTest</h1>
+    <p class="text-lg leading-relaxed mb-4">
+      WebsiteTest is a demonstration project built with Astro, showcasing modern web development practices.
+      Our goal is to create fast, modular, and maintainable websites.
+    </p>
+    <p class="text-lg leading-relaxed">
+      This project emphasizes component-based architecture, efficient asset management, and a clean design.
+    </p>
+  </main>
+  <Footer />
 </BaseLayout>
