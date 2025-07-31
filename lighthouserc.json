@@ -2,12 +2,10 @@
   "ci": {
     "collect": {
       "url": [
-        "http://localhost:3000/",
-        "http://localhost:3000/about/",
-        "http://localhost:3000/contact/"
-      ],
-      "startServerCommand": "npx serve dist -l 3000",
-      "startServerReadyTimeout": 20000
+        "http://localhost:4321/",
+        "http://localhost:4321/about/",
+        "http://localhost:4321/contact/"
+      ]
     },
     "assert": {
       "assertions": {
