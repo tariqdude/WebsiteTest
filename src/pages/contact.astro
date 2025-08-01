@@ -11,7 +11,12 @@ import Footer from '../components/layout/Footer.astro';
     <p class="text-lg leading-relaxed mb-4">
       Feel free to reach out to us with any questions or inquiries.
     </p>
-    <form id="contact-form" class="bg-surface p-8 rounded-lg shadow-md max-w-lg mx-auto">
+    <form id="contact-form" class="bg-surface p-8 rounded-lg shadow-md max-w-lg mx-auto" autocomplete="off">
+      <!-- Honeypot field for spam protection -->
+      <div style="display:none;">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
       <div class="mb-4">
         <label for="name" class="block text-text text-sm font-bold mb-2">Name:</label>
         <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-text leading-tight focus:outline-none focus:shadow-outline">
@@ -34,6 +39,15 @@ import Footer from '../components/layout/Footer.astro';
       </div>
       <div id="form-message" class="mt-4 text-center hidden"></div>
     </form>
+    <section class="mt-16 text-center">
+      <h2 class="text-2xl font-bold text-headings mb-2">Other Ways to Reach Us</h2>
+      <p class="text-text mb-2">Email: <a href="mailto:info@websitetest.com" class="text-primary hover:underline">info@websitetest.com</a></p>
+      <p class="text-text mb-2">Phone: <a href="tel:+1234567890" class="text-primary hover:underline">(123) 456-7890</a></p>
+      <p class="text-text mb-2">Address: 123 Main St, Anytown, USA</p>
+      <div class="mt-4 flex justify-center">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-0.128590,51.507351,-0.127758,51.507900&amp;layer=mapnik" style="border:1px solid #ccc" width="300" height="150" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
   </main>
   <Footer />
 </BaseLayout>
