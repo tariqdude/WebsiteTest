@@ -1,35 +1,11 @@
 ---
 import Button from '../common/Button.astro';
-import Typewriter from '../common/Typewriter.astro';
-import AnimatedBackground from '../common/AnimatedBackground.jsx';
----
-<section class="relative overflow-hidden py-20 text-center text-white">
----
-// Props: backgroundType = 'animated' | 'youtube', youtubeId = string
-const { backgroundType = 'animated', youtubeId = 'dQw4w9WgXcQ' } = Astro.props;
 ---
 
-<section class="relative overflow-hidden py-20 text-center text-white min-h-[60vh] flex items-center justify-center">
-  {backgroundType === 'animated' && <AnimatedBackground />}
-  {backgroundType === 'youtube' && (
-    <div class="absolute inset-0 w-full h-full z-0 flex items-center justify-center">
-      <iframe
-        src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${youtubeId}`}
-        class="w-full h-full object-cover"
-        style="min-height: 100%; min-width: 100%;"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        title="Hero Background Video"
-      ></iframe>
-      <div class="absolute inset-0 bg-black opacity-50"></div>
-    </div>
-  )}
-  <div class="container relative z-20 mx-auto px-4">
-    <h1 class="text-5xl font-bold leading-tight mb-4">
-      <Typewriter phrases={["Unleash Your Power", "Precision Dyno Tuning", "Race-Ready Performance"]} />
-    </h1>
-    <p class="text-xl mb-8">Experience the ultimate in vehicle performance and optimization.</p>
-    <Button href="/contact" text="Book a Dyno Session" primary={true} />
+<section class="py-20">
+  <div class="container mx-auto text-center">
+    <h1 class="text-4xl font-bold text-headings">Welcome to WebsiteTest</h1>
+    <p class="mt-4 text-lg text-text">This is a placeholder for the hero section.</p>
+    <Button variant="primary" size="lg" class="mt-8">Get Started</Button>
   </div>
 </section>

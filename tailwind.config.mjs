@@ -5,17 +5,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
-        accent: 'var(--color-accent)',
-        text: 'var(--color-text)',
-        headings: 'var(--color-headings)',
-        background: 'var(--color-background)',
-        surface: 'var(--color-surface)',
+        primary: '#3366FF',
+        secondary: '#66CC99',
+        accent: '#FFCC00',
+        text: '#333333',
+        headings: '#1A1A1A',
+        background: '#F8F8F8',
+        surface: '#FFFFFF',
       },
       fontFamily: {
-        heading: ['Orbitron', 'sans-serif'],
-        body: ['Roboto', 'sans-serif'],
+        heading: ['Montserrat', 'sans-serif'],
+        body: ['Open Sans', 'sans-serif'],
       },
     },
   },
