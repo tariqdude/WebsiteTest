@@ -1,0 +1,23 @@
+---
+import Card from '../common/Card.astro';
+---
+
+<section class="py-20 bg-background">
+  <div class="container mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-headings">Our Services</h2>
+      <p class="text-lg text-text mt-4">Precision tuning and performance measurement.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <Card title="Dyno Tuning" icon="🔧">
+        <p>State-of-the-art dynamometer tuning for peak performance and reliability.</p>
+      </Card>
+      <Card title="ECU Calibration" icon="💻">
+        <p>Custom ECU mapping to optimize your engine's potential for any application.</p>
+      </Card>
+      <Card title="Performance Parts" icon="⚙️">
+        <p>Installation and configuration of high-quality performance components.</p>
+      </Card>
+    </div>
+  </div>
+</section>
