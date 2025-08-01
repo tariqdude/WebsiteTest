@@ -68,7 +68,6 @@ jobs:
         with:
           node-version: "20"
 
-
       - name: Install dependencies
         run: npm install # Install dependencies for Lighthouse CI
 
