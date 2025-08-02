@@ -7,10 +7,7 @@ export interface Props {
   className?: string;
 }
 
-const {
-  showNewsletter = true,
-  className = ''
-} = Astro.props;
+const { showNewsletter = true, className = '' } = Astro.props;
 
 const footerSections = navigationConfig.footer.sections;
 const socialLinks = siteConfig.social;
@@ -21,98 +18,133 @@ const companyInfo = siteConfig.business;
   <!-- Main Footer Content -->
   <div class="container py-16">
     <!-- Newsletter Section -->
-    {showNewsletter && (
-      <div 
-        class="bg-gradient-to-r from-primary-600 to-accent-600 rounded-2xl p-8 mb-16"
-        data-aos="fade-up"
-      >
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 class="text-2xl font-bold text-white mb-2">Stay Updated</h3>
-            <p class="text-white/90">Get the latest news, updates, and insights delivered to your inbox.</p>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              class="flex-1 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
-              required
-            />
-            <button
-              type="submit"
-              class="px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200"
-            >
-              Subscribe
-            </button>
+    {
+      showNewsletter && (
+        <div
+          class="from-primary-600 to-accent-600 mb-16 rounded-2xl bg-gradient-to-r p-8"
+          data-aos="fade-up"
+        >
+          <div class="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-white">Stay Updated</h3>
+              <p class="text-white/90">
+                Get the latest news, updates, and insights delivered to your
+                inbox.
+              </p>
+            </div>
+            <div class="flex flex-col gap-4 sm:flex-row">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="flex-1 rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-white/50"
+                required
+              />
+              <button
+                type="submit"
+                class="text-primary-600 rounded-lg bg-white px-6 py-3 font-semibold transition-colors duration-200 hover:bg-gray-100"
+              >
+                Subscribe
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    )}
+      )
+    }
 
     <!-- Footer Links -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
       <!-- Company Info -->
       <div class="lg:col-span-1">
-        <div class="flex items-center space-x-2 mb-4">
-          <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+        <div class="mb-4 flex items-center space-x-2">
+          <div
+            class="from-primary-500 to-accent-500 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br"
+          >
+            <svg
+              class="h-5 w-5 text-white"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"
+              ></path>
             </svg>
           </div>
-          <span class="font-display font-bold text-xl">{companyInfo.name}</span>
+          <span class="font-display text-xl font-bold">{companyInfo.name}</span>
         </div>
-        <p class="text-gray-400 mb-6 leading-relaxed">{companyInfo.description}</p>
-        
+        <p class="mb-6 leading-relaxed text-gray-400">
+          {companyInfo.description}
+        </p>
+
         <!-- Social Links -->
         <div class="flex space-x-4">
-          {Object.entries(socialLinks).map(([platform, url]) => url && (
-            <a
-              href={url as string}
-              class="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors duration-200"
-              aria-label={`Follow us on ${platform}`}
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-              </svg>
-            </a>
-          ))}
+          {
+            Object.entries(socialLinks).map(
+              ([platform, url]) =>
+                url && (
+                  <a
+                    href={url as string}
+                    class="hover:bg-primary-600 flex h-10 w-10 items-center justify-center rounded-lg bg-gray-800 transition-colors duration-200"
+                    aria-label={`Follow us on ${platform}`}
+                  >
+                    <svg
+                      class="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                    </svg>
+                  </a>
+                )
+            )
+          }
         </div>
       </div>
 
       <!-- Footer Sections -->
-      {footerSections.map((section: any) => (
-        <div>
-          <h4 class="font-semibold text-white mb-4">{section.title}</h4>
-          <ul class="space-y-2">
-            {section.links.map((link: any) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {
+        footerSections.map((section: any) => (
+          <div>
+            <h4 class="mb-4 font-semibold text-white">{section.title}</h4>
+            <ul class="space-y-2">
+              {section.links.map((link: any) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-gray-400 transition-colors duration-200 hover:text-white"
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </div>
 
     <!-- Bottom Bar -->
     <div class="border-t border-gray-800 pt-8">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="text-gray-400 text-sm mb-4 md:mb-0">
+      <div class="flex flex-col items-center justify-between md:flex-row">
+        <div class="mb-4 text-sm text-gray-400 md:mb-0">
           © 2024 {companyInfo.name}. All rights reserved.
         </div>
         <div class="flex flex-wrap gap-6 text-sm">
-          <a href="/privacy" class="text-gray-400 hover:text-white transition-colors duration-200">
+          <a
+            href="/privacy"
+            class="text-gray-400 transition-colors duration-200 hover:text-white"
+          >
             Privacy Policy
           </a>
-          <a href="/terms" class="text-gray-400 hover:text-white transition-colors duration-200">
+          <a
+            href="/terms"
+            class="text-gray-400 transition-colors duration-200 hover:text-white"
+          >
             Terms of Service
           </a>
-          <a href="/cookies" class="text-gray-400 hover:text-white transition-colors duration-200">
+          <a
+            href="/cookies"
+            class="text-gray-400 transition-colors duration-200 hover:text-white"
+          >
             Cookie Policy
           </a>
         </div>

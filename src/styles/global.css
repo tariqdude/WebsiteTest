@@ -8,12 +8,14 @@
   * {
     @apply border-border;
   }
-  
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
@@ -23,35 +25,35 @@
   .btn {
     @apply inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
   }
-  
+
   .btn-primary {
-    @apply btn bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    @apply btn transform bg-primary text-primary-foreground shadow-lg hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl;
   }
-  
+
   .btn-secondary {
     @apply btn bg-secondary text-secondary-foreground hover:bg-secondary/90;
   }
-  
+
   .btn-outline {
     @apply btn border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground;
   }
-  
+
   .card {
-    @apply rounded-xl bg-card text-card-foreground shadow-lg border backdrop-blur-sm;
+    @apply rounded-xl border bg-card text-card-foreground shadow-lg backdrop-blur-sm;
   }
-  
+
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    @apply border border-white/20 bg-white/10 backdrop-blur-md;
   }
-  
+
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
-  
+
   .section-padding {
     @apply py-16 lg:py-24;
   }
-  
+
   .container-custom {
     @apply container mx-auto px-4 sm:px-6 lg:px-8;
   }
@@ -61,18 +63,19 @@
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-  
+
   .animate-fade-in {
     animation: fadeIn 0.8s ease-out forwards;
   }
-  
+
   .animate-slide-up {
     animation: slideUp 0.8s ease-out forwards;
   }
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -112,7 +115,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary rounded-full;
+  @apply rounded-full bg-primary;
 }
 
 ::-webkit-scrollbar-thumb:hover {

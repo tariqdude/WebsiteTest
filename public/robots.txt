@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://tariqdude.github.io/WebsiteTest/sitemap-index.xml
+
+# Disallow certain paths if needed
+# Disallow: /admin/
+# Disallow: /private/

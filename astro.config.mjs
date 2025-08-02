@@ -8,8 +8,8 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yourdomain.github.io',
-  base: '/',
+  site: 'https://tariqdude.github.io',
+  base: '/WebsiteTest/',
   output: 'static',
   trailingSlash: 'never',
   integrations: [

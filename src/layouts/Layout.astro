@@ -6,24 +6,25 @@ export interface Props {
   description?: string;
 }
 
-const { title, description = "Professional business landing page template" } = Astro.props;
+const { title, description = 'Professional business landing page template' } =
+  Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
+
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <!-- SEO Meta Tags -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -31,25 +32,30 @@ const { title, description = "Professional business landing page template" } = A
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    
+
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-900">
+  <body
+    class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-900"
+  >
     <slot />
-    
+
     <script>
       // Theme toggle functionality
       function initTheme() {
         const theme = localStorage.getItem('theme') || 'light';
         document.documentElement.classList.toggle('dark', theme === 'dark');
       }
-      
+
       initTheme();
-      
+
       // Smooth scroll for anchor links
       document.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
-        if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+        if (
+          target.tagName === 'A' &&
+          target.getAttribute('href')?.startsWith('#')
+        ) {
           e.preventDefault();
           const id = target.getAttribute('href')?.slice(1);
           const element = document.getElementById(id || '');

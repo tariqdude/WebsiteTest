@@ -57,67 +57,72 @@ export interface Newsletter {
 
 export const blogCategories: BlogCategory[] = [
   {
-    id: "digital-transformation",
-    name: "Digital Transformation",
-    description: "Insights on modernizing business processes and leveraging technology for growth",
-    slug: "digital-transformation",
-    color: "#3B82F6",
-    icon: "refresh-cw",
-    postCount: 24
+    id: 'digital-transformation',
+    name: 'Digital Transformation',
+    description:
+      'Insights on modernizing business processes and leveraging technology for growth',
+    slug: 'digital-transformation',
+    color: '#3B82F6',
+    icon: 'refresh-cw',
+    postCount: 24,
   },
   {
-    id: "cybersecurity",
-    name: "Cybersecurity",
-    description: "Latest trends, threats, and best practices in enterprise security",
-    slug: "cybersecurity",
-    color: "#EF4444",
-    icon: "shield",
-    postCount: 18
+    id: 'cybersecurity',
+    name: 'Cybersecurity',
+    description:
+      'Latest trends, threats, and best practices in enterprise security',
+    slug: 'cybersecurity',
+    color: '#EF4444',
+    icon: 'shield',
+    postCount: 18,
   },
   {
-    id: "cloud-computing",
-    name: "Cloud Computing",
-    description: "Cloud strategies, migrations, and optimization techniques",
-    slug: "cloud-computing",
-    color: "#10B981",
-    icon: "cloud",
-    postCount: 32
+    id: 'cloud-computing',
+    name: 'Cloud Computing',
+    description: 'Cloud strategies, migrations, and optimization techniques',
+    slug: 'cloud-computing',
+    color: '#10B981',
+    icon: 'cloud',
+    postCount: 32,
   },
   {
-    id: "data-analytics",
-    name: "Data & Analytics",
-    description: "Data science, business intelligence, and analytics insights",
-    slug: "data-analytics",
-    color: "#8B5CF6",
-    icon: "bar-chart",
-    postCount: 21
+    id: 'data-analytics',
+    name: 'Data & Analytics',
+    description: 'Data science, business intelligence, and analytics insights',
+    slug: 'data-analytics',
+    color: '#8B5CF6',
+    icon: 'bar-chart',
+    postCount: 21,
   },
   {
-    id: "ai-machine-learning",
-    name: "AI & Machine Learning",
-    description: "Artificial intelligence applications and machine learning solutions",
-    slug: "ai-machine-learning",
-    color: "#F59E0B",
-    icon: "cpu",
-    postCount: 15
+    id: 'ai-machine-learning',
+    name: 'AI & Machine Learning',
+    description:
+      'Artificial intelligence applications and machine learning solutions',
+    slug: 'ai-machine-learning',
+    color: '#F59E0B',
+    icon: 'cpu',
+    postCount: 15,
   },
   {
-    id: "business-strategy",
-    name: "Business Strategy",
-    description: "Strategic planning, leadership, and organizational transformation",
-    slug: "business-strategy",
-    color: "#6366F1",
-    icon: "target",
-    postCount: 19
-  }
+    id: 'business-strategy',
+    name: 'Business Strategy',
+    description:
+      'Strategic planning, leadership, and organizational transformation',
+    slug: 'business-strategy',
+    color: '#6366F1',
+    icon: 'target',
+    postCount: 19,
+  },
 ];
 
 export const featuredPosts: BlogPost[] = [
   {
-    id: "ai-transformation-guide-2024",
-    title: "The Complete Guide to AI Transformation in 2024",
-    slug: "ai-transformation-guide-2024",
-    excerpt: "Discover how artificial intelligence is reshaping business operations and learn practical steps to implement AI solutions that drive real value for your organization.",
+    id: 'ai-transformation-guide-2024',
+    title: 'The Complete Guide to AI Transformation in 2024',
+    slug: 'ai-transformation-guide-2024',
+    excerpt:
+      'Discover how artificial intelligence is reshaping business operations and learn practical steps to implement AI solutions that drive real value for your organization.',
     content: `
 # The Complete Guide to AI Transformation in 2024
 
@@ -171,34 +176,42 @@ AI transformation is not just about technology—it's about reimagining how your
 Ready to start your AI transformation? [Contact our experts](/contact) for a free consultation.
     `,
     author: {
-      name: "Dr. Marcus Johnson",
-      title: "Chief Technology Officer",
-      avatar: "/images/team/marcus-johnson.jpg",
-      bio: "Technology visionary with 18+ years of experience in AI, cloud architecture, and digital transformation."
+      name: 'Dr. Marcus Johnson',
+      title: 'Chief Technology Officer',
+      avatar: '/images/team/marcus-johnson.jpg',
+      bio: 'Technology visionary with 18+ years of experience in AI, cloud architecture, and digital transformation.',
     },
-    publishedAt: "2024-01-15",
-    category: "ai-machine-learning",
-    tags: ["AI", "Digital Transformation", "Strategy", "Implementation"],
+    publishedAt: '2024-01-15',
+    category: 'ai-machine-learning',
+    tags: ['AI', 'Digital Transformation', 'Strategy', 'Implementation'],
     featured: true,
-    image: "/images/blog/ai-transformation-2024.jpg",
+    image: '/images/blog/ai-transformation-2024.jpg',
     readTime: 12,
     seo: {
-      metaTitle: "AI Transformation Guide 2024 | Enterprise Solutions Pro",
-      metaDescription: "Complete guide to AI transformation with practical steps, case studies, and expert insights for business leaders in 2024.",
-      keywords: ["AI transformation", "artificial intelligence", "business AI", "digital transformation", "AI strategy"]
+      metaTitle: 'AI Transformation Guide 2024 | Enterprise Solutions Pro',
+      metaDescription:
+        'Complete guide to AI transformation with practical steps, case studies, and expert insights for business leaders in 2024.',
+      keywords: [
+        'AI transformation',
+        'artificial intelligence',
+        'business AI',
+        'digital transformation',
+        'AI strategy',
+      ],
     },
     engagement: {
       views: 12500,
       likes: 284,
       shares: 156,
-      comments: 42
-    }
+      comments: 42,
+    },
   },
   {
-    id: "cybersecurity-trends-2024",
-    title: "Top 10 Cybersecurity Trends Every Business Must Know in 2024",
-    slug: "cybersecurity-trends-2024",
-    excerpt: "Stay ahead of cyber threats with our comprehensive analysis of the most critical cybersecurity trends shaping the business landscape in 2024.",
+    id: 'cybersecurity-trends-2024',
+    title: 'Top 10 Cybersecurity Trends Every Business Must Know in 2024',
+    slug: 'cybersecurity-trends-2024',
+    excerpt:
+      'Stay ahead of cyber threats with our comprehensive analysis of the most critical cybersecurity trends shaping the business landscape in 2024.',
     content: `
 # Top 10 Cybersecurity Trends Every Business Must Know in 2024
 
@@ -259,34 +272,42 @@ Cybersecurity in 2024 requires a proactive, multi-layered approach. Organization
 Need help securing your organization? [Schedule a security consultation](/contact) with our cybersecurity experts.
     `,
     author: {
-      name: "Sarah Mitchell",
-      title: "Head of Cybersecurity",
-      avatar: "/images/team/sarah-mitchell.jpg",
-      bio: "Cybersecurity expert with 15+ years of experience protecting enterprise organizations from cyber threats."
+      name: 'Sarah Mitchell',
+      title: 'Head of Cybersecurity',
+      avatar: '/images/team/sarah-mitchell.jpg',
+      bio: 'Cybersecurity expert with 15+ years of experience protecting enterprise organizations from cyber threats.',
     },
-    publishedAt: "2024-01-08",
-    category: "cybersecurity",
-    tags: ["Cybersecurity", "Trends", "Risk Management", "Security Strategy"],
+    publishedAt: '2024-01-08',
+    category: 'cybersecurity',
+    tags: ['Cybersecurity', 'Trends', 'Risk Management', 'Security Strategy'],
     featured: true,
-    image: "/images/blog/cybersecurity-trends-2024.jpg",
+    image: '/images/blog/cybersecurity-trends-2024.jpg',
     readTime: 8,
     seo: {
-      metaTitle: "Top 10 Cybersecurity Trends 2024 | Business Security Guide",
-      metaDescription: "Discover the most critical cybersecurity trends in 2024 and learn how to protect your business from evolving cyber threats.",
-      keywords: ["cybersecurity trends", "cyber threats", "business security", "cyber defense", "security strategy"]
+      metaTitle: 'Top 10 Cybersecurity Trends 2024 | Business Security Guide',
+      metaDescription:
+        'Discover the most critical cybersecurity trends in 2024 and learn how to protect your business from evolving cyber threats.',
+      keywords: [
+        'cybersecurity trends',
+        'cyber threats',
+        'business security',
+        'cyber defense',
+        'security strategy',
+      ],
     },
     engagement: {
       views: 8900,
       likes: 192,
       shares: 87,
-      comments: 31
-    }
+      comments: 31,
+    },
   },
   {
-    id: "cloud-migration-success-factors",
-    title: "5 Critical Success Factors for Enterprise Cloud Migration",
-    slug: "cloud-migration-success-factors",
-    excerpt: "Learn from real-world enterprise cloud migrations and discover the key factors that determine success or failure in large-scale cloud transformation projects.",
+    id: 'cloud-migration-success-factors',
+    title: '5 Critical Success Factors for Enterprise Cloud Migration',
+    slug: 'cloud-migration-success-factors',
+    excerpt:
+      'Learn from real-world enterprise cloud migrations and discover the key factors that determine success or failure in large-scale cloud transformation projects.',
     content: `
 # 5 Critical Success Factors for Enterprise Cloud Migration
 
@@ -342,108 +363,136 @@ Successful enterprise cloud migration requires careful planning, expert guidance
 Ready to start your cloud migration journey? [Contact our cloud experts](/contact) for a free assessment.
     `,
     author: {
-      name: "David Chen",
-      title: "Cloud Solutions Architect",
-      avatar: "/images/team/david-chen.jpg",
-      bio: "Cloud architecture expert specializing in enterprise migrations and multi-cloud strategies."
+      name: 'David Chen',
+      title: 'Cloud Solutions Architect',
+      avatar: '/images/team/david-chen.jpg',
+      bio: 'Cloud architecture expert specializing in enterprise migrations and multi-cloud strategies.',
     },
-    publishedAt: "2024-01-03",
-    category: "cloud-computing",
-    tags: ["Cloud Migration", "Enterprise Architecture", "Digital Transformation", "Cloud Strategy"],
+    publishedAt: '2024-01-03',
+    category: 'cloud-computing',
+    tags: [
+      'Cloud Migration',
+      'Enterprise Architecture',
+      'Digital Transformation',
+      'Cloud Strategy',
+    ],
     featured: true,
-    image: "/images/blog/cloud-migration-success.jpg",
+    image: '/images/blog/cloud-migration-success.jpg',
     readTime: 10,
     seo: {
-      metaTitle: "Enterprise Cloud Migration Success Factors | Cloud Strategy Guide",
-      metaDescription: "Discover the 5 critical success factors for enterprise cloud migration with real-world case studies and expert insights.",
-      keywords: ["cloud migration", "enterprise cloud", "cloud strategy", "digital transformation", "cloud architecture"]
+      metaTitle:
+        'Enterprise Cloud Migration Success Factors | Cloud Strategy Guide',
+      metaDescription:
+        'Discover the 5 critical success factors for enterprise cloud migration with real-world case studies and expert insights.',
+      keywords: [
+        'cloud migration',
+        'enterprise cloud',
+        'cloud strategy',
+        'digital transformation',
+        'cloud architecture',
+      ],
     },
     engagement: {
       views: 6750,
       likes: 148,
       shares: 94,
-      comments: 28
-    }
-  }
+      comments: 28,
+    },
+  },
 ];
 
 export const recentPosts: BlogPost[] = [
   {
-    id: "data-analytics-roi-2024",
-    title: "Measuring ROI in Data Analytics: A Framework for Success",
-    slug: "data-analytics-roi-2024",
-    excerpt: "Learn how to quantify the business value of your data analytics investments with our proven ROI measurement framework.",
-    content: "Full article content here...",
+    id: 'data-analytics-roi-2024',
+    title: 'Measuring ROI in Data Analytics: A Framework for Success',
+    slug: 'data-analytics-roi-2024',
+    excerpt:
+      'Learn how to quantify the business value of your data analytics investments with our proven ROI measurement framework.',
+    content: 'Full article content here...',
     author: {
-      name: "Dr. Priya Patel",
-      title: "Chief Operations Officer",
-      avatar: "/images/team/priya-patel.jpg",
-      bio: "Operations expert with deep expertise in analytics and performance measurement."
+      name: 'Dr. Priya Patel',
+      title: 'Chief Operations Officer',
+      avatar: '/images/team/priya-patel.jpg',
+      bio: 'Operations expert with deep expertise in analytics and performance measurement.',
     },
-    publishedAt: "2024-01-20",
-    category: "data-analytics",
-    tags: ["Data Analytics", "ROI", "Business Intelligence", "Metrics"],
+    publishedAt: '2024-01-20',
+    category: 'data-analytics',
+    tags: ['Data Analytics', 'ROI', 'Business Intelligence', 'Metrics'],
     featured: false,
-    image: "/images/blog/data-analytics-roi.jpg",
+    image: '/images/blog/data-analytics-roi.jpg',
     readTime: 7,
     seo: {
-      metaTitle: "Data Analytics ROI Framework | Business Intelligence Guide",
-      metaDescription: "Learn to measure and maximize ROI from your data analytics investments with our proven framework and case studies.",
-      keywords: ["data analytics ROI", "business intelligence", "analytics value", "data strategy"]
+      metaTitle: 'Data Analytics ROI Framework | Business Intelligence Guide',
+      metaDescription:
+        'Learn to measure and maximize ROI from your data analytics investments with our proven framework and case studies.',
+      keywords: [
+        'data analytics ROI',
+        'business intelligence',
+        'analytics value',
+        'data strategy',
+      ],
     },
     engagement: {
       views: 4200,
       likes: 89,
       shares: 45,
-      comments: 12
-    }
+      comments: 12,
+    },
   },
   {
-    id: "digital-transformation-roadmap",
-    title: "Building Your Digital Transformation Roadmap: A Step-by-Step Guide",
-    slug: "digital-transformation-roadmap",
-    excerpt: "Create a comprehensive digital transformation roadmap that aligns technology initiatives with business objectives.",
-    content: "Full article content here...",
+    id: 'digital-transformation-roadmap',
+    title: 'Building Your Digital Transformation Roadmap: A Step-by-Step Guide',
+    slug: 'digital-transformation-roadmap',
+    excerpt:
+      'Create a comprehensive digital transformation roadmap that aligns technology initiatives with business objectives.',
+    content: 'Full article content here...',
     author: {
-      name: "James Rodriguez",
-      title: "Head of Consulting",
-      avatar: "/images/team/james-rodriguez.jpg",
-      bio: "Digital transformation expert with 14+ years of consulting experience."
+      name: 'James Rodriguez',
+      title: 'Head of Consulting',
+      avatar: '/images/team/james-rodriguez.jpg',
+      bio: 'Digital transformation expert with 14+ years of consulting experience.',
     },
-    publishedAt: "2024-01-18",
-    category: "digital-transformation",
-    tags: ["Digital Transformation", "Strategy", "Roadmap", "Planning"],
+    publishedAt: '2024-01-18',
+    category: 'digital-transformation',
+    tags: ['Digital Transformation', 'Strategy', 'Roadmap', 'Planning'],
     featured: false,
-    image: "/images/blog/transformation-roadmap.jpg",
+    image: '/images/blog/transformation-roadmap.jpg',
     readTime: 9,
     seo: {
-      metaTitle: "Digital Transformation Roadmap Guide | Strategic Planning",
-      metaDescription: "Step-by-step guide to creating a successful digital transformation roadmap with expert insights and templates.",
-      keywords: ["digital transformation roadmap", "transformation strategy", "digital planning", "business transformation"]
+      metaTitle: 'Digital Transformation Roadmap Guide | Strategic Planning',
+      metaDescription:
+        'Step-by-step guide to creating a successful digital transformation roadmap with expert insights and templates.',
+      keywords: [
+        'digital transformation roadmap',
+        'transformation strategy',
+        'digital planning',
+        'business transformation',
+      ],
     },
     engagement: {
       views: 5500,
       likes: 112,
       shares: 67,
-      comments: 19
-    }
-  }
+      comments: 19,
+    },
+  },
 ];
 
 export const newsletter: Newsletter = {
-  title: "Digital Insights Weekly",
-  description: "Get the latest insights on digital transformation, cybersecurity, and business technology delivered to your inbox every week.",
-  frequency: "Weekly",
-  subscriberCount: "25,000+",
+  title: 'Digital Insights Weekly',
+  description:
+    'Get the latest insights on digital transformation, cybersecurity, and business technology delivered to your inbox every week.',
+  frequency: 'Weekly',
+  subscriberCount: '25,000+',
   benefits: [
-    "Exclusive industry insights and analysis",
-    "Early access to new research and reports",
-    "Invitations to webinars and events",
-    "Case studies from successful transformations",
-    "Expert tips and best practices",
-    "No spam, unsubscribe anytime"
+    'Exclusive industry insights and analysis',
+    'Early access to new research and reports',
+    'Invitations to webinars and events',
+    'Case studies from successful transformations',
+    'Expert tips and best practices',
+    'No spam, unsubscribe anytime',
   ],
-  cta: "Join thousands of business leaders who stay ahead with our insights"
+  cta: 'Join thousands of business leaders who stay ahead with our insights',
 };
 
 // Blog configuration
@@ -454,7 +503,7 @@ export const blogConfig = {
   enableSocialSharing: true,
   enableNewsletter: true,
   categories: blogCategories,
-  defaultCategory: "digital-transformation"
+  defaultCategory: 'digital-transformation',
 };
 
 export default featuredPosts;
