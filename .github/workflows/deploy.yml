@@ -1,0 +1,168 @@
+name: 🚀 Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  lint-and-test:
+    name: 🔍 Code Quality & Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📥 Install dependencies
+        run: |
+          npm ci --prefer-offline --no-audit
+          
+      - name: 🔧 Type check
+        run: npm run type-check
+        continue-on-error: true
+
+      - name: 🧹 Lint code
+        run: npm run lint
+        continue-on-error: true
+
+      - name: 🎨 Check formatting
+        run: npm run format
+        continue-on-error: true
+
+      - name: 🔍 Astro check
+        run: npm run check
+
+  build:
+    name: 🏗️ Build & Deploy
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📥 Install dependencies
+        run: |
+          npm ci --prefer-offline --no-audit --production=false
+
+      - name: 🏗️ Build Astro site
+        run: |
+          npm run build:prod
+        env:
+          NODE_ENV: production
+
+      - name: 📊 Generate bundle analysis
+        run: |
+          echo "📦 Build completed successfully"
+          echo "📋 Bundle size analysis:"
+          du -sh dist/
+          echo "🗂️ Asset breakdown:"
+          find dist -name "*.js" -exec ls -lh {} \; | awk '{print $5 " " $9}' | sort -hr | head -10
+          find dist -name "*.css" -exec ls -lh {} \; | awk '{print $5 " " $9}' | sort -hr | head -5
+          echo "📸 Image assets:"
+          find dist -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.svg" -o -name "*.webp" | wc -l
+        continue-on-error: true
+
+      - name: 🔧 Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  performance-audit:
+    name: 🏃‍♂️ Performance Audit
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔍 Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            https://${{ github.repository_owner }}.github.io/WebsiteTest/
+          configPath: '.lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+        continue-on-error: true
+
+  security-scan:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: 📦 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📥 Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔍 Security audit
+        run: |
+          npm audit --audit-level=moderate
+          echo "🔒 Security scan completed"
+        continue-on-error: true
+
+      - name: 🔒 Check for vulnerabilities
+        run: |
+          npx audit-ci --config audit-ci.json
+        continue-on-error: true
+
+  notify:
+    name: 📢 Deployment Notification
+    needs: [build, performance-audit, security-scan]
+    runs-on: ubuntu-latest
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: 📢 Success notification
+        if: needs.build.result == 'success'
+        run: |
+          echo "✅ Deployment successful!"
+          echo "🌐 Site URL: https://${{ github.repository_owner }}.github.io/WebsiteTest/"
+          echo "⏰ Deployed at: $(date)"
+          
+      - name: ❌ Failure notification
+        if: needs.build.result == 'failure'
+        run: |
+          echo "❌ Deployment failed!"
+          echo "📝 Check the logs above for details"

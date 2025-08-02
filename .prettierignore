@@ -1,0 +1,17 @@
+dist/
+node_modules/
+.astro/
+.vscode/
+.DS_Store
+*.log
+.env*
+!.env.example
+coverage/
+.nyc_output/
+.cache/
+public/build/
+.vercel/
+.netlify/
+.svelte-kit/
+package-lock.json
+yarn.lock

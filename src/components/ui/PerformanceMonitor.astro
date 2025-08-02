@@ -1,0 +1,361 @@
+---
+// Performance monitoring and analytics component
+---
+
+<div id="performance-monitor" class="fixed bottom-4 right-4 z-50 hidden">
+  <div class="glass rounded-2xl p-4 min-w-[200px] shadow-luxury">
+    <div class="flex items-center justify-between mb-3">
+      <h4 class="text-sm font-semibold text-secondary-900 dark:text-white">Performance</h4>
+      <button id="toggle-monitor" class="text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="space-y-2 text-xs">
+      <div class="flex justify-between">
+        <span class="text-secondary-600 dark:text-secondary-400">FCP:</span>
+        <span id="fcp-time" class="font-mono text-secondary-900 dark:text-white">-</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-secondary-600 dark:text-secondary-400">LCP:</span>
+        <span id="lcp-time" class="font-mono text-secondary-900 dark:text-white">-</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-secondary-600 dark:text-secondary-400">FID:</span>
+        <span id="fid-time" class="font-mono text-secondary-900 dark:text-white">-</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-secondary-600 dark:text-secondary-400">CLS:</span>
+        <span id="cls-score" class="font-mono text-secondary-900 dark:text-white">-</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-secondary-600 dark:text-secondary-400">TTFB:</span>
+        <span id="ttfb-time" class="font-mono text-secondary-900 dark:text-white">-</span>
+      </div>
+    </div>
+    
+    <div class="mt-3 pt-3 border-t border-secondary-200 dark:border-secondary-700">
+      <div class="flex justify-between items-center">
+        <span class="text-xs text-secondary-600 dark:text-secondary-400">Score:</span>
+        <div class="flex items-center space-x-2">
+          <div id="performance-score" class="text-sm font-bold text-success-600">-</div>
+          <div id="performance-indicator" class="w-2 h-2 rounded-full bg-secondary-300"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Performance Monitor Toggle Button -->
+<button id="show-monitor" class="fixed bottom-4 right-4 z-40 w-12 h-12 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group">
+  <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+  </svg>
+</button>
+
+<script>
+  // Performance monitoring functionality
+  class PerformanceMonitor {
+    private metrics: Record<string, number>;
+
+    constructor() {
+      this.metrics = {};
+      this.init();
+    }
+
+    init() {
+      this.setupEventListeners();
+      this.measureNavigationTiming();
+      this.measureWebVitals();
+      this.startContinuousMonitoring();
+    }
+
+    setupEventListeners() {
+      const showBtn = document.getElementById('show-monitor');
+      const hideBtn = document.getElementById('toggle-monitor');
+      const monitor = document.getElementById('performance-monitor');
+
+      showBtn?.addEventListener('click', () => {
+        monitor?.classList.remove('hidden');
+        showBtn.classList.add('hidden');
+      });
+
+      hideBtn?.addEventListener('click', () => {
+        monitor?.classList.add('hidden');
+        showBtn?.classList.remove('hidden');
+      });
+    }
+
+    measureNavigationTiming() {
+      if (typeof window !== 'undefined' && 'performance' in window) {
+        const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+        
+        if (navigation) {
+          const ttfb = navigation.responseStart - navigation.requestStart;
+          this.updateMetric('ttfb-time', `${Math.round(ttfb)}ms`);
+          this.metrics.ttfb = ttfb;
+        }
+      }
+    }
+
+    measureWebVitals() {
+      // First Contentful Paint
+      this.measureFCP();
+      
+      // Largest Contentful Paint
+      this.measureLCP();
+      
+      // First Input Delay
+      this.measureFID();
+      
+      // Cumulative Layout Shift
+      this.measureCLS();
+    }
+
+    measureFCP() {
+      if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+        try {
+          const observer = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const fcp = entries.find(entry => entry.name === 'first-contentful-paint');
+            
+            if (fcp) {
+              this.updateMetric('fcp-time', `${Math.round(fcp.startTime)}ms`);
+              this.metrics.fcp = fcp.startTime;
+              this.calculateScore();
+            }
+          });
+          
+          observer.observe({ entryTypes: ['paint'] });
+        } catch (error) {
+          console.log('FCP measurement not supported');
+        }
+      }
+    }
+
+    measureLCP() {
+      if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+        try {
+          const observer = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            
+            if (lastEntry) {
+              this.updateMetric('lcp-time', `${Math.round(lastEntry.startTime)}ms`);
+              this.metrics.lcp = lastEntry.startTime;
+              this.calculateScore();
+            }
+          });
+          
+          observer.observe({ entryTypes: ['largest-contentful-paint'] });
+        } catch (error) {
+          console.log('LCP measurement not supported');
+        }
+      }
+    }
+
+    measureFID() {
+      if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+        try {
+          const observer = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            
+            entries.forEach(entry => {
+              const fidEntry = entry as any;
+              if (fidEntry.processingStart && fidEntry.startTime) {
+                const fid = fidEntry.processingStart - fidEntry.startTime;
+                this.updateMetric('fid-time', `${Math.round(fid)}ms`);
+                this.metrics.fid = fid;
+                this.calculateScore();
+              }
+            });
+          });
+          
+          observer.observe({ entryTypes: ['first-input'] });
+        } catch (error) {
+          console.log('FID measurement not supported');
+        }
+      }
+    }
+
+    measureCLS() {
+      if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+        try {
+          let clsValue = 0;
+          
+          const observer = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            
+            entries.forEach(entry => {
+              if (!(entry as any).hadRecentInput) {
+                clsValue += (entry as any).value;
+              }
+            });
+            
+            this.updateMetric('cls-score', clsValue.toFixed(3));
+            this.metrics.cls = clsValue;
+            this.calculateScore();
+          });
+          
+          observer.observe({ entryTypes: ['layout-shift'] });
+        } catch (error) {
+          console.log('CLS measurement not supported');
+        }
+      }
+    }
+
+    calculateScore() {
+      let score = 100;
+      
+      // FCP scoring (good: <1.8s, needs improvement: 1.8s-3s, poor: >3s)
+      if (this.metrics.fcp) {
+        if (this.metrics.fcp > 3000) score -= 20;
+        else if (this.metrics.fcp > 1800) score -= 10;
+      }
+      
+      // LCP scoring (good: <2.5s, needs improvement: 2.5s-4s, poor: >4s)
+      if (this.metrics.lcp) {
+        if (this.metrics.lcp > 4000) score -= 25;
+        else if (this.metrics.lcp > 2500) score -= 15;
+      }
+      
+      // FID scoring (good: <100ms, needs improvement: 100ms-300ms, poor: >300ms)
+      if (this.metrics.fid) {
+        if (this.metrics.fid > 300) score -= 20;
+        else if (this.metrics.fid > 100) score -= 10;
+      }
+      
+      // CLS scoring (good: <0.1, needs improvement: 0.1-0.25, poor: >0.25)
+      if (this.metrics.cls) {
+        if (this.metrics.cls > 0.25) score -= 20;
+        else if (this.metrics.cls > 0.1) score -= 10;
+      }
+      
+      // TTFB scoring (good: <200ms, needs improvement: 200ms-500ms, poor: >500ms)
+      if (this.metrics.ttfb) {
+        if (this.metrics.ttfb > 500) score -= 15;
+        else if (this.metrics.ttfb > 200) score -= 5;
+      }
+      
+      score = Math.max(0, Math.min(100, score));
+      
+      this.updateMetric('performance-score', score.toString());
+      this.updatePerformanceIndicator(score);
+    }
+
+    updatePerformanceIndicator(score: number) {
+      const indicator = document.getElementById('performance-indicator');
+      if (indicator) {
+        let colorClass = 'bg-secondary-300';
+        
+        if (score >= 90) {
+          colorClass = 'bg-success-500';
+        } else if (score >= 70) {
+          colorClass = 'bg-warning-500';
+        } else {
+          colorClass = 'bg-error-500';
+        }
+        
+        indicator.className = `w-2 h-2 rounded-full ${colorClass}`;
+      }
+    }
+
+    updateMetric(elementId: string, value: string) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.textContent = value;
+      }
+    }
+
+    startContinuousMonitoring() {
+      // Monitor resource loading
+      if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+        try {
+          const observer = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            console.log('Resource loading:', entries);
+          });
+          
+          observer.observe({ entryTypes: ['resource'] });
+        } catch (error) {
+          console.log('Resource monitoring not supported');
+        }
+      }
+    }
+
+    // Public method to get current metrics
+    getMetrics() {
+      return this.metrics;
+    }
+
+    // Public method to export metrics for analytics
+    exportMetrics() {
+      return JSON.stringify(this.metrics, null, 2);
+    }
+  }
+
+  // Initialize performance monitor when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof window !== 'undefined') {
+      (window as any).performanceMonitor = new PerformanceMonitor();
+      
+      // Add keyboard shortcut to toggle monitor (Ctrl/Cmd + Shift + P)
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
+          e.preventDefault();
+          const monitor = document.getElementById('performance-monitor');
+          const showBtn = document.getElementById('show-monitor');
+          
+          if (monitor?.classList.contains('hidden')) {
+            monitor.classList.remove('hidden');
+            showBtn?.classList.add('hidden');
+          } else {
+            monitor?.classList.add('hidden');
+            showBtn?.classList.remove('hidden');
+          }
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Smooth animations for performance monitor */
+  #performance-monitor {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  #show-monitor:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Performance indicator pulse animation */
+  #performance-indicator.bg-success-500 {
+    animation: pulse-success 2s infinite;
+  }
+  
+  #performance-indicator.bg-warning-500 {
+    animation: pulse-warning 2s infinite;
+  }
+  
+  #performance-indicator.bg-error-500 {
+    animation: pulse-error 2s infinite;
+  }
+  
+  @keyframes pulse-success {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  @keyframes pulse-warning {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  
+  @keyframes pulse-error {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>

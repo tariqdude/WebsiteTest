@@ -1,0 +1,286 @@
+---
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+  benefits: string[];
+  link?: string;
+}
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  features?: Feature[];
+  layout?: 'grid' | 'list' | 'cards';
+  className?: string;
+}
+
+const {
+  title = "Powerful Features for Modern Business",
+  subtitle = "Everything You Need",
+  description = "Comprehensive solutions designed to streamline your operations, enhance productivity, and drive growth across all aspects of your business.",
+  features = [
+    {
+      icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+      </svg>`,
+      title: "Lightning Fast Performance",
+      description: "Experience blazing fast load times with our optimized infrastructure and global CDN network.",
+      benefits: ["99.9% uptime guarantee", "Global edge caching", "Auto-scaling infrastructure", "Performance monitoring"],
+      link: "/features/performance"
+    },
+    {
+      icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+      </svg>`,
+      title: "Enterprise Security",
+      description: "Bank-level security with end-to-end encryption, SOC 2 compliance, and advanced threat protection.",
+      benefits: ["End-to-end encryption", "SOC 2 Type II certified", "Advanced threat detection", "Regular security audits"],
+      link: "/features/security"
+    },
+    {
+      icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+      </svg>`,
+      title: "24/7 Premium Support",
+      description: "Get expert help whenever you need it with our dedicated support team and comprehensive resources.",
+      benefits: ["Live chat support", "Priority phone support", "Dedicated account manager", "Comprehensive documentation"],
+      link: "/support"
+    },
+    {
+      icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+      </svg>`,
+      title: "Seamless Integration",
+      description: "Connect with your existing tools and workflows through our extensive API and pre-built integrations.",
+      benefits: ["REST & GraphQL APIs", "Webhook support", "Third-party integrations", "Custom connectors"],
+      link: "/features/integrations"
+    },
+    {
+      icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+      </svg>`,
+      title: "Advanced Analytics",
+      description: "Make data-driven decisions with comprehensive analytics, real-time insights, and custom reports.",
+      benefits: ["Real-time dashboards", "Custom reporting", "Data visualization", "Predictive analytics"],
+      link: "/features/analytics"
+    },
+    {
+      icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+      </svg>`,
+      title: "Scalable Growth",
+      description: "Scale your business effortlessly with our flexible infrastructure that grows with your needs.",
+      benefits: ["Auto-scaling resources", "Flexible pricing tiers", "Global deployment", "Load balancing"],
+      link: "/features/scaling"
+    }
+  ],
+  layout = 'grid',
+  className = ''
+} = Astro.props;
+---
+
+<section class={`section bg-gray-50 dark:bg-gray-900 ${className}`}>
+  <div class="container">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div 
+        class="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium mb-4"
+        data-aos="fade-up"
+      >
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+        </svg>
+        {subtitle}
+      </div>
+      
+      <h2 
+        class="h2 text-gray-900 dark:text-white mb-6"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        {title}
+      </h2>
+      
+      <p 
+        class="body-lg text-gray-600 dark:text-gray-300"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        {description}
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature, index) => (
+        <div 
+          class="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:-translate-y-2"
+          data-aos="fade-up"
+          data-aos-delay={300 + (index * 100)}
+        >
+          <!-- Background Gradient -->
+          <div class="absolute inset-0 bg-gradient-to-br from-primary-50 via-transparent to-accent-50 dark:from-primary-900/20 dark:via-transparent dark:to-accent-900/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          <div class="relative z-10">
+            <!-- Icon -->
+            <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+              <Fragment set:html={feature.icon} />
+            </div>
+            
+            <!-- Content -->
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+              {feature.title}
+            </h3>
+            
+            <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+              {feature.description}
+            </p>
+            
+            <!-- Benefits List -->
+            <ul class="space-y-2 mb-6">
+              {feature.benefits.map((benefit) => (
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-sm text-gray-600 dark:text-gray-400">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+            
+            <!-- Learn More Link -->
+            {feature.link && (
+              <a 
+                href={feature.link}
+                class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm group-hover:translate-x-1 transition-all duration-300"
+              >
+                Learn more
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            )}
+          </div>
+          
+          <!-- Hover Effect Border -->
+          <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-primary-200 dark:group-hover:border-primary-800 transition-colors duration-300"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Stats Section -->
+    <div class="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div 
+        class="text-center"
+        data-aos="fade-up"
+        data-aos-delay="600"
+      >
+        <div class="text-4xl lg:text-5xl font-bold text-primary-600 dark:text-primary-400 mb-2" data-count="99.9">0</div>
+        <div class="text-gray-600 dark:text-gray-400">Uptime %</div>
+      </div>
+      
+      <div 
+        class="text-center"
+        data-aos="fade-up"
+        data-aos-delay="700"
+      >
+        <div class="text-4xl lg:text-5xl font-bold text-primary-600 dark:text-primary-400 mb-2" data-count="500">0</div>
+        <div class="text-gray-600 dark:text-gray-400">Enterprise Clients</div>
+      </div>
+      
+      <div 
+        class="text-center"
+        data-aos="fade-up"
+        data-aos-delay="800"
+      >
+        <div class="text-4xl lg:text-5xl font-bold text-primary-600 dark:text-primary-400 mb-2" data-count="50">0</div>
+        <div class="text-gray-600 dark:text-gray-400">Countries Served</div>
+      </div>
+      
+      <div 
+        class="text-center"
+        data-aos="fade-up"
+        data-aos-delay="900"
+      >
+        <div class="text-4xl lg:text-5xl font-bold text-primary-600 dark:text-primary-400 mb-2" data-count="24">0</div>
+        <div class="text-gray-600 dark:text-gray-400">Hour Support</div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div 
+      class="mt-16 text-center"
+      data-aos="fade-up"
+      data-aos-delay="1000"
+    >
+      <a
+        href="/features"
+        class="inline-flex items-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+      >
+        Explore All Features
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Counter animation for stats
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const element = entry.target as HTMLElement;
+        const targetValue = parseFloat(element.dataset.count || '0');
+        const duration = 2000; // 2 seconds
+        const steps = 60;
+        const stepValue = targetValue / steps;
+        const stepDuration = duration / steps;
+        
+        let currentValue = 0;
+        const timer = setInterval(() => {
+          currentValue += stepValue;
+          if (currentValue >= targetValue) {
+            element.textContent = targetValue.toString();
+            if (targetValue === 99.9) element.textContent = '99.9';
+            clearInterval(timer);
+          } else {
+            if (targetValue === 99.9) {
+              element.textContent = Math.min(currentValue, 99.9).toFixed(1);
+            } else {
+              element.textContent = Math.floor(currentValue).toString();
+            }
+          }
+        }, stepDuration);
+        
+        statsObserver.unobserve(element);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all stat elements
+  document.querySelectorAll('[data-count]').forEach((stat) => {
+    statsObserver.observe(stat);
+  });
+
+  // Add intersection observer for feature cards
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-in-up');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.group').forEach((card) => {
+    cardObserver.observe(card);
+  });
+</script>
