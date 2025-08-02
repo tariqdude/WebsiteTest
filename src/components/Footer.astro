@@ -1,0 +1,74 @@
+---
+import { siteConfig } from '../data/config';
+---
+
+<footer class="bg-card border-t">
+  <div class="container-custom py-16">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Company Info -->
+      <div class="lg:col-span-2">
+        <div class="flex items-center space-x-2 mb-4">
+          <div class="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">{siteConfig.name.charAt(0)}</span>
+          </div>
+          <span class="text-xl font-bold gradient-text">{siteConfig.name}</span>
+        </div>
+        <p class="text-muted-foreground mb-6 max-w-md">
+          {siteConfig.description}
+        </p>
+        <div class="flex space-x-4">
+          {Object.entries(siteConfig.social).map(([platform, url]) => (
+            <a 
+              href={url}
+              class="w-10 h-10 bg-muted hover:bg-primary hover:text-primary-foreground rounded-lg flex items-center justify-center transition-all duration-200"
+              aria-label={`Follow us on ${platform}`}
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <div>
+        <h3 class="font-semibold mb-4">Navigation</h3>
+        <ul class="space-y-2">
+          {siteConfig.navigation.map((item) => (
+            <li>
+              <a href={item.href} class="text-muted-foreground hover:text-primary transition-colors">
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- Contact -->
+      <div>
+        <h3 class="font-semibold mb-4">Contact</h3>
+        <ul class="space-y-2 text-muted-foreground">
+          <li>{siteConfig.email}</li>
+          <li>{siteConfig.phone}</li>
+          <li class="text-sm">{siteConfig.address}</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Bottom Bar -->
+    <div class="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-muted-foreground text-sm">
+        © 2024 {siteConfig.name}. All rights reserved.
+      </p>
+      <div class="flex space-x-6 mt-4 md:mt-0">
+        <a href="#" class="text-muted-foreground hover:text-primary text-sm transition-colors">
+          Privacy Policy
+        </a>
+        <a href="#" class="text-muted-foreground hover:text-primary text-sm transition-colors">
+          Terms of Service
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

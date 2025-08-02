@@ -9,12 +9,12 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://yourdomain.github.io',
-  base: '/WebsiteTest',
+  base: '/',
   output: 'static',
   trailingSlash: 'never',
   integrations: [
     tailwind({
-      applyBaseStyles: false,
+      applyBaseStyles: true,
     }),
     react({
       experimentalReactChildren: true,
