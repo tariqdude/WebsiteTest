@@ -1,17 +1,15 @@
 ---
-export interface NavItem {
-  name: string;
-  href: string;
-  children?: NavItem[];
-}
+import { navigationConfig } from '../../data/navigation';
+import { siteConfig } from '../../data/site';
 
 export interface Props {
-  items: NavItem[];
   currentPath?: string;
   className?: string;
 }
 
-const { items, currentPath = '', className = '' } = Astro.props;
+const { currentPath = '', className = '' } = Astro.props;
+const items = navigationConfig.main;
+const logo = siteConfig.branding.logo;
 ---
 
 <header 
@@ -33,7 +31,7 @@ const { items, currentPath = '', className = '' } = Astro.props;
             </svg>
           </div>
           <span class="font-display font-bold text-xl md:text-2xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-            Enterprise
+            {siteConfig.business.name.split(' ')[0]}
           </span>
         </a>
       </div>

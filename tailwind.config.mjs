@@ -403,8 +403,10 @@ export default {
       });
     },
   ],
+  },  // Close extend
+  // Close theme
   // Enable all core plugins for maximum customization
   corePlugins: {
     preflight: true,
   },
-}
+};

@@ -197,7 +197,7 @@ const fullTitle = title.includes('Enterprise Business Template') ? title : `${ti
       // Smooth scroll for older browsers
       if (!('scrollBehavior' in document.documentElement.style)) {
         // Fallback for browsers without smooth scroll support
-        document.documentElement.style.scrollBehavior = 'auto';
+        (document.documentElement as HTMLElement).style.scrollBehavior = 'auto';
       }
       
       // Performance observer for Core Web Vitals

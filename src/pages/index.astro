@@ -4,25 +4,10 @@ import Header from '../components/navigation/Header.astro';
 import Hero from '../components/sections/Hero.astro';
 import Features from '../components/sections/Features.astro';
 import Footer from '../components/navigation/Footer.astro';
-
-const navItems = [
-  { name: 'Home', href: '/' },
-  { 
-    name: 'Solutions', 
-    href: '/solutions',
-    children: [
-      { name: 'Enterprise', href: '/enterprise' },
-      { name: 'Small Business', href: '/small-business' },
-      { name: 'Consulting', href: '/consulting' }
-    ]
-  },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' }
-];
 ---
 
 <BasicLayout title="Enterprise Business Template">
-  <Header items={navItems} />
+  <Header />
   
   <main>
     <Hero />
@@ -37,7 +22,7 @@ const navItems = [
   title="Enterprise Business Template - Next-Gen Professional Website Solution"
   description="Ultra-modern, high-performance business website template built with Astro 5, React 19, and advanced Tailwind CSS. Featuring cutting-edge animations, glass morphism, and Fortune 500-ready design patterns."
 >
-  <Header items={navItems} currentPath="/" />
+  <Header currentPath="/" />
   
   <main id="main-content">
     <Hero />

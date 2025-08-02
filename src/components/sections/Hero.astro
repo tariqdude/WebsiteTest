@@ -1,38 +1,17 @@
 ---
+import { siteConfig } from '../../data/site';
+import { clientLogos, businessStats } from '../../data/testimonials';
+
 export interface Props {
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  primaryCTA?: {
-    text: string;
-    href: string;
-  };
-  secondaryCTA?: {
-    text: string;
-    href: string;
-  };
-  image?: string;
-  video?: string;
-  features?: string[];
   className?: string;
 }
 
-const {
-  title = "Transform Your Business with Enterprise Solutions",
-  subtitle = "Leading Innovation",
-  description = "Empower your organization with cutting-edge technology solutions designed for Fortune 500 companies. Scale faster, innovate smarter, and stay ahead of the competition.",
-  primaryCTA = { text: "Get Started Free", href: "/contact" },
-  secondaryCTA = { text: "Watch Demo", href: "/demo" },
-  image = "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-  video,
-  features = [
-    "99.9% Uptime Guarantee",
-    "Enterprise Security",
-    "24/7 Premium Support",
-    "Global CDN Network"
-  ],
-  className = ""
-} = Astro.props;
+const { className = "" } = Astro.props;
+
+// Use configuration data
+const heroData = siteConfig.hero;
+const testimonialData = businessStats;
+const companyInfo = siteConfig.business;
 ---
 
 <section class={`relative min-h-screen flex items-center justify-center overflow-hidden ${className}`}>
@@ -64,7 +43,7 @@ const {
           <svg class="w-4 h-4 mr-2 text-accent-300" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
           </svg>
-          {subtitle}
+          {heroData.subtitle}
         </div>
         
         <!-- Main Title -->
@@ -73,7 +52,7 @@ const {
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          {title}
+          {heroData.title}
         </h1>
         
         <!-- Description -->
@@ -82,7 +61,7 @@ const {
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          {description}
+          {heroData.description}
         </p>
         
         <!-- Features List -->
@@ -91,7 +70,7 @@ const {
           data-aos="fade-up"
           data-aos-delay="400"
         >
-          {features.map((feature, index) => (
+          {heroData.features.map((feature: string, index: number) => (
             <div 
               class="flex items-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-2 text-white/90 text-sm"
               data-aos="fade-up"
@@ -112,11 +91,11 @@ const {
           data-aos-delay="600"
         >
           <a
-            href={primaryCTA.href}
+            href={heroData.primaryCTA.href}
             class="group relative inline-flex items-center justify-center px-8 py-4 bg-white text-primary-600 font-semibold rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10 flex items-center">
-              {primaryCTA.text}
+              {heroData.primaryCTA.text}
               <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
@@ -125,13 +104,13 @@ const {
           </a>
           
           <a
-            href={secondaryCTA.href}
+            href={heroData.secondaryCTA.href}
             class="group inline-flex items-center justify-center px-8 py-4 bg-transparent text-white font-semibold rounded-xl border-2 border-white/30 hover:border-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
           >
             <svg class="w-5 h-5 mr-2 transform group-hover:scale-110 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
             </svg>
-            {secondaryCTA.text}
+            {heroData.secondaryCTA.text}
           </a>
         </div>
         
@@ -143,11 +122,11 @@ const {
         >
           <p class="text-white/70 text-sm mb-4">Trusted by industry leaders</p>
           <div class="flex flex-wrap justify-center lg:justify-start items-center gap-6 opacity-70">
-            <!-- Company logos would go here -->
-            <div class="h-8 w-20 bg-white/20 rounded"></div>
-            <div class="h-8 w-20 bg-white/20 rounded"></div>
-            <div class="h-8 w-20 bg-white/20 rounded"></div>
-            <div class="h-8 w-20 bg-white/20 rounded"></div>
+            {clientLogos.slice(0, 4).map((client) => (
+              <div class="h-8 w-20 bg-white/20 rounded flex items-center justify-center text-white/60 text-xs font-medium">
+                {client.name.split(' ')[0]}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -163,7 +142,7 @@ const {
           <div class="absolute -inset-4 bg-gradient-to-r from-accent-500 to-primary-500 rounded-2xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
           
           <div class="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-1 shadow-2xl">
-            {video ? (
+            {heroData.video ? (
               <div class="relative rounded-xl overflow-hidden">
                 <video
                   autoplay
@@ -171,9 +150,9 @@ const {
                   loop
                   playsinline
                   class="w-full h-auto rounded-xl"
-                  poster={image}
+                  poster={heroData.image}
                 >
-                  <source src={video} type="video/mp4" />
+                  <source src={heroData.video} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
@@ -181,7 +160,7 @@ const {
             ) : (
               <div class="relative rounded-xl overflow-hidden">
                 <img
-                  src={image}
+                  src={heroData.image}
                   alt="Hero illustration"
                   class="w-full h-auto rounded-xl transform group-hover:scale-105 transition-transform duration-700"
                   loading="eager"
@@ -212,24 +191,24 @@ const {
             data-aos="fade-up"
             data-aos-delay="800"
           >
-            <div class="text-2xl font-bold text-white">99.9%</div>
-            <div class="text-white/70 text-sm">Uptime</div>
+            <div class="text-2xl font-bold text-white">{businessStats.satisfaction.total}</div>
+            <div class="text-white/70 text-sm">{businessStats.satisfaction.description.split(' ')[0]}</div>
           </div>
           <div 
             class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 flex-1 text-center"
             data-aos="fade-up"
             data-aos-delay="900"
           >
-            <div class="text-2xl font-bold text-white">500+</div>
-            <div class="text-white/70 text-sm">Clients</div>
+            <div class="text-2xl font-bold text-white">{businessStats.clients.total}</div>
+            <div class="text-white/70 text-sm">{businessStats.clients.description.split(' ')[0]}</div>
           </div>
           <div 
             class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4 flex-1 text-center"
             data-aos="fade-up"
             data-aos-delay="1000"
           >
-            <div class="text-2xl font-bold text-white">24/7</div>
-            <div class="text-white/70 text-sm">Support</div>
+            <div class="text-2xl font-bold text-white">{businessStats.experience.total}</div>
+            <div class="text-white/70 text-sm">{businessStats.experience.description.split(' ')[0]} Years</div>
           </div>
         </div>
       </div>
@@ -262,7 +241,7 @@ const {
       backgroundShapes.forEach((shape, index) => {
         const speed = (index + 1) * 0.1;
         const yPos = -(scrolled * speed);
-        shape.style.transform = `translateY(${yPos}px)`;
+        (shape as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
     });
   }
